@@ -1,0 +1,330 @@
+============================================================================
+                              Enhanced DOSKEY
+               (C) Copyright 2011 Paul Houle and 2018 Wengier
+                        http://paulhoule.com/doskey
+----------------------------------------------------------------------------
+                       Version 2.8 - April 14, 2018
+============================================================================
+
+
+Introduction
+============
+
+Enhanced DOSKEY is a DOS command line enhancement program that is designed
+as a replacement for the DOSKEY.COM that ships with MS-DOS and Windows 9x/Me.
+As a 16-bit terminate-and-stay-resident (TSR) program, it is a great addition
+to DOS environment like DOS boot diskettes, and to the Win 9x/Me environment
+if the DOS box is used frequently.
+
+The primary added feature of Enhanced DOSKEY is command and file/directory
+"auto-completion" via the Tab key. Depending on the context, either a matching
+command or filename (or path) will be supplied. This is a huge timesaver when
+using the command line. Both the traditional DOS 8.3 filenames (SFN) and
+Windows-style long filenames (LFN) are supported by Enhanced DOSKEY.
+
+There are several other enhancements in Enhanced DOSKEY over original DOSKEY
+too such as improved macro support. For example, F1-F12 function keys can be
+redefined, and commands like "macro=[text]" can be automatically translated to
+the "doskey macro=[text]" functionality. Although enhanced, it has a small
+disk and memory resident footprint, and can be used as a drop-in replacement
+for the original DOSKEY shipped with DOS and Win 9x/Me.
+
+The program should work with operating systems compatible with MS-DOS 5.0 or
+later such as MS-DOS 6.22/7.10, PC-DOS 6.3/7.x and (E)DR-DOS 7.0x, as well as
+a Windows 3.x/9x/Me DOS box environment. However, it will *not* operate under
+the Windows NT family of operating systems, including all recent versions of
+Windows such as Windows 2000/XP/Vista/7/8/10. Also, the FreeDOS version of
+COMMAND.COM (known as FreeCOM) has its own built-in command-line completion
+feature, so this program may not be needed in the FreeDOS environment either.
+
+Usage
+=====
+
+The syntax of Enhanced DOSKEY is similar to the original DOSKEY:
+
+DOSKEY [-option [-option]] [macro=[text]]
+
+Parameters:
+
+[macro=[text]]
+
+  Create (or modify) a macro carrying out one or more DOS commands. A macro
+  name specifies the name you want to assign to the macro, and text specifies
+  the commands you want to record. An empty text will delete the macro.
+  
+Options can be started with either "-" or "/" (e.g. "-R" or "/R"):
+
+-R{einstall}
+
+  Installs a new copy of the program, even if one is already installed. In the
+  latter case, this option also clears the buffer.
+  
+-U{ninstall}
+
+  Unloads the program from memory if installed previously. It may not be
+  uninstalled or removed if some other program loaded after Enhanced DOSKEY
+  has hooked the interrupt.
+
+-B{ufsize}=size
+
+  Specifies the size of the buffer in which Enhanced DOSKEY stores commands
+  and macros. The default size is approximately 800 bytes.
+  
+-D{isableLFN}
+
+  Disables long file name (LFN) support in command and file name completion.
+  By default, Enhanced DOSKEY supports long file names when LFN API is usable,
+  and will fallback to traditional DOS 8.3 names (SFN) otherwise. This option
+  will force SFN mode even if LFN API is available. The ALT+F5 shortcut can be
+  used to toggle LFN support.
+  
+-E{nableLFN}
+
+  Enables long file name (LFN) support in command and file name completion,
+  which is the default. It will automatically fallback to traditional DOS 8.3
+  names (SFN) when LFN API is not available. The ALT+F5 shortcut can be used
+  to toggle LFN support.
+
+-A{ppendMode}
+
+  Enables APPEND mode, which will append the command line to completed names
+  in command or file name auto-completion (default). The ALT+F9 shortcut can
+  be used to toggle between APPEND mode and CHANGE mode.
+  
+-C{hangeMode}
+
+  Enables CHANGE mode, which will change the command line to match full name
+  automatically in command or file name auto-completion. The ALT+F9 shortcut
+  can be used to toggle between APPEND mode and CHANGE mode.
+  
+-N{oSystemFiles}
+
+  Excludes system and hidden files in Tab completion (default); in this case
+  files and directories with system or hidden attributes will not be matched.
+  The ALT+F11 shortcut can toggle the inclusion of system and hidden files.
+
+-S{ystemFiles}
+
+  Includes system and hidden files in Tab completion, so files and directories
+  with system or hidden attributes are matched in addition to those without
+  these attributes. The ALT+F11 shortcut can be used to toggle the inclusion
+  of system and hidden files.
+  
+-L{owercase}
+
+  Enables automatic conversion of file and directory names to lower case
+  characters in Tab completion. It will work for both SFN and LFN modes.
+
+-P{upercase}
+
+  Enables automatic conversion of file and directory names to upper case
+  characters in Tab completion. It will work for both SFN and LFN modes.
+
+-I{nsert}
+
+  Enables keystroke INSERT mode. When in this mode new text that you type on a
+  line is inserted into old text as if you had pressed the Ins (INSERT) key.
+
+-O{verstrike}
+
+  Enables keystroke OVERSTRIKE mode. This is the default mode; in this mode
+  new text that you type on a line replaces (overwrites) old text.
+
+-M{acros}
+
+  Displays a list of all Enhanced DOSKEY macros. You can use a redirection
+  symbol (>) with this option to redirect the list to a file.
+
+-H{istory}
+
+  Displays a list of all commands stored in memory. You can use a redirection
+  symbol (>) with this option to redirect the list to a file.
+
+-V{erbose}
+
+  Displays the current settings of Enhanced DOSKEY, such as the current mode
+  for the keystroke and Tab completion, and the command history/macro size.
+
+Note: The options may be used when you load DOSKEY, or after Enhanced DOSKEY
+is already loaded in memory in order to change its current modes and settings.
+The options are case-insensitive. For example:
+
+  doskey /c /s
+
+The above command will enable CHANGE mode and also include system and hidden
+files in Tab completion.
+
+If you want to disable auto-case conversion when such a conversion is already
+enabled previously with either /l or /p option, just specify both /l and /p
+options when re-executing Enhanced DOSKEY.
+
+Command-line Editing
+====================
+
+The keys used for command-line editing and command history functionalities in
+Enhanced DOSKEY are very similar to the ones supplied by the original DOSKEY
+program. For example:
+
+The Left/Right arrows move the cursor back/forward one character;
+The Ctrl+Left/Right arrows move the cursor back/forward one word;
+The Up/Down arrows recall the DOS command used before/after the one displayed;
+The PageUp/PageDown keys recall the oldest/most recent DOS command used;
+The Home/End keys move the cursor to the beginning/end of the line; 
+The ESC key clears the current command;
+The F7 key displays the command history;
+The Alt+F7 key clears the command history;
+The F8/Alt+F8 keys select the history beginning with the desired characters;
+The F9 key selects a command by number;
+The Ins key switches between the INSERT and OVERSTRIKE mode until you press
+the ENTER key; on the other hand, DOSKEY's /INSERT option puts your keyboard
+in the INSERT mode each time you press ENTER. The cursor changes shape when
+the keystroke mode is changed from one to the other.
+
+Please refer to the help for the original DOSKEY command in the DOS manual for
+more details about the available keys used for command-line editing. With
+Enhanced DOSKEY the F1 to F12 function keys can also be redefined with macros
+(please see the next section for details).
+
+Note that DBCS (double-byte character set) systems (Chinese/Japanese/Korean)
+are supported by Enhanced DOSKEY in addition to SBCS (single-byte character
+set) systems like English, French and German DOS/Win9x systems.
+
+Macro Support
+=============
+
+Just like original DOSKEY shipped with DOS and Win 9x/Me, you can use Enhanced
+DOSKEY to create macros that carry out one or more DOS commands. Special
+characters like $0-$9 and $G/$L can be used to control command operations when
+defining a macro, as listed below. Please refer to the DOS manual for more
+details about these special characters.
+
+$0-$9        Parameter replacements, similar to %0-%9 in batch files.
+$*           Replaced with the entire line following the macro name.
+$L,$G,$B,$$  Replaced with "<", ">", "|", "$" characters when macro executed.
+$T           Separates DOS commands within a macro.
+
+For example, to create a macro that performs a quick and unconditional format
+of a disk, the following command may be used:
+
+  doskey qf=format $1 /q /u
+
+With Enhanced DOSKEY, you can directly use the format "macro=[text]" (without
+quotes) in the DOS command line to create (or modify) macros as well whenDOSKEY is resident:
+
+  qf=format $1 /q /u
+
+The latter format is shorter and also faster because it will directly operate
+in the memory instead of re-loading the Enhanced DOSKEY executable. It will
+however not work in a batch file.
+  
+Function keys (F1 to F12) can also be redefined using f1[!]-f12[!] macros.
+For example, after defining the following macro:
+
+  f1=dir $*
+
+Enhanced DOSKEY will display "f1 " in the command line and wait for the input
+of optional arguments when you press the F1 key. On the other hand, if you
+define the following macro:
+
+  f1!=dir
+  
+That is, with an exclamation mark ("!") after "f1", the dir command will be
+executed immediately after you press the F1 key. If both macros are defined,
+the latter (i.e. the one with a "!" sign) will take precedence. This applies
+to macros for other function keys too.
+
+If, for some reason, your DOS system does not respond to pressing the F11 and
+F12 keys, the ADDKEYS program by Herb Kleinman will generally help. This is
+rarely required, and you may load it either before or after Enhanced DOSKEY.
+
+You can create a macro that has the same name as a DOS command. This can be
+useful, for example, if you always use a certain command with certain options.
+
+Tab Completion
+==============
+
+When you press the Tab key on the DOS command line, either a matching command
+or file/directory name will be supplied depending on the context. When
+performing a command completion, only files with appropriate extensions (.EXE,
+.COM, .BAT) will be allowed, but it will allow directories of any name. A file
+or directory name completion will be performed after a command name has been
+entered in the command line. If the command entered are CD/MD/RD (or their
+longer versions, CHDIR/MKDIR/RMDIR), then its arguments that a Tab completion
+will perform will be limited to directories (not files), unless they have been
+previously redefined as macro names. You can continue to press the Tab key to
+find a next match, and pressing Shift+Tab will go backward through the list of
+matches (if, for example, you pressed Tab one too many times).
+
+There are two modes for the auto-completion, namely the APPEND mode and CHANGE
+mode. The differences between the two modes will especially be noticeable when
+you are working with long file names (LFN). When the APPEND mode is enabled,
+it will only append characters to perform the Tab completion. On the other
+hand, when in the CHANGE mode, Enhanced DOSKEY will automatically change the
+command or file/directory name the user has typed in to match the actual name.
+Note that Enhanced DOSKEY fully supports the use of quotation marks ("") to
+include spaces or some other special characters in the file/directory name
+either when LFN API is available (e.g. with a driver like DOSLFN installed) or
+when the DOS version is found to be at least 7. Unlike MS-DOS 6.xx or earlier,
+MS-DOS 7+ understands quotes even if DOSLFN is not loaded. Quotes can be both
+in two sides and within the middle of a file/directory name. These are well
+supported by DOS/Win9x systems that understand quotes, as long as characters
+such as spaces have been properly quoted.
+
+For example, suppose LFN support is available and there are two directories
+"WINDOWS" and "Program Files" in the current path, and the user has typed the
+following partial names:
+
+  win
+  progra
+
+When the Tab key is pressed in the APPEND mode, these will become:
+
+  winDOWS
+  progra"m Files"
+  
+When the Tab key is pressed in the CHANGE mode, these will become:
+
+  WINDOWS
+  "Program Files"
+
+Both styles will work (in MS-DOS 7+ or a Windows 9x/Me DOS box, for example);
+since in APPEND mode Enhanced DOSKEY is not allowed to change anything that
+the user has already typed (unlike in CHANGE mode), the opening quotation
+mark will be inserted at the current cursor location when it is necessary to
+add quotes for file/directory names with spaces or other special characters in
+case that the user has not added a quote manually. You may want to turn on
+CHANGE mode (instead of APPEND mode) if you prefer the quotation marks to be
+always inserted into both sides of the file/directory names automatically.
+
+Enhanced DOSKEY supports the use of the Ctrl+Tab key to directly enter into a
+directory instead of looping into the next same level directory, as will be
+done by the Tab key. You can also press the F11 key to show all matching
+commands or file/directory names from the current command line. The ALT+F11
+shortcut can be used to toggle the inclusion of system and hidden files in Tab
+completions. Wildcards ("?" and "*") are supported in Tab completions as well,
+and they will be handled differently in APPEND mode and CHANGE mode. Some
+commands like CD do not support wildcards in their arguments and will work
+better with the CHANGE mode, since in this mode the Tab key will automatically
+convert wildcards into actual names.
+
+Like the command-line editing feature, Enhanced DOSKEY supports DBCS systems
+(Chinese/Japanese/Korean) in its Tab completion feature, and special cases
+in these systems are handled by Enhanced DOSKEY automatically.
+
+Licence
+=======
+
+This program is Free Software, distributed under the terms of the GNU General
+Public License v2.0 as published by the Free Software Foundation. Please see
+the file gpl-2.0.txt in the src directory of the package for licence details.
+
+The software is distributed in the hope that it will be useful, but "AS IS"
+and WITHOUT ANY WARRANTY OR CONDITION, expressed or implied, including but not
+limited to the implied warranty of merchantability or fitness for a particular
+purpose. In no event shall the authors be liable for damages of any type
+caused by the use or inability to use the software.
+
+You can redistribute and/or modify the program under the terms of the GNU GPL;
+either version 2 of the License, or (at your option) any later version.
+
+Enhanced DOSKEY is copyright (c) Paul Houle and Wengier. All rights reserved.

@@ -1,0 +1,129 @@
+.TH ODIPKT 8 "March 3, 1992"
+.UC 9
+.fp 5 C Courier
+.SH NAME
+odipkt \- translate Open Data-Link Interface to Packet Driver interface
+.SH SYNOPSIS
+.B odipkt
+[ logical_board [ vector ] ]
+.br
+.B odipktpn
+[ logical_board [ vector ] ]
+.SH DESCRIPTION
+.I Odipkt.com
+provides a Packet Driver API over Novell's Open Data-Link
+Interface, allowing a single network adapter to service IPX, tcp/ip,
+and other protocol stacks which use packet drivers.
+.I Odipkt.com
+understands Ethernet, Token Ring, and ARCnet frame types.  Ethernet and
+Token Ring frames are passed unchanged to packet driver applications,
+but ARCnet frames are internally mapped to Ethernet.  Thus, packet
+driver applications do not need specific knowledge of ARCnet in order
+to operate in such environments.
+.PP
+The
+.I logical_board
+argument indicates which logical adapter
+.I odipkt
+should bind to.  Under ODI, there is one logical adapter per frame
+type.  There may be multiple physical adapters, and multiple frame
+types per physical adapter.  The logical adapter number starts at
+zero and increases by one for each frame type.  For example, if
+a system contained two physical adapters with two frame types
+each, there would be four logical adapters numbered 0-3.  The
+frame types are specified in the NET.CFG file which must be in the
+current directory (or on the APPEND path) when the ODI drivers are
+loaded.
+.PP
+Typically, the frame type used by default by Netware on a given adapter
+will not be appropriate for tcp/ip.  The correct frame type for tcp/ip
+on Token Ring is TOKEN-RING_SNAP and the correct frame type for tcp/ip
+on Ethernet is almost always ETHERNET_II.  Assuming an existing installation
+with one adapter running the default Netware frame type, it will usually
+be necessary to define a second frame type (as listed above) and to specify
+the
+.I logical_board
+argument as 1.  An exception to this rule is ARCnet which uses only
+one frame type.  Below is a NET.CFG entry for a 3c501 using the
+default address and interrupt.  Other Ethernet adapters would use similar
+configurations:
+.sp
+.nf
+.ft C
+Link driver 3c501
+	envelope type ETHERNET_802.3
+	envelope type ETHERNET_II
+.ft
+.fi
+.sp
+Given the above entry, the
+.I logical_board
+argument of
+.I oipkt
+would be 1.
+Token Ring uses different frame types:
+.sp
+.nf
+.ft C
+Link driver token
+	envelope type TOKEN-RING
+	envelope type TOKEN-RING_SNAP
+.ft
+.fi
+.sp
+Again, the
+.I logical_board
+should be specified as 1 for this example.  ARCnet installations
+require no frame-type definitions and should use a
+.I logical_board
+of 0.
+.PP
+Because
+.I odipkt.com
+uses buffers provided by the Link Support Layer, the Link support
+section of NET.CFG must specify at least one buffer of a size appropriate
+to the medium in use.  Some adapters require more buffers for optimal
+performance, e.g., the 3c503 can use at least five during reception
+of back-to-back packets.  The following lines configure five buffers
+large enough for Ethernet:
+.sp
+.nf
+.ft C
+Link support
+	Buffers 5 1600
+.ft
+.fi
+.sp
+The correct buffer size for Token Ring will vary depending on the
+installation.  Specifying too small a buffer size will result in
+unpredictable behavior.
+.PP
+.I Vector
+is the packet driver interrupt at which to provide service.  The default
+is 105 and the parameter is decimal.
+.PP
+.I Odipkt.com
+should be loaded after lsl.com and the adapter-specific driver(s).
+It must, of course, be loaded before the packet driver applications
+which use it.  The Netware shell and ipxodi.com can be loaded before
+or after the
+.I odipkt.com
+program.
+.PP
+.I Odipktpn.com
+supports an older version of the ODI specification as used in
+Farallon's PhoneNET Talk product.  Operation of
+.I opipktpn.com
+is identical to that of
+.I opipkt.com
+but configuration of NET.CFG is somewhat different:  no ``envelope''
+statements are required or allowed.  Because
+multiple frame types are not supported,
+.I odipktpn.com
+treats all Ethernet cards as ETHERNET_II.
+.SH AUTHOR
+Dan Lanciani
+.br
+185 Atlantic Road
+.br
+Gloucester, MA 01930
