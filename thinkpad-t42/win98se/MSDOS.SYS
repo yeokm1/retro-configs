@@ -5,10 +5,10 @@ HostWinBootDrv=C
 
 [Options]
 Logo=0
-BootMulti=1
 BootMenu=1
 BootMenuDefault=1
 BootMenuDelay=2
+BootGUI=1
 DoubleBuffer=1
 AutoScan=1
 WinVer=4.10.2222
