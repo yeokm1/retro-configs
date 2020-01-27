@@ -27,3 +27,5 @@ Boot menu options
 6. [SHSUCDX 3.03F](http://optimizr.dyndns.org/dos/shsucdx.html)
 7. [SHSUCDX 3.06](http://adoxa.altervista.org/shsucdx/index.html)
 8. [GRUBFORDOS](https://sourceforge.net/projects/grub4dos/files/GRUB4DOS/)
+9. [svgaptch for VESA compliance](https://download.wcnews.com/files/other/wcpc/)
+10.[nusb33 Win 98 Universal USB drivers](https://www.philscomputerlab.com/windows-98-usb-storage-driver.html)

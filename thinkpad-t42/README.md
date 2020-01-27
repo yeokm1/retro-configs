@@ -1,6 +1,6 @@
 # Thinkpad T42
 
-The Thinkpad T42 is a laptop released in 2004 by IBM. It is from the last Thinkpad series with Windows 98 support.
+The Thinkpad T42-2373 is a laptop released in 2004 by IBM. It is from the last Thinkpad series with Windows 98 support.
 
 <img src="photos/t42-full.jpg" width="500">
 
@@ -15,7 +15,7 @@ These are the specifications specific to the Thinkpad I have:
 * 1x1GB DDR PC2700 RAM
 * Intel AC'97 2.2 Audio with a SoundMax AD1981B codec
 * 14.1" TFT display with 1024x768 resolution (XGA)
-* 32GB Sandisk Compactflash card with 
+* 32GB Sandisk Compactflash card
 * Intel Gigabit PRO/1000 MT Ethernet
 * Intel PRO/Wireless LAN 2100 3B Mini PCI (I disabled in BIOS)
 * 1x ECP capable parallel port
