@@ -1,0 +1,13 @@
+default 0
+timeout 2
+
+title Reboot to Win98SE
+root (hd0,1)
+makeactive
+reboot
+
+title Back to DOS 6.22
+quit
+
+title Commandline
+commandline

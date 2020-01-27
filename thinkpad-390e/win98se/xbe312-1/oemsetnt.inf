@@ -1,0 +1,2397 @@
+;***********************************************************************
+;
+;       Windows NT 4 Network Setup File
+;       Xircom Cardbus Ethernet 10/100 Network Adapters
+;       (c) 1996-2000 Xircom, Inc.
+;
+;		//Softex merge 052200, Ndis switch, Resource Detect
+;
+;       $Revision:   1.22  $
+;       $Date:   14 Apr 2000 15:51:32  $
+;
+;***********************************************************************
+
+[Identification]
+	OptionType = NetAdapter
+
+[PlatformsSupported]
+	ISA
+	EISA
+	MCA
+	PCI
+
+[Options]
+	CBE
+
+[OptionsTextENG]
+	CBE    = "Xircom CardBus Ethernet 10/100 Adapter (Resource Detect)"
+
+[AllFileConstants]
+GenericInfVersion  = " v3.11"
+;  File names, etc. ----------------------------------------
+UtilityInf      = "UTILITY.INF"
+ParamInf        = "NCPARAM.INF"
+subroutineinf   = "SUBROUTN.INF"
+SoftwareType    = "driver"
+Exit_Code       = 0
+; EventLog Message File  ----------------------------------------
+NetEventDLL     = "%SystemRoot%\System32\netevent.dll"
+IoLogMsgDLL     = "%SystemRoot%\System32\IoLogMsg.dll"
+; Product Info ----------------------------------------
+Manufacturer    = "Xircom"
+; Flow control variables  ----------------------------------------
+;DISABLEPCMCIASYS = "1"
+DISABLEPCMCIASYS = "0"
+RUNDLLCODE = "1"
+
+;;;----------start FileConstantsSoftex-CBE----------;;;
+[FileConstantsSoftex-CBE]
+GenericAdapterName = "Xircom CardBus Ethernet 10/100 for NT Card Services"
+GenericDriverName  = "Xircom CardBus Ethernet 10/100 for NT Card Services"
+GenericSysName     = "CBENT.sys"
+GenericName        = "CBENT"
+
+; Product Info ----------------------------------------
+ProductMajorVersion     = "3"
+ProductMinorVersion     = "11"
+ProductVersion  = $(ProductMajorVersion)"."$(ProductMinorVersion)
+; Software  ----------------------------------------
+ProductSoftwareName     = "CBENT"
+ProductSoftwareDescription = "Xircom CardBus Ethernet 10/100 for NT Card Services"
+ProductSoftwareImagePath = "\SystemRoot\System32\drivers\"$(GenericSysName)
+NetRuleSoftwareType     = "cbentSys ndisDriver cbentDriver"
+NetRuleSoftwareUse      = $(SoftwareType)
+NetRuleSoftwareBindForm = """cbentSys"" yes no container"
+NetRuleSoftwareClass    = {"cbentDriver basic"}
+NetRuleSoftwareBindable = {"cbentDriver cbentAdapter non exclusive 100"}
+; Hardware  ----------------------------------------
+ProductHardwareName        = "CBENT"
+ProductHardwareDescription = "Xircom CardBus Ethernet 10/100"
+NetRuleHardwareType        = "cbent cbentAdapter"
+NetRuleHardwareBindForm    = " yes yes container"
+NetRuleHardwareClass       = {"cbentAdapter basic"}
+; Registry Key  ----------------------------------------
+ProductKeyName  = $(!NTN_SoftwareBase)"\"$(Manufacturer)"\"$(ProductSoftwareName)"\CurrentVersion"
+ParamKeyName    = $(!NTN_ServiceBase)"\"$(ProductHardwareName)"\Parameters"
+; Tuple Information -----------------------------------
+VERS1Manufacturer = "Xircom"
+VERS1Product      = "CardBus Ethernet 10/100"
+VERS1Product2     = "CardBus Ethernet II 10/100"
+VERS1Product3     = "RealPort2 CardBus Ethernet 10/100"
+VERS1Type         = "CBE-10/100"
+PCMCIA            = 0
+PCIVendorID       = 4445
+;;;----------end FileConstantsSoftex-CBE----------;;;
+
+;;;----------start FileConstants-CBE----------;;;
+[FileConstants-CBE]
+GenericAdapterName = "Xircom CardBus Ethernet 10/100"
+GenericDriverName  = "Xircom CardBus Ethernet 10/100"
+GenericSysName     = "CBEN4.sys"
+GenericName        = "CBE"
+
+; Product Info ----------------------------------------
+ProductMajorVersion     = "3"
+ProductMinorVersion     = "11"
+ProductVersion  = $(ProductMajorVersion)"."$(ProductMinorVersion)
+; Software  ----------------------------------------
+ProductSoftwareName     = "CBE"
+ProductSoftwareDescription = "Xircom CardBus Ethernet 10/100"
+ProductSoftwareImagePath = "\SystemRoot\System32\drivers\"$(GenericSysName)
+NetRuleSoftwareType     = "cbeSys ndisDriver cbeDriver"
+NetRuleSoftwareUse      = $(SoftwareType)
+NetRuleSoftwareBindForm = """cbeSys"" yes no container"
+NetRuleSoftwareClass    = {"cbeDriver basic"}
+NetRuleSoftwareBindable = {"cbeDriver cbeAdapter non exclusive 100"}
+; Hardware  ----------------------------------------
+ProductHardwareName        = "CBE"
+ProductHardwareDescription = "Xircom CardBus Ethernet 10/100"
+NetRuleHardwareType        = "cbe cbeAdapter"
+NetRuleHardwareBindForm    = " yes yes container"
+NetRuleHardwareClass       = {"cbeAdapter basic"}
+; Registry Key  ----------------------------------------
+ProductKeyName  = $(!NTN_SoftwareBase)"\"$(Manufacturer)"\"$(ProductSoftwareName)"\CurrentVersion"
+ParamKeyName    = $(!NTN_ServiceBase)"\"$(ProductHardwareName)"\Parameters"
+; Tuple Information -----------------------------------
+VERS1Manufacturer = "Xircom"
+VERS1Product      = "CardBus Ethernet 10/100"
+VERS1Product2     = "CardBus Ethernet II 10/100"
+VERS1Product3     = "RealPort2 CardBus Ethernet 10/100"
+VERS1Type         = "CBE-10/100"
+PCMCIA            = 0
+PCIVendorID       = 4445
+;;;----------end FileConstants-CBE----------;;;
+
+;;;----------start GeneralConstantsSoftex----------;;;
+[GeneralConstantsSoftex]
+;  Program flow control variables.
+from      = ""
+to        = ""
+;  Return codes; Exit_Code is set to one of these
+ExitCodeOk     = 0
+ExitCodeCancel = 1
+ExitCodeFatal  = 2
+KeyNull         = ""
+MAXIMUM_ALLOWED   = 33554432
+RegistryErrorIndex = NO_ERROR
+KeyProduct      = ""
+KeyParameters   = ""
+TRUE            = 1
+FALSE           = 0
+NoTitle            = 0
+ExitState   = "Active"
+OldVersionExisted = $(FALSE)
+DriverPath      = $(!STF_NTPATH)\drivers
+;---------------------------------
+; Default list choices
+;---------------------------------
+;;;DEFAULT_MEMORY  = 27
+;;;DEFAULT_IRQ     = 6
+
+DEFAULT_MEMORY  = 1
+DEFAULT_IO      = 1
+DEFAULT_IRQ     = 1
+;;;----------end GeneralConstantsSoftex----------;;;
+
+;;;----------start GeneralConstants----------;;;
+[GeneralConstants]
+;  Program flow control variables.
+from      = ""
+to        = ""
+;  Return codes; Exit_Code is set to one of these
+ExitCodeOk     = 0
+ExitCodeCancel = 1
+ExitCodeFatal  = 2
+KeyNull         = ""
+MAXIMUM_ALLOWED   = 33554432
+RegistryErrorIndex = NO_ERROR
+KeyProduct      = ""
+KeyParameters   = ""
+TRUE            = 1
+FALSE           = 0
+NoTitle            = 0
+ExitState   = "Active"
+OldVersionExisted = $(FALSE)
+DriverPath      = $(!STF_NTPATH)\drivers
+;---------------------------------
+; Default list choices
+;---------------------------------
+DEFAULT_MEMORY  = 26
+DEFAULT_IO      = 30
+DEFAULT_IRQ     = 7
+;;;----------end GeneralConstants----------;;;
+
+[date]
+	; Now is a list which contains { Sec from 1-1-1970, Year, Month, Day, Hour,
+	; Minute, Second }
+	Now = {} ? $(!LIBHANDLE) GetSystemDate
+
+
+;---------------------------------------------------------------------------
+; 1. Identify
+;
+; DESCRIPTION:   To verify that this INF deals with the same type of options
+;                as we are choosing currently.
+;
+; INPUT:         None
+;
+; OUTPUT:        $($R0): STATUS: STATUS_SUCCESSFUL
+;                $($R1): Option Type (COMPUTER ...)
+;                $($R2): Diskette description
+;---------------------------------------------------------------------------
+
+[Identify]
+	;
+	;
+	read-syms Identification
+
+	set Status     = STATUS_SUCCESSFUL
+	set Identifier = $(OptionType)
+	set Media      = #("Source Media Descriptions", 1, 1)
+
+	Return $(Status) $(Identifier) $(Media)
+
+;------------------------------------------------------------------------
+; 2. ReturnOptions:
+;
+; DESCRIPTION:   To return the option list supported by this INF and the
+;                localised text list representing the options.
+;
+;
+; INPUT:         $($0):  Language used. ( ENG | FRN | ... )
+;
+; OUTPUT:        $($R0): STATUS: STATUS_SUCCESSFUL |
+;                                STATUS_NOLANGUAGE
+;                                STATUS_FAILED
+;                                STATUS_NOTSUPPORTED
+;
+;                $($R1): Option List
+;                $($R2): Option Text List
+;------------------------------------------------------------------------
+
+[ReturnOptions]
+	;
+	;
+	set Status        = STATUS_FAILED
+	set OptionList     = {}
+	set OptionTextList = {}
+
+	;
+	; Check if the language requested is supported
+	;
+	set LanguageList = ^(LanguagesSupported, 1)
+	Ifcontains(i) $($0) in $(LanguageList)
+		;
+		; Check if the platforms requested is supported
+		;
+		ifstr(i) $($1) == ""
+						goto returnoptions
+		endif
+
+		set PlatformList = ^(PlatformsSupported, 1)
+		Ifcontains(i) $($1) in $(PlatformList)
+						goto returnoptions
+		else
+						set Status = STATUS_NOTSUPPORTED
+						goto finish_ReturnOptions
+		endif
+	else
+				set Status = STATUS_NOLANGUAGE
+				goto finish_ReturnOptions
+	endif
+
+	;
+	; form a list of all the options and another of the text representing
+	;
+
+returnoptions = +
+	set OptionList     = ^(Options, 1)
+	set OptionTextList = ^(OptionsText$($0), 1)
+	set Status         = STATUS_SUCCESSFUL
+
+finish_ReturnOptions = +
+	Return $(Status) $(OptionList) $(OptionTextList)
+
+;------------------------------------------------------------------------
+;
+; InstallOption:
+;
+;      This section is shelled to by main installation processing
+;      or by NCPASHEL.INF during reconfig, removal, update, etc.
+;
+;
+; FUNCTION:  To copy files representing Options
+;            To configure the installed option
+;            To update the registry for the installed option
+;
+; INPUT:     $($0):  Language to use
+;            $($1):  OptionID to install
+;            $($2):  SourceDirectory
+;            $($3):  AddCopy  (YES | NO)
+;            $($4):  DoCopy   (YES | NO)
+;            $($5):  DoConfig (YES | NO)
+;
+; OUTPUT:    $($R0): STATUS: STATUS_SUCCESSFUL |
+;                            STATUS_NOLANGUAGE |
+;                            STATUS_USERCANCEL |
+;                            STATUS_FAILED
+;
+;------------------------------------------------------------------------
+[InstallOption]
+	;
+	; Set default values for
+	;
+	set Status   = STATUS_FAILED
+	;
+	; extract parameters
+	;
+	set Option   = $($1)
+	set SrcDir   = $($2)
+	set AddCopy  = $($3)
+	set DoCopy   = $($4)
+	set DoConfig = $($5)
+
+	Set !DebugOutputControl = 1
+
+	;
+	; Check if the language requested is supported
+	;
+	set LanguageList = ^(LanguagesSupported, 1)
+	Ifcontains(i) $($0) NOT-IN $(LanguageList)
+		Return STATUS_NOLANGUAGE
+	endif
+
+	set-subst LF = "\n"
+
+	;-------------------------------
+	;start Resource Detect with Softex merge
+
+	set CSInstalled = "STANDARD NT4"
+	ifstr(i) $(!NTN_InstallMode) == "install"
+		LoadLibrary "disk 1" $(SrcDir)"CBE.DLL" hLib
+	else
+		LoadLibrary "disk 1" $(!STF_WINDOWSSYSPATH)"\CBE.DLL" hLib
+	endif
+
+	LibraryProcedure CSInstalled, $(hLib), IsSoftex
+
+	ifstr(i) $(CSInstalled) == "Softex"
+		
+		read-syms GeneralConstantsSoftex
+		read-syms AllFileConstants
+		read-syms FileConstantsSoftex"-"$(Option)
+	
+	else-ifstr(i) $(CSInstalled) == "STANDARD NT4"
+	
+		read-syms GeneralConstants
+		read-syms AllFileConstants
+		read-syms FileConstants"-"$(Option)
+	
+	endif
+
+	read-syms DialogConstants$(!STF_LANGUAGE)"-"$(Option)
+	
+	ifstr(i) $(!NTN_Origination) == "NCPA"
+		set Continue = $(OK)
+	endif
+
+	read-syms AllFileConstants$(!STF_LANGUAGE)
+
+	ifstr(i) $(CSInstalled) == "Softex"
+		
+		read-syms FileConstantsSoftex$(!STF_LANGUAGE)"-"$(Option)
+	
+	else-ifstr(i) $(CSInstalled) == "STANDARD NT4"
+	
+		read-syms FileConstants$(!STF_LANGUAGE)"-"$(Option)
+	
+	endif
+
+	detect date
+
+	set-title  $(FunctionTitle)
+
+	set to   = Begin
+	set from = Begin
+;
+;  Assume all is well.
+;
+	set CommonStatus = STATUS_SUCCESSFUL
+
+	EndWait
+
+;
+;   Set up the operation-mode-based variables and gaily welcome
+;   the user.  If the "install mode" variable is improperly set,
+;   assume this is a new installation.
+;
+
+Begin = +
+	Set ActivateDetection = FALSE
+
+	Ifstr(i) $(!NTN_InstallMode) == deinstall
+		set StartLabel = removeadapter
+	else-Ifstr(i) $(!NTN_InstallMode) == Update
+		set StartLabel = UpgradeSoftware
+	else-Ifstr(i) $(!NTN_InstallMode) == bind
+		set StartLabel = bindingadapter
+	else-Ifstr(i) $(!NTN_InstallMode) == configure
+;        set ActivateDetection = TRUE
+		set StartLabel = configureadapter
+		;
+		;   You cannot config the software component
+		;
+		Ifstr(i) $(ProductKeyName) == $(!NTN_RegBase)
+			;Debug-Output "Cannot configure the software."
+			Shell $(UtilityInf),RegistryErrorString,CANNOT_CONFIGURE_SOFTWARE
+			ifint $($ShellCode) != $(!SHELL_CODE_OK)
+				Debug-Output "ShellCode error: cannot get an error string."
+				goto ShellCodeError
+			endif
+			set Error = $($R0)
+			set from = end
+			set to = end
+			goto nonfatalinfo
+		endif
+	else
+;        set ActivateDetection = TRUE
+		set StartLabel = installadapter
+		set OEM_ABANDON_OPTIONS = {}
+		set OEM_ABANDON_SOFTWARE = FALSE
+		set OEM_ABANDON_ON = TRUE
+	endif
+
+	;  Set the Default values
+	set MemoryAddrValue             = *($(MemoryAddrList), $(DEFAULT_MEMORY)) ; Memory Address = 0x55B84000
+	set IOBaseAddrValue             = *($(IOBaseAddrList), $(DEFAULT_IO))   ; IOBase Address = Default
+	set IRQValue                    = *($(IRQList), $(DEFAULT_IRQ))         ; IRQ Level      = Default
+	set InterruptStyleValue         = *($(InterruptStyleList), 1)   ; InterruptStyle = Auto Detect
+	set LineConfigValue             = *($(LineConfigList), 1)       ; LineConfig = Auto Detect
+	set SocketValue                 = *($(SocketList), 1)           ; Socket = Auto Detect
+	set InitDelayValue              = *($(InitDelayList), 1)        ; InitDelay = 0
+
+	ifstr(i) $(CSInstalled) == "STANDARD NT4"
+		set NdisVersionValue              = *($(NdisVersionList), 1)        ; NdisVersion = 4
+	endif
+
+	set NegotiationValue            = "ON"          ; Negotiation = on
+	set LinkIntegrityValue          = "ON"          ; Link Integrity = Enabled
+	set CableDetectValue            = "ON"          ; Cable(Energy) Detect = Enabled
+	set AutoPolarityValue           = "ON"          ; Auto Polarity = Enabled
+	set MemoryModeValue             = "OFF"         ; Memory Mode = off
+	set DynamicLinkDetectValue      = "ON"          ; Dynamic Link Detection = on
+
+	set NetworkAddressValue         = ""            ; Not used when Blank
+	set TxBufferSizeValue           = 10            ; Not shown on Dialog Box
+	set RxBufferSizeValue           = 30            ; Not shown on Dialog Box
+
+	Set from = $(fatal)
+	Set to = $(fatal)
+	Goto $(StartLabel)
+
+;-----------------------------------------------
+; Installation Section
+;-----------------------------------------------
+
+installadapter = +
+;
+;   First, check whether the same version of the software exists
+;
+	OpenRegKey $(!REG_H_LOCAL) "" $(ProductKeyName) $(MAXIMUM_ALLOWED) KeyProduct
+
+	Ifstr $(KeyProduct) != $(KeyNull)
+		;
+		; Same version already existed in the local machine
+		; Popup the dialog and ask the user whether he wants to continue
+		;
+		CloseRegKey $(KeyProduct)
+
+		ifstr(i) !(NTN_RegBase) == $(ProductKeyName)
+		   ;
+		   ; Cannot Install the same software again
+		   ;
+		   Shell $(UtilityInf), VerExistedDlg, $(ProductSoftwareTitle),+
+			   $(ProductVersion)
+		   ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			   Debug-Output "ShellCode error: cannot get an error string."
+			   goto ShellCodeError
+		   endif
+
+		   goto end
+		else
+		   ;
+		   ; Add a new adapter card?
+		   ;
+		   Shell $(UtilityInf), CardExistedDlg
+
+		   ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			   Debug-Output "ShellCode error: cannot get an error string."
+			   goto ShellCodeError
+		   endif
+
+		   ifstr(i) $($R1) != "OK"
+			   goto end
+		   endif
+		   set OldVersionExisted = $(TRUE)
+		endif
+	endif
+
+;
+;  dll load addition
+;
+	Shell $(UtilityInf), DoAskSource, $(!STF_CWDDIR), $(SrcDir) NO
+
+	Ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		Goto ShellCodeError
+	Else-Ifstr(i) $($R0) == STATUS_FAILED
+		Shell $(UtilityInf) RegistryErrorString "ASK_SOURCE_FAIL"
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+		set Error = $($R0)
+		Goto fatal
+	Else-Ifstr(i) $($R0) == STATUS_USERCANCEL
+		Goto successful
+	Endif
+
+	Set SrcDir = $($R1)
+
+	install "Install-Dll"
+
+
+	goto adaptersetup
+
+;-----------------------------------------------
+; Configuration Section
+;-----------------------------------------------
+;
+;   Get the current values of all the parameters
+;
+configureadapter = +
+	Ifstr $(KeyProduct) == $(KeyNull)
+		OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_RegBase) $(MAXIMUM_ALLOWED) KeyProduct
+		Ifstr $(KeyProduct) == $(KeyNull)
+			set RegistryErrorIndex = CANNOT_FIND_COMPONENT_SERVICE
+			Debug-Output "Cannot find component product key"
+			goto fatalregistry
+		Endif
+	Endif
+
+	;
+	; Get the other parameters;  they're attached to the service parameters key
+	;
+	Debug-Output "INF: Shelling to FindService"
+	Shell $(UtilityInf) FindService, $(KeyProduct)
+	Ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		Debug-Output "INF: FindService shell failure"
+		Goto ShellCodeError
+	Endif
+	Ifstr(i) $($R0) != NO_ERROR
+		Debug-Output "INF: FindService Shell error: "$($R0)
+		Goto fatalregistry
+	endif
+
+	Set KeyParameters = $($R2)
+
+	;
+	;  We don't need the services key, so close it.
+	;
+	CloseRegKey $($R1)
+
+	Ifstr $(KeyParameters) == $(KeyNull)
+		set RegistryErrorIndex = CANNOT_FIND_COMPONENT_SERVICE
+		Debug-Output "Cannot find component service"
+		goto fatalregistry
+	endif
+
+	set OldVersionExisted = $(TRUE)
+
+	set ValueName = ""
+	set ValueData = ""
+	set ValueStr  = ""
+	set ValueList = {}
+
+	
+	;
+	; Get the old values from the Registry  [Get Values]
+	; *********************************************************
+	EnumRegValue $(KeyParameters) ValueList
+	ForListDo $(ValueList)
+		set ValueItem = $($)
+		set ValueName = *($(ValueItem),1)
+		set ValueData = *($(ValueItem),4)
+		ifstr(i) $(ValueName) == "MemoryBaseAddress"
+			set MemoryAddrIndex = $(ValueData)
+		else-ifstr(i) $(ValueName) == "IoBaseAddress"
+			set IOBaseAddrIndex = $(ValueData)
+		else-ifstr(i) $(ValueName) == "InterruptNumber"
+			set IRQValueIndex = $(ValueData)
+		else-ifstr(i) $(ValueName) == "InterruptStyle"
+			set InterruptStyleIndex = $(ValueData)
+		else-ifstr(i) $(ValueName) == "LineConfig"
+			set LineConfigIndex = $(ValueData)
+		else-ifstr(i) $(ValueName) == "SocketNumber"
+			set SocketIndex = $(ValueData)
+		else-ifstr(i) $(ValueName) == "InitDelay"
+			set InitDelayIndex = $(ValueData)
+		else-ifstr(i) $(ValueName) == "NdisVersion"
+			set NdisVersionIndex = $(ValueData)
+		else-ifstr(i) $(ValueName) == "Negotiation"
+			set NegotiationValue = $(ValueData)
+		else-ifstr(i) $(ValueName) == "LinkIntegrity"
+			set LinkIntegrityValue = $(ValueData)
+		else-ifstr(i) $(ValueName) == "CableDetect"
+			set CableDetectValue = $(ValueData)
+		else-ifstr(i) $(ValueName) == "AutoPolarity"
+			set AutoPolarityValue = $(ValueData)
+		else-ifstr(i) $(ValueName) == "MemoryMode"
+			set MemoryModeValue = $(ValueData)
+		else-ifstr(i) $(ValueName) == "DynamicLinkDetect"
+			set DynamicLinkDetectValue = $(ValueData)
+		else-ifstr(i) $(ValueName) == "NetworkAddress"
+			set NetworkAddressValue = $(ValueData)
+		else-ifstr(i) $(ValueName) == "TxBufferSize"
+			set TxBufferSizeValue = $(ValueData)
+		else-ifstr(i) $(ValueName) == "RxBufferSize"
+			set RxBufferSizeValue = $(ValueData)
+		endif
+	EndForListDo
+
+	set MemoryAddrValue = *($(MemoryAddrList), ~($(MemoryAddrValues),$(MemoryAddrIndex)))
+	ifstr(i) $(MemoryAddrValue) == ""
+		set MemoryAddrValue = *($(MemoryAddrValues), $(DEFAULT_MEMORY))
+	endif
+
+	set IOBaseAddrValue = *($(IOBaseAddrList), ~($(IOBaseAddrValues),$(IOBaseAddrIndex)))
+	ifstr(i) $(IOBaseAddrValue) == ""
+		set IOBaseAddrValue = *($(IOBaseAddrList), $(DEFAULT_IO))
+	endif
+
+	set IRQValue = *($(IRQList), ~($(IRQValues),$(IRQValueIndex)))
+	ifstr(i) $(IRQValue) == ""
+		set IRQValue = *($(IRQList), $(DEFAULT_IRQ))
+	endif
+
+	set InterruptStyleValue = *($(InterruptStyleList), ~($(InterruptStyleValues),$(InterruptStyleIndex)))
+	ifstr(i) $(InterruptStyleValue) == ""
+		set InterruptStyleValue = *($(InterruptStyleList), 0)
+	endif
+
+	set LineConfigValue = *($(LineConfigList), ~($(LineConfigValues),$(LineConfigIndex)))
+	ifstr(i) $(LineConfigValue) == ""
+		set LineConfigValue = *($(LineConfigValues), 1)
+	endif
+
+	set SocketValue = *($(SocketList), ~($(SocketValues),$(SocketIndex)))
+	ifstr(i) $(SocketValue) == ""
+		set SocketValue = *($(SocketValues), 1)
+	endif
+
+	set InitDelayValue = *($(InitDelayList), ~($(InitDelayValues),$(InitDelayIndex)))
+	ifstr(i) $(InitDelayValue) == ""
+		set InitDelayValue = *($(InitDelayValues), 1)
+	endif
+
+	ifstr(i) $(CSInstalled) == "STANDARD NT4"
+		set NdisVersionValue = *($(NdisVersionList), ~($(NdisVersionValues),$(NdisVersionIndex)))
+		ifstr(i) $(NdisVersionValue) == ""
+			set NdisVersionValue = *($(NdisVersionValues), 1)
+		endif
+	endif
+
+	ifstr(i) $(NegotiationValue) == ""
+		set NegotiationValue = 1
+	endif
+
+	ifstr(i) $(LinkIntegrityValue) == ""
+		set LinkIntegrityValue = 1
+	endif
+
+	ifstr(i) $(CableDetectValue) == ""
+		set CableDetectValue = 1
+	endif
+
+	ifstr(i) $(AutoPolarityValue) == ""
+		set AutoPolarityValue = 1
+	endif
+
+	ifstr(i) $(MemoryModeValue) == ""
+		set MemoryModeValue = 0
+	endif
+
+	ifstr(i) $(DynamicLinkDetectValue) == ""
+		set DynamicLinkDetectValue = 1
+	endif
+
+	ifint $(NegotiationValue) == 1
+		set NegotiationValue = "ON"
+	else
+		set NegotiationValue = "OFF"
+	endif
+
+	ifint $(LinkIntegrityValue) == 1
+		set LinkIntegrityValue = "ON"
+	else
+		set LinkIntegrityValue = "OFF"
+	endif
+
+	ifint $(CableDetectValue) == 1
+		set CableDetectValue = "ON"
+	else
+		set CableDetectValue = "OFF"
+	endif
+
+	ifint $(AutoPolarityValue) == 1
+		set AutoPolarityValue = "ON"
+	else
+		set AutoPolarityValue = "OFF"
+	endif
+
+	ifint $(MemoryModeValue) == 1
+		set MemoryModeValue = "ON"
+	else
+		set MemoryModeValue = "OFF"
+	endif
+
+	ifint $(DynamicLinkDetectValue) == 1
+		set DynamicLinkDetectValue = "ON"
+	else
+		set DynamicLinkDetectValue = "OFF"
+	endif
+
+
+	set CheckItemsIn = {$(NegotiationStr),$(LinkIntegrityStr),$(CableDetectStr),+
+                            $(AutoPolarityStr),$(MemoryModeStr),$(DynamicLinkDetectStr)}
+	;set CheckItemsIn = {"OFF", "ON", "OFF"}
+
+
+	;  Save the settings as they were read from the Registry.
+
+;    Shell $(ParamInf) Param_SaveValues
+;    Set CurrParamSettings = $($R0)
+;
+;   Put up the adapter configuration dialog if necessary.
+;
+;   Note that $(CurrParamSettings) has the old known parameter values.
+;
+adaptersetup = +
+
+
+	;Shell "" DebugConfiguration "before displaying dialog"
+
+	Set from = adapteroptions
+
+
+adapteroptions = +
+
+	
+	ifstr(i) $(!STF_GUI_UNATTENDED) == "YES"
+		goto skipoptions
+	endif
+	
+	set CheckItemsIn = {$(NegotiationStr),$(LinkIntegrityStr),$(CableDetectStr),+
+                            $(AutoPolarityStr),$(MemoryModeStr),$(DynamicLinkDetectStr)}
+
+	;;;-------START--Resource--Detect---------------------------------------
+	;Resource Detect message displays only on non-Softex machine
+
+	ifstr(i) $(CSInstalled) == "STANDARD NT4"
+		Ifstr(i) $(!NTN_InstallMode) == install
+			
+			;;; display scanning message on initial install only, not when checking properties
+			set DlgType			=	"MessageBox"
+			set STF_MB_TITLE	=	"Xircom NT Resource Detect"
+			set STF_MB_TEXT		=	"Resource Detect Completed successfully.  The hardware resources on the next screen are recommended to install the "$(GenericAdapterName)"."
+			set STF_MB_TYPE		=	1
+			set STF_MB_ICON		=	2
+			set STF_MB_DEF		=	1
+
+			ui start "Scanning Message"
+		Endif
+	endif
+		;-----------------------------------------------
+		; before dialog display
+		; $(CurrParamSettings) values from Registry will be default values if currently installed
+
+		set Curr_Memory			=	$(MemoryAddrValue)
+		set Curr_MemValue			=	$(MemoryAddrIndex)
+		set Curr_Io				=	$(IOBaseAddrValue)
+		set Curr_IoValue				=	$(IOBaseAddrIndex)
+		set Curr_Irq			=	$(IRQValue)
+		set Curr_IrqValue			=	$(IRQValueIndex)
+		
+		ifint $(RUNDLLCODE) == 1
+		
+			Set UsedIoList		= {}		;;;initialize lists and variables
+			Set AvailIoList		= {}
+			Set AvailIoValues	= {}
+
+			Set UsedIrqList		= {}
+			Set AvailIrqList	= {}
+			Set AvailIrqValues	= {}
+
+			Set UsedMemList		= {}
+			Set AvailMemList	= {}
+			Set AvailMemValues	= {}
+			
+			Set UsedDeviceList		= {}
+			;========	start IO's	=================================
+			
+			;Scan for used Io port resources
+			
+			LibraryProcedure UsedIoList, $(hLib), GetResources "GetIoList"
+			Debug-Output "UsedIoList: "$(UsedIoList)
+			
+			;all registered io resources found in Registry now reside in UsedIoList
+			;--------------------------------------------------------
+			;build the AvailIoList/Values based on results from Registry scan
+			; then process UsedIoList against IOBaseAddrList/Values
+
+			Set AvailIoList			=	{}
+			Set AvailIoValues		=	{}
+		
+			Set Index = 0
+			ForListDo $(IOBaseAddrList)						;;;Io ports that don't match the Used ones
+				Set-add Index = $(Index), 1					;;;will become the new Available list
+
+				Ifcontains(i) $($) not-in $(UsedIoList)
+					Set AvailIoList = >($(AvailIoList), $($))
+					Set AvailIoValues = >( $(AvailIoValues),  *($(IOBaseAddrValues), $(Index)) )
+				Endif
+			EndForListDo
+			
+			;========================================================
+			;now reassign AvailIoList/Values -> IOBaseAddrList/Values
+			
+				Set IOBaseAddrList		=	{}
+				Set IOBaseAddrValues	=	{}
+			
+				ForListDo $(AvailIoList)
+					Set IOBaseAddrList = >($(IOBaseAddrList), $($))
+				EndForListDo
+				
+				ForListDo $(AvailIoValues)
+					Set IOBaseAddrValues = >($(IOBaseAddrValues), $($))
+				EndForListDo
+			
+			;========	finished with IO's	=================================
+
+
+			;========	start IRQs	=================================
+
+			;scan for used Irq resources
+			
+			LibraryProcedure UsedIrqList, $(hLib), GetResources "GetIrqList"
+			Debug-Output "UsedIrqList: "$(UsedIrqList)
+			;--------------------------------------------------------
+			;build the AvailIrqList/AvailIrqValues based on results from Registry scan
+			
+			Set Index = 0
+			Set AvailIrqList = {}
+			Set AvailIrqValues = {}
+
+			ForListDo $(IRQList)						;;;Irqs that don't match the Used ones
+				Set-add Index = $(Index), 1				;;;will become the new Available list
+			
+				Ifcontains(i) $($) not-in $(UsedIrqList)
+					Set AvailIrqList = >($(AvailIrqList), $($))
+					Set AvailIrqValues = >( $(AvailIrqValues),  *($(IRQValues), $(Index)) )
+				Endif
+			EndForListDo
+			;--------------------------------------------------------
+			;now reassign AvailIrqList -> IRQList and AvailIrqValues -> IRQValues
+			
+				Set IRQList = {}
+				Set IRQValues = {}
+
+				ForListDo $(AvailIrqList)
+					Set IRQList = >($(IRQList), $($))
+				EndForListDo
+
+				ForListDo $(AvailIrqValues)
+					Set IRQValues = >($(IRQValues), $($))
+				EndForListDo
+			;Debug-Output "IRQList: "$(IRQList)
+			;Debug-Output "IRQValues: "$(IRQValues)
+			;========	finished with IRQs	=================================
+
+
+			;========	start MEM's	=================================
+			;scan for used Memory resources
+			
+			LibraryProcedure UsedMemList, $(hLib), GetResources "GetMemList"
+			Debug-Output "UsedMemList: "$(UsedMemList)
+			
+			LibraryProcedure UsedDeviceList, $(hLib), GetResources "GetDeviceList"
+			Debug-Output "UsedDeviceList: "$(UsedDeviceList)
+
+			;--------------------------------------------------------
+			;build the AvailMemList/Values based on results from Registry scan
+			Set Index = 0
+			Set AvailMemList = {}
+			Set AvailMemValues = {}
+			
+			
+			ForListDo $(MemoryAddrList)								;;;Mem ports that don't match the Used ones
+				Set-add Index = $(Index), 1							;;;will become the new Available list
+			
+				Ifcontains(i) $($) not-in $(UsedMemList)
+					Set AvailMemList = >($(AvailMemList), $($))
+					Set AvailMemValues = >( $(AvailMemValues),  *($(MemoryAddrValues), $(Index)) )
+				Endif
+						
+			EndForListDo
+
+					
+				Set MemoryAddrList = {}
+				Set MemoryAddrValues = {}
+					
+				ForListDo $(AvailMemList)
+					Set MemoryAddrList = >($(MemoryAddrList), $($))
+				EndForListDo
+
+				ForListDo $(AvailMemValues)
+					Set MemoryAddrValues = >($(MemoryAddrValues), $($))
+				EndForListDo
+
+			;========	finished with MEM's	=================================
+
+		FreeLibrary $(hLib)
+		endif
+
+			
+		;======================================================
+		;;;on Properties check, currently installed CBE params from Registry is added back to Avail List/Values
+		;;;since resource scan will exclude these as they are considered Used Resources
+
+		Ifstr(i) $(!NTN_InstallMode) == "configure"
+					
+					Debug-Output "NTN_InstallMode == configure."
+					Debug-Output "Curr_Io: "$(Curr_Io)
+					Debug-Output "Curr_Irq: "$(Curr_Irq)
+					Debug-Output "Curr_Memory: "$(Curr_Memory)
+		
+					ForListDo $(IOBaseAddrList)
+						Ifcontains(i) $(Curr_Io) not-in $(IOBaseAddrList)
+							Set IOBaseAddrList = >($(IOBaseAddrList),$(Curr_Io))
+						Endif
+						
+						Ifcontains(i) $(Curr_IoValue) not-in $(IOBaseAddrValues)
+							Set IOBaseAddrValues = >($(IOBaseAddrValues),$(Curr_IoValue))
+						Endif
+					EndForListDo
+		
+					ForListDo $(IRQList)
+						Ifcontains(i) $(Curr_Irq) not-in $(IRQList)
+							Set IRQList	= >($(IRQList),$(Curr_Irq))
+						Endif
+						Ifcontains(i) $(Curr_IrqValue) not-in $(IRQValues)
+							Set IRQValues = >($(IRQValues), $(Curr_IrqValue))
+						Endif
+					EndForListDo
+						
+					ForListDo $(MemoryAddrList)
+						Ifcontains(i) $(Curr_Memory) not-in $(MemoryAddrList)
+							Set MemoryAddrList = >($(MemoryAddrList),$(Curr_Memory))
+						Endif
+
+						Ifcontains(i) $(Curr_MemValue) not-in $(MemoryAddrValues)
+							Set MemoryAddrValues = >($(MemoryAddrValues),$(Curr_MemValue))
+						Endif
+					EndForListDo
+						
+		Endif
+	
+		;;;-------END--Resource--Detect---------------------------------------------
+
+	LoadLibrary "disk 1" $(DialogDllName) hLib
+	
+	ifstr(i) $(CSInstalled) == "Softex"
+		read-syms FileDependentDlgSoftex$(!STF_LANGUAGE)"-"$(Option)
+	else-ifstr(i) $(CSInstalled) == "STANDARD NT4"
+		read-syms FileDependentDlg$(!STF_LANGUAGE)"-"$(Option)
+	endif
+
+	set ENABLER = 0
+
+	
+	ui start "InputDlg"  $(hLib)
+
+	set ExitButton      = $(ButtonPressed)
+	FreeLibrary $(hLib)
+
+	ifstr(i) $(DLGEVENT) == "CONTINUE"
+
+		set MemoryAddrIndex		= $(Combo1Out)
+		set IOBaseAddrIndex		= $(Combo2Out)
+		set IRQValueIndex		= $(Combo3Out)
+		set InterruptStyleIndex		= $(Combo4Out)
+		set LineConfigIndex		= $(Combo5Out)
+		set SocketIndex			= $(Combo6Out)
+		set InitDelayIndex		= $(Combo7Out)
+		
+		ifstr(i) $(CSInstalled) == "STANDARD NT4"
+			set NdisVersionIndex		= $(Combo8Out)
+		endif
+
+		set NegotiationValue		= *($(CheckItemsOut), 1)
+		set LinkIntegrityValue		= *($(CheckItemsOut), 2)
+		set CableDetectValue		= *($(CheckItemsOut), 3)
+		set AutoPolarityValue		= *($(CheckItemsOut), 4)
+		set MemoryModeValue		= *($(CheckItemsOut), 5)
+		set DynamicLinkDetectValue	= *($(CheckItemsOut), 6)
+
+		set NetworkAddressValue		= *($(EditTextOut), 1)
+		set TxBufferSizeValue		= *($(EditTextOut), 2)
+		set RxBufferSizeValue		= *($(EditTextOut), 3)
+		set ExitButton			= $(ButtonPressed)
+
+		ui pop 1
+
+	else-ifstr(i) $(DLGEVENT) == "EXIT"
+		set CommonStatus = STATUS_USERCANCEL
+		ui pop 1
+		goto end
+	else
+		set CommonStatus = STATUS_USERCANCEL
+		ui pop 1
+		Debug-Output "Action: unknown. Bye."
+		goto end
+	endif
+
+
+;
+;   If installing, go create the necessary keys;
+;   if configuring, they're already open.
+;
+skipoptions =+
+
+	ifint $(OldVersionExisted) == $(TRUE)
+		ifstr(i) $(!NTN_InstallMode) == configure
+			goto writeparameters
+		endif
+	endif
+	StartWait
+	;
+	; Add Software Component
+	;
+	ifint $(OldVersionExisted) == $(FALSE)
+
+		ifstr(i) $(!NTN_InstallMode) == "install"
+		   Ifstr(i) $(DoCopy) == "YES"
+
+			  Shell $(UtilityInf), DoAskSource, $(!STF_CWDDIR), $(SrcDir) YES
+
+			  Ifint $($ShellCode) != $(!SHELL_CODE_OK)
+				  Goto ShellCodeError
+			  Else-Ifstr(i) $($R0) == STATUS_FAILED
+				  Shell $(UtilityInf) RegistryErrorString "ASK_SOURCE_FAIL"
+				  ifint $($ShellCode) != $(!SHELL_CODE_OK)
+					  goto ShellCodeError
+				  endif
+				  set Error = $($R0)
+				  Goto fatal
+			  Else-Ifstr(i) $($R0) == STATUS_USERCANCEL
+				  Goto successful
+			  Endif
+
+			  Set SrcDir = $($R1)
+
+		   Endif
+
+		   install "Install-Option"
+
+		   ifstr(i) $(STF_INSTALL_OUTCOME) != STF_SUCCESS
+			  Shell $(UtilityInf) RegistryErrorString "UNABLE_COPY_FILE"
+			  ifint $($ShellCode) != $(!SHELL_CODE_OK)
+				  goto ShellCodeError
+			  endif
+			  set Error = $($R0)
+			  goto fatal
+		   endif
+		endif
+
+
+
+		Shell $(UtilityInf), AddSoftwareComponent, $(Manufacturer), +
+			$(ProductSoftwareName), +
+			$(ProductSoftwareName), +
+			$(ProductSoftwareTitle), $(STF_CONTEXTINFNAME), +
+			$(ProductSoftwareImagePath), "kernel", "NDIS", {}, "",+
+			$(NetEventDLL)
+
+		Set OEM_ABANDON_SOFTWARE = TRUE
+
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			Debug-Output "ShellCode error"
+			goto ShellCodeError
+		endif
+		;
+		;   At this point:
+		;     $R1 contains the product version key handle;
+		;     $R2 contains the NetRules subkey handle;
+		;     $R3 contains the new Services key handle; and
+		;     $R4 contains the Parameters key
+		;     $R5 contains the Linkage Key
+		;
+		set RegistryErrorIndex = $($R0)
+		set KeyProduct      = $($R1)
+		Set SoftNetRulesKey = $($R2)
+		CloseRegKey $($R3)
+		CloseRegKey $($R4)
+		CloseRegKey $($R5)
+
+		Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+			EndWait
+			Debug-Output "Registry error: add software components"
+			CloseRegKey $(KeyProduct)
+			CloseRegKey $(SoftNetRulesKey)
+			goto fatalregistry
+		endif
+
+		set NewValueList = {{SoftwareType,$(NoTitle),$(!REG_VT_SZ),$(SoftwareType)},+
+						   {MajorVersion,$(NoTitle),$(!REG_VT_DWORD),$(ProductMajorVersion)},+
+						   {MinorVersion,$(NoTitle),$(!REG_VT_DWORD),$(ProductMinorVersion)},+
+						   {Title,$(NoTitle),$(!REG_VT_SZ),$(ProductSoftwareTitle)},+
+						   {Description,$(NoTitle),$(!REG_VT_SZ),$(ProductSoftwareDescription)},+
+						   {ServiceName,$(NoTitle),$(!REG_VT_SZ),$(ProductSoftwareName)},+
+						   {InstallDate,$(NoTitle),$(!REG_VT_DWORD),*($(Now),1)}}
+
+		Shell  $(UtilityInf), AddValueList, $(KeyProduct), $(NewValueList)
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			Debug-Output "ShellCode error."
+			goto ShellCodeError
+		endif
+
+		set RegistryErrorIndex = $($R0)
+
+		Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+			EndWait
+			Debug-Output "Registry error: add value list."
+			CloseRegKey $(KeyProduct)
+			CloseRegKey $(SoftNetRulesKey)
+			goto fatalregistry
+		endif
+
+		set NewValueList = {{type,$(NoTitle),$(!REG_VT_SZ),$(NetRuleSoftwareType)},+
+							{use,$(NoTitle),$(!REG_VT_SZ),$(NetRuleSoftwareUse)}, +
+							{bindform,$(NoTitle),$(!REG_VT_SZ),$(NetRuleSoftwareBindForm)}, +
+							{class,$(NoTitle),$(!REG_VT_MULTI_SZ),$(NetRuleSoftwareClass)}, +
+							{bindable,$(NoTitle),$(!REG_VT_MULTI_SZ),$(NetRuleSoftwareBindable)}, +
+							{InfOption,$(NoTitle),$(!REG_VT_SZ),$(Option)}}
+
+		Shell  $(UtilityInf), AddValueList, $(SoftNetRulesKey), $(NewValueList)
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			Debug-Output "ShellCode error."
+			goto ShellCodeError
+		endif
+
+		set RegistryErrorIndex = $($R0)
+
+		CloseRegKey $(KeyProduct)
+		CloseRegKey $(SoftNetRulesKey)
+
+		Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+			EndWait
+			Debug-Output "Resgitry error: add value list."
+			goto fatalregistry
+		endif
+	endif
+;
+;   Create the HARDWARE\Netcard region and its corresponding service
+;
+	Shell $(UtilityInf), AddHardwareComponent, $(ProductHardwareName),$(STF_CONTEXTINFNAME),$(ProductKeyName)
+
+	ifint $($R4) != -1
+		Set OEM_ABANDON_OPTIONS = >($(OEM_ABANDON_OPTIONS), $(!NTN_SoftwareBase)"\Microsoft\Windows NT\CurrentVersion\NetworkCards\"$($R4))
+	endif
+
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		Debug-Output "Cannot add hardware component"
+		goto ShellCodeError
+	endif
+
+	set RegistryErrorIndex = $($R0)
+
+	Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+		EndWait
+		Debug-Output "Registry error: add hardware component"
+		CloseRegKey $($R1)
+		CloseRegKey $($R2)
+		CloseRegKey $($R3)
+		goto fatalregistry
+	endif
+
+;
+;   At this point:
+;     $R1  Registry key variable for HARDWARE\Netcard\(n)
+;     $R2  Registry key variable for HARDWARE\Netcard\(n)\\NetRules
+;     $R3  Registry key handle for <service>\Parameters key
+;     $R4  Adapter number assigned to adapter
+;     $R5  Service name generated by combining svc name with adapter number
+;
+	set KeyParameters = $($R3)
+	set KeyAdapterRules = $($R2)
+	set AdapterNumber = $($R4)
+
+	set NewValueList = {{Manufacturer,$(NoTitle),$(!REG_VT_SZ),$(Manufacturer)},+
+					   {Title,$(NoTitle),$(!REG_VT_SZ),"["$($R4)"] "$(ProductHardwareTitle)},+
+					   {Description,$(NoTitle),$(!REG_VT_SZ),$(ProductHardwareDescription)},+
+					   {ProductName,$(NoTitle),$(!REG_VT_SZ),$(ProductHardwareName)},+
+					   {ServiceName,$(NoTitle),$(!REG_VT_SZ),$($R5)},+
+					   {InstallDate,$(NoTitle),$(!REG_VT_DWORD),*($(Now),1)}}
+
+	Shell  $(UtilityInf), AddValueList, $($R1), $(NewValueList)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		Debug-Output "ShellCode error"
+		goto ShellCodeError
+	endif
+
+	CloseRegKey $($R1)
+
+	set TempProdName = """"$(ProductHardwareName)$(AdapterNumber)""""
+	set TempBindForm = $(TempProdName)$(NetRuleHardwareBindForm)
+
+	set NewValueList = {{type,$(NoTitle),$(!REG_VT_SZ),$(NetRuleHardwareType)},+
+						{bindform,$(NoTitle),$(!REG_VT_SZ),$(TempBindForm)}, +
+						{class,$(NoTitle),$(!REG_VT_MULTI_SZ),$(NetRuleHardwareClass)}, +
+						{InfOption,$(NoTitle),$(!REG_VT_SZ),$(Option)}}
+
+	Shell  $(UtilityInf), AddValueList, $(KeyAdapterRules), $(NewValueList)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		Debug-Output "ShellCode error."
+		goto ShellCodeError
+	endif
+
+	set RegistryErrorIndex = $($R0)
+
+	Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+		EndWait
+		Debug-Output "Resgitry error: add value list."
+		CloseRegKey $(KeyParameters)
+		CloseRegKey $(KeyAdapterRules)
+		goto fatalregistry
+	endif
+
+	CloseRegKey $(KeyAdapterRules)
+
+	goto writeparameters
+;
+;   REQUIRED:   $(KeyParameters) contains service Parameters key handle
+;
+writeparameters = +
+	Shell $(UtilityInf), GetBusTypeNum
+	set BusTypeNum = $($R1)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		Debug-Output "ShellCode error."
+		goto ShellCodeError
+	endif
+;
+;   Add the rest of the parameters to the Services area
+;
+
+
+	ifstr(i) $(NegotiationValue) == "ON"
+		set NegotiationValue =  "1"
+	else
+		set NegotiationValue =  "0"
+	endif
+
+	ifstr(i) $(LinkIntegrityValue) == "ON"
+		set LinkIntegrityValue =  "1"
+	else
+		set LinkIntegrityValue =  "0"
+	endif
+
+	ifstr(i) $(CableDetectValue) == "ON"
+		set CableDetectValue =  "1"
+	else
+		set CableDetectValue =  "0"
+	endif
+
+	ifstr(i) $(AutoPolarityValue) == "ON"
+		set AutoPolarityValue =  "1"
+	else
+		set AutoPolarityValue =  "0"
+	endif
+
+	ifstr(i) $(MemoryModeValue) == "ON"
+		set MemoryModeValue =  "1"
+	else
+		set MemoryModeValue =  "0"
+	endif
+
+	ifstr(i) $(DynamicLinkDetectValue) == "ON"
+		set DynamicLinkDetectValue =  "1"
+	else
+		set DynamicLinkDetectValue =  "0"
+	endif
+
+	ifstr(i) $(!STF_GUI_UNATTENDED) == "YES"
+		set MemoryAddrValue             = *($(MemoryAddrValues), $(DEFAULT_MEMORY))
+		set IOBaseAddrValue             = *($(IOBaseAddrValues), $(DEFAULT_IO))
+		set IRQValue                    = *($(IRQValues), $(DEFAULT_IRQ))
+		set InterruptStyleValue         = *($(InterruptStyleValues), 1)
+		set LineConfigValue             = *($(LineConfigValues), 1)
+		set SocketValue                 = *($(SocketValues), 1)
+        set InitDelayValue              = *($(InitDelayValues), 1)
+		
+		ifstr(i) $(CSInstalled) == "STANDARD NT4"
+			set NdisVersionValue              = *($(NdisVersionValues), 1)
+		endif
+	else
+		set MemoryAddrValue             = *($(MemoryAddrValues),~($(MemoryAddrList), $(MemoryAddrIndex)))
+		set IOBaseAddrValue             = *($(IOBaseAddrValues),~($(IOBaseAddrList), $(IOBaseAddrIndex)))
+		set IRQValue                    = *($(IRQValues),       ~($(IRQList),        $(IRQValueIndex)))
+		set InterruptStyleValue         = *($(InterruptStyleValues), ~($(InterruptStyleList),  $(InterruptStyleIndex)))
+		set LineConfigValue             = *($(LineConfigValues),~($(LineConfigList), $(LineConfigIndex)))
+		set SocketValue                 = *($(SocketValues),    ~($(SocketList),     $(SocketIndex)))
+		set InitDelayValue              = *($(InitDelayValues), ~($(InitDelayList),  $(InitDelayIndex)))
+		
+		ifstr(i) $(CSInstalled) == "STANDARD NT4"
+			set NdisVersionValue              = *($(NdisVersionValues), ~($(NdisVersionList),  $(NdisVersionIndex)))
+		endif
+	endif
+
+	ifstr(i) $(CSInstalled) == "Softex"
+		set NewValueList =     {{AutoPolarity,		$(NoTitle),$(!REG_VT_DWORD),$(AutoPolarityValue)},+
+				{BusNumber,		$(NoTitle),$(!REG_VT_DWORD),0},+
+				{BusType,		$(NoTitle),$(!REG_VT_DWORD),$(BusTypeNum)},+
+				{CableDetect,		$(NoTitle),$(!REG_VT_DWORD),$(CableDetectValue)},+
+				{DynamicLinkDetect,	$(NoTitle),$(!REG_VT_DWORD),$(DynamicLinkDetectValue)},+
+				{Negotiation,		$(NoTitle),$(!REG_VT_DWORD),$(NegotiationValue)},+
+				{IoBaseAddress,		$(NoTitle),$(!REG_VT_DWORD),$(IOBaseAddrValue)},+
+				{InitDelay,		$(NoTitle),$(!REG_VT_DWORD),$(InitDelayValue)},+
+				{InterruptNumber,	$(NoTitle),$(!REG_VT_DWORD),$(IRQValue)},+
+				{InterruptStyle,	$(NoTitle),$(!REG_VT_DWORD),$(InterruptStyleValue)},+
+				{LineConfig,		$(NoTitle),$(!REG_VT_DWORD),$(LineConfigValue)},+
+				{LinkIntegrity,		$(NoTitle),$(!REG_VT_DWORD),$(LinkIntegrityValue)},+
+				{MediaType,		$(NoTitle),$(!REG_VT_DWORD),1},+
+				{MemoryBaseAddress,	$(NoTitle),$(!REG_VT_DWORD),$(MemoryAddrValue)},+
+				{MemoryMode,		$(NoTitle),$(!REG_VT_DWORD),$(MemoryModeValue)},+
+				{PCIVendorID,		$(NoTitle),$(!REG_VT_DWORD),4445},+
+				{PCMCIA,		$(NoTitle),$(!REG_VT_DWORD),0},+
+				{RXBUFFERSIZE,		$(NoTitle),$(!REG_VT_DWORD),$(RxBufferSizeValue)},+
+				{SocketNumber,		$(NoTitle),$(!REG_VT_DWORD),$(SocketValue)},+
+				{TXBUFFERSIZE,		$(NoTitle),$(!REG_VT_DWORD),$(TxBufferSizeValue)},+
+				{NetworkAddress,	$(NoTitle),$(!REG_VT_SZ)   ,$(NetworkAddressValue)}+
+			       }
+
+	else-ifstr(i) $(CSInstalled) == "STANDARD NT4"
+		set NewValueList =     {{AutoPolarity,		$(NoTitle),$(!REG_VT_DWORD),$(AutoPolarityValue)},+
+				{BusNumber,		$(NoTitle),$(!REG_VT_DWORD),0},+
+				{BusType,		$(NoTitle),$(!REG_VT_DWORD),$(BusTypeNum)},+
+				{CableDetect,		$(NoTitle),$(!REG_VT_DWORD),$(CableDetectValue)},+
+				{DynamicLinkDetect,	$(NoTitle),$(!REG_VT_DWORD),$(DynamicLinkDetectValue)},+
+				{Negotiation,		$(NoTitle),$(!REG_VT_DWORD),$(NegotiationValue)},+
+				{IoBaseAddress,		$(NoTitle),$(!REG_VT_DWORD),$(IOBaseAddrValue)},+
+				{InitDelay,		$(NoTitle),$(!REG_VT_DWORD),$(InitDelayValue)},+
+				{NdisVersion,		$(NoTitle),$(!REG_VT_DWORD),$(NdisVersionValue)},+
+				{InterruptNumber,	$(NoTitle),$(!REG_VT_DWORD),$(IRQValue)},+
+				{InterruptStyle,	$(NoTitle),$(!REG_VT_DWORD),$(InterruptStyleValue)},+
+				{LineConfig,		$(NoTitle),$(!REG_VT_DWORD),$(LineConfigValue)},+
+				{LinkIntegrity,		$(NoTitle),$(!REG_VT_DWORD),$(LinkIntegrityValue)},+
+				{MediaType,		$(NoTitle),$(!REG_VT_DWORD),1},+
+				{MemoryBaseAddress,	$(NoTitle),$(!REG_VT_DWORD),$(MemoryAddrValue)},+
+				{MemoryMode,		$(NoTitle),$(!REG_VT_DWORD),$(MemoryModeValue)},+
+				{PCIVendorID,		$(NoTitle),$(!REG_VT_DWORD),4445},+
+				{PCMCIA,		$(NoTitle),$(!REG_VT_DWORD),0},+
+				{RXBUFFERSIZE,		$(NoTitle),$(!REG_VT_DWORD),$(RxBufferSizeValue)},+
+				{SocketNumber,		$(NoTitle),$(!REG_VT_DWORD),$(SocketValue)},+
+				{TXBUFFERSIZE,		$(NoTitle),$(!REG_VT_DWORD),$(TxBufferSizeValue)},+
+				{NetworkAddress,	$(NoTitle),$(!REG_VT_SZ)   ,$(NetworkAddressValue)}+
+			       }
+	endif
+
+	Shell  $(UtilityInf), AddValueList, $(KeyParameters), $(NewValueList)
+
+	ifstr(i) $(!STF_GUI_UNATTENDED) == "YES"
+		Shell $(UtilityInf), AddDefaultNetCardParameters, $(KeyParameters)
+	endif
+
+	CloseRegKey $(KeyParameters)
+
+	; --------------------------------------------------------------------------------
+	; Version 1.0 of the driver requires that PCMCIA.sys be disabled to avoid
+	; contention problems with the cardbus controller chip.  Should be fixed with
+	; updated PCMCIA.sys due from MS in Dec96
+	; --------------------------------------------------------------------------------
+	ifint $(DISABLEPCMCIASYS) == 1
+		set PCMCIAKeyName = $(!NTN_ServiceBase)"\Pcmcia"
+		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIAKeyName) $(MAXIMUM_ALLOWED) PCMCIAKey
+		; Set the values --------------------------------------------------------------------------------------
+		SetRegValue $(PCMCIAKey) {Start, 0, $(!REG_VT_DWORD),4}  ; '4' disables the driver
+		CloseRegKey $(PCMCIAKey)
+	endif
+	
+    ; --------------------------------------------------------------------------------
+    ; --------------------------------------------------------------------------------
+
+	ifstr(i) $(CSInstalled) == "STANDARD NT4"
+		;;;-----------------------------
+		;;;Ndis Switch	4 <==> 3
+
+		ifint $(NdisVersionValue) == "1"		;;;Ndis 3
+				
+			OpenRegKey $(!REG_H_LOCAL) "" "SYSTEM\CurrentControlSet\Services\"$(ProductSoftwareName) $(MAXIMUM_ALLOWED) ImagePathHandle
+		
+			Ifstr $(ImagePathHandle) != $(KeyNull)
+				SetRegValue $(ImagePathHandle) {ImagePath, 0, $(!REG_VT_SZ), "\SystemRoot\System32\drivers\CBE.sys"}
+			Endif
+			CloseRegKey $(ImagePathHandle)
+
+		else-ifint $(NdisVersionValue) == "0"		;;;Ndis 4
+		
+			OpenRegKey $(!REG_H_LOCAL) "" "SYSTEM\CurrentControlSet\Services\"$(ProductSoftwareName) $(MAXIMUM_ALLOWED) ImagePathHandle
+		
+			Ifstr $(ImagePathHandle) != $(KeyNull)
+				SetRegValue $(ImagePathHandle) {ImagePath, 0, $(!REG_VT_SZ), "\SystemRoot\System32\drivers\CBEN4.sys"}
+			Endif
+			CloseRegKey $(ImagePathHandle)
+		endif
+		;;;-----end--Ndis Switch---------
+
+		; --------------------------------------------------------------------------------
+		; Write the parameters to the PCMCIA database section
+		; This is here for SystemSoft C&SSsupport
+		; First, do 1st Product (i.e. VERS1Product)
+		; --------------------------------------------------------------------------------
+		set PCMCIADatabaseKeyName = $(!NTN_ServiceBase)"\Pcmcia\DataBase"
+	;   set PCMCIADatabaseMfgKeyName = $(PCMCIADatabaseKeyName)"\"$(VERS1Manufacturer)
+		set PCMCIADatabaseMfgKeyName = $(PCMCIADatabaseKeyName)"\Xircom"
+		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseKeyName) $(MAXIMUM_ALLOWED) PCMCIADatabaseKey
+
+		ifstr $(PCMCIADatabaseKey) == $(NULL)
+		;Debug-Output "Pcmcia\DataBase not present"
+		else ; PCMCIA.sys is installed and registry has database section in it.
+		; Try to open Manufacturer section.  Delete it if found
+	;	OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseKeyName)"\"$(VERS1Manufacturer) $(MAXIMUM_ALLOWED) PCMCIADatabaseMfgKey
+		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseKeyName)"\Xircom" $(MAXIMUM_ALLOWED) PCMCIADatabaseMfgKey
+		ifstr $(PCMCIADatabaseMfgKey) == $(NULL) ; open failed, so create Manufacturer subkey
+	;		CreateRegKey $(PCMCIADatabaseKey) {$(VERS1Manufacturer), 0, 0} "" $(MAXIMUM_ALLOWED) "" PCMCIADatabaseMfgKey
+			CreateRegKey $(PCMCIADatabaseKey) {"Xircom", 0, 0} "" $(MAXIMUM_ALLOWED) "" PCMCIADatabaseMfgKey
+		endif
+
+		; Open Product Name  aka $(VERS1Product) ----------------------------------------------------------------------
+    		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseMfgKeyName)"\"$(VERS1Product) $(MAXIMUM_ALLOWED) PCMCIADatabaseMfgC56Key
+		ifstr $(PCMCIADatabaseMfgC56Key) == $(NULL)
+			CreateRegKey $(PCMCIADatabaseMfgKey) {$(VERS1Product), 0, 0} "" $(MAXIMUM_ALLOWED) 0 PCMCIADatabaseMfgC56Key
+		endif
+
+		; Set the values --------------------------------------------------------------------------------------
+		SetRegValue $(PCMCIADatabaseMfgC56Key) {Driver, 0, $(!REG_VT_SZ),"CBE"}
+		; SetRegValue $(PCMCIADatabaseMfgC56Key) {AttributeMemorySize, 0, $(!REG_VT_DWORD),8192}
+		SetRegValue $(PCMCIADatabaseMfgC56Key) {DeviceType, 0, $(!REG_VT_SZ),"NET"}
+		CloseRegKey $(PCMCIADatabaseMfgC56Key)
+		CloseRegKey $(PCMCIADatabaseMfgKey)
+		CloseRegKey $(PCMCIADatabaseKey)
+		endif
+
+		; --------------------------------------------------------------------------------
+		; Write the parameters to the PCMCIA database section
+		; This is here for SystemSoft C&SSsupport
+		; Second, do 2nd Product (i.e. VERS1Product2)
+		; --------------------------------------------------------------------------------
+		set PCMCIADatabaseKeyName = $(!NTN_ServiceBase)"\Pcmcia\DataBase"
+	;   set PCMCIADatabaseMfgKeyName = $(PCMCIADatabaseKeyName)"\"$(VERS1Manufacturer)
+		set PCMCIADatabaseMfgKeyName = $(PCMCIADatabaseKeyName)"\Xircom"
+		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseKeyName) $(MAXIMUM_ALLOWED) PCMCIADatabaseKey
+
+		ifstr $(PCMCIADatabaseKey) == $(NULL)
+		;Debug-Output "Pcmcia\DataBase not present"
+		else ; PCMCIA.sys is installed and registry has database section in it.
+		; Try to open Manufacturer section.  Delete it if found
+	;	OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseKeyName)"\"$(VERS1Manufacturer) $(MAXIMUM_ALLOWED) PCMCIADatabaseMfgKey
+		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseKeyName)"\Xircom" $(MAXIMUM_ALLOWED) PCMCIADatabaseMfgKey
+		ifstr $(PCMCIADatabaseMfgKey) == $(NULL) ; open failed, so create Manufacturer subkey
+	;		CreateRegKey $(PCMCIADatabaseKey) {$(VERS1Manufacturer), 0, 0} "" $(MAXIMUM_ALLOWED) "" PCMCIADatabaseMfgKey
+			CreateRegKey $(PCMCIADatabaseKey) {"Xircom", 0, 0} "" $(MAXIMUM_ALLOWED) "" PCMCIADatabaseMfgKey
+		endif
+
+		; Open Product Name aka $(VERS1Product2) ----------------------------------------------------------------------
+    		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseMfgKeyName)"\"$(VERS1Product2) $(MAXIMUM_ALLOWED) PCMCIADatabaseMfgC56Key
+		ifstr $(PCMCIADatabaseMfgC56Key) == $(NULL)
+			CreateRegKey $(PCMCIADatabaseMfgKey) {$(VERS1Product2), 0, 0} "" $(MAXIMUM_ALLOWED) 0 PCMCIADatabaseMfgC56Key
+		endif
+
+		; Set the values --------------------------------------------------------------------------------------
+		SetRegValue $(PCMCIADatabaseMfgC56Key) {Driver, 0, $(!REG_VT_SZ),"CBE"}
+		; SetRegValue $(PCMCIADatabaseMfgC56Key) {AttributeMemorySize, 0, $(!REG_VT_DWORD),8192}
+		SetRegValue $(PCMCIADatabaseMfgC56Key) {DeviceType, 0, $(!REG_VT_SZ),"NET"}
+		CloseRegKey $(PCMCIADatabaseMfgC56Key)
+		CloseRegKey $(PCMCIADatabaseMfgKey)
+		CloseRegKey $(PCMCIADatabaseKey)
+		endif
+
+		; --------------------------------------------------------------------------------
+		; Write the parameters to the PCMCIA database section
+		; This is here for SystemSoft C&SSsupport
+		; Third, do 3rd Product (i.e. VERS1Product3)
+		; --------------------------------------------------------------------------------
+		set PCMCIADatabaseKeyName = $(!NTN_ServiceBase)"\Pcmcia\DataBase"
+	;   set PCMCIADatabaseMfgKeyName = $(PCMCIADatabaseKeyName)"\"$(VERS1Manufacturer)
+		set PCMCIADatabaseMfgKeyName = $(PCMCIADatabaseKeyName)"\Xircom"
+		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseKeyName) $(MAXIMUM_ALLOWED) PCMCIADatabaseKey
+
+		ifstr $(PCMCIADatabaseKey) == $(NULL)
+		;Debug-Output "Pcmcia\DataBase not present"
+		else ; PCMCIA.sys is installed and registry has database section in it.
+		; Try to open Manufacturer section.  Delete it if found
+	;	OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseKeyName)"\"$(VERS1Manufacturer) $(MAXIMUM_ALLOWED) PCMCIADatabaseMfgKey
+		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseKeyName)"\Xircom" $(MAXIMUM_ALLOWED) PCMCIADatabaseMfgKey
+		ifstr $(PCMCIADatabaseMfgKey) == $(NULL) ; open failed, so create Manufacturer subkey
+	;		CreateRegKey $(PCMCIADatabaseKey) {$(VERS1Manufacturer), 0, 0} "" $(MAXIMUM_ALLOWED) "" PCMCIADatabaseMfgKey
+			CreateRegKey $(PCMCIADatabaseKey) {"Xircom", 0, 0} "" $(MAXIMUM_ALLOWED) "" PCMCIADatabaseMfgKey
+		endif
+
+		; Open Product Name  (i.e. VERS1Product3) ----------------------------------------------------------------------
+    		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIADatabaseMfgKeyName)"\"$(VERS1Product3) $(MAXIMUM_ALLOWED) PCMCIADatabaseMfgC56Key
+		ifstr $(PCMCIADatabaseMfgC56Key) == $(NULL)
+			CreateRegKey $(PCMCIADatabaseMfgKey) {$(VERS1Product3), 0, 0} "" $(MAXIMUM_ALLOWED) 0 PCMCIADatabaseMfgC56Key
+		endif
+
+		; Set the values --------------------------------------------------------------------------------------
+		SetRegValue $(PCMCIADatabaseMfgC56Key) {Driver, 0, $(!REG_VT_SZ),"CBE"}
+		; SetRegValue $(PCMCIADatabaseMfgC56Key) {AttributeMemorySize, 0, $(!REG_VT_DWORD),8192}
+		SetRegValue $(PCMCIADatabaseMfgC56Key) {DeviceType, 0, $(!REG_VT_SZ),"NET"}
+		CloseRegKey $(PCMCIADatabaseMfgC56Key)
+		CloseRegKey $(PCMCIADatabaseMfgKey)
+		CloseRegKey $(PCMCIADatabaseKey)
+		endif
+
+    endif	;;;STANDARD NT4
+	; --------------------------------------------------------------------------------
+    ; --------------------------------------------------------------------------------
+	
+
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		Debug-Output "ShellCode error."
+		goto ShellCodeError
+	endif
+
+	set RegistryErrorIndex = $($R0)
+
+	Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+		Debug-Output "Registry error: Add value list"
+		goto fatalregistry
+	endif
+
+	EndWait
+
+	goto successful
+
+;-----------------------------------------------
+; Binding section
+;-----------------------------------------------
+bindingadapter =+
+	set Error = "Binding: Sorry, not yet implemented."
+	goto fatal
+
+;-----------------------------------------------
+; Removeadapter section
+;-----------------------------------------------
+
+removeadapter = +
+	Ifstr(i) $(ProductKeyName) == $(!NTN_RegBase)
+		; Remove Software Component
+		Shell $(UtilityInf), RemoveSoftwareComponent, $(Manufacturer), +
+			$(ProductSoftwareName)
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			Debug-Output "ShellCode error"
+			goto ShellCodeError
+		endif
+
+		set RegistryErrorIndex = $($R0)
+
+		Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+			goto fatalregistry
+		endif
+	else
+		Shell $(UtilityInf), RemoveHardwareComponent, $(Manufacturer), +
+			$(ProductSoftwareName), $(!NTN_RegBase)
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			Debug-Output "ShellCode error"
+			goto ShellCodeError
+		endif
+
+		set RegistryErrorIndex = $($R0)
+
+		Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+			goto fatalregistry
+		endif
+
+
+	endif
+
+	;-----------------------------------------------
+	; Remove Manufacturer Key
+	;-----------------------------------------------
+	OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_SoftwareBase) $(MAXIMUM_ALLOWED) KeyManf
+	Ifstr $(KeyManf) == $(KeyNull)
+		Debug-Output "INF: Could not open HKLM\SOFTWARE registry key"
+	else
+		DeleteRegKey $(KeyManf) $(Manufacturer)
+		Ifint $(RegLastError) != $(!REG_ERROR_SUCCESS)
+			Debug-Output "INF: Could not delete Manufacturer registry key"
+		else
+			Debug-Output "INF: Deleted Manufacturer registry key"
+		Endif
+		CloseRegKey $(KeyManf)
+	endif
+
+	;-----------------------------------------------
+	; From version 1.0 of the driver, re-enable the PCMCIA.sys driver
+	; when removing this adapter from the system.
+	;-----------------------------------------------
+	ifint $(DISABLEPCMCIASYS) == 1
+		set PCMCIAKeyName = $(!NTN_ServiceBase)"\Pcmcia"
+		OpenRegKey $(!REG_H_LOCAL) "" $(PCMCIAKeyName) $(MAXIMUM_ALLOWED) PCMCIAKey
+		; Set the values --------------------------------------------------------------------------------------
+		SetRegValue $(PCMCIAKey) {Start, 0, $(!REG_VT_DWORD),0}  ; '0' restores the driver to "BOOT"
+		CloseRegKey $(PCMCIAKey)
+	endif
+
+	goto end
+
+;-----------------------------------------------
+; Upgrade Software section
+;-----------------------------------------------
+
+UpgradeSoftware = +
+	;
+	; First determine whether we want to do upgrade or update for software
+	; or hardware component. Then we will determine whether the Mode is
+	; update or upgrade.
+	;
+	; If the same version of the product existed in the registry, we do
+	; update. Otherwise, we will do a upgrade
+	;
+	ifstr(i) $(ProductKeyName) == $(!NTN_RegBase)
+		; Upgrade software component
+		;
+		; see whether the same version exist or not
+		;
+		OpenRegKey $(!REG_H_LOCAL) "" $(ProductKeyName) $(MAXIMUM_ALLOWED) KeyProduct
+
+		Ifstr $(KeyProduct) != $(KeyNull)
+			GetRegValue $(KeyProduct),"MajorVersion", VersionInfo
+			set Version = *($(VersionInfo), 4)
+
+			;
+			; Update the binaries
+			;
+			Shell $(UtilityInf), GetInfFileNameFromRegistry, $(KeyProduct)
+
+			ifint $($ShellCode) != $(!SHELL_CODE_OK)
+				Debug-Output "ShellCode error"
+				goto ShellCodeError
+			endif
+
+			set !UG_Filename = $($R0)
+
+			ifstr(i) $(!UG_Filename) != ""
+				install "Install-Update"
+				ifstr(i) $(STF_INSTALL_OUTCOME) != STF_SUCCESS
+					goto fatal
+				endif
+			endif
+
+			; Upgrade the version number
+			;
+			SetRegValue $(KeyProduct) {MajorVersion,$(NoTitle),$(!REG_VT_SZ),$(ProductMajorVersion)}
+			SetRegValue $(KeyProduct) {MinorVersion,$(NoTitle),$(!REG_VT_SZ),$(ProductMinorVersion)}
+
+			;
+			; do nothing for update
+			;
+			ifint $(Version) != $(ProductVersion)
+			   ;
+			   ; If the major version number is not the same,
+			   ; it is major upgrade. So let Upgrade the product
+			   ;
+			   ;
+			   ; make other upgrade change if necessary
+			   ;
+			endif
+			CloseRegKey $(KeyProduct)
+		else
+			;
+			; Cannot Open software key, goto ERROR
+			;
+			goto fatalregistry
+		endif
+	else
+		;
+		; upgrade/update hardware component
+		; There is no different between upgrade and update for hardware
+		; component
+		;
+		; 1. Get the Service Name
+		; 2. Change the NetRule section if necessary
+		;
+		OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_RegBase) +
+			  $(MAXIMUM_ALLOWED) NetworkCardKey
+		Ifstr(i) $(NetworkCardKey) != $(KeyNull)
+			;
+			; Get Service name
+			;
+			GetRegValue $(NetworkCardKey),"ServiceName", ServiceNameInfo
+			set ServiceName = *($(ServiceNameInfo), 4)
+
+			;
+			; Change the NetRule if necessary
+			;
+			OpenRegKey $(NetworkCardKey) "" "NetRules" +
+				$(MAXIMUM_ALLOWED) NetRuleKey
+			Ifstr(i) $(NetRuleKey) != $(KeyNull)
+				;
+				; Make the change....
+				;
+			else
+				;
+				; Error, cannot open net rules key
+				;
+				goto fatalregistry
+			endif
+
+			CloseRegKey $(NetRules)
+			CloseRegKey $(NetworkCardKey)
+		else
+			;
+			; Error, cannot open network card key
+			;
+			goto fatalregistry
+		endif
+		;
+		; 3. Change the service section of the hardware. i.e.,
+		;    ParameterName change, value change, etc.
+		;
+		OpenRegKey $(!REG_H_LOCAL) "" +
+			  $(!NTN_ServiceBase)"\"$(ServiceName) +
+			  $(MAXIMUM_ALLOWED) ServiceKey
+
+		Ifstr(i) $(ServiceKey) != $(KeyNull)
+			;
+			; Get the ServiceKey to change the Start value
+			; or Type value. Or open Parameters key to
+			; change the hardware parameters if necessary.
+			;
+			CloseRegKey $(ServiceKey)
+		else
+			;
+			; Error, cannot open network card key
+			;
+			goto fatalregistry
+		endif
+	endif
+
+	goto end
+	;
+	; End of Upgrade Software
+	;
+
+;
+;  Escape hatches
+;
+successful = +
+	goto end
+
+abandon = +
+	ForListDo $(OEM_ABANDON_OPTIONS)
+		Shell $(UtilityInf), RemoveHardwareComponent, $(Manufacturer), +
+			$(ProductSoftwareName), $($)
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			Debug-Output "ShellCode error"
+			goto ShellCodeError
+		endif
+
+		set RegistryErrorIndex = $($R0)
+
+		Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+			goto fatalregistry
+		endif
+	EndForListDo
+
+	Ifstr(i) $(OEM_ABANDON_SOFTWARE) == TRUE
+		; Remove Software Component
+		Shell $(UtilityInf), RemoveSoftwareComponent, $(Manufacturer), +
+			$(ProductSoftwareName), FALSE
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			Debug-Output "ShellCode error"
+			goto ShellCodeError
+		endif
+
+		set RegistryErrorIndex = $($R0)
+
+		Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+			goto fatalregistry
+		endif
+	endif
+
+	goto end
+
+;
+; warning display
+;
+warning = +
+	Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "WARNING", $(Error)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+	ifstr(i) $($R1) == "OK"
+		goto $(to)
+	else-ifstr(i) $($R1) == "CANCEL"
+		goto $(from)
+	else
+		goto "end"
+	endif
+;
+; non fatal error display
+;
+nonfatalinfo = +
+	Set Severity = STATUS
+	Set CommonStatus = STATUS_USERCANCEL
+	goto nonfatalmsg
+nonfatal = +
+	Set Severity = NONFATAL
+	goto nonfatalmsg
+nonfatalmsg = +
+	ifstr(i) $(Error) == ""
+		Set Severity = NONFATAL
+		Shell $(UtilityInf) RegistryErrorString "SETUP_FAIL"
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+		set Error = $($R0)
+	endif
+	Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), $(Severity), $(Error)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+	ifstr(i) $($R1) == "OK"
+		goto $(from)
+	else
+		goto "end"
+	endif
+
+;
+;  Registry is broken
+;
+fatalregistry = +
+	Shell $(UtilityInf) RegistryErrorString $(RegistryErrorIndex)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+	set Error = $($R0)
+	goto fatal
+;
+;  Netcard detection failure
+;
+fataldetect = +
+	Shell $(UtilityInf),RegistryErrorString,CANNOT_DETECT
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		Debug-Output "ShellCode error: cannot get an error string."
+		goto ShellCodeError
+	endif
+	set Error = $($R0)
+	Goto fatal
+;
+; fatal error display
+;
+fatal = +
+	ifstr(i) $(Error) == ""
+		Shell $(UtilityInf) RegistryErrorString "SETUP_FAIL"
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+		set Error = $($R0)
+	endif
+	Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "FATAL", $(Error)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+
+	goto setfailed
+
+;
+;  Shelling error
+;
+ShellCodeError = +
+	set DlgType      = "MessageBox"
+	set STF_MB_TITLE = $(ShellCodeErrorTitle)
+	set STF_MB_TEXT  = $(ShellCodeErrorText)
+	set STF_MB_TYPE  = 1
+	set STF_MB_ICON  = 3
+	set STF_MB_DEF   = 1
+	ui start "Error Message"
+	goto setfailed
+
+setfailed = +
+	set CommonStatus = STATUS_FAILED
+	;
+	; if OEM_ABANDON_ON == TRUE, then remove the registry entries
+	;
+	ifstr(i) $(OEM_ABANDON_ON) == TRUE
+		set OEM_ABANDON_ON = FALSE
+		goto abandon
+	endif
+	goto end
+
+end = +
+	goto term
+
+term = +
+
+	Return $(CommonStatus)
+
+[DebugConfiguration]
+
+	Set InfName = "OEMSETNT.INF"
+	;Debug-Output $(InfName)" **CONFIGURATION STATE: "$($0)
+	;Debug-Output $(InfName)" IRQ_Level is "$(!p:IRQ_Level)
+	;Debug-Output $(InfName)" IOBaseAddrValue is "$(!p:IOBaseAddrValue)
+	;Debug-Output $(InfName)" TransceiverValue is "$(!p:TransceiverValue)
+	;Debug-Output $(InfName)" MemoryAddr is "$(!p:MemoryAddr)
+	;Debug-Output $(InfName)" MappedValue is "$(!p:MappedValue)
+
+	return
+
+
+;***************************************************************
+;  INSTALL SECTIONS
+;***************************************************************
+[Install-Option]
+	set STF_VITAL = ""
+
+	ifstr(i) $(AddCopy) == "YES"
+		ifstr(i) $(CSInstalled) == "Softex"
+			AddSectionFilesToCopyList FilesSoftex-$(Option) $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+		else-ifstr(i) $(CSInstalled) == "STANDARD NT4"	
+			AddSectionFilesToCopyList FilesN4-$(Option) $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+			AddSectionFilesToCopyList Files-$(Option) $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+		endif
+
+	endif
+
+	ifstr(i) $(DoCopy) == "YES"
+
+	   ;
+	   ; Copy files in the copy list
+	   ;
+	   set !STF_NCPA_FLUSH_COPYLIST = TRUE
+	   CopyFilesInCopyList
+
+	endif
+
+	Exit
+
+[Install-Update]
+   set STF_VITAL        = ""
+   set STF_OVERWRITE    = "VERIFYSOURCEOLDER"
+   ;set STF_VERSION     = "YES"
+
+	ifstr(i) $(CSInstalled) == "Softex"
+		AddSectionFilesToCopyList FilesSoftex-$(Option) $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+
+	else-ifstr(i) $(CSInstalled) == "STANDARD NT4"
+		AddSectionFilesToCopyList FilesN4-$(Option) $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+		AddSectionFilesToCopyList Files-$(Option) $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+
+	endif
+
+	AddSectionFilesToCopyList Files-Inf $(SrcDir) $(!STF_WINDOWSSYSPATH)
+
+   set !STF_NCPA_FLUSH_COPYLIST = TRUE
+   CopyFilesInCopyList
+
+   exit
+
+
+[Install-Dll]
+   set STF_VITAL    = ""
+   AddSectionFilesToCopyList Files-Dll $(SrcDir) $(!STF_WINDOWSSYSPATH)
+   set !STF_NCPA_FLUSH_COPYLIST = TRUE
+   CopyFilesInCopyList
+   exit
+
+
+
+
+
+[Source Media Descriptions]
+	1  = "Xircom Setup Disk for NT"
+
+
+[ProductType]
+STF_PRODUCT  = Winnt
+STF_PLATFORM = I386
+
+
+[Files-Inf]
+1, OEMSETNT.INF, SIZE=58000,    RENAME=$(!UG_Filename)
+
+[Files-Dll]
+1, CBE.DLL,  SIZE=21000
+
+[FilesN4-CBE]
+1, CBEN4.SYS, SIZE=53000
+
+[Files-CBE]
+1, CBE.SYS, SIZE=53000
+
+[FilesSoftex-CBE]
+1, CBENT.SYS, SIZE=53000
+
+[LanguagesSupported]
+	ENG
+
+[AllFileConstantsENG]
+ProCaption   = "Windows NT Setup"
+ProCancel    = "Cancel"
+ProCancelMsg = "Windows NT Networking is not correctly installed.  "+
+			   "Are you sure you want to cancel copying files?"
+ProCancelCap = "Network Setup Message"
+ProText1     = "Copying:"
+ProText2     = "To:"
+DialogDllName = "CBE.DLL"
+
+
+
+; START CBE -------------------------------------------------------------------------------------------
+
+;;;--------start FileConstantsSoftexENG-CBE----------;;;
+[FileConstantsSoftexENG-CBE]
+FunctionTitle           = $(GenericAdapterName)" Setup"$(GenericInfVersion)
+ProductSoftwareTitle    = $(GenericDriverName)
+ProductHardwareTitle    = $(GenericAdapterName)
+
+MemoryAddrList          = ^(MemoryAddrChoicesSoftex,1)
+MemoryAddrValues        = ^(MemoryAddrChoicesSoftex,2)
+IOBaseAddrList          = ^(IOBaseAddrChoicesSoftex, 1)
+IOBaseAddrValues        = ^(IOBaseAddrChoicesSoftex, 2)
+IRQList                 = ^(IRQChoicesSoftex, 1)
+IRQValues               = ^(IRQChoicesSoftex, 2)
+InterruptStyleList      = ^(InterruptStyleChoices, 1)
+InterruptStyleValues    = ^(InterruptStyleChoices, 2)
+LineConfigList          = ^(LineConfigChoices, 1)
+LineConfigValues        = ^(LineConfigChoices, 2)
+SocketList              = ^(SocketChoices, 1)
+SocketValues            = ^(SocketChoices, 2)
+InitDelayList           = ^(InitDelayChoices, 1)
+InitDelayValues         = ^(InitDelayChoices, 2)
+;;;--------end FileConstantsSoftexENG-CBE----------;;;
+
+;;;--------start FileConstantsENG-CBE----------;;;
+[FileConstantsENG-CBE]
+FunctionTitle           = $(GenericAdapterName)" Setup"$(GenericInfVersion)
+ProductSoftwareTitle    = $(GenericDriverName)
+ProductHardwareTitle    = $(GenericAdapterName)
+
+MemoryAddrList          = ^(MemoryAddrChoices,1)
+MemoryAddrValues        = ^(MemoryAddrChoices,2)
+IOBaseAddrList          = ^(IOBaseAddrChoices, 1)
+IOBaseAddrValues        = ^(IOBaseAddrChoices, 2)
+IRQList                 = ^(IRQChoices, 1)
+IRQValues               = ^(IRQChoices, 2)
+InterruptStyleList      = ^(InterruptStyleChoices, 1)
+InterruptStyleValues    = ^(InterruptStyleChoices, 2)
+LineConfigList          = ^(LineConfigChoices, 1)
+LineConfigValues        = ^(LineConfigChoices, 2)
+SocketList              = ^(SocketChoices, 1)
+SocketValues            = ^(SocketChoices, 2)
+InitDelayList           = ^(InitDelayChoices, 1)
+InitDelayValues         = ^(InitDelayChoices, 2)
+NdisVersionList           = ^(NdisVersionChoices, 1)
+NdisVersionValues         = ^(NdisVersionChoices, 2)
+;;;--------end FileConstantsENG-CBE----------;;;
+
+[DialogConstantsENG-CBE]
+Help        = "&Help"
+Exit        = "Cancel"
+OK          = "OK"
+HelpContext = ""
+Continue    = "Continue"
+Cancel      = "Cancel"
+
+;;;-----start FileDependentDlgSoftexENG-CBE-----;;;
+[FileDependentDlgSoftexENG-CBE]
+DlgType = "RadioCombination"
+DlgTemplate = "CBE_SOFTEX"
+Caption = $(FunctionTitle)
+HelpContext = $(!IDH_DB_OEMNADE2_INS)
+CBOptionsGreyed = {}
+NotifyFields = {NO, NO, NO, NO, NO, NO, NO}
+Combo1Label = "Memory Address:"
+Combo2Label = "I/O Port:"
+Combo3Label = "Interrupt:"
+Combo4Label = "Interrupt Style:"
+Combo5Label = "Line Configuration:"
+Combo6Label = "PCCard Socket:"
+Combo7Label = "Initialization Delay:"
+
+Check1 = "Line &Negotiation"
+Check2 = "Link &Integrity"
+Check3 = "Cable &Detect"
+Check4 = "Auto &Polarity"
+Check5 = "&Memory Mode"
+Check6 = "Dynamic &Link Detect"
+
+Edit1Label = "Network Address"
+Edit2Label = "Tx Buffer Size"
+Edit3Label = "Rx Buffer Size"
+
+Combo1List = $(MemoryAddrList)
+Combo1Out  = $(MemoryAddrValue)
+Combo2List = $(IOBaseAddrList)
+Combo2Out  = $(IOBaseAddrValue)
+Combo3List = $(IRQList)
+Combo3Out  = $(IRQValue)
+Combo4List = $(InterruptStyleList)
+Combo4Out  = $(InterruptStyleValue)
+Combo5List = $(LineConfigList)
+Combo5Out  = $(LineConfigValue)
+Combo6List = $(SocketList)
+Combo6Out  = $(SocketValue)
+Combo7List = $(InitDelayList)
+Combo7Out  = $(InitDelayValue)
+ComboListItemsIn  = {Combo1List,Combo2List,Combo3List, Combo4List, Combo5List, Combo6List, Combo7List}
+ComboListItemsOut = {Combo1Out, Combo2Out, Combo3Out, Combo4Out, Combo5Out, Combo6Out, Combo7Out}
+
+CheckItemsIn = {$(NegotiationValue),$(LinkIntegrityValue),$(CableDetectValue),+
+                $(AutoPolarityValue),$(MemoryModeValue),$(DynamicLinkDetectValue)}
+CheckItemsOut = {Check1Out, Check2Out, Check3Out, Check4Out, Check5Out, Check6Out}
+
+EditTextIn  = {$(NetworkAddressValue), $(TxBufferSizeValue), $(RxBufferSizeValue)}
+EditTextLim = {"","",""}
+EditTextOut = {Edit1Out, Edit2Out, Edit3Out}
+;;;-----end FileDependentDlgSoftexENG-CBE-----;;;
+
+;;;-----start FileDependentDlgENG-CBE-----;;;
+[FileDependentDlgENG-CBE]
+DlgType = "RadioCombination"
+DlgTemplate = "CBE"
+Caption = $(FunctionTitle)
+HelpContext = $(!IDH_DB_OEMNADE2_INS)
+CBOptionsGreyed = {}
+NotifyFields = {NO, NO, NO, NO, NO, NO, NO, NO}
+Combo1Label = "Memory Address:"
+Combo2Label = "I/O Port:"
+Combo3Label = "Interrupt:"
+Combo4Label = "Interrupt Style:"
+Combo5Label = "Line Configuration:"
+Combo6Label = "PCCard Socket:"
+Combo7Label = "Initialization Delay:"
+Combo8Label = "Ndis Version:"
+
+Check1 = "Line &Negotiation"
+Check2 = "Link &Integrity"
+Check3 = "Cable &Detect"
+Check4 = "Auto &Polarity"
+Check5 = "&Memory Mode"
+Check6 = "Dynamic &Link Detect"
+
+Edit1Label = "Network Address"
+Edit2Label = "Tx Buffer Size"
+Edit3Label = "Rx Buffer Size"
+
+Combo1List = $(MemoryAddrList)
+Combo1Out  = $(MemoryAddrValue)
+Combo2List = $(IOBaseAddrList)
+Combo2Out  = $(IOBaseAddrValue)
+Combo3List = $(IRQList)
+Combo3Out  = $(IRQValue)
+Combo4List = $(InterruptStyleList)
+Combo4Out  = $(InterruptStyleValue)
+Combo5List = $(LineConfigList)
+Combo5Out  = $(LineConfigValue)
+Combo6List = $(SocketList)
+Combo6Out  = $(SocketValue)
+Combo7List = $(InitDelayList)
+Combo7Out  = $(InitDelayValue)
+Combo8List = $(NdisVersionList)
+Combo8Out  = $(NdisVersionValue)
+ComboListItemsIn  = {Combo1List,Combo2List,Combo3List, Combo4List, Combo5List, Combo6List, Combo7List, Combo8List}
+ComboListItemsOut = {Combo1Out, Combo2Out, Combo3Out, Combo4Out, Combo5Out, Combo6Out, Combo7Out, Combo8Out}
+
+CheckItemsIn = {$(NegotiationValue),$(LinkIntegrityValue),$(CableDetectValue),+
+                $(AutoPolarityValue),$(MemoryModeValue),$(DynamicLinkDetectValue)}
+CheckItemsOut = {Check1Out, Check2Out, Check3Out, Check4Out, Check5Out, Check6Out}
+
+EditTextIn  = {$(NetworkAddressValue), $(TxBufferSizeValue), $(RxBufferSizeValue)}
+EditTextLim = {"","",""}
+EditTextOut = {Edit1Out, Edit2Out, Edit3Out}
+;;;-----end FileDependentDlgENG-CBE-----;;;
+
+; END CBE -------------------------------------------------------------------------------------------
+
+;;;-----start MemoryAddrChoicesSoftex-----;;;
+[MemoryAddrChoicesSoftex]
+MA_0  = "Auto Detect", 0
+MA_1  = "0xC0000", 786432
+MA_2  = "0xC4000", 802816
+MA_3  = "0xC8000", 819200
+MA_4  = "0xCC000", 835584
+MA_5  = "0xD0000", 851968
+MA_6  = "0xD4000", 868352
+MA_7  = "0xD8000", 884736
+MA_8  = "0xDC000", 901120
+MA_9  = "0xE0000", 917504
+MA_10 = "0xE4000", 933888
+MA_11 = "0xE8000", 950272
+MA_12 = "0xEC000", 966656
+MA_13 = "0x5B80000", 95944704
+MA_14 = "0x5B84000", 95961088
+MA_15 = "0x5B88000", 95977472
+MA_16 = "0x5B8C000", 95993856
+MA_17 = "0x10000000", 268435456
+MA_18 = "0x10004000", 268451840
+MA_19 = "0x10008000", 268468224
+MA_20 = "0x1000C000", 268484608
+MA_21 = "0x50000000", 1342177280
+MA_22 = "0x50004000", 1342193664
+MA_23 = "0x50008000", 1342210048
+MA_24 = "0x5000C000", 1342226432
+MA_25 = "0x55B80000", 1438121984      
+MA_26 = "0x55B84000", 1438138368
+MA_27 = "0x55B88000", 1438154752
+MA_28 = "0x55B8C000", 1438171136
+MA_29 = "0xB0000000", 2952790016
+MA_30 = "0xB0004000", 2952806400
+MA_31 = "0xB0008000", 2952822784
+MA_32 = "0xB000C000", 2952839168
+;;;-----end MemoryAddrChoicesSoftex-----;;;
+
+;;;-----start MemoryAddrChoices-----;;;
+[MemoryAddrChoices]
+MA_1  = "0xC0000", 786432
+MA_2  = "0xC4000", 802816
+MA_3  = "0xC8000", 819200
+MA_4  = "0xCC000", 835584
+MA_5  = "0xD0000", 851968
+MA_6  = "0xD4000", 868352
+MA_7  = "0xD8000", 884736
+MA_8  = "0xDC000", 901120
+MA_9  = "0xE0000", 917504
+MA_10 = "0xE4000", 933888
+MA_11 = "0xE8000", 950272
+MA_12 = "0xEC000", 966656
+MA_13 = "0x5B80000", 95944704
+MA_14 = "0x5B84000", 95961088
+MA_15 = "0x5B88000", 95977472
+MA_16 = "0x5B8C000", 95993856
+MA_17 = "0x10000000", 268435456
+MA_18 = "0x10004000", 268451840
+MA_19 = "0x10008000", 268468224
+MA_20 = "0x1000C000", 268484608
+MA_21 = "0x50000000", 1342177280
+MA_22 = "0x50004000", 1342193664
+MA_23 = "0x50008000", 1342210048
+MA_24 = "0x5000C000", 1342226432
+MA_25 = "0x55B80000", 1438121984      
+MA_26 = "0x55B84000", 1438138368
+MA_27 = "0x55B88000", 1438154752
+MA_28 = "0x55B8C000", 1438171136
+MA_29 = "0xB0000000", 2952790016
+MA_30 = "0xB0004000", 2952806400
+MA_31 = "0xB0008000", 2952822784
+MA_32 = "0xB000C000", 2952839168
+;;;-----end MemoryAddrChoices-----;;;
+
+;;;-----start IRQChoicesSoftex-----;;;
+[IRQChoicesSoftex]
+IRQ_0 = "Auto Detect", 0
+IRQ_1 = "3", 3
+IRQ_2 = "4", 4
+IRQ_3 = "5", 5
+IRQ_4 = "7", 7
+IRQ_5 = "9", 9
+IRQ_6 = "10", 10
+IRQ_7 = "11", 11
+IRQ_8 = "12", 12
+IRQ_9 = "13", 13
+IRQ_10 = "14", 14
+IRQ_11 = "15", 15
+;;;-----end IRQChoicesSoftex-----;;;
+
+;;;-----start IRQChoices-----;;;
+[IRQChoices]
+IRQ_1 = "3", 3
+IRQ_2 = "4", 4
+IRQ_3 = "5", 5
+IRQ_4 = "7", 7
+IRQ_5 = "9", 9
+IRQ_6 = "10", 10
+IRQ_7 = "11", 11
+IRQ_8 = "12", 12
+IRQ_9 = "13", 13
+IRQ_10 = "14", 14
+IRQ_11 = "15", 15
+;;;-----end IRQChoices-----;;;
+
+[SocketChoices]
+S_0 = "Auto Detect",0
+S_1 = "1",1
+S_2 = "2",2
+S_3 = "3",3
+S_4 = "4",4
+
+[InterruptStyleChoices]
+IS_1 = "Auto Detect", 0
+IS_2 = "PCI IRQ", 1
+IS_3 = "ISA IRQ", 2
+
+[LineConfigChoices]
+LC_1 = "Auto Detect", 0
+LC_2 = "10 Mbps/Half Duplex", 1
+LC_3 = "10 Mbps/Full Duplex", 2
+LC_4 = "100 Mbps/Half Duplex", 3
+LC_5 = "100 Mbps/Full Duplex", 4
+
+;;;-----start IOBaseAddrChoicesSoftex-----;;;
+[IOBaseAddrChoicesSoftex]
+IOBase_0  = "Auto Detect",0
+IOBase_1  = "0x1000",4096
+IOBase_2  = "0x1800",6144
+IOBase_3  = "0x2000",8192
+IOBase_4  = "0x2800",10240
+IOBase_5  = "0x3000",12288
+IOBase_6  = "0x3800",14336
+IOBase_7  = "0x4000",16384
+IOBase_8  = "0x4800",18432
+IOBase_9  = "0x5000",20480
+IOBase_10 = "0x5800",22528
+IOBase_11 = "0x6000",24576
+IOBase_12 = "0x6800",26624
+IOBase_13 = "0x7000",28672
+IOBase_14 = "0x7800",30720
+IOBase_15 = "0x8000",32768
+IOBase_16 = "0x8800",34816
+IOBase_17 = "0x9000",36864
+IOBase_18 = "0x9800",38912
+IOBase_19 = "0xA000",40960
+IOBase_20 = "0xA800",43008
+IOBase_21 = "0xB000",45056
+IOBase_22 = "0xB800",47104
+IOBase_23 = "0xC000",49152
+IOBase_24 = "0xC800",51200
+IOBase_25 = "0xD000",53248
+IOBase_26 = "0xD800",55296
+IOBase_27 = "0xE000",57344
+IOBase_28 = "0xE800",59392
+IOBase_29 = "0xF000",61440
+IOBase_30 = "0xF500",62720
+IOBase_31 = "0xF800",63488
+;;;-----end IOBaseAddrChoicesSoftex-----;;;
+
+;;;-----start IOBaseAddrChoices-----;;;
+[IOBaseAddrChoices]
+IOBase_1  = "0x1000",4096
+IOBase_2  = "0x1800",6144
+IOBase_3  = "0x2000",8192
+IOBase_4  = "0x2800",10240
+IOBase_5  = "0x3000",12288
+IOBase_6  = "0x3800",14336
+IOBase_7  = "0x4000",16384
+IOBase_8  = "0x4800",18432
+IOBase_9  = "0x5000",20480
+IOBase_10 = "0x5800",22528
+IOBase_11 = "0x6000",24576
+IOBase_12 = "0x6800",26624
+IOBase_13 = "0x7000",28672
+IOBase_14 = "0x7800",30720
+IOBase_15 = "0x8000",32768
+IOBase_16 = "0x8800",34816
+IOBase_17 = "0x9000",36864
+IOBase_18 = "0x9800",38912
+IOBase_19 = "0xA000",40960
+IOBase_20 = "0xA800",43008
+IOBase_21 = "0xB000",45056
+IOBase_22 = "0xB800",47104
+IOBase_23 = "0xC000",49152
+IOBase_24 = "0xC800",51200
+IOBase_25 = "0xD000",53248
+IOBase_26 = "0xD800",55296
+IOBase_27 = "0xE000",57344
+IOBase_28 = "0xE800",59392
+IOBase_29 = "0xF000",61440
+IOBase_30 = "0xF500",62720
+IOBase_31 = "0xF800",63488
+;;;-----end IOBaseAddrChoices-----;;;
+
+[InitDelayChoices]
+InitD_0 = "0",0
+InitD_1 = "1",1
+InitD_2 = "2",2
+InitD_3 = "3",3
+InitD_4 = "4",4
+InitD_5 = "5",5
+InitD_6 = "10",10
+InitD_7 = "20",20
+InitD_8 = "30",30
+InitD_9 = "40",40
+InitD_10 = "50",50
+InitD_11 = "60",60
+
+[NdisVersionChoices]
+NV_1 = "NDIS 4", 0
+NV_2 = "NDIS 3", 1

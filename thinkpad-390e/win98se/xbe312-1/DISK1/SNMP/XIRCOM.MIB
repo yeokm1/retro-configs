@@ -1,0 +1,1163 @@
+XIRCOM-MIB
+
+
+-- This is the Xircom Network Adapter Management Information Base (MIB)
+-- for remote management of network devices employing Xircom network
+-- device drivers.
+
+
+-- Note:  The following statements are MIB extensions from Epilog Inc.
+--        The FORCE-INCLUDE causes the Epilog MIB compiler to include
+--        the named file in the C-language source files which are
+--        generated for the SNMP agent.
+
+
+FORCE-INCLUDE "xall.h"
+FORCE-INCLUDE "xagent.h"
+FORCE-INCLUDE "xproto.h"
+FORCE-INCLUDE "socket.h"
+FORCE-INCLUDE "emissary.h"
+FORCE-INCLUDE "mib.h"
+FORCE-INCLUDE "snmpdefs.h"
+FORCE-INCLUDE "snmpvars.h"
+FORCE-INCLUDE "callback.h"
+FORCE-INCLUDE "auxfuncs.h"
+FORCE-INCLUDE "party.h"
+FORCE-INCLUDE "odi/define.h"
+FORCE-INCLUDE "odi/oditype.h"
+FORCE-INCLUDE "odi/extern.h"
+FORCE-INCLUDE "odi/odiproto.h"
+
+
+-- Note:  The following default statements cause the mib compiler to
+--        build four generic SNMP agent callback functions:
+--
+--DEFAULT get-function  GetMib_%t
+--DEFAULT set-function  SetMib_%t
+--DEFAULT next-function std_next
+--DEFAULT test-function TestMib_object
+
+
+--	iso.org.dod.internet	 				1.3.6.1
+
+	EXCLUDE	directory			-- 	1.3.6.1.1
+--	EXCLUDE	mgmt							1.3.6.1.2
+--	EXCLUDE	mib-2			 				1.3.6.1.2.1
+--	EXCLUDE	system			 			1.3.6.1.2.1.1
+--	EXCLUDE	interfaces		 			1.3.6.1.2.1.2
+	EXCLUDE 	at						-- 	1.3.6.1.2.1.3
+--	EXCLUDE	ip				 				1.3.6.1.2.1.4
+--	EXCLUDE	ipForwarding
+	EXCLUDE	ipDefaultTTL 
+	EXCLUDE	ipInReceives 
+	EXCLUDE	ipInHdrErrors 
+	EXCLUDE	ipInAddrErrors 
+	EXCLUDE	ipForwDatagrams 
+	EXCLUDE	ipInUnknownProtos 
+	EXCLUDE	ipInDiscards 
+	EXCLUDE	ipInDelivers 
+	EXCLUDE	ipOutRequests 
+	EXCLUDE	ipOutDiscards 
+	EXCLUDE	ipOutNoRoutes 
+	EXCLUDE	ipReasmTimeout 
+	EXCLUDE	ipReasmReqds 
+	EXCLUDE	ipReasmOKs 
+	EXCLUDE	ipReasmFails 
+	EXCLUDE	ipFragOKs 
+	EXCLUDE	ipFragFails 
+	EXCLUDE	ipFragCreates 
+	EXCLUDE	ipRouteTable		--		1.3.6.1.2.1.4.21
+	EXCLUDE	ipNetToMediaTable	--		1.3.6.1.2.1.4.22
+	EXCLUDE	ipRoutingDiscards
+	EXCLUDE	icmp					-- 	1.3.6.1.2.1.5
+	EXCLUDE	tcp					-- 	1.3.6.1.2.1.6
+	EXCLUDE	udp					-- 	1.3.6.1.2.1.7
+	EXCLUDE	egp					-- 	1.3.6.1.2.1.8
+	EXCLUDE	transmission		-- 	1.3.6.1.2.1.10
+	EXCLUDE	snmp					-- 	1.3.6.1.2.1.11
+	EXCLUDE	experimental		--		1.3.6.1.3
+--	EXCLUDE	private						1.3.6.1.4
+--	EXCLUDE	enterprises					1.3.6.1.4.1
+--	EXCLUDE	xircom						1.3.6.1.4.1.588
+--	EXCLUDE	ws								1.3.6.1.4.1.588.1
+--	EXCLUDE	hw								1.3.6.1.4.1.588.1.1
+--	EXCLUDE	dos							1.3.6.1.4.1.588.1.2
+	EXCLUDE	win					--		1.3.6.1.4.1.588.1.3
+	EXCLUDE	net					--		1.3.6.1.4.1.588.2
+	EXCLUDE	agent					--		1.3.6.1.4.1.588.3
+	EXCLUDE	trap					--		1.3.6.1.4.1.588.4
+	EXCLUDE	security				--		1.3.6.1.5
+	EXCLUDE	snmpV2				--		1.3.6.1.6
+
+
+
+DEFINITIONS ::= BEGIN
+
+	IMPORTS
+--		directory			FROM SNMPv2-SMI
+--		mgmt					FROM SNMPv2-SMI
+--		mib-2					FROM SNMPv2-SMI
+		 system				FROM RFC1213-MIB
+		interfaces			FROM RFC1213-MIB
+--		at						FROM RFC1213-MIB
+		ip						FROM RFC1213-MIB
+--		icmp					FROM RFC1213-MIB
+--		tcp				   FROM RFC1213-MIB
+--	    udp					FROM RFC1213-MIB
+--		egp					FROM RFC1213-MIB
+--		transmission		FROM RFC1213-MIB
+		snmp					FROM RFC1213-MIB
+--		experimental		FROM SNMPv2-SMI
+--		private				FROM SNMPv2-SMI
+		enterprises			FROM SNMPv2-SMI
+--		security				FROM SNMPv2-SMI
+--		snmpV2				FROM SNMPv2-SMI
+
+		MODULE-IDENTITY	FROM SNMPv2-SMI
+		OBJECT-TYPE			FROM SNMPv2-SMI
+		NOTIFICATION-TYPE	FROM SNMPv2-SMI
+--		Counter				FROM RFC1155-SMI
+		IpAddress			FROM SNMPv2-SMI
+		DisplayString		FROM SNMPv2-TC;
+
+
+	xircom MODULE-IDENTITY
+		LAST-UPDATED "9409200000Z"
+		ORGANIZATION "Xircom, Inc."
+		CONTACT-INFO
+			"        Xircom, Inc.
+				Postal: 2300 Corporate Center Drive
+						  Newbury Park, California  91320
+						  USA
+				Phone : +1-805-376-9300
+					Fax: +1-805-376-9311
+				E-Mail: MRice@xircom.com"
+		DESCRIPTION
+			"Xircom Adapter MIB using SNMPv2 SMI."
+		::= { enterprises 588 }
+
+
+
+
+-- STANDARD MIB GROUPS
+
+
+
+-- System Group
+
+
+
+	sysDescr OBJECT-TYPE
+		DEFAULT	cookie (char *)201
+		::= { system 1 }
+
+	sysObjectID OBJECT-TYPE
+		DEFAULT cookie		(char *)202
+		::= { system 2 }
+
+   sysUpTime OBJECT-TYPE
+		DEFAULT cookie		(char *)203
+		::= { system 3 }
+
+	sysContact OBJECT-TYPE
+		DEFAULT cookie		(char *)204
+		::= { system 4 }
+
+	sysName OBJECT-TYPE
+		DEFAULT cookie		(char *)205
+		::= { system 5 }
+
+	sysLocation OBJECT-TYPE
+		DEFAULT cookie		(char *)206
+		::= { system 6 }
+
+	sysServices OBJECT-TYPE
+		DEFAULT cookie		(char *)207
+		::= { system 7 }
+
+
+
+-- Interfaces Group
+
+
+
+	ifNumber OBJECT-TYPE
+		DEFAULT cookie		(char *)300
+		::= { interfaces 1 }
+
+	ifTable OBJECT-TYPE
+		::= { interfaces 2 }
+
+	ifEntry OBJECT-TYPE
+		::= { ifTable 1 }
+
+	ifIndex OBJECT-TYPE
+		DEFAULT cookie		(char *)301
+		::= { ifEntry 1 }
+
+	ifDescr OBJECT-TYPE
+		DEFAULT cookie		(char *)302
+		::= { ifEntry 2 }
+
+	ifType OBJECT-TYPE
+		DEFAULT cookie		(char *)303
+		::= { ifEntry 3 }
+
+	ifMtu OBJECT-TYPE
+		DEFAULT cookie		(char *)304
+		::= { ifEntry 4 }
+
+	ifSpeed OBJECT-TYPE
+		DEFAULT cookie		(char *)305
+		::= { ifEntry 5 }
+
+	ifPhysAddress OBJECT-TYPE
+		DEFAULT cookie		(char *)306
+		::= { ifEntry 6 }
+
+	ifAdminStatus OBJECT-TYPE
+		DEFAULT cookie		(char *)307
+		::= { ifEntry 7 }
+
+	ifOperStatus OBJECT-TYPE
+		DEFAULT cookie		(char *)308
+		::= { ifEntry 8 }
+
+	ifLastChange OBJECT-TYPE
+		DEFAULT cookie		(char *)309
+		::= { ifEntry 9 }
+
+	ifInOctets OBJECT-TYPE
+		DEFAULT cookie		(char *)310
+		::= { ifEntry 10 }
+
+	ifInUcastPkts OBJECT-TYPE
+		DEFAULT cookie		(char *)311
+		::= { ifEntry 11 }
+
+	ifInNUcastPkts OBJECT-TYPE
+		DEFAULT cookie		(char *)312
+		::= { ifEntry 12 }
+
+	ifInDiscards OBJECT-TYPE
+		DEFAULT cookie		(char *)313
+		::= { ifEntry 13 }
+
+	ifInErrors OBJECT-TYPE
+		DEFAULT cookie		(char *)314
+		::= { ifEntry 14 }
+
+	ifInUnknownProtos OBJECT-TYPE
+		DEFAULT cookie		(char *)315
+		::= { ifEntry 15 }
+
+	ifOutOctets OBJECT-TYPE
+		DEFAULT cookie		(char *)316
+		::= { ifEntry 16 }
+
+	ifOutUcastPkts OBJECT-TYPE
+		DEFAULT cookie		(char *)317
+		::= { ifEntry 17 }
+
+	ifOutNUcastPkts OBJECT-TYPE
+		DEFAULT cookie		(char *)318
+		::= { ifEntry 18 }
+
+	ifOutDiscards OBJECT-TYPE
+		DEFAULT cookie		(char *)319
+		::= { ifEntry 19 }
+
+	ifOutErrors OBJECT-TYPE
+		DEFAULT cookie		(char *)320
+		::= { ifEntry 20 }
+
+	ifOutQLen OBJECT-TYPE
+		DEFAULT cookie		(char *)321
+		::= { ifEntry 21 }
+
+	ifSpecific OBJECT-TYPE
+		DEFAULT cookie		(char *)322
+		::= { ifEntry 22 }
+
+
+
+-- the IP group
+
+
+	ipForwarding OBJECT-TYPE
+		DEFAULT cookie		(char *)401
+		::= { ip 1 }
+
+	ipDefaultTTL OBJECT-TYPE
+		DEFAULT cookie		(char *)402
+		::= { ip 2 }
+
+	ipInReceives OBJECT-TYPE
+		DEFAULT cookie		(char *)403
+		::= { ip 3 }
+
+	ipInHdrErrors OBJECT-TYPE
+		DEFAULT cookie		(char *)404
+		::= { ip 4 }
+
+	ipInAddrErrors OBJECT-TYPE
+		DEFAULT cookie		(char *)405
+		::= { ip 5 }
+
+	ipForwDatagrams OBJECT-TYPE
+		DEFAULT cookie		(char *)406
+		::= { ip 6 }
+
+	ipInUnknownProtos OBJECT-TYPE
+		DEFAULT cookie		(char *)407
+		::= { ip 7 }
+
+	ipInDiscards OBJECT-TYPE
+		DEFAULT cookie		(char *)408
+		::= { ip 8 }
+
+	ipInDelivers OBJECT-TYPE
+		DEFAULT cookie		(char *)409
+		::= { ip 9 }
+
+	ipOutRequests OBJECT-TYPE
+		DEFAULT cookie		(char *)410
+		::= { ip 10 }
+
+	ipOutDiscards OBJECT-TYPE
+		DEFAULT cookie		(char *)411
+		::= { ip 11 }
+
+	ipOutNoRoutes OBJECT-TYPE
+		DEFAULT cookie		(char *)412
+		::= { ip 12 }
+
+	ipReasmTimeout OBJECT-TYPE
+		DEFAULT cookie		(char *)413
+		::= { ip 13 }
+
+	ipReasmReqds OBJECT-TYPE
+		DEFAULT cookie		(char *)414
+		::= { ip 14 }
+
+	ipReasmOKs OBJECT-TYPE
+		DEFAULT cookie		(char *)415
+		::= { ip 15 }
+
+	ipReasmFails OBJECT-TYPE
+		DEFAULT cookie		(char *)416
+		::= { ip 16 }
+
+	ipFragOKs OBJECT-TYPE
+		DEFAULT cookie		(char *)417
+		::= { ip 17 }
+
+	ipFragFails OBJECT-TYPE
+		DEFAULT cookie		(char *)418
+		::= { ip 18 }
+
+	ipFragCreates OBJECT-TYPE
+		DEFAULT cookie		(char *)419
+		::= { ip 19 }
+
+
+	-- the IP address table
+
+
+	ipAddrTable OBJECT-TYPE
+		::= { ip 20 }
+
+	ipAddrEntry OBJECT-TYPE
+		::= { ipAddrTable 1 }
+
+	ipAdEntAddr OBJECT-TYPE
+		DEFAULT cookie		(char *)421
+		::= { ipAddrEntry 1 }
+
+	ipAdEntIfIndex OBJECT-TYPE
+		DEFAULT cookie		(char *)422
+		::= { ipAddrEntry 2 }
+
+	ipAdEntNetMask OBJECT-TYPE
+		DEFAULT cookie		(char *)423
+		::= { ipAddrEntry 3 }
+
+	ipAdEntBcastAddr OBJECT-TYPE
+		DEFAULT cookie		(char *)424
+		::= { ipAddrEntry 4 }
+
+	ipAdEntReasmMaxSize OBJECT-TYPE
+		DEFAULT cookie		(char *)425
+		::= { ipAddrEntry 5 }
+
+
+	-- the IP routing table
+
+
+	ipRouteTable OBJECT-TYPE
+		::= { ip 21 }
+
+	ipRouteEntry OBJECT-TYPE
+		::= { ipRouteTable 1 }
+
+	ipRouteDest OBJECT-TYPE
+		DEFAULT cookie		(char *)431
+		::= { ipRouteEntry 1 }
+
+	ipRouteIfIndex OBJECT-TYPE
+		DEFAULT cookie		(char *)432
+		::= { ipRouteEntry 2 }
+
+	ipRouteMetric1 OBJECT-TYPE
+		DEFAULT cookie		(char *)433
+		::= { ipRouteEntry 3 }
+
+	ipRouteMetric2 OBJECT-TYPE
+		DEFAULT cookie		(char *)434
+		::= { ipRouteEntry 4 }
+
+	ipRouteMetric3 OBJECT-TYPE
+		DEFAULT cookie		(char *)435
+		::= { ipRouteEntry 5 }
+
+	ipRouteMetric4 OBJECT-TYPE
+		DEFAULT cookie		(char *)436
+		::= { ipRouteEntry 6 }
+
+	ipRouteNextHop OBJECT-TYPE
+		DEFAULT cookie		(char *)437
+		::= { ipRouteEntry 7 }
+
+	ipRouteType OBJECT-TYPE
+		DEFAULT cookie		(char *)438
+		::= { ipRouteEntry 8 }
+
+	ipRouteProto OBJECT-TYPE
+		DEFAULT cookie		(char *)439
+		::= { ipRouteEntry 9 }
+
+	ipRouteAge OBJECT-TYPE
+		DEFAULT cookie		(char *)440
+		::= { ipRouteEntry 10 }
+
+	ipRouteMask OBJECT-TYPE
+		DEFAULT cookie		(char *)441
+		::= { ipRouteEntry 11 }
+
+	ipRouteMetric5 OBJECT-TYPE
+		DEFAULT cookie		(char *)442
+		::= { ipRouteEntry 12 }
+
+	ipRouteInfo OBJECT-TYPE
+		DEFAULT cookie		(char *)443
+		::= { ipRouteEntry 13 }
+
+
+	-- the IP Address Translation table
+
+
+	ipNetToMediaTable OBJECT-TYPE
+		::= { ip 22 }
+
+	ipNetToMediaEntry OBJECT-TYPE
+		::= { ipNetToMediaTable 1 }
+
+	ipNetToMediaIfIndex OBJECT-TYPE
+		DEFAULT cookie		(char *)451
+		::= { ipNetToMediaEntry 1 }
+
+	ipNetToMediaPhysAddress OBJECT-TYPE
+		DEFAULT cookie		(char *)452
+		::= { ipNetToMediaEntry 2 }
+
+	ipNetToMediaNetAddress OBJECT-TYPE
+		DEFAULT cookie		(char *)453
+		::= { ipNetToMediaEntry 3 }
+
+	ipNetToMediaType OBJECT-TYPE
+		DEFAULT cookie		(char *)454
+		::= { ipNetToMediaEntry 4 }
+
+	-- additional IP objects
+
+	ipRoutingDiscards OBJECT-TYPE
+		DEFAULT cookie		(char *)463
+		::= { ip 23 }
+
+
+
+-- the SNMP group
+
+
+
+	 snmpInPkts OBJECT-TYPE
+		DEFAULT cookie		(char *)501
+		  ::= { snmp 1 }
+
+	 snmpOutPkts OBJECT-TYPE
+		DEFAULT cookie		(char *)502
+		  ::= { snmp 2 }
+
+	 snmpInBadVersions OBJECT-TYPE
+		DEFAULT cookie		(char *)503
+		  ::= { snmp 3 }
+
+    snmpInBadCommunityNames OBJECT-TYPE
+		DEFAULT cookie		(char *)504
+        ::= { snmp 4 }
+
+    snmpInBadCommunityUses OBJECT-TYPE
+		DEFAULT cookie		(char *)505
+        ::= { snmp 5 }
+
+	 snmpInASNParseErrs OBJECT-TYPE
+		DEFAULT cookie		(char *)506
+        ::= { snmp 6 }
+
+    -- { snmp 7 } is not used
+
+    snmpInTooBigs OBJECT-TYPE
+		DEFAULT cookie		(char *)508
+        ::= { snmp 8 }
+
+    snmpInNoSuchNames OBJECT-TYPE
+		DEFAULT cookie		(char *)509
+        ::= { snmp 9 }
+
+    snmpInBadValues OBJECT-TYPE
+		DEFAULT cookie		(char *)510
+        ::= { snmp 10 }
+
+    snmpInReadOnlys OBJECT-TYPE
+		DEFAULT cookie		(char *)511
+        ::= { snmp 11 }
+
+    snmpInGenErrs OBJECT-TYPE
+		DEFAULT cookie		(char *)512
+        ::= { snmp 12 }
+
+    snmpInTotalReqVars OBJECT-TYPE
+		DEFAULT cookie		(char *)513
+		  ::= { snmp 13 }
+
+    snmpInTotalSetVars OBJECT-TYPE
+		DEFAULT cookie		(char *)514
+        ::= { snmp 14 }
+
+    snmpInGetRequests OBJECT-TYPE
+		DEFAULT cookie		(char *)515
+        ::= { snmp 15 }
+
+    snmpInGetNexts OBJECT-TYPE
+		DEFAULT cookie		(char *)516
+        ::= { snmp 16 }
+
+    snmpInSetRequests OBJECT-TYPE
+		DEFAULT cookie		(char *)517
+        ::= { snmp 17 }
+
+    snmpInGetResponses OBJECT-TYPE
+		DEFAULT cookie		(char *)518
+        ::= { snmp 18 }
+
+    snmpInTraps OBJECT-TYPE
+		DEFAULT cookie		(char *)519
+        ::= { snmp 19 }
+
+    snmpOutTooBigs OBJECT-TYPE
+		DEFAULT cookie		(char *)520
+		  ::= { snmp 20 }
+    
+    snmpOutNoSuchNames OBJECT-TYPE
+		DEFAULT cookie		(char *)521
+        ::= { snmp 21 }
+
+    snmpOutBadValues OBJECT-TYPE
+		DEFAULT cookie		(char *)522
+        ::= { snmp 22 }
+
+    -- { snmp 23 } is not used
+
+    snmpOutGenErrs OBJECT-TYPE
+		DEFAULT cookie		(char *)524
+        ::= { snmp 24 }
+
+    snmpOutGetRequests OBJECT-TYPE
+		DEFAULT cookie		(char *)525
+        ::= { snmp 25 }
+
+    snmpOutGetNexts OBJECT-TYPE
+		DEFAULT cookie		(char *)526
+        ::= { snmp 26 }
+
+    snmpOutSetRequests OBJECT-TYPE
+		DEFAULT cookie		(char *)527
+        ::= { snmp 27 }
+
+	 snmpOutGetResponses OBJECT-TYPE
+		DEFAULT cookie		(char *)528
+        ::= { snmp 28 }
+
+    snmpOutTraps OBJECT-TYPE
+		DEFAULT cookie		(char *)529
+        ::= { snmp 29 }
+
+    snmpEnableAuthenTraps OBJECT-TYPE
+		DEFAULT cookie		(char *)530
+        ::= { snmp 30 }
+
+
+
+
+-- XIRCOM ENTERPRISE GROUPS
+
+
+	ws OBJECT IDENTIFIER
+		::= { xircom 1 }
+
+	hw	OBJECT IDENTIFIER
+		::= { ws 1 }
+
+	dos OBJECT IDENTIFIER
+		::= { ws 2 }
+
+	win OBJECT IDENTIFIER
+		::= { ws 3 }
+
+	net OBJECT IDENTIFIER
+		::= { xircom 2 }
+
+	agent OBJECT IDENTIFIER
+		::= { xircom 3 }
+
+	trap OBJECT IDENTIFIER
+		::= { xircom 4 }
+
+
+
+-- Xircom Workstation Group
+
+  	hwType OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "Make and model of the workstation.  This may have to be entered 
+	  in the configuration disk file.  It may or may not be detectable."
+		--DEFAULT cookie (char *) 1
+      	::= { hw 1 }
+
+  	hwBios OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+			STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the BIOS signature."
+		--DEFAULT cookie (char *) 2
+      	::= { hw 2 }
+
+  	hwCPU OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string showing the processor type and
+	  optional math coprocessor type."
+		--DEFAULT cookie (char *) 3
+      	::= { hw 3 }
+
+  	hwRAM OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string showing the DOS, EMS, and XMS 
+	  memory configuration."
+		--DEFAULT cookie (char *) 4
+      	::= { hw 4 }
+
+  	hwDisk OBJECT-TYPE
+      	SYNTAX    	DisplayString
+			MAX-ACCESS	read-only
+      	STATUS		current
+      	DESCRIPTION
+	 "This is a text string listing the number of disk drives, 
+	  including drive type, size and number of bytes unused."
+		--DEFAULT cookie (char *) 5
+      	::= { hw 5 }
+
+  	hwVideo OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS		current
+      	DESCRIPTION
+	 "This is a text string showing the video adapter type
+	         and monitor type."
+		--DEFAULT cookie (char *) 6
+      	::= { hw 6 }
+
+  	hwPort OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string listing the parallel and serial ports."
+		--DEFAULT cookie (char *) 7
+      	::= { hw 7 }
+
+  	hwComment OBJECT-TYPE
+			SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string that contains comments about the workstation. 
+	  Comments are specified by the network manager in the 
+	  configuration disk file."
+		--DEFAULT cookie (char *) 8
+      	::= { hw 8 }
+
+
+-- Xircom DOS Group
+
+  	dosVersion OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string showing the version of DOS."
+		--DEFAULT cookie (char *) 11
+      	::= { dos 1 }
+
+  	dosDate OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the current date set on 
+	  DOS the workstation."
+		--DEFAULT cookie (char *) 12
+      	::= { dos 2 }
+
+  	dosTime OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the current time set on 
+	  the DOS workstation."
+		--DEFAULT cookie (char *) 13
+      	::= { dos 3 }
+
+  	dosCurrentDrive OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the current default disk drive
+	  on the DOS workstation."
+		--DEFAULT cookie (char *) 14
+      	::= { dos 4 }
+
+  	dosMemory OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+			DESCRIPTION
+	 "This is a text string containing the current amount of used and
+	  available DOS memeory available on the workstation."
+		--DEFAULT cookie (char *) 15
+      	::= { dos 5 }
+
+
+
+-- Xircom Microsoft Windows Group
+
+
+  	winName OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the Microsoft Windows name."
+		--DEFAULT cookie (char *) 21
+      	::= { win 1 }
+
+  	winVersion OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the Microsoft Windows 
+	  version number."
+		--DEFAULT cookie (char *) 22
+      	::= { win 2 }
+
+  	winTaskTable OBJECT-TYPE
+  		SYNTAX    	SEQUENCE OF WinTaskEntry
+  		MAX-ACCESS	not-accessible
+  		STATUS    	current
+		DESCRIPTION
+	 "This is a table of Microsoft Window tasks which are currently
+	  active on the workstation."
+  		::= { win 3 }
+
+  	winTaskEntry OBJECT-TYPE
+  		SYNTAX    	WinTaskEntry
+  		MAX-ACCESS	not-accessible
+  		STATUS    	current
+		DESCRIPTION
+	 "This is an entry in the table of Windows' tasks."
+  		INDEX    	{ winTaskIndex }
+  		::= { winTaskTable 1 }
+
+  	WinTaskEntry ::= SEQUENCE {
+  		winHandle	INTEGER,
+  		winStyle 	INTEGER,
+  		winClass 	INTEGER,
+  		winTitle	DisplayString,
+  		winModule	DisplayString
+  	}
+
+  	winTaskIndex OBJECT-TYPE
+  		SYNTAX    	INTEGER (1..127)
+  		MAX-ACCESS	read-only
+  		STATUS    	current
+  		DESCRIPTION
+	 "This is an integer indexing the Windows' Task Entry.
+	  The first entry contains 1."
+		--DEFAULT cookie (char *) 23
+      	::= { winTaskEntry 1 }
+
+  	winHandle OBJECT-TYPE
+      	SYNTAX    	INTEGER
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is an integer containing the Windows' handle of the task."
+		--DEFAULT cookie (char *) 24
+      	::= { winTaskEntry 2 }
+
+  	winStyle OBJECT-TYPE
+      	SYNTAX    	INTEGER
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is an integer containing the Windows' handle of the task."
+		--DEFAULT cookie (char *) 25
+      	::= { winTaskEntry 3 }
+
+  	winClass OBJECT-TYPE
+      	SYNTAX    	INTEGER
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is an integer containing the Windows' handle of the task."
+		--DEFAULT cookie (char *) 26
+      	::= { winTaskEntry 4 }
+
+  	winTitle OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is an integer containing the Windows' handle of the task."
+		--DEFAULT cookie (char *) 27
+      	::= { winTaskEntry 5 }
+
+  	winModule OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is an integer containing the Windows' handle of the task."
+		--DEFAULT cookie (char *) 28
+      	::= { winTaskEntry 6 }
+
+
+
+
+-- Xircom Network Group
+
+  	netName OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the network driver signature."
+		--DEFAULT cookie (char *) 31
+      	::= { net 1 }
+
+  	netDesc OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing a description of the network 
+	  driver."
+		--DEFAULT cookie (char *) 32
+      	::= { net 2 }
+
+  	netVersion OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the network driver version."
+		--DEFAULT cookie (char *) 33
+      	::= { net 3 }
+
+  	netMacAddress OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the network adapter 
+	  48-bit node address, stored as an ascii representation of 
+	  the hexidecimal value."
+		--DEFAULT cookie (char *) 34
+      	::= { net 4 }
+
+  	netMode OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing driver-dependent mode settings
+	  which reflect run-time characteristics of the driver."
+		--DEFAULT cookie (char *) 35
+      	::= { net 5 }
+
+  	netSlot OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the slot for which the network 
+	  adapter is currently configured."
+		--DEFAULT cookie (char *) 36
+      	::= { net 6 }
+
+  	netBase OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the network adapter 
+	  I/O base address."
+		--DEFAULT cookie (char *) 37
+      	::= { net 7 }
+
+  	netMemory OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the network adapter 
+	  memory address range."
+		--DEFAULT cookie (char *) 38
+      	::= { net 8 }
+
+  	netIrq OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the network adapter IRQ number."
+		--DEFAULT cookie (char *) 39
+      	::= { net 9 }
+
+  	netDma OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the network adapter DMA
+	  channel number."
+		--DEFAULT cookie (char *) 40
+      	::= { net 10 }
+
+  	netMaxPktSize OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the maximum packet size for 
+	  which the driver is currently configured."
+		--DEFAULT cookie (char *) 41
+      	::= { net 11 }
+
+  	netFrameType OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the frame and media type being
+	  used by the network driver."
+		--DEFAULT cookie (char *) 42
+      	::= { net 12 }
+
+  	netSendRetry OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the number of send retries for
+	  which the network driver is currently configured."
+		--DEFAULT cookie (char *) 43
+      	::= { net 13 }
+
+  	netReset OBJECT-TYPE
+      	SYNTAX    	INTEGER
+      	MAX-ACCESS	read-write
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is an integer which contains a value of 0.  Setting it to 1
+	  causes the workstation to reset."
+		--DEFAULT cookie (char *) 44
+      	::= { net 14 }
+
+-- Xircom SNMP Agent Group
+
+
+  	agentName OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing the name of the 
+	  Xircom SNMP Agent."
+		--DEFAULT cookie (char *) 61
+      	::= { agent 1 }
+
+  	agentDesc OBJECT-TYPE
+      	SYNTAX    	DisplayString
+      	MAX-ACCESS	read-only
+      	STATUS    	current
+      	DESCRIPTION
+	 "This is a text string containing a description of the 
+	  Xircom SNMP Agent."
+		--DEFAULT cookie (char *) 62
+			::= { agent 2 }
+
+	agentVersion OBJECT-TYPE
+			SYNTAX    	DisplayString
+			MAX-ACCESS	read-only
+			STATUS    	current
+			DESCRIPTION
+	 "This is a text string containing the version of the
+	  Xircom SNMP Agent."
+		--DEFAULT cookie (char *) 63
+			::= { agent 3 }
+
+	agentIpAddress OBJECT-TYPE
+			SYNTAX    	IpAddress
+			MAX-ACCESS	read-write
+			STATUS    	current
+			DESCRIPTION
+	 "This is a text string containing the IP Address of the workstation.  The
+	  agent acquires this information from a configuration disk file."
+		--DEFAULT cookie (char *) 64
+			::= { agent 4 }
+
+	agentCommunity OBJECT-TYPE
+			SYNTAX    	DisplayString
+			MAX-ACCESS	read-write
+			STATUS    	current
+			DESCRIPTION
+	 "This is a text string containing the SNMP community.  The
+	  agent acquires this information from a configuration disk file."
+		--DEFAULT cookie (char *) 65
+			::= { agent 5 }
+
+
+-- Xircom Trap Group
+
+	trapTable OBJECT-TYPE
+		SYNTAX    	SEQUENCE OF TrapEntry
+		MAX-ACCESS	not-accessible
+		STATUS    	current
+		DESCRIPTION
+	 "This is a table of Alerts (SNMP Traps) which can be sent
+	  to the specified ipaddress using the specified protocol
+	  by setting the value of the trapTrigger object
+	  to the index of an entry in this table."
+		::= { trap 1 }
+
+	trapEntry OBJECT-TYPE
+		SYNTAX    	TrapEntry
+		MAX-ACCESS	not-accessible
+		STATUS    	current
+		DESCRIPTION
+	 "This is an entry in the table of Alerts (SNMP Traps)."
+		INDEX    	{ trapIndex }
+		::= { trapTable 1 }
+
+	TrapEntry ::= SEQUENCE {
+		trapIndex		INTEGER,
+		trapAddress	IpAddress,
+		trapProtocol	INTEGER
+	}
+
+	trapIndex OBJECT-TYPE
+		SYNTAX    	INTEGER (1..127)
+		MAX-ACCESS	read-only
+		STATUS    	current
+		DESCRIPTION
+	 "This is an integer indexing the Trap Entry.
+	  The first entry contains 1."
+		--DEFAULT cookie (char *) 141
+			::= { trapEntry 1 }
+
+	trapAddress OBJECT-TYPE
+		SYNTAX    	IpAddress
+		MAX-ACCESS	read-write
+		STATUS    	current
+		DESCRIPTION
+	 "This is an IP address containing the address where alerts
+	  (traps) will be sent."
+		--DEFAULT cookie (char *) 142
+		::= { trapEntry 2 }
+
+	trapProtocol OBJECT-TYPE
+		SYNTAX    	INTEGER {
+			disabled(1),
+			tcpIp(2),
+			ipxEtherII(3),
+			ipx802Dot2(4),
+			ipx802Dot2Snap(5),
+			ipx802Dot3(6)
+		}
+		MAX-ACCESS	read-write
+		STATUS    	current
+		DESCRIPTION
+	 "This is an integer containing a code indicating the
+	  protocol to use when sending alerts.  1 means disabled,
+	  i.e. the corresponding trapAdr variable is
+	  not really intended to receive traps.  2 means use
+	  TCP/IP protocol.  3,4,5,6 mean use IPX protocol using
+	  Ethernet II, RAW 802.2, 802.2 SNAP or 802.3 physical layer."
+		--DEFAULT cookie (char *) 143
+		::= { trapEntry 3 }
+
+	trapTrigger OBJECT-TYPE
+		SYNTAX    	INTEGER
+		MAX-ACCESS	read-write
+		STATUS    	current
+		DESCRIPTION
+	 "This is an integer which is set to 0 by the Xircom agent.
+	  If an application sets this value to a valid trap index,
+	  the trap indicated by the index value is sent and the agent
+	  resets the value to 0."
+		--DEFAULT cookie (char *) 144
+		::= { trap 2 }
+
+	trapAlert NOTIFICATION-TYPE
+		OBJECTS     { netReset }
+		STATUS      current
+		DESCRIPTION
+	 "This is a notification object which references the
+	  netReset object."
+		::= { trap 3 }
+
+END
+

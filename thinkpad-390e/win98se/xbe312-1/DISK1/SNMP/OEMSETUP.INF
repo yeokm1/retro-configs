@@ -1,0 +1,444 @@
+[Identification]
+    OptionType = NetService
+
+[Options]
+    XMOBILE
+
+[FileConstants]
+UtilityInf      = "UTILITY.INF"
+subroutineinf   = "SUBROUTN.INF"
+SoftwareType	= "service"
+Exit_Code       = 0
+NetEventDLL     = "%SystemRoot%\System32\netevent.dll"
+IoLogMsgDLL     = "%SystemRoot%\System32\IoLogMsg.dll"
+XMOBILEDLL	= "%SystemRoot%\System32\xmobile.dll"
+Manufacturer	= "Xircom"
+ProductMajorVersion	= "1"
+ProductMinorVersion	= "01"
+ProductVersion  = $(ProductMajorVersion)"."$(ProductMinorVersion)
+ProductSoftwareName	= "XMobile"
+ProductSoftwareImagePath = $(XMOBILEDLL)
+ProductKeyName  = $(!NTN_SoftwareBase)"\"$(Manufacturer)"\"$(ProductSoftwareName)"\CurrentVersion"
+
+[GeneralConstants]
+from      = ""
+to        = ""
+ExitCodeOk     = 0
+ExitCodeCancel = 1
+ExitCodeFatal  = 2
+KeyNull         = ""
+MAXIMUM_ALLOWED   = 33554432
+RegistryErrorIndex = NO_ERROR
+KeyProduct      = ""
+KeyParameters   = ""
+TRUE            = 1
+FALSE           = 0
+NoTitle            = 0
+ExitState   = "Active"
+OldVersionExisted = $(FALSE)
+DriverPath	= $(!STF_NTPATH)\drivers
+
+[date]
+    Now = {} ? $(!LIBHANDLE) GetSystemDate
+
+[Identify]
+    read-syms Identification
+    set Status     = STATUS_SUCCESSFUL
+    set Identifier = $(OptionType)
+    set Media      = #("Source Media Descriptions", 1, 1)
+    Return $(Status) $(Identifier) $(Media)
+
+[ReturnOptions]
+    set Status        = STATUS_FAILED
+    set OptionList     = {}
+    set OptionTextList = {}
+    set LanguageList = ^(LanguagesSupported, 1)
+    Ifcontains(i) $($0) in $(LanguageList)
+        goto returnoptions
+    else
+        set Status = STATUS_NOLANGUAGE
+        goto finish_ReturnOptions
+    endif
+
+returnoptions = +
+    set OptionList     = ^(Options, 1)
+    set OptionTextList = ^(OptionsText$($0), 1)
+    set Status	       = STATUS_SUCCESSFUL
+
+finish_ReturnOptions = +
+    Return $(Status) $(OptionList) $(OptionTextList)
+
+[InstallOption]
+    set Option   = $($1)
+    set SrcDir   = $($2)
+    set AddCopy  = $($3)
+    set DoCopy   = $($4)
+    set DoConfig = $($5)
+    set LanguageList = ^(LanguagesSupported, 1)
+    Ifcontains(i) $($0) NOT-IN $(LanguageList)
+        Return STATUS_NOLANGUAGE
+    endif
+
+    set-subst LF = "\n"
+    read-syms GeneralConstants
+    read-syms FileConstants
+    read-syms DialogConstants$(!STF_LANGUAGE)
+    ifstr(i) $(!NTN_Origination) == "NCPA"
+        set Continue = $(OK)
+    endif
+    read-syms FileConstants$(!STF_LANGUAGE)
+    detect date
+    set-title  $(FunctionTitle)
+    set to   = Begin
+    set from = Begin
+    set CommonStatus = STATUS_SUCCESSFUL
+    EndWait
+
+Begin = +
+    Ifstr(i) $(!NTN_InstallMode) == deinstall
+        set StartLabel = removeadapter
+    else-Ifstr(i) $(!NTN_InstallMode) == Update
+        set StartLabel = UpgradeSoftware
+    else-Ifstr(i) $(!NTN_InstallMode) == bind
+        set StartLabel = bindingadapter
+    else-Ifstr(i) $(!NTN_InstallMode) == configure
+        set StartLabel = configureadapter
+    else
+        set StartLabel = installadapter
+    endif
+    set from = $(fatal)
+    set to = $(fatal)
+    goto $(StartLabel)
+
+installadapter = +
+    OpenRegKey $(!REG_H_LOCAL) "" $(ProductKeyName) $(MAXIMUM_ALLOWED) KeyProduct
+    Ifstr $(KeyProduct) != $(KeyNull)
+        CloseRegKey $(KeyProduct)
+        Shell $(UtilityInf), VerExistedDlg, $(ProductSoftwareTitle),+
+            $(ProductVersion)
+        ifint $($ShellCode) != $(!SHELL_CODE_OK)
+            Debug-Output "ShellCode error: cannot get an error string."
+            goto ShellCodeError
+        endif
+        goto end
+    endif
+
+    StartWait
+    ifstr(i) $(OldVersionExisted) == $(FALSE)
+        install "Install-Option"
+        ifstr(i) $(STF_INSTALL_OUTCOME) != STF_SUCCESS
+           Shell $(UtilityInf) RegistryErrorString "UNABLE_COPY_FILE"
+           ifint $($ShellCode) != $(!SHELL_CODE_OK)
+               goto ShellCodeError
+           endif
+           set Error = $($R0)
+           goto fatal
+	endif
+
+	set OEM_ABANDON_ON = TRUE
+
+	Shell $(UtilityInf), AddSoftwareComponent, $(Manufacturer), +
+	    $(ProductSoftwareName), $(ProductSoftwareName),+
+	    $(ProductSoftwareDisplayName), +
+	    $(STF_CONTEXTINFNAME), $(ProductSoftwareImagePath), "service", "",+
+	    {"SNMP", "EventLog"}, "", $(XMOBILEDLL)
+
+	Set SoftwareProductKey = $($R1)
+	Set SoftwareNetRuleKey = $($R2)
+	Set SoftwareServiceKey = $($R3)
+	Set SoftwareParameterKey = $($R4)
+	Set SoftLinkageKey	= $($R5)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	   Debug-Output "ShellCode error"
+	   goto ShellCodeError
+	endif
+	set RegistryErrorIndex = $($R0)
+	Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+	   EndWait
+	   Debug-Output "Registry error: add software components"
+	   CloseRegKey $(SoftwareProductKey)
+	   CloseRegKey $(SoftwareNetRuleKey)
+	   CloseRegKey $(SoftwareServiceKey)
+	   CloseRegKey $(SoftwareParameterKey)
+	   CloseRegKey $(SoftLinkageKey)
+	   CloseRegKey $(KeyParameters)
+	   goto fatalregistry
+	endif
+
+        set NewValueList = {{SoftwareType,$(NoTitle),$(!REG_VT_SZ),$(SoftwareType)},+
+                           {MajorVersion,$(NoTitle),$(!REG_VT_DWORD),$(ProductMajorVersion)},+
+                           {MinorVersion,$(NoTitle),$(!REG_VT_DWORD),$(ProductMinorVersion)},+
+                           {Title,$(NoTitle),$(!REG_VT_SZ),$(ProductSoftwareTitle)},+
+                           {Description,$(NoTitle),$(!REG_VT_SZ),$(ProductSoftwareDescription)},+
+                           {ServiceName,$(NoTitle),$(!REG_VT_SZ),$(ProductSoftwareName)},+
+                           {InstallDate,$(NoTitle),$(!REG_VT_DWORD),*($(Now),1)}}
+        Shell $(UtilityInf), AddValueList, $(SoftwareProductKey), $(NewValueList)
+        ifint $($ShellCode) != $(!SHELL_CODE_OK)
+            Debug-Output "ShellCode error."
+            goto ShellCodeError
+	endif
+
+        set RegistryErrorIndex = $($R0)
+        Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+            EndWait
+            Debug-Output "Resgitry error: add value list."
+            CloseRegKey $(SoftwareProductKey)
+            CloseRegKey $(SoftwareNetRuleKey)
+            CloseRegKey $(SoftwareServiceKey)
+            CloseRegKey $(SoftLinkageKey)
+            CloseRegKey $(SoftwareParameterKey)
+            goto fatalregistry
+	endif
+
+        set NewValueList = {{InfOption,$(NoTitle),$(!REG_VT_SZ),$(Option)}}
+        Shell  $(UtilityInf), AddValueList, $(SoftwareNetRuleKey), $(NewValueList)
+        ifint $($ShellCode) != $(!SHELL_CODE_OK)
+            Debug-Output "ShellCode error."
+            goto ShellCodeError
+        endif
+        set RegistryErrorIndex = $($R0)
+        Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+            EndWait
+            Debug-Output "Resgitry error: add value list."
+            CloseRegKey $(SoftwareProductKey)
+            CloseRegKey $(SoftwareNetRuleKey)
+            CloseRegKey $(SoftwareServiceKey)
+            CloseRegKey $(SoftwareParameterKey)
+            CloseRegKey $(SoftLinkageKey)
+            goto fatalregistry
+	endif
+
+
+	OpenRegKey $(!REG_H_LOCAL) "" "SYSTEM\CurrentControlSet\Services\SNMP\Parameters\ExtensionAgents" $(MAXIMUM_ALLOWED) ExtensionAgentKey
+	Shell $(UtilityInf) AddValueList, $(ExtensionAgentKey), +
+	    {{"XMobile", $(NoTitle), $(!REG_VT_SZ), "SOFTWARE\Xircom\XMobile\CurrentVersion"}}
+	CloseRegKey $(ExtensionAgentKey)
+
+	OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Xircom\XMobile\CurrentVersion" $(MAXIMUM_ALLOWED) XircomKey
+	Shell $(UtilityInf) AddValueList, $(XircomKey), +
+	    {{"Pathname", $(NoTitle), $(!REG_VT_SZ), "%SystemRoot%\System32\xmobile.dll"}}
+
+    endif
+    EndWait
+
+    ifint $(Result) == 0
+        set CommonStatus = STATUS_REBOOT
+    else-ifint $(Result) == 1
+        set CommonStatus = STATUS_REBOOT
+    else
+        set RegistryErrorIndex = $(Result)
+        goto fatalregistry
+    endif
+
+    Goto successful
+
+configureadapter = +
+    ifint $(Result) == 0
+        set CommonStatus = STATUS_NO_EFFECT
+    else-ifint $(Result) == 1
+        set CommonStatus = STATUS_NO_EFFECT
+    else
+        set RegistryErrorIndex = $(Result)
+        goto fatalregistry
+    endif
+    goto successful
+
+bindingadapter =+
+    set Error = "Binding: Sorry, not yet implemented."
+    goto fatal
+
+removeadapter = +
+    Shell $(UtilityInf), RemoveSoftwareComponent, $(Manufacturer), +
+        $(ProductSoftwareName)
+    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+        Debug-Output "ShellCode error"
+        goto ShellCodeError
+    endif
+    set RegistryErrorIndex = $($R0)
+    Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+        goto fatalregistry
+    endif
+
+    OpenRegKey $(!REG_H_LOCAL) "" "SYSTEM\CurrentControlSet\Services\SNMP\Parameters\ExtensionAgents" $(MAXIMUM_ALLOWED) ExtensionAgentKey
+    DeleteRegValue, $(ExtensionAgentKey), "XMobile"
+    CloseRegKey $(ExtensionAgentKey)
+
+    goto end
+
+UpgradeSoftware = +
+    OpenRegKey $(!REG_H_LOCAL) "" $(ProductKeyName) $(MAXIMUM_ALLOWED) KeyProduct
+    Ifstr $(KeyProduct) != $(KeyNull)
+        install "Install-Update"
+        ifstr(i) $(STF_INSTALL_OUTCOME) != STF_SUCCESS
+            goto fatal
+        endif
+        SetRegValue $(KeyProduct) {MajorVersion,$(NoTitle),$(!REG_VT_SZ),$(ProductMajorVersion)}
+        SetRegValue $(KeyProduct) {MinorVersion,$(NoTitle),$(!REG_VT_SZ),$(ProductMinorVersion)}
+        CloseRegKey $(KeyProduct)
+    else
+        goto fatalregistry
+    endif
+    goto end
+
+successful = +
+    goto end
+
+warning = +
+    Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "WARNING", $(Error)
+    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+        goto ShellCodeError
+    endif
+    ifstr(i) $($R1) == "OK"
+        goto $(to)
+    else-ifstr(i) $($R1) == "CANCEL"
+        goto $(from)
+    else
+        goto "end"
+    endif
+
+nonfatal = +
+    ifstr(i) $(Error) == ""
+        Shell $(UtilityInf) RegistryErrorString "SETUP_FAIL"
+        ifint $($ShellCode) != $(!SHELL_CODE_OK)
+            goto ShellCodeError
+        endif
+        set Error = $($R0)
+    endif
+    Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "NONFATAL", $(Error)
+    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+        goto ShellCodeError
+    endif
+    ifstr(i) $($R1) == "OK"
+        goto $(from)
+    else
+        goto "end"
+    endif
+
+fatalregistry = +
+    Shell $(UtilityInf) RegistryErrorString $(RegistryErrorIndex)
+    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+        goto ShellCodeError
+    endif
+    set Error = $($R0)
+    goto fatal
+
+fatal = +
+    ifstr(i) $(Error) == ""
+        Shell $(UtilityInf) RegistryErrorString "SETUP_FAIL"
+        ifint $($ShellCode) != $(!SHELL_CODE_OK)
+            goto ShellCodeError
+        endif
+        set Error = $($R0)
+    endif
+    Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "FATAL", $(Error)
+    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+        goto ShellCodeError
+    endif
+    goto setfailed
+
+ShellCodeError = +
+    set DlgType      = "MessageBox"
+    set STF_MB_TITLE = $(ShellCodeErrorTitle)
+    set STF_MB_TEXT  = $(ShellCodeErrorText)
+    set STF_MB_TYPE  = 1
+    set STF_MB_ICON  = 3
+    set STF_MB_DEF   = 1
+    ui start "Error Message"
+    goto setfailed
+
+setfailed = +
+    set CommonStatus = STATUS_FAILED
+    Ifint $(RegistryErrorIndex) == TCPIP_NONEXIST_ERROR
+        set CommonStatus = STATUS_USERCANCEL
+    endif
+    ifstr(i) $(OEM_ABANDON_ON) == TRUE
+        set OEM_ABANDON_ON = FALSE
+        goto removeadapter
+    endif
+    goto end
+
+end = +
+    goto term
+
+term = +
+    Return $(CommonStatus)
+
+[GetFilesSize]
+    set FileSizeList = ^(Files-XMobile,3)
+    set TotalSize = 0
+    ForListDo $(FileSizeList)
+        Split-String $($) "=" SplitString
+        set Size = *($(SplitString),3)
+        set-add TotalSize = $(TotalSize) $(Size)
+    EndForListDo
+    set-div SizeInK = $(TotalSize) 1024
+    return $(SizeInK)
+
+[Install-Option]
+    set STF_VITAL = ""
+    ifstr(i) $(AddCopy) == "YES"
+        AddSectionFilesToCopyList Files-$(Option) $(SrcDir) $(!STF_WINDOWSSYSPATH)
+    endif
+    ifstr(i) $(DoCopy) == "YES"
+       set !STF_NCPA_FLUSH_COPYLIST = TRUE
+       CopyFilesInCopyList
+    endif
+    ifstr(i) $(DoConfig) == "YES"
+    endif
+    Exit
+
+[Install-Update]
+   set STF_VITAL        = ""
+   set STF_OVERWRITE	= "VERIFYSOURCEOLDER"
+
+   AddSectionFilesToCopyList Files-$(Option) $(SrcDir) $(!STF_WINDOWSSYSPATH)
+;;;;;	AddSectionFilesToCopyList Files-Inf $(SrcDir) $(!STF_WINDOWSSYSPATH)
+
+   set !STF_NCPA_FLUSH_COPYLIST = TRUE
+   CopyFilesInCopyList
+
+   exit
+
+[Source Media Descriptions]
+     1 = "Xircom Setup Disk for NT"
+
+[ProductType]
+STF_PRODUCT  = Winnt
+STF_PLATFORM = I386
+
+[Files-Inf]
+1, OEMSETUP.INF, SIZE=13814, RENAME=$(!UG_Filename)
+
+[Files-XMOBILE]
+1, XMOBILE.DLL, SIZE=9728
+
+[LanguagesSupported]
+    ENG
+
+[OptionsTextENG]
+    XMOBILE	= "Xircom SNMP Mobile Extension Agent"
+
+[FileConstantsENG]
+ProCaption   = "Windows NT Setup"
+ProCancel    = "Cancel"
+ProCancelMsg = "Windows NT Networking is not correctly installed.  "+
+               "Are you sure you want to cancel copying files?"
+ProCancelCap = "Network Setup Message"
+ProText1     = "Copying:"
+ProText2     = "To:"
+FunctionTitle	= "XMobile Setup"
+ProductSoftwareDescription	= "Xircom SNMP Mobile Management Service"
+ProductSoftwareDisplayName	= "Xircom Mobile SNMP Service"
+ProductSoftwareTitle	= "Xircom SNMP Mobile Extension Agent"
+ShellCodeErrorTitle     = "Error: "$(FunctionTitle)
+ShellCodeErrorText	= "Shell Code Error."
+
+[DialogConstantsENG]
+Help        = "&Help"
+Exit        = "Cancel"
+OK          = "OK"
+HelpContext = ""
+Continue    = "Continue"
+Cancel	    = "Cancel"
+
+[FileDependentDlgENG]

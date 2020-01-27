@@ -1,0 +1,156 @@
+; Copyright (c) IBM Corporation
+; IBM ThinkPad LCD Monitor INF/Color Profile
+
+[version]
+signature="$Chicago$"
+Class=Monitor
+ClassGuid={4D36E96E-E325-11CE-BFC1-08002BE10318}
+Provider=%IBM%
+CatalogFile=IBMTPLCD.CAT
+DriverVer=07/15/2004, 2.00.0.0
+
+[ClassInstall32]
+AddReg=ClassAddReg32
+
+[ClassAddReg32]
+HKR,,,,%MonitorClassName%
+HKR,,Icon,,"-1"
+HKR,,NoInstallClass,,1
+
+[DestinationDirs]
+DefaultDestDir     = 11
+IBMTPLCD.CopyFiles = 23         ; System\Color directory
+IBMTPFLX.CopyFiles = 23
+
+[SourceDisksNames]
+1=%SRCDISK%,,0
+
+[SourceDisksFiles]
+IBMTPLCD.icm=1
+IBMTPFLX.icm=1
+
+[Manufacturer]
+%IBM%=IBM
+
+[IBM]
+%TPVGA%  =TPLCDVGA.Install,Monitor\IBM0A2E      ; TFT, 640x480
+%TPVGA%  =TPLCDVGA.Install,Monitor\IBM0A41      ; HPA, 640x480
+%TPSVGA% =TPLCDSVGA.Install,Monitor\IBM0A4B     ; TFT, 800x600
+%TPSVGA% =TPLCDSVGA.Install,Monitor\IBM0A50     ; HPA, 800x600
+%TPXGA%  =TPLCDXGA.Install,Monitor\IBM0A55      ; TFT, 1024x768 
+%TPXGA%  =TPLCDXGA.Install,Monitor\IBM254A      ; HPA, 1024x768 
+%TPSXGA% =TPLCDSXGA.Install,Monitor\IBM254C     ; TFT, 1280x1024
+%TPSXGAP% =TPLCDSXGAP.Install,Monitor\IBM254D   ; TFT, 1400x1050 
+%1TPSXGAP%=1TPLCDSXGAP.Install,Monitor\IBM1A5E  ; Wide Viewing, 1400x1050 
+%TPUXGA% =TPLCDUXGA.Install,Monitor\IBM0A54     ; TFT, 1600x1200
+%1TPUXGA% =1TPLCDUXGA.Install,Monitor\IBM1A5D   ; Wide Viewing, 1600x1200
+%TPQXGA% =TPLCDQXGA.Install,Monitor\IBM0A5C     ; TFT, 2048x1536
+%1TPQXGA% =1TPLCDQXGA.Install,Monitor\IBM1A5C   ; Wide Viewing, 2048x1536
+
+[TPLCDVGA.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=640, DPMS, ICM
+CopyFiles=IBMTPLCD.CopyFiles
+
+[TPLCDSVGA.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=800, DPMS, ICM
+CopyFiles=IBMTPLCD.CopyFiles
+
+[TPLCDXGA.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=1024, DPMS, ICM
+CopyFiles=IBMTPLCD.CopyFiles
+
+[TPLCDSXGA.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=1280, DPMS, ICM
+CopyFiles=IBMTPLCD.CopyFiles
+
+[TPLCDSXGAP.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=1400, DPMS, ICM
+CopyFiles=IBMTPLCD.CopyFiles
+
+[1TPLCDSXGAP.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=1400, DPMS, 1ICM
+CopyFiles=IBMTPFLX.CopyFiles
+
+[TPLCDUXGA.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=1600, DPMS, ICM
+CopyFiles=IBMTPLCD.CopyFiles
+
+[1TPLCDUXGA.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=1600, DPMS, 1ICM
+CopyFiles=IBMTPFLX.CopyFiles
+
+[TPLCDQXGA.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=2048, DPMS, ICM
+CopyFiles=IBMTPLCD.CopyFiles
+
+[1TPLCDQXGA.Install]
+DelReg=DEL_CURRENT_REG
+AddReg=2048, DPMS, 1ICM
+CopyFiles=IBMTPFLX.CopyFiles
+
+[DEL_CURRENT_REG]
+HKR,MODES
+HKR,,MaxResolution
+HKR,,DPMS
+HKR,,ICMProfile
+
+[640]
+HKR,,MaxResolution,,"640,480"
+
+[800]
+HKR,,MaxResolution,,"800,600"
+
+[1024]
+HKR,,MaxResolution,,"1024,768"
+
+[1280]
+HKR,,MaxResolution,,"1280,1024"
+
+[1400]
+HKR,,MaxResolution,,"1400,1050"
+
+[1600]
+HKR,,MaxResolution,,"1600,1200"
+
+[2048]
+HKR,,MaxResolution,,"2048,1536"
+
+[DPMS]
+HKR,,DPMS,,1
+
+[ICM]
+HKR,,ICMProfile,0,IBMTPLCD.icm
+
+[1ICM]
+HKR,,ICMProfile,0,IBMTPFLX.icm
+
+[IBMTPLCD.CopyFiles]
+IBMTPLCD.icm
+
+[IBMTPFLX.CopyFiles]
+IBMTPFLX.icm
+
+[Strings]
+SRCDISK ="IBM ThinkPad Supplement File"
+
+TPVGA  ="IBM ThinkPad  640x480 LCD panel"
+TPSVGA ="IBM ThinkPad  800x600 LCD panel"
+TPXGA ="IBM ThinkPad 1024x768 LCD panel"
+TPSXGA ="IBM ThinkPad 1280x1024 LCD panel"
+TPSXGAP ="IBM ThinkPad 1400x1050 LCD panel"
+1TPSXGAP ="Wide viewing angle & High density FlexView Display 1400x1050"
+TPUXGA ="IBM ThinkPad 1600x1200 LCD panel"
+1TPUXGA ="Wide viewing angle & High density FlexView Display 1600x1200"
+TPQXGA ="IBM ThinkPad 2048x1536 LCD panel"
+1TPQXGA ="Wide viewing angle & High density FlexView Display 2048x1536"
+
+IBM     ="IBM ThinkPad"

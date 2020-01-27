@@ -1,0 +1,93 @@
+; XMOBILE.INF
+;
+; Xircom Mobile MIB SNMP DLL
+;
+; Copyright (c) 1996 Xircom, Inc. All rights reserved.
+;
+; Author:	Ian Cullimore
+;
+; Date: 	11-APRIL-1996
+;
+; Version:	1.01
+;
+
+[version]
+signature="$CHICAGO$"
+Class=NetService
+provider=%V_XIRCOM%
+
+[Manufacturer]
+%V_XIRCOM%=XIRCOM
+
+[XIRCOM]
+%XIRCSNMP.DeviceDesc%=XIRCSNMP.ndi, XIRCSNMP; XIRCSNMP agent
+
+;*********************************************
+;    XIRCSNMP Agent
+;*********************************************
+[XIRCSNMP.ndi]
+AddReg=XIRCSNMP.ndi.reg
+;Unique PnP ID, entry needs to be present so that setup can back track
+;the device name from the driver
+DeviceID=XIRCSNMP
+CopyFiles=XIRCSNMP.copy.inf
+
+[XIRCSNMP.ndi.reg]
+HKR,Ndi,DeviceID,,XIRCSNMP
+; Interfaces
+HKR,Ndi\Interfaces,DefLower,,"winsock"
+HKR,Ndi\Interfaces,LowerRange,,"winsock"
+; Install-Remove Section
+HKR,Ndi\Install,,,"XIRCSNMP.Install"
+HKR,Ndi\Remove,,,"XIRCSNMP.Remove"
+; Context help
+HKR,Ndi,HelpText,,%XIRCSNMP_HELP%
+
+[XIRCSNMP.copy.inf]
+xmobile.inf
+
+[XIRCSNMP.Install]
+AddReg=XIRCSNMP.Add.reg
+CopyFiles=XIRCSNMP.Add.files
+
+[XIRCSNMP.Add.reg]
+HKLM,"SYSTEM\CurrentControlSet\Services\SNMP\Parameters\ExtensionAgents","XMobile",,"SOFTWARE\Xircom\XircMIB\CurrentVersion"
+HKLM,"Software\Xircom\XircMIB\CurrentVersion",Pathname,,"xmobile.dll"
+
+[XIRCSNMP.Add.files]
+xmobile.dll
+
+[XIRCSNMP.Remove]
+DelReg=XIRCSNMP.Remove.reg
+
+[XIRCSNMP.Remove.reg]
+HKLM,"System\CurrentControlSet\Services\SNMP\Parameters\ExtensionAgents","XMobile"
+HKLM,"SOFTWARE\Xircom\XircMIB"
+
+[SourceDisksNames]
+78=%DSK%, "", 0001
+
+[SourceDisksFiles]
+xmobile.dll = 78,,36000
+xmobile.inf = 78,,1024
+
+;****************************************************************************
+; Destination directories
+;****************************************************************************
+[DestinationDirs]
+XIRCSNMP.Add.files	    = 25    ;LDID_SHARED
+XIRCSNMP.copy.inf	    = 17    ;LDID_INF
+
+;****************************************************************************
+; Localizable Strings
+;****************************************************************************
+[strings]
+V_XIRCOM="Xircom"
+
+; Devices
+XIRCSNMP.DeviceDesc="Xircom SNMP extension agent"
+
+; Context help
+XIRCSNMP_HELP="The SNMP extension agent provides administrators with mobile configuration information about this computer."
+
+DSK="DISK1"

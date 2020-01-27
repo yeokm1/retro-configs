@@ -1,0 +1,53 @@
+;******************************************************************************
+; OEMSETUP.INF --- Xircom Installation File
+; Copyright (C) 1996,1997 Xircom, Inc. All Rights Reserved
+;
+; Windows for Workgroups 3.11
+; IBM LAN Server 4.0 DOS
+;------------------------------------------------------------------------------
+[data]
+type=network
+version="3.11.100"
+
+[disks]
+1=., "Xircom CardBus Ethernet Adapter 10/100 Network Drivers Disk", disk 1
+
+[netcard]
+XIRCMAC="Xircom CardBus Ethernet 10/100 NDIS 2.01 Real Mode", 0, NDIS, Ethernet, REAL, XIRCMAC_INST, XIRCMAC_INI
+XIRC$ODI="Xircom CardBus Ethernet 10/100 ODI for Netware", 0, NDIS, Ethernet, 0x04, XIRCODI_INST, XIRCODI_INI
+
+[XIRCODI_INST]
+mlid=cbeodi.com
+
+[XIRCODI_INI]
+
+[XIRCMAC_INST]
+netdir=1:cbendis.exe
+device=cbendis.exe, @netdir\cbendis.exe
+
+[XIRCMAC_INI]
+DriverName=XIRCOM$
+param = MEMORY, "Adapter memory address", hex, "0xC000,0xE800,0x200", 0xD200, 2
+param = IOADDRESS, "Adapter IO address", hex, "0x100,0xFF80,0x80", 0xF500, 2
+param = MODE, "Adapter address mode", enum, "Memory,MEMORY,IO,IO", MEMORY, 2
+param = IRQ, "Adapter IRQ number", int, "3,15,1", 11, 2
+param = SOCKET, "CardBus socket", int, "1,4,1", 1, 2
+param = NOCHECK, "Disable resource checking", keyonly,,,2
+param = VERBOSE, "Enable verbose messages", keyonly,,,2
+param = NOPOLL, "Disable driver polling", keyonly,,,2
+param = RXBUFFERSIZE, "Receive buffer size (in packets)", int, "1,30,1", 15, 2
+param = TXBUFFERSIZE, "Transmit buffer size (in packets)", int, "1,10,1", 2, 2
+param = NOBURST, "Disable burst mode", keyonly,,,2
+param = LINESPEED, "Force line speed", enum, "100 Mbps,100,10 Mbps, 10", 100, 2
+param = LINEMODE, "Force line mode", enum, "Half duplex,HALF,Full duplex,FULL", HALF, 2
+param = PCIIRQ, "Force PCI style IRQ", keyonly,,,2
+param = ISAIRQ, "Force ISA style IRQ", keyonly,,,2
+param = NOLED, "Turn LEDs off", keyonly,,,2
+param = LINKDISABLE, "Disable link integrity", keyonly,,,2
+param = LATENCY, "Latency timer", int, "0,255,1", 32, 2
+param = NOWRITEPOST, "Disable write posting", keyonly,,,2
+param = CACHE, "Cache line size", enum, "0,0,8,8,16,16,32,32", 8, 2
+param = NOPREFETCH, "Disable bridge pre-fetching", keyonly,,,2
+
+
+

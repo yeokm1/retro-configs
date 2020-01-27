@@ -1,0 +1,147 @@
+; ///////////////////////////////////////////////////////////////////////
+; //			   MagicMedia 256 AV                           //
+; //                    Windows 95/98 Drivers Disk                     //
+; //                 Inf Version 4.11.01.5215-T2.15.00                 //
+; //                       PACKAGE 2.15.00-T                           //
+; ///////////////////////////////////////////////////////////////////////
+
+[version]
+Class=DISPLAY
+signature="$CHICAGO$"
+Provider=%Mfg%
+CatalogFile=nmgc5.cat
+
+[DestinationDirs]
+DefaultDestDir  = 11   
+Driver.Copy = 11
+
+
+[SourceDisksNames]
+1="Win95/98 NeoMagic Driver Disk",,0
+
+[SourceDisksFiles]
+NeoMagic.dll
+tsb.dll
+NMGC5_32.dll
+NMGC5_16.dll
+NMGC5.drv
+NMGC5VDD.vxd
+NMGC5VD2.vxd
+NMGCDD5.dll
+NMGC5VPM.drv
+NeoMagic.hlp
+nmgc5.cat=0,,920
+
+
+[Manufacturer]
+%Mfg%=Mfg
+
+[Mfg]
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_000510C8
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_10021025
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_10031025
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_10041025
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_00011553
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_000414C0
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_000814C0
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_000914C0
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_B0D10E11
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_008F1028
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_00881028
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_008B1028
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_106C10CF
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_8004107B
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_8017107B
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_0002103C
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_0008103C
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_000D103C
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_00DD1014
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_01371014
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_01511014
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_831010F7
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_831110F7
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_831310F7
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_110A110A
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_100913BD
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_8021104D
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_802A104D
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_804C104D
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_805D104D
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_8040104D
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_8051104D
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_00011179
+%NMX.DeviceDescNM5%=Driver.Install_NM5,PCI\VEN_10C8&DEV_0005&SUBSYS_00021179
+
+[Driver.Install_NM5]
+CopyFiles=Driver.Copy, VPM.Copy
+DelReg=Prev.DelReg
+AddReg=Driver.AddReg_NM5
+UpdateInis=VPM.Ini
+
+
+[Driver.Copy]
+NMGC5.drv
+NMGC5VDD.vxd
+NMGC5VD2.vxd
+NMGCDD5.dll
+NeoMagic.dll
+NeoMagic.hlp
+tsb.dll
+
+[VPM.Copy]
+NMGC5_32.dll
+NMGC5_16.dll
+NMGC5VPM.drv
+
+[VPM.Ini]
+system.ini,drivers,,"VPM=NMGC5VPM.drv"
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+
+[Driver.AddReg_NM5]
+HKR,,Ver,,4.11.01.5215-T2.15.00
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,800,600"
+HKR,DEFAULT,drv,,Nmgc5.drv
+HKR,DEFAULT,drv2,,Nmgc5.drv
+HKR,DEFAULT,vdd,,*vdd
+HKR,DEFAULT,minivdd,,Nmgc5Vdd.vxd
+HKR,DEFAULT,minivdd2,,Nmgc5Vd2.vxd
+HKR,DEFAULT,RefreshRate,,-1
+HKR,DEFAULT,DDC,,1
+HKR,"MODES\8\640,480",,,"60,75,85"
+HKR,"MODES\8\800,600",,,"60,75,85"
+HKR,"MODES\8\1024,480",,,"60,70,75"
+HKR,"MODES\8\1024,768",,,"60,70,75,85"
+HKR,"MODES\8\1280,1024",,,"60"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,480"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\24\640,480"
+HKR,"MODES\24\800,600"
+HKR,"MODES\24\1024,480"
+HKR,"MODES\24\1024,768"
+HKR,DEFAULT,BusMaster,1,01
+HKR,DEFAULT,DualDisplay,1,00
+HKR,DEFAULT,Disable_DevBitmap,1,00
+HKR,DEFAULT,Enable_DualDisplay,1,01
+HKR,DEFAULT,IDTDisplay,1,00
+HKR,DEFAULT,GammaCorrectionSupport,1,00
+HKCR,"CLSID\{6643A3A0-7C15-11cf-913C-0020AFE4E9D7}\InProcServer32",,,"NeoMagic.dll"
+HKCR,"CLSID\{6643A3A0-7C15-11cf-913C-0020AFE4E9D7}\InProcServer32",ThreadingModel,,"Apartment"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\Shellex\PropertySheetHandlers\NeoMagic Display CPL Shell Extension",,,"{6643A3A0-7C15-11cf-913C-0020AFE4E9D7}"
+HKLM,"Software\NeoMagic\PropertySheet",PackageVersion,,"4.11.01.5215-T2.15.00"
+HKLM,"Software\NeoMagic\PropertySheet",CrtIndependent,,"0"
+HKLM,"Software\NeoMagic\PropertySheet",CrtType,,"1"
+HKLM,"Software\NeoMagic\PropertySheet",TVStandard,,"1"
+
+[Strings]
+Mfg="NeoMagic Corporation"
+NMX.DeviceDescNM5="NeoMagic MagicMedia 256AV"

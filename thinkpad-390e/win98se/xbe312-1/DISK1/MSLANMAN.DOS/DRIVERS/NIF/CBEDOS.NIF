@@ -1,0 +1,6 @@
+Model = Xircom CardBus Ethernet 10/100 Adapter
+Path = Ethernet\XIRCOM
+DeviceDriver = @lanroot\Drivers\Ethernet\XIRCOM\CBENDIS.EXE
+DeviceName = Xircom$
+Type = NDIS
+

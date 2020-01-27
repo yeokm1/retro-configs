@@ -1,0 +1,397 @@
+;******************************************************************************
+; CBEODI.INF --- Xircom Client32 LAN Driver INF for Windows95
+; (C) 1996,1997 Xircom, Inc. All Rights Reserved
+;
+;------------------------------------------------------------------------------
+
+;******************************************************************************
+; Version Section
+;------------------------------------------------------------------------------
+[Version]
+InfVersion	= 00.01.00
+Signature	= "$CHICAGO$"
+Class		= Net
+Provider	= %COMPANY_NAME%
+
+;******************************************************************************
+; Manufacturer
+;------------------------------------------------------------------------------
+[Manufacturer]
+%COMPANY_NAME% = Device
+
+;******************************************************************************
+; Device
+;------------------------------------------------------------------------------
+[Device]
+%ADAPTER% = CBE.Install, XIRCOM-CBE_10/100					; Non PNP DeviceID, necessary for SR1 WIN95
+
+;******************************************************************************
+; Install
+;------------------------------------------------------------------------------
+[CBE.Install]									; WIN95 forced load support
+AddReg	 = CBE.AddReg, ODI.AddReg, CBE.AddReg.Params, ODI.AddReg.Params
+
+;******************************************************************************
+; Add Registry
+;------------------------------------------------------------------------------
+[CBE.AddReg]									; WIN95 forced load support
+HKR,Ndi,CardType,,"LEGACY"
+HKR,Ndi,DeviceID,,"XIRCOM-CBE_10/100"		                               ; Non PNP DeviceID, necessary for SR1 WIN95
+
+[ODI.AddReg]
+HKR,,DevLoader,,*odiload
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+HKR,Ndi,NdiInstaller,,"odipage.dll,OdiNdiProc"
+
+;--------------------------------------
+; Interfaces
+;--------------------------------------
+HKR,Ndi\Interfaces,DefUpper,,  "odinsup,novellodi32"
+HKR,Ndi\Interfaces,DefLower,,  "ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"odinsup,novellodi32"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+
+;--------------------------------------
+; Install sections
+;--------------------------------------
+HKR,Ndi\Install,"16 Bit",,"CBE.ODI16.install"
+HKR,Ndi\Install,"32 Bit",,"CBE.ODI32.install"
+
+;--------------------------------------
+; Remove section
+;--------------------------------------
+HKR,Ndi\Remove,"16 Bit",,"CBE.ODI16.Remove"
+
+;--------------------------------------
+; ODI 16 Bit info
+;--------------------------------------
+HKR,"ODI\16 Bit",ModulePath,,"%24%%DRIVER_32_PATH%"
+HKR,"ODI\16 Bit",Modules,,"LSL.NLM,PC32MLID.LAN"
+HKR,"ODI\16 Bit",DriverPath,,"%24%%DRIVER_16_PATH%"
+HKR,"ODI\16 Bit",FileName,,"CBEODI.com"
+HKR,"ODI\16 Bit",NetcfgPath,,"%24%%DRIVER_16_PATH%"
+HKR,"ODI\16 Bit",NetcfgFileName,,"Net.cfg"
+HKR,"ODI\16 Bit",LinkDriver,,"CBEODI"
+
+;--------------------------------------
+; ODI 32 Bit Info
+;--------------------------------------
+HKR,"ODI\32 Bit",ModulePath,,"%24%%DRIVER_32_PATH%"
+HKR,"ODI\32 Bit",Modules,,"LSL.NLM,CMSM.NLM,ETHERTSM.NLM"
+HKR,"ODI\32 Bit",DriverPath,,"%24%%DRIVER_32_PATH%"
+HKR,"ODI\32 Bit",FileName,,"CBE.lan"
+
+;******************************************************************************
+; Install
+;------------------------------------------------------------------------------
+;--------------------------------------
+; Install ODI 16
+;--------------------------------------
+[CBE.ODI16.Install]
+CopyFiles=CBE.ODI16.CopyFiles
+UpdateAutoBat=CBE.ODI16.UpdateAutoBat
+
+[CBE.ODI16.UpdateAutoBat]
+CmdAdd=LSL.COM, "-c=%24%%DRIVER_16_PATH%NET.CFG"
+CmdAdd=NESL.COM
+CmdAdd=cbeodi.com
+
+;--------------------------------------
+; Install ODI 32
+;--------------------------------------
+[CBE.ODI32.Install]
+CopyFiles=CBE.ODI32.CopyFiles
+UpdateAutoBat=CBE.ODI32.UpdateAutoBat
+
+[CBE.ODI32.UpdateAutoBat]
+CmdDelete=LSL
+CmdDelete=NESL
+CmdDelete=cbeodi
+
+;******************************************************************************
+; Remove
+;------------------------------------------------------------------------------
+[CBE.ODI16.Remove]
+UpdateAutoBat=CBE.ODI16.AutoBatRemove
+
+[CBE.ODI16.AutoBatRemove]
+CmdDelete=LSL
+CmdDelete=NESL
+CmdDelete=cbeodi
+
+;******************************************************************************
+; Params
+;------------------------------------------------------------------------------
+[CBE.AddReg.Params]
+HKR,NDI\params\IRQ,ParamDesc,,"Interrupt"
+HKR,Ndi\Params\IRQ,Type,,INT
+HKR,Ndi\Params\IRQ,Default,,11
+HKR,Ndi\Params\IRQ,Optional,,1
+HKR,Ndi\Params\IRQ,Min,,3
+HKR,Ndi\Params\IRQ,Max,,15
+HKR,Ndi\Params\IRQ,Step,,1
+HKR,Ndi\Params\IRQ,Base,,10
+
+HKR,NDI\params\IOADDRESS,ParamDesc,,"I/O Address"
+HKR,Ndi\Params\IOADDRESS,Type,,DWORD
+HKR,Ndi\Params\IOADDRESS,Default,,0xF500
+HKR,Ndi\Params\IOADDRESS,Optional,,1
+HKR,Ndi\Params\IOADDRESS,Min,,100
+HKR,Ndi\Params\IOADDRESS,Max,,FF80
+HKR,Ndi\Params\IOADDRESS,Step,,80
+HKR,Ndi\Params\IOADDRESS,Base,,16
+
+HKR,NDI\params\MEMORY,ParamDesc,,"Memory Address"
+HKR,Ndi\Params\MEMORY,Type,,DWORD
+HKR,Ndi\Params\MEMORY,Default,,5B80000
+HKR,Ndi\Params\MEMORY,Optional,,1
+HKR,Ndi\Params\MEMORY,Min,,C0000
+HKR,Ndi\Params\MEMORY,Max,,FFFFE000
+HKR,Ndi\Params\MEMORY,Step,,2000
+HKR,Ndi\Params\MEMORY,Base,,16
+
+HKR,Ndi\Params\CACHE,ParamDesc,,"Cache"
+HKR,Ndi\Params\CACHE,Type,,ENUM
+HKR,Ndi\Params\CACHE,Default,,32
+HKR,Ndi\Params\CACHE,Optional,,1
+HKR,Ndi\Params\CACHE\Enum,0,,0
+HKR,Ndi\Params\CACHE\Enum,8,,8
+HKR,Ndi\Params\CACHE\Enum,16,,16
+HKR,Ndi\Params\CACHE\Enum,32,,32
+
+HKR,Ndi\Params\ERT,ParamDesc,,"Early Receive Threshold"
+HKR,Ndi\Params\ERT,Type,,ENUM
+HKR,Ndi\Params\ERT,Default,,HIGH
+HKR,Ndi\Params\ERT,Optional,,1
+HKR,Ndi\Params\ERT\Enum,HIGH,,HIGH
+HKR,Ndi\Params\ERT\Enum,MEDIUM,,MEDIUM
+HKR,Ndi\Params\ERT\Enum,LOW,,LOW
+
+HKR,Ndi\Params\ISAIRQ,ParamDesc,,"Force ISA Interrupt Mode"
+HKR,Ndi\Params\ISAIRQ,Type,,ENUM
+HKR,Ndi\Params\ISAIRQ,Default,,ON
+HKR,Ndi\Params\ISAIRQ,Optional,,1
+HKR,Ndi\Params\ISAIRQ\Enum,ON,,ON
+
+HKR,Ndi\Params\LATENCY,ParamDesc,,"Latency"
+HKR,Ndi\Params\LATENCY,Type,,INT
+HKR,Ndi\Params\LATENCY,Default,,32
+HKR,Ndi\Params\LATENCY,Optional,,1
+HKR,Ndi\Params\LATENCY,Min,,0
+HKR,Ndi\Params\LATENCY,Max,,255
+HKR,Ndi\Params\LATENCY,Step,,1
+
+HKR,Ndi\Params\LINEMODE,ParamDesc,,"Force Line Duplex Mode"
+HKR,Ndi\Params\LINEMODE,Type,,ENUM
+HKR,Ndi\Params\LINEMODE,Default,,FULL
+HKR,Ndi\Params\LINEMODE,Optional,,1
+HKR,Ndi\Params\LINEMODE\Enum,FULL,,FULL
+HKR,Ndi\Params\LINEMODE\Enum,HALF,,HALF
+
+HKR,Ndi\Params\LINESPEED,ParamDesc,,"Force Line Speed"
+HKR,Ndi\Params\LINESPEED,Type,,ENUM
+HKR,Ndi\Params\LINESPEED,Default,,100
+HKR,Ndi\Params\LINESPEED,Optional,,1
+HKR,Ndi\Params\LINESPEED\Enum,10,,10
+HKR,Ndi\Params\LINESPEED\Enum,100,,100
+
+HKR,Ndi\Params\LINKDISABLE,ParamDesc,,"Disable Link Integrity"
+HKR,Ndi\Params\LINKDISABLE,Type,,ENUM
+HKR,Ndi\Params\LINKDISABLE,Default,,ON
+HKR,Ndi\Params\LINKDISABLE,Optional,,1
+HKR,Ndi\Params\LINKDISABLE\Enum,ON,,ON
+
+HKR,Ndi\Params\MODE,ParamDesc,,"Address Mode"
+HKR,Ndi\Params\MODE,Type,,ENUM
+HKR,Ndi\Params\MODE,Default,,MEMORY
+HKR,Ndi\Params\MODE,Optional,,1
+HKR,Ndi\Params\MODE\Enum,MEMORY,,MEMORY
+HKR,Ndi\Params\MODE\Enum,IO,,IO
+
+HKR,Ndi\Params\NOBURST,ParamDesc,,"Disable Burst Mode"
+HKR,Ndi\Params\NOBURST,Type,,ENUM
+HKR,Ndi\Params\NOBURST,Default,,ON
+HKR,Ndi\Params\NOBURST,Optional,,1
+HKR,Ndi\Params\NOBURST\Enum,ON,,ON
+
+HKR,Ndi\Params\NOEARLYRX,ParamDesc,,"Disable Early Receive"
+HKR,Ndi\Params\NOEARLYRX,Type,,ENUM
+HKR,Ndi\Params\NOEARLYRX,Default,,ON
+HKR,Ndi\Params\NOEARLYRX,Optional,,1
+HKR,Ndi\Params\NOEARLYRX\Enum,ON,,ON
+
+HKR,Ndi\Params\NOEARLYTX,ParamDesc,,"Disable Early Transmit"
+HKR,Ndi\Params\NOEARLYTX,Type,,ENUM
+HKR,Ndi\Params\NOEARLYTX,Default,,ON
+HKR,Ndi\Params\NOEARLYTX,Optional,,1
+HKR,Ndi\Params\NOEARLYTX\Enum,ON,,ON
+
+HKR,Ndi\Params\NOLED,ParamDesc,,"Disable LEDs"
+HKR,Ndi\Params\NOLED,Type,,ENUM
+HKR,Ndi\Params\NOLED,Default,,ON
+HKR,Ndi\Params\NOLED,Optional,,1
+HKR,Ndi\Params\NOLED\Enum,ON,,ON
+
+HKR,Ndi\Params\NOPREFETCH,ParamDesc,,"Disable Prefetching"
+HKR,Ndi\Params\NOPREFETCH,Type,,ENUM
+HKR,Ndi\Params\NOPREFETCH,Default,,ON
+HKR,Ndi\Params\NOPREFETCH,Optional,,1
+HKR,Ndi\Params\NOPREFETCH\Enum,ON,,ON
+
+HKR,Ndi\Params\NOWRITEPOST,ParamDesc,,"Disable Write Posting"
+HKR,Ndi\Params\NOWRITEPOST,Type,,ENUM
+HKR,Ndi\Params\NOWRITEPOST,Default,,ON
+HKR,Ndi\Params\NOWRITEPOST,Optional,,1
+HKR,Ndi\Params\NOWRITEPOST\Enum,ON,,ON
+
+
+HKR,Ndi\Params\RXBUFFERSIZE,ParamDesc,,"Receive Buffer Size"
+HKR,Ndi\Params\RXBUFFERSIZE,Type,,INT
+HKR,Ndi\Params\RXBUFFERSIZE,Default,,30
+HKR,Ndi\Params\RXBUFFERSIZE,Optional,,1
+HKR,Ndi\Params\RXBUFFERSIZE,Min,,1
+HKR,Ndi\Params\RXBUFFERSIZE,Max,,100
+HKR,Ndi\Params\RXBUFFERSIZE,Step,,1
+
+HKR,Ndi\Params\SOCKET,ParamDesc,,"Force Socket"
+HKR,Ndi\Params\SOCKET,Type,,INT
+HKR,Ndi\Params\SOCKET,Default,,1
+HKR,Ndi\Params\SOCKET,Optional,,1
+HKR,Ndi\Params\SOCKET,Min,,1
+HKR,Ndi\Params\SOCKET,Max,,4
+HKR,Ndi\Params\SOCKET,Step,,1
+
+HKR,Ndi\Params\TXBUFFERSIZE,ParamDesc,,"Transmit Buffer Size"
+HKR,Ndi\Params\TXBUFFERSIZE,Type,,INT
+HKR,Ndi\Params\TXBUFFERSIZE,Default,,10
+HKR,Ndi\Params\TXBUFFERSIZE,Optional,,1
+HKR,Ndi\Params\TXBUFFERSIZE,Min,,1
+HKR,Ndi\Params\TXBUFFERSIZE,Max,,100
+HKR,Ndi\Params\TXBUFFERSIZE,Step,,1
+
+;--------------------------------------
+; General Ethernet Frame-Type params
+;--------------------------------------
+[ODI.AddReg.Params]
+; First Logical Board
+HKR,Ndi\params\Frame1,ParamDesc,,"1. Frame Type"
+HKR,Ndi\params\Frame1,default,,1
+HKR,Ndi\params\Frame1,type,,enum
+HKR,Ndi\params\Frame1,optional,,0
+HKR,Ndi\params\Frame1\enum,1,,"Ethernet_802.2"
+HKR,Ndi\params\Frame1\enum,2,,"Ethernet_SNAP"
+HKR,Ndi\params\Frame1\enum,3,,"Ethernet_II"
+HKR,Ndi\params\Frame1\enum,4,,"Ethernet_802.3"
+
+; Second Logical Board
+HKR,Ndi\params\Frame2,ParamDesc,,"2. Frame Type"
+HKR,Ndi\params\Frame2,default,,2
+HKR,Ndi\params\Frame2,type,,enum
+HKR,Ndi\params\Frame2,optional,,0
+HKR,Ndi\params\Frame2\enum,1,,"Ethernet_802.2"
+HKR,Ndi\params\Frame2\enum,2,,"Ethernet_SNAP"
+HKR,Ndi\params\Frame2\enum,3,,"Ethernet_II"
+HKR,Ndi\params\Frame2\enum,4,,"Ethernet_802.3"
+HKR,Ndi\params\Frame2\enum,5,,"Not used"
+
+; Third Logical Board
+HKR,Ndi\params\Frame3,ParamDesc,,"3. Frame Type"
+HKR,Ndi\params\Frame3,default,,3
+HKR,Ndi\params\Frame3,type,,enum
+HKR,Ndi\params\Frame3,optional,,0
+HKR,Ndi\params\Frame3\enum,1,,"Ethernet_802.2"
+HKR,Ndi\params\Frame3\enum,2,,"Ethernet_SNAP"
+HKR,Ndi\params\Frame3\enum,3,,"Ethernet_II"
+HKR,Ndi\params\Frame3\enum,4,,"Ethernet_802.3"
+HKR,Ndi\params\Frame3\enum,5,,"Not used"
+
+; Fourth Logical Board
+HKR,Ndi\params\Frame4,ParamDesc,,"4. Frame Type"
+HKR,Ndi\params\Frame4,default,,4
+HKR,Ndi\params\Frame4,type,,enum
+HKR,Ndi\params\Frame4,optional,,0
+HKR,Ndi\params\Frame4\enum,1,,"Ethernet_802.2"
+HKR,Ndi\params\Frame4\enum,2,,"Ethernet_SNAP"
+HKR,Ndi\params\Frame4\enum,3,,"Ethernet_II"
+HKR,Ndi\params\Frame4\enum,4,,"Ethernet_802.3"
+HKR,Ndi\params\Frame4\enum,5,,"Not used"
+
+; Node Address Override
+HKR,Ndi\params\"Node Address",ParamDesc,,"Node Address Override"
+HKR,Ndi\params\"Node Address",type,,edit
+HKR,Ndi\params\"Node Address",LimitText,,18
+HKR,Ndi\params\"Node Address",UpperCase,,1
+HKR,Ndi\params\"Node Address",default,,""
+HKR,Ndi\params\"Node Address",flag,1,20,00,00,00
+HKR,Ndi\params\"Node Address",optional,,1
+
+; Help section
+HKR,Ndi,HelpText,,%ODIMLID_HELP%
+
+;******************************************************************************
+; Copy file sections
+;------------------------------------------------------------------------------
+;--------------------------------------
+; Copy ODI 16
+;--------------------------------------
+[CBE.ODI16.CopyFiles]
+cbeodi.com,,,5
+lsl.com,,,5
+nesl.com,,,5
+
+;--------------------------------------
+; Copy ODI 32
+;--------------------------------------
+[CBE.ODI32.CopyFiles]
+cbe.lan,,,5
+
+;******************************************************************************
+; Source Disk Names & Source Disk Files
+;------------------------------------------------------------------------------
+[SourceDisksNames]
+1=%NETWORK_DISK%,"",0004
+1=%NETWORK_DISK%,"",0004
+
+[SourceDisksFiles]
+cbe.lan  = 1
+cbeodi.com  = 1
+
+;nesl.com       =42
+;nesl.com       =42
+;lsl.com        =42
+
+;******************************************************************************
+; Destination Directories
+;------------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir		= 11			; System directory
+CBE.ODI16.CopyFiles     = 24, novell\nwclient
+CBE.ODI32.CopyFiles     = 24, novell\client32
+
+;******************************************************************************
+; Localizable Strings
+;------------------------------------------------------------------------------
+[Strings]
+COMPANY_NAME = "Xircom"
+ADAPTER      = "Xircom CardBus Ethernet 10/100 for NetWare Client 32 V1.0"
+
+;--------------------------------------
+; Driver Paths
+;--------------------------------------
+DRIVER_16_PATH = "novell\nwclient\"
+DRIVER_32_PATH = "novell\client32\"
+
+;--------------------------------------
+; Driver Disk names
+;--------------------------------------
+NETWORK_DISK = "Xircom CardBus Ethernet 10/100 Network Drivers Disk"
+
+;--------------------------------------
+; Context help
+;--------------------------------------
+ODIMLID_HELP="Enables NetWare Client 32 or 16-bit ODI on the Xircom CardBus Ethernet 10/100 Adapter"
+
+;--------------------------------------
+; PNP Devices
+;--------------------------------------
+

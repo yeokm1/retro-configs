@@ -1,0 +1,20 @@
+ACORDO DE LICENçA DE SOFTWARE DO USUÁRIO FINAL 
+
+A Xircom outorga uma licença não exclusiva para o uso das cópias dos programas de software fornecidas com este produto nos seguintes termos:
+
+VOCÊ PODE:
+Usar o programa de software em qualquer computador ou rede, mas somente em conjunto com qualquer produto de hardware da Xircom;
+Permitir que qualquer pessoa use o programa de software diretamente ou em uma rede de computadores, mas somente se não houver mais de um usuário para cada produto de hardware da Xircom em uso concomitante com o programa de software.
+Fazer somente o número de cópias de arquivo e de backup do programa de software na forma legível por máquina, pois essas cópias são essenciais para efeitos de backup do programa de software, desde que todos os avisos sobre propriedade sejam reproduzidos em cada cópia. 
+
+ VOCÊ NÃO PODE:
+Modificar, traduzir, aplicar o processo de engenharia reversa, descompilar, desmontar, criar trabalhos derivados com base em ou copiar (exceto para fins de arquivo) o programa ou a documentação que o acompanha;
+Alugar, transferir, sublicenciar ou outorgar quaisquer direitos sobre o programa ou sobre a documentação que o acompanha (incluindo o acordo de tempo compartilhado) de forma alguma, para qualquer outra pessoa, sem o consentimento prévio, por escrito, da Xircom; 
+Remover quaisquer avisos, etiquetas ou marcas de propriedade do programa e da documentação que o acompanha.
+
+O não cumprimento de qualquer uma das restrições acima rescindirá esta licença. Esta operação não é uma venda. A titularidade e os direitos autorais do programa e da documentação que o acompanha, bem como qualquer cópia, permanecem com a Xircom, a não ser que a titularidade dos programas de software entregues pela Xircom por intermédio de um acordo com qualquer outro fabricante pertença e seja retida pelo fabricante original; e nenhuma titularidade à propriedade intelectual contida em tais programas seja transferida pelo presente documento. As instruções do programa de software que podem ser lidas pelas pessoas, porém não diretamente pelo computador (código de origem), incluindo o código de origem dos programas entregues pela Xircom por intermédio de um acordo com outro fabricante, não são sublicenciados pelo presente documento.
+
+DIREITOS RESTRITOS DO GOVERNO DOS E.U.A
+O SOFTWARE e a documentação são fornecidos com DIREITOS RESTRITOS. O uso, duplicação ou revelação pelo Governo estão sujeitos às restrições estipuladas no subparágrafo (c)(1)(ii) da cláusula dos Direitos sobre Dados Técnicos e Softwares de Computador em DFARS 252.227-7013, ou nos subparágrafos (c)(1) e (c)(2) dos Direitos Comerciais Restritos ao Comércio de Softwares para Computadores em 48 CFR52.227-19, conforme aplicável. O contratante/fabricante é a Xircom, Inc., 2300 Corporate Center Drive, Thousand Oaks, CA 91320-1420.
+Este Acordo é governado pelas leis do Estado da California.
+

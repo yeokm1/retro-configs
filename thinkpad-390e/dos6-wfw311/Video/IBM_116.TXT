@@ -1,0 +1,42 @@
+RELEASE NOTE FOR NM2200 WINDOWS 3.1x DRIVER VERSION 1.16
+--------------------------------------------------------
+
+RELEASE DATE:		01/15/99
+DRIVER VERSION:		1.16
+OPERATION SYSTEM:	WINDOWS 3.1x
+PRODUCT:		NM2200
+
+
+DRIVER RELEASE CHECK LIST:
+--------------------------
+
+-  Installation:		YES
+-  Regression Test:		01/19/99
+
+8 AND 16 BIT DISPLAY DRIVER - Version 4.18
+------------------------------------------
+Fixes:
+------
+-  #6612: - DOS window garbage and garbage on desktop.
+-  #5670: - Font corruption with long strings.
+-  #6612: - Black garbage on desktop with PCOM V4.2.1 or DOS Window.
+
+24 BIT DISPLAY DRIVER - Version 4.9
+-----------------------------------
+-  No change
+
+VDD - Version 4.14
+------------------
+-  No change
+
+DCI - Version 4.3  
+-----------------
+-  No change
+
+VPM - Version 4.0
+-----------------
+-  No change.
+
+
+
+-------------------------oooOOOooo-----------------------

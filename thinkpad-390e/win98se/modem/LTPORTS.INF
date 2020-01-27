@@ -1,0 +1,28 @@
+;----------------------------------------------------------------------------
+; INF file to add port in Win NT for Non Plug and Play Hardware 
+; - Mars Modem, BIOS PnP modem.
+;----------------------------------------------------------------------------
+[Version]
+LayoutFile=layout.inf
+Signature="$WINDOWS NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%Mfg%
+
+[Manufacturer]
+%Mfg% = LT
+
+[LT]
+%Port1% = LT_MODEM, LTPORT
+
+[LT_MODEM]
+LogConfig=LT_LOG_CONF
+
+[LT_LOG_CONF]
+ConfigPriority=NORMAL,FORCED
+IOConfig=2F8-2FF
+IRQConfig=3
+
+[Strings]
+Mfg = "Lucent"
+Port1 = "Controllerless Modem Port"

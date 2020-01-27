@@ -1,0 +1,7 @@
+
+
+Model = Xircom Pocket Ethernet Adapter III
+Path = Ethernet\XIRCOM
+DeviceDriver = @lanroot\Drivers\Ethernet\XIRCOM\PE3NDIS.OS2
+DeviceName = Xircom$
+Type = NDIS

@@ -1,0 +1,11 @@
+
+
+Model = Xircom Pocket Ethernet Adapter III
+DeviceDriver = Protman.dos /i:%lanroot%\drivers2\xiratt35
+	     = Attload.dos /y
+	     = Xiratt35\PE3NDIS.EXE
+	     = Attiso\Attiso.dos
+Lana = 0
+DeviceName = ATTISO$
+DeviceType = netbios
+Bd_attrib = 0
