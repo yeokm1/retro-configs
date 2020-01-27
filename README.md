@@ -1,7 +1,7 @@
 # retro-configs
 Collection of my DOS configurations and drivers of my retro machines. Decided to open source my configurations in case it might help you.
 
-I currently only have the configuration of my Thinkpad T42.
+I currently only have the configuration of my Thinkpad T42 and 390e but more coming up soon!
 
 Common drivers and software not specific to a particular system are located in the [common](common) folder.
 
