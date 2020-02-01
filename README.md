@@ -41,3 +41,4 @@ Boot menu options
 8.  [GRUBFORDOS](https://sourceforge.net/projects/grub4dos/files/GRUB4DOS/)
 9.  [svgaptch for VESA compliance](https://download.wcnews.com/files/other/wcpc/)
 10. [nusb33 Win 98 Universal USB drivers](https://www.philscomputerlab.com/windows-98-usb-storage-driver.html)
+11. [DOSIDLE 2.51](https://www.vogons.org/viewtopic.php?p=438763#p438763)
