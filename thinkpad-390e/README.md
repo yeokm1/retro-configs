@@ -22,6 +22,8 @@ These are the specifications specific to the Thinkpad I have:
 
 ### Accessories
 
+<img src="photos/390e-pe3.jpg">
+
 * Xircom PE3-10BT Parallel Port Ethernet
 * Xircom Realport2 10/100 Cardbus Ethernet
 
