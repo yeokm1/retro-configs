@@ -11,7 +11,7 @@ The machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 
 
 <img src="thinkpad-t42/photos/t42-full.jpg" width="500">
 
-In the BIOS
+In Win98SE
 
 <img src="thinkpad-t42/photos/t42-dos622-bootmenu.jpg" width="500">
 
