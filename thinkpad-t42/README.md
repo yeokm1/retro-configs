@@ -12,7 +12,7 @@ These are the specifications specific to the Thinkpad I have:
 
 * 1.7 Ghz Pentium M 735 CPU
 * ATI Mobility Radeon 7500 with 32MB
-* 1x1GB DDR PC2700 RAM
+* 1x512MB DDR PC2700 RAM
 * Intel AC'97 2.2 Audio with a SoundMax AD1981B codec
 * 14.1" TFT display with 1024x768 resolution (XGA)
 * 32GB Sandisk Compactflash card
@@ -22,6 +22,7 @@ These are the specifications specific to the Thinkpad I have:
 * Matsushita UJDA765 DVD/CD-RW Ultrabay Slim
 * 2x Type II Cardbus slots
 * Infrared Communication
+* Linksys WPC54Gv3 Cardbus 802.11g Wifi
 
 ## Boot Configuration
 
@@ -65,9 +66,6 @@ Starts Grub to enable rebooting into Windows 98
 * Boot Menu
 * No logo
 
-<img src="photos/t42-win98se.jpg" width="500">
-
-
 ### Grub rebooting into another OS
 
 DOS 6.22 and Win98SE only supports booting from the first primary partition which is assigned the drive letter `C`. They however have to be booted from separate partitions to avoid clashing configurations.
@@ -106,5 +104,6 @@ It is not necessary to hide partition when booting between DOS6.22 and Win 98SE.
 1. [Official T42 drivers](https://thinkpads.com/support/Thinkpad-Drivers/download.lenovo.com/lenovo/content/ddfm/T42.html)
 2. [DOS Ethernet drivers taken from T400 website](https://support.lenovo.com/mn/en/downloads/ds001865)
 3. [Win 3.1 AC97 drivers](http://turkeys4me.byethost4.com/programs/index.htm)
-4. Dualbooting DOS and Win95: [Just setting active](http://retropcbuilder.blogspot.com/2016/11/dual-booting-dos-and-windows-95-follow.html) and [Hiding partitions](http://retropcbuilder.blogspot.com/2016/11/dual-booting-ms-dos-622windows-31-and.html).
+4. [Linksys WPC54Gv3 drivers](https://www.wireless-driver.com/linksys-wpc54g-wireless-windows-me-2000-xp-drivers-utility/)
+5. Dualbooting DOS and Win95: [Just setting active](http://retropcbuilder.blogspot.com/2016/11/dual-booting-dos-and-windows-95-follow.html) and [Hiding partitions](http://retropcbuilder.blogspot.com/2016/11/dual-booting-ms-dos-622windows-31-and.html).
 
