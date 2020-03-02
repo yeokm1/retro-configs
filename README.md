@@ -52,3 +52,5 @@ The machine is configured for single-boot Windows 98SE with a bootup option to e
 9.  [svgaptch for VESA compliance](https://download.wcnews.com/files/other/wcpc/)
 10. [nusb33 Win 98 Universal USB drivers](https://www.philscomputerlab.com/windows-98-usb-storage-driver.html)
 11. [DOSIDLE 2.51](https://www.vogons.org/viewtopic.php?p=438763#p438763)
+12. [MS-DOS 6.22 install disks](https://winworldpc.com/product/ms-dos/622)
+13. [Windows for Workgroups 3.11 install disks](https://winworldpc.com/product/windows-3/wfw-311)
