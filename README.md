@@ -29,6 +29,16 @@ In the BIOS
 
 Boot menu options
 
+# 3. Tweener PC
+
+My "Tweener PC" is affectionately called that as it contains a healthy mix of new and old technologies. From ISA, floppy drives to modern Ethernet and USB.
+
+The machine is configured for single-boot Windows 98SE with a bootup option to enter pure DOS configuration only.
+
+<img src="tweener-pc/photos/tweener-disks.jpg" width="500">
+
+<img src="tweener-pc/photos/tweener-w98-desktop.jpg" width="500">
+
 ## Sources
 
 1.  [Toshiba generic CD driver CDROMDRV](https://www.legroom.net/howto/msdos)

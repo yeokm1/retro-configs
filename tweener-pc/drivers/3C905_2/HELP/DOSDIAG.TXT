@@ -1,0 +1,336 @@
+                         3Com (R) Corporation
+                    3C90x EtherLink PCI NIC Family
+          3Com NIC Configuration and Diagnostic Program for DOS
+
+
+Overview
+--------
+The configuration portion of the 3Com NIC Configuration and Diagnostics
+program for DOS allows you to change the configuration parameters 
+for the NIC to fit the specific environment in which the NIC is 
+installed.
+
+The diagnostics portion of the program is designed to make sure that 
+the NIC is installed correctly and functioning properly in the PC.
+It consists of the following tests:
+
+   The Group 1 tests check the physical components, connectors, and 
+   circuitry of the NIC and require only that the NIC be installed in 
+   the PC.
+
+   The Group 2 tests check the ability of the NIC to transmit data on the
+   network; these require that the NIC be connected to a loopback plug 
+   or to a network (for 3C900-COMBO or 3C900-TPC NICs).  
+
+   The Group 3 tests check the ability of the NIC to correctly transmit and 
+   receive data over the network; these require that the NIC be connected 
+   to a network on which an echo server has been set up.
+
+The PC that contains the NIC to be configured or tested must be running 
+DOS only (reboot with a DOS-only diskette) and must have at least 505KB 
+of free memory.
+
+NOTE:  If the PC is an operating server, notify all users of the
+       server to save their work and to log out from the network before
+       running the Configuration and Diagnostics program. The program 
+       disrupts the normal operation of servers and workstations, 
+       and work that is not saved may be lost.
+
+
+Starting the 3Com NIC Configuration and Diagnostics Program for DOS
+------------------------------------------------------------------
+
+There are two ways to start the program:
+
+1.  Automatically (from INSTALL.EXE) by selecting 
+    Configuration and Diagnostics Program on the main menu.
+
+2.  Manually, from the root directory of the EtherCD or EtherDisk diskette 2, 
+    by typing the following command:
+
+    3C90XCFG [command keyword] [parameter list]
+
+    3C90XCFG represents the 3Com NIC Configuration and Diagnostics program
+    name.
+    The brackets indicate that the command keyword and parameter list are
+    optional.
+
+    3C90XCFG without any arguments invokes the program in full Windows
+    mode. This includes mouse support and context-sensitive help.  
+    Press [F1] for help at any time.
+
+
+    Command Line Keywords
+    ---------------------
+    You can use the first two characters of any command or parameter as a 
+    shortcut. For example, 3C90XCFG HE RU means 3C90XCFG HELP RUN.
+
+    The command keywords and parameters are not case-sensitive (for
+    example, CONFIGURE, configure, and Configure, will all work).
+
+
+    CONFIGURE
+        Configures a NIC in one of three ways:
+        1.  Automatically with the /auto parameter
+        2.  Using a specified NIC configuration file
+        3.  Using command line configuration parameters
+
+    ECHOSERVER
+        Enables a designated NIC to function as an echo
+        server.
+
+    HELP 
+        Displays general or command-specific help information.  
+        To get command-specific help, type:
+
+        3C90XCFG HELP [command keyword]
+
+    LANGUAGE 
+        Invokes the program in full Windows mode using a 
+        specified external resource file. This option provides
+        support for multiple languages through a different resource
+        file for each language supported.
+       
+    LIST 
+        Displays a list of installed NICs and their recognized 
+        NIC numbers.
+       
+    RUN 
+        Executes the diagnostic tests (which can also be specified
+        from a file) on a selected NIC and writes the results 
+        to the screen, a file, or a printer.
+
+
+Configuration
+-------------
+The NIC can be configured in either full-screen Windows mode or 
+command line mode.
+
+
+    Full Screen Windows Mode
+    ------------------------
+    To configure the NIC using full-screen windowing, type:
+    
+    3C90XCFG [Enter] 
+    
+    Then select the Configure NIC option from the Install menu.
+
+
+    Command Line Mode
+    -----------------
+        Command Line Mode Defaults
+        --------------------------
+        Defaults: CONFIGURE has /AUTO and /ADAPTERNUM:1 as defaults.  
+        So, for example, if only 3C90XCFG CONFIGURE is used, NIC 
+        number 1 is automatically configured.
+
+        ADAPTERNUM:N and /SLOT:S parameters can be used with any of the 
+        CONFIGURE options that follow. They are both intended for use 
+        whenever multiple NICs are present in the PC and 
+        recognized by the Configuration and Diagnostics program.
+
+        /ADAPTERNUM:N specifies the number of the NIC to be configured for 
+        PCI computers. Run the LIST command separately to determine the 
+        NIC number to use here.
+
+    There are three different ways to configure the NIC using 
+    command-line mode: 
+    
+    1.  Command line with auto configuration
+
+    2.  Command line with explicit parameters
+
+    3.  Command line with configuration file
+     
+     
+        Command Line with Auto Configuration
+        ------------------------------------
+        Command syntax:  3C90XCFG CONFIGURE  /AUTO
+
+        The /AUTO parameter configures the NIC media type 
+        automatically. All other options settings are left unchanged.
+ 
+        NOTE:  The program attempts to detect what media type is being 
+               used. Therefore, connect to the network first and then run        
+               3C90CFG CONFIGURE /AUTO. The program configures the 
+               media type for you.
+
+
+        Command Line with Explicit Parameters
+        -------------------------------------
+        Command syntax:  3C90XCFG CONFIGURE  [ /BSTATE:N  /XCVR:N  /TR:N
+                         /FULLDUPLEX:N /OPTIMIZE:N  /LINKBEAT:N ]
+
+        Command line configuration parameters are used to configure the 
+        NIC using only the option settings you specify. Some 
+        parameters are for all NICs; some are for PCI only. For 
+        example, /BSTATE:N is a PCI-only parameter. In most cases, any 
+        combination of parameters can be used. Therefore, it is possible
+        to modify only a few settings if needed.
+
+        /BSTATE           
+            Boot PROM state  
+            Possible values - disabled, enabled
+
+        /TR (or /XCVR)
+            Transceiver  
+            Possible values - Auto, 100BASE-TX, 10BASE-T, COAX, AUI,
+                              100BASE-T4, 10BASE-FL, and 100BASE-FX
+
+        /OPTIMIZE 
+            Network Driver Optimization
+            Possible values - NORMAL, NETWORK, CPU
+
+        /LINKBEAT
+            Link Beat disable/enable (pre-10BASE-T standard only)
+            Possible values - disabled, enabled
+            
+            NOTE:  Try this setting ONLY if pre-10BASE-T standard hubs
+                   are in use.
+
+        /FULLDUPLEX
+            Full Duplex disable/enable 
+            Possible values - disabled, enabled
+
+            NOTE:  Enable this setting ONLY if the NIC is
+                   connected to a 100BASE-T or 10BASE-T repeater
+                   that supports full duplex. Otherwise, it will bring 
+                   down the network.
+
+
+        Command Line with Configuration File
+        ------------------------------------
+        Command syntax:  3C90XCFG CONFIGURE  /CONFIGFILE:filename
+
+        /CONFIGFILE:filename is used to configure a NIC with the
+        settings specified in an ASCII configuration file that can be 
+        created and modified by any text editor. The filename can be
+        a fully qualified DOS filename including a path. A standard
+        format for the file must be used, as follows:
+       
+        -   Variable names and values match the wording in the
+            full-screen Configure window in most cases.
+
+        -   Begin each variable/value line with an "at" symbol (@), 
+            followed by a variable name, a colon (:), and the value.
+
+            Example:  @Media type: 100BASE-TX
+
+        -   Blank lines and other white spaces are allowed between 
+            variable lines.
+
+        -   Start any comment lines with a semicolon (;).
+
+        -   The variable names allowed are:
+            Boot PROM state
+            Media type
+            Network driver optimization
+            Full duplex
+            Link beat
+
+        -   The values allowed are the same as those shown in the 
+            full-screen Configure window.
+        
+            Example 1:  @Network driver optimization:Normal
+            Example 2:  @Media type:On-board Coax
+
+
+Diagnostics
+-----------
+
+    Full-Screen Windows Mode
+    ------------------------
+    To run the diagnostic tests using full-screen windowing, type:
+    
+    3C90XCFG [ENTER] 
+    
+    Then select the Run Tests option from the Tests menu.
+
+    
+    Command Line Option - RUN
+    -------------------------
+
+    Command syntax:  3C90XCFG RUN  [/TESTFILE:filename] [/RESULTS:[filename
+                     | PRN | PRNHP]] [/ADAPTERNUM:N]
+
+    The RUN parameter executes the diagnostic tests on a selected NIC
+    and displays the results on the screen. The defaults are NIC
+    number 1 and Group 1 tests. The parameters below are all optional.
+
+    /TESTFILE:filename 
+         Specifies a test file that contains a specific test setup
+         description.
+
+    /RESULTS:[filename or PRN or PRNHP] 
+         Specifies an alternative location to store the test results.
+         This location can be a DOS path and filename, PRN printer port
+         (same as LPT1), or PRNHP, which is an HP LaserJet printer
+         connected to LPT1.
+
+    /ADAPTERNUM:N 
+         Specifies the NIC number to be tested, in the case of
+         multiple NICs installed in the PC and recognized by 
+         this program. Run the LIST command separately (see LIST below)
+         to determine the NIC number to use.
+
+
+Other Command Line Options
+--------------------------
+
+HELP
+    Command syntax:  3C90XCFG HELP  [Command Keyword]
+
+    HELP is an on-line summary of commands. Without a command keyword
+    specified, it gives a summary of the command keywords. With a command 
+    keyword specified, it gives the parameter choices for that particular 
+    command. For example, 3C90XCFG HELP CONFIGURE gives details about the 
+    parameter options for the CONFIGURE command.
+
+LANGUAGE
+    Command syntax:  3C90XCFG LANGUAGE  /LANGFILE:filename
+
+    LANGUAGE invokes the program in full Windows mode using a specified
+    external resource file. This option provides support for multiple
+    languages through a different resource file for each language supported.
+
+    /LANGFILE:filename is a required parameter with this command.
+    The filename is the name of the resource file that is loaded by the
+    program. The filename can be a fully qualified DOS filename.
+
+    NOTE: At this time, there are no alternative resource files included 
+          on the EtherCD or EtherDisk diskette.
+
+LIST
+    Command syntax:  3C90XCFG LIST
+
+    LIST displays a list of currently installed NICs (and their 
+    assigned NIC numbers) that are recognized by this program. The 
+    NIC number is then used as the N value for the /ADAPTERNUM:N 
+    parameter when multiple NICs are installed.  There are no 
+    parameters associated with the LIST command keyword.
+
+ECHOSERVER
+    Command syntax:  3C90XCFG ECHOSERVER  [/ADAPTERNUM:N]
+
+    ECHOSERVER enables a NIC to function within an echo server.
+    /ADAPTERNUM:N specifies the NIC to be configured in the 
+    echo server, in the case of multiple NICs. 
+
+
+Further Assistance
+------------------
+If the NIC fails any of the diagnostic tests, see the TROUBLE.TXT file
+in the \HELP directory on the EtherCD (or EtherDisk diskette 2) for 
+troubleshooting procedures.
+
+The SUPPORT.TXT file in the \HELP directory on the EtherCD (or EtherDisk 
+diskette 2) provides information about obtaining product support for 
+the NIC.
+
+
+3Com, EtherDisk, and EtherLink are registered trademarks of 3Com
+Corporation. All other trademarks are the property of their respective 
+owners.
+
+
+(%VER DOSDIAG.TXT - Configuration and Diagnostic Program Instructions v5.1.0)

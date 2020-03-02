@@ -1,0 +1,85 @@
+                        3Com (R) Corporation
+                   EtherDisk (R) Diskette for the
+                3C90x EtherLink 10/100 PCI NIC Family
+             Clarkson Packet Driver Installation Notes
+
+
+EtherLink 10/100 PCI Packet Driver
+-----------------------------------
+The EtherLink 10/100 PCI NIC is completely configured through software. 
+You can load the driver from the command line or in the AUTOEXEC.BAT file. 
+When the packet driver is loaded, the only required command line option is 
+the software interrupt value (/I).  The software interrupt is used to 
+communicate between the driver and the protocol and should not be confused 
+with the NIC's hardware interrupt.
+
+In version 1.10 of the Packet Driver Specification, valid software interrupt
+values are in the range 0x20 to 0x80.  
+
+In version 1.09, valid software interrupts are in the range 0x60 to 0x80.
+
+                                                                  
+ Loading the Driver from the AUTOEXEC.BAT File 
+ ---------------------------------------------
+ To load the driver from the AUTOEXEC.BAT file, copy the driver 
+ from the PKTDVR directory on EtherDisk 3 diskette to your hard drive.  
+ You must either place the driver in your path or use the full pathname in 
+ the AUTOEXEC.BAT file.  
+
+
+ Loading the Driver from the Command Line 
+ ----------------------------------------
+ To load the driver from the command line, use the following syntax:
+
+ 3C90XPD [switches] [options]
+
+     Switches 
+     --------
+     The driver supports the following switches:
+
+     -? = Show usage
+     -u = Uninstall driver
+     -n = Novell NetWare conversion
+     -d = Delay initialization (for diskless booting)
+     -t = Disable transmit Parallel Tasking (R) feature
+     -r = Disable receive Parallel Tasking feature
+     -m = Maximize PCI latency timer
+    
+     The -n switch is needed if the packet is in Ethernet encapsulated IPX 
+     format and it needs to be converted to 802.3 format. The default is 
+     802.3 format.
+
+     The -t switch disables the NIC's early transmit feature.  The default 
+     is enabled.
+     
+     The -r switch disables the NIC's early receive indications feature.  
+     The default is enabled.
+
+     Options
+     -------
+     The driver supports the following options:
+
+     /I = software interrupt (20h -FFh); default = 60h
+     /S = slot number (0 - 31 for PCI)
+     /K = bus number (0 - 7 for PCI)
+
+     You must specify the bus type if the bus number and the slot number 
+     are used. The bus number is used specifically for PCI.
+
+     Example
+     -------
+     The following example shows a typical command line.  If you want to 
+     load the driver at software interrupt 60h with receive Parallel Tasking
+     feature disabled, a PCI bus type, slot number = 1, and PCI bus 
+     number = 0, the command line should look like this:
+
+     3C90XPD  -r  /S=1  /K=0  /I=60
+
+     For a complete summary of usage guidelines, type at the command line:
+
+     3C90XPD -?
+                                                                  
+            
+              (%VER PACKET.TXT - Packet Driver Text File v1.0.1)
+
+

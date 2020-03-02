@@ -1,0 +1,354 @@
+	3Com (R) Corporation
+3C90x 10 Mbps and 10/100 Mbps PCI NIC Family
+     Windows NT Installation Information
+
+-----------------------------------------------------------------
+        
+This file describes how to use EtherCD 5.4 
+to do the following tasks on a PC running 
+Windows NT 4.0
+
+   --Install a 3Com PCI NIC using installation 
+      diskettes (which can be created from 
+      the EtherCD or downloaded from the 
+      3Com World Wide Web site).
+
+   --Remove the network driver and NIC 
+     software.
+
+   --Troubleshoot installation problems.
+
+    
+Installing a NIC Using Installation Diskettes
+-----------------------------------------------------------------
+Installation diskettes can be created from the
+EtherCD (see the user guide, "Installing from 
+Diskette") or downloaded from the 3Com 
+World Wide Web site at:
+
+http://www.3com.com
+
+When you use installation diskettes, you install
+the driver only.  If you want to install any other 
+3Com NIC software, you must use the 
+EtherCD.
+
+To install a 3Com NIC in a PC running 
+Windows NT 4.0 using installation diskettes:
+ 
+1.  Install the NIC in the PC, as described in the 
+     user guide.
+     You do not have to run the EtherCD 
+     preinstallation program.
+
+2.  Start Windows NT.
+
+3.  Double-click the My Computer icon, then 
+     the Control Panel icon, and then the 
+     Network icon.
+     The Network window appears.
+
+4.  Click the Adapters tab.
+
+       Note:  If networking has not been installed 
+       on your PC before, Windows NT asks you 
+       if you want to install networking.  Click Yes. 
+       See the Windows NT documentation for 
+       instructions. 
+           
+       If you have previously installed a 
+       Windows NT service pack, you need to 
+       reinstall the service pack after the network 
+       installation is complete to ensure that the 
+       Windows NT network components are 
+       updated to the level of the service pack.
+
+5.  Click Add.  The Select Network Adapter 
+     dialog box appears.
+
+6.  Click Have Disk.  The Insert Disk 
+      dialog box appears.  
+
+7.  Insert EtherDisk diskette 1 in drive A, 
+     and then click OK.  
+ 
+     The OEM Option dialog box appears. 
+
+8.  Make sure that the 3Com NIC is 
+     highlighted, then click OK.
+
+     The hour glass appears for a few 
+     seconds, and then the Adapters tab 
+     of the Network screen reappears. 
+     The name of the installed NIC appears 
+     in the list of network adapters.
+
+9. Click Close.
+    
+    If the Microsoft TCP/IP Properties 
+    screen appears, enter the requested 
+    information for your network environment. 
+    Refer to your system administrator or 
+    the Windows NT documentation for
+    assistance.
+   
+    If the Microsoft TCP/IP Properties screen 
+    does not appear, the installation is complete.
+
+10. Remove the EtherDisk from the floppy 
+      drive, and then shut down and restart 
+      the PC.
+      
+
+Updating the Network Driver and NIC Software
+-----------------------------------------------------------------
+If you are using a version of EtherDisk software
+that is older than the software on this EtherCD, 
+follow the instructions below to properly 
+update the driver and the Windows-based 
+3Com NIC Diagnostics program.
+
+   To update EtherDisk software in a PC running 
+   Windows NT 4.0:
+
+   The EtherCD installation and update 
+   technology is significantly different then what 
+   was available on previous EtherDisks.  For this
+   reason, do not use the Update button on the 
+   Adapter tab of the Network control panel.  
+   Use one of the two methods below to update 
+   the software.
+
+   Preferred method:
+
+   1.  Insert the EtherCD into the CD-ROM drive 
+        after Windows NT starts.  This EtherCD 
+        Welcome screen appears.
+
+   2.  Click NIC Software, NIC Drivers and Diagnostics, 
+         and then Update NIC driver.
+
+   3.  Click Update Drivers and Diagnostic Program
+        to update the network driver and NIC diagnostic 
+        program, or click Update Drivers and remove
+        Diagnostic Program to update the driver only.  
+
+       The upgrade begins
+
+   4.  The update utility asks 'Do you have to install 
+        NIC drivers for any EtherLink PCI NICs'? 
+        Click No.  
+        The update utility posts a message box 
+        that the update has successfully completed.  
+        Click OK.
+
+   5.  Click Exit on the EtherCD, and then restart 
+         the computer.
+
+   Alternate method:
+
+       Do not use the Update button on the Adapter 
+       tab of the Network control panel to update the 
+       driver and NIC software.  
+         
+   1.  Double-click the My Computer icon, then 
+        the Control Panel icon, and then the Network 
+        icon.  The Network window appears.
+
+   2.  Click the Adapters tab.  
+
+   3.  Highlight the 3Com EtherLink NIC, and then 
+        click the Remove button.  A warning message
+        will appear.  Click the Yes button.
+
+   4.  The NIC will disappear from the Adapter 
+         window.  Click the Close button.  The bindings 
+         review window will appear for a few seconds, 
+         followed by the Network Settings Change 
+         window requesting a reboot.  Click the Yes 
+         button.
+
+   5.  After the computer reboots, continue at the 
+        Windows NT 4.0 First Time Install procedure 
+        above.
+
+     
+                                                
+Removing the Network Driver and NIC Software
+-----------------------------------------------------------------
+
+   Preferred Method:
+
+   The procedure listed below is appropriate to 
+   remove either the Windows diagnostic program 
+   or to remove all software for a single 3Com NIC. 
+   If you have more than one 3Com NIC installed
+   and only want to remove one NIC, then use the 
+   Alternate Method below.
+
+   1.  After the system is booted and you have logged 
+        into Windows NT, insert the EtherCD.  
+ 
+   2.  Click NIC software, NIC Drivers and Diagnostics, 
+         and then Installation Utilities.
+
+   3.  At this point, you have the option to just remove 
+        the NIC Windows Diagnostic or to remove 
+        all the NIC support software.  Click Remove 
+        Diagnostic to just remove the windows diagnostic 
+        program.  Click Clean Up Failed installation 
+        to remove both the drivers and Windows diagnostic 
+        program.
+
+   4.  The next screen explains briefly what is going 
+         to happen.  Click Proceed.
+
+   5.  If you chose 'Clean up failed installation", you 
+        will see the bindings process for a few seconds, 
+        followed by an Update utility message.  Click OK.  
+        Another Update message appears. Click OK.
+
+   6.  Exit the EtherCD.  
+
+   7.  Reboot the computer to make the configuration 
+        changes take effect.
+
+   
+   Alternate Method:
+
+   To remove the NIC driver and software from a PC 
+   running Windows NT 4.0:
+ 
+   1.  Double-click the My Computer icon, then the 
+        Control Panel icon, and then the Network icon.
+       The Network window appears.
+
+   2.  Click the Adapters tab.  
+
+   3.  Highlight the name of the NIC in the 
+        Network Adapters box, and then click the 
+        Remove button.
+
+   4.  Click Yes to confirm the removal.
+
+   5.  Click Close to close the Network window.
+       You are prompted to restart the PC.
+
+       If you are physically removing the NIC from the PC, 
+       click No.  Do not restart the PC until you shut 
+       down the PC, turned the power off, and removed
+       the NIC from the PC.
+
+       If you are reinstalling the NIC software, click Yes 
+       to restart the PC.
+
+   
+
+Troubleshooting 
+-----------------------------------------------------------------
+If  a message appears, stating that Windows NT 
+networking is not installed, either it has not been 
+installed or a problem has occurred in changing 
+the network settings.  If you have never installed 
+networking on this system, proceed to the next 
+section, "Installing Windows NT Networking for 
+the First Time." Otherwise, follow the steps 
+below to reinstall Windows NT networking.
+
+    Reinstalling Windows NT Networking
+    ---------------------------------------------------
+    NOTE:  This procedure requires Windows NT 
+    installation media.
+
+    WARNING:  You will lose all network settings 
+    when you perform this procedure.
+    
+    1.  Click No when asked if you wish to 
+          install networking.
+    
+    2.  In the Network Settings window, select 
+         each installed component one after the 
+         other, and click Remove after each one 
+         to uninstall all NICs and software listed 
+         in the window.
+    
+    3.  Click OK after you have been removed 
+          all items.
+    
+    4.  Reboot the PC when prompted.
+    
+    5.  When Windows NT restarts, go to the 
+         Network Control Panel.  You are asked 
+         again if you want to install networking.
+    
+    6.  In the Network Settings box, click Yes 
+         to begin installing Windows NT networking.
+    
+    7.  Enter the location of the Windows NT 
+         installation media.  For example, if your 
+         CD-ROM drive is E:, type:
+    
+        E:\i386
+    
+    8.  In the NIC Card Detection window, 
+         click Do Not Detect.  
+    
+    9.  In the Add Network NIC window, press and 
+         hold the down arrow key until the option 
+         <Other> Requires Disk from Manufacturer 
+         appears.
+    
+    10. Insert the EtherCD in the CD ROM drive 
+          or EtherDisk 1 diskette into drive A: and 
+          press enter.
+    
+    11. In the Select OEM Option box, select the 
+          3Com EtherLink NIC that you are installing.
+    
+    12. Click OK.
+    
+    13. Select the network protocols you will be 
+           using on the network, and then click Continue.
+    
+        Consult your system administrator to find 
+        out which protocols to select.
+    
+    14. Click OK in the Network Settings window 
+           to accept the choices you have made.
+     
+    15. Provide additional information, as required, 
+           during the network installation process.
+    
+        Your computer can automatically detect the 
+        frame type if needed, but you must obtain 
+        IP address and gateway information from your
+        system administrator.
+        
+    16. Enter the workgroup name or the domain name 
+           in the Domain/Workgroup Settings window and 
+           click OK.
+    
+    17. When prompted, restart the PC to finish the 
+           installation.
+
+    18. If you have installed an NT service pack, you 
+           will need to reinstall the service pack to make sure
+           the Microsoft network components are upgraded 
+           to the level of the service pack.
+    
+    
+Installing Windows NT Networking for the 
+First Time
+-----------------------------------------------------------------
+If you have never installed networking on this 
+PC, begin at step 5 in "Reinstalling Windows NT 
+Networking."
+    
+
+-----------------------------------------------------------------
+
+3Com and EtherDisk are registered trademarks
+of 3Com Corporation.
+
+   (%VER WINNT.TXT - Installing the NDIS 3.0 
+                 Driver for Windows NT V5.4.1)

@@ -1,0 +1,29 @@
+;; 3Com Windows for Workgroups 3.11 Inf file for 3Com EtherLink PCI NICs (3C90X)
+;; OEMSETUP.INF
+;; Copyright (c) 3Com Corporation, 1991-1998
+;;
+;; %VER v5.1.0
+;;
+
+[data]
+type=network
+version="3.11.050"
+
+[disks]
+	1 = \wfw311 ,"3Com EtherCD for 3Com EtherLink PCI NICs", el90x.38_	
+
+[netcard]
+;   key = description, MSID, type, media, mode, install, protini, style
+tcm$el90x="3Com EtherLink PCI NICs (3C90X)",0,ndis,ethernet,0x07,tcm$el90x,tcm$el90x_nif
+
+;
+; 3Com Fast EtherLink XL / Etherlink XL Adapter.
+;
+[tcm$el90x]
+ndis3=1:el90x.386
+ndis2=1:el90x.dos
+mlid=1:3c90x.com
+
+[tcm$el90x_nif]
+param       =DriverName,"",static,"el90x$"
+slot        =SLOT,"Adapter Slot Number",int,"1,64,1",1,0x32

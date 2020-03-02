@@ -1,0 +1,109 @@
+`IMPORTANT:  READ BEFORE INSTALLING THE SOFTWARE
+
+3COM END USER SOFTWARE LICENSE AGREEMENT
+
+YOU SHOULD CAREFULLY READ THE FOLLOWING TERMS AND CONDITIONS BEFORE 
+DOWNLOADING, INSTALLING AND USING THIS PRODUCT, THE USE OF WHICH IS LICENSED 
+BY 3COM CORPORATION ("3COM") TO ITS CUSTOMERS FOR THEIR USE ONLY AS SET FORTH 
+BELOW. DOWNLOADING, INSTALLING OR OTHERWISE USING ANY PART OF THE SOFTWARE 
+OR DOCUMENTATION INDICATES THAT YOU ACCEPT THESE TERMS AND CONDITIONS.  IF 
+YOU DO NOT AGREE TO THE TERMS AND CONDITIONS OF THIS AGREEMENT, DO NOT 
+DOWNLOAD, INSTALL OR OTHERWISE USE THE SOFTWARE OR DOCUMENTATION, DO NOT 
+CLICK ON THE "I AGREE" OR SIMILAR BUTTON. AND IF YOU HAVE RECEIVED THE 
+SOFTWARE AND DOCUMENTATION ON PHYSICAL MEDIA, RETURN THE ENTIRE PRODUCT 
+WITH THE SOFTWARE AND DOCUMENTATION UNUSED TO THE SUPPLIER WHERE YOU 
+OBTAINED IT.
+
+LICENSE:  3Com grants you a nonexclusive, nontransferable (except as specified herein) license to use the 
+accompanying software program(s) in executable form (the "Software") and accompanying documentation (the 
+"Documentation"), subject to the terms and restrictions set forth in this Agreement. You are not permitted to lease, 
+rent, distribute or sublicense (except as specified herein) the Software or Documentation or to use the Software or 
+Documentation in a time-sharing arrangement or in any other unauthorized manner.  Further, no license is granted to 
+you in the human readable code of the Software (source code).  Except as provided below, this Agreement does not 
+grant you any rights to patents, copyrights, trade secrets, trademarks, or any other rights with respect to the Software 
+or Documentation.
+
+Subject to the restrictions set forth herein, the Software is licensed to be used by one (1) user on any personal 
+computer owned by or leased to you, for your internal use.  You may reproduce one (1) copy of the Software and 
+Documentation for backup or archive purposes.  Any such copy of the Software and Documentation must contain 
+3Com’s and its licensors’ proprietary rights and copyright notices in the same form as on the original.  You agree 
+not to remove or deface any portion of any legend provided on any licensed program or documentation delivered to 
+you under this Agreement. 
+
+ASSIGNMENT; NO REVERSE ENGINEERING:  You may transfer the Software, Documentation and the 
+licenses granted herein to another party in the same country in which you obtained the Software and Documentation 
+if the other party agrees in writing to accept and be bound by the terms and conditions of this Agreement. If you 
+transfer the Software and Documentation, you must at the same time either transfer all copies of the Software and 
+Documentation to the party or you must destroy any copies not transferred. Except as set forth above, you may not 
+assign or transfer your rights under this Agreement.
+
+Modification, reverse engineering, reverse compiling, or disassembly of the Software is expressly prohibited. 
+However, if you are a European Union ("EU") resident, information necessary to achieve interoperability of the 
+Software with other programs within the meaning of the EU Directive on the Legal Protection of Computer 
+Programs is available to you from 3Com upon written request.
+
+EXPORT RESTRICTIONS:  The Software, including the Documentation and all related technical data (and any 
+copies thereof) (collectively "Technical Data"), is subject to United States Export control laws and may be subject to 
+export or import regulations in other countries.  In addition, the Technical Data covered by this Agreement may 
+contain data encryption code which is unlawful to export or transfer from the United States or country where 
+you legally obtained it without an approved U.S. Department of Commerce export license and appropriate 
+foreign export or import license, as required.  You agree that you will not export or re-export the Technical Data 
+(or any copies thereof) or any products utilizing the Technical Data in violation of any applicable laws or regulations 
+of the United States or the country where you legally obtained it. You are responsible for obtaining any licenses to 
+export, re-export or import the Technical Data.  In addition to the above, the Product may not be used, exported or 
+re-exported (i) into or to a national or resident of any country to which the U.S. has embargoed; or (ii) to any one on 
+the U.S. Commerce Department’s Table of Denial Orders or the U.S. Treasury Department’s list of Specially 
+Designated Nationals.
+
+TRADE SECRETS; TITLE:  You acknowledge and agree that the structure, sequence and organization of the 
+Software are the valuable trade secrets of 3Com and its suppliers. You agree to hold such trade secrets in 
+confidence. You further acknowledge and agree that ownership of, and title to, the Software and Documentation and 
+all subsequent copies thereof regardless of the form or media are held by 3Com and its suppliers.
+
+UNITED STATES GOVERNMENT LEGENDS:  The Software, Documentation and any other technical data 
+provided hereunder is commercial in nature and developed solely at private expense.  The Software is delivered as 
+"Commercial Computer Software" as defined in DFARS 252.227-7014 (June 1995) or as a commercial item as 
+defined in FAR 2.101(a) and as such is provided with only such rights as are provided in this Agreement, which is 
+3Com’s standard commercial license for the Software.  Technical data is provided with limited rights only as 
+provided in DFAR 252.227-7015 (Nov. 1995) or FAR 52.227-14 (June 1987), whichever is applicable.
+
+TERM AND TERMINATION:  The licenses granted hereunder are perpetual unless terminated earlier as 
+specified below. You may terminate the licenses and this Agreement at any time by destroying the Software and 
+Documentation together with all copies and merged portions in any form. The licenses and this Agreement will also 
+terminate immediately if you fail to comply with any term or condition of this Agreement. Upon such termination 
+you agree to destroy the Software and Documentation, together with all copies and merged portions in any form.
+
+LIMITED WARRANTIES AND LIMITATION OF LIABILITY: All warranties and limitations of liability 
+applicable to the Software are as stated on the Limited Warranty Card or in the product documentation, whether in 
+paper or electronic form, accompanying the Software.   Such warranties and limitations of liability are incorporated 
+herein in their entirety by this reference. 
+
+GOVERNING LAW:   This Agreement shall be governed by the laws of the State of California, U.S.A. excluding 
+its conflicts of laws principles and excluding the United Nations Convention on Contracts for the International Sale 
+of Goods.
+
+SEVERABILITY:  In the event any provision of this Agreement is found to be invalid, illegal or unenforceable, the 
+validity, legality and enforceability of any of the remaining provisions shall not in any way be affected or impaired 
+and a valid, legal and enforceable provision of similar intent and economic impact shall be substituted therefor.
+
+ENTIRE AGREEMENT:  This Agreement sets forth the entire understanding and agreement between you and 
+3Com and supersedes all prior agreements, whether written or oral, with respect to the Software and Documentation, 
+and may be amended only in a writing signed by both parties.
+
+Should you have any questions concerning this Agreement or if you desire to contact 3Com for any reason, please 
+contact the 3Com subsidiary serving your country, or write: 3Com Corporation, Customer Support Information, 
+5400 Bayfront Plaza, Santa Clara, CA  95052
+
+3Com Corporation
+5400 Bayfront Plaza, 
+P.O. Box 58145
+Santa Clara, CA 95052-8145    
+(408) 326-5000
+
+Copyright © 2002 3Com Corporation.  
+All rights reserved.  
+3Com is a registered trademark of 3Com Corporation. 
+
+
+
+End (EULA) Template Single Use 070301.doc

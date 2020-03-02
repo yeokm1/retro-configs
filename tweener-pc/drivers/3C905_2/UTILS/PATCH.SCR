@@ -1,0 +1,21 @@
+:* %VERv3 patch.scr v1.0b
+
+:* ***************************************************************************
+:* Look in the CONFIG.SYS file for EMM386
+:* 
+moveto start
+:loopemm386
+find "device[ 	]*=[ 	]*{([a-z]:)?\\?([a-z0-9_.]+\\)*}emm386"
+if error endemm386
+set target @1@
+if match "^rem" nextemm386
+goto foundemm386
+:nextemm386
+moveto next
+goto loopemm386
+:foundemm386
+write targ386.dat "@target@"
+abort 0
+:endemm386
+abort 200
+

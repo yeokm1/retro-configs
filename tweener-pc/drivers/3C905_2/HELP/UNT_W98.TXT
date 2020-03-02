@@ -1,0 +1,384 @@
+                               3Com (R) Corporation
+                          3C90x EtherLink PCI NIC Family
+                    Windows 98 Automated Network Installations
+
+
+
+This document describes the procedures for performing an automated 
+installation of Windows 98 over the network using a 3Com EtherLink PCI
+(3C90x) NIC.  The procedures use the 3Com EtherCD version 5.1 or later
+software.  (The EtherCD 5.1 software is also available on installation
+diskettes.)
+
+
+Requirements
+============
+1) Server with enough hard drive space for the Windows 98 source files and 
+   any extra drivers that may be required for the installation.
+
+2) DOS client PC that can access the server.  (These instructions assume that 
+   you are installing Windows 98 onto a clean DOS system.  With slight 
+   modifications, these directions can be applied to several environments).
+
+3) Windows 98 source files.
+
+4) Windows 98 Answer File.  (This file is created with the BATCH 98 utility.  
+   The Answer File varies according to your environment.  This document only 
+   covers the portion involving the software from this EtherCD or EtherDisk 
+   diskettes).
+
+5) This EtherCD or EtherDisk diskettes for the 3Com EtherLink PCI (3C90X)
+   NIC family.
+
+
+Procedures for Unattended Installations of Windows 98
+======================================================
+The drivers for the 3C90x NICs are not native to Windows 98 and require steps
+to integrate them into the installation source files.  This is done with a 
+utility called INFINST.EXE, and it is documented in the section "Running the
+INFINST.EXE Utility" later in this document.  The INFINST.EXE utility only runs 
+on PCs with Windows 98 or Windows NT 4.0 or later.  It does NOT run on PCs with 
+Windows 95.
+
+After running the INFINST.EXE utility, you must create a file that automates 
+the installation process.  This file is called the Answer File (often named 
+MSBATCH.INF).  The complete version of Windows 98 contains the utility (Batch 98) 
+needed to create the Answer File.  The Batch 98 utility only runs on PCs with 
+Windows 98 or Windows NT 4.0 or later.  It does NOT run on PCs with Windows 95.
+
+After the Answer File is created, you begin the installation process.  The 
+installation process is started by executing the SETUP.EXE program for 
+Windows 98, which is contained in the source location of the Windows 98 files 
+and can be accessed across the network.  (The installation process assumes that 
+the installation is being done on a clean DOS system.)
+
+Preparing the Server
+-------------------
+To prepare the server for automated installations, over the network, of 
+Windows 98:
+
+1) Make sure that the server is operational.
+
+2) Copy the Windows 98 source files to a shared directory on the server.
+
+3) Make sure that you have write access to the server.
+
+4) Create a user account on the server, if necessary.
+
+5) For NetWare networks, make sure that you have a Windows 98 or 
+   Windows NT 4.0 or later PC that can access the shared location of the 
+   Windows 98 source files.  (For Windows NT 4.0 or later, these steps 
+   can be done at the file server, the only difference is the drive 
+   mappings.)
+
+Running the INFINST.EXE Utility
+-------------------------------
+The INFINST.EXE utility is used to integrate OEM drivers into the Windows 98 
+source files.  This utility must be run for the installation to be successful.  
+The INFINST.EXE utility can be found in the TOOLS\RESKIT\INFINST directory 
+on the Windows 98 source media.  
+
+To install the software from the EtherCD or EtherDisk, the INFINST.EXE 
+utility must be executed against two INF files: W9XEL90X.INF and W9X90XBC.INF.  
+
+The W9XEL90X.INF file applies to the 3C90x family of NICs:
+  3C905-TX
+  3C905-T4
+  3C900-TPO
+  3C900-COMBO
+
+The W9X90XBC.INF file applies to the 3C90xC and 3C90xB families of NICs:
+  3C905C-TX
+  3C905B-TX
+  3C905B-FX
+  3C905B-COMBO
+  3C900B-TPO
+  3C900B-TPC
+  3C900B-FL
+  3C900B-COMBO
+
+1) Start the INFINST.EXE utility.
+
+2) Execute the INF installer against W9X90XBC.INF on the root of EtherCD or 
+   EtherDisk 1.
+
+   A warning message appears, stating that the W9XEL90X.INF file has been 
+   copied, but may need to be run with the INFINST utility.  Click OK to this
+   message.
+
+3) Click OK.
+
+4) After the installation of W9X90XBC.INF is complete, run the INFINST utility 
+   against W9XEL90X.INF.   
+
+   A warning message appears, stating that Windows 98 setup already contains 
+   an INF file called W9XEl90X.INF.  
+
+5) Click Yes.
+
+   A warning message appears, stating that the MSBATCH.INF must be updated 
+   to include any additional clients.  (This is done in the next section, 
+   "Creating the Answer File.")
+
+6) Click OK.
+
+Creating the Answer File
+------------------------
+The Answer File contains all the information needed to automate the 
+installation.  This file is created with the Batch 98 utility that comes 
+with the Windows 98 source installation media (located in the 
+TOOLS\RESKIT\BATCH directory).  
+
+The Batch 98 utility has a SETUP program.  It can only be installed on PCs 
+with Windows 98 or Windows NT 4.0 or later.  This document provides 
+information on installing the EtherDisk 4.x or later driver set using the 
+Batch 98 utility only. For more information on the Batch 98 utility, refer to 
+the Windows 98 resource kit.  
+
+An example Answer File is included at the end of this document and can be 
+used as a reference.  However, this file varies depending on your requirements.
+
+The Answer File is normally saved as MSBATCH.INF, and it is referred to as such 
+in these instructions.   
+
+The following steps describe the portion necessary to automate the 
+installation of software from the EtherDisk diskettes version 4.x or later:
+
+1) Install the Batch 98 utility from the Windows 98 source media.  
+   (The Batch 98 SETUP program can be found in the TOOLS\RESKIT\BATCH 
+   directory.)
+
+2) Run the Batch 98 utility.  
+
+3) Make the appropriate selections for protocols, clients, services, and so on.
+   To install the software from the EtherDisk diskettes, an additional setting 
+   must be made under the Additional Clients tab in the Network Options portion 
+   of the Batch 98 utility.  Enter TCAATDI in the Other Clients field.  If multiple 
+   items are specified in Other Clients, they are separated by a comma.
+
+4) After making the necessary settings, save the file.  (By default, the file 
+   is saved as MSBATCH.INF.)
+
+5) After saving the settings, make the following changes to the [network] 
+   section of the Answer File (MSBATCH.INF):
+
+   [network]
+   .
+   .
+   .
+   IgnoreDetectedNetCards=1
+   NetCards="PCI\VEN_10b7&DEV_9055"   ; 3C905B-TX
+
+   The above example is for the 3C905B-TX NIC. For other 3C90x NICs, enter 
+   the correct PCI device ID, as described below:
+
+       NetCards="PCI\VEN_10b7&DEV_9050"   ; 3C905-TX
+       NetCards="PCI\VEN_10b7&DEV_9058"   ; 3C905B-Combo
+       NetCards="PCI\VEN_10b7&DEV_905A"   ; 3C905B-FX
+       NetCards="PCI\VEN_10b7&DEV_9051"   ; 3C905-T4
+       NetCards="PCI\VEN_10b7&DEV_9004"   ; 3C900B-TPO
+       NetCards="PCI\VEN_10b7&DEV_9005"   ; 3C900B-Combo
+       NetCards="PCI\VEN_10b7&DEV_9006"   ; 3C900B-TPC
+       NetCards="PCI\VEN_10b7&DEV_900A"   ; 3C900B-FL
+       NetCards="PCI\VEN_10b7&DEV_9000"   ; 3C900-TPO
+       NetCards="PCI\VEN_10b7&DEV_9001"   ; 3C900-Combo
+
+Initiating the Installation
+---------------------------
+To start the installation, a network connection is required to the shared 
+directory of the Windows 98 source files on the server.
+
+When initiating the SETUP, you must specify the location of the Answer File.  
+For example:
+
+    J:>setup j:\msbatch.inf
+
+
+Example Answer File (MSBATCH.INF)
+=================================
+; MSBATCH.INF
+;
+
+[BatchSetup]
+Version=3.0 (32-bit)
+SaveDate=09/20/98
+
+[Version]
+Signature = "$CHICAGO$"
+LayoutFile=layout.inf
+
+[Setup]
+Express=1
+InstallDir="c:\windows"
+InstallType=3
+ProductKey="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
+EBD=0
+ShowEula=0
+ChangeDir=0
+OptionalComponents=1
+Network=1
+System=0
+CCP=0
+CleanBoot=0
+Display=0
+DevicePath=0
+NoDirWarn=1
+TimeZone="Pacific"
+Uninstall=0
+NoPrompt2Boot=1
+
+[System]
+Locale=L0409
+SelectedKeyboard=KEYBOARD_00000409
+
+[NameAndOrg]
+Name="YOUR NAME"
+Org="YOUR COMPANY"
+Display=0
+
+[Network]
+ComputerName="AZTEC"
+Workgroup="WORKGROUP"
+Description="UNATTEND 98"
+Display=0
+PrimaryLogon=VREDIR
+Clients=VREDIR, NWREDIR
+Protocols=NETBEUI, NWLINK, MSTCP, TCAATDI
+DefaultProtocol=NetBEUI
+Services=VSERVER
+Security=SHARE
+IgnoreDetectedNetCards=1
+NetCards="PCI\VEN_10b7&DEV_9055"   ; 3C905B-TX
+
+[NWLINK]
+Frame_Type=4
+
+[MSTCP]
+LMHOSTS=0
+DHCP=1
+DNS=0
+WINS=D
+
+[NWREDIR]
+FirstNetDrive=H:
+ProcessLoginScript=1
+
+[VREDIR]
+LogonDomain="WORKGROUP"
+ValidatedLogon=0
+
+[VSERVER]
+LMAnnounce=0
+MaintainServerList=2
+
+[OptionalComponents]
+"Accessibility Options"=1
+"Accessibility Tools"=0
+"Briefcase"=0
+"Calculator"=1
+"Desktop Wallpaper"=0
+"Document Templates"=1
+"Games"=1
+"Imaging"=1
+"Mouse Pointers"=0
+"Paint"=1
+"Quick View"=0
+"Windows Scripting Host"=1
+"WordPad"=1
+"Dial-Up Networking"=0
+"Dial-Up Server"=0
+"Direct Cable Connection"=0
+"HyperTerminal"=0
+"Microsoft Chat 2.1"=0
+"Microsoft NetMeeting"=1
+"Phone Dialer"=1
+"Virtual Private Networking"=0
+"Baseball"=0
+"Dangerous Creatures"=0
+"Inside your Computer"=0
+"Jungle"=0
+"Leonardo da Vinci"=0
+"More Windows"=0
+"Mystery"=0
+"Nature"=0
+"Science"=0
+"Space"=0
+"Sports"=0
+"The 60's USA"=0
+"The Golden Era"=0
+"Travel"=0
+"Underwater"=0
+"Windows 98"=0
+"Desktop Themes Support"=0
+"Microsoft FrontPage Express"=1
+"Microsoft VRML 2.0 Viewer"=0
+"Microsoft Wallet"=0
+"Personal Web Server"=1
+"Real Audio Player 4.0"=0
+"Web Publishing Wizard"=0
+"Web-Based Enterprise Mgmt"=0
+"Microsoft Outlook Express"=1
+"Baltic"=0
+"Central European"=0
+"Cyrillic"=0
+"Greek"=0
+"Turkish"=0
+"Audio Compression"=1
+"CD Player"=1
+"Macromedia Shockwave Director"=1
+"Macromedia Shockwave Flash"=1
+"Media Player"=1
+"Microsoft NetShow Player 2.0"=0
+"Multimedia Sound Schemes"=0
+"Sample Sounds"=0
+"Sound Recorder"=1
+"Video Compression"=1
+"Volume Control"=1
+"America Online"=1
+"AT&T WorldNet Service"=1
+"CompuServe"=1
+"Prodigy Internet"=1
+"The Microsoft Network"=1
+"Additional Screen Savers"=0
+"Flying Windows"=1
+"OpenGL Screen Savers"=0
+"Backup"=0
+"Character Map"=0
+"Clipboard Viewer"=0
+"Disk compression tools"=1
+"Drive Converter (FAT32)"=1
+"Group policies"=0
+"Net Watcher"=0
+"System Monitor"=0
+"System Resource Meter"=0
+"Web TV for Windows"=0
+"WaveTop Data Broadcasting"=0
+
+[Printers]
+
+[InstallLocationsMRU]
+
+[Install]
+AddReg=Run.Installed.Components,Registry.WinUpdate
+
+[Run.Installed.Components]
+HKLM,%KEY_INSTALLEDCOMPS%\>BatchSetupx,,,">Batch 98 - General Settings"
+HKLM,%KEY_INSTALLEDCOMPS%\>BatchSetupx,IsInstalled,1,01,00,00,00
+HKLM,%KEY_INSTALLEDCOMPS%\>BatchSetupx,Version,,"3,0,0,0"
+HKLM,%KEY_INSTALLEDCOMPS%\>BatchSetupx,StubPath,,"%25%\rundll.exe 
+setupx.dll,InstallHinfSection Installed.Components.General 4 %10%\msbatch.inf"
+HKLM,%KEY_INSTALLEDCOMPS%\>Batchwu,,,">Batch 98 - Windows Update"
+HKLM,%KEY_INSTALLEDCOMPS%\>Batchwu,IsInstalled,1,01,00,00,00
+HKLM,%KEY_INSTALLEDCOMPS%\>Batchwu,Version,,"3,0,0,0"
+HKLM,%KEY_INSTALLEDCOMPS%\>Batchwu,StubPath,,"wupdmgr.exe -shortcut"
+
+[Registry.WinUpdate]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Policies\Explorer,
+NoDevMgrUpdate,0x10001,0
+HKLM,Software\Microsoft\Windows\CurrentVersion\Policies\Explorer,
+NoWindowsUpdate,0x10001,0
+
+[Strings]
+KEY_INSTALLEDCOMPS="SOFTWARE\Microsoft\Active Setup\Installed Components"
+
+                     ; (%VER UNT_W98.TXT - v5.2.0)

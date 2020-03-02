@@ -1,0 +1,55 @@
+                       3Com (R) Corporation
+                  3C90x EtherLink PCI NIC Family
+                   Troubleshooting Information
+
+
+If the NIC diagnostic tests fail using the 3Com Configuration and 
+Diagnostic program for DOS, the NIC may not be defective. Check the 
+following:
+
+1.  Make sure that the NIC is completely seated in its slot.  Review
+    the installation instructions in the NIC's user guide.
+
+2.  If you are running the Group 2 test, make sure that the NIC is
+    securely connected to a loopback plug or to a properly cabled network.
+    Running Group 2 tests while connected to an active network can cause
+    intermittent failures.  These failures can be avoided by using a
+    loopback plug or by connecting to an inactive network on which only 
+    the computer being tested is operating.
+
+3.  If you are running the Group 3 test, make sure that the NIC is
+    securely connected to a properly cabled network and that an echo 
+    server is set up and running on the network.
+
+4.  If you are configuring the I/O base address, interrupt request level,
+    or boot PROM base address, make sure that the settings you choose for
+    these parameters do not conflict with any other peripheral or software
+    program installed in the computer.  For a list of system resources
+    commonly used by other peripherals, select Commonly Used Interrupt
+    and I/O Base Addresses from the Configuration and Diagnostic submenu.
+
+5.  Make sure that the configuration setting for the transceiver type is
+    correct.
+
+6.  If you installed a twisted-pair NIC in your PC, check the LED on
+    the backplate of the NIC.  The LED should be checked only during or 
+    after the diagnostic tests have been run.  The LED lights when 
+    there is a correct and active connection between the NIC and the hub.
+    The LED flashes if the polarity of the connection is reversed.
+
+7.  The slot in the computer may be defective.  Install the NIC in
+    another slot and run the tests again.
+
+8.  The computer in which the NIC is installed may be defective.
+    Install the NIC in a known functioning computer and run the tests
+    again.
+
+9.  The components of the loopback plug you are using may be defective.
+    Try a different loopback plug.
+
+10. Replace the failed NIC with a known working NIC with the same
+    configuration.  Run the tests again.  If the second NIC fails,
+    something is probably wrong with the test environment, not with
+    the NIC.
+
+                 (%VER  TROUBLE.TXT - Troubleshooting v5.1.0)

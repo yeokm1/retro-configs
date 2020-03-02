@@ -1,0 +1,12 @@
+                        3Com (R) Corporation
+                   3C90x EtherLink PCI NIC Family
+                    Software Compatibility Guide
+
+
+The 3Com Facts fax service is no longer supported, so the Software  
+Compatibility Guide located on 3Com Facts is no longer available.
+
+For software help, use the 3Com web site (www.3com.com)
+
+
+    (%VER ISVLIST.TXT - Software Compatibility guide v5.4.0.0)

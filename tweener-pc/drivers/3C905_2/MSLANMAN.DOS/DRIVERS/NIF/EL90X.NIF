@@ -1,0 +1,5 @@
+Model = 3Com Etherlink XL and Fast Etherlink XL Family
+Path = ETHERNET\EL90X
+DeviceDriver = EL90X.DOS
+DeviceName = EL90X
+Type = NDIS
