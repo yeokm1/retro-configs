@@ -12,6 +12,10 @@ With all trays open.
 
 <img src="photos/tweener-mobo.jpg" width="500">
 
+<img src="photos/tweener-some-cards.jpg" width="500">
+
+AWE64 and Resound OPL3
+
 ## Specifications
 
 These are the specifications specific to the Thinkpad I have:
