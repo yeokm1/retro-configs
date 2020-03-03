@@ -14,25 +14,28 @@ With all trays open.
 
 <img src="photos/tweener-some-cards.jpg" width="500">
 
-AWE64 and Resound OPL3
+AWE64 and Resound OPL3. USB Header and Wake-on-LAN cables are used.
 
 ## Specifications
 
-These are the specifications specific to the Thinkpad I have:
-
 * Intel Pentium III 550Mhz 100Mhz FSB
 * MSI MS6163 Pro Intel 440BX motherboard
-* ATI Radeon 9500 Pro 128MB DDR AGP 8X
-* 2x 256MB PC133 SDRAM
-* Creative Sound Blaster AWE64 Gold ISA
-* Resound OPL3 ISA
-* 3Com 3C905 PCI 10/100 Mbps
-* VIA USB 2.0 PCI Controller
+* 2x256MB PC133 SDRAM
 * 32GB Sandisk Compactflash card
-* DVD-RW IDE
+* NEC ND-3530A DVD-RW IDE
 * ZIP-750 IDE
 * 1.2MB 5.25" Floppy
 * 1.44MB 3.5" Floppy
+
+<img src="photos/tweener-cards.jpg" width="500">
+
+Expansion cards from top left
+
+* Creative Sound Blaster AWE64 Gold ISA
+* 3Com 3C905 PCI 10/100 Mbps
+* VIA VT6212 USB 2.0 PCI Controller
+* Resound OPL3 ISA
+* ATI Radeon 9500 Pro 128MB DDR AGP 8X
 
 ## Boot Configuration
 
