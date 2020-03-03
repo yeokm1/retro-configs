@@ -5,33 +5,37 @@ I currently only have the configuration of my Thinkpad T42 and 390e but more com
 
 Common drivers and software not specific to a particular system are located in the [common](common) folder.
 
-# 1. Thinkpad T42
+# 1. [Thinkpad T42](thinkpad-t42)
 
-The machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
+The Pentium II machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
 
 <img src="thinkpad-t42/photos/t42-full.jpg" width="500">
 
-In Win98SE
+In Win 98SE
 
-<img src="thinkpad-t42/photos/t42-dos622-bootmenu.jpg" width="500">
+<img src="thinkpad-t42/photos/t42-wfw311.jpg" width="500">
 
-Boot menu options
+In WFW 3.11
 
-# 2. Thinkpad 390E
+# 2. [Thinkpad 390E](thinkpad-390e)
 
-The machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
+The Pentium M machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
 
 <img src="thinkpad-390e/photos/390e-full.jpg" width="500">
 
 In the BIOS
 
-<img src="thinkpad-390e/photos/390e-dos622-bootmenu.jpg" width="500">
+<img src="thinkpad-390e/photos/390e-wfw311.jpg" width="500">
 
-Boot menu options
+In WFW 3.11
 
-# 3. Tweener PC
+<img src="thinkpad-390e/photos/390e-win98se.jpg" width="500">
 
-My "Tweener PC" is affectionately called that as it contains a healthy mix of new and old technologies. From ISA, floppy drives to modern Ethernet and USB.
+In Win 98SE
+
+# 3. [Tweener PC](tweener-pc)
+
+My "Tweener PC" based on Pentium III is affectionately called that as it contains a healthy mix of new and old technologies. From ISA, floppy drives to modern Ethernet and USB.
 
 The machine is configured for single-boot Windows 98SE with a bootup option to enter pure DOS configuration only.
 
