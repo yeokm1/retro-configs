@@ -14,7 +14,7 @@ With all trays open.
 
 <img src="photos/tweener-some-cards.jpg" width="500">
 
-AWE64 and Resound OPL3. USB Header and Wake-on-LAN cables are used.
+AWE64 and Resound OPL3. CD-In, USB Header and Wake-on-LAN cables are used.
 
 ## Specifications
 
