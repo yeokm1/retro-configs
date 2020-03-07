@@ -1,0 +1,24 @@
+REGEDIT4
+;
+; SYMNO_DV.REG - Version REG.1
+; Disable Domain Validation Support for NT
+;
+; This data file will add a registry entry to disable domain validation
+; support for the sym_u3.sys NT SCSI driver.  Domain validation is a
+; feature where the driver performs basic SCSI functions to verify that
+; the data transfer parameters (sync/wide) will operate properly with the
+; SCSI devices and cable configuration.  However, some SCSI devices do not
+; function properly with this feature enabled.
+;
+; This registry entry is applied by the regedit.exe program.  Go to
+; Windows Explorer and double-click on symno_dv.reg or at a command
+; prompt type: 
+;
+;      regedit symno_dv.reg
+;
+; NOTE: To delete this entry from the registry, use the file sym_domv.reg.
+;
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Sym_u3\Parameters\Device]
+"DriverParameter"="DisableDomainValidation=1;"
+;
+; Note: The system must be rebooted for this setting to take effect.

@@ -1,0 +1,746 @@
+**************************************************************************** 
+                                  WIN9X.TXT 
+***************************************************************************** 
+
+INSTALLATION GUIDE FOR THE SDMS DRIVERS: SYMC8XX.MPD V4.15.00
+                                         SYM_HI.MPD  V4.15.00
+                                         SYM_U3.MPD  V5.06.00
+
+This file describes the features and use of the Symbios SDMS device drivers
+for the Windows 95/98 operating system environment. LSI Logic uses the
+same filenames for their drivers for different Windows operating systems.
+The driver files are packaged either in separate subdirectories based on the
+Windows operating system or on different flex disks. To determine the
+driver file for Windows 95/98, note that the filename ends with ".mpd". For
+example SYMC8XX.MPD.
+
+This file contains these sections:
+
+Introduction for Windows 95/98
+     Features
+     Symbios Devices Supported
+     Description
+
+Installing Your SYMC8XX.MPD/SYM_HI.MPD/SYM_U3.MPD Driver(s)
+     Preparing a Symbios Driver Diskette
+     New System Installation
+     Existing System Installation
+     Existing System Using ASPI8XX.SYS DOS ASPI Driver
+     Verifying Correct Driver Installation
+     Troubleshooting
+
+Command Line Options
+     Enabling/Disabling Ultra SCSI Support
+     Disabling Auto Request Sense Support
+     Disabling Domain Validation Suport
+     Enabling SCAM Support
+     Multiple Symbios Host Adapter Considerations
+
+
+
+
+*********************** Introduction for Windows 95/98 *********************** 
+
+Windows 95/98 is an operating system designed to run on Intel processors
+using current technology. It provides a graphical user interface environment 
+incorporating many high-level features. Refer to the Microsoft Windows 95/98 
+documentation for details.
+
+
+An I/O manager handles I/O requests in Windows 95/98. To address a SCSI
+peripheral, the I/O manager goes through the appropriate drivers. Class drivers
+for hard disk, floptical, CD-ROM, printer, and scanner peripherals are provided
+in Windows 95/98. Other class drivers, provided by peripheral manufacturers,
+are added to support new devices.
+
+LSI Logic and Microsoft provide miniport drivers, called SYMC8XX.MPD,
+SYM_HI.MPD, and SYM_U3.MPD to complete the path to a Symbios controller or
+processor with an optional SDMS SCSI BIOS. The following sections describe
+these drivers and their installation.
+
+
+*  *  *  *  *  *  *  *  *  *  * Features *  *  *  *  *  *  *  *  *  *  *  * 
+
+The Symbios miniport drivers support these features:
+
+o  Ultra160 data transfers (for devices that support this feature)
+o  Domain Validation
+o  Synchronous negotiation (including Fast/Ultra SCSI/Ultra2 SCSI) 
+o  Wide negotiation 
+o  Auto Request Sense 
+o  Multiple host adapters 
+o  Multiple Logical Unit Numbers (LUNs) 
+o  Disconnect/Reselect 
+o  Scatter/Gather 
+o  Differential Support 
+o  SCSI pass-through functionality 
+o  SCAM Support (SCSI Configured AutoMatically) 
+o  Target initiated negotiation support 
+o  NVRAM support (wide/sync parameters, SCSI Host ID, SCAM ON/OFF) 
+
+
+*  *  *  *  *  *  *  *  Symbios Devices Supported *  *  *  *  *  *  *  *  * 
+
+The SYMC8XX.MPD driver supports the following devices and Symbios host adapters
+based on those devices:
+
+o  SYM53C810, SYM53C810A, SYM53C810AE (SYM8100S, SYM8100ASP, SYM20810)
+o  SYM53C815 (SYM815XS, SYM8150SP)
+o  SYM53C825, SYM53C825A (SYM8250S, SYM8251S, SYM8251D, SYM8250ASP, SYM8251ASP,
+   SYM8251AD)
+o  SYM53C860, SYM53C860AE (SYM8600SP, SYM20860)
+o  SYM53C875, SYM53C875E (SYM8750SP, SYM8751SP, SYM8751SPE, SYM8751D)
+o  SYM53C876 (SYM22801, SYM22802)
+o  SYM53C885 
+o  SYM53C895, (SYM8951U, SYM8952U)
+
+
+The SYM_HI.MPD driver supports the following devices and associated Symbios
+host adapters:
+
+o  SYM53C895A (SYM8953U)
+o  SYM53C896 (SYM22910, SYM21002, SYM22902)
+
+The SYM_U3.MPD driver supports the following devices and associated Symbios
+host adapter:
+
+o SYM53C1010-33 (SYM8955U, SYM21040)
+
+
+*  *  *  *  *  *  *  *  *  *  * Description *  *  *  *  *  *  *  *  *  *  *
+
+SYMC8XX.MPD, SYM_HI.MPD, and SYM_U3.MPD are designed to the Microsoft speci-
+fication for miniport drivers. These drivers allow connection of SCSI devices
+including disk drives, CD-ROMs, and tape drives for PCI-based machines. To
+support a new SCSI device, the Windows 95/98 architecture requires that a class
+driver for that type device is present (usually supplied by Microsoft, or
+possibly by the peripheral manufacturer). No changes to SYMC8XX.MPD,
+SYM_HI.MPD, or SYM_U3.MPD are required. These drivers are only supported under
+Windows 95/98.
+
+SCSI commands are passed directly from a Windows application to the SCSI 
+devices by using the SCSI pass-through facility (refer to Microsoft
+Windows 95/98 documentation for details). This facility allows applications to 
+directly control and access SCSI devices by filling in a data structure and 
+calling in to the port driver.
+
+The SYMC8XX.MPD and SYM_HI.MPD drivers support Ultra SCSI protocol, providing
+twice the raw data transfer rate of Fast SCSI for disk drives and Symbios host 
+adapters that support Ultra SCSI. These drivers also support Ultra2 SCSI
+protocol, providing quadruple the raw data transfer rate of Fast SCSI. The
+SYM_U3.MPD driver supports Ultra160 SCSI protocol providing 80 Mbytes/s of data
+transfer and up to 160 Mbytes/s data transfer for double transition.
+
+Caution: Ultra SCSI requires more stringent SCSI bus cabling setups than 
+         Fast SCSI. Ultra2 and Ultra160 SCSI require Low-Voltage Differential
+         (LVD) termination.
+
+
+*********** Installing Your SYMC8XX.MPD/SYM_HI.MPD/SYM_U3.MPD Driver ********** 
+
+*  *  *  *  *  *  *  * Preparing a Symbios Driver Diskette *  *  *  *  *  * 
+
+Copy the files listed below for the appropriate driver (supplied to you on
+distribution media) to the root directory of a clean floppy diskette, and use
+this Symbios Driver diskette during installation.
+
+For the SYMC8XX.MPD driver: SYMC8XX.MPD   
+                            SYMC8XX.INF   
+
+For the SYM_HI.MPD driver:  SYM_HI.MPD   
+                            SYM_HI.INF
+
+For the SYM_U3.MPD driver:  SYM_U3.MPD
+                            SYM_U3.INF   
+
+
+*  *  *  *  *  *  *  *  *  New System Installation *  *  *  *  *  *  *  *  *
+
+This procedure installs the SYMC8XX.MPD, SYM_HI.MPD, or SYM_U3.MPD driver onto
+a Windows 95/98 system for all new system installations. Use this procedure
+when initially upgrading to Windows 95/98. Windows 95/98 automatically adds the
+driver to the registry and copies the driver to the appropriate directories.
+
+NOTE: Some Symbios PCI SCSI host adapters are supported by a driver 
+      bundled in Windows 95/98. For these adapters, the bundled driver is 
+      automatically installed during Windows 95/98 Setup. To change to the 
+      newer SYMC8XX.MPD, SYM_HI.MPD or SYM_U3.MPD driver, follow the
+      instructions under "Existing System Installation" after the 
+      Windows 95/98 installation has completed.
+
+1. Start the Windows 95/98 Setup according to the Microsoft instructions.
+
+2. Setup enters the hardware detection phase after a system reboot. The
+   "Setting up Hardware" message box appears. If the message "Symbios PCI 
+   SCSI Host Adapter" appears, then the host adapter supports the bundled 
+   driver, and it installs automatically. After the Windows 95/98 installation 
+   has completed, the user can install the SYMC8XX.MPD, SYM_HI.MPD, and/or
+   SYM_U3.MPD drivers according to the "Existing System Installation" 
+   instructions.
+
+3. If the bundled driver does not support the host adapter, Setup displays 
+   a New Hardware Found - PCI SCSI Bus Controller dialog box. Select "Driver 
+   from disk provided by hardware manufacturer" and click OK.
+
+   Note: If ASPI8XX.SYS (the Symbios SDMS 4.0 DOS ASPI driver) is loaded 
+         when beginning the Windows 95/98 installation, no messages about 
+         PCI SCSI Bus Controllers will appear. The installation completes,
+         but real-mode disk drivers are used. See the section below on 
+         "Verifying Correct Driver Installation." To install the SYMC8XX.MPD,
+         SYM_HI.MPD, and/or SYM_U3.MPD drivers, (which disable loading of the
+         ASPI8XX.SYS driver under Windows 95/98) see the section on "Existing
+         System Using ASPI8XX.SYS DOS ASPI Driver" below. 
+
+4. Insert the Symbios Driver diskette into drive A: (or B:) (the one prepared 
+   in * Preparing a Symbios Driver Diskette *) and click OK. If using drive 
+   B:, you must select it from the pick list.
+
+   Windows 95/98 automatically copies the appropriate driver files and rebuilds 
+   its driver database.
+
+   A "System Settings Change" dialog box appears.
+
+5. Remove the diskette from the drive and click Yes to restart the computer.
+
+At this point, Windows 95/98 Setup has completed, and the new driver is
+operational. To verify this, see the section "Verifying Correct Driver
+Installation."
+
+
+*  *  *  *  *  *  *  *  * Existing System Installation *  *  *  *  *  *  *  * 
+
+This procedure installs the SYMC8XX.MPD, SYM_HI.MPD, or SYM_U3.MPD driver onto
+an existing Windows 95/98 system. These instructions indicate where specific
+information applies to Windows 95 or Windows 98. Unnless noted, the
+instructions apply to both operating systems. Please review the steps below
+before beginning the installation.
+
+1. Boot Windows 95/98.
+
+2. Click Start. Select Settings-->Control Panel.
+
+3. Double click on the System icon.
+
+4. Click on the Device Manager tab.
+
+    Note: If the SCSI controllers entry, or the PCI Symbios C8XX SCSI 
+          Host Adapter entry do not exist, the system is probably using the 
+          ASPI8XX.SYS DOS ASPI driver. See the "Existing System Using
+          ASPI8XX.SYS DOS ASPI Driver" section below.
+
+5. Either double click on the SCSI controllers entry, or click once on the 
+   plus sign to the left of it.
+
+6. Select the desired PCI Symbios xxx SCSI Host Adapter entry. Click the 
+   Properties button.
+
+7. Click on the Driver button. In Windows 95, the version of the currently
+   active driver should display in the File details section. In Windows 98,
+   press the DRIVER FILE DETAILS button to get this information to appear.
+
+   Note: In certain versions of Windows 95, the version of the active driver 
+         appears as NOT available. This is an operating system issue and is
+         fixed in later versions of Windows 95. To verify the version of the
+         driver, click on the Properties field of the SYMC8XX.MPD, SYM_HI.MPD
+         or SYM_U3.MPD file under the Version tab. The MPD driver is generally
+         found in the \WINDOWS\SYSTEM\IOSUBSYS\ directory.
+
+8. Click on the Change Driver... button.
+
+* * * * * For Windows 95 * * * * *
+
+9. Even though you may have previously installed the SYMC8XX.MPD, SYM_HI.MPD,
+   or SYM_U3.MPD drivers, proceed to click on the Have Disk... button to 
+   install a newer version.
+
+10. Insert the Symbios Driver diskette in drive A: (or B:) (the one prepared 
+    in * Preparing a Symbios Driver Diskette *) and click OK. If using drive 
+    B:, you must select it from the pick list.
+
+    The Select Device dialog box should display "Symbios xxx PCI SCSI 
+    Host Adapter," where xxx matches the installed adapter.
+
+11. Click OK.
+
+    The Driver tab is updated to display the new driver files.
+
+12. Click OK to install these driver files.
+    (Do NOT click on the Change Driver... button.)
+ 
+    The driver files are copied, and a new driver database is built.
+
+* * * * * For Windows 98 * * * * *
+
+"Update Device Driver Wizard" starts and provides several windows with choices.
+Follow the steps below to correctly install the device driver for Windows 98.
+
+9.  After the Intro window appears, click on the NEXT button.
+
+    The Wizard provides a choice between having the Wizard search for a better
+    driver than the one in use or displays a list of drivers from a specific
+    location. 
+
+10. Choose "search..." and click on the NEXT button.
+
+    The next window allows the user to specify which device(s) will be
+    searched, such as a floppy diskette, CD-ROM or specify a specific path 
+    **(In TYAN CD, the driver is in \LSI53C1010\win98\)**
+
+11. Select "Floppy disk drive" only and click on the NEXT button.
+
+    The next window queries the user about utilizing the currently installed
+    driver.
+
+12. Mark "Install one of the other drivers" and click on the "View List"
+    button.
+
+    Next, a list of drivers appears from the specified search devices and the
+    currently installed driver.
+
+13. Highlight the driver of choice and click OK.
+
+    The previous window appears with the selected driver displayed as the
+    driver to install.
+
+14. Click on the NEXT button.
+
+    The next window displays the chosen driver along with reference to the 
+    designated path to install it in.
+
+15. Click on the NEXT button.
+
+    The Wizard summary window appears. 
+
+16. Click on the Finish button.
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+Upon completion of the installation for WIN95/98, the "System Settings Change" 
+dialog box appears. Remove the diskette from the drive and click Yes to restart
+the computer.
+
+At this point, the new driver is operational. To ensure the correct driver 
+has been installed, see the section "Verifying Correct Driver Installation."
+
+
+*    * Existing System Using ASPI8XX.SYS DOS ASPI Driver *    *
+
+This procedure installs the SYMC8XX.MPD, SYM_HI.MPD, and/or SYM_U3.MPD drivers
+onto an existing Windows 95/98 system which is using the ASPI8XX.SYS DOS ASPI
+driver. You can check this by using the Verifying Correct Driver Installation
+instructions below.
+
+1. Boot Windows 95/98.
+
+2. Click Start. Select Settings-->Control Panel.
+
+3. Double click on the System icon.
+
+4. Click on the Device Manager tab.
+
+5. Either double click on the Other entry, or click once on the plus sign to 
+   the left of it.
+
+6. Select the PCI SCSI Bus Controller entry. Click on the Properties button.
+
+7. Click on the Driver button. A message should state that no drivers are 
+   installed for this device.
+
+8. Click on the Change Driver... button.
+
+9. Select SCSI Controllers in the Select Hardware Type dialog box,
+
+10. Click on the Have Disk button in the Select Device dialog box,
+
+11. Insert the Symbios Driver diskette in drive A: (or B:) (the one prepared 
+    in * Preparing a Symbios Driver Diskette *) and click OK. If using drive 
+    B:, you must select it from the pick list.
+
+12. The Select Device dialog box should display "Symbios xxx PCI SCSI 
+    Host Adapter", where xxx matches the installed adapter. Click OK.
+
+    The Driver tab is updated to display the new driver files.
+
+13. Click OK to install these driver files.
+    (Do NOT click the Change Driver... button.)
+ 
+    The driver files are copied and a new driver database is built.
+
+    The "System Settings Change" dialog box appears. Ignore the message 
+    saying to turn off your computer and change hardware settings. 
+
+14. Remove the diskette from the drive and click Yes to shut down the
+    computer. 
+
+15. Press Ctrl-Alt-Delete or the system reset button to restart the system. 
+
+At this point, the new driver is operational. To verify this, see the section 
+"Verifying Correct Driver Installation"
+
+
+*  *  *  *  *  *  *  Verifying Correct Driver Installation *  *  *  *  *  * 
+
+After installing/updating with the SYMC8XX.MPD, SYM_HI.MPD, or SYM_U3.MPD
+drivers, verify proper operation of the driver(s).
+
+1. Check that all devices on the SCSI bus are available using My Computer. 
+   Double click on the My Computer icon. Check that all logical SCSI hard 
+   drives and CD-ROM drives are shown.
+
+2. Click on the Start button. Select Settings-->Control Panel. 
+
+3. Double click on the System icon.
+
+4. Click the Device Manager tab.
+
+   Check that no host adapter appears with a yellow or red symbol under the
+   SCSI controllers entry. If there is, continue with the steps below to help
+   determine the problem.
+
+5. Either double click on the SCSI controllers entry, or click once on the 
+   plus sign to the left of it. 
+
+   One entry for each host adapter installed in the system is displayed.
+
+6. Select an entry, then click on the Properties button. 
+
+   The Device Status message should read "This device is working properly." 
+   If any other messages appear, continue with the steps below to  get more
+   information on the problem.
+
+7. Click the Driver tab.
+
+   For Windows 98, press Driver File Details. Two entries should appear:
+   one for the INF and one for the MPD file. The INF file does not contain
+   embedded version information, so the File Details are all Not Available.
+   
+8. Select the MPD file.
+
+   The file version of the driver appears.
+
+9. Click Cancel to leave the Host Adapter Properties dialog box.
+
+10. Click on the Performance tab.
+
+   A list of performance attributes appears. Below the list, you should see
+   the message "Your system is configured for optimal performance."
+
+   If any other messages appear, select each message and click on the Details
+   button. This provides more information on why the system is not performing
+   optimally and methods to correct the problem.
+
+If no problems are encountered in the above steps, the new driver is operating
+properly. Otherwise, consult the section on Troubleshooting for additional
+information.
+
+
+*  *  *  *  *  *  *  *  *  * Troubleshooting *  *  *  *  *  *  *  *  *  *  *
+
+Some problems and their suggested solutions are:
+
+*   *   * Problem *   *   *
+
+During Installation, No SCSI Devices Are Found.
+
+*   *   * Solution *   *   *
+
+a. Ensure that all devices are powered on and terminated correctly.
+
+b. Check that no devices have duplicate SCSI IDs.
+
+c. Make sure INT A is assigned for the PCI slot(s) where your SCSI host 
+   adapter(s) are installed.
+
+d. Be sure that all devices appear properly in the display banner of the
+   SDMS SCSI BIOS at boot time.
+
+*   *   * Problem *   *   *
+
+Problems With Ultra SCSI Devices Using Ultra SCSI Protocol.
+
+*   *   * Solution *   *   *
+
+a. If the system is configured with a Symbios host adapter that 
+   supports Ultra SCSI, an Ultra SCSI device is on the SCSI bus, and Ultra 
+   SCSI support by the SYMC8XX.MPD or SYM_HI.MPD driver is enabled,
+   intermittent problems and possible system crashes can occur if the SCSI
+   bus cable and terminators do not conform to the Ultra SCSI specification. 
+
+b. If the system is bootable, disable Ultra SCSI support using the procedure 
+   described below.
+
+c. If the system is not bootable to Windows 95/98, hold down the F8 key when
+   Starting Windows 95/98... appears on the screen. At the menu, select Safe
+   Mode. Once the system is booted, disable Ultra SCSI support using the
+   procedure described in the Command Line Options section titled "Enabling/
+   Disabling Ultra SCSI Support." 
+
+d. If the system operates properly without Ultra SCSI enabled, it is highly 
+   likely that the SCSI bus cable and terminators are not configured 
+   correctly for Ultra SCSI. See the Symbios host adapter hardware 
+   manual for information on Ultra SCSI cabling requirements.
+
+e. Verify that the devices appear with the proper value for speed in the SDMS
+   SCSI BIOS banner at boot time. Please see Chapter 2  "SCSI BIOS" in the 
+   Symbios PCI SCSI/Storage Device Management System SDMS 4.0 User's Guide for
+   additional details.
+
+*   *   * Problem *   *   *
+
+Problems With Scanners.
+
+a. If a scanner is not operating properly (either the scanner is not found or 
+   a SCSI interface error occurs during scanning), it is possible that the 
+   third-party scanner drivers do not support the auto request sense feature 
+   of Symbios host adapters. Disable the auto request sense feature and try
+   the scanner operation again. Use the procedure described in the Command
+   Lines Options section titled "Disabling Auto Request Sense Support."
+
+*   *   * Problem *   *   *
+
+The system hangs at boot, has a long boot time, or SCSI device not available.
+
+Some older SCSI devices do not tolerate Domain Validation operations.  At
+system boot time, Domain Validation is performed to test the data integrity of
+the SCSI bus between the host adapter and each target device.  With some older
+SCSI devices, these operations can cause the device to stop responding to SCSI
+commands.
+
+*   *   * Solution *   *   *
+
+Disable Domain Validation support as described below, either for a specific
+problem SCSI target or all adapters controlled by the SYMC8XX.MPD, SYM_HI.MPD,
+or SYM_U3.MPD driver. Refer to the procedure in the Command Line Options
+section titled "Disabling Domain Validation Support.
+
+**************************** Command Line Options ****************************
+
+The command line options are described below. 
+
+*  *  *  *  *  * Enabling/Disabling Ultra SCSI Support *  *  *  * 
+
+Ultra SCSI support is controlled by settings in the adapter NVRAM. 
+These settings can be viewed or changed using the SCSI BIOS Configuration
+Utility. During system boot, after the Symbios PCI BIOS banner, the message
+"Press Ctrl-C to start Configuration Utility" appears for a few seconds.
+Press Ctrl-C to start this utility.  
+
+Select one of the adapters displayed, then "Device Selections". This shows 
+the Sync Rate for each device and the selected adapter. To set a device to 
+Ultra, the speed should be set to 20 Mbytes/s (for width of 8) or 40 Mbytes/s
+(for width of 16). To disable Ultra, the speed should be no higher than
+10 Mbytes/s (for width of 8) or 20 Mbytes/s (for width of 16). If the speed of
+the adapter itself is changed, the speed for all devices will be set no higher
+than the adapter speed.
+
+
+*  *  *   *  *  *  * Disabling Auto Request Sense Support *  *  *  *  *  *  * 
+
+When the SYMC8XX.MPD, SYM_HI.MPD and/or SYM_U3.MPD drivers are installed, 
+support for auto request sense is enabled. Auto request sense is a feature of
+the adapter where certain device information is obtained automatically without
+system control, thereby increasing overall performance. However, some
+third-party peripheral drivers do not support the use of auto request sense,
+resulting in perceived device failures. Therefore, to allow these devices to
+operate properly, the auto request sense feature can be disabled using the
+Device Manager on a per adapter basis.
+
+Use this procedure for disabling auto request sense support:
+
+1. Click on the Start button. Select Settings-->Control Panel.
+
+2. Double click on the System icon. 
+
+3. Click on the Device Manager tab.
+
+4. Either double click on the SCSI controllers entry, or click once on the 
+   plus sign to the left of it. 
+
+   One entry for each host adapter installed in the system appears.
+
+5. Select the adapter desired, then click on the Properties button.
+
+6. Click the Settings tab.
+
+7. In the Adapter settings entry, type "DisableAutoReqSense=1;", without 
+   the quotes. 
+   
+   If there is already an entry displayed, type the above at the end of the
+   existing entry. Be sure to include the semicolon.
+
+8. Click OK to exit the Settings tab.
+
+9. Click OK again.
+
+   If the entry was changed, the "System Settings Change" dialog box appears.
+
+10 Click Yes to restart the computer.
+
+After the system reboots, auto request sense is disabled for the 
+selected adapter. To re-enable auto request sense, delete the entry that was 
+made above. If other entries exist, be sure to leave them intact.
+
+
+*  *  *  * Disabling Domain Validation Support *  *  *  * 
+
+When the SYMC8XX.MPD, SYM_HI.MPD, or SYM_U3.MPD driver is installed, support
+for domain validation is enabled. Domain validation is a feature of the adapter
+where the data transfer speed between the adapter and each target is tested at
+system boot. If the test fails, the data transfer speed is reduced and the test
+repeated until a supported data transfer speed is found. However, some older
+SCSI devices do not properly support the standard SCSI commands used during
+this testing, resulting in the system not booting or a device not available.
+Therefore, to allow these devices to operate properly, the domain validation
+feature can be disabled using the Device Manager for all adapters controlled by
+the respective driver, or in the PCI SCSI BIOS Configuration Utility on a per
+device basis.
+
+Use this procedure for disabling domain validation support for all adapters
+controlled by the SYMC8XX.MPD, SYM_HI.MPD, or SYM_U3.MPD driver:
+
+1. Click on the Start button. Select Settings-->Control Panel.
+
+2. Double click on the System icon.
+
+3. Click on the Device Manager tab.
+
+4. Either double click on the SCSI controllers entry, or click once on the 
+   plus sign to the left of it. 
+
+   One entry for each host adapter installed in the system appears.
+
+5. Select any adapter controlled by the desired driver, then click on the
+   Properties button. 
+
+6. Click on the Settings tab.
+
+7. In the Adapter settings entry, type "DisableDomainValidation=1;", without 
+   the quotes. 
+
+   If there is already an entry displayed, type the above at the end of the
+   existing entry. Be sure to include the semicolon.
+
+8. Click OK to exit from the Settings tab.
+
+9. Click OK again. 
+
+   If the entry was changed, the "System Settings Change" dialog box appears.
+
+10 Click Yes to restart the computer.
+
+After the system reboots, domain validation is disabled for adapters controlled
+by the selected driver. To re-enable domain validation, delete the entry that
+was made above. If other entries exist, be sure to leave them intact.
+
+
+Use this procedure for disabling domain validation support for a selected
+device, using the PCI SCSI BIOS Configuration Utility:
+ 
+1. During system boot, after the Symbios PCI BIOS banner, the message "Press
+   Ctrl-C to start Configuration Utility" appears for a few seconds.
+   Press Ctrl-C to start this utility.
+
+2. Select the desired adapter and press Enter, then choose "Device Selections",
+   and press Enter. This shows the Sync Rate and Width for each device and the
+   selected adapter.
+
+3. To disable domain validation for a selected device, set the Sync Rate to 0
+   and Width to 0 for that device. This sets the device to asynchronous/narrow
+   transfers and domain validation functions are not issued to this device.
+
+4. Exit the SCSI BIOS Configuration Utility and save changes.
+
+
+*  *  *  *  *  *  *  *  * Enabling SCAM Support *  *  *  *  *  *  *  *  *
+
+SCAM (SCSI Configured AutoMatically) is a protocol that allows SCAM-compliant 
+peripherals to assign their SCSI IDs dynamically at boot time, thus eliminating 
+the need for the user to check and set unique SCSI IDs. This feature is 
+disabled by default in the Symbios PCI BIOS (version 4.14 or earlier) and the
+SYMC8XX.MPD, SYM_HI.MPD, and SYM_U3.MPD drivers. Some legacy (non-SCAM)
+peripherals have problems with the SCAM protocol, resulting in the device 
+either not being seen by the operating system, or not working correctly. 
+However, if usage of the SCAM protocol is desired, there are two methods for 
+enabling SCAM: Method 1 and Method 2. 
+
+
+*   *   * Method 1 *   *   *
+
+Use this method when the adapter has NVRAM. During system boot, after the 
+Symbios PCI BIOS banner, the message "Press Ctrl-C to start Configuration
+Utility" appears for a few seconds. Press Ctrl-C to start this utility.
+
+Select the desired adapter, then choose "Adapter Setup". On the Adapter Setup
+Menu, highlight "S-SCAM Support" and press Enter. Use the up/down arrows to
+select the ON setting, and press Enter. Exit from the menus and save the
+settings. This turns SCAM ON for both the PCI BIOS and the SYMC8XX.MPD,
+SYM_HI.MPD, or SYM_U3.MPD driver (whichever is controlling the selected
+adapter). To disable SCAM, repeat the above procedure to change the setting
+to OFF. 
+
+*   *   * Method 2 *   *    *
+
+For adapters that do not have NVRAM, SCAM can be enabled within Windows 95/98: 
+
+1. Click on the Start button. Select Settings-->Control Panel.
+   Double click on the System icon. Click on the Device Manager tab.
+
+2. Either double click on the SCSI controllers entry, or click once on the 
+   plus sign to the left of it. One entry for each host adapter installed in 
+   the system is displayed. Select the adapter desired, then click on the 
+   Properties button. Click on the Settings tab. 
+
+3. In the Adapter settings entry, type in "do_SCAM=1;", without the quotes. If 
+   an entry is already displayed, type the above at the end of the existing 
+   entry. Be sure to include the semicolon. 
+
+4. Click OK to exit the Settings tab.
+
+5. Click OK again. If the entry was changed, the "System Settings Change" 
+   dialog box appears. Click Yes to restart the computer.
+
+After the system reboots, SCAM is enabled for the selected adapter. To 
+disable SCAM, delete the entry that was made above. If other entries exist, 
+be sure to leave them intact.
+
+
+*  *  *  *  *  * Multiple Symbios Host Adapter Considerations *  *  *  *  *  *
+
+If multiple Symbios PCI SCSI host adapters are installed in the system, special
+actions are sometimes required to install or change drivers. This is due to the
+fact that some Symbios host adapters are supported by the bundled driver, and
+also that one Symbios driver can support multiple Symbios host adapters
+installed in the system.
+
+With multiple Symbios adapters, it is possible to have a situation where one 
+adapter is assigned to one driver, and another adapter is assigned to a
+different version of the same driver. This can cause conflicts that may cause
+the system to switch to real mode drivers, affecting performance and access to
+CD-ROM or tape drives.
+
+When installing additional boards or updating drivers, two methods are
+available for ensuring that all Symbios host adapters are controlled by only 
+one version of the appropriate driver.
+
+*   *   * Method 1 *   *   *
+
+Using the Device Manager, change the driver for a particular host adapter to 
+the desired driver. When asked to reboot the system for the new settings 
+to take effect, click No. Change drivers for all Symbios host adapters 
+in the system supported by that same driver to the new driver, and reply No to
+rebooting until the final adapter is changed. If booting from a SCSI device,
+ensure that the adapter controlling this device is the last one changed.
+
+*   *   * Method 2 *   *   *
+
+Determine which driver file is active for all adapters through the Properties 
+tab in Device Manager. Go to the \WINDOWS\SYSTEM\IOSUBSYS directory and 
+rename the driver file to an extension other than MPD. Reboot the system.
+ 
+While booting, the system may ask to load the bundled driver file from the 
+Windows 95/98 installation disk. Click OK. When the system says it cannot 
+find the file, click Skip File. Do this for all adapter messages while 
+booting. After the system is booted, use the Device Manager to change the 
+driver for each adapter to the desired driver. Do NOT reply Yes to reboot the 
+system until the final adapter has been changed.
+

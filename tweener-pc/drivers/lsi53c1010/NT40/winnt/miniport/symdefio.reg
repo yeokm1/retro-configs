@@ -1,0 +1,21 @@
+REGEDIT4
+;
+; SYMDEFIO.REG - Version REG.1
+; Reset Maximum Number of Concurrent I/O's to default for NT 4.0
+;
+; This data file will delete any NumberOfRequests registry entry to restore 
+; the default maximum number of concurrent I/O's for NT 4.0.
+;
+; This registry entry is applied by the regedit.exe program.  Go to
+; Windows Explorer and double-click on symdefio.reg or at a command
+; prompt type:
+;
+;      regedit symdefio.reg
+;
+; This registry data file is used to reset the maximum number of concurrent
+; I/O's to the default of 32.  To increase this value, use sym100io.reg.
+;
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Sym_u3\Parameters\Device]
+"NumberOfRequests"=-
+;
+; Note: The system must be rebooted for this setting to take effect.

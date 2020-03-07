@@ -1,0 +1,18 @@
+REGEDIT4
+;
+; SYM_AUTO.REG - Version REG.1
+; Enable Auto Reqeust Sense feature for sym_u3.sys NT SCSI Driver
+;
+; This data file will delete the registry entry which disables auto request 
+; sense, thereby re-enabling the feature.
+;
+; This registry entry is applied by the regedit.exe program.  Go to
+; Windows Explorer and double-click on sym_auto.reg or at a command
+; prompt type:
+;
+;      regedit sym_auto.reg
+;
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Sym_u3\Parameters\Device]
+"DriverParameter"=""
+;
+; Note: The system must be rebooted for this setting to take effect.

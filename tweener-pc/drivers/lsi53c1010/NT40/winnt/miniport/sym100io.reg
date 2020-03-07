@@ -1,0 +1,34 @@
+REGEDIT4
+;
+; SYM100IO.REG - Version REG.1
+; Guarantee Maximum Number of Concurrent I/O's for NT 4.0
+;
+; This data file will add a registry entry to specify a maximum number of 
+; concurrent I/O's (useful when performance benchmarking and for high 
+; performance servers).
+;
+; This registry entry is applied by the regedit.exe program.  Go to
+; Windows Explorer and double-click on sym100io.reg or at a command
+; prompt type:
+;
+;      regedit sym100io.reg
+;
+; NOTE: Increasing the value of this setting will consume non-paged pool
+; memory, a critical resource for NT.  Do not set the value arbitrarily high.
+; It is possible to degrade system performance by setting the value too high.
+;
+; The entries below will set the maximum number of concurrent I/O's to the
+; value indicated.  The value below will set the maximum number of 
+; concurrent I/O's to 100 (64 hex).  To set a different value edit the value
+; of 00000064 in the entry.  Do not change any other parts of the entry.
+; Note that increasing this value will consume more non-paged pool memory,
+; a critical resource for NT.  It is possible to degrade system performance
+; by using a value which is too high.
+;
+; IMPORTANT:  The value is always expressed as a hex value, with a string
+;             of 8 digits, such as 00000064 (=0x64 or 100 decimal).
+;
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Sym_u3\Parameters\Device]
+"NumberOfRequests"=dword:00000064
+;
+; Note: The system must be rebooted for this setting to take effect.

@@ -1,0 +1,23 @@
+REGEDIT4
+;
+; SYMNO_AR.REG - Version REG.1 
+; Disable Auto Request Sense Support for NT 4.0
+;
+; This data file will add a registry entry to disable auto request sense
+; support for the sym_u3.sys NT SCSI driver.  Auto request sense is a
+; feature where the SCSI adapter will automatically obtain additional
+; information from a device about an error condition.  However, some
+; applications do not function properly with this feature enabled.
+;
+; This registry entry is applied by the regedit.exe program.  Go to
+; Windows Explorer and double-click on symno_ar.reg or at a command
+; prompt type: 
+;
+;      regedit symno_ar.reg
+;
+; NOTE: To delete this entry from the registry, use the file sym_auto.reg.
+;
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Sym_u3\Parameters\Device]
+"DriverParameter"="DisableAutoReqSense=1;"
+;
+; Note: The system must be rebooted for this setting to take effect.
