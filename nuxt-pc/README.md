@@ -8,9 +8,12 @@ Front of the PC with IDE HDD caddy (just a filler), Gotek Floppy emulator with H
 
 <img src="photos/nuxt-internal.jpg" width="500">
 
+<img src="photos/nuxt-cards-inserted.jpg" width="500">
+
 ## Specifications
 
 * NEC V20 overclocked to 9.55Mhz via BIOS setting
+* Intel 8087 FPU
 * NuXT motherboard
 * 640KiB conventional RAM
 * 512MB Sandisk Compactflash card
@@ -22,7 +25,7 @@ Expansion cards from top left
 
 * National Semiconductor NE2000plus+
 * EPP Parallel Port 
-* Creative Sound Blaster 16 CT2950 CQM
+* Creative Sound Blaster 16 CT2940 OPL3
 * RTC ISA 8 bits (Very Low Profile)
 
 ## DOS Boot Configuration
