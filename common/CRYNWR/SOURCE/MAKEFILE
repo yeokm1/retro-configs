@@ -1,0 +1,66 @@
+.AUTODEPEND
+
+#		*Translator Definitions*
+CC = bcc +YAPCBR.CFG
+TASM = TASM
+TLINK = tlink
+
+
+#		*Implicit Rules*
+.c.obj:
+  $(CC) -c {$< }
+
+.cpp.obj:
+  $(CC) -c {$< }
+
+#		*List Macros*
+
+
+EXE_dependencies =  \
+  pkvec.obj \
+  main.obj \
+  screen.obj \
+  timer.obj \
+  yapcbr.obj
+
+#		*Explicit Rules*
+yapcbr.exe: yapcbr.cfg $(EXE_dependencies)
+  $(TLINK) /v/x/c/P-/LC:\BORLANDC\LIB @&&|
+c0l.obj+
+pkvec.obj+
+main.obj+
+screen.obj+
+timer.obj+
+yapcbr.obj
+yapcbr
+		# no map file
+emu.lib+
+mathl.lib+
+cl.lib+
+graphics.lib
+|
+
+
+#		*Individual File Dependencies*
+pkvec.obj: pkvec.asm 
+	$(TASM) /MX /ZI /O PKVEC.ASM,PKVEC.OBJ
+
+main.obj: main.c 
+
+screen.obj: screen.c 
+
+timer.obj: timer.c 
+
+yapcbr.obj: yapcbr.c 
+
+#		*Compiler Configuration File*
+yapcbr.cfg: makefile
+  copy &&|
+-v
+-ml
+-IC:\BORLANDC\INCLUDE
+-LC:\BORLANDC\LIB
+-P-.C
+| yapcbr.cfg
+
+

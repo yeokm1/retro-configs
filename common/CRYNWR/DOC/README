@@ -1,0 +1,28 @@
+To install this driver, pick a software interrupt between 60 hex and
+80 hex.  You assign this to the packet driver.  Run the packet driver
+with this number as the first parameter on the command line.  The
+default base is decimal.  Most often the address is specified in
+hexadecimal, so precede it with "0x". Your packet driver client
+program should automatically locate this interrupt vector with no
+configuration necessary.
+
+The packet driver should automatically locate the adapter.  Sometimes
+this causes problems (e.g. when you have two identical adapters).
+When it does, specify the "virtual" slot number following the
+software interrupt.  These slot numbers start at 16, so you would run
+two e100bpkt's like this:
+    e100bpkt 0x60 16
+    e100bpkt 0x61 17
+
+The packet driver should automatically choose the correct transceiver
+and speed if it is connected to the target Ethernet hub.  If this is
+not the case at installation time, you can specify the transceiver
+following the optional I/O address.  For the connector, choose from
+AUTO, UTP, BNC, and AUI.  For the speed, choose from SLOW (for
+10Mbps) or FAST (for 100Mbps).  For the duplex, choose from HALF or
+FULL.  These parameters may be given in any order.
+
+This packet driver is supported by Intel at least through 12/98.  For
+technical assistance, send email to info@crynwr.com, call
++1-315-268-1925, or fax +1-315-268-9201.
+

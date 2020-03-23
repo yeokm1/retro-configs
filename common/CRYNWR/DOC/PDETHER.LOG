@@ -1,0 +1,12 @@
+----------------------------------------------------------------------
+Modifications below this point are in release 1.03, released February
+11th, 1993 by donp@novell.com
+----------------------------------------------------------------------
+
+If a packet driver returned a failure indication from send_pkt, PDEther
+would head south.  Fixed by correcting some bad code.
+
+----------------------------------------------------------------------
+No log information is available for Releases 1.02 and earlier.
+----------------------------------------------------------------------
+

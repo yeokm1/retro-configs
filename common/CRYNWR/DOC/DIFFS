@@ -1,0 +1,161 @@
+diff -u ./chip.inc ../chip.inc
+--- ./chip.inc	Mon Jul 22 11:49:40 1996
++++ ../chip.inc	Mon Mar  4 15:50:26 1996
+@@ -22,6 +22,7 @@
+ TRANSMIT	EQU	0004h
+ TDR_CMD		EQU	0005h
+ 	LNK_OK		EQU	8000h
++	TDR_TIME	equ	07ffh
+ ; debug
+ 	TX_THRESHOLD	EQU	4h
+ 	TX_EOF_BIT		EQU	8000h
+Only in .: diffs
+Only in ..: head.obj
+Binary files ./i.com and ../i.com differ
+Only in ..: i.map
+diff -u ./il.asm ../il.asm
+--- ./il.asm	Mon Jul 22 11:49:42 1996
++++ ../il.asm	Mon Mar  4 16:01:08 1996
+@@ -1,4 +1,4 @@
+-;History:473,21
++;History:858,1
+ 
+ 	include	chip.inc
+ 
+@@ -100,17 +100,7 @@
+ 	ALIGN	16
+ self_test_buff	dd	0, -1		; Results of the self-test test placed here
+ 
+-;debug
+-;	ALIGN	16
+-;temp_buffer	db	80 dup (0)		; TX buffer for media detect
+-
+-if	CHIP EQ INTEL_82596
+-; debug
+-;	ALIGN	16
+-;scp_buff	db	(type SCP_STRUC + 7)      dup (0)
+-;	ALIGN	16
+-;iscp_buff	db	(type ISCP_STRUC + 7)     dup (0)
+-else
++if	CHIP EQ INTEL_82557
+ eeprom_buff	dw	40h DUP (0)
+ endif
+ 
+@@ -247,26 +237,9 @@
+     pop     es
+     int     4Bh
+ 	jc		short exit_virtual_address_convert
+-    test	[di+0ch], 0FF000000h
+-	jz		short below_16_meg
+-;debug
+-	jmp		short below_16_meg
+-    mov     ax, 8104h		; Unlock DMA region
+-    mov     dx, 0			; No copy
+-    int     4Bh
+-	print	above_16_meg_msg
+-	stc
+-
+-below_16_meg:
+-; debug
+-	jmp		short no_unlock
+-
+-
+-	; Now unlock the DMA region
+     mov     ax, 8104h		; Unlock DMA region
+     mov     dx, 0			; No copy
+     int     4Bh
+-no_unlock:
+     mov     eax, [di+0ch]
+ 	clc
+ exit_virtual_address_convert:
+@@ -701,11 +674,6 @@
+ 	mov		scb_buff.scb_rfa_add, offset cgroup:start_rfd
+ 	mov		scb_buff.scb_command, RU_START
+ 	C_ATTENTION
+-	
+-;#	mov		ax, scb_buff.scb_status		;- Acknowledge any interrupts
+-;#	and		ax, SCB_STATUS_MASK
+-;#	mov		scb_buff.scb_command, ax
+-;#	C_ATTENTION						; Issue a channel attention to the 82596
+ else
+ ; debug - setup receive code required for 82557
+ endif
+Only in ..: il.obj
+Only in ..: intelh
+diff -u ./ir.asm ../ir.asm
+--- ./ir.asm	Mon Jul 22 11:49:42 1996
++++ ../ir.asm	Mon Mar  4 15:50:40 1996
+@@ -1,4 +1,4 @@
+-;History:1063,30
++;History:980,1
+ 
+ 	include	chip.inc
+ 	include	options.inc
+@@ -92,8 +92,6 @@
+ 	db	CB_CFIG_IFS
+ 	db	CB_CFIG_SLOTTIME_LOW
+ 	db	CB_CFIG_MAX_RETRIES + CB_CFIG_SLOTTIME_HIGH
+-; debug
+-;	db	CB_CFIG_TX_NO_CRS
+ 	db	0h
+ 	db	0h
+ 	db	RUNT
+@@ -349,12 +347,10 @@
+ ;enter with ds:si -> Ethernet address, CX = length of address.
+ ;exit with nc if okay, or cy, dh=error if any errors.
+ 	assume	  ds:nothing
+-	call	set_ether	
++	call	set_ether
+ 	jnc		short exit_set_address
+-; debug - need to deal with unable to set - timeout code ?
++	mov	dh,CANT_SET
+ exit_set_address:
+-	xor		dh, dh					; Clear error conditions
+-	clc
+ 	ret
+ 
+ if	CHIP EQ INTEL_82596
+@@ -919,11 +915,6 @@
+ 	mov		first_rfd, si			; Store first RFD for next time
+ 
+ 	jmp		another_frame
+-; debug
+-;	test	ax, RBD_PREFETCH		; Check if there was a prefetch problem
+-;	jz		another_frame			; Contine reading frames if not
+-;	to_scrn	7,0,'^'
+-;	ret
+ receive_int	ENDP
+ 
+ 
+@@ -981,15 +972,15 @@
+ 	ret
+ 
+ tdr_bad_cable:
+-;	push	ax
+-;	and	ax, TDR_TIME
+-;	stosw				; store time
+-;	pop	ax
+-
+-;	mov	cl, 12
+-;	shr	ax, cl
+-;	and	ax, 7
+-;	mov	dh, al
++	push	ax
++	and	ax, TDR_TIME
++	stosw				; store time
++	pop	ax
++
++	mov	cl, 12
++	shr	ax, cl
++	and	ax, 7
++	mov	dh, al
+ 	stc
+ 	ret
+ 
+Only in ..: ir.obj
+Only in ..: tail.obj
+Only in ..: temp.000
+Only in ..: temp.001
+Only in ..: temp.002
+Only in .: temp.003
+Only in .: temp.004

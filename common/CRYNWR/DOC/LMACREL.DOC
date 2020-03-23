@@ -1,0 +1,59 @@
+                  STANDARD MICROSYSTEMS CORPORATION
+
+                                                       
+                    9232 LMAC RELEASE INFORMATION
+
+   This software is licensed by SMC for use by its customers only.
+     Copyright (c) 1994, 1995 Standard Microsystems Corporation.
+                         All rights reserved.
+
+   		   VERSION 1.04	   February 10, 1995
+
+VERSION HISTORY
+
+-- Version 1.04
+   LM_9232_s2.1_v1.04 (950210)
+
+1. Fixed loopback test in lft_ext.asm.  Software appended CRC bit is not set
+   properly in the control byte of the packet data area.
+   
+2. Added copyright banner to all files.   
+
+
+-- Version 1.03
+   LM_9232_s2.1_v1.03 (950202)
+
+1. Added save and restore node address to LM_Loopback_test for
+   EZStart, so when EZStart gets executed again without reboot, the 
+   node address will be correct.
+
+
+-- Version 1.02
+   LM_9232_s2.1_v1.02 (950125)
+
+1. Added "cld" instruction to LM_Receive_Copy and LM_Send.
+
+
+-- Version 1.01
+   LM_9232_s2.1_v1.01 (950110)
+
+1. Fixed a problem in TxIntr when restoring pointer register.  
+2. Enabled strip CRC bit in Receive Control Register.  Disable strip
+   CRC was a workaround for Rev. C and prior FEAST chip when there
+   were data corruption at the end of the frame.
+3. Added workaround for Rev. D FEAST chip.  For maximum Ethernet
+   frame size 1514 bytes, the TooLong bit in Receive Status word will
+   be set incorrectly.  LMAC will ignore that status.
+4. Fixed LM_Loopback_Test by adding delay after setting the transmit
+   control register.
+   
+
+-- Version 1.00
+   LM_9232_s2.1_v1.00 (941202)
+
+1. Initial Release.
+
+
+
+
+

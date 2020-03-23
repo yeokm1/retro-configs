@@ -1,0 +1,731 @@
+Summary of changes in the 11.x release:
+
+	New drivers: Aquila, Kodiak, Eagle NE2100 (&NE1500), Exos 205T
+		Thomas-Conrad TC5045, Parallel port to Parallel port,
+		Ottawa PI, Vaxmate, Racal-Datacomm es3210, 3Com
+		EtherLink III, SMC (formerly Western Digital)/IBM
+		Ethernet/A, Zenith Z-Note, Cabletron DNI Exxxx and Mylex.
+	New utility: pktwatch.
+	New switches added (-p to disable promiscuous mode, -u to
+		uninstall, -i to select class 11 if available).
+	Intel Netware driver (PDIPX) is now included.
+	Parameters changed: 3c503, 3c505, 3c507, winpkt
+
+Versions:
+
+If you already have an older packet driver, you may wish to upgrade.
+You should base this decision on the contents of the "Changes..."
+section below.  The major version (currently 11) goes up with every
+release.  The minor version (.x, different for every driver) goes up
+with every significant change in the device dependent part.  Some
+drivers (at&t, 3c507, 3c523, exos205t, ncret105, ubnicps2, ni5210,
+and ni9210) depend on 82586.asm, so they have a subminor version
+number which is the version of 82586.asm.  Some drivers (ctrondni,
+ethiie, es3210, hppclan, hppclanp, ne1000, ne2000, 3c503, and smc_wd)
+depend on 8390.asm, so they have a subminor version number which is
+the version of 8390.asm. If the minor version hasn't changed, then
+chances are very good that no significant bugs have been introduced.
+Sometimes the file is changed without changing the version number.
+This is done only when an identical change is made to all drivers to
+fix a bug that appears in every driver.
+
+3c501.asm	version	equ	2
+3c503.asm	version	equ	6
+3c505.asm	version	equ	1
+3c507.asm	version	equ	1
+3c509.asm	version	equ	0
+3c523.asm	version	equ	1
+82586.asm	i82586_version	equ	3
+8390.asm	dp8390_version	equ	3
+aquila.asm	version	equ	0
+ar450.asm	version	equ	0
+arcether.asm	version	equ	1
+arcnet.asm	version	equ	0
+at&t.asm	version	equ	1
+at&t_lp.asm	version	equ	1
+at1500.asm	version	equ	1
+at1700.asm	version	equ	1
+ctrondni.asm	version	equ	1
+davidsys.asm	version	equ	5
+de600.asm	version equ     1
+delay.asm	version	equ	0
+depca.asm	version	equ	3
+dk86960.asm	version	equ	4
+dk86965.asm	version	equ     1
+en301.asm	version	equ     2
+es3210.asm	version	equ	0
+ethiie.asm	version	equ	0
+exos205.asm	version	equ	1
+exp16.asm	version	equ	5
+express.asm	version	equ	4
+hppclan.asm	version	equ	1
+hppclanp.asm	version	equ	2
+ibmtoken.asm	version	equ	16h
+intel.asm	version	equ	0
+ipxpkt.asm	version	equ	3
+irqtest.asm	version	equ	0
+irqtest1.asm	version	equ	0
+isolan.asm	version	equ	2
+isolink.asm	version	equ	3
+kodiak16.asm	version	equ	0
+kodiak8.asm	version	equ	0
+kodiakk.asm	version	equ	2
+lance.asm	lance_version	equ	1
+localtlk.asm	version	equ	3
+multitst.asm	version	equ	1
+mylex.asm	version	equ	0
+nb.asm		version equ     4
+ncret105.asm	version	equ	0
+ne1000.asm	version	equ	5
+ne2.asm		version	equ	5
+ne2000.asm	version	equ	4
+ne2100.asm	version	equ	1
+ni5010.asm	version	equ	2
+ni5210.asm	version	equ	2
+ni6510.asm	version	equ	1
+ni9210.asm	version	equ	0
+nti16.asm	version	equ	0
+pi.asm		version	equ	2
+pktaddr.asm	version	equ	1
+pktall.asm	version	equ	0
+pktchk.asm	version	equ	1
+pktmode.asm	version	equ	2
+pktmulti.asm	version	equ	1
+pktsend.asm	version	equ	1
+pktstat.asm	version	equ	1
+pkttraf.asm	version	equ	0
+pktwatch.asm	version	equ	0
+plip.asm	version	equ	0
+skeleton.asm	version	equ	0
+slipmerg.asm	version	equ	7
+smc_wd.asm	version	equ	7
+t7231.asm	t7231_version	equ	1
+tcenet.asm	version	equ	0
+termin.asm	version	equ	1
+tiara.asm	version	equ     4
+trace.asm	version	equ	1
+ubnicpc.asm	version	equ	1
+ubnicps2.asm	version	equ	1
+vaxmate.asm	version	equ	0
+wd8003e.asm	version	equ	0
+znote.asm	version	equ	5
+
+Back issues:
+
+Back issues of the packet drivers are available from Crynwr Software.
+See SUPPORT.DOC.
+
+
+Changes from version 10.x to 11.x of the drivers:
+
+Every driver now reads its ROM Ethernet address once, in the
+	initialization code.  After all, the ROM isn't likely (or
+	supposed to) change, now is it?
+Every driver now has a pool of memory it can allocate memory out of
+	(if it needs to).  This has made the driver's file size more
+	closely resemble its size in memory.
+The skeleton now detects the processor type, and provides is_186,
+	is_286, and is_386 variables.
+The skeleton now detects the bus type, and provides an is_eisa variable.
+Per request by the UK people, we match on IEEE 802.3 classes, then
+	types. For all others, we match on type, then class.  This
+	lets their software work without breaking BLUEBOOK type
+	length=0 clients.
+The 8390 and 82586 drivers used to crash if they received traffic
+	during initialization.  No more.
+Drivers have the opportunity to hook into the timer IRQ chain if desired.
+Every driver now says <hardware_irq> where it used to say <int_no>.
+Every driver now returns an error message from it's etopen routine
+	instead of printing the message.
+The packet driver specification allows changing the segment registers, so
+	the utility programs (pkt*) now preserve them.
+The send wait loop in 8390.asm changed to execute with interrupts
+	enabled, giving lower packet loss and higher throughput.
+Any 8390 transmit errors are reported as CANT_SEND on the next send
+	attempt and that send is then ignored.
+Kai Getrost <kai@stratus.som.cwru.edu> wrote a Cabletron DNI Exxxx driver.
+??? <> discovered that the 8390 drivers were scarfing keystrokes
+	on some machines because they were doing a "in ax,61h"
+	instead of the proper "in al,61h".
+Hans-Juergen Knobloch <hjk@dtro.e-technik.th-darmstadt.de> found and
+	fixed a bug in pkttraf's traffic counting algorithm.
+Russell <Nelson@crynwr.com> wrote a 3Com 3c509 packet driver.
+Russell <Nelson@crynwr.com> wrote a Zenith Data Systems Z-Note packet driver.
+The Western Digital packet driver now works on the SMC and IBM Microchannel
+	adapters.  The driver is now called smc_wd to reflect SMC's purchase
+	of Western Digital's Ethernet card division.
+SMC_WD now uses movemem.  Gives you 10% better performance.
+Pktaddr now has an option, -c, to compare the board's Ethernet address against
+	that given on the command line.  For use by batch files, it
+	returns a nonzero error code if the addresses don't match.
+Pktall has three new options:
+	-v dumps the received packet in hex.
+	-p puts the driver into promiscuous mode.
+	-a <addr> filters out all but the given Ethernet address.
+Pktsend now has an option, -d <number>, that inserts a delay between
+	packet sends.  Pktsend has also been internally restructured
+	to make it work properly with a delay.
+Trace had its own private copy of the library routines.
+Russell <nelson@crynwr.com> wrote a very simple packet watch program.
+Many drivers would happily send oversize packets.
+IPXPKT was changed considerably because of the memory allocation routines.
+The 3c501 and ni5010's I/O routines were moved to io8.asm.
+The ni5010's receive mode setting code was cleaned up.
+The 3c505 didn't use its mem_base parameter so it has been removed.
+The 3c507 now operates with a 16K, 32K, 48K, or 64K memory window size.
+The 3c507 had two parameters removed (int_no and base_addr) because
+	it asked the board for them anyway.
+The 3c507 now works even if another 3c507 is present in the system.
+slip8250 would use the (broken) fifos on a 16550, even though it
+	should only use the fifos on a 16550AF.
+Julian Byrne found that the tiara and en301 drivers didn't clean out
+	their FIFO's properly, and suggested that it clear the
+	underrun status.
+Peter Karrer <pkarrer@bernina.ethz.ch> and Erik Olson
+	<erik@marg.phys.washington.edu> independently merged the
+	ethersl source with slip8250, so Ethersl should be more reliable.
+Phil Burns <pib@nwu.edu> added hardware handshaking back to slip8250.
+The 82586-based drivers (see Versions) now report the amount of
+	memory they find.
+The skeleton now checks the time on the executable program to see if
+	it is 05:06:08 AM.  If it is not, then a message is printed
+	saying that it has not been released by Crynwr Software.
+More of Glenn Talbott's 8390 reliability changes have been
+	incorporated.
+Peter Tattum <peter@psychnet.psychol.utas.edu.au> found that winpkt
+	was gratuitiously incrementing the packet size, so that the longest
+	packets could not be received.  He also submitted changes to run
+	winpkt on the same software interrupt as the existing packet driver.
+Russell <Nelson@crynwr.com> fixed the D-link de600's -n switch support.
+Dana <wolfe@halcon.lerc.nasa.gov> fixed a bug in the Kodiak driver.
+Russell <Nelson@crynwr.com> made the Aquila packet driver work.
+Mike <ching@brahms.amd.com> submitted a NE2100 packet driver.
+Russell <Nelson@crynwr.com> fixed the depca packet driver's
+	promiscuous mode.
+Russell <Nelson@crynwr.com> wrote a parallel port packet driver.
+	When used with a "LapLink Turbo" (parallel) cable or clone,
+	it appears to be a 2-node Ethernet network.
+The IBMTOKEN packet driver displays a message while it's waiting to
+	initialize.  In addition, the code was cleaned up.
+ISOLINK driver completely discarded and reimplemented using ni6510 code.
+Russell <Nelson@crynwr.com> wonders if anybody ever reads this stuff.  If
+	you see this, please send him some mail.
+ISOLINK and NI6510 now work with -d switch.
+The ARCETHER packet driver now works over Accton's LANSoft network OS.
+The DEPCA packet driver formerly required 64K mode.  It now works in
+	64K, 32K, or 2K modes.
+Joe Rosenfeld <cowboy@trans.csuohio.edu> found that the David Systems
+	driver didn't advertise itself as an IEEE8023 packet driver.
+FTP Software <info@ftp.com> found and fixed a bug in the LANCE-based
+	packet drivers (ni6510, ne2100, and DEPCA) that caused
+	packets to be four bytes too long.
+Russell <Nelson@crynwr.com> wrote a Thomas-Conrad TC5045
+	packet driver.
+Dirk Koeppen <dirk@incom.de> wrote an EXOS 205T packet driver.
+Russell <Nelson@crynwr.com> fixed the 3c503 I/O mapped code so that it works
+	with memory disabled.
+Russell <Nelson@crynwr.com> added code to the 3c503 to automagically select
+	the correct interface.
+Dave Perry VE3IFB <perryd@software.mitel.com> submitted an AX.25 packet
+	driver for the Ottawa PI board.
+Russell <Nelson@crynwr.com> fixed the following bugs in the Intel
+	EtherExpress 16 packet driver (exp16): It rounded the
+	transmitted packet length up to even word lengths.  It had
+	the wrong driver type (was 255, is now 91).  Didn't report
+	all error messages as it should.  When send_pkt was called
+	from the upcall, the driver went deaf.  On new boards with
+	10Base-T transceivers (identified by horizontal LED's), it
+	didn't enable the twisted pair port.  Error messages used
+	Exp16's project name instead of EtherExpress.
+Russell <Nelson@crynwr.com> wrote the hppclanp driver, which works on
+	the new hp27247B and hp27252A.
+Markku Toijala <mto@xerver.icl.fi> submitted changes to ibmtoken to
+	make it co-exist with Microsoft LAN Manager, but the method
+	probably works also with IBM LAN SW and Novell Netware.
+The ICL EtherTeam16 was writing one too many bytes when it received
+	an odd-length packet.
+
+
+Changes from version 9.x to 10.x of the drivers:
+
+Markku Toijala <mto@xerver.icl.fi> submitted a packet driver for
+	the ICL EtherTeam16 (formerly Nokia Data).
+Markku Toijala <mto@xerver.icl.fi> submitted some fixes for
+	IBMTOKEN to make it cooperate with software sharing the TR adapter.
+The IBMTOKEN driver has the debug flag turned off.
+Chris Elmquist <elmquist@SSESCO.com> submitted a Multitech EN301 driver.
+Martin Wilmes <Q91@DHDURZ1.BITNET> submitted modifications to the ARCNET
+	driver to make it a simulated Ethernet driver, calling it ARCETHER.
+Michael Martineau <martinea@hawk.nstn.ns.ca> submitted modifications
+	to the SLIP8250 driver to make it a simulated Ethernet
+	driver, calling it ETHERSL.
+Russell Nelson <nelson%crynwr.com@uu.psi.com> wrote an Intel
+	EtherExpress driver.
+Mark K. Darby <mkd@mtung.att.com> wrote a driver for the new AT&T
+	adapters that use the AT&T T7231 Ethernet controller.
+Roger James <roger@bj.co.uk> wrote winpkt, which forces upcalls into
+	the correct virtual machine.
+Marc Dye <unknown> wrote a driver under contract to David Systems Inc (DSI).
+Jeff Douglass <douglass@davidsys.com> submitted a driver for the
+	David Systems cards.
+Michael Martineau <martinea@hawk.nstn.ns.ca> changed the nb driver
+	from class 6 to class 1 by faking ARP.  It's now very useful
+	with Lantastic.  See NB.NOT.
+Jim Noble <noble_jim@po.gis.prc.com> submitted modifications to align
+	the LocalTalk packet driver with MacIP standards for IP over
+	LocalTalk; it also contains a few bug fixes including one
+	that caused the packet driver to report the wrong packet
+	address on the second receiver upcall.
+The 82586 drivers no longer do a TDR test.  It isn't reliable and just
+	confuses people when it fails.
+The 82586 drivers now test for a reasonable memory address.  This will catch
+	people who enter an absolute address such as 0xd0000 instead of a
+	segment address such as 0xd000.
+The DEPCA driver now works on the Rev. E DEPCAs, the DE-100, and the DE-200.
+The DEPCA driver no longer reports that it implements promiscuous mode.
+	Promiscuous mode didn't work and needs to be fixed.
+driver_info() always returned the first driver_class (BLUEBOOK) as
+	the class of the driver.  It now returns the driver class
+	of the handle that driver_info was called with.
+set_multicast_list() didn't pass the right number of values to the
+	driver-specific code.
+pktmulti added one junk multicast address for every real multicast address
+	it added.
+Glen Talbott submitted some improvements to the 8390.asm and
+	head.asm to make it more reliable on fast machines.
+Glen Talbott noticed that the interrupt handler was being re-entered
+	due to a rare hardware problem, and added a semaphore to avoid
+	the re-entrancy.
+Glen Talbott improved the hppclan driver to support the HP 27247A.
+Ismo Salonen <ismo@cs.tut.fi> suggested increasing the ARCNET timeout.
+Alan Barrett <barrett@ee.und.ac.za> improved the IPXPKT driver.
+Gary Spanswick at BICC improved the isolan driver by adding
+	timeouts to its otherwise-infinite loops.
+Gary Spanswick at BICC fixed the "isolink" driver. The name "isolink"
+	is actually the name of a network OS, but we'll keep using it
+	anyway.
+Joe Doupnik <jrd@cc.usu.edu> fixed slip8250 by doing transmit in a busy-wait
+	loop.
+termin.com now uses a two-byte type code to keep dis_pkt happy.
+The tiara driver had its parameters backwards from its usage message
+	and from the convention set by other drivers.
+
+Changes from version 8.x to 9.x of the drivers:
+
+Some 8.x drivers complained about int_no needing to be greater than 2.
+Using the -n switch caused the driver to go deaf.
+The set_address() routine was broken.
+The set_rcv_mode() routine no longer returns an error if the requested
+	mode is the same as the current mode.
+Some NE1000 manufacturers use invalid manufacturer codes in their
+	Ethernet addresses.  They are invalid because the multicast bit is
+	set.  The driver will reset the bit and whine at you about it.
+The wd8003e usage message didn't include the -o switch.  The error
+	message for non-responding memory mentioned IO addresses wrongly.
+Brian Fisher sent in code for the tiara driver to read the POS registers.
+Pktaddr, pktmode, and pktstat used to use a completely bogus packet type
+	of length 8.  That confused Joe Doupnik's dis_pkt (packet driver over
+	NDIS driver) converter.  I changed it to use a bogus type of
+	length 2.
+Mark Power <mpower@beowulf.his.uab.edu> found a few bugs in the ibmtoken
+	driver.
+
+
+Summary of changes in the 8.x release:
+
+	New drivers: HP Ethertwist, 3Com EtherLink Plus, UB NIC/PS2,
+		ARLAN 450, NCR ET-105, D-Link DE-600, Mitel Express,
+		NE/2, DEPCA, BICC Isolink (4110-2/3) (buggy).
+	Bugs fixed: pktchk, 3c523, ibmtoken, tiara, ne2000, ubnicpc.
+	All class 1 drivers can also act as class 11 drivers.
+
+Changes from version 7.x to 8.x of the drivers:
+
+Russell Nelson wrote an HP Ethertwist driver.  This covers the HP27245
+	HP27250 HP27247 but not the HP27246 (MCA).  We could not get
+	the latter driver working by release time.
+Russell Nelson wrote a 3Com EtherLink Plus (3c507), UB NIC/PS2 driver,
+	ARLAN 450 driver, and NCR ET-105 driver.
+Glenn Talbott <gt@hprnd.rose.hp.com> suggested that the hardware be
+	terminated after the interrupt was masked off, to avoid
+	spurious interrupts during the termination process.
+D-Link donated a DE-600 driver.
+Dave Price wrote a Mitel Express (ISDN) packet driver.
+Eric Henderson wrote a NE/2 packet driver.
+Sylvan Butler fixed two bugs in ubnicpc.
+The handle check on get_address isn't necessary, and so was removed.  The 1.09
+	spec says that it's required, but that will be removed in the 1.10
+	spec, as I'm told.
+Doug Smith wrote a DEPCA packet driver, and Russell Nelson finished it
+	off.
+Russell Nelson and Tobias Reber fixed the 3c523 driver (yay!).
+Renamed ubnic to ubnicpc to make it clearer which adapter it's for.
+Reinhard Strebler added code to wd8003e to read the POS registers prior
+	to parsing the arguments.
+John A. Murphy fixed a problem in the 8390 driver whereby it could
+	lose the interrupt on an incoming packet.
+Gregory T Small found a bug in the packet interrupt verification (tail.asm).
+Bill Rust <wjr@ftp.com> rewrote the 8259a interrupt acknowledgement
+	code to use specific EOIs, which gets around the C&T bug (see
+	8259.not).
+There is a new helper file called printnum.asm, that prints a label,
+	then a dword number in hex, then in decimal.
+There is a new helper file called verifypi.asm, that verifies that a
+	packet driver exists at the given interrupt.
+A few messages were reworded for more clarity.
+The machine type (ISA versus MCA) is now determined before the call to
+	parse_args.  This is so that MCA drivers can read the POS
+	registers to supply defaults.
+The set_rcv_mode function will only change the receive mode if only one
+	handle is open.  This prevents Novell and KA9Q users from running a
+	netwatcher, which confuses both of them.
+All drivers for boards using the 82586 (see Versions above) have had
+	code added to compensate for some bugs in the 82586.
+Reinhard Strebler found a serious bug in the 82586 where it didn't
+	wait for the results of a command properly.  This fixes the bogus
+	TDR reports.
+All drivers for boards using the 8390 (see Versions above) have had
+	the 8390-specific code consolidated into a single file.
+Eric Henderson and Colin Cook's class 11 changes have been
+	incorporated.  They let a single driver appear as
+	multiple-class drivers.
+Russell Nelson modified their code so that packet watchers still get all
+	packets.
+Don Provan and Jan Engvald fixed a bug in the -n switch handling.
+	When -n is used, DIX Ethernet (aka Ethernet II aka Blue Book
+	Ethernet) frames shouldn't be passed on as-is.  Don's fix dropped
+	them, Jan's converted them to 8138 packets.  Jan's was a
+	better idea.
+The 3c503 driver has some code added to use the board in I/O-mapped
+	mode.  Unfortunately, there wasn't time to get it working.
+	It'll have to wait for the next release.
+The helper file movemem.asm will use 386 memory move instructions.
+The helper file getnum.asm didn't always reject invalid digits.
+Brian Fisher fixed ibmtoken to flush the RIF cache using a LRU algorithm.
+Russell Nelson cleaned up the multicast handling in the ni6510 driver.
+Russell Nelson worked on pktsend: didn't properly check for trashed
+	memory on machines with less than 640K.  Also prints the
+	address of the trashed memory. It also now prints 'R' when a
+	packet is received, and 'T' when a packet is transmitted.
+Denis DeLaroca changed the way the 16550A is detected in slip8250.asm.
+The tiara packet driver didn't work properly with the -n switch.
+The ne2000 packet driver didn't work properly with the -n switch.
+Russell Nelson cleaned up trace internally, no difference to the user.
+John Baird wrote some ipxpkt documentation.
+
+
+Changes from version 6.0 to 7.0 of the drivers:
+
+Summary:
+	New drivers: UB PC/NIC, LocalTalk, Tiara, NTI.
+	Bugs fixed: 3c505, 3c503, wd8003e, nb, ne1000.
+	Bug found but not fixed: 3c523.
+
+*** The 3c523 driver is semi-broken.***  If you run the 5.x release of
+the 3c523 driver (3c523_5), terminate it, then run the 7.x release (3c523),
+it will work.  This need only be done once after powering-up the computer.
+This will be fixed in the next release.
+
+Drew Perkins made a bunch of changes:
+
+pktsend now takes a length argument, (-l) so that you may send packets of a
+	given length with unknown contents.
+pktsend now skips blanks between the -f switch and the filename.
+pktsend now takes a packet count argument (-n) which is the count of packets
+	to send between keypresses.
+pktsend now takes a switch to be quiet (-q).
+pktsend now takes a switch (-a) to send using as_send_pkt, for testing of
+	asychronous packet sending.
+getnum now parses very large numbers correctly.
+wd8003d now has 16 bit support for the WD8013EBT card.  Also "high
+	performance" changes to WD8003E.ASM and HEAD.ASM.
+fixed hangs or other errors caused by incorrect function in some 8259
+	clone ICs.
+enabled slave interrupts on the master 8259.  Apparently some early IBM
+	BIOSes didn't do this.
+
+John Mann submitted some code to delay the etopen and convert between
+	Novell's pseudo IEEE 802.3 packets and Ethernet packets.
+Jan Engvald made Mann's changes optional by adding two switches.
+	The -d switch delays the initialization, and the -n switch
+	converts Novell packets.  The n option converts the type 8137
+	packets from the BYU packet driver IPX into Novell ISO-like
+	packets. The d option delays initialization until it gets the
+	first call.  Together these options make it very easy to run
+	packet drivers in a PROM booted LAN PC.
+Jan Engvald improved the 3c501 and ni5010 drivers, which were only
+	implemented to look at the two bytes in the type field, and
+	for n-option to work one has to look at at least 4 bytes.
+Jan Engvald implemented Stop Function (8) that clears in use flags of
+	all handles.  See README.BOT for more details.
+Jan Engvald found and fixed a few coding errors in occupied.asm,
+	tail.asm and wd8003e.asm.
+John Mann improved the ne1000 driver.  It didn't handle large Ethernet packets
+	(between 1454 and 1472 bytes of data (total packet size 1496 and
+	1514 bytes).  He also changed a few hard-coded numbers into symbols.
+Katie Stevens wrote a LocalTalk driver.
+Katie Stevens added code to head.asm to prevent snarfing a hardware interrupt
+	if the packet driver doesn't use one.
+Anto Prijosoesilo, who fixed a bug related to DMA in the ni6510 driver.
+Paul Kranenburg added routing support to use Novell bridges (netwide
+	broadcasting and hacks to find out about IPX net addresses).
+Paul Kranenburg added support for IPX node address with less than 6
+	significant bytes.  (through the `-n <bytes>' command line
+	option).
+Paul Kranenburg added auxiliary program (ipxstat.c) to display route
+	table information and a couple of other statistics (define
+	STAT when compiling the driver to use this option)
+John Breeden found a bug in the AT&T driver where it didn't report
+	the type of an unknown card correctly.  He also added a new
+	card to the list of AT&T cards (StarLAN-10 R3).
+Russell Nelson fixed a problem in dump.exe where it reported the names
+	of function numbers >=20 incorrectly.
+Steve Wallace added a hack to let the packet drivers run under Windows.
+	This is not to be construed with the proper solution, which is
+	to write a TCP/IP package for Windows.  This hack is enabled only
+	when you use the '-w' switch.
+Russell Nelson added promiscuous mode to the ni5010 driver.
+Martin Knoblauch found that the ni5010 driver was resetting the receive
+	mode after each packet was received.
+Russell Nelson added code to 82586.asm to allow runts to be upcalled in
+	mode 6 (promiscuous mode).
+Eric Henderson added Carl Beame's fix to his ne1000 driver, and he also
+	copied the receive mode support from the wd8003e driver.
+Reinhard Strebler added a success message to termin.asm, and an error return
+	to the f_terminate call.
+
+
+Changes from version 5.0 to 6.0 of the drivers:
+
+Summary:
+	New drivers: ni6510, at&t, arcnet, ipxpkt, nb, ne2000.
+	New utilities: pktmulti, pktsend, pktstat.
+	Bugs fixed: 3c505, 3c503, wd8003e.
+
+Carl Beame found a bug in his National 8390 drivers which was also present
+	in the drivers based on the 3c503.  To wit, when the buffers
+	overflowed, there was a chance that there were no buffers present.
+	Trying to read one of these buffers would cause a crash.  This
+	affects the 3c503, wd8003e, and ne2000 drivers.
+James A. Harvey fixed a problem in the first beta test release that caused
+	some machines to incorrectly determine the number of interrupts,
+	and fixed the lockup problem in the 3c503.
+Russell Nelson changed the skeleton to enable compliance with version 1.09
+	of the packet driver spec.
+Russell Nelson wrote the following drivers: ni6510, at&t, and arcnet.
+Russell Nelson wrote the following utilities pktmulti, pktsend, pktstat.
+The following drivers now implement promiscuous mode: 3c501, 3c523, ni9210,
+	ni5210, at&t, ni6510, wd8003e.
+Jan Engvald enhanced HEAD.ASM to properly sense the second 8259a.
+Denis DeLaroca fixed the 16550a support in slip8250.asm.
+Glen Marianko's ROMREL program is now included for Novell users.
+All of the programs may be assembled with Borland or Microsoft (5.1) products.
+Some of the programs may be assembled with Microsoft v4.0 products.
+The set_address function refused to change the address if there was one or
+	more handles open.  One handle is allowable.
+The 3c501 driver now sends large broadcast packets (i.e. BOOTP) correctly.
+The routine get_multicast_list has been obsoleted by doing the same function
+	totally within HEAD.ASM
+The terminate routine now gets called on the f_terminate calls.
+f_terminate now checks for any outstanding handles before terminating.
+The parameters are now printed separately from being parsed.  This is to let
+	programs determine the parameters dynamically.
+The 3c503 driver was enabling interrupts when it shouldn't have.
+Some drivers would return a parameter error if some of the parameters
+	weren't specified.
+The bus type in 82586-based drivers is now a variable rather than an equate.
+The 82586-based drivers now have multicast partially implemented.
+The 3c523 driver reads the POS registers before parsing the parameters.
+The 82586-based drivers disable interrupts prior to being initialized.  Some
+	of these drivers would generate spurious interrupt, which caused
+	crashes when interrupt 2 was used.  The BIOS enables interrupt 2
+	automatically.
+The 82586-based drivers now sense the amount of memory automatically, even
+	though they still only use 8K.  This means no problems with 386
+	memory mappers.
+The maximum number of handles was increased from 8 to 10 (MAX_HANDLE).
+The .286 directive was removed from DEFS.ASM so that no 286 code accidentally
+	slips in.
+The function dispatch routine in HEAD.ASM was changed for version 1.09 of the
+	PDS.
+As promised in the version 4.x notes, the unique handle creation code went
+	away.
+If a driver sets int_no to zero, the timer interrupt won't get masked off. :-)
+Dave Horne changed the 3c503 driver into a ne2000 driver.
+Dave Horne changed the way upcalls are called so that the upcall handler can
+	exit using either a far return, or an iret.
+David E. Johnson fixed the 3c505 driver.
+Joe Doupnik improved HEAD.ASM by adding some comments and he brought it closer
+	into compliance with the PDS.  He also changed access_type so that it
+	would let driver users ask for all packets even though other driver
+	users were asking for some packets.
+Joe Doupnik added packet driver support to PC/IP's netwatch.
+Many useful subroutines were split out into separate files, rather than
+	being duplicated in every program that used them.  These routines
+	are in the public domain.
+The various packet driver clients (pkt*.com) were changed to use these
+	separate files.  They also now use a macro to call the packet driver.
+	They also report any and all errors that may occur.  They also ask
+	the driver for driver_info, then uses it to access_type.
+The packet receive tester, pktall, test to see if the driver is writing too
+	much or too little, or in memory that it doesn't own.
+SLIP8250 now requires a command-line switch to enable hardware handshake.
+TAIL.ASM now prints the arcnet address, if the driver is an arcnet driver.
+Jan Engvald improved the wd8003e driver:
+The wd8003e driver now supports the E EBT EB ET/A and E/A boards.
+The wd8003e memory base default was 0xc400 and is now 0xd000.
+The wd8003e driver supports multicast modes.
+The wd8003e driver has a better test for occupied memory, and a switch to
+	disable the occupied memory test in case it loses.
+
+
+Changes from version 4.0 to 5.0 of the drivers:
+
+Summary: New: 3c505, ne1000, ni9210, ibmtoken.  Bugs fixed: all drivers.
+
+Krishnan Gopalan and Gregg Stefancik wrote a packet driver for the 3c505.
+Brian Fisher wrote an "Ethernet" packet driver for the IBM Token Ring Adapter.
+Eric Henderson wrote a packet driver for Novell's NE1000.
+Russell Nelson modified ni5210 to be a ni9210 driver.  This entailed some
+	changes in 82586.asm.
+Russell Nelson wrote pktmode, a utility to set the receive mode.
+Russell Nelson wrote pktaddr, a utility to set the Ethernet address.
+Russell Nelson wrote pktall, a utility to help debug packet reception.
+Trace.com is a little bit more helpful about how to run it.
+Vance Morrison added starlan support to the wd8003e driver.
+Eric Henderson improved it.
+Deborah Swanberg noticed that the 3c503 driver didn't timeout properly
+	if there was a failure to complete a transmit.
+The set_address routine in the device dependent files now
+	returns the address length as it should have.
+Head.asm now keeps a copy of the hardware address set by set_address.  This is
+	used by f_get_address to return the current address.  The device
+	dependent get_address routine always returns the PROM address.
+The set_rcv_mode routine didn't work.  Not at all.
+The access_type routine returns more appropriate errors.
+The f_get_address routine wasn't passing the right address length to
+	get_address.
+Tail.asm now checks for extra parameters on the end of the line.
+Dan Lanciani added changes to ni5210 version 4.2 to increase reliability.
+	It works for him.  Unfortunately, I have had reports from other
+	people that it breaks Novell.  So, these changes are in "if DAN"
+	conditional assembly.  If your Novell connection gets dropped,
+	try reassembling ni5210 after setting "DAN equ 0" in 82586.asm
+Packet drivers for the NE2000 and UB NIC PC/2 are in the works, but don't
+	hold your breath.
+A packet driver for the Xircom pocket Ethernet adapter is undergoing testing.
+Jan Engvald found and fixed a bug in the wd8003e memory presence check.
+
+
+Changes from version 3.0 to 4.0 of the drivers:
+
+Russell Nelson added code to enable interrupts in the body of the packet
+	driver.
+Denis DeLaRoca added hardware handshake to the SLIP8250 driver.
+John Grover optimized the SLIP8250 driver to work at 38.4 Kbps.
+Russell Nelson added some sanity checking to slip8250 to warn the user about
+	possible incorrect parameters.
+Bob Clements added a switch to select thick or thin Ethernet in the 3c503.
+Russell Nelson found a minor bug in NI5210 that caused it to fail to
+	initialize sometimes.  Thanks to everyone who reported it.
+Dan Lanciani found a race condition in the 80586 code common to the
+	NI5210 and 3c523 drivers.
+Russell Nelson split out the 82586 code from the NI5210 and 3c523 drivers
+	into a single file.
+Russell Nelson added memory address checking to NI5210.
+Glen M. Marianko devised a method for determining the memory size of the
+	NI5210 automagically.
+Jan Engvald enhanced the packet driver code for Western Digital Ethernet
+	cards to handle the micro channel version WD8003ET/A.
+Jan Engvald enhanced TAIL.ASM to return error codes to DOS.
+Jan Engvald enhanced HEAD.ASM to be aware of running on a MicroChannel bus.
+Rainer Toebbicke wrote the BICC Data Networks' ISOLAN 4110 ethernet driver.
+Russell Nelson wrote the packet driver tracer and dumper (trace.com and
+	dump.exe).
+Russell Nelson added support for set_rcv_mode, get_rcv_mode,
+	set_multicast_list, and get_multicast_list to the infrastructure.  It
+	is up to the individuals who wrote the individual drivers to add the
+	device-dependent support.
+
+
+Changes from version 2.0 to 3.0 of the drivers:
+
+GNU General Public License adopted.  The restriction on commercial usage
+     prevented some companies from distributing the packet drivers.  This
+     is entirely my idea, so send any comments to nelson@clutx.clarkson.edu.
+3c523 driver added, thanks to Dan Lanciani (ddl@harvard.edu).
+Gregg Stefanik (wstef@eng.clemson.edu) is working on a 3c505 driver.  Don't
+     bug him about it unless you're willing to be a alpha tester.
+User documentation added (DRIVERS.DOC).
+Brad Clements (no relation to Bob Clements) fixed the NI5210 driver so that
+     it will work with a MTU of 1500.
+The NI5210 now checks for shorts and opens before it starts up, thanks to
+     Brad.
+All memory-mapped packet drivers now check the packet length in send_pkt to
+     ensure that too-long packets get trapped.  All packet drivers will
+     work with MTUs of 1500 (plus 14 bytes of Ethernet header).
+Deborah Swanberg noticed that attach_type was returning NO_CLASS
+     when it meant to return NO_TYPE.
+She also noted that packet drivers weren't returning unique handles.  This
+     is only a problem with Phil Karn's code, as his code directs *every*
+     packet driver to the same receiver routine.  With non-unique handles,
+     it was impossible to tell which packet driver was upcalling the
+     receiver.  Unique handles are now generated, based on the starting
+     segment of the driver.  The latest version of Karn's code uses different
+     receiver routines, so the code to implement this will eventually go away.
+Tail.asm now prints the Ethernet address of the interface (if it is an Ethernet
+     class device)
+Micom has sold Interlan, and Racal has bought it, so perhaps the NI5210 is
+     now the Racal-Interlan NI5210?
+If anyone is interested in using the Zenith Z-100 with a SLIP packet driver, please
+     send me (Russell Nelson) mail.  I have it partially written, but will
+     probably never use it myself.
+WD8003E and 3c503 sped up slightly -- stole movemem from NI5210.
+
+
+Changes from version 3 to 2.0 of the drivers:
+
+Version numbering now changed.  If the skeleton changes, the major version is
+     incremented and all the minor versions are reset to zero.
+
+Support for version 1.08 of the packet driver spec included.
+Bob Clements' 3c503 driver added.  See README.503.
+Some comments improved.
+BAD_COMMAND checking code fixed.
+cld instructions added to ensure that DF=0.
+NI5210 sped up slightly -- look at movemem in ni5210.asm for an especially
+     fast routine to move memory around.
+
+
+Changes from version 2 to 3 of the drivers:
+
+SLIP8250 can now be one of three classes: SLIP, AX.25, and KISS.
+Tail.asm now checks for a packet driver already at the given interrupt.
+Tail.asm now echoes its arguments in hex and decimal.
+Tail.asm will close stdout so that a file handle won't be used up in
+     case the user redirects stdout to NUL.
+Head.asm now supports driver termination.
+Termin.com added to terminate a driver.
+Head.asm now does a stack swap to avoid pushing too many things when
+     interrupting MS-LOSS.
+
+
+Changes from version 1 to 2 of the drivers:
+
+!!  Arguments are now in decimal by default  !!  Use a 0x prefix for hex.
+
+DEFS.ASM created.
+The loadport macro improved.
+SLIP8250 driver added, thanks for a C version from Phil Karn.
+     I've tried to put some 16550 support in, but I don't have one to
+     test it with.  The documentation insists the TBRE goes low when
+     the transmit buffer is not empty, while it makes sense for it to stay
+     high while the buffer is not full.  I suspect the documentation is
+     wrong.
+NI5010 driver added, thanks for a C version from Bill Doster.
+WD8003 driver added, by Bob Clements.
+Loadport macro added to WD8003 driver by Russell Nelson.
+Numeric arguments may now be specified in octal, decimal or hex, using the
+     C notation.
+Numeric arguments can now use up to 32 bits.
+Source files reformatted.

@@ -1,0 +1,120 @@
+From: burley@geech.gnu.ai.mit.edu (Craig Burley)
+
+In describing what I do for "ordinary" folks -- those who _use_ computers
+rather than program them (if they use them at all) -- I've found their
+interests prioritize as follows:
+
+1.  Can I get your software for free?
+
+    A:  Yes, though there might be easier ways for you to get it if you're
+        willing to spend money.  (Though, for some people, the _easiest_ way
+        of all is also the free way -- it requires only access to certain
+        networks.)
+
+2.  Do I have to pay anything if I use the software a lot?
+
+    A:  No.  You can also use it on as many machines as you like, and make
+        copies of it for friends (as long as you copy the stuff altogether,
+        not bits and pieces, and don't pretend you wrote it).
+
+3.  So it's not like shareware then?
+
+    A:  Right, except that, like shareware, you can evaluate the product
+        for free -- with FSF software, it _stays_ free if you keep on using
+        it.  With shareware, you really should pay the author what he or
+        she asks if you keep using the software.
+
+4.  How is it different from public domain?
+
+    A:  It always comes with source code.
+
+5.  Which means?
+
+    A:  If you need to change it, you can, either yourself, or by hiring a
+        programmer -- any qualified programmer.  Public-domain software
+        often comes with no source code, and thus cannot be changed, at least
+        not without mammoth effort.
+
+6.  How do you earn a living from this?
+
+    A:  Primarily two ways: one, because the few people who want to make
+        changes to my software will probably want me to make the changes if
+        they can't do them themselves (since I am obviously an expert on my
+        own software); two, because others who have lots of money and see
+        that they can benefit from lots of free software donate money to
+        those of us who promise to write it.
+
+7.  There's got to be a downside -- what is it?
+
+    A:  Primarily that if you make changes to it and then want to distribute
+        the changes outside your own organization or home, you have to obey
+        certain requirements.
+
+8.  Like what?
+
+    A:  You have to give anyone to whom you distribute the changed product
+        the same rights you had to the original, which means they can freely
+        copy the product and have the source code to it, including your
+        changes.
+
+
+Note that I've _never_ had anyone balk at the answers to #s 7 and 8, even
+though I've pointed out that some people in the industry dislike those
+restrictions, because I've also pointed out that it's those very restrictions
+that help keep the software free (in, as I've said before, any reasonable
+sense of the word) for everyone.  In fact, only one or two people have ever
+asked questions 7 and 8 out of the 50 or so with whom I've discussed the
+issues.
+
+What I have seen is that the _programmers_ with whom I've talked include a few
+that somehow think that the answers to #s 7 and 8 make FSF software not only
+"not free" but rather useless, not only to them but to everyone else.
+
+But it has long been the case that programmers have thought that everyone
+else had the exact same needs and wants as they. Fortunately, probably over
+99% of the population of users who have access to computers such that they
+not only use, but can install, software care not one whit whether they can
+both change that software _and_ distribute their changed versions to the
+outside world withno encumbrances.  Of those who do care, only a few seem
+to really hate the idea that they can't so distribute FSF software with
+their changes.
+
+And, fortunately for everyone, anyone who really feels that "truly free"
+software, not requiring source-code distribution and/or equivalent-licensing
+of distribution of derivations, can choose to set up competing organizations
+and products, so everyone can see which ends up winning.  Just as the FSF,
+Cygnus, and the many supporters of FSF-style free software already are
+competing with the vast, existing proprietary-software community and the
+smaller, ad-hoc public-domain and shareware communities -- and holding their
+own (if not winning outright in a few areas).
+
+Personally, I'd love to see someone set up a "Public-Domain Software
+Foundation" and write stuff released via the PD mechanism, get funding for
+it, etc, so we can all see whether the software would compete effectively
+against FSF stuff.  (Nothing would prevent the FSF from snarfing it
+and releasing it under the GPL, perhaps, but that's hardly an argument
+that such a PDSF couldn't effectively compete due to the FSF, because the
+FSF is hardly the only organization that would do such snarfing.)  Or,
+set up an FSF-like organization using a GPL-like license that has fewer
+restrictions (like dropping the source-code and/or derived-work requirements).
+
+Given all the hoopla about how bad the GPL and FSF are in "pretending" to
+be free, undoubtedly anyone really willing to put their money where their
+mouth is would have no trouble finding others sharing their beliefs and
+willing to contribute funds and/or effort towards _their_ idea of a "free"
+body of software.  Either that or they're in such a minority as makes little
+or no difference.
+
+Fortunately, rather than simply froth at the mouth, rms actually _did_
+something, creating the FSF, and here we are.  Of course, he (and some others
+of us) had previously done an equivalent of "truly free" software, and he
+(and a few others) ended up feeling somewhat burned by it, but that doesn't
+mean others shouldn't try.
+
+I'll close with a quote that I think is most apropos in this situation:
+
+    "So much has been given to me; I have no time to ponder over that
+     which has been denied."
+
+        -- Hellen Keller
+

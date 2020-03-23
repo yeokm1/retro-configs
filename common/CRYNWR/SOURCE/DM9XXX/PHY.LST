@@ -1,0 +1,628 @@
+Microsoft (R) Macro Assembler Version 6.11		    08/31/01 09:41:38
+.\phy.asm						     Page 1 - 1
+
+
+				;*****************************************************************************
+				;* Name : PHY.ASM
+				;*
+				;* All rights reserved by DAVICOM, 1996
+				;*
+				;* Description : Setup PHY procedure, include reset, read & write register.
+				;*
+				;* Functions :
+				;*	. MIIDelay
+				;*	. Syn_PHY
+				;*	. Read_Register_PHY
+				;*	. PHY_start_code
+				;*	. PHY_write_readcode
+				;*	. PHY_write_Addr
+				;*
+				;* Author : Spenser Tsai
+				;*
+				;* Date : 05/17/96
+				;*
+				;* Change Notes :
+				;* Date - Modifier
+				;*     Cause :
+				;*  Modified :
+				;*    Result :
+				;
+				; Maintainers:
+				;
+				; John H.T. Ho		htho
+				;
+				;
+				; Revision History:
+				;
+				; Date	     Modfier.	Modification Descriptions
+				; ---------- ---------- ------------------------------------------
+				; 2000.4.24	htho	fail to detect existance of 9801 if run RPHY.EXE first
+				;
+				;*
+				;*****************************************************************************
+				.model tiny
+				.386
+
+ 0000				code	segment para  public
+					assume	cs:code, ds:code
+
+				include phy.inc
+			      C ;; -- PHY Registers
+ = 0000			      C PHY_BMCR		EQU	00h
+ = 0001			      C PHY_BMSR		EQU	01h
+ = 0002			      C PHY_PHYIDR1		EQU	02h
+ = 0003			      C PHY_PHYIDR2		EQU	03h
+ = 0004			      C PHY_ANAR		EQU	04h
+ = 0005			      C PHY_ANLPAR		EQU	05h
+ = 0006			      C PHY_ANER		EQU	06h
+ = 0012			      C PHY_DCR 		EQU	12h
+ = 0013			      C PHY_FCSCR		EQU	13h
+ = 0015			      C PHY_DECR		EQU	15h
+ = 0016			      C PHY_SRR 		EQU	16h
+ = 0017			      C PHY_PCR 		EQU	17h
+ = 0018			      C PHY_LBREMR		EQU	18h
+ = 0011			      C PHY_DSCSR		EQU	17
+ = 0012			      C PHY_10BTCSR		EQU	18
+ = 0019			      C PHY_PAR 		EQU	19h
+ = 001B			      C PHY_10BTSR		EQU	1Bh
+ = 001C			      C PHY_10BTCR		EQU	1Ch
+			      C 
+			      C ;; -- Pattern thtough CR9 to program PHY
+ = 0000			      C PHY_clkL_Write_0	EQU	00000h
+ = 00010000		      C PHY_clkH_Write_0	EQU	10000h
+ = 00020000		      C PHY_clkL_Write_1	EQU	20000h
+ = 00030000		      C PHY_clkH_Write_1	EQU	30000h
+			      C 
+ = 00040000		      C PHY_clkL_Read		EQU	40000h
+ = 00050000		      C PHY_clkH_Read		EQU	50000h
+			      C 
+ = 00080000		      C CR9_M_MDI	       EQU     80000h
+ = 0013			      C CR9_S_MDI	       EQU     19
+			      C 
+ = 0100			      C BMCR_M_DM		EQU	0100h	       ; Duplex Mode mask.
+			      C 
+ = 0020			      C BMSR_M_AN		EQU	0020h	       ; Auto-Negotiation complete mask
+ = 0004			      C BMSR_M_LS		EQU	0004h	       ; Link Status mask.
+			      C 
+ = 0001			      C ANER_M_LAA		EQU	0001h	       ; Link Partner Auto-Negotiation Able mask
+			      C 
+			      C ;;PAR_M_SI10		  EQU	  0040h 	 ; Speed Indication mask
+			      C 
+			      C ;;--- PHY Chip
+ = 0000			      C DSIPHY			EQU	0
+ = 0001			      C NSPHY			EQU	1
+			      C ;;++, 2000.3.27
+ = 0002			      C PNAPHY			EQU	2
+			      C ;;++
+			      C 
+ = 2000			      C NS_OUI_MSB		EQU	0010000000000000B
+ = 5C00			      C NS_OUI_LSB		EQU	0101110000000000B
+			      C 
+			      C  
+			      C 
+
+				EXTRN	PortReadTickCounter : NEAR
+				EXTRN	p_CR9 : WORD
+				EXTRN	PortPrintMessage : NEAR
+
+ 0000 44 65 62 75 67 3A		PHY_Fail_msg	     DB      'Debug: Can not read the register of PHY.'
+       20 43 61 6E 20 6E
+       6F 74 20 72 65 61
+       64 20 74 68 65 20
+       72 65 67 69 73 74
+       65 72 20 6F 66 20
+       50 48 59 2E
+ 0028  0D 0A					     DB      0Dh,0Ah
+ 002A = 002A			PHY_Fail_msg_len     EQU     $ - PHY_Fail_msg
+
+				;--------------------------------------------------------------------+
+				; Name : MIIDelay
+				;
+				; Description: MII clock (MDC) has a maximum clock rate of 2.5Mhz(400ns).
+				;	PortReadTickCounter gives 419 nsec per count.
+				;
+				; Enter :
+				; Return :
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+					PUBLIC	MIIDelay
+ 002A				MIIDelay  proc	  near
+				;	cli
+ 002A  50				push	ax
+ 002B  53				push	bx
+ 002C  E8 0000 E			call	PortReadTickCounter	;Get initial value, Return counter value = AX
+ 002F  8B D8				mov	bx, ax			;Save start value
+
+ 0031				MIID_loop:
+ 0031  E8 0000 E			call	PortReadTickCounter
+ 0034  F7 D8				neg	ax
+ 0036  03 C3				add	ax, bx			;Get difference
+ 0038  83 F8 02				cmp	ax, 2
+ 003B  72 F4				jb	SHORT MIID_loop
+ 003D  5B				pop	bx
+ 003E  58				pop	ax
+				;	sti
+ 003F  C3				ret
+ 0040				MIIDelay  endp
+
+				;--------------------------------------------------------------------+
+				; Name : Syn_PHY
+				;
+				; Description: Sends a sequence of 32 contiguous 1's on MDIO to provide
+				;	the PHY with a sequence that can be used to establish synchronization.
+				;
+				; Enter :
+				; Return :
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+					PUBLIC	Syn_PHY
+ 0040				Syn_PHY 	PROC	NEAR
+ 0040  66| B8 00020000			mov	eax, PHY_clkL_Write_1	;; clk low
+ 0046  66| EF				out	dx, eax
+ 0048  E8 FFDF				call	MIIDelay
+
+				;;-+, 2000.4.24, htho
+				;;	mov	cx, 20h
+ 004B  B9 0022				mov	cx, 22h
+				;;-+
+ 004E				Syn_seq:
+ 004E  66| B8 00030000			mov	eax, PHY_clkH_Write_1	;; clk high
+ 0054  66| EF				out	dx, eax
+ 0056  E8 FFD1				call	MIIDelay		;; Delay 419ns
+ 0059  66| B8 00020000			mov	eax, PHY_clkL_Write_1	;; clk low
+ 005F  66| EF				out	dx, eax
+ 0061  E8 FFC6				call	MIIDelay
+ 0064  E2 E8				loop	Syn_seq
+ 0066  C3				ret
+ 0067				Syn_PHY 	ENDP
+
+
+				;--------------------------------------------------------------------+
+				; Name : Read_Register_PHY
+				;
+				; Description: Read each of 16 registers of PHY.
+				;
+				; Enter : BL = register index.
+				;	  BH = PHY address.
+				;
+				; Return : AX = register data.
+				;	   carry flag set = PHY fail.
+				;		    clear = sucessful.
+				;
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+					PUBLIC	Read_Register_PHY
+ 0067				Read_Register_PHY	PROC	NEAR
+ 0067  8B 16 0000 E			mov	dx, p_CR9
+				;; -- Synchronization
+ 006B  E8 FFD2				call	Syn_PHY
+				;; -- Start state
+ 006E  E8 011F				call	PHY_start_code		;; Start Code <01>
+				;; -- Code state (Read)
+ 0071  E8 0159				call	PHY_write_readcode	;; Read command
+				;; -- PHY address state
+ 0074  8A C7				mov	al, bh			;; PHY address
+ 0076  E8 01CE				call	PHY_write_Addr
+				;; -- Register address state
+ 0079  8A C3				mov	al, bl			;; PHY's register address
+ 007B  E8 01C9				call	PHY_write_Addr
+				;; -- TurnAround state
+ 007E  66| B8 00020000			mov	eax, PHY_clkL_Write_1	   ;; clk low & Read
+ 0084  66| EF				out	dx, eax
+ 0086  66| B8 00030000			mov	eax, PHY_clkH_Write_1	   ;; Change to read operation & clk high
+ 008C  66| EF				out	dx, eax
+ 008E  E8 FF99				call	MIIDelay
+ 0091  66| B8 00020000			mov	eax, PHY_clkL_Write_1	   ;; clk low & Read
+ 0097  66| EF				out	dx, eax
+ 0099  E8 FF8E				call	MIIDelay
+				;; -- Check turnaround bit
+				;	 mov	 eax, PHY_clkH_Read	 ;; clk high & Read
+				;	 out	 dx, eax
+				;	 in	 eax, dx
+				;	 test	 eax, CR9_M_MDI 	;; bit19 = 0 ?
+				;	 jnz	 PHY_fail
+				;; -- Register Data state
+				;; -- Read data (MDI)
+				;	mov	eax, PHY_clkL_Read
+				;	out	dx, eax
+				;	call	MIIDelay
+				;	mov	eax, PHY_clkH_Read
+				;	out	dx, eax
+				;	call	MIIDelay
+				;	mov	eax, PHY_clkL_Read
+				;	out	dx, eax
+				;	call	MIIDelay
+
+ 009C  66| 53				push	ebx
+ 009E  33 DB	xor	bx, bx		      ;; Clear BX
+ 00A0  B9 0010				mov	cx, 16
+ 00A3				PHY_read_cyc:
+ 00A3  66| B8 00050000			mov	eax, PHY_clkH_Read	;; clk high & Read
+ 00A9  66| EF				out	dx, eax
+ 00AB  E8 FF7C				call	MIIDelay
+ 00AE  66| ED				in	eax, dx
+ 00B0  66| 25 00080000			and	eax, CR9_M_MDI		;; mask MDI bit
+ 00B6  66| C1 E8 13			shr	eax, CR9_S_MDI
+ 00BA  D1 E3				shl	bx, 1
+ 00BC  0B D8				or	bx, ax		      ;; save bit
+
+ 00BE  66| B8 00040000			mov	eax, PHY_clkL_Read	 ;; clk low & Read
+ 00C4  66| EF				out	dx, eax
+ 00C6  E8 FF61				call	MIIDelay
+ 00C9  E2 D8				loop	PHY_read_cyc
+
+				;;--- Add clock to release bus
+ 00CB  66| B8 00050000			mov	eax, PHY_clkH_Read	;; clk high & Read
+ 00D1  66| EF				out	dx, eax
+ 00D3  E8 FF54				call	MIIDelay
+ 00D6  66| B8 00040000			mov	eax, PHY_clkL_Read	 ;; clk low & Read
+ 00DC  66| EF				out	dx, eax
+ 00DE  E8 FF49				call	MIIDelay
+
+ 00E1  8B C3				mov	ax, bx		      ;; Return register data
+ 00E3  66| 5B				pop	ebx
+ 00E5  F8				clc
+ 00E6  EB 0A				jmp	PHY_read_ok
+ 00E8				PHY_fail:
+
+ 00E8  BE 0000 R			mov  si, OFFSET PHY_Fail_msg
+ 00EB  B9 002A				mov  cx, PHY_Fail_msg_len
+ 00EE  E8 0000 E			call PortPrintMessage
+ 00F1  F9				stc
+
+ 00F2				PHY_read_ok:
+ 00F2  C3				ret
+
+ 00F3				Read_Register_PHY	ENDP
+
+				;--------------------------------------------------------------------+
+				; Name : Write_Register_PHY
+				;
+				; Description: Write each of 16 registers of PHY.
+				;
+				; Enter : BL = register index.
+				;	  BH = PHY address.
+				;	  DX = Write Data
+				;
+				; Return : None
+				;
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+					PUBLIC	Write_Register_PHY
+ 00F3				Write_Register_PHY	 PROC	 NEAR
+ 00F3  52				push	dx			;; Push write data
+
+ 00F4  8B 16 0000 E			mov	dx, p_CR9
+				;; -- Synchronization
+ 00F8  E8 FF45				call	Syn_PHY
+				;; -- Start state
+ 00FB  E8 0092				call	PHY_start_code		;; Start Code <01>
+				;; -- Code state (Read)
+ 00FE  E8 0109				call	PHY_write_writecode	 ;; Read command
+				;; -- PHY address state
+ 0101  8A C7				mov	al, bh			;; PHY address
+ 0103  E8 0141				call	PHY_write_Addr
+				;; -- Register address state
+ 0106  8A C3				mov	al, bl			;; PHY's register address
+ 0108  E8 013C				call	PHY_write_Addr
+				;; -- TurnAround state
+ 010B  66| B8 00020000			mov	eax, PHY_clkL_Write_1	   ;; clk low & Read
+ 0111  66| EF				out	dx, eax
+ 0113  66| B8 00030000			mov	eax, PHY_clkH_Write_1	   ;; Change to read operation & clk high
+ 0119  66| EF				out	dx, eax
+ 011B  E8 FF0C				call	MIIDelay
+ 011E  66| B8 00020000			mov	eax, PHY_clkL_Write_1	   ;; clk low & Read
+ 0124  66| EF				out	dx, eax
+ 0126  E8 FF01				call	MIIDelay
+
+ 0129  66| B8 00000000			mov	eax, PHY_clkL_Write_0	   ;; clk low & Read
+ 012F  66| EF				out	dx, eax
+ 0131  66| B8 00010000			mov	eax, PHY_clkH_Write_0	   ;; Change to read operation & clk high
+ 0137  66| EF				out	dx, eax
+ 0139  E8 FEEE				call	MIIDelay
+ 013C  66| B8 00000000			mov	eax, PHY_clkL_Write_0	   ;; clk low & Read
+ 0142  66| EF				out	dx, eax
+ 0144  E8 FEE3				call	MIIDelay
+
+				;; -- Write register data
+ 0147  5B				pop	bx				;; Pop write data
+ 0148  B9 0010				mov	cx, 16
+ 014B				Write_loop:
+ 014B  D1 E3				shl	bx, 1
+ 014D  72 20				jc	Write_pat1
+ 014F				Write_pat0:
+ 014F  66| B8 00000000			mov	eax, PHY_clkL_Write_0
+ 0155  66| EF				out	dx, eax
+ 0157  66| B8 00010000			mov	eax, PHY_clkH_Write_0
+ 015D  66| EF				out	dx, eax
+ 015F  E8 FEC8				call	MIIDelay
+ 0162  66| B8 00000000			mov	eax, PHY_clkL_Write_0
+ 0168  66| EF				out	dx, eax
+ 016A  E8 FEBD				call	MIIDelay
+ 016D  EB 1E				jmp	Write_ret_loop
+
+ 016F				Write_pat1:
+ 016F  66| B8 00020000			mov	eax, PHY_clkL_Write_1
+ 0175  66| EF				out	dx, eax
+ 0177  66| B8 00030000			mov	eax, PHY_clkH_Write_1
+ 017D  66| EF				out	dx, eax
+ 017F  E8 FEA8				call	MIIDelay
+ 0182  66| B8 00020000			mov	eax, PHY_clkL_Write_1
+ 0188  66| EF				out	dx, eax
+ 018A  E8 FE9D				call	MIIDelay
+
+ 018D				Write_ret_loop:
+ 018D  E2 BC				loop	Write_loop
+
+ 018F  C3				ret
+
+ 0190				Write_Register_PHY	 ENDP
+
+				;--------------------------------------------------------------------+
+				; Name : PHY_start_code
+				;
+				; Description: Start code <01> pattern to transition the MDIO from
+				;		the default idle line state.
+				;
+				; Enter : DX = CR9 I/O address.
+				;
+				; Return : None
+				;
+				; Destroied registers : EAX.
+				;
+				;---------------------------------------------------------------------+
+					PUBLIC	PHY_start_code
+ 0190				PHY_start_code	PROC	NEAR
+				;; -- Write 0 pattern
+ 0190  66| B8 00000000			mov	eax, PHY_clkL_Write_0	;; Stable Data
+ 0196  66| EF				out	dx, eax
+ 0198  66| B8 00010000			mov	eax, PHY_clkH_Write_0	;; clk high, Write & MDO=0.
+ 019E  66| EF				out	dx, eax
+ 01A0  E8 FE87				call	MIIDelay
+ 01A3  66| B8 00000000			mov	eax, PHY_clkL_Write_0	;; clk low, Write & MDO=0.
+ 01A9  66| EF				out	dx, eax
+ 01AB  E8 FE7C				call	MIIDelay
+				;; -- Write 1 pattern
+ 01AE  66| B8 00020000			mov	eax, PHY_clkL_Write_1
+ 01B4  66| EF				out	dx, eax
+ 01B6  66| B8 00030000			mov	eax, PHY_clkH_Write_1	;; clk high, Write & MDO=1.
+ 01BC  66| EF				out	dx, eax
+ 01BE  E8 FE69				call	MIIDelay
+ 01C1  66| B8 00020000			mov	eax, PHY_clkL_Write_1	;; clk high, Write & MDO=1.
+ 01C7  66| EF				out	dx, eax
+ 01C9  E8 FE5E				call	MIIDelay
+ 01CC  C3				ret
+ 01CD				PHY_start_code	ENDP
+
+				;--------------------------------------------------------------------+
+				; Name : PHY_write_readcode
+				;
+				; Description: Read code <10> pattern to execute read command.
+				;
+				; Enter : DX = CR9 I/O address.
+				;
+				; Return : None
+				;
+				; Destroied registers : EAX.
+				;
+				;---------------------------------------------------------------------+
+					PUBLIC	PHY_write_readcode
+ 01CD				PHY_write_readcode	PROC	NEAR
+ 01CD  66| B8 00020000			mov	eax, PHY_clkL_Write_1		;; clk low, Write & MDO=1.
+ 01D3  66| EF				out	dx, eax
+ 01D5  66| B8 00030000			mov	eax, PHY_clkH_Write_1		;; clk high, Write & MDO=1.
+ 01DB  66| EF				out	dx, eax
+ 01DD  E8 FE4A				call	MIIDelay
+ 01E0  66| B8 00020000			mov	eax, PHY_clkL_Write_1		;; clk low, Write & MDO=1.
+ 01E6  66| EF				out	dx, eax
+ 01E8  E8 FE3F				call	MIIDelay
+
+ 01EB  66| B8 00000000			mov	eax, PHY_clkL_Write_0		;; clk low, Write & MDO=0.
+ 01F1  66| EF				out	dx, eax
+ 01F3  66| B8 00010000			mov	eax, PHY_clkH_Write_0		;; clk high, Write & MDO=0.
+ 01F9  66| EF				out	dx, eax
+ 01FB  E8 FE2C				call	MIIDelay
+ 01FE  66| B8 00000000			mov	eax, PHY_clkL_Write_0		;; clk low, Write & MDO=0.
+ 0204  66| EF				out	dx, eax
+ 0206  E8 FE21				call	MIIDelay
+ 0209  C3				ret
+ 020A				PHY_write_readcode	ENDP
+
+				;--------------------------------------------------------------------+
+				; Name : PHY_write_writecode
+				;
+				; Description: Write code <01> pattern to execute read command.
+				;
+				; Enter : DX = CR9 I/O address.
+				;
+				; Return : None
+				;
+				; Destroied registers : EAX.
+				;
+				;---------------------------------------------------------------------+
+					PUBLIC	PHY_write_writecode
+ 020A				PHY_write_writecode	 PROC	 NEAR
+ 020A  66| B8 00000000			mov	eax, PHY_clkL_Write_0		;; clk low, Write & MDO=1.
+ 0210  66| EF				out	dx, eax
+ 0212  66| B8 00010000			mov	eax, PHY_clkH_Write_0		;; clk high, Write & MDO=1.
+ 0218  66| EF				out	dx, eax
+ 021A  E8 FE0D				call	MIIDelay
+ 021D  66| B8 00000000			mov	eax, PHY_clkL_Write_0		;; clk low, Write & MDO=1.
+ 0223  66| EF				out	dx, eax
+ 0225  E8 FE02				call	MIIDelay
+
+ 0228  66| B8 00020000			mov	eax, PHY_clkL_Write_1		;; clk low, Write & MDO=0.
+ 022E  66| EF				out	dx, eax
+ 0230  66| B8 00030000			mov	eax, PHY_clkH_Write_1		;; clk high, Write & MDO=0.
+ 0236  66| EF				out	dx, eax
+ 0238  E8 FDEF				call	MIIDelay
+ 023B  66| B8 00020000			mov	eax, PHY_clkL_Write_1		;; clk low, Write & MDO=0.
+ 0241  66| EF				out	dx, eax
+ 0243  E8 FDE4				call	MIIDelay
+ 0246  C3				ret
+ 0247				PHY_write_writecode	 ENDP
+
+				;--------------------------------------------------------------------+
+				; Name : PHY_write_Addr
+				;
+				; Description:
+				;		Normal, this address extract from serial ROM.
+				;
+				; Enter : DX = CR9 I/O address.
+				;	  AL = address.
+				;
+				; Return : None
+				;
+				; Destroied registers : EAX, BH.
+				;
+				;---------------------------------------------------------------------+
+					PUBLIC	PHY_write_Addr
+ 0247				PHY_write_Addr	     PROC    NEAR
+ 0247  53				push	bx
+ 0248  8A F8				mov	bh, al
+ 024A  C0 E7 03				shl	bh, 3				;; Align to 5 bits.
+ 024D  B9 0005				mov	cx, 5				;; PHY address are 5 bits.
+ 0250				addr_loop:
+ 0250  D0 E7				shl	bh, 1
+ 0252  72 20				jc	pattern1
+ 0254				pattern0:
+ 0254  66| B8 00000000			mov	eax, PHY_clkL_Write_0
+ 025A  66| EF				out	dx, eax
+ 025C  66| B8 00010000			mov	eax, PHY_clkH_Write_0
+ 0262  66| EF				out	dx, eax
+ 0264  E8 FDC3				call	MIIDelay
+ 0267  66| B8 00000000			mov	eax, PHY_clkL_Write_0
+ 026D  66| EF				out	dx, eax
+ 026F  E8 FDB8				call	MIIDelay
+ 0272  EB 1E				jmp	addr_ret_loop
+
+ 0274				pattern1:
+ 0274  66| B8 00020000			mov	eax, PHY_clkL_Write_1
+ 027A  66| EF				out	dx, eax
+ 027C  66| B8 00030000			mov	eax, PHY_clkH_Write_1
+ 0282  66| EF				out	dx, eax
+ 0284  E8 FDA3				call	MIIDelay
+ 0287  66| B8 00020000			mov	eax, PHY_clkL_Write_1
+ 028D  66| EF				out	dx, eax
+ 028F  E8 FD98				call	MIIDelay
+
+ 0292				addr_ret_loop:
+ 0292  E2 BC				loop	addr_loop
+
+ 0294  5B				pop	bx
+ 0295  C3				ret
+ 0296				PHY_write_Addr	     ENDP
+
+ 0296				code		ends
+
+						end
+ 
+Microsoft (R) Macro Assembler Version 6.11		    08/31/01 09:41:38
+.\phy.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+code . . . . . . . . . . . . . .	16 Bit	 0296	  Para	  Public  
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+MIIDelay . . . . . . . . . . . .	P Near	 002A	  code	Length= 0016 Public
+PHY_start_code . . . . . . . . .	P Near	 0190	  code	Length= 003D Public
+PHY_write_Addr . . . . . . . . .	P Near	 0247	  code	Length= 004F Public
+PHY_write_readcode . . . . . . .	P Near	 01CD	  code	Length= 003D Public
+PHY_write_writecode  . . . . . .	P Near	 020A	  code	Length= 003D Public
+Read_Register_PHY  . . . . . . .	P Near	 0067	  code	Length= 008C Public
+Syn_PHY  . . . . . . . . . . . .	P Near	 0040	  code	Length= 0027 Public
+Write_Register_PHY . . . . . . .	P Near	 00F3	  code	Length= 009D Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0001h	 
+@code  . . . . . . . . . . . . .	Text   	 DGROUP
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+ANER_M_LAA . . . . . . . . . . .	Number	 0001h	 
+BMCR_M_DM  . . . . . . . . . . .	Number	 0100h	 
+BMSR_M_AN  . . . . . . . . . . .	Number	 0020h	 
+BMSR_M_LS  . . . . . . . . . . .	Number	 0004h	 
+CR9_M_MDI  . . . . . . . . . . .	Number	 00080000h   
+CR9_S_MDI  . . . . . . . . . . .	Number	 0013h	 
+DSIPHY . . . . . . . . . . . . .	Number	 0000h	 
+GEN_VER  . . . . . . . . . . . .	Text   	 0
+HOMEPNA  . . . . . . . . . . . .	Text   	 
+MAJ_VER  . . . . . . . . . . . .	Text   	 1
+MIID_loop  . . . . . . . . . . .	L Near	 0031	  code	
+MIN_VER  . . . . . . . . . . . .	Text   	 4
+NSPHY  . . . . . . . . . . . . .	Number	 0001h	 
+NS_OUI_LSB . . . . . . . . . . .	Number	 5C00h	 
+NS_OUI_MSB . . . . . . . . . . .	Number	 2000h	 
+PHY_10BTCR . . . . . . . . . . .	Number	 001Ch	 
+PHY_10BTCSR  . . . . . . . . . .	Number	 0012h	 
+PHY_10BTSR . . . . . . . . . . .	Number	 001Bh	 
+PHY_ANAR . . . . . . . . . . . .	Number	 0004h	 
+PHY_ANER . . . . . . . . . . . .	Number	 0006h	 
+PHY_ANLPAR . . . . . . . . . . .	Number	 0005h	 
+PHY_BMCR . . . . . . . . . . . .	Number	 0000h	 
+PHY_BMSR . . . . . . . . . . . .	Number	 0001h	 
+PHY_DCR  . . . . . . . . . . . .	Number	 0012h	 
+PHY_DECR . . . . . . . . . . . .	Number	 0015h	 
+PHY_DSCSR  . . . . . . . . . . .	Number	 0011h	 
+PHY_FCSCR  . . . . . . . . . . .	Number	 0013h	 
+PHY_Fail_msg_len . . . . . . . .	Number	 002Ah	 
+PHY_Fail_msg . . . . . . . . . .	Byte	 0000	  code	
+PHY_LBREMR . . . . . . . . . . .	Number	 0018h	 
+PHY_PAR  . . . . . . . . . . . .	Number	 0019h	 
+PHY_PCR  . . . . . . . . . . . .	Number	 0017h	 
+PHY_PHYIDR1  . . . . . . . . . .	Number	 0002h	 
+PHY_PHYIDR2  . . . . . . . . . .	Number	 0003h	 
+PHY_SRR  . . . . . . . . . . . .	Number	 0016h	 
+PHY_clkH_Read  . . . . . . . . .	Number	 00050000h   
+PHY_clkH_Write_0 . . . . . . . .	Number	 00010000h   
+PHY_clkH_Write_1 . . . . . . . .	Number	 00030000h   
+PHY_clkL_Read  . . . . . . . . .	Number	 00040000h   
+PHY_clkL_Write_0 . . . . . . . .	Number	 0000h	 
+PHY_clkL_Write_1 . . . . . . . .	Number	 00020000h   
+PHY_fail . . . . . . . . . . . .	L Near	 00E8	  code	
+PHY_read_cyc . . . . . . . . . .	L Near	 00A3	  code	
+PHY_read_ok  . . . . . . . . . .	L Near	 00F2	  code	
+PNAPHY . . . . . . . . . . . . .	Number	 0002h	 
+PortPrintMessage . . . . . . . .	L Near	 0000	  code	External
+PortReadTickCounter  . . . . . .	L Near	 0000	  code	External
+SINGLE_PORT  . . . . . . . . . .	Text   	 
+SW_ONE_PKT . . . . . . . . . . .	Text   	 
+Syn_seq  . . . . . . . . . . . .	L Near	 004E	  code	
+Write_loop . . . . . . . . . . .	L Near	 014B	  code	
+Write_pat0 . . . . . . . . . . .	L Near	 014F	  code	
+Write_pat1 . . . . . . . . . . .	L Near	 016F	  code	
+Write_ret_loop . . . . . . . . .	L Near	 018D	  code	
+addr_loop  . . . . . . . . . . .	L Near	 0250	  code	
+addr_ret_loop  . . . . . . . . .	L Near	 0292	  code	
+p_CR9  . . . . . . . . . . . . .	Word	 0000	  code	External
+pattern0 . . . . . . . . . . . .	L Near	 0254	  code	
+pattern1 . . . . . . . . . . . .	L Near	 0274	  code	
+
+	   0 Warnings
+	   0 Errors

@@ -1,0 +1,124 @@
+
+-- HOWTOGET.IT
+
+		The Crynwr packet driver collection
+
+Availability
+
+The Crynwr packet driver collection is available on CD-ROM, by mail,
+by FTP, by email, by UUCP and by modem.  The drivers are distributed
+in three files: pktd11.zip, which contains most executables and
+documentation, pktd11a.zip, which contains the first half of the
+remaining files, and pktd11b.zip, which contains the second half of
+the remaining files.
+
+Mail:
+
+Columbia University distributes packet drivers on PC diskette by
+postal mail.  5.25-inch 360K and 3.5" 720K diskettes are available;
+please specify size.  Two diskette sets are available, and two prices
+are quoted for each; the first price is for the USA, Canada, and
+Mexico; the second price is for shipment to all other countries.  All
+prices are in US dollars.  Prepayment by check, MasterCard, or Visa
+is accepted.  If your check is not drawn on a US bank, please add $35
+check-cashing fee.
+
+  1. Binaries and documentation:        $35  /  $40
+  2. Source code:                       $60  /  $68
+
+To order by credit card, please specify MasterCard or Visa, your card
+number and expiration date, and sign and date your order.  For further
+information, call +1 212 854-3703, or write to:
+
+  Kermit Distribution, Dept PD
+  Columbia University Academic Information Systems
+  612 West 115th Street
+  New York, NY  10025
+
+or send e-mail to kermit@columbia.edu (Internet) or KERMIT@CUVMA
+(BITNET/CREN/EARN).
+
+FTP/email:
+
+The packet driver collection has its own directory devoted to it in
+the SimTel collection, msdos/pktdrvr.  The drivers are there, along
+with a number of programs that use the packet drivers.
+
+For security reasons the SimTel Software Repository is located on a
+host that is not accessible by Internet users, however its files are
+available by anonymous ftp from the primary mirror site OAK.Oakland.Edu
+(141.210.10.117) located in Rochester, Michigan, and from the secondary
+mirror sites:
+
+   St. Louis, MO: wuarchive.wustl.edu (128.252.135.4)
+   Corvallis, OR: archive.orst.edu (128.193.2.13)
+Falls Church, VA: ftp.uu.net (192.48.96.9
+       Australia: archie.au (139.130.4.6)
+         England: src.doc.ic.ac.uk (146.169.2.1)
+         Finland: ftp.funet.fi (128.214.6.100)
+         Germany: ftp.uni-paderborn.de (131.234.2.32)
+          Israel: ftp.technion.ac.il (132.68.1.10)
+     Switzerland: ftp.switch.ch (130.59.1.40)
+          Taiwan: NCTUCCCA.edu.tw (140.111.1.10)
+
+SimTel files may obtained by e-mail from various ftp-mail servers
+or through the BITNET/EARN file servers.  For details see file
+/pub/msdos/filedocs/mailserv.inf.  Gopher users can access the
+collection through Gopher.Oakland.Edu.  World Wide Web (WWW) and
+Mosaic users can connect to the URL http://www.acs.oakland.edu to
+access the files on OAK.Oakland.Edu.
+
+Modem:
+
+If you cannot access them via FTP or e-mail, most SimTel MSDOS
+files, including the PC-Blue collection, are also available for
+downloading from Detroit Download Central (313) 885-3956.  DDC
+has multiple lines which support 300/1200/2400/9600/14400 bps
+(103/212/V22bis/HST/V32bis/V42bis/MNP).  This is a subscription system
+with an average hourly cost of 17 cents.  It is also accessable on
+Telenet via PC Pursuit and on Tymnet via StarLink outdial.  New files
+uploaded to SimTel are usually available on DDC within 24 hours.
+
+CD-ROM:
+
+Title:  Packet Driver, WinSock & TCP/IP CD-ROM (aka Packet Driver CD)
+Price:  US$29.95/each
+
+Brochures and order forms for the CD (paper and electronic versions)
+will be available from:
+
+Gopher: gopher.CDPublishing.com
+FTP:    ftp.CDPublishing.com
+E-mail: <info@CDPublishing.com>
+FAX:    604-874-1431
+Phone:  604-874-1430
+        800-333-7565
+Postal: CD Publishing Corporation
+        4824 Fraser Street
+        Vancouver, B.C.  V5V 4H4
+        Canada
+
+UUCP:
+
+The packet driver files are available from UUNET's 1-900-GOT-SRCS, in
+uunet!~/systems/msdos/simtel20/pktdrvr.  Contact UUNET for more details:
+
+UUNET Technologies, Inc.
+3110 Fairview Park Drive, Suite 570
+Falls Church, VA 22042
++1 703 204 8000 (voice)
++1 703 204 8001 (fax)
+info@uunet.uu.net
+
+UK UUCP:
+
+Steve Kennedy's BBS is on +44 71 483 2454 (Telebit T2500 PEP/V32 ...)
+                                                2455 (USR HST/DS+)
+
+Files will be in /pub
+there will be an anonymous uucp (nuucp) account.
+
+System name is "marvin"
+
+-- end of HOWTOGET.IT
+

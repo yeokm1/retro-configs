@@ -75,3 +75,4 @@ Post DOS 6.22 bootup
 12. [MS-DOS 6.22 install disks](https://winworldpc.com/product/ms-dos/622)
 13. [Windows for Workgroups 3.11 install disks](https://winworldpc.com/product/windows-3/wfw-311)
 14. [SBPNPXT by dca2](https://www.vogons.org/viewtopic.php?p=479466#p479466)
+15. [Crynwr](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/repos/pkg-html/crynwr.html)

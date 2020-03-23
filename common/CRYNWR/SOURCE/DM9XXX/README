@@ -1,0 +1,151 @@
+
+insmod usage:
+
+insmod dmfe			;;auto mode
+insmod mode=0			;;Force to 10M Half Duplex Mode
+insmod mode=1			;;Force to 100M Half Duplex Mode
+insmod mode=4			;;Force to 10M Full Duplex Mode
+insmod mode=5			;;Force to 100M Full Duplex Mode
+insmod debug=1			;;Enable debug message
+insmod cr6set=xxxxxxxx		;;Set CR6 default operating mode
+	cr6set=0x100		;;Enable RX single port
+	cr6set=0x002c0000	;;Enable HomeNet
+insmod chkmode=0		;;Disable check mode for DM9102
+
+
+date		version		description
+---------	-------		--------------------------------------
+01-18--2000	v1.28		Release Version:
+				After netbench, file copy , compare test. it
+				did not find problem. The detail see 
+				c:\wang\linux\netbench
+
+01-14--2000	v1.27f		Test Version:
+				process send_filter_frame() used TX queue method
+
+01-14--2000	v1.27e		Test Version:
+				Used the tx queue to do the software one
+				packet to solve RedHat6.1 performance low 
+				problem.
+				It need more Tx polling command to transmit
+				sometimes.
+
+10-08--99	v1.27		Release Version:
+				Like as V1.26K, except do not display media type
+				Support SROM format V3.0/V4.0
+				Test kernel 2.0.36, 2.2.05, 2.2.12, 2.3.18
+				10MHF, copy to/from over night OK.
+
+10-07--99	v1.26K		Test Version:
+				Add PCI_BIOS32.H for kernel 2.0.36
+
+10-06--99	v1.26J		Test Version:
+				Fixed phy_addr=1, to solve SROM format V3.0
+				and V4.0 problem.
+				Let DEVICE = device for under kernel 2.3.00
+				else    DEVICE = net_device 
+				compiler test: v2.2.5, v2.2.12, v2.3.18
+
+09-29--99	v1.26I		Test Version:
+				Deleted some unnecessary include files
+				100M full duplex mode test, win98/cal2.2:
+				date 9/29~9/30
+				copy to/from many big files over 12hours,OK
+
+09-27--99	v1.26H		Test Version:
+				Solve problem: IO size at clean_module(),
+				release IO regision must be the same range.
+				Callback Time : 1 S"
+				Tx timeout : 2 S"
+				100M Half Duplex Mode test, win98/caldera2.2:
+				date: 9/27/99 ~ 9/29/99
+				1. copy to/from many big files over 24 hours,OK
+				2. copy to/from thusronds files over 24 hours,OK
+
+09-15--99	v1.26G		Test Version:
+				Solve problem. At DM9102, IO size 128,
+				DM9102A/DM9132 IO size 256. previous version
+				used 256 always and it did not work on some PC.
+08-04--99	v1.26F		Test Version:
+				Solve problem. After a dynamic reset, it
+				did not fill all MC address to MAC.
+08-04--99	v1.26E		Test Version:
+				Display the wrong packet for SERCOMM
+08-04--99	v1.26B		Test Version:
+				Support DM9102A+DM9181
+				Addition: Tx statistic counter : collision
+07-29--99	v1.26A		Test Version:
+				Support DM9132 using 1 perfect and 64 bits
+				hash_table.
+07-22--99	v1.26		Same to V.125E. This is a release version.
+07-26--99	v1.25F		Enable CR0 bit 20/22/23 (New BL, TX/RX 
+				descriptor burst mode). Test version.
+07-21--99	v1.25E		DM9102 don't need the check mode. New 
+				parameter "chkmode"
+07-20--99	v1.25D		1. DM9102A don't need this. DM9102 need :
+				Check the data error problem for DM9102,
+				If found the data error packet, let Dm9102
+				work at the single port when rx packet <30000
+				packets. Else let Chip works at dual port.
+				2.init_module parse "mode" used another method.
+07-16--99	v1.25C		Support DM9102AF(DM9132), Check Chip revision
+				and do CR12 conversion. DM9102AF CR12 bit1=0
+				link ok, bit1=1, link failed.
+07-06--99	v1.25B		Init db->last_rx=jiffies, when rx packet coming
+				at Rx handler.
+07-01--99	v1.25A		When Rx interrupt too much(over 5000h per s")
+				, I disabled the RX interrupt and enabled
+				RX buffer unavailable interrupt. When RX traffic
+				lower than 5000h, I enabled the RX interrupt 
+				again.
+06-28--99	v1.25		1.dynamic_reset() stop dm9102 before free the 
+				Rx resource.
+				2.Un-show the media type in dmfe_timer()
+				3.Check CR8, if in the timer callback interval,
+				no packet coming but CR8 had value, RESET the
+				device.
+06-22--99	v1.24C		dmfe_init_dm910x() reset dm9102 phyxcer.
+06-16--99	v1.24A		kmalloc() need GFP_DMA flag, to allocate
+				physical memory
+06-14--99	v1.24		Solve the page_fault problem when remove
+				dmfe module.
+06-10--99	v1.23e		dmfe_free_rxbuffer() modified
+06-09--99	v1.23b		After dynamic_reset(), let rx_error_cnt=0
+				In Serrcom environment, It happens
+				dmfe_dynamic_reset() very soon.
+06-01--99	v1.23a		Addition a option "cr6set", user could set
+				CR6 default value. 
+				<eg> insmod dmfe cr6set=0x100 : enable rx fifo
+				single port function
+
+05-25--99	v1.23		Used new library. Kernel version over 2.035
+				used "pci_" to replace "pcibios_"
+				Reset DM9102 when rdes0 not F/L happen too fast.
+
+05-20--99	v1.22		Solve page fault on kernel 2.20 when remove
+				module.
+				In dmfe_stop(), After we released the allocated
+				memory, we need to clear the pointer.
+
+05-07-99	v1.21		Solve the 8259 interrupt edge problem.
+				Disable all interrupt in CR7, when enter
+				interrupt handler. Resore the CR7 original
+				value before leave the interrupt handler.
+
+04-21-99	v1.20		Solve the copy and compare file problem
+				on 100M mode.
+				dmfe_start_xmit(): if tbusy=1 & tx_packet_cnt=0
+				let tbusy=0 and keep transmitting
+
+04-13-99	v1.10		Solve the transmit double lock problem.
+				Let transmit timeout time=4S"
+				Solve 100M under run error,
+				CR6_DEFAULT enable SF/MII port
+				dmfe_start_xmit() return 1 when dev->tbusy=1
+
+12-30-98	v1.00		For slackware gcc compiler, merge all
+				independent line to one line for #define
+
+10-28-98	v0.9a		Beta version and released to TM
+				Known bug: using UNIX FTP, it will happen
+				"double unlock/lock device queue"

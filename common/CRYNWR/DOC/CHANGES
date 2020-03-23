@@ -1,0 +1,61 @@
+Changes from version 11.9 to 11.10:
+
+  o Wasn't properly checking to see if the PHY device number in the
+    EEPROM was in range.  This resulted in a garbage message being printed.
+  o A change in manufacturing caused the unset values in the EEPROM to
+    default to 0xFF instead of 0.  This made it appear as if a second
+    PHY chip was installed, which isn't supported.
+  o Manual speed/duplex configuration was broken on all 82558/82559/82550
+    boards.  Auto-negotiation happened, but wasn't being reported.
+    Added a subroutine for 82555 setup.  Why 82555?  Because that's
+    the Intel's original implementation of a PHY chip.  It got moved
+    onto the same die for the 82558 && friends.
+  o Moved the phy I/O routines from macros into subroutines.  No need
+    for that much in-line code.
+  o Helge Wagner added support for systems where the eeprom only has a
+    MAC address and checksum.  If it reads back as all ones, we
+    initialize to reasonable values and life goes on.
+
+Changes from version 11.8 to 11.9:
+
+  o Pro/100 VA support added.  Actually, all it does is recognize Yet
+    Another PCI device id.
+  o The ADL MSMP5S PC/104 board claims that it has neither primary
+    nor secondary PHY chips.  Removed code that aborted out if
+    neither PHY was defined in the EEPROM.
+
+Changes from version 11.7 to 11.8:
+
+  o Made interrupt sharing actually work properly.
+
+Changes from version 11.6 to 11.7:
+
+  o A few changes for MASM compatibility.
+  o Changed the TX_THRESHOLD to 200 to delay transmission until the
+    packet has been completely copied.  This was necessary for some
+    machines to avoid sending runt packets.  If this causes you to
+    have a cow, I can add a switch to set it back to 4.
+  o newer boards have bigger eeproms, so the eeprom code is nearly all new.
+  o Intel is now using multiple device ids, so the code needs to find
+    all possible id's that might be used.
+  o Default to half duplex.
+
+Changes from version 11.5 to 11.6:
+
+  o Changed the method used to locate adapters subsequent to the first.
+    A user needed to specify multiple adapters in a consistent manner
+    from machine to machine regardless of the assigned I/O address.
+  o Enabled IRQ sharing.  Too much of a hassle to tweak BIOS
+    parameters to ensure that each board has its own IRQ.
+
+Changes from version 11.4 to 11.5:
+
+  o Need to turn on bus_master in PCI command register.
+  o We were printing the self test FAILED msg twice.
+
+Changes from version 11.1 to 11.2:
+
+  o Removed int_no from the command line parsing.  No need for it.
+  o On some fast Pentiums, there was insufficient delay between
+    EEPROM accesses
+

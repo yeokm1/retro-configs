@@ -1,0 +1,59 @@
+Notes on using the 3c507 network card with ICETCP
+-------------------------------------------------
+
+The card is SOFTWARE CONFIGURED.  This means that the port address, irq,
+memory address, memory size and rom address (normally not used) are
+set in a configuration program called 3c507.exe which comes with the
+board.
+
+The configuration program may not immediatly recognize the board
+if there are io port conflicts in the machine.  In this case the command
+should be given as
+	3C507 /B:###
+	where ### is the address in hex of the board's desired port 
+location.  It should then be possible to bring up the configuration program 
+the normal way by just typing 3c507 <enter>.
+
+The card can be configured using the menu option "set
+configuration".  Possible problems are, as always:
+
+	The irq line used cannot be shared with other devices
+
+	and
+
+	The shared memory address must not conflict with other memory mapped 
+devices or drivers, (such as qemm-386).  This is a little more difficult 
+than usual because the board has a large buffer.  If you want to use it to 
+it's fullest, you need a 64k block of open space in the C000-EFFF area.  If 
+there isn't a gap that large available, then a smaller buffer (as small as 
+16k is possible) should be used. 
+
+	Also
+
+	The zero wait state and turbo options can also cause problems. 
+On some machines, these will options will not work with the packet driver.
+On some machines, these will also not work with NDIS. With both options
+turned off, everything will work.  We recommend starting with both options
+off and running the diagnostics part of the 3c507.exe program to see if
+everything is working.  Then, after all software (ICE.TCP) is running,
+the zero wait state and turbo options can be tried.  The diagnostics part of
+3c507.exe is a good test for these options.
+
+Even though the board is totally software configured, the packet
+driver for the 3c507 (3c507.COM, unfortunately the same name as the
+configuration program) needs to know all of the parameters set in the
+configuration of the board.  The NDIS driver does not need these parameters.
+If the packet driver fails, check the parameters for the packet driver to
+verify that you entered the same ones as when you configured the board. If it
+still doesn't work, check to see that the turbo and zero wait state options
+are turned off.  If it still doesn't load, check for irq, port and memory
+address conflicts.
+
+Finally, the 3COM configuration program for the board WILL NOT RUN if
+there are any active drivers (just freezes). If you need to reconfigure,
+remove the packet or ndis drivers from your autoexec.bat or
+config.sys files FIRST.
+
+(C) 1991, James River Group, Inc, Minneapolis MN USA
+
+

@@ -1,0 +1,58 @@
+
+Gopher client for IBM PC
+ 
+Version 1.1 of the PC Gopher client is now available by anonymous 
+FTP from boombox.micro.umn.edu in the directory 
+     pub/gopher/PC_client/version_1.20
+ 
+ 
+About Gopher:
+ 
+The Internet Gopher is a distributed document delivery service.  
+It allows a neophyte user to access various types of data 
+residing on multiple hosts in a seamless fashion.  This is 
+accomplished by presenting the user a hierarchical arrangement 
+of documents and by using a client-server communications model.
+In addition to browsing through hierarchies of documents, gopher 
+users can submit queries to gopher search servers. The search 
+servers typically have full-text indexes for a set of gopher 
+documents; the responce to a query is a list of documents that 
+matched the search criteria. 
+
+Internet Gopher servers accept simple queries (sent over a TCP 
+connection), and respond by sending the client a document or a 
+list of documents. Since this is a distributed protocol there can
+be many servers... but the client software hides this fact from 
+the user. We currently use this technology at the University of
+Minnesota to help support microcomputer users... a couple of gopher
+servers have 6000-7000 computer Q&A items that users can search
+for answers to their questions. In addition, there are also gopher 
+servers with recipes and other fun stuff.
+ 
+The PC Gopher client runs on most networked PCs, but requires that 
+you have loaded the appropriate Clarkson packet driver for your network 
+ethernet card. The PC gopher software has a TurboVision user interface
+so both keyboard and mouse are supported... and you don't need to run
+MS Windows.
+
+If you want more information about the Gopher protocol, you can anonymous  
+FTP to boombox.micro.umn.edu and look in the /pub/gopher directory tree.
+Currently there are gopher clients for Mac, PC and Unix (curses-based)
+available from the University of Minnesota. The University of St. Thomas 
+wrote a NeXT gopher client available for anonymous ftp from 
+     cs.stthomas.edu (140.209.5.1)
+directory gopher, file Gopher_1.0b.tar.Z (51605 bytes).
+ 
+You can subscribe to a mailing list for announcemnets of new gopher 
+servers and software by sending a request to:
+          gopher-news-request@boombox.micro.umn.edu
+          
+You can send e-mail to the gopher development team at: 
+          gopher@boombox.micro.umn.edu
+
+Daniel A. Torrey
+Distributed Services and Planning
+Computer and Information Services
+University of Minnesota
+daniel@boombox.micro.umn.edu
+

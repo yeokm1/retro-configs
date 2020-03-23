@@ -1,0 +1,35 @@
+
+Introduction:
+
+  This document describes the procedure to setup the Packet driver for
+  100/10M PCI Ethernet Adapter.
+
+  Location of Driver:     \PKTDRV\FEAPKT.COM
+
+
+Usage:
+
+  Load the packet driver using the software interrupt and any
+  optional switches if required.
+
+  Usage: FEAPKT [-u] <software_int_no> [media]
+
+  Example: FEAPKT 0x60
+
+  The only required parameter is the software interrupt.  A packet
+  driver needs to have a software interrupt assigned to it for other
+  programs to access it.
+  If you need any of the options listed below, place them before the
+  software interrupt on the command line.
+
+    -u           : to unload this driver",CR,LF
+    packet_int_no: to set software interrupt for this driver
+                   the reasonable value is from 0x60 to 0x80
+    media        : to set the line speed and fullduplex function
+                   the reasonable value is auto/10half/10full/100half/100full
+                   auto    = enable autonegotiation
+                   10half  = force to 10M, half duplex
+                   10full  = force to 10M, full duplex
+                   100half = force to 100M, half duplex
+                   100full = force to 100M, full duplex
+

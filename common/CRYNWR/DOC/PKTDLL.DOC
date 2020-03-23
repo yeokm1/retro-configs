@@ -1,0 +1,156 @@
+PKTDLL v1.2
+~~~~~~~~~~~
+PKTDLL provides a Packet Driver interface over Digital Equipment Corp.'s
+Datalink (DLL) specification drivers.  This is a small TSR shim which
+translates application Packet Driver calls into appropriate DLL calls.
+PKTDLL should work over any of the current v4.1 DLL and earlier drivers
+(DLLDEPCA, DLLNDIS, etc.), making it a simple matter to add Packet Driver
+applications to an existing PATHWORKS network environment (v5.0 should
+most likely work as well - except for Novell 802.3 support - see below).
+Simply add a line with "PKTDLL" into your AUTOEXEC.BAT after the commands
+to start the network.  If you feel really adventurous you could even
+"LOADHIGH PKTDLL" (it works fine!).
+
+PKTDLL was renamed from DLLPKT to be consistent with the naming conventions
+used within Digital Equipment Corporation and the left to right reading
+habits of the western world.  If you feel stubborn about this issue, DOS
+does have a file renaming command.
+
+I have not included support for any advanced functionality such as
+multicast and promiscuous mode.  If there are significant grumblings, I
+will re-examine these issues, however, I really don't see the need.  This
+extra functionality is better served by existing utilities which deal
+directly with the DLL.
+
+There is an assumption that the DECnet flavour of PATHWORKS is being used.
+Having two different TCP/IP stacks simultaneously on a single machine would
+be somewhat strange (perhaps it would be ok with multiple network cards).
+Also, PKTDLL is currently setup as a Class 1 Packet Driver (ethernet).  I
+will soon be examining the changes required to support Token Ring.  I have
+also made this a so called high performance Packer Driver, but there has
+been a minimum of testing with the high performance functions.  This may
+sound somewhat tentative, however, I have been using the driver regularly
+for quite some time and have found no problems.
+
+If you have the desire to modify this code or find items needing repair,
+please send me your requests and/or updates.  I am closer to DEC's
+engineering group and should be able to ensure that PKTDLL functions
+according to the DLL specification, hopefully keeping so called quality at
+a high level.  Please also forward any other comments to me.  I am quite
+interested in how people may be using this driver.
+
+As with any other packet driver, to use most network applications within
+MS Windows, one must employ the services of WINPKT or PKTMUX.
+
+The following packages have been successfully tested with PKTDLL:
+WATTCP                          NCSA Telnet
+KA9Q                            CUTCP
+Kermit                          QVTNET
+Trumpet - News Reader           PDIPX from Intel
+Trumpet - TCPDRV                IPX from BYU
+PKTMUX                          WINPKT
+
+
+New in PKTDLL 1.2:
+~~~~~~~~~~~~~~~~~~
+1)      Specifying a protocol type of "0" as the first protocol type on
+	the command line will stop any protocols from being held open for
+	Windows.  This should not be necessary in most circumstances, as
+	the protocols are always available to DOS applications.  There may
+	be a very tiny performance gain.
+
+2)      Specifying "/s" on the command line will stop all upcalls from
+	PKTDLL (similar to "TERMIN/S").  This combined with a MARK/RELEASE
+	type program will safely allow the unloading of a normally non-
+	unloadable packet driver based program (eg. IPX).  This can and
+	will ungracefully mess up any running packet driver applications
+	(ie. not recommended except for very specific uses).
+
+3)      The command line parsing is somewhat more freeform, though the
+	switches must still be at the end of the line.  The order of the
+	numbers is less important and the vector does not have to be
+	specified in order to change the protocol types anymore.
+
+4)      A problem with Novell 802.3 support over v4.1 DLLDEPCA has been
+	fixed.  Novell 802.3 packets have now been successfully tested
+	over DLLDEPCA and DLLNDIS (still no progress on v5.0 DLL support).
+
+	Thanks for feedback to David Denholm.
+
+
+Usage:                  PKTDLL [packet_int] [proto_type...] [/n] [/s] [/u]
+~~~~~~
+
+packet_int      -       This is the Packet Driver interrupt to use.  The
+			default interrupt is 61 HEX.  The number will be
+			interpreted as hexadecimal whether or not it is
+			prefixed by "0x".  This same rule applies to the
+			protocol type following.
+
+			range: 60 - 7F
+
+proto_type      -       This is a list of protocol types to hold open for
+			Windows access.  The DLL must have any protocols
+			which it will use in Windows opened prior to
+			entering Windows.  The protocols in this list will 
+			be opened and held in limbo until accessed by an
+			application.  There is no such restriction on Packet
+			Driver applications outside of Windows.
+
+			The default is to open protocols 0800, 0806, and
+			8035 (IP, ARP, and RARP).  This list may replaced
+			by a list of your own choosing.  Be aware that the
+			DLL only supports 8 portals, several of which are
+			often used by PATHWORKS.  MOP and LoopBack are
+			temporarily disabled when PKTDLL is loaded but are
+			restored on exiting PKTDLL.  A value of 0 will
+			disable this feature.
+
+			range: 0 or 05EF - FFFE
+
+/n              -       "/n" will select 802.3 framing for Novell's IPX.
+			Most public domain IPX stacks use Novell's 8137
+			DIX protocol type.  This will convert these packets
+			to 802.3 on the wire.  This functionality will not
+			work with the new PATHWORKS V5.x DLL drivers being
+			developed - ie. only DIX will be supported (the API
+			is changing and I am feeling very lazy).
+
+/s              -       "/s" will stop all upcalls from PKTDLL, allowing
+			a MARK/RELEASE type program to safely unload a
+			non-unloadable program like IPX.  PKTDLL remains
+			in memory and available for use.
+
+/u              -       "/u" will unload the driver releasing both its
+			memory and it reserved protocols, provided there
+			are none in use.  If an alternate interrupt has
+			been chosen, it must be specified when unloading
+			the driver.
+
+
+Examples:               PKTDLL
+
+			Loads the Packet Driver at interrupt 61 with protocols
+			IP, ARP and RARP active for Windows.
+
+			PKTDLL 61 7301 7302 /n
+			WINPKT 0x60 0x61
+
+			Loads the Packet Driver at Interrupt 61 with protocols
+			7301 and 7302 (just made them up!) active for Windows.
+			Also, protocol 8137 will be converted to 802.3.
+			The WINPKT line is necessary to run most packet driver
+			applications within Windows.  If you feel adventurous
+			try PKTMUX v1.2c (it actually works).
+
+			PKTDLL 60 /u
+
+			Unloads the Packer Driver loaded at interrupt 60.
+
+
+Have Fun,
+
+Brian Angus
+
+angus@trcoa.enet.dec.com
+(416) 597-3268

@@ -1,0 +1,191 @@
+                  STANDARD MICROSYSTEMS CORPORATION
+
+                            Packet Driver
+                      For Ethernet LAN Adapters
+
+                          INSTALLATION GUIDE
+
+   This software is licensed by SMC for use by its customers only.
+      Copyright (c) 1994-1996 Standard Microsystems Corporation.
+                         All rights reserved.
+
+
+This installation guide describes:
+
+o  Basic packet driver use.
+
+o  Software interrupts.
+
+o  How to use the packet driver to connect to a NetWare 2.2 server
+   using the BYU packet driver shell. 
+
+o  How to use the packet driver to connect to a NetWare server 
+   using the Intel packet driver shell.
+
+o  Using the packet driver with SMC adapters.
+
+Note: This driver supports all 8432, 8432 (Enhanced), and 9332 Ethernet
+	adapters.
+
+
+BASIC PACKET DRIVER USE
+
+The following section describes basic packet driver use. Since 
+different networks have different requirements, you can include the 
+following switches in your command lines as needed.
+
+  -d    This switch delays the adapter's initialization until the first 
+        time the packet driver is accessed. Use this switch if your 
+        workstation loads the operating system over the network using a 
+        Boot ROM on the SMC adapter.
+
+  -n    This switch configures the driver to change 8137-formatted 
+        packets seen by the client into IEEE802.3 packets.  Unless you 
+        use the BYU's NetWare packet driver shell, you can omit this 
+        switch. If you want to use 8137 packets, use "econfig" to
+        configure Intel's PDIPX103 packet driver shell.
+
+  -p    This switch disables promiscuous mode. A small level of security 
+        can be achieved by disabling promiscuous mode; however, 
+        disabling promiscuous mode should not be mistaken for real 
+        security.
+          
+  -w    This switch is used with Microsoft Windows for nonresident DOS 
+        TCP stacks, such as NCSA Telnet and PC-Gopher. Alternatively,
+        you can use the Windows freely copyable utility, winpkt. 
+
+  -i    The SMC packet driver can be used with both Ethernet_II and 
+        IEEE 802.3 frame types. The packet driver specification, however, 
+        only allows a driver to report one class which, by default, is
+        Ethernet_II. If you use the packet driver with client software 
+        that expects to find an IEEE 802.3 packet driver instead of an 
+        Ethernet_II packet driver, use this switch to configure the 
+        driver to use IEEE 802.3-formatted packets.
+
+
+SOFTWARE INTERRUPTS
+
+A packet driver provides services for client programs. These programs
+access the packet driver by issuing software interrupts. 
+
+Any software interrupt between the hexadecimal addresses of 0x60 
+through 0x80 can be used with the packet driver, with the following 
+exceptions:
+
+o  0x67 is reserved for the EMS specification.
+
+o  0x70 through 0x77 are reserved for hardware IRQ lines 8 through 15.
+
+After you choose a software interrupt, assign that interrupt to the 
+packet driver, and install the packet driver. The client programs 
+will then automatically locate the packet driver by searching for
+the packet driver's signature at software interrupts from 0x60 
+through 0x80.
+
+
+MEDIA/SPEED KEYWORDS
+
+Following the optional slot number parameter are several optional
+keywords.  If you specify media then you must specify speed (and
+vice-versa).  These select the media: 
+
+AUTONEGOTIATE - (Negotiated -- default)
+MII - Media Independent Interface
+UTP - Unshielded Twisted Pair
+BNC - British Naval Connector (thinwire)
+AUI - Attachment Unit Interface (thickwire)
+S10 - Starlan 10 (pre-standard 10Base10 -- no link beat)
+
+Other keywords select the speed.  FOUR and SIXTEEN are for Token
+Ring.  TEN and HUNDRED are for Ethernet.  FD is for full duplex
+interfaces.
+
+
+INSTALLING THE PACKET DRIVER
+
+The command line has the name of the packet driver, any dash options
+(as listed above), the software interrupt, and any optional
+parameters, such as slot number, or media/speed keywords.  The
+simplest command line is "pktpwr 0x7e".  A more complex line would be
+"pktpwr 0x7e aui", or "pktpwr 0x7e hundred fd".
+
+
+CONNECTING TO A NetWare 2.2 SERVER USING THE BYU PACKET DRIVER SHELL
+
+If you want to connect to a NetWare 2.2 server that, by default, is 
+configured to use IEEE 802.3-type packets, use the following command 
+line examples.
+
+   PKTPWR -n 0x7e
+   BYUIPX
+   NETX
+
+In this command line:
+
+o  PKTPWR denotes the SMCPower adapter.
+
+o  -n configures the driver to change 8137-formatted packets seen by 
+   the client into IEEE802.3 packets.
+
+o  Software interrupt setting 0x7e is the hexadecimal address 7E,
+   which allows packet driver clients to use interrupt 7E to 
+   communicate with the packet driver.
+
+
+CONNECTING TO A NetWare SERVER USING THE INTEL PACKET DRIVER SHELL
+
+If you want to connect to a NetWare server using the Intel packet
+driver shell, pdipx103, use the following command line:
+
+   PKTPWR 0x7e
+   PDIPX
+   NETX
+
+In this line:
+
+o  PKTPWR denotes the SMCPower adapter.
+
+o  0x7e is the hexadecimal address 7E, which allows packet driver 
+   clients to use interrupt 7E to communicate with the packet driver.
+
+
+USING THE PACKET DRIVER WITH TWO SMCPower ADAPTERS IN ONE MACHINE
+
+You can use the packet driver with two adapters in the same machine.
+The first packet driver will use the first adapter found, which will
+be in virtual slot number 16, the first PCI slot.  The second packet
+driver should specify virtual slot number seventeen, which is the
+second PCI slot.
+
+pktpwr 0x7d
+pktpwr 0x7e 17
+
+In these lines:
+
+o  PKTPWR denotes the SMCPower adapter.
+
+o  0x7d is the hexadecimal address 7D, which allows packet driver 
+   clients to use interrupt 7D to communicate with the packet driver.
+   Similarly for 0x7e.
+
+o  17 is the Virtual slot number.
+
+
+This commercial computer software and documentation is provided with
+RESTRICTED RIGHTS.  Use, duplication, or disclosure by the
+Government is subject to restrictions set forth in subparagraph
+(c) (1) (ii) of the Rights in Technical Data and Computer Software
+clause at DFARS 252.227-7013, or subparagraphs (c) (1) and (2) of the
+Commercial Computer Software -- Restricted Rights clause at
+FAR 52.227-19, or Alternate III of the Rights in Data -- General
+clause at FAR 52.227-14, as applicable.  The manufacturer /
+subcontractor is Standard Microsystems Corporation,   80 Arkay Drive,
+Hauppauge,  NY    11788. 
+
+
+SMC and Standard Microsystems are registered trademarks; and EtherEZ,
+EtherCard Elite 16 Ultra, EtherCard Elite 16T Ultra, EtherCard Elite
+16C Ultra, EliteSeries, EZStart, and SuperDisk are trademarks of 
+Standard Microsystems Corporation.  Other product and company names 
+are registered trademarks or trademarks of their respective holders.
+

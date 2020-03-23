@@ -1,0 +1,39 @@
+	Making Novell's NetWare cooperate with other protocols.
+
+To share an Ethernet card with multiple protocol stacks, you must
+have a way to direct packets to the appropriate stack.  IPX does not
+lend itself to doing this.  Some vendors have tortured their IPX into
+giving up packets when it needs to.  Packet drivers (and a packet
+driver IPX) are a good solution.  Novell has chosen ODI drivers (and
+IPXODI) for NetWare 4.
+
+First, install a packet driver.  Read the other documentation to see
+how to do this.  Do not use the -n switch. Then run the PDIPX.COM
+found in pdipx103.zip.  Then run your favorite NETx program.
+
+That's it!
+
+Upgrading from BYU packet driver IPX:
+
+The pdipx is not a drop-in replacement for the BYU packet driver IPX.
+It does not need the -n switch, because unlike the BYU packet driver
+IPX, it understands about different frame types.  By default, it uses
+the default frame type -- Novell's "Raw" IEEE 802.3.  If you're using
+Ethernet_II, you must set your frame type as explained below.
+
+Updating the IPX:
+
+Pdipx103 has a fairly recent IPX.  If you need to regenerate it with
+a newer IPX, then treat the SIPX.LAN and SIPX.OBJ files as
+third-party shell drivers.  Perform the SHGEN (NetWare 2) or WSGEN
+(NetWare 3) procedure per Novell's documentation.  Set the frame type
+as explained below if you're using Ethernet_II framing.
+
+Setting your frame type:
+
+The PDIPX expects Novell's "raw 802.3" packet types by default.  If
+you're using Ethernet_II framing, then run econfig on IPX.  Use
+"econfig pdipx.com shell:e 8137".  This sets the packet type to
+Ethernet and type 8137 (Novell).  Just running "econfig pdipx.com"
+will tell you what frame type it's configured for.
+

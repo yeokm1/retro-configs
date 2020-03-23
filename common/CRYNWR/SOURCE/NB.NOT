@@ -1,0 +1,261 @@
+                         
+
+1.0  INTRODUCTION
+
+
+The NetBIOS packet driver found in the Clarkson collection has been
+heavily modified to correct deficiencies and to change it from a
+type 6 to a type 1 packet driver.  This document describes the new
+NetBIOS packet driver and explains how to use the packet driver to
+support concurrent operation of TCP/IP application software
+packages and NetBIOS based applications such as Lantastic.
+
+
+2.0  BACKGROUND
+
+
+Lantastic is an inexpensive Networking Operating System (NOS) that
+provides most of the features required by smaller organizations. 
+Unfortunately, Lantastic does not support packet drivers.  As a
+result, it is difficult to use popular "freeware" TCP/IP packages
+(such as NCSA Telnet, POPmail and TRUMPET) concurrently with
+Lantastic.
+
+Lantastic uses NetBIOS to provide session layer (and below)
+services.  Hence, one approach to providing concurrent Lantastic -
+TCP/IP operation is to purchase an RFC 1001/1002 compliant NetBIOS
+implementation.  As most people purchase Lantastic because of its
+low cost and because they wish to use "freeware" TCP/IP packages,
+it is unlikely that they will want to spend yet more money on
+another NetBIOS implementation.  In addition, this approach will
+only provide TCP/IP support to those application which can interact
+with the TCP/IP stack on which the RFC 1001/1002 compliant NetBIOS
+is based.
+
+Another approach is to use the Lantastic NetBIOS implementation as
+the "data link" on which to transmit IP packets.  As there is a
+NetBIOS packet driver in the Clarkson collection, this approach
+appears to be viable.  Unfortunately, the NetBIOS packet driver
+presently found in the Clarkson collection has a number of
+deficiencies whichb render it virtually unusable, especailly in
+configurations which have Internet gateways.
+
+While the Clarkson NetBIOS packet driver has its flaws, it does
+contain the basic code needed to provide the required services. 
+Hence, it was decided to update the packet driver.  Work started on
+upgrading the packet driver nearly two years ago.  A working
+version was in operation within two weeks, with updates being made
+to improve operation every few months.
+
+The original NetBIOS packet driver was a class 6 packet driver.  Up
+until about a month ago, the updated NetBIOS packet driver was also
+a class 6 packet driver.  The inability of a number of popular
+TCP/IP application packages to deal with class 6 packet drivers
+resulted in the development of EtherSLIP, a SLIP mode packet driver
+which provides a class 1 interface to the application software
+packages.  Ideas and code from EtherSLIP development were used to
+modify the NetBIOS packet driver such that it also is now a class
+1 packet driver.
+
+The NetBIOS packet driver has been tested and found to operate
+correctly with a number of TCP/IP packages, including NCSA Telnet,
+POPmail, PC_gopher, TRUMPET, CUTCP, ka9q, and PC/TCP from FTP
+Software.
+ 
+3.0  THEORY OF OPERATION
+
+
+This section provides a brief description of how the NetBIOS packet
+driver operates.  It is assumed that the reader is familiar with
+the basic operation of packet drivers, NetBIOS and the Internet
+Protocol.  An understanding of how the NetBIOS packet driver is not
+reqquired to make use of the packet driver.  Hence, this section
+can be skipped if the reader does not wish to understand the
+internals of the NetBIOS packet driver.
+
+The NetBIOS packet driver accepts complete Ethernet frames from the
+application software, strips the Ethernet header, and uses the
+NetBIOS datagram service to send the IP packet contained in the
+data portion of the Ethernet frame.
+
+On the receive side, the NetBIOS packet driver extracts IP packets
+from incoming NetBIOS datagrams.  An Ethernet header is prepended
+to the IP packet and the resulting Ethernet frame is passed to the
+application software package.  The source address in the Ethernet
+header is formed from the source NetBIOS address while the
+destination address is set based on the local IP address.
+
+Since the NetBIOS packet driver is a class 1 packet driver,
+application software packages will likely use the Address
+Resolution Protocol (ARP) to translate the IP address to an
+appropriate data link address.  Though it might be possible to
+support ARP using NetBIOS, the present NetBIOS packet driver traps
+all ARP requests and formulates its own ARP reply.  Address
+translation is simple; the target data link address is set to the
+target IP address.
+
+NetBIOS datagrams are directed to specific destinations as
+identified by a NetBIOS name.  When sending an IP packet, the
+NetBIOS name for the destination machine is constructed by
+appending the address found in the destination address field of the
+Ethernet header to the string "TCPIP".
+
+4.0  INSTALLATION
+
+
+Concurrent operation of TCP/IP application software and NetBIOS
+based software such as Lantastic requires installation of the
+NetBIOS packet driver on each PC and the provision of a NetBIOS
+gateway.  This section examines both these installation issues in
+some detail.
+
+4.1  NetBIOS Packet Driver Installation
+
+The NetBIOS Packet driver is invoked on each computer using the
+following command line:
+
+     nb <int_no> [-g] <ip_address>
+
+     where:
+
+          <int_no>       is the interrupt vector on which the
+                         packet driver receives commands.
+
+          <ip_address>   is the IP address of the local host.
+
+          -g             gateway flag; only needed on the machine
+                         which is to be the NetBIOS gateway.
+
+
+4.2  NetBIOS Gateway
+
+The NetBIOS packet driver encapsulates IP packets inside NetBIOS
+datagrams.  In order for applications packages using the NetBIOS
+packet driver to exchange IP packets with machines which do not
+support NetBIOS, some form of gateway is required.  Though most (if
+not all) commercial routers do not support NetBIOS encapsulation,
+it is possible to implement such a gateway using PC based router
+software which supports class 1 packet drivers.  Two such packages
+are PCroute and ka9q.
+
+The PC based NetBIOS gateway must use two Ethernet boards, one to
+handle raw Ethernet frames and one to handle NetBIOS packets.  
+NetBIOS software is required to provide the NetBIOS interface;
+Artisoft's NetBIOS implementation is needed if Lantastic is to be
+supported concurrently.  As well, the NetBIOS packet driver must be
+loaded with the gateway flag specified on the command line.
+
+Rather than try to explain in general terms how to configure a
+NetBIOS gateway, the configuration file for a ka9q based NetBIOS
+gateway will be examined, line by line.  In particular, note that
+PROXY ARPS and static routes for each of the machines running the
+NetBIOS packet driver.  This configuration has been tested and is
+known to work.
+
+# 
+# This entry tells the ka9q software the name of your machine. 
+#
+hostname hawkeye.nstn.ns.ca 
+#
+# This entry contains your IP address.  Brackets are required.
+#
+ip address [192.70.224.3]
+#
+# The attach command tells the ka9q software about the interfaces
+# in your computer that you will be using for TCP/IP. 
+# 
+# Specify packet driver for "raw" Ethernet packet driver.
+#
+attach packet 0x61 ec0 25 1500
+#
+# Specify IP address for the interface using the "ifconfig"
+# command.
+#
+ifconfig ec0 ipaddr [192.70.224.3]
+#
+# Specify packet driver for NetBIOS packet driver.
+#
+attach packet 0x60 nb0 25 1500 
+#
+# Set up the ka9q software to PROXY ARP for each of the
+# PCs on which the NetBIOS packet driver is running.
+#
+arp publish [192.70.224.2] ether 00:00:c0:48:92:19
+arp publish [192.70.224.5] ether 00:00:c0:48:92:19
+arp publish [192.70.224.6] ether 00:00:c0:48:92:19
+arp publish [192.70.224.7] ether 00:00:c0:48:92:19
+arp publish [192.70.224.8] ether 00:00:c0:48:92:19
+arp publish [192.70.224.9] ether 00:00:c0:48:92:19
+arp publish [192.70.224.10] ether 00:00:c0:48:92:19
+arp publish [192.70.224.11] ether 00:00:c0:48:92:19
+arp publish [192.70.224.12] ether 00:00:c0:48:92:19
+arp publish [192.70.224.13] ether 00:00:c0:48:92:19
+arp publish [192.70.224.14] ether 00:00:c0:48:92:19
+arp publish [192.70.224.15] ether 00:00:c0:48:92:19
+arp publish [192.70.224.16] ether 00:00:c0:48:92:19
+arp publish [192.70.224.17] ether 00:00:c0:48:92:19
+arp publish [192.70.224.18] ether 00:00:c0:48:92:19
+arp publish [192.70.224.19] ether 00:00:c0:48:92:19
+arp publish [192.70.224.20] ether 00:00:c0:48:92:19
+arp publish [192.70.224.21] ether 00:00:c0:48:92:19
+#
+# Set up a default, static route to the external router.
+#
+route add [192.70.224.0]/24 ec0
+route add default ec0 [192.70.224.1]
+
+#
+# Set up static routes to each of the machines on which
+# the NetBIOS packet driver is operating.
+#
+route add [192.70.224.2] nb0
+route add [192.70.224.5] nb0
+route add [192.70.224.6] nb0
+route add [192.70.224.7] nb0
+route add [192.70.224.8] nb0
+route add [192.70.224.9] nb0
+route add [192.70.224.10] nb0
+route add [192.70.224.11] nb0
+route add [192.70.224.12] nb0
+route add [192.70.224.13] nb0
+route add [192.70.224.14] nb0
+route add [192.70.224.15] nb0
+route add [192.70.224.16] nb0
+route add [192.70.224.17] nb0
+route add [192.70.224.18] nb0
+route add [192.70.224.19] nb0
+route add [192.70.224.20] nb0
+route add [192.70.224.21] nb0
+#
+# Time To Live is the maximum number of hops a packet can take 
+# before it is thrown away. This command prevents an inadvertent 
+# infinite loop from occuring with packets in the network.
+#
+ip ttl 50 
+#
+# The Maximum Segment Size is the largest single transmission that 
+# you will send. An mss of 216 corresponds to the mtu of 256 set
+# up in the attach command above, overhead bytes considered.
+#
+tcp mss 576
+#
+# The Window parameter establishes the maximum number of bytes 
+# that may be outstanding before your system expects an ack.
+# If window is twice as big as mss, for example, there will be two
+# active packets on the channel at any given time... large values
+# of window provide improved throughput on full-duplex links, but
+# are a problem on the air.  Keep  mss <= window <= 2*mss if you're
+# on the air.
+# 
+tcp window 8192
+#
+
+
+5.0  POSSIBLE FUTURE ENHANCEMENTS
+
+
+It would appear, from examining NetBIOS documentation, that it is
+possible to support ARP on NetBIOS using NetBIOS broadcast
+datagrams.   Hence, a possible future enhancement would be to
+support NetBIOS broadcasts so that ARP requests can be sent.
+

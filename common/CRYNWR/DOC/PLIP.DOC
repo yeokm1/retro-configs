@@ -1,0 +1,31 @@
+This is the wiring diagram for the cable necessary to link two
+machines together by their parallel ports.  This is the same wiring
+diagram used by a Turbo LapLink cable, available for sale from many
+PC parts outlets.
+
+1 - 1
+2 - 15
+3 - 13
+4 - 12
+5 - 10
+6 - 11
+7 nc
+8 nc
+9 nc
+10 - 5
+11 - 6
+12 - 4
+13 - 3
+14 - 14
+15 - 2
+16 - 16
+17 - 17
+18 nc
+19 nc
+20 nc
+21 nc
+22 nc
+23 nc
+24 nc
+25 - 25 (ground)
+
