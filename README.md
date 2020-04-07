@@ -7,7 +7,7 @@ Common drivers and software not specific to a particular system are located in t
 
 # 1. [Thinkpad T42](thinkpad-t42)
 
-The Pentium II machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
+The Pentium M machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
 
 <img src="thinkpad-t42/photos/t42-full.jpg" width="500">
 
@@ -19,7 +19,7 @@ In WFW 3.11
 
 # 2. [Thinkpad 390E](thinkpad-390e)
 
-The Pentium M machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
+The Pentium II machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
 
 <img src="thinkpad-390e/photos/390e-full.jpg" width="500">
 
