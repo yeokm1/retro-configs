@@ -50,3 +50,4 @@ Loading MTCP to prove packet drivers work.
 ## Sources
 1. [Modified BIOS with RTC feature](https://github.com/spark2k06/micro_8088/tree/master/BIOS)
 2. [NE2000 8-bit driver](https://github.com/yeokm1/ne2000plus-collection)
+3. [RTC SPLD Binaries](https://github.com/spark2k06/hardware/tree/master/RTC8088/SPLD)
