@@ -4,7 +4,7 @@ My NuXt PC is based on a modern 8088-based XT motherboard in a uATX form factor.
 
 <img src="photos/nuxt-external.jpg" width="500">
 
-Front of the PC with IDE HDD caddy (just a filler), Gotek Floppy emulator with HxC firmware, 3.5" 1.44 MB HDD.
+Front of the PC with IDE HDD caddy (just a filler), Gotek Floppy emulator with HxC firmware, 3.5" 1.44 MB FDD.
 
 <img src="photos/nuxt-internal.jpg" width="500">
 
