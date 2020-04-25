@@ -59,6 +59,18 @@ Old-New motherboard
 
 Post DOS 6.22 bootup
 
+# 5. [IBM 5155](ibm-5155)
+
+The IBM 5155 Portable is a PC released in 1984. It is based on the IBM XT released in 1983 but in a "portable" form with internal amber monochrome CRT monitor.
+
+<img src="ibm-5155/photos/5155-front.jpg" width="500">
+
+Front of the PC with 5.25" 360K floppy and Gotek Floppy emulator with HxC firmware.
+
+<img src="ibm-5155/photos/5155-internal.jpg" width="500">
+
+Using up almost all the ISA slots.
+
 ## Sources
 
 1.  [Toshiba generic CD driver CDROMDRV](https://www.legroom.net/howto/msdos)
