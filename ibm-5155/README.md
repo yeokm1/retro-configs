@@ -30,34 +30,43 @@ Motherboards from early IBM PCs are bare with most of the external functionality
 
 Expansion cards from top left
 
-* IBM CGA Graphics
-* 3Com 3C503 10Mbps Ethernet
-* XT-IDE Rev 4
+* IBM CGA Graphics Adapter
+* [Sergey Kiselev Floppy Disk and Serial Controller](http://www.malinov.com/Home/sergeys-projects/isa-fdc-and-uart)
 * Creative Sound Blaster 16 CT2950 CQM
-* Bidirectional Parallel Port
-* Monotech MicroRAM - 640K + UMB RAM
+* 3Com Etherlink II TP 3C503 10Mbps Ethernet
+* [Glitch Works XT-IDE Rev 4](https://www.glitchwrks.com/2017/11/23/xt-ide-rev4)
 * Transcend 40-pin IDE Flash Module
-* Floppy Disk and Serial Controller
+* [Monotech MicroRAM - 640K + UMB RAM](https://monotech.fwscart.com/MicroRAM_640K_UMB_RAM_8bit_ISA/p6083514_19914752.aspx)
+* [Aitor Gómez's RTC ISA 8 Bits XT](https://hackaday.io/project/168972-rtc-isa-8-bits-pcxt)
+
 
 The IDE flash module is used as the system seems to run more stable with it than from CompactFlash cards.
 
 ## DOS Boot Configuration
 
-The machine is configured for single-boot DOS 6.22 and very similar to the NuXT PC.
+The machine is configured for single-boot DOS 6.22 and very similar to my NuXT PC's configuration.
 
-* Crynwr 3C503 packet driver
 * MTCP environment variables
-* Cutemouse
+* Crynwr 3C503 packet driver
+* Get time from RTC
 * SBPNPXT to configure Sound Blaster ISA PnP
 
-At the end of the boot process, it will sync the time from an NTP server as there is currently no RTC in the system.
+## RTC
 
-## Extra files
+I was experimenting in getting an Real-time clock to work with this system with little success.
 
-I was experimenting in getting an Real-time clock to work with this system but did not manage to succeed. I'm just including the files I tried as reference.
+Many thanks to Aitor Gómez's [RTC ISA 8 Bits XT](https://hackaday.io/project/168972-rtc-isa-8-bits-pcxt) and his help. I managed to reprogram his board to use the `240h` address and get it work.
 
+1. [RTC SPLD Binaries](https://github.com/spark2k06/hardware/tree/master/RTC8088/SPLD)
+2. [RTC Program from dieymir](http://www.vcfed.org/forum/showthread.php?71958-RTC-ISA-8-bits-(Very-Low-Profile)&p=606650#post606650)
+
+<img src="photos/5155-isartc.jpg" width="500">
+
+### Unused RTC programs for reference
 1. [DS1216E RTC program](https://www.brutman.com/PCjr/DS1216E.html)
 2. [David_M generic clock program](http://minuszerodegrees.net/rtc/rtc.htm)
+
+## Rescue Floppy
 
 The `DSKA0001_dos6boot.img` is a 1.44MB floppy image containing a minimal DOS environment and a subset of MTCP's tools. 
 
@@ -69,4 +78,4 @@ After booting from the floppy image, I start an FTP server and then copy the res
 
 1. [Technical Reference](http://www.minuszerodegrees.net/manuals/IBM_5155_5160_Technical_Reference_6280089_MAR86.pdf)
 2. [Operations Manual](http://classiccomputers.info/down/IBM/IBM_PC_Portable_5155/IBM_5155_Guide_to_Operations_6936571_JAN84.pdf)
-3.  [PSU Review by Hugo Holden](http://worldphaco.com/uploads/The_IBM_5155_POWER_SUPPLY.pdf)
+3. [PSU Review by Hugo Holden](http://worldphaco.com/uploads/The_IBM_5155_POWER_SUPPLY.pdf)
