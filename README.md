@@ -3,7 +3,7 @@ Collection of my DOS configurations and drivers of my retro machines. Decided to
 
 Common drivers and software not specific to a particular system are located in the [common](common) folder.
 
-# 1. [IBM 5155](ibm-5155)
+# 1. [IBM 5155](ibm-5155) (1984)
 
 The IBM 5155 Portable is a PC released in 1984. It is based on the IBM XT released in 1983 but in a "portable" form with internal amber monochrome CRT monitor.
 
@@ -15,7 +15,7 @@ Front of the PC with 5.25" 360K floppy and Gotek Floppy emulator with HxC firmwa
 
 Using up almost all the ISA slots.
 
-# 2. [Thinkpad 390E](thinkpad-390e)
+# 2. [Thinkpad 390E](thinkpad-390e) (1999)
 
 The Pentium II machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
 
@@ -31,7 +31,7 @@ In WFW 3.11
 
 In Win 98SE
 
-# 3. [Thinkpad T42](thinkpad-t42)
+# 3. [Thinkpad T42](thinkpad-t42) (2004)
 
 The Pentium M machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
 
@@ -43,7 +43,7 @@ In Win 98SE
 
 In WFW 3.11
 
-# 4. [Tweener PC](tweener-pc)
+# 4. [Tweener PC](tweener-pc) (2001)
 
 My "Tweener PC" based on Pentium III is affectionately called that as it contains a healthy mix of new and old technologies. From ISA, floppy drives to modern Ethernet and USB.
 
@@ -53,7 +53,7 @@ The machine is configured for single-boot Windows 98SE with a bootup option to e
 
 <img src="tweener-pc/photos/tweener-w98-desktop.jpg" width="500">
 
-# 5. [NuXT PC](nuxt-pc)
+# 5. [NuXT PC](nuxt-pc) (2019)
 
 My NuXt PC is based on a modern 8088-based XT motherboard in a uATX form factor.
 

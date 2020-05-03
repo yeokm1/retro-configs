@@ -1,6 +1,6 @@
 # NuXT PC
 
-My NuXt PC is based on a modern 8088-based XT motherboard in a uATX form factor.
+My NuXt PC is based on a modern 8088-based XT motherboard in a uATX form factor. This v1.2 motherboard was [released in 2019](https://www.vogonswiki.com/index.php/NuXT) by Monotech PCs.
 
 <img src="photos/nuxt-external.jpg" width="500">
 
@@ -14,7 +14,7 @@ Front of the PC with IDE HDD caddy (just a filler), Gotek Floppy emulator with H
 
 * NEC V20 overclocked to 9.55Mhz via BIOS setting
 * Intel 8087 FPU
-* NuXT motherboard
+* NuXT v1.2 motherboard
 * 640KiB conventional RAM
 * 512MB Sandisk Compactflash card
 * 1.44MB 3.5" Floppy
