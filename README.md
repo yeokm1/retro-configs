@@ -57,15 +57,15 @@ The machine is configured for single-boot Windows 98SE with a bootup option to e
 
 My NuXt PC is based on a modern 8088-based XT motherboard in a uATX form factor.
 
-<img src="nuxt-pc/photos/nuxt-external.jpg" width="500">
+<img src="nuxt-pc-v1.2/photos/nuxt-external.jpg" width="500">
 
 Front of the PC with IDE HDD caddy (just a filler), HxC Gotek Floppy emulator, 3.5" 1.44 MB HDD.
 
-<img src="nuxt-pc/photos/nuxt-internal.jpg" width="500">
+<img src="nuxt-pc-v1.2/photos/nuxt-internal.jpg" width="500">
 
 Old-New motherboard
 
-<img src="nuxt-pc/photos/nuxt-postboot.jpg" width="500">
+<img src="nuxt-pc-v1.2/photos/nuxt-postboot.jpg" width="500">
 
 Post DOS 6.22 bootup
 
