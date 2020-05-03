@@ -53,7 +53,7 @@ The machine is configured for single-boot Windows 98SE with a bootup option to e
 
 <img src="tweener-pc/photos/tweener-w98-desktop.jpg" width="500">
 
-# 5. [NuXT PC](nuxt-pc) (2019)
+# 5. [NuXT PC](nuxt-pc-v1.2) (2019)
 
 My NuXt PC is based on a modern 8088-based XT motherboard in a uATX form factor.
 
