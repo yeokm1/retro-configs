@@ -1,0 +1,621 @@
+
+Universal PnP Sound Card Enabler for DOS v0.68d. JazeFox Apr-2020 (UNISOUND)
+============================================================================
+
+Index of this document:
+-----------------------
+
+ 1- Background (Read the *important warning* at the end of this section!)
+ 2- Usage, options and examples
+ 3- Supported cards (in the current version)
+ 4- Special notes about some cards like the GUS PnP (limited support)
+ 5- Tested systems
+ 6- Version history
+
+
+1- Background
+============================================================================
+UNISOUND is a DOS-only tool that configures and initializes PnP ISA sound 
+cards from serveral brands and models, and some non-PnP, like early SB16 
+software configurable models that required tools like DIAGNOSE.EXE. 
+Works on all x86 CPUs, including 8088/8086/80286/386...
+
+This tool was created at fisrt for my own use. Now I decided to release it
+because I think it may be useful to someone else. The first objective was 
+to be able to use some cheap but capable ISA PnP cards from different brands
+and manufacturers I had in a drawer on my AT and XT machines, with chipsets 
+like ESS, Creative, ALS, Yamaha, CMI... Then I figured that it will be also
+very useful to have an all-in-one tool to set up a lot of different cards, 
+getting rid of the whole mess of different files, configurations, CONFIG.SYS
+and AUTOEXEC.BAT ugly lines...
+isapnptools and other solutions are ok, but they miss important propietary
+initialization sequences, special cases, mixer settings...
+
+Furthermore, the goal is: to have a unique executable file, that 
+make any sound card to work, with a basic SB/Adlib-compatible support in
+DOS so you can change the cards when you want without worrying about 
+installing or configuring anything else.
+
+The main problem when you want to use your sound cards is the
+configuration and initialization, as it depends on a lot of stuff, like:
+The type of CPU you have, if the machine has a PnP BIOS or not (usually a
+486 machine or lower doesn't have it), the PnP software to use (CTCM/CTCU
+for Creative cards, Intel ICU for others, propietary software for others)
+so finally you end up having a lot of files (ICU have more than 290 files!!)
+and a big mess of CONFIG.SYS and AUTOEXEC.BAT lines. (I also got rid of the
+DIAGNOSE.EXE and AWEUTIL /S for non-PnP SB16/AWE cards, adding support for
+them in this tool.)
+
+Tired of all that stuff, I wanted to do something to minimize everything
+involved to my card's initialization. Only one file, very small size, 
+(in fact it could be used to be fitted even in a floppy disk together with
+a game if you want), and no need for anything else to get basic functionality
+of the cards: centered in SB/SBpro/SB16 compatibility (altough some cards 
+will work in WSS mode too...), basic mixer setting (all channels have fixed 
+volume, and Master volume is user-configurable), and "useless" stuff disabled
+by default (Modem, IDE...) Well, IDE is disabled by default but it is 
+user-configurable with a custom parameter un BLASTER environment variable C.
+Check the Usage section (2) for more info on this.
+
+This tool has taken a lot of time, researching over technical 
+documentation of the card's/chip's manufacturers, reverse engeneering, and
+having some headaches, too. To initialize some cards properly, the PnP part
+is not enough, as a lot of them need further initialization sequences that
+in most cases are bad documented or no documented at all, or are obscure.
+
+UNISOUND tries to initialize the cards fully, PnP part, propietary init part
+and also mixer defaults, so it pretends to be real "Plug and Play".
+
+As I made this tool for my own needs initially, and as I am not an expert,
+it may have a lot of bugs. **Use at your own risk**
+
+**VERY IMPORTANT WARNING**:
+This tool does *NOT* check for resource conflicts, so if you configure your
+cards with already used ports, IRQs, DMAs... you will notice problems, like
+hangs, corruptions, even damage to your data if you are not careful. You
+have been warned!! I am not responsible for any damage.
+In addition, this tool does not check if the settings you provide are right
+or wrong (only very basic check like usual ranges of addresses and IRQs...,)
+and will try to avoid some known issues with duplicated DMAs in some cards...
+you are supposed to know what are you doing. *Again! use at your own risk!!*
+
+
+2- Usage, options and examples
+============================================================================
+
+Unisound can be launched without arguments, with optional command line 
+arguments and with/without a BLASTER/ULTRASND environment variable present
+(before launch). It doesn't consume RAM. It is not a TSR, it's an
+initialization tool. It doesn't require mem extenders, XMS/EMS, nothing.
+You can use it of course in old machines (XT, AT, 386, 486..) without PnP
+BIOS, but even with a PnP BIOS, you can override the values using Unisound.
+So no problem to use it in more modern machines like pentiums, K6-2...
+
+UNISOUND (without arguments): initializes 1st PnP card found in the system
+with internal default resource settings and ~85% Mixer Master volume.
+
+The tool default values, if no environment variable is found, are (optional 
+args for some cards with special resources are between brackets):
+
+For SB or SB compatible cards:
+ADDR: 220, IRQ: 5, DMA1: 1, DMA2: 1, MPU: 330, (AWE: 620), (WSS: 530), 
+(JOY: 200) (CD-IDE: 0)
+
+For GUS PnP:
+ADDR: 240, CODEC: 34x, DMA1: 3, DMA2: 3, IRQ: 11
+
+If BLASTER (or ULTRASND for GUS PnP) environment var is found, UNISOUND will
+use its values to configure the card. If not, Unisound default values will
+be used.
+
+Usage: UNISOUND [/Cn] [/Vnn] [/F] [/R] [/H]
+
+Options:
+   /Cn    Select PnP card number 'n' to initialize/show (n = 2 to 5)
+   /CS    Try to initialize non-PnP SB16 card skipping PnP detection
+   /CL    List all PnP cards present in the system (numbered)
+   /Vnn   Set sound card mixer Master Volume level to 'nn' % (00-99)
+   /F     Faster PnP detection process (but less reliable)
+   /R     Read PnP card current settings only (can be used with /Cn)
+   /H /?  Help screen
+
+--
+
+Before the first try, it is recommended to start with UNISOUND /CL
+to list the detected cards, especially if you have more than one installed.
+(Note that it is not recommended to have several cards of the same type
+installed at the same time to avoid conflicts. GUS + SB are OK).
+If you only have 1 PnP card (sound card or not), use UNISOUND as is.
+
+With /CL a numbered list of the cards is presented like this:
+
+------------------------------------------
+Card #1 [GRV0001] Ultrasound Plug & Play
+Card #2 [ESS1868] ESS ES1868 Plug and Play Audiodrive
+
+If you have more than one card, like in this example, you can use the /Cn 
+option to select which card you want to initialize (let's do with ES1868, 
+assuming that you have set a BLASTER env var before):
+
+UNISOUND /C2 
+
+Then you'll see something like this:
+
+------------------------------------------
+Card #1 [GRV0001] Skipped.
+PnP card found: [ESS1868] ESS ES1868 Plug and Play Audiodrive
+BLASTER environment var found! Loading settings...
+ADD:220 OPL:388 MPU:330 IRQ:5 DMA1/1 JOY:200
+Initialization done.
+ESS Mixer set. (Vol: 85%)
+
+Ok! if the values you provided are good, the card sould work. Now if the
+volume is too high you can use: UNISOUND /C2 /V50 for example.
+
+If you only want to check the current settings of a PnP card, use:
+
+UNISOUND /R (or UNISOUND /R /C2 in the ESS example we saw before).
+
+It wil work (if the card support resource reading), even if the card has
+been not initialized (will show zero or weird values), or if it has been
+initialized by other PnP tool (like ICU or CTCM) or even if it has been
+configured by a PnP BIOS.
+
+Important Notes about configuration with the BLASTER environment variable:
+
+In addition to the regular BLASTER parameters, this tool accepts new custom
+ones (optional). All of them are explained here (example values):
+
+A220 I5 D1 H1 P330 E620 W530 J200 C168 Rxxx M310
+
+  W: WSS address for cards that require it (530 if not specified). It is
+     better not to use this if you don't know what you are doing.
+  J: Joystick game port address (if you put J0 the port is disabled)
+  C: IDE port address (disabled by default). If you put a value, it will
+     activate the IDE port (if address is valid). Valid values: 
+     170 (secondary), 1E8 (tertiary), 168 (quaternary, recommended). Please
+     take into account that some cards have only 1 possible value 
+     (usually 170), so you can try and test. C0 will force disable it.
+     IRQs for this port are calculated automatically (10, 11, 15) based
+     on the address, so it is not needed to specify them. Anyway as this 
+     tool is launched after config.sys, if you want CD-ROM support you'll 
+     have to load CD driver (like vide-cdd.sys) with device driver loaders
+     like DEVLOAD after Unisound IDE port activation.
+  R: Address for cards that require a CONTROL register to configure internal
+     stuff of the card. You should not use this parameter, every card has 
+     its own value as default internally in the tool. Use this ONLY if
+     you know what you are doing.
+  M: Special option for Maxi Sound 64 series cards with DREAM SAM chips, it
+     is the primary MPU port (P is the internal port, needed to upload 
+     firmware, but you can swap them playing with P and M values).
+
+As every card has its own oddities and quirks, some values are fixed and no
+user-configurable for now (like MPU IRQs, some special control ports, 
+secondary IRQs for some WSS-compatible cards, OPL/FM address -fixed to 388- 
+and so..). Try and check!
+
+Look at the section 4 "Special notes about some cards", to check special
+situations using some cards.
+
+For non-PNP SB16/AWE cards (those who need DIAGNOSE.EXE and/or AWEUTIL/S),
+use UNISOUND /CS, or UNISOUND (slower, asi it will look for PnP cards
+first, and if no PnP cards found, the tool will try to find and configure
+a SB16/AWE non-PNP card). You can use /Vnn too to adjust master volume.
+
+For the GUS PnP, the usual format of ULTRASND env var is:
+ULTRASND=240,3,3,11,11
+
+
+3- Supported cards in the current version (v0.68d):
+============================================================================
+
+I know that this list has many card models missing, but I added the models 
+I could try, and I think this list cover about 90% of the most used cards 
+for casual retro-gaming and testing.
+
+Creative:
+----------------------
+- All SB16 PnP and non-PnP (software-configurable) cards, including all 
+  ViBRA16/S/C/XV/CL, Phone Blaster... (No need for DIAGNOSE.EXE for non-PnP)
+- SB AWE32 PnP and non-PnP, AWE64, SB32PnP. EMU8K initialization included 
+  (to enable FM and built-in wavetable sound, so no AWEUTIL /S needed. No 
+  soundfonts loading though).
+On all Creative cards, DSP version is displayed at init time.
+Check section 5.1 for a complete list of successfully tested Creative models
+
+ESS AudioDrive:
+----------------------
+- ES1868F single chip cards
+- Guillemot Maxi Sound 64 (ES1868 + SAM9407 versions only) SAM9407 firmware
+  uploading and initialization included (to unmute output sound).
+- ES1869F single chip cards (Compaq branded for now)
+- ES968+ES688 and ES968+ES1688 dual chip cards. (Caution with these ES968
+  combos! Different manufacturers share the same Vendor ID with totally 
+  different resources. It has been tested with 2 different cards, but yours
+  may not behave correctly). If you have problems with the initialization,
+  use the PNP jumper in the card. 
+
+Yamaha:
+----------------------
+- YMF71x single chip cards. OPL-SAX, OPL-SA3... (Tested with YMF719-S 
+  and YMF718-S based cards)
+
+Avance Logic:
+----------------------
+- ALS007 chip based cards.
+- ALS1xx chips (Tested with ALS100, ALS100+ and ALS120)
+
+Diamond Technologies:
+----------------------
+- DT-0197H chip cards (clone or re-branded ALS007 chip).
+
+Aztech:
+----------------------
+- AZT2320 chip (tested with a MM Pro 16 IIIS+ PNP)
+
+Rockwell:
+----------------------
+- RWA01x (WaveArtist) chip cards (Tested in RWA010 chip based card).
+
+OPTi:
+----------------------
+- OPTi 82C925 + AD1845 combo only. (Awful card. Not very stable)
+- OPTi 82C931 and 82C933 chip based cards.
+
+Crystal (Cirrus Logic)
+----------------------
+- CS423x chip based cards (Tested with a CS4236 card)
+- CX423x chip based cards (Tested with a CX4236B card)
+
+C-Media:
+----------------------
+- CMI8330 chip based cards. (Audio Excel...)
+
+AD SoundPort (Analog Devices):
+------------------------------
+- AD181x chips based cards (AD1816/A, AD1815, AD18max10...). 
+  Some Terratec and Aztech cards use these chips.
+
+Advanced Gravis:
+------------------------------
+- Gravis Ultrasound PnP (AMD Interwave chip). Centered in Classic GUS 
+  compatibility only (No SB emu, no MPU, no IDE). 
+  The amount of RAM installed is displayed at init time.
+
+
+4- Special notes about some cards (like the GUS PnP...)
+============================================================================
+
+*Notes about Guillemot Maxi Sound 64 series (ES1868 + SAM9407 only!):
+--------------
+This card has an special (bad design in my opinion) oddity; the card after
+standard PnP initialization and Mixer settings configured, does not output
+sound by default (FM/Digital), because the ESS chip sound output channels
+are routed through the SAM chip. The SAM chip need a firmware to be uploaded
+in order to configure itself and enable sound output. With the original 
+drivers you had to use a tool and some INIs to upload the firmware and 
+enable sound. Now since version 0.52b of Unisound, the firmware uploading
+is implemented. In order to get it to work, yo have to get the firmware
+binary, rename it to SAM9407.BIN and put it in the current directory (the
+one from where you are calling Unisound). It will upload it automatically on
+every initialization. 
+This card is supported as an SBpro compatible card. This tool does not have
+the ability to upload soundfonts, so if you neeed them, you'll have to use
+official tools.
+
+*Notes about cards with WSS (Windows Sound System) support:
+--------------
+Some cards have WSS support, but every model has its quirks. For example,
+Yamaha cards, CMI cards and OPTi 931/33 cards, are capable of playing
+digital audio via SB and WSS at the same time (well, with the same config),
+while some others, like (the damn) OPTi 925 or some Crystal CS43x are not.
+By default, SB compatibility is ALWAYS selected by the tool. Of course,
+the 98% of the games are SB compatible, so it has preference.
+
+*Notes about using some of these cards on 8 bit ISA slots (or XT machines):
+--------------
+Some cards work without issues on 8 bit slots / XT machines, but others
+doesn't. It usually has something to do with the use of the 16 bit address
+lines that some cards need to use. For instance, the AWE32/64 EMU8K can not
+be initialized, because high bits are ignored when inserted on 8 bit slot 
+and you try the initialization (It will say "done", but it will not work).
+So for the cards that need EMU8K init to unmute the FM/Wavetable sound, only
+the digital sound will work. 
+The same happens with the GUS PnP, the initialization fails (Will show 0K
+RAM detected and internal registers will not be set).
+The Maxi sound 64 has the same problem trying to upload the SAM firmware.
+Some others will not work if DMAs are different from 1 or 3...
+
+Try your cards with Unisound, they may work well on XT / 8 bit slots!!
+
+
+*Notes about Gravis Ultrasound PnP:
+--------------
+This is a special case. This card has been added to this tool mainly to be
+used paired with a sound blaster (with different resource settings, of 
+course) or as a stand alone card configured with Classic GUS support. 
+Only the Base address (2x0), codec address (3xx), main IRQ and 2 DMAs
+(play-rec) will be configured, the remaining resources will be disabled 
+(Game port, SB emu resources, MPU address and IDE resources).
+
+This tool will look for the ULTRASND environment variable, if found, 
+the card will be configured using its values, and then initialize the 
+Interwave as classic GUS compatible, and with default mixer settings 
+(85% master vol or personalized with /Vnn). It is mandatory to have the
+card populated with some RAM modules!. If no ULTRASND variable is found,
+it will be configured as: 240,3,3,11. *check if you have free resources*
+
+No IWINIT needed. Only ULTRASND env variable and this tool. 
+
+If you want Classic GUS Wavetable support (optional), you only have to 
+add the ULTRADIR env variable pointing to a directory with 2 items: 
+the ULTRASND.INI file  and the MIDI directory with the instrument 
+patches inside.
+
+Note that this is a limited use of the GUS, and if you want the MPU emu, 
+SB emu... you will need the official drivers. But I added this card to 
+Unisound because with the basic classic GUS support it provides, it works
+very well for old GUS uses like a lot of demoscene demos/intros, games 
+like Epic pinball/Silverball... and with the patches folder, with Dark
+forces, Descent... or simply to be paired with a SB16 and have the full
+experience without crappy emulation.
+
+
+*Notes about ESS ES1869 cards in very slow systems (XT/8088/8086/286)
+--------------
+
+In very slow systems (about 286/12 or less), The initialization works,
+but value readings (UNISOUND /R) does not. If you run UNISOUND /R after
+previous card initialization, the values returned will be zero and the
+card will stop working. In that case you'll have to run UNISOUND again
+to re-initialize it. Note that using UNISOUND /CL after previous card
+initialization will make the card to not work too.
+So, only for the these cards + only these slow systems, init the card
+only, and it will work well.
+
+
+5- Tested systems
+============================================================================
+
+This tool has been tested successfully on several different systems:
+
+1- 486 DX-50, Octek Motherboard with crappy OPTi chipset, 8Mb RAM 
+   (30 pin SIMMS), ISA slots only, no VLB or PCI, 256K cache. OAK VGA 1Mb
+
+2- Pentium 100Mhz, Soyo SY-5VA motherboard, Intel VX chipset, 16Mb EDO RAM,
+   256K cache, PnP BIOS.
+
+3- Generic DTK turbo XT motherboard with 640K RAM, 6 8-bit ISA slots. CPU
+   Siemens 8088-10. Paradise VGA 8-bit. (only some cards work in 8bit slots,
+   read about it in section 4)
+
+4- 386 DX-33 from AMD, PCChips unknown model board, crappy OPTi chipset,
+   2Mb RAM, 128K cache. Trident 9000 1Mb VGA.
+
+5- K6-2 500, DFI K6XV3+ motherboard, VIA chipset, 128Mb RAM PC-100, 
+   3 ISA slots, SiS AGP VGA 8Mb
+   
+Notes: The 2 boards with OPTi chipset (386 & 486): high DMAs are not working
+(like with the original drivers of the cards). Cards that allow low DMA
+assignation for the HDMA, work well (Example: SB16 with same DMA and 
+HDMA = 1, are OK). In fact, default Unisound values for DMA,HDMA are = 1 for
+better general compatibility.
+
+5.1- Successfully tested cards models:
+--------------------------------------
+
+Creative:
+- SB16 / ViBRA PnP: CT2950, CT2960, CT2980, CT2940, CT4180, CT4170
+- SB16 non-PnP: CT2290, CT2770, CT3120
+- AWE32 PnP: CT3600, CT3620, CT3670, CT3980, CT3990.
+- AWE32 non-PnP: CT2760 v1 and CT2760 v3.
+- AWE64 PnP: CT4380, CT4500, CT4520, CT4390 (Gold)
+
+For now, all the other cards from otrher brands/chipsets, are covered in
+the section 3 itself. If the list grows, it will be put here. 
+
+
+6- Version history:
+============================================================================
+
+v0.10b
+----------------------------
+- Initial version. 
+- Usable in really old CPUs (8088/8086/NEC V20/V30...) and higher.
+- Support for cards that doesn't require extra propietary init seqs only.
+- Focused only in SB compatibility modes of the cards.
+- No mixer defaults init yet.(Some cards will have very quiet/silent output)
+- Fixed non-configurable resources (will change this soon) A220, I5, D1 (H1)
+- Cards supported in this first version:
+  ** ESS ES1868 (single chip based cards only)
+  ** Creative SB16 PnP versions (And ViBRA/S/C/XV/CL)
+  ** Creative PnP AWE/32/64 in SB16 mode only (no wavetable/FM init)
+  ** Rockwell RWA01x chip based cards.
+- Extra resources (like game port, MPU, IDE...) are disabled automatically.
+- After a timeout, if no PnP cards are found, the program will end.
+
+v0.21b
+------------------------
+- Added support for new cards:
+  ** Avance Logic ALS1xx chipsets (tested ALS120 and ALS100Plus) 
+  ** ESS ES968+ES688 dual-chip based cards (type 1)
+- User configurable resources for Base address port, IRQ and single DMA, 
+  based on the BLASTER environment variable, for all cards (including 
+  non-creative). If not provided, the default values are: A220, I5, D1.
+- Fixed ES1868 detection bug that recognized bad PnP resources.
+
+v0.24b
+------------------------
+- Added basic mixer default settings for some cards ALS1xx/SB16/Rockwell 
+ (fixed for simplicity, to ~80% vol levels, not user configurable).
+- Added High DMA, MPU and Game port addresses as user configurable.
+- Added SB16 mode as default for ALS1xx cards. (HDMA default to 1)
+
+v0.32b
+------------------------
+- Added support for new cards:
+  ** Yamaha YMF71x based cards (tested on OPL-3SAx, YFM719) SBPro 
+     compatibility only. Not 100% stable tough. 
+  ** Guillemot Maxi Sound 64 pro (ESS ES1868 based) PnP init only, no sound.
+     Warning! This card Will *remain silent* if user do not upload the 
+     SAM9407 firmware with the original maxiset tool (that does not work on 
+     808x machines). I have plans for the future, to integrate a function 
+     that could upload the firmware and finish the initialization to unmute 
+     the card. No ETA.
+
+v0.40b
+------------------------
+- Big step with AWE PnP cards. Now 100% complete EMU8000 chip initialization
+  with fixed settings. FM and Wavetable are working now. No AWEUTIL /S 
+  needed! (No MPU emulation for the built-in wavetable nor SoundFont banks u
+  ploading, though, sorry).
+- Fixed YMF71x stability issues, now using proper Yamaha propietary init
+  sequence after the PnP config. Mixer default settings added too.
+- Added more init data (not user configurable) to display at run time: AWE 
+  address, WSS base address (for cards that require WSS port only, fixed to
+  530h), IDE base address/IRQ, and secondary IRQ if availabe (for YMF now).
+
+v0.44b
+------------------------
+- Added support for non-PnP SB16 cards (Software configurable). Those who 
+  needed DIAGNOSE.EXE to initialize, now are supported (like CT2290, CT2770,
+  etc). There are 2 ways to do it: 1) Launch the program normally, and it
+  will try to find and configure a PnP card first if present. If no PnP card
+  is found, it will look for a non-PnP SB16 card, and will initialize it if
+  found. 2) Using the new command line parameter /CS (faster): If used, the
+  program will skip the PnP detection process and will try to initialize a 
+  non-PnP SB if found. Remember that the Base address port (2x0h) of those 
+  cards is hardware fixed and has to be configured by jumpers in the board 
+  itself (the tool will detect it when it runs). The same happens with MPU 
+  base address.
+- Also added AWE32 non-PnP EMU8000 initialization, so no more DIAGNOSE nor 
+  AWEUTIL /S needed for the loved CT2760. 
+
+v0.46b
+------------------------
+- Fixed a bug (this was tricky) where in AWE64 and some late AWE32 boards,
+  FM music sound garbled or with some glitches after EMU8000 initialization
+  due to the existence of different revisions of the EMU8K chip that do not
+  behave exactly the same. (and now the revision info is displayed as well
+  at run time).
+- Added by default the mixer output gain setting to x2 in Creative cards.
+
+v0.47b
+------------------------
+- Fixed a bug that affected systems with 2 or more PnP cards plugged at the
+  same time that prevented the correct initialization of the first card.
+- Fixed ESS cards wavetable DB header muted. Now unmuted by default.
+
+v0.48b
+------------------------
+- Added new command line options for selecting the desired card you want to
+  initialize, if more than 1 PnP card is present in the system: 
+  /Cn (n = 2 to 5), where 'n' is the card number you want to initialize. 
+  To check the order of the cards, first use /CL to list and see the IDs of
+  all detected cards. USE WITH CAUTION! This tool does *not* check for 
+  resource conflicts between cards. Double check the free resources of your
+  system before using it. Bad usage may cause damage. *Use at your own risk*
+- Fixed wrong DMA assignations for some cards that (as per documentation) 
+  do not allow the same DMA channel in different resources.
+
+v0.50b
+------------------------
+- Added support for new cards:
+  ** CMI8330 chip based cards (Audio Excel...)
+  ** OPTi 82C925 chip + AD1845 chip codec combo only (Unstable because this
+     is an horrible card, and the documentation for the chip and the codec 
+     are wrong, incomplete, inaccurate. Bad support in games, bad sound...
+
+v0.52b
+------------------------
+- Added support for new cards:
+  ** ALS007 (has single DMA)
+  ** Aztech AZT2320 chip based card (tested only in a MM Pro 16 IIIS+ PNP)
+  ** Support for Maxi Sound 64 Series (ESS + SAM9407 only for now) firmware
+     uploading (Yay! Sound output enabled!). Program will look for 
+     SAM9407.BIN file in the current directory and upload to the card if 
+     found. You must find the file yourself in the official driver pack and
+     rename/copy it.
+
+v0.56b
+------------------------
+- Added support for new cards:
+  ** Diamond Technologies DT-0197H chip (seems to be an ALS007 clone)
+  ** AD181x chips based cards (like Terratec T1816, or some aztech)
+- Added new command line option '/Vnn' to set the cards' mixer master volume
+  (in %), where 'nn' is the % volume from 00 to 99.
+
+v0.58b
+------------------------
+- Added support for new cards:
+  ** Crystal CS423x / CX423x chip cards (tested with a CS4236 and a CX4236B)
+  ** OPTi 82C931 chip based cards
+  ** OPTi 82C933 chip based cards
+- Fixed PnP detection timing issues with some cards in Pentium machines.
+
+v0.61b
+------------------------
+- Added new command line option: '/R' : Read current configuration from PnP
+  card and show it (if it is not initialized, values returned could be zero,
+  except DMAs, that return 4 when not assigned -cascade-, or propietary 
+  control registers like some OPTi's.). It works even if the card has been 
+  initialized with a different PnP tool. Optionally it can be used together 
+  with /Cn , to select the card to read if more than one is present.
+- Now the IDE port is user-configurable via new BLASTER env variable custom
+  parameter 'Cxxx', where xxx is the hex port. E.g.: C168 , that is a 
+  quaternary IDE channel. Make sure that your card support the address. 
+  The IRQ is not needed, as the tool uses the default IRQ value for each 
+  channel (15 for secondary, 11 for tertiary and 10 for quaternary). 
+  Primary channel is not allowed. If the parameter is not specified, or is
+  specified as C0 , IDE will be disabled. Anyway as this tool is launched 
+  after config.sys, if you want CD-ROM support you'll have to load CD driver
+  (like vide-cdd.sys) with device driver loaders like DEVLOAD after Unisound
+  IDE port activation.
+- Now the Joystick (game) port is user-configurable, via BLASTER var, too,
+  with the parameter Jxxx (xxx is the hex port). J0 to disable the port.
+- Now for Creative PnP cards, DSP version is displayed at init time.
+
+v0.65b
+------------------------
+- Added support for new card:
+  ** Gravis Ultrasound PnP: This is a special case. This card has been added
+     to this tool mainly to be used paired with a sound blaster (with 
+     different resource settings, of course) or as a stand alone card 
+     configured with Classic GUS support. Only the Base address (2x0), codec
+     address (3xx), main IRQ and 2 DMAs (play-rec) will be configured, the 
+     remaining resources will be disabled (Game port, SB emu resources,
+     MPU address and IDE resources).
+  ** This tool will look for the ULTRASND environment variable, if found, 
+     the card will be configured using its values, and then initialize the 
+     Interwave as GUS compatible, and with default mixer settings 
+    (85% master vol or personalized with /Vnn). It is mandatory to have the
+    card populated with some RAM modules!. If no ULTRASND variable is found,
+    it will be configured as: 240,3,3,11. *check if you have free resources*
+  ** No IWINIT needed. Only ULTRASND env variable and this tool. 
+  ** If you want Classic GUS Wavetable support (optional), you only have to 
+     add the ULTRADIR env variable pointing to a directory with 2 items: 
+     the ULTRASND.INI file  and the MIDI directory with the instrument 
+     patches inside.
+
+v0.65c
+------------------------
+- Added support for new Vendor IDs for Aztech 2320 based cards.
+
+v0.67b
+------------------------
+- Added SB AWE Memory detection. RAM amount is displayed at init time.
+- Bug fix: ALS1xx wrong detection in some models corrected.
+- Bug fix: ALS100 Inverted DMA & HDMA assignation corrected.
+- Bug fix: Missing master volume setting for some ES968+ES1688 cards added.
+
+v0.68d
+------------------------
+- Added support for more Crystal CS423x card variants.
+- Bug fix: Listing cards on very slow systems not working as expected.
+- Bug fix: Resource assignment for some ES1869 submodels
+- Bug fix: Added missing Control address assignment for some ES186x chips.
+- Bug fix: ES1869 cards did not work in slow machines (XT/8088/8086/286),
+  now an alternative method is used. Note: After card initialization in
+  very slow systems, do not run Unisound again with /R or /CL switches or
+  the card will stop working and should be initialized again, and in those
+  systems, /R will output zero value for all resources.

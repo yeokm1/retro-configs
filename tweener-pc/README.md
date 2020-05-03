@@ -12,8 +12,6 @@ With all trays open.
 
 <img src="photos/tweener-mobo.jpg" width="500">
 
-<img src="photos/tweener-some-cards.jpg" width="500">
-
 AWE64 and Resound OPL3. CD-In, USB Header and Wake-on-LAN cables are used. Adhoc uses of the SCSI card.
 
 ## Specifications
@@ -31,11 +29,15 @@ AWE64 and Resound OPL3. CD-In, USB Header and Wake-on-LAN cables are used. Adhoc
 
 Expansion cards from top left
 
-* Creative Sound Blaster AWE64 Gold ISA
+* Creative Sound Blaster AWE64 Gold ISA with SIMMConn 32MB
 * 3Com 3C905 PCI 10/100 Mbps
 * VIA VT6212 USB 2.0 PCI Controller
 * Resound OPL3 ISA
 * ATI Radeon 9500 Pro 128MB DDR AGP 8X
+
+<img src="photos/tweener-awe64-simmconn.jpg" width="500">
+
+The [SIMMConn Revival](http://simmconn.tripod.com/) allows typical SIMM-72 RAM to be store large Soundbanks. I have 32MB installed.
 
 ### Optional cards
 I added drivers of these cards as I occasionally may use them for ad-hoc testing.
@@ -64,8 +66,20 @@ Only the ATI and 3Com drivers are needed. Win 98SE already has the latest AWE64 
 * 3Com Packet drivers
 * MTCP environment variables
 * Cutemouse
-* Creative PnP manager to configure AWE64
+* [Universal PnP Sound card enabler by Jazefox](https://www.vogons.org/viewtopic.php?f=62&t=72553)
 * CDROM drivers
+
+#### Sound
+
+Using Jazefox's Universal PnP Sound card enabler to configure the PnP settings much faster than Creative's own tool.
+
+<img src="photos/tweener-unisound-init.jpg" width="500">
+
+<img src="photos/tweener-sb-diagnose.jpg" width="500">
+
+I still keep Creative's DIAGNOSE tool to test the DRAM.
+
+#### Network
 
 <img src="photos/tweener-3c905-config.jpg" width="500">
 

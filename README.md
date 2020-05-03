@@ -1,21 +1,19 @@
 # retro-configs
 Collection of my DOS configurations and drivers of my retro machines. Decided to open source my configurations in case it might help you.
 
-I currently only have the configuration of my Thinkpad T42 and 390e but more coming up soon!
-
 Common drivers and software not specific to a particular system are located in the [common](common) folder.
 
-# 1. [Thinkpad T42](thinkpad-t42)
+# 1. [IBM 5155](ibm-5155)
 
-The Pentium M machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
+The IBM 5155 Portable is a PC released in 1984. It is based on the IBM XT released in 1983 but in a "portable" form with internal amber monochrome CRT monitor.
 
-<img src="thinkpad-t42/photos/t42-full.jpg" width="500">
+<img src="ibm-5155/photos/5155-front.jpg" width="500">
 
-In Win 98SE
+Front of the PC with 5.25" 360K floppy and Gotek Floppy emulator with HxC firmware.
 
-<img src="thinkpad-t42/photos/t42-wfw311.jpg" width="500">
+<img src="ibm-5155/photos/5155-internal.jpg" width="500">
 
-In WFW 3.11
+Using up almost all the ISA slots.
 
 # 2. [Thinkpad 390E](thinkpad-390e)
 
@@ -33,7 +31,19 @@ In WFW 3.11
 
 In Win 98SE
 
-# 3. [Tweener PC](tweener-pc)
+# 3. [Thinkpad T42](thinkpad-t42)
+
+The Pentium M machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
+
+<img src="thinkpad-t42/photos/t42-full.jpg" width="500">
+
+In Win 98SE
+
+<img src="thinkpad-t42/photos/t42-wfw311.jpg" width="500">
+
+In WFW 3.11
+
+# 4. [Tweener PC](tweener-pc)
 
 My "Tweener PC" based on Pentium III is affectionately called that as it contains a healthy mix of new and old technologies. From ISA, floppy drives to modern Ethernet and USB.
 
@@ -43,7 +53,7 @@ The machine is configured for single-boot Windows 98SE with a bootup option to e
 
 <img src="tweener-pc/photos/tweener-w98-desktop.jpg" width="500">
 
-# 4. [NuXT PC](nuxt-pc)
+# 5. [NuXT PC](nuxt-pc)
 
 My NuXt PC is based on a modern 8088-based XT motherboard in a uATX form factor.
 
@@ -58,18 +68,6 @@ Old-New motherboard
 <img src="nuxt-pc/photos/nuxt-postboot.jpg" width="500">
 
 Post DOS 6.22 bootup
-
-# 5. [IBM 5155](ibm-5155)
-
-The IBM 5155 Portable is a PC released in 1984. It is based on the IBM XT released in 1983 but in a "portable" form with internal amber monochrome CRT monitor.
-
-<img src="ibm-5155/photos/5155-front.jpg" width="500">
-
-Front of the PC with 5.25" 360K floppy and Gotek Floppy emulator with HxC firmware.
-
-<img src="ibm-5155/photos/5155-internal.jpg" width="500">
-
-Using up almost all the ISA slots.
 
 ## Sources
 
@@ -88,3 +86,4 @@ Using up almost all the ISA slots.
 13. [Windows for Workgroups 3.11 install disks](https://winworldpc.com/product/windows-3/wfw-311)
 14. [SBPNPXT by dca2](https://www.vogons.org/viewtopic.php?p=479466#p479466)
 15. [Crynwr](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/repos/pkg-html/crynwr.html)
+16. [Unisound](https://www.vogons.org/viewtopic.php?f=62&t=72553)
