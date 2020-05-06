@@ -16,6 +16,10 @@ Using up almost all the ISA slots.
 
 An XT-IDE card is used which has a boot loader to boot from selected disks.
 
+<img src="photos/5155-network.jpg" width="500">
+
+Connecting to the network is possible.
+
 ## Specifications
 
 <img src="photos/5155-intel-cpu.jpg" width="500">
