@@ -1,6 +1,6 @@
-# NuXT PC
+# NuXT v2.0 PC
 
-My NuXt PC is based on a modern 8088-based XT motherboard in a uATX form factor. This v2.0 motherboard was [released in 2020](https://www.vogonswiki.com/index.php/NuXT) by Monotech PCs. [Purchase link](https://monotech.fwscart.com/NuXT_v20_-_MicroATX_Turbo_XT_-_10MHz_832K_XT-IDE_Multi-IO_SVGA/p6083514_19777986.aspx).
+My NuXT PC is based on a modern 8088-based XT motherboard in a uATX form factor. This v2.0 motherboard was [released in 2020](https://www.vogonswiki.com/index.php/NuXT) by Monotech PCs. [Purchase link](https://monotech.fwscart.com/NuXT_v20_-_MicroATX_Turbo_XT_-_10MHz_832K_XT-IDE_Multi-IO_SVGA/p6083514_19777986.aspx).
 
 <img src="photos/nuxt-external.jpg" width="500">
 
