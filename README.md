@@ -53,19 +53,19 @@ The machine is configured for single-boot Windows 98SE with a bootup option to e
 
 <img src="tweener-pc/photos/tweener-w98-desktop.jpg" width="500">
 
-# 5. [NuXT PC](nuxt-pc-v1.2) (2019)
+# 5. [NuXT PC](nuxt-pc-v2.0) (2020)
 
 My NuXt PC is based on a modern 8088-based XT motherboard in a uATX form factor.
 
-<img src="nuxt-pc-v1.2/photos/nuxt-external.jpg" width="500">
+<img src="nuxt-pc-v2.0/photos/nuxt-external.jpg" width="500">
 
-Front of the PC with IDE HDD caddy (just a filler), HxC Gotek Floppy emulator, 3.5" 1.44 MB HDD.
+Front of the PC with IDE HDD caddy, HxC Gotek Floppy emulator, 3.5" 1.44 MB HDD.
 
-<img src="nuxt-pc-v1.2/photos/nuxt-internal.jpg" width="500">
+<img src="nuxt-pc-v2.0/photos/nuxt-internal.jpg" width="500">
 
 Old-New motherboard
 
-<img src="nuxt-pc-v1.2/photos/nuxt-postboot.jpg" width="500">
+<img src="nuxt-pc-v2.0/photos/nuxt-postboot.jpg" width="500">
 
 Post DOS 6.22 bootup
 
@@ -87,3 +87,5 @@ Post DOS 6.22 bootup
 14. [SBPNPXT by dca2](https://www.vogons.org/viewtopic.php?p=479466#p479466)
 15. [Crynwr](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/repos/pkg-html/crynwr.html)
 16. [Unisound](https://www.vogons.org/viewtopic.php?f=62&t=72553)
+17. [Microsoft Mouse 8.20](https://winworldpc.com/product/microsoft-mouse/8x)
+18. [Microsoft Mouse 9.01](https://winworldpc.com/product/microsoft-mouse/9x)
