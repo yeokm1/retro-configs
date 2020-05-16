@@ -1,5 +1,5 @@
 
-Universal PnP Sound Card Enabler for DOS v0.68d. JazeFox Apr-2020 (UNISOUND)
+Universal PnP Sound Card Enabler for DOS v0.70b. JazeFox May-2020 (UNISOUND)
 ============================================================================
 
 Index of this document:
@@ -51,11 +51,11 @@ involved to my card's initialization. Only one file, very small size,
 (in fact it could be used to be fitted even in a floppy disk together with
 a game if you want), and no need for anything else to get basic functionality
 of the cards: centered in SB/SBpro/SB16 compatibility (altough some cards 
-will work in WSS mode too...), basic mixer setting (all channels have fixed 
-volume, and Master volume is user-configurable), and "useless" stuff disabled
-by default (Modem, IDE...) Well, IDE is disabled by default but it is 
-user-configurable with a custom parameter un BLASTER environment variable C.
-Check the Usage section (2) for more info on this.
+will work in WSS mode too...), mixer settings (Master vol, Wave/DAC vol, 
+FM/Synth vol, Line-in vol), and "useless" stuff disabled by default 
+(Modem, IDE...) Well, IDE is disabled by default but it is user-configurable
+with a custom parameter un BLASTER environment variable C. Check the Usage
+section (2) for more info on this.
 
 This tool has taken a lot of time, researching over technical 
 documentation of the card's/chip's manufacturers, reverse engeneering, and
@@ -69,7 +69,7 @@ and also mixer defaults, so it pretends to be real "Plug and Play".
 As I made this tool for my own needs initially, and as I am not an expert,
 it may have a lot of bugs. **Use at your own risk**
 
-**VERY IMPORTANT WARNING**:
+**IMPORTANT WARNING**:
 This tool does *NOT* check for resource conflicts, so if you configure your
 cards with already used ports, IRQs, DMAs... you will notice problems, like
 hangs, corruptions, even damage to your data if you are not careful. You
@@ -92,14 +92,15 @@ BIOS, but even with a PnP BIOS, you can override the values using Unisound.
 So no problem to use it in more modern machines like pentiums, K6-2...
 
 UNISOUND (without arguments): initializes 1st PnP card found in the system
-with internal default resource settings and ~85% Mixer Master volume.
+with internal default resource settings and the following Mixer volume 
+defaults: ~85% Master vol, 80% Wave vol, 80% FM/Synth vol, 50% Line in vol.
 
 The tool default values, if no environment variable is found, are (optional 
 args for some cards with special resources are between brackets):
 
 For SB or SB compatible cards:
 ADDR: 220, IRQ: 5, DMA1: 1, DMA2: 1, MPU: 330, (AWE: 620), (WSS: 530), 
-(JOY: 200) (CD-IDE: 0)
+(JOY: 200), (CD-IDE: 0), (OPL: 388)
 
 For GUS PnP:
 ADDR: 240, CODEC: 34x, DMA1: 3, DMA2: 3, IRQ: 11
@@ -108,7 +109,7 @@ If BLASTER (or ULTRASND for GUS PnP) environment var is found, UNISOUND will
 use its values to configure the card. If not, Unisound default values will
 be used.
 
-Usage: UNISOUND [/Cn] [/Vnn] [/F] [/R] [/H]
+Usage: UNISOUND [/Cn] [/F] [/R] [/Vnn] [/WVnn] [/VFnn] [/VLnn] [/H]
 
 Options:
    /Cn    Select PnP card number 'n' to initialize/show (n = 2 to 5)
@@ -117,14 +118,19 @@ Options:
    /Vnn   Set sound card mixer Master Volume level to 'nn' % (00-99)
    /F     Faster PnP detection process (but less reliable)
    /R     Read PnP card current settings only (can be used with /Cn)
+   /Vnn   Set sound card Master Volume level to 'nn' % (00-99)
+   /VWnn  Set sound card Wave/DAC Volume level to 'nn' % (00-99)
+   /VFnn  Set sound card FM/Synth Volume level to 'nn' % (00-99)
+   /VLnn  Set sound card Line-in Volume level to 'nn' % (00-99)
    /H /?  Help screen
 
 --
 
 Before the first try, it is recommended to start with UNISOUND /CL
 to list the detected cards, especially if you have more than one installed.
-(Note that it is not recommended to have several cards of the same type
-installed at the same time to avoid conflicts. GUS + SB are OK).
+(Note that altough it is not recommended to have several cards of the same 
+type installed at the same time to avoid conflicts, it is possible to have
+them working if you configure them well. GUS + SB are a very good combo!).
 If you only have 1 PnP card (sound card or not), use UNISOUND as is.
 
 With /CL a numbered list of the cards is presented like this:
@@ -147,10 +153,11 @@ PnP card found: [ESS1868] ESS ES1868 Plug and Play Audiodrive
 BLASTER environment var found! Loading settings...
 ADD:220 OPL:388 MPU:330 IRQ:5 DMA1/1 JOY:200
 Initialization done.
-ESS Mixer set. (Vol: 85%)
+ESS Mixer set (Master:85% Wave:80% FM:80% Line:50%)
 
 Ok! if the values you provided are good, the card sould work. Now if the
-volume is too high you can use: UNISOUND /C2 /V50 for example.
+master volume is too high you can use: UNISOUND /C2 /V50 for example, or
+if you don't use line-in and want to avoid input noise, use /VL00.
 
 If you only want to check the current settings of a PnP card, use:
 
@@ -166,7 +173,7 @@ Important Notes about configuration with the BLASTER environment variable:
 In addition to the regular BLASTER parameters, this tool accepts new custom
 ones (optional). All of them are explained here (example values):
 
-A220 I5 D1 H1 P330 E620 W530 J200 C168 Rxxx M310
+A220 I5 D1 H1 P330 E620 W530 J200 C168 Rxxx M310 F388
 
   W: WSS address for cards that require it (530 if not specified). It is
      better not to use this if you don't know what you are doing.
@@ -188,11 +195,18 @@ A220 I5 D1 H1 P330 E620 W530 J200 C168 Rxxx M310
   M: Special option for Maxi Sound 64 series cards with DREAM SAM chips, it
      is the primary MPU port (P is the internal port, needed to upload 
      firmware, but you can swap them playing with P and M values).
+  F: FM/OPL Base address. Default is 388. F0 to disable (not all cards allow
+     to disable or change this port!). Accepted values: 388, 398, 3A8, 0.
+     This option is useful, for example, to disable or remap CQM synth in
+     SB cards if you use other card with a genuine OPL chip tied to 388,
+     or useful for the future "AWE64 Legacy" project, with a genuine OPL.
+     Note that a few games (like Dynblaster) will try to use FM synth on
+     SB ports 2x0, and it will FM output sound (in SB with CQM for example)
+     anyway. Set FM volume to 0 to avoid it.
 
 As every card has its own oddities and quirks, some values are fixed and no
 user-configurable for now (like MPU IRQs, some special control ports, 
-secondary IRQs for some WSS-compatible cards, OPL/FM address -fixed to 388- 
-and so..). Try and check!
+secondary IRQs for some WSS-compatible cards, and so..). Try and check!
 
 Look at the section 4 "Special notes about some cards", to check special
 situations using some cards.
@@ -206,7 +220,7 @@ For the GUS PnP, the usual format of ULTRASND env var is:
 ULTRASND=240,3,3,11,11
 
 
-3- Supported cards in the current version (v0.68d):
+3- Supported cards in the current version (v0.70b):
 ============================================================================
 
 I know that this list has many card models missing, but I added the models 
@@ -221,6 +235,7 @@ Creative:
   (to enable FM and built-in wavetable sound, so no AWEUTIL /S needed. No 
   soundfonts loading though).
 On all Creative cards, DSP version is displayed at init time.
+On AWE cards, total memory detected is displayed at init time.
 Check section 5.1 for a complete list of successfully tested Creative models
 
 ESS AudioDrive:
@@ -228,7 +243,7 @@ ESS AudioDrive:
 - ES1868F single chip cards
 - Guillemot Maxi Sound 64 (ES1868 + SAM9407 versions only) SAM9407 firmware
   uploading and initialization included (to unmute output sound).
-- ES1869F single chip cards (Compaq branded for now)
+- ES1869F single chip cards
 - ES968+ES688 and ES968+ES1688 dual chip cards. (Caution with these ES968
   combos! Different manufacturers share the same Vendor ID with totally 
   different resources. It has been tested with 2 different cards, but yours
@@ -251,7 +266,7 @@ Diamond Technologies:
 
 Aztech:
 ----------------------
-- AZT2320 chip (tested with a MM Pro 16 IIIS+ PNP)
+- AZT2320 chip based cards.
 
 Rockwell:
 ----------------------
@@ -619,3 +634,20 @@ v0.68d
   very slow systems, do not run Unisound again with /R or /CL switches or
   the card will stop working and should be initialized again, and in those
   systems, /R will output zero value for all resources.
+
+v0.70b
+------------------------
+- Added FM/OPL Base address as user-configurable. Default value = 388. 
+  F0 to disable (not all cards allow to disable or change this port!). 
+  Accepted values: 388, 398, 3A8, 0. This option is useful, for example,
+  to disable or remap CQM synth in SB cards if you use together with other
+  card with a genuine OPL chip tied to 388, or useful for the future 
+  "AWE64 Legacy" project, wich will mount a genuine OPL chip.
+- Added new user-configurable mixer volume values: Wave/DAC, FM/Synth,
+  Line-in. The new values are set with new command-line arguments:
+  /VW /VF /VL . Defaults: Master:85% , Wave/DAC: 80% , FM/Synth: 80%, 
+  Line-in: 50%
+
+v0.70c
+------------------------
+- Added support for new Vendor IDs for Aztech 2320 based cards.
