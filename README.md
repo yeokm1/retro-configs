@@ -69,6 +69,12 @@ Old-New motherboard
 
 Post DOS 6.22 bootup
 
+# 6 [Virtualbox (DOS 6.22)](vbox-dos622)
+
+Not exactly a retro PC but I just wanted to store the settings I use for my virtual DOS background. This is typically for me to do quick and dirty testing without powering up my actual retro-PCs.
+
+<img src="vbox-dos622/vbox-shot.png" width="500">
+
 ## Sources
 
 1.  [Toshiba generic CD driver CDROMDRV](https://www.legroom.net/howto/msdos)
