@@ -50,7 +50,6 @@ My "Tweener PC" based on Pentium III is affectionately called that as it contain
 The machine is configured for single-boot Windows 98SE with a bootup option to enter pure DOS configuration only.
 
 <img src="tweener-pc/photos/tweener-disks.jpg" width="500">
-
 <img src="tweener-pc/photos/tweener-w98-desktop.jpg" width="500">
 
 # 5. [NuXT PC](nuxt-pc-v2.0) (2020)
@@ -95,3 +94,5 @@ Not exactly a retro PC but I just wanted to store the settings I use for my virt
 16. [Unisound](https://www.vogons.org/viewtopic.php?f=62&t=72553)
 17. [Microsoft Mouse 8.20](https://winworldpc.com/product/microsoft-mouse/8x)
 18. [Microsoft Mouse 9.01](https://winworldpc.com/product/microsoft-mouse/9x)
+19. [PLIP v11.2](http://macall.net/)
+
