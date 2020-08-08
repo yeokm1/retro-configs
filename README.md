@@ -74,6 +74,14 @@ Not exactly a retro PC but I just wanted to store the settings I use for my virt
 
 <img src="vbox-dos622/vbox-shot.png" width="500">
 
+# 3. [Thinkpad R50e](thinkpad-r50e) (2005)
+
+The Pentium M machine is configured to boot to DOS 5.0 only. This machine is solely for experimental purposes to try a slightly older DOS version.
+
+<img src="thinkpad-r50e/photos/r50e-bios.jpg" width="500">
+
+<img src="thinkpad-r50e/photos/r50e-dos5.jpg" width="500">
+
 ## Sources
 
 1.  [Toshiba generic CD driver CDROMDRV](https://www.legroom.net/howto/msdos)
