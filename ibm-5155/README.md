@@ -10,7 +10,7 @@ Front of the PC with 5.25" 360K floppy and Gotek Floppy emulator with HxC firmwa
 
 <img src="photos/5155-internal.jpg" width="500">
 
-Using up all the ISA slots except the harder to use Slot 8.
+Using up all the ISA slots except the harder-to-use Slot 8.
 
 <img src="photos/5155-back-opened.jpg" width="500">
 
@@ -59,11 +59,11 @@ Replacing Bank 0 and Bank 1 with the 18x 256K-bit chips from the kit.
 
 <img src="photos/5155-u84.jpg" width="500">
 
-Adding to the 74LS158 multiplexer/decoder chip to empty socket U84.
+Adding the 74LS158 multiplexer/decoder chip to empty socket U84.
 
 <img src="photos/5155-u48-pal.jpg" width="500">
 
-The terminals 1 and 8 of the IBM Programmable Array Logic (PAL) chip at U44 is required to be shorted.
+The terminals 1 and 8 of the IBM Programmable Array Logic (PAL) chip at U44 are required to be shorted.
 
 As the IBM5155 uses the older version of an XT motherboard, it does not have a jumper terminal to do the shorting easily. A wire has to be wrapped around the chip legs to do the shorting.
 
