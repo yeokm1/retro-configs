@@ -10,7 +10,11 @@ Front of the PC with 5.25" 360K floppy and Gotek Floppy emulator with HxC firmwa
 
 <img src="photos/5155-internal.jpg" width="500">
 
-Using up almost all the ISA slots.
+Using up all the ISA slots except the harder to use Slot 8.
+
+<img src="photos/5155-back-opened.jpg" width="500">
+
+All the rear IO ports.
 
 <img src="photos/5155-xtideboot.jpg" width="500">
 
@@ -26,7 +30,7 @@ Connecting to the network is possible.
 
 * Intel 8088 4.77Mhz
 * Intel 8087 FPU
-* Motherboard only has 256K onboard
+* Motherboard has 640KB upgrade kit installed (See next section)
 
 Motherboards from early IBM PCs are bare with most of the external functionality provided by ISA cards.
 
@@ -35,16 +39,36 @@ Motherboards from early IBM PCs are bare with most of the external functionality
 Expansion cards from top left
 
 * IBM CGA Graphics Adapter
-* [Sergey Kiselev Floppy Disk and Serial Controller](http://www.malinov.com/Home/sergeys-projects/isa-fdc-and-uart)
-* Creative Sound Blaster 16 CT2950 CQM
 * 3Com Etherlink II TP 3C503 10Mbps Ethernet
+* [Aitor Gómez's RTC ISA 8 Bits XT](https://hackaday.io/project/168972-rtc-isa-8-bits-pcxt)
+* [Sergey Kiselev Floppy Disk and Serial Controller](http://www.malinov.com/Home/sergeys-projects/isa-fdc-and-uart)
 * [Glitch Works XT-IDE Rev 4](https://www.glitchwrks.com/2017/11/23/xt-ide-rev4)
 * Transcend 40-pin IDE Flash Module
-* [Monotech MicroRAM - 640K + UMB RAM](https://monotech.fwscart.com/MicroRAM_640K_UMB_RAM_8bit_ISA/p6083514_19914752.aspx)
-* [Aitor Gómez's RTC ISA 8 Bits XT](https://hackaday.io/project/168972-rtc-isa-8-bits-pcxt)
-
+* [Blasterboard: a modern SB 2.0 clone](https://www.tindie.com/products/jrlab/blasterboard-a-complete-8-bit-isa-sound-card/)
+* AP138B Parallel Port card
 
 The IDE flash module is used as the system seems to run more stable with it than from CompactFlash cards.
+
+## 640K upgrade
+
+I used the [RAM upgrade kit from Monotech PCs](https://monotech.fwscart.com/640K_RAM_Upgrade_for_IBM_5160/p6083514_20677547.aspx) to boost the default 256KB conventional memory to the maximum of 640KB. Therefore saving an ISA slot for another function which would have otherwise gone to a separate RAM card.
+
+<img src="photos/5155-mem-chips.jpg" width="500">
+
+Replacing Bank 0 and Bank 1 with the 18x 256K-bit chips from the kit.
+
+<img src="photos/5155-u84.jpg" width="500">
+
+Adding to the 74LS158 multiplexer/decoder chip to empty socket U84.
+
+<img src="photos/5155-u48-pal.jpg" width="500">
+
+The terminals 1 and 8 of the IBM Programmable Array Logic (PAL) chip at U44 is required to be shorted.
+
+As the IBM5155 uses the older version of an XT motherboard, it does not have a jumper terminal to do the shorting easily. A wire has to be wrapped around the chip legs to do the shorting.
+
+More information for this upgrade can be found [here](http://minuszerodegrees.net/5160/motherboard/5160_upgrading_256k_motherboard_to_640k.pdf).
+
 
 ## DOS Boot Configuration
 
@@ -53,13 +77,12 @@ The machine is configured for single-boot DOS 6.22 and very similar to my NuXT P
 * MTCP environment variables
 * Crynwr 3C503 packet driver
 * Get time from RTC
-* SBPNPXT to configure Sound Blaster ISA PnP
 
 ## RTC
 
 I was experimenting in getting an Real-time clock to work with this system with little success.
 
-Many thanks to Aitor Gómez's [RTC ISA 8 Bits XT](https://hackaday.io/project/168972-rtc-isa-8-bits-pcxt) and his help. I managed to reprogram his board to use the `240h` address and get it work.
+Many thanks to Aitor Gómez's [RTC ISA 8 Bits XT](https://hackaday.io/project/168972-rtc-isa-8-bits-pcxt) and his help. I managed to reprogram his board to use the `240h` address and get it to work.
 
 1. [RTC SPLD Binaries](https://github.com/spark2k06/hardware/tree/master/RTC8088/SPLD)
 2. [RTC Program from dieymir](http://www.vcfed.org/forum/showthread.php?71958-RTC-ISA-8-bits-(Very-Low-Profile)&p=606650#post606650)
@@ -83,3 +106,4 @@ After booting from the floppy image, I start an FTP server and then copy the res
 1. [Technical Reference](http://www.minuszerodegrees.net/manuals/IBM_5155_5160_Technical_Reference_6280089_MAR86.pdf)
 2. [Operations Manual](http://classiccomputers.info/down/IBM/IBM_PC_Portable_5155/IBM_5155_Guide_to_Operations_6936571_JAN84.pdf)
 3. [PSU Review by Hugo Holden](http://worldphaco.com/uploads/The_IBM_5155_POWER_SUPPLY.pdf)
+4. [IBM5160 and IBM5155 motherboard versions](http://minuszerodegrees.net/5160/motherboard/5160_motherboard_revisions.htm)
