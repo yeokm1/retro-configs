@@ -12,12 +12,12 @@ With all trays open.
 
 <img src="photos/tweener-mobo.jpg" width="500">
 
-AWE64 and Resound OPL3. CD-In, USB Header and Wake-on-LAN cables are used. Adhoc uses of the SCSI card.
+CD-In and Wake-on-LAN cables are used.
 
 ## Specifications
 
 * Intel Pentium III 550Mhz 100Mhz FSB
-* MSI MS6163 Pro Intel 440BX motherboard
+* Asus P2B Rev 1.10 Intel 440BX motherboard
 * 2x256MB PC133 SDRAM
 * 32GB Sandisk Compactflash card
 * NEC ND-3530A DVD-RW IDE
@@ -28,12 +28,10 @@ AWE64 and Resound OPL3. CD-In, USB Header and Wake-on-LAN cables are used. Adhoc
 <img src="photos/tweener-cards.jpg" width="500">
 
 Expansion cards from top left
-
-* Creative Sound Blaster AWE64 Gold ISA with SIMMConn 32MB
-* 3Com 3C905 PCI 10/100 Mbps
-* VIA VT6212 USB 2.0 PCI Controller
 * Resound OPL3 ISA
 * ATI Radeon 9500 Pro 128MB DDR AGP 8X
+* 3Com 3C905 PCI 10/100 Mbps
+* Creative Sound Blaster AWE64 Gold ISA with SIMMConn 32MB
 
 <img src="photos/tweener-awe64-simmconn.jpg" width="500">
 
@@ -43,10 +41,13 @@ The [SIMMConn Revival](http://simmconn.tripod.com/) allows typical SIMM-72 RAM t
 I added drivers of these cards as I occasionally may use them for ad-hoc testing.
 
 * Nvidia FX5500
-
 * LSI 53C1010
 
-<img src="photos/tweener-lsi.jpg" width="500">
+## BIOS configuration
+
+<img src="photos/tweener-bios-interrupt.jpg" width="500">
+
+Interrupt 5 and DMA 1 have to be enabled in the BIOS for the use of ISA cards.
 
 ## Boot Configuration
 
@@ -74,6 +75,8 @@ Only the ATI and 3Com drivers are needed. Win 98SE already has the latest AWE64 
 Using Jazefox's Universal PnP Sound card enabler to configure the PnP settings much faster than Creative's own tool.
 
 <img src="photos/tweener-unisound-init.jpg" width="500">
+
+The AWE64's FM is disabled to not conflict with the Resound OPL3.
 
 <img src="photos/tweener-sb-diagnose.jpg" width="500">
 
