@@ -92,6 +92,13 @@ After loading 3c905 packet drivers.
 
 Loading MTCP to prove packet drivers work.
 
+## P2B BIOS
+
+I included 2 BIOS files for my reference in case I need to reflash them.
+
+* Latest stable 1012
+* 1014 Beta 3 which supports some new CPUs
+
 ## Sources
 1. [3C905 drivers](https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/3com/3c905/support.3com.com/infodeli/tools/nic/3c905.htm)
 2. [AWE64 PnP](https://support.creative.com/Products/ProductDetails.aspx?prodID=1848&prodName=Sound%20Blaster%20AWE64)
@@ -99,3 +106,4 @@ Loading MTCP to prove packet drivers work.
 4. [Nvidia Forceware 80 81.98](https://www.nvidia.com/Download/Find.aspx)
 5. [LSI 53C1010 x86 drivers](ftp://ftp.tyan.com/SCSI/LSI1010/111700/LSI1010.exe)
 6. [LSI 53C1010 x64 drivers](http://www.edugeek.net/forums/windows-7/96515-windows-7-x64-drivers-lsi-20160-scsi-adaptor.html)
+7. [BIOS sources](http://ftp.tekwind.co.jp/pub/asustw/mb/slot1/440bx/p2b/)
