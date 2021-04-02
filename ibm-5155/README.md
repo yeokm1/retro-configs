@@ -44,10 +44,14 @@ Expansion cards from top left
 * [Sergey Kiselev Floppy Disk and Serial Controller](http://www.malinov.com/Home/sergeys-projects/isa-fdc-and-uart)
 * [Glitch Works XT-IDE Rev 4](https://www.glitchwrks.com/2017/11/23/xt-ide-rev4)
 * Transcend 40-pin IDE Flash Module
-* [Blasterboard: a modern SB 2.0 clone](https://www.tindie.com/products/jrlab/blasterboard-a-complete-8-bit-isa-sound-card/)
+* [Blasterboard: a modern SB 2.0 clone (faulty)](https://www.tindie.com/products/jrlab/blasterboard-a-complete-8-bit-isa-sound-card/)
 * AP138B Parallel Port card
 
 The IDE flash module is used as the system seems to run more stable with it than from CompactFlash cards.
+
+<img src="photos/5155-ct2950.jpg" width="500">
+
+The Blasterboard seems to be faulty probably due to soldering. So the final sound card I used is a Creative SB16 CT2950. It does not have the actual OPL3 chip but uses a CQM clone. 
 
 ## 640K upgrade
 
@@ -107,3 +111,4 @@ After booting from the floppy image, I start an FTP server and then copy the res
 2. [Operations Manual](http://classiccomputers.info/down/IBM/IBM_PC_Portable_5155/IBM_5155_Guide_to_Operations_6936571_JAN84.pdf)
 3. [PSU Review by Hugo Holden](http://worldphaco.com/uploads/The_IBM_5155_POWER_SUPPLY.pdf)
 4. [IBM5160 and IBM5155 motherboard versions](http://minuszerodegrees.net/5160/motherboard/5160_motherboard_revisions.htm)
+5. [SBPNPXT by dca2](https://www.vogons.org/viewtopic.php?p=479466#p479466)
