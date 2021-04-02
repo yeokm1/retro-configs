@@ -82,6 +82,8 @@ The machine is configured for single-boot DOS 6.22 and very similar to my NuXT P
 * Crynwr 3C503 packet driver
 * Get time from RTC
 
+As the SB16 CT2950 is an ISA PNP card, some initialisation is required before it can be used. The latest version of a modern initialisation app [Unisound](https://www.vogons.org/viewtopic.php?t=72553) at time of writing unfortunately cannot detect this card. I have to use an alternative [SBPNPXT by dca2](https://www.vogons.org/viewtopic.php?p=479466#p479466).
+
 ## RTC
 
 I was experimenting in getting an Real-time clock to work with this system with little success.
