@@ -68,19 +68,27 @@ Old-New motherboard
 
 Post DOS 6.22 bootup
 
-# 6 [Virtualbox (DOS 6.22)](vbox-dos622)
+# 6. [Virtualbox (DOS 6.22)](vbox-dos622)
 
 Not exactly a retro PC but I just wanted to store the settings I use for my virtual DOS background. This is typically for me to do quick and dirty testing without powering up my actual retro-PCs.
 
 <img src="vbox-dos622/vbox-shot.png" width="500">
 
-# 3. [Thinkpad R50e](thinkpad-r50e) (2005)
+# 7. [Thinkpad R50e](thinkpad-r50e) (2005)
 
 The Pentium M machine is configured to boot to DOS 5.0 only. This machine is solely for experimental purposes to try a slightly older DOS version.
 
 <img src="thinkpad-r50e/photos/r50e-bios.jpg" width="500">
 
 <img src="thinkpad-r50e/photos/r50e-dos5.jpg" width="500">
+
+# 8. [Custom 486 PC](custom-486-pc) (circa early 1990s)
+
+This 486 PC will boot to DOS 6.22 and WFW 3.11. It's for my generic retro testing purposes.
+
+<img src="custom-486-pc/photos/front-case-drives.jpg" width="500">
+
+<img src="custom-486-pc/photos/wfw311.jpg" width="500">
 
 ## Sources
 
@@ -102,4 +110,6 @@ The Pentium M machine is configured to boot to DOS 5.0 only. This machine is sol
 16. [Microsoft Mouse 8.20](https://winworldpc.com/product/microsoft-mouse/8x)
 17. [Microsoft Mouse 9.01](https://winworldpc.com/product/microsoft-mouse/9x)
 18. [PLIP v11.2](http://macall.net/)
+19. [CheckIt System Info tool](https://winworldpc.com/product/checkit/30)
+20. [Win 98 SE boot disk](https://www.bootdisk.com/bootdisk.htm)
 

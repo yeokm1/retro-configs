@@ -1,0 +1,73 @@
+; Creative Technology Ltd.
+;     Copyright (c) Creative Technology Ltd, 1994-1996.
+;
+; Description
+;	  - This .inf files is to allow the user to set up the environment
+;		when they upgrade from Windows 3.1 to Windows95
+;	  - This .inf files can also be used to allow user to upgrade from
+;		ctpnpscn.exe to ctpnpscn.drv..and also to upgrade old ctcm package
+;		if the user have it on their system
+;
+;     It will : 1. Add entry in the <WIN95>/SYSTEM.INI
+;                  Under [boot] section, Key=drivers, the entry ctpnpscn.drv
+;               2. Copy CTPNPSCN.DRV to <WIN95>/SYSTEM directory
+;               3. Copy CTCM.EXE into Win95 directory
+;               3. Remark out device=<CTCM>/CTCM.EXE
+;               4. Remark out SET CTCM
+;               5. Remark out CTCU /S /W=C:<WIN31>
+;				6. Delete the statement CTPNPSCN.EXE in <WIN95>/WIN.INI
+;				   Under [windows] section, Key=run, the entry ctpnpscn.exe
+;
+; Date : 19th September 1996
+; Revision 1.01
+;
+
+[Version]
+Signature="$CHICAGO$"
+provider=%CREAF%
+
+[CTInfVersion]
+InfName=CTCM.INF
+InfVersion=1.01
+
+[DefaultInstall]
+CopyFiles=CTCM.CopyList, CTPNPSCN.CopyList
+UpdateIniFields=Update.SystemIni, Update.WinIni
+UpdateCfgSys=Update.ConfigSys
+UpdateAutoBat=Update.AutoexecBat
+
+[DestinationDirs]
+CTCM.CopyList = 10				; LDID_WINDOWS
+CTPNPSCN.CopyList = 11	        ; LDID_SYS
+
+[SourceDisksFiles]
+ctcm.exe=1
+
+[SourceDisksNames]
+1="",,,
+
+;---------------------------------------------------------------;
+
+[CTCM.CopyList]
+ctcm.exe,ctcm.exe,
+
+[CTPNPSCN.CopyList]
+ctpnpscn.drv,,
+
+[Update.SystemIni]
+%10%\system.ini, boot, drivers,,ctpnpscn.drv,1
+
+[Update.WinIni]
+%10%\win.ini, windows, run, ctpnpscn.exe,,1
+
+[Update.ConfigSys]
+DevDelete=ctcm.exe
+
+[Update.AutoexecBat]
+UnSet=ctcm
+CmdDelete=ctcu
+
+;---------------------------------------------------------------;
+
+[Strings]
+CREAF="Creative"

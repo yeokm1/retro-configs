@@ -1,0 +1,7 @@
+History.txt for Sound Blaster Software Updates (UPD-STD-03)
+
+Rev 1 [20 June 96]:
+
+1. Fixes FM music cannot be heard problem on sound cards with model
+   number CT2760, CT3780, CT3900, CT391x, CT3980.
+2. Resolves voice message playback problem in SuperVoice.
