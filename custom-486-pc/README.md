@@ -20,7 +20,7 @@ Ignore the I5 label!
 * 512MB Compactflash card
 * DVD-RW IDE
 * IDE HDD caddy
-* Gotok Floppy Emulator with HxC
+* Gotek Floppy Emulator with HxC firmware
 * 1.44MB 3.5" Floppy
 
 <img src="photos/inside-case.jpg" width="500">
