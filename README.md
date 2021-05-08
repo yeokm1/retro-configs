@@ -95,7 +95,7 @@ This 486 PC will boot to DOS 6.22 and WFW 3.11. It's for my generic retro testin
 1.  [Toshiba generic CD driver CDROMDRV](https://www.legroom.net/howto/msdos)
 2.  [Cutemouse](http://cutemouse.sourceforge.net/)
 3.  [Enhanced DOSKEY 2.8](http://paulhoule.com/doskey/)
-4.  [MTCP TCP/IP stack Jan 2020](http://www.brutman.com/mTCP/)
+4.  [MTCP TCP/IP stack](http://www.brutman.com/mTCP/)
 5.  [ODI to Packet Driver v3.1](http://wiki.freedos.org/wiki/index.php/Networking_FreeDOS_-_ODI_driver_installation)
 6.  [SHSUCDX 3.03F](http://optimizr.dyndns.org/dos/shsucdx.html)
 7.  [SHSUCDX 3.06](http://adoxa.altervista.org/shsucdx/index.html)
