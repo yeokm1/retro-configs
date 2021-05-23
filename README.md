@@ -76,11 +76,19 @@ Not exactly a retro PC but I just wanted to store the settings I use for my virt
 
 # 7. [Thinkpad R50e](thinkpad-r50e) (2005)
 
-The Pentium M machine is configured to boot to DOS 5.0 only. This machine is solely for experimental purposes to try a slightly older DOS version.
+The Pentium M machine is configured to boot to Win XP and Debian only. This machine is solely for experimental purposes.
 
 <img src="thinkpad-r50e/photos/r50e-bios.jpg" width="500">
 
-<img src="thinkpad-r50e/photos/r50e-dos5.jpg" width="500">
+BIOS
+
+<img src="thinkpad-r50e/photos/r50e-winxp.jpg" width="500">
+
+Win XP
+
+<img src="thinkpad-r50e/photos/r50e-debian.jpg" width="500">
+
+Debian
 
 # 8. [Custom 486 PC](custom-486-pc) (circa early 1990s)
 
