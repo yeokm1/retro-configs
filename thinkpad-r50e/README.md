@@ -1,4 +1,4 @@
-# Thinkpad T42
+# Thinkpad R50e
 
 The Thinkpad R50E-1834 is a laptop released in 2005 by IBM. 
 
