@@ -1,0 +1,715 @@
+***************************************************************************** 
+                                  WINNT.TXT  
+***************************************************************************** 
+
+Installation Guide for the Symbios SDMS Drivers: SYMC8XX.SYS V4.15.00
+                                                 SYM_HI.SYS  V4.13.00
+                                                 SYM_U3.SYS  V5.05.00
+
+This file describes the features and use of the Symbios SDMS device 
+drivers for the Windows 4.0 operating system environment. LSI Logic 
+uses the same filenames for their drivers for different Windows operating
+systems. The driver files are packaged either in separate subdirectories
+based on the Windows operating system or on different flex disks.
+
+To determine the driver file for Windows NT 4.0, note that the filename ends 
+with ".sys". For example, SYMC8XX.SYS. (The same is true for Windows 2000.)
+To determine the operating system version, go into Windows Explorer, 
+display the driver file, right click on the filename, click on Properties,
+click on the Version tab. Finally, click on the Internal Filename in the
+lower section. For Windows NT 4.0, the filename appears as filename (NT 4.0).
+For example, SYMC8XX.SYS (NT 4.0).
+
+This file contains these sections: 
+
+Introduction for Windows NT 4.0 
+     Features
+     Symbios Devices Supported
+     Description
+
+Installing the SYMC8XX.SYS/SYM_HI.SYS/SYM_U3.SYS Driver(s)
+     New System Installation
+         CD-ROM Installation
+         Boot Floppy Disk Installation 
+     Existing System Installation 
+          Windows NT 4.0 
+          Performance Tuning for NT 4.0 
+          Large Block Size Support 
+          Maximum Number of Concurrent I/Os 
+     Disk Mirroring 
+     Troubleshooting 
+
+
+******************** Introduction for Windows NT 4.0 ******************** 
+
+Windows NT 4.0 is an operating system designed to run on processors using 
+current technology. It provides a graphical user interface environment
+incorporating many high-level features (refer to the Microsoft Windows NT 4.0
+documentation for details). An I/O manager handles I/O requests in Windows
+NT 4.0. To address a SCSI peripheral, the I/O manager goes through the
+appropriate drivers. Class drivers for hard disk, floptical, CD-ROM, printer,
+and scanner peripherals are provided in Windows NT 4.0.
+  
+Other class drivers, provided by peripheral manufacturers, may be added to 
+support new devices. Tape device support is built into the operating system 
+itself and does not require a class driver. Microsoft provides the port
+driver and LSI Logic provides the miniport drivers, which are called
+SYMC8XX.SYS, SYM_HI.SYS, and SYM_U3.SYS. These drivers complete the path to
+a Symbios controller or processor with an optional SDMS SCSI BIOS. The next
+sections describe these drivers and their installation. 
+
+
+*  *  *  *  *  *  *  *  *  *  * Features *  *  *  *  *  *  *  *  *  *  *  * 
+
+The Symbios miniport drivers support these features:
+
+o  Ultra160 Data Transfers (for SYM53C1010)
+o  Domain Validation
+o  Synchronous negotiation (including Fast SCSI/Ultra SCSI/Ultra2 SCSI) 
+o  Wide negotiation 
+o  Tagged command queuing 
+o  Multiple host adapters 
+o  Multiple Logical Unit Numbers (LUNs) 
+o  Allows Disconnect/Reselect 
+o  Scatter-Gather 
+o  Provides Differential support 
+o  SCSI pass-through functionality 
+o  Disk array configurations with no LUN 0 
+o  Disk array configurations with non-contiguous LUNs 
+o  Target initiated negotiation 
+o  Auto request sense 
+o  Maximum block size support: NT 4.0 - 1 Mbyte 
+o  NVRAM support (wide/sync parameters, SCSI Host ID) 
+
+
+*  *  *  *  *  *  *  *  Symbios Devices Supported *  *  *  *  *  *  *  *  * 
+
+The SYMC8XX.SYS driver is named "Symbios PCI (53C8XX)" for driver
+installation. It supports the following devices and Symbios host adapters
+based on those devices:
+
+o  SYM53C810, SYM53C810A, SYM53C810AE (SYM8100S, SYM8100ASP, SYM20810)
+o  SYM53C815 (SYM815XS, SYM8150SP)
+o  SYM53C825, SYM53C825A (SYM8250S, SYM8251S, SYM8251D, SYM8250ASP,
+   SYM8251ASP, SYM8251AD)
+o  SYM53C860, SYM53C860AE (SYM8600SP, SYM20860)
+o  SYM53C875, SYM53C875E (SYM8750SP, SYM8751SP, SYM8751SPE, SYM8751D)
+o  SYM53C876 (SYM22801, SYM22802)
+o  SYM53C885 
+o  SYM53C895, (SYM8951U, SYM8952U)
+
+
+The SYM_HI.SYS driver is named "Symbios PCI High Performance Driver" for
+driver installation. It supports the following devices and associated Symbios
+host adapters:
+
+o  SYM53C895A (SYM8953U)
+o  SYM53C896 (SYM22910, SYM21002, SYM22902)
+
+The SYM_U3.SYS driver is named "Symbios Ultra3 PCI SCSI Driver" for
+driver installation. It supports the following device and associated Symbios
+host adapter:
+
+o SYM53C1010-33 (SYM8955U, SYM21040)
+
+*  *  *  *  *  *  *  *  *  *  * Description *  *  *  *  *  *  *  *  *  *  *
+
+SYMC8XX.SYS, SYM_HI.SYS, and SYM_U3.SYS are designed to Microsoft's speci-
+fication for miniport drivers. These drivers allow connection of SCSI devices
+including disk drives, CD-ROMs, and tape drives for PCI-based machines. To
+support a new SCSI device, the Windows NT architecture requires that a class 
+driver for that type device be present (usually supplied by Microsoft, or 
+possibly by the peripheral manufacturer). No changes to SYMC8XX.SYS, 
+SYM_HI.SYS, or SYM_U3.SYS are required. These drivers are only supported under
+Windows NT 4.0 and later versions. They do not run under earlier versions of
+Windows NT.
+
+SCSI commands are passed directly from a Windows application to the SCSI 
+devices by using the SCSI pass-through facility (refer to the Microsoft 
+Windows NT 4.0 documentation for details). This facility allows
+applications to directly control and access SCSI devices by filling in a 
+data structure and calling into the port or class driver.
+
+The SYMC8XX.SYS and SYM_HI.SYS drivers support Ultra SCSI protocol, providing
+twice the raw data transfer rate of Fast SCSI for disk drives and Symbios host
+adapters that support Ultra SCSI. These drivers also support Ultra2 protocol,
+providing quadruple the raw data transfer rate of Fast SCSI. The SYM_U3.SYS
+driver supports Ultra160 SCSI protocol providing 80 Mbytes/s of data transfer
+and up to 160 Mbytes/s data transfer for double transition.
+
+CAUTION: Ultra SCSI requires more stringent SCSI bus cabling setups than Fast 
+         SCSI. Ultra2 and Ultra160 SCSI require low-voltage differential (LVD)
+         termination.
+
+NOTE: The Symbios driver bundled in Windows NT 4.0 is named SYMC810.SYS. 
+      When Windows NT selects the bundled Symbios driver during setup, 
+      the driver information (that is, "Symbios C810 PCI SCSI Host 
+      Adapter") appears. Although this implies that the driver only 
+      supports the SYM53C810, it actually supports the SYM53C810, SYM53C810A,
+      SYM53C815, SYM53C825, SYM53C825A, SYM53C860, SYM53C875, and SYM53C876.
+      This driver does not "see" or support the SYM53C885, SYM53C895,  
+      SYM53C896, SYM53C895A, SYM53C1010-33 chipsets and any newer host adapters
+      based on these chipsets that Symbios currently produces.
+      
+      Keep in mind that the Windows NT 4.0 setup only displays the driver 
+      information, and not every controller found by that driver.
+
+
+********** Installing the SYMC8XX.SYS/SYM_HI.SYS/SYM_U3.SYS Driver *********** 
+
+This section provides installation instructions for new and existing Windows
+NT systems. 
+
+*  *  *  *  *  *  *  *  *  * New System Installation *  *  *  *  *  *  *  *  * 
+
+This procedure installs the SYMC8XX.SYS, SYM_HI.SYS, or SYM_U3.SYS driver onto 
+a Windows NT 4.0 system. Use this procedure when installing Windows NT 4.0 onto
+an unused SCSI drive. Windows NT 4.0 automatically adds the driver to the
+registry and copies the driver to the appropriate directory.
+
+Choose the appropriate method to install these drivers onto a Windows NT 4.0
+system. The two methods are:
+
+o  Boot directly from the Windows NT 4.0 CD-ROM
+   
+   -or-
+
+o  Use Windows NT Boot Floppy Diskettes.
+
+Different steps are required depending on the method used. For Compaq/DEC
+systems based on the Alpha processor, CD-ROM installation is the only method
+available. The CD-ROM Installation and Boot Floppy Diskette Installation
+procedures are listed below. Select the appropriate installation for your
+system.
+
+
+CD-ROM Installation
+
+The driver that is bundled with Windows NT 4.0 is SYMC810.SYS. This driver 
+supports controllers that are listed in the "NOTE" above. 
+
+1. Have the Symbios Driver Diskette available for inserting into the
+   A: drive when prompted.
+
+Important: Read Steps 2 and 3 before performing the instructions contained
+           within these steps.
+
+2. Start the Windows NT 4.0 installation by booting from the Windows NT CD-ROM:
+
+   For Intel-based systems, the system BIOS must support booting from a CD-ROM.
+   Symbios BIOS settings may need to be changed to allow CD-ROM booting.
+
+   For Alpha-based systems, select Supplimentary menu from the firmware Boot
+   Menu, and then select Install Windows NT from CD-ROM.
+
+3. When the screen displays "Windows NT Setup", press the F6 key. This must be
+   done or else the new driver installed from the Symbios Driver diskette will
+   not be recognized. 
+
+   Note: Be sure to press the F6 key as any driver loaded later in the
+         installation process is not recognized by the Windows setup.
+         If F6 is not pressed, all devices controlled by the drivers are 
+         not available during Windows NT setup.
+
+
+4. When the screen displays "Setup could not determine the type of one or more
+   mass storage devices...", choose S to specify an additional device. 
+
+   NOTE: If this screen is not displayed as the first user input, then the F6
+         keypress was not seen by the setup program. Reboot the system and
+         try again.
+
+   The system prompts for the manufacturer-supplied hardware support disk.
+
+5. Insert the appropriate Symbios Driver diskette containing the Windows NT
+   driver required to support your Symbios adapter(s) and press Enter. 
+
+      
+   NOTE: Current Windows NT 4.0 drivers can be downloaded from the LSI Logic web
+         site at URL: http://www.lsilogic.com. After being connected to this
+         web site, click on the Support option in the menu bar. Go to the
+         "Software and drivers for Symbios brand PCI host adapters" section
+         and choose the operating system or utility desired. Click on the Go
+         button. Based on your selection, you will either:
+
+        A. Download the driver or utility from the next screen,
+
+           -or-
+
+        B. Select the chipset or model number of the host adapter card, then
+           download the appropriate driver based on the selection made.
+
+6. Depending on the driver being installed, either "Symbios PCI (53C8XX)",
+   "Symbios PCI High Performance Driver", or "Symbios Ultra3 PCI SCSI Driver"
+   is shown highlighted. Press Enter to proceed.
+
+    
+   NOTE: If more than one Symbios driver needs to be installed, they can be
+         installed one after the other using steps 4 through 6. Installation
+         order is not important.
+
+7. Windows NT 4.0 should now recognize the Miniport driver(s) and the SCSI
+   hardware. Press Enter to continue. 
+
+   At this point, simply follow the Microsoft Windows NT installation
+   procedure.
+
+Boot Floppy Disk Installation
+
+The driver that is bundled with Windows NT 4.0 is SYMC810.SYS. This driver 
+supports controllers that are listed in the "NOTE" above.
+
+1. Have the Symbios Driver Diskette available for inserting into the A:
+   drive when prompted.
+
+Important: Read Step 2 before performing the instructions contained
+           within this step.
+
+2. Start the Windows NT 4.0 installation by booting from the Microsoft Setup
+   floppy diskette.
+
+3. Press Enter when the Welcome to Setup screen appears.
+
+   The Windows NT 4.0 Workstation Setup window appears next.
+
+4. Press S to skip automatic detection and do manual selection. A screen
+   displays the message "Setup has recognized the following mass storage
+   devices in your computer..."
+ 
+5. Choose S to configure additional SCSI adapters when a screen displays
+   the SCSI adapters found.
+
+6. Move the highlight bar to Other and press Enter. 
+
+   The system prompts for the manufacturer-supplied hardware support disk.
+
+7. Insert the appropriate Symbios Driver diskette containing the Windows NT
+   driver required to support your Symbios adapter(s) and press Enter.
+
+   NOTE: Current Windows NT 4.0 drivers can be downloaded from the LSI Logic web
+         site at URL: http://www.lsilogic.com. After being connected to this
+         web site, click on the Support option in the menu bar. Go to the
+         "Software and drivers for Symbios brand PCI host adapters" section
+         and choose the operating system or utility desired. Click on the Go
+         button. Based on your selection, you will either:
+
+        A. Download the driver or utility from the next screen,
+          
+           -or-
+
+        B. Select the chipset or model number of the host adapter card, then
+           download the appropriate driver based on the selection made.
+  
+8.  Depending on the driver being installed, either "Symbios PCI (53C8XX)",
+    "Symbios PCI High Performance Driver" or "Symbios Ultra3 PCI SCSI Driver"
+    is shown highlighted. Press Enter to proceed.
+
+     NOTE: If more than one Symbios driver needs to be installed, they can be
+         installed one after the other using steps 5 through 8. Installation
+         order is not important.
+
+9. The Windows NT Workstation Setup window reappears. If using an IDE
+    CD-ROM for installation, press S to load additional drives. Another
+    window appears. Scroll up and select:
+
+    "IDE CD-ROM (ATAPI 1.2)/PCI IDE Controller"
+
+    Press Enter.
+
+    -or-
+   
+    If you have completed configuring additional SCSI adapters, press
+    Enter.
+
+10. Upon exiting, a screen displays the message "Setup will load support for
+    the following mass storage devices(s). Press Enter to continue.  This 
+    message implies that Windows NT recognizes the miniport driver and the
+    SCSI hardware. 
+
+    At this point, simply follow the Microsoft Windows NT installation 
+    procedure.
+
+
+*  *  *  *  *  *  *  *  * Existing System Installation *  *  *  *  *  *  *  *
+
+This procedure installs the SYMC8XX.SYS, SYM_HI.SYS, or SYM_U3.SYS driver onto
+an existing Windows NT system.
+
+NOTE: Windows NT 4.0 uses the Windows 95/98 user interface, resulting in minor 
+      changes to the procedure for updating SCSI drivers. 
+
+
+*   *   * Windows NT 4.0 *   *   *
+
+1. Boot Windows NT 4.0 and log on as Administrator.
+
+2. Click on the Start button. Move to Settings-->Control Panel and click.
+
+3. Double click on SCSI Adapters.
+
+4. Click on the Drivers tab. If NCRSDMS.SYS, NCRC810.SYS, NCRC8XX.SYS, or
+   SYMC810.SYS drivers are listed, and you are installing the SYMC8XX driver,
+   select the driver(s) and choose Remove before adding the new SYMC8XX driver.
+   Also, if the name of the driver you are installing (SYMC8XX.SYS, SYM_HI.SYS,
+   or SYM_U3.SYS) is listed, remove it before adding the new driver. Select OK
+   when the Remove Driver message prompts, "Are you sure you want to remove
+   this driver?". Another message may appear and prompt for a response, "The
+   SCSI Adapter has been marked as a boot device ...". If so, click on the OK
+   button.
+
+5. Click Add. A list of installed adapters is displayed.
+
+6. Click the Have Disk button.
+
+7. When prompted, insert the appropriate Symbios Driver diskette containing
+   the Windows NT 4.0 driver required to support your Symbios adapter(s). For
+   the path to copy manufacturer's files from, enter 
+  
+     A:\WINNT\MINIPORT   
+
+   Select OK. 
+
+8. Depending on the driver being installed, either "Symbios PCI (53C8XX)",
+   "Symbios PCI High Performance Driver", or "Symbios Ultra3 PCI SCSI Driver"
+   is shown highlighted on the Install Driver menu. If it is not highlighted,
+   select it. Choose OK.
+
+   At this point, the following message may occur:
+
+   "The driver(s) for this SCSI Adapter are already on the system. Do you 
+   want to use the currently installed driver(s) or install new one(s)?" 
+
+   Selecting Current uses the driver already on the system, and selecting New 
+   uses the driver on the floppy diskette. Unless you want to use the older 
+   version already on the system, choose New. If you chose Current, go to 
+   step 10.
+
+9. For the path to the OEM SCSI Adapter files, A:\WINNT\MINIPORT should be
+   displayed. Select Continue. Then remove the floppy diskette from the
+   A: drive.
+
+   The System Settings Change message displays "You must restart your computer 
+   before the new settings take effect. Do you want to restart your computer 
+   now?" 
+
+10.Click on the Yes button to restart and reboot Windows NT 4.0. If you choose
+   Cancel, remember that you must restart the computer to load the new driver.
+
+11.If more than one Symbios driver needs to be installed, they can be installed
+   one after the other without rebooting for each one. Installation order is
+   not important.
+
+12.Reboot your system to load the new miniport driver(s).
+
+
+*  *  *  *  *  *  *  *  * Performance Tuning for NT 4.0 *  *  *  *  *  *  *
+
+Windows NT 4.0 has registry entries that can be used to improve the performance 
+of SCSI I/O for certain configurations. The tunable parameters are large 
+transfer block size support and a guaranteed number of concurrent I/Os for a 
+particular SCSI bus.
+
+
+*   *   * Large Block Size Support *   *   *
+
+The SYMC8XX.SYS, SYM_HI.SYS, and SYM_U3.SYS drivers can support up to a 1 Mbyte
+transfer size in Windows NT 4.0. However, in Windows NT 4.0, the default
+transfer size is 64 Kbytes. To enable a larger transfer size, an entry must be
+added to the registry, using the file sym_256K.reg. This file will set a 256
+Kbytes maximum, but it can be edited to set other desired maximum transfer
+sizes.
+
+Important: Be sure to read the information in the sym_256K.reg data
+           file before editing it.
+ 
+Choose one of two methods to add this registry setting:
+
+1. Locate the sym_256K.reg data file (supplied with the driver files) using
+   Windows Explorer and double click on the file.
+ 
+   -or-
+
+2. Type at the command prompt:
+
+     regedit sym_256K.reg
+
+This inserts an entry in the registry to enable 256K block size support. 
+
+Editing the sym_256K.reg can set any maximum block size between 64 Kbytes and
+1 Mbyte (-8 Kbytes). The formula to calculate the proper value for
+MaximumSGList is:
+
+     MaximumSGList = (Maximum Block Size)/4K +1
+
+For 256K: 256K/4K = 64, add 1 for 65 (decimal) or 0x41(hexadecimal). The 
+maximum value allowed for MaximumSGLIst is 255 or 0xFF. This denotes an 
+absolute maximum transfer size of 1040384, which is 8K less than 1 MB
+(1040384/4K = 0xFE, add 1 for 0xFF or 255). 
+
+The system must be rebooted for the new registry setting to be effective.
+
+To reset the maximum block size to the default of 64K, follow the instructions
+above, except use symdfblk.reg as the data file.
+
+
+*  *  *  *  * Maximum Number of Concurrent I/Os (Guaranteed) *  *  *  *  *  *  
+
+Windows NT 4.0 only guarantees a maximum of 32 concurrent I/Os active on a
+particular SCSI bus. However, due to the method of memory allocation, the
+actual limit of concurrent I/Os can vary greatly between various drivers or
+versions of drivers. This can have a huge impact on performance benchmarking
+between different driver versions or adapter vendors. In effect, one adapter
+may actually be able to have 70 or 80 I/Os outstanding, while another adapter
+could only have 32. This can also affect systems with high performance storage
+subsystems, such as disk arrays.
+
+In order to have a guaranteed number of concurrent I/Os, an entry must be 
+added to the registry, using the file sym100io.reg.
+
+Important: Be sure to read the information in the sym100io.reg data file
+           before editing it.
+
+Choose one of two methods to add this registry setting:
+
+1. Locate the sym100io.reg data file (supplied with the driver files) using
+   Windows Explorer and double click on the file. 
+
+   -or-
+
+2. Type at the command prompt:
+
+     regedit sym100io.reg
+
+This inserts an entry in the registry to guarantee a maximum of 100 
+concurrent I/Os per adapter.
+
+If a maximum other than 100 is desired, the sym100io.reg can be edited.
+The system administrator should be aware that increasing the number of
+concurrent I/Os from the default of 32 will use increasing amounts of
+non-paged pool memory. High values for this setting can degrade system
+performance.
+
+The system must be rebooted for the new registry setting to be effective.
+
+To reset the guaranteed number of concurrent I/Os to the default of 32, 
+follow the instructions above, except use symdefio.reg as the data file. 
+
+
+*   *   * Auto Request Sense *   *   *
+
+Enabling and Disabling Auto Request Sense is found in the section titled 
+"Troubleshooting."
+
+*  *  *  *  *  *  *  *  *  *  * Disk Mirroring *  *  *  *  *  *  *  *  *  *
+
+Note: This section applies only to Intel x86-platforms where the Symbios 4.XX 
+      PCI SCSI BIOS is used.
+
+Symbios 4.XX PCI SCSI BIOS loads only one image into the system memory at boot 
+time regardless of how many host adapters are used in the system. All of the 
+disk drives on all host adapters will be recognized through the INT13h function 
+call. Because of this implementation, disk mirroring under Windows NT needs to
+be done by following instructions which might be different from the Microsoft
+documentation.
+
+To create an NT Fault Tolerant (FT) floppy diskette so that you can boot from
+the mirrored partition in case the primary partition fails, follow these steps:
+
+1. Format a floppy diskette in drive A: using NT (File Manager or Windows 
+   Explorer) for use as a Fault Tolerant boot floppy.
+
+2. From the root directory of the primary partition, copy NTLDR, 
+   NTDETECT.COM, and BOOT.INI to this floppy diskette.
+
+3. Temporarily remove the read-only attribute of the BOOT.INI file so that it 
+   can be modified and saved.
+
+4. Edit the BOOT.INI file on the FT floppy diskette and modify the following 
+   line where you want to boot the mirrored partition:
+
+        multi(0)disk(0)rdisk(x)partition(y)\<winnt_directory>
+
+   where:
+    
+     multi(0) and disk(0) should always remain same.
+
+     x = the drive number of the mirrored partition in the INT13 chain minus
+         80h.
+
+     The drive number of the mirrored partition can be found during system 
+     bootup of the Symbios 4.XX PCI SCSI BIOS when the primary partition does
+     not exist. It should say either BOOT (=80h), 81h, 82h, and higher. 
+     Therefore, the value of x would be 0 when BOOT, 1 when 81h, 2 when 
+     82h, etc.
+
+     y = the partition number on the drive (starts at 1 which equals single 
+     partition on the drive)
+
+     The next example provides a scenario to better illustrate the above
+     information.
+   
+     EXAMPLE: Two Symbios 8xx host adapters are in the system. 
+
+     The first HBA, HBA #0 which is the boot path, has two SCSI hard drives on 
+     ID 0 and ID 5. The second host adapter,HBA #1, has two SCSI hard drives on 
+     ID 2 and ID 4. Assuming that the SCSI bus scan starts from ID 0 and goes
+     up, the drive number of INT13h will look like this:
+
+       HBA #0, ID 0= BOOT (which is 80h)    
+       HBA #0, ID 5= 81h    
+       HBA #1, ID 2= 82h    
+       HBA #1, ID 4= 83h    
+
+   Now Windows NT 4.0 is installed on the boot drive, HBA #0 ID 0, and a
+   mirrored partition is established on HBA #1 ID 2. If the primary partition
+   fails, for example due to power failure, then the drive number of INT13h
+   will change:
+
+       HBA #0, ID 5= BOOT (which is 80h)   
+       HBA #1, ID 2= 81h    
+       HBA #1, ID 4= 82h    
+
+   Therefore, the following line should be used in the BOOT.INI file on the NT 
+   Fault Tolerant boot floppy to boot from the mirrored partition, HBA #1
+   ID 2. Note that rdisk(1) was calculated from x=81h minus 80h.
+
+        multi(0)disk(0)rdisk(1)partition(1)\<winnt_directory> 
+
+6. Save the BOOT.INI and restore the "read-only" attribute.
+
+
+*  *  *  *  *  *  *  *  *  * Troubleshooting *  *  *  *  *  *  *  *  *  *  * 
+
+Some potential problems and their suggested solutions are:
+
+*   *   * Problem *   *   *
+
+During installation, no SCSI devices are found.
+
+*   *   * Solution *   *   *
+
+a. Ensure that the custom setup is chosen on the Setup Method screen.
+
+b. Ensure that all devices are powered on and terminated correctly.
+
+c. Check that no devices have duplicate SCSI IDs.
+
+d. Make sure INT A is assigned for the PCI slot(s) where your SCSI host 
+   adapter(s) are installed.
+
+e. Ensure that all devices can be seen in the display banner of the SDMS
+   SCSI BIOS at boot time.
+
+*   *   * Problem *   *   *
+
+System crashes during installation with a message indicating inaccessible 
+boot device.
+
+*   *   * Solution *   *   *
+
+a. This error is usually associated with an IRQ, DMA channel, I/O (chip) 
+   address, or BIOS address conflict. Set the SCSI host adapter to use a 
+   different interrupt.
+
+b. A virus sometimes causes this error that infects the Master Boot Record 
+   of the boot device. Use a write-protected DOS bootable flex containing 
+   virus scanning and cleaning software to check for any viruses on the boot 
+   device, and remove if any are found.
+
+*   *   * Problem *   *   *
+
+A disk drive is recognized as seven different devices when only one is 
+physically connected to the SCSI bus.
+
+*   *   * Solution *   *   *
+
+a. Older SCSI devices that incorrectly indicate to Windows NT 4.0 that they 
+   support multiple LUNs usually cause this error. Contact the device
+   manufacturer for a firmware upgrade.
+   
+-  -
+
+*   *   * Problem *   *   *
+
+Problems with SCSI devices installation or operation.
+
+*   *   * Solution *   *   *
+
+a. If a SCSI device is not operating properly (either the device is not found 
+   or a SCSI interface error occurs during scanning), it is possible that the 
+   third-party device drivers do not support the auto request sense feature 
+   of Symbios host adapters. Disable the auto request sense feature as 
+   described below and try the device operation again.
+
+   Using the file symno_ar.reg (supplied with the Symbios NT driver files),
+   either double click the file in Windows Explorer or File Manager or type
+   "regedit symno_ar.reg" at the command prompt. This inserts a registry entry
+   that disables the auto request sense feature. The system must be rebooted
+   for this change to take effect.
+
+   To re-enable the auto request sense feature, use the file "sym_auto.reg"
+   and perform one of the update methods described in the preceding paragraph.
+
+*   *   * Problem *   *   *
+
+Problems with certain SCSI devices when using an Ultra SCSI adapter.
+
+*   *   * Solution *   *   *
+
+a. Some SCSI devices do not function properly when the adapter attempts to 
+   negotiate Ultra SCSI transfer rates. If a device is not operating 
+   properly, check the transfer speed setting using the SDMS 4.XX PCI SCSI BIOS 
+   Configuration Utility (press Ctrl-C when the Symbios PCI BIOS banner appears
+   during the system boot process). Devices that do not support Ultra SCSI
+   should be set to a maximum of 10 Mbytes/s for 8-bits, and 20 Mbytes/s for
+   16-bits.
+
+*   *   * Problem *   *   *
+
+Problems with Ultra SCSI devices using Ultra SCSI protocol.
+
+*   *   * Solution *   *   *
+
+a. If the system is configured with a Symbios host adapter that supports Ultra 
+   SCSI and an Ultra SCSI device is on the SCSI bus, intermittent problems and 
+   possible system crashes can occur if the SCSI bus cable and terminators do  
+   not conform to the Ultra SCSI specification.
+
+b. Disable Ultra SCSI support for all devices via the SDMS 4.XX PCI SCSI BIOS  
+   Configuration Utility (press Ctrl-C when the Symbios PCI BIOS banner is 
+   displayed during the system boot process).
+
+c. If the system operates properly without Ultra SCSI enabled, it is highly 
+   likely that the SCSI bus cable and terminators are not configured 
+   correctly for Ultra SCSI. See the Symbios host adapter User's Guide 
+   for information on Ultra SCSI cabling requirements.
+
+*   *   * Problem *   *   *
+
+The system hangs at boot, has a long boot time, or SCSI device not available.
+
+Some older SCSI devices do not tolerate Domain Validation operations.  At
+system boot time, Domain Validation is performed to test the data integrity of
+the SCSI bus between the host adapter and each target device. With some older
+SCSI devices, these operations can cause the device to stop responding to SCSI
+commands.
+
+*   *   * Solution *   *   *
+
+Disable Domain Validation, either for a specific SCSI target or all adapters
+controlled by a specific driver.
+
+a. To disable Domain Validation for a specific SCSI target, use the SDMS 4.XX 
+   PCI SCSI BIOS Configuration Utility to set the sync rate to 0 (async) and 
+   the data width to 8. This target will be running in async/narrow mode and
+   no Domain Validation operations will be performed on it.
+  
+b. To disable Domain Validation for all host adapters controlled by this
+   driver, use the file symno_dv.reg (supplied with the Symbios NT driver 
+   files). Either double click on the file in Windows Explorer or File Manager 
+   or type "regedit symno_dv.reg" at the command prompt. This inserts a
+   registry entry that disables Domain Validation operations. The system must
+   be rebooted for this change to take effect.
+
+c. To re-enable the Domain Validation feature, use the file "sym_domv.reg" and
+   perform one of the update methods described in the preceding paragraph.

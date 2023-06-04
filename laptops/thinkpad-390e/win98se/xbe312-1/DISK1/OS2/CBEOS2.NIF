@@ -1,0 +1,235 @@
+[CBEOS2_NIF]
+ Version = 3.0 (980603)
+ Type = NDIS
+ Title = Xircom CardBus Ethernet 10/100 Adapter
+ DriverName = XIRCOM$
+ XPORTS = NETBEUI LANDD
+
+[File]
+ Name = CBENDIS.OS2
+ Path = IBMCOM\MACS
+
+[MEMORY]
+ Display        = "Adapter memory address"
+ Type           = HexNum
+ Default        = 5B800000
+ Range          = C0000-7FFFF000
+ Step           = 1000
+ Optional       = Yes
+ help = "Use this parameter to set the base memory address of
+ the adapter in hexadecimal notation. The adapter supports a
+ full 32-bit address space. If the adapter is using IO mode,
+ this memory window is only used during initialization."
+
+[IOADDRESS]
+ Display        = "Adapter IO address"
+ Type           = HexNum
+ Default        = F500
+ Range          = 100-FF80
+ Step           = 80
+ Optional       = Yes
+ help = "Use this parameter to set the base I/O address of
+ the adapter in hexadecimal notation. The adapter supports
+ 16-bits of I/O address space, and requires 128 contiguous
+ I/O addresses if run in I/O mode. If using memory-mapped
+ I/O mode, no I/O ports are necessary and this field should
+ be left blank."
+
+[MODE]
+ Display        = "Adapter address mode"
+ Type           = String
+ StrLength      = 6
+ Set            = MEMORY, IO
+ Optional       = Yes
+ help = "This parameter will select a particular operating
+ mode for the driver. If MEMORY is selected, or this parameter
+ is left blank, the driver will run in memory-mapped IO mode.
+ In this situation the adapter IO address field should be left
+ blank. If IO is selected, the driver will run in I/O mode."
+
+[IRQ]
+ Display        = "Adapter IRQ number"
+ Type           = Decimal
+ Default        = 11
+ Range          = 3-15
+ Optional       = Yes
+ help = "This parameter selects a hardware interrupt for use by the adapter.
+ If the computer system uses PCI interrupts on the CardBus
+ Bridge, this parameter is ignored (unless the IRQ mode field
+ is used to force ISA style IRQs)."
+
+[SOCKET]
+ Display        = "CardBus socket"
+ Type           = Decimal
+ Range          = 1-4
+ Optional       = Yes
+ help = "This parameter can be used to force the driver to
+ use a particular CardBus socket (or slot). Normally this
+ field should be left blank and the driver will automatically
+ detect the adapter. Using this parameter will override the
+ detection and force the driver to use only the socket specified."
+
+[NOCHECK]
+ Display        = "Disable resource checking?"
+ Type           = None
+ Set            = "Yes", "No"
+ Default        = "No"
+ help = "This parameter disables verification of adapter resources.
+ If the driver resource detection and verification code is causing
+ problems when the driver loads, this keyword can be used to turn
+ the feature off."
+
+[VERBOSE]
+ Display        = "Enable verbose messages?"
+ Type           = None
+ Set            = "Yes", "No"
+ Default        = "No"
+ help = "This parameter is used to turn on detailed information when
+ the driver initializes. This information includes the type of CardBus
+ bridge controller found."
+
+[NOPOLL]
+ Display        = "Disable driver polling?"
+ Type           = None
+ Set            = "Yes", "No"
+ Default        = "No"
+ help = "This parameter is used to turn the polling feature of the driver
+ off. Polling is used to detect cable faults and line speed detection."
+
+[RXBUFFERSIZE]
+ Display        = "Receive buffer size (in packets)"
+ Type           = Decimal
+ Default        = 15
+ Range          = 1-30
+ Optional       = Yes
+ help = "This parameter sets the size of the adapter's receive
+ packet buffer. This is a number in decimal in the range 1 - 30.
+ Each packet adds approximately 1520 bytes to the resident size
+ of the driver. The default is 15 packets."
+			
+[TXBUFFERSIZE]
+ Display        = "Transmit buffers size (in packets)"
+ Type           = Decimal
+ Default        = 2
+ Range          = 1-10
+ Optional       = Yes
+ help = "This parameter sets the size of the adapters transmit
+ packet buffer. This is the number of transmit packets in decimal
+ in the range 1 - 10. Each packet adds approximately 1520 bytes to
+ the resident size of the driver. The default is 2 packets."
+
+[NOBURST]
+ Display        = "Disable burst mode?"
+ Type           = None
+ Set            = "Yes", "No"
+ Default        = "No"
+ help = "This parameter disables burst mode reads on the
+ adapter. Using this parameter will force the adapter to
+ initiate a bus-master request for each read, negatively
+ impacting performance."
+
+[LINESPEED]
+ Display        = "Line speed"
+ Type           = Decimal
+ Set            = 10, 100
+ Optional       = Yes
+ help = "This parameter forces operation to 10 or 100 Mbps.
+ If left blank the line speed will be automatically detected (default)."
+
+[LINEMODE]
+ Display        = "Line duplex mode"
+ Type           = String
+ StrLength      = 4
+ Set            = HALF, FULL
+ Optional       = Yes
+ help = "This parameter selects either half-duplex or
+ full-duplex mode for the network. Valid parameters are
+ HALF or FULL. Selecting full-duplex enables the adapter
+ to send and receive data simultaneously when connected
+ to a full-duplex hub. If left blank the line mode will
+ be determined automatically using N-Way autonegotiation."
+
+[PCIIRQ]
+ Display        = "Force PCI IRQ?"
+ Type           = None
+ Set            = "Yes", "No"
+ Default        = "No"
+ help = "This parameter is used to force the driver to use
+ PCI IRQ routing. Some CardBus bridges have the capability
+ of supporting both PCI and ISA style IRQ routing. The driver
+ automatically determines the best choice for this option
+ unless this parameter is used as an override. Normally
+ this parameter should be left blank. This parameter is
+ mutually exclusive of the force ISA IRQ parameter."
+
+[ISAIRQ]
+ Display        = "Force ISA IRQ?"
+ Type           = None
+ Set            = "Yes", "No"
+ Default        = "No"
+ help = "This parameter is used to force the driver to use
+ ISA IRQ routing. Some CardBus bridges have the capability
+ of supporting both PCI and ISA style IRQ routing. The driver
+ automatically determines the best choice for this option
+ unless this parameter is used as an override. Normally
+ this parameter should be left blank. This parameter is
+ mutually exclusive of the force PCI IRQ parameter."
+
+[NOLED]
+ Display        = "Disable LEDs?"
+ Type           = None
+ Set            = "Yes", "No"
+ Default        = "No"
+ help = "This parameter is used to turn the dongle LEDs off.
+ This might be helpful on a mobile computer and may result
+ in a modest increase in battery life."
+
+[LINKDISABLE]
+ Display        = "Disable link integrity?"
+ Type           = None
+ Set            = "Yes", "No"
+ Default        = "No"
+ help = "This parameter is used to turn link integrity checking
+ off. Some older network configurations may require this parameter
+ be set."
+
+[LATENCY]
+ Display        = "Latency"
+ Type           = DECIMAL
+ Default        = 32
+ Range          = 0-256
+ Optional       = Yes
+ help = "This parameter specifies the latency timer for the CardBus Bridge. This
+ parameter affects the bus mastering capabilities of the
+ CardBus adapter. Changing this parameter may affect system
+ performance. The range is a decimal number between 1 and 255.
+ The default is 32."
+
+[NOWRITEPOST]
+ Display        = "Disable write posting?"
+ Type           = None
+ Set            = "Yes", "No"
+ Default        = "No"
+ help = "This parameter disables write posting on the CardBus bridge.
+ Using this keyword may negatively impact performance."
+
+[CACHE]
+ Display        = "Cache line size"
+ Type           = Decimal
+ Default        = 8
+ Set            = 0,8,16,32
+ Optional       = Yes
+ help = "This parameter sets the system cache line size
+ on the CardBus Bridge. Valid arguments are system dependent
+ and may include only 0 (cache disabled), 4, 8, 16, or 32.
+ Changing this parameter may affect network performance."
+
+[NOPREFETCH]
+ Display        = "Disable bridge pre-fetching?"
+ Type           = None
+ Set            = "Yes", "No"
+ Default        = "No"
+ help = "This parameter disables prefetching in memory-mapped
+ I/O mode by turning off this capability on the CardBus bridge.
+ Using this keyword may negatively impact performance."
+

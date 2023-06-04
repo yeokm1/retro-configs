@@ -1,0 +1,227 @@
+
+SCB_STATUS	EQU 00h
+	RU_STATUS_BITS	EQU	03Ch
+	RU_IDLE			EQU 000h
+	RU_SUSPENDED	EQU 004h
+	RU_NO_RESOURCES	EQU 008h
+	RU_READY		EQU 010h
+	RU_SPND_NO_RBD	EQU 024h
+	RU_NO_RS_NO_RBD	EQU 028h
+	RU_READY_NO_RBD	EQU 030h
+	CU_STATUS_BITS	EQU	0C0h
+	CU_IDLE			EQU 000h
+	CU_SUSPENDED	EQU 040h
+	CU_ACTIVE		EQU 080h
+	SW_INT			EQU 0400h
+	MD_INT			EQU 0800h
+	RNR_ST_BIT		EQU 1000h
+	CNA_INT			EQU	2000h
+	FR_ST_BIT		EQU	4000h
+	CMD_INT			EQU	8000h
+	SCB_STATUS_MASK	EQU CMD_INT+FR_ST_BIT+CNA_INT+RNR_ST_BIT+MD_INT+SW_INT
+SCB_CMD	EQU 02h
+	RU_NOP			EQU 00h
+	RU_START		EQU 01h
+	RU_RESUME		EQU 02h
+	RU_ABORT		EQU 04h
+	RU_LD_HDS		EQU 05h
+	RU_LD_BASE		EQU 06h
+	RU_RBD_RESUME	EQU 07h
+	CU_NOP			EQU 00h
+	CU_START		EQU 10h
+	CU_RESUME		EQU 20h
+	CU_LD_DCA		EQU 40h
+	CU_DUMP_CNTRS	EQU 50h
+	CU_LD_BASE		EQU 60h
+	CU_DUMP_RESET	EQU 70h
+SCB_CMD_INT	EQU 03h
+	MASK_INT_BIT	EQU	01h
+	SOFT_INT_BIT	EQU 02h
+SCB_GEN_PTR	EQU	04h
+PORT	EQU	08h
+	SOFTWARE_RESET	EQU	00h
+	SELF_TEST_CMD	EQU	01h
+	SELECTIVE_RESET	EQU	02h
+	DUMP_CMD		EQU	03h
+EEPROM_REG	EQU 0EH
+; Bit positions in the EEPROM_REG
+	EEDO	EQU	08h
+	EEDI	EQU	04h
+	EECS	EQU	02h
+	EESK	EQU	01h
+MDI_CTRL_REG	EQU 10H
+	PHY_READ_OPCODE		EQU 0800h
+	PHY_WRITE_OPCODE	EQU 0400h
+	PHY_READY_BIT		EQU 10000000h
+
+
+
+; EEPROM equates
+IA_BYTE_1		EQU	00h
+IA_BYTE_2		EQU	01h
+IA_BYTE_3		EQU	02h
+IA_BYTE_4		EQU	03h
+IA_BYTE_5		EQU	04h
+IA_BYTE_6		EQU	05h
+COMPATIBILITY	EQU	06h
+	MC_10_OK		EQU	01h
+	MC_100_OK		EQU	02h
+CONNECTORS		EQU	0Ah
+	RJ_45_BIT		EQU	01h
+	BNC_BIT			EQU 02h
+	AUI_BIT			EQU	04h
+	MII_BIT			EQU	08h
+CONTRL_TYPE		EQU 0Bh
+	D100			EQU	01h
+	D101			EQU	02h
+PHY_DEV_REC_1	EQU	0Ch
+	PHY_DEV_BITS	EQU	03F00h
+	VSCR_BIT		EQU 04000h
+	TEN_MB_ONLY		EQU	08000h
+	PHY_CONTROL_REG	EQU	00h
+		PHY_CTRL_REG_FAST	EQU	2000h
+		PHY_CTRL_REG_AUTO_ENBL	EQU	1000h
+		PHY_CTRL_REG_RESTART_AUTO	EQU	0200h
+		PHY_CTRL_REG_FULL	EQU	0100h
+	PHY_STATUS_REG	EQU	01h
+		PHY_STA_NWAY_COMPLETE	EQU	0020h
+		PHY_STA_LINK_STATUS		EQU	0004h
+	PHY_ADVERT_REG	EQU	04h
+	T4_HALF_BIT		EQU	0200h
+	TX_FULL_BIT		EQU	0100h
+	TX_HALF_BIT		EQU	0080h
+	T_FULL_BIT		EQU	0040h
+	T_HALF_BIT		EQU	0020h
+		LINK_ABILITY_BITS	EQU	 T4_HALF_BIT+TX_FULL_BIT+TX_HALF_BIT+T_FULL_BIT+T_HALF_BIT
+	PHY_LINK_PART_REG	EQU	05h
+	PHY_EXP_REG		EQU	06h
+		PHY_ANE_LP_AUTONEG	EQU	0001h
+		AUTONEG_FAULT		EQU	0010h
+	NSC_CONG_CTRL_REG	EQU	17h
+		NSC_TX_CONG_TXREADY		EQU	0400h
+		NSC_TX_CONG_F_CONNECT	EQU	0020h
+	NSC_SPEED_INDC_REG	EQU	19h
+		NSC_10MBS_BIT		EQU	0040h
+		NSC_CON_STATUS_BIT	EQU	0020h
+PHY_DEV_REC_2	EQU	0Eh
+CHKSUM_VAL		EQU 0BABAh
+
+MII_PHY			EQU	1
+
+NOT_SUPPORTED	EQU 0FFFFh
+SUPPORTED		EQU 00000h
+
+;- CB Status Word
+;-
+; debug - need just tx status
+CB_STATUS_MASK           equ     BIT_12_15    ;- CB Status Mask (4-bits)
+CB_STATUS_COMPLETE       equ     BIT_15       ;- CB Complete Bit
+CB_STATUS_OK             equ     BIT_13       ;- CB OK Bit
+CB_STATUS_FAIL           equ     BIT_12       ;- CB Fail (F) Bit
+
+; configuration data
+; Byte 0
+BYTE_COUNT	EQU	16h
+; Byte 1
+RX_FIFO_LMT	EQU	8h
+TX_FIFO_LMT	EQU	0h
+; Byte 2
+ADPATIVE_IFS	EQU	0h
+; Byte 3
+; Byte 4
+RX_DMA_MAX		EQU	0h
+; Byte 5
+TX_DMA_MAX		EQU	0h
+DMBC_EN			EQU	80h
+; Byte 6
+LATE_SCB		EQU	01h
+TNO_INT			EQU 04h
+CI_INT			EQU	08h
+DISC_OVRRUN		EQU	40h
+SAVE_BF			EQU	80h
+; Byte 7
+DISC_SHORT		EQU	01h
+UNDR_RTRY_0		EQU 00h
+UNDR_RTRY_1		EQU 02h
+UNDR_RTRY_2		EQU 04h
+UNDR_RTRY_3		EQU 06h
+; Byte 8
+MII_MODE		EQU	01h
+; Byte 9
+; Byte 10
+NSAI			EQU	08h
+PREAMBLE_LEN_1	EQU	00h
+PREAMBLE_LEN_3	EQU	10h
+PREAMBLE_LEN_7	EQU	20h
+PREAMBLE_LEN_15	EQU	30h
+NORMAL_OP		EQU	00h
+INT_LOOPBACK	EQU 40h
+EXT_LOOPBACK	EQU 0C0h
+; Byte 11
+NRML_LINR_PRTY	EQU	00h
+; Byte 12
+L_PRI_MODE		EQU	01h
+DEF_IFS_SPACING	EQU	60h
+; Byte 13
+; Byte 14
+; Byte 15
+PROMISC_MODE	EQU	01h
+BROADCAST_DIS	EQU	02h
+CRS_CDT			EQU	80h
+; Byte 16
+; Byte 17
+; Byte 18
+STRIPPING_ENBL	EQU	01h
+PADDING_ENBL	EQU	02h
+RCV_CRC_TRANSF	EQU	04h
+; Byte 19
+FORCE_FDX		EQU	040h
+FDX_PIN_ENBL	EQU 080h
+; Byte 20
+MULTI_IA_ENBL	EQU	040h
+; Byte 21
+MULTICAST_ALL	EQU	08h
+
+; Transmit Command Block (TxCB)
+TXCB_STRUC			struc
+    tx_status			dw	?		; Command Block Status
+    tx_command			dw	?		; Command Block Command
+    tx_link_ptr			dd	?		; Offset To Next CB
+	tx_tbd_ptr			dd	?		; TBD Offset
+	tx_count			dw	?		; Data Bytes In TCB past header
+	tx_thresh			db	0		; TX Threshold for FIFO Extender
+	tbd_number			db	0
+TXCB_STRUC			ends
+
+
+; Received Frame Descriptor
+RFD_STRUCT	struc
+rfd_status	dw	?				; Status word for frame
+rfd_eol		dw	?				; End of FD list flag
+rfd_link	dd	?				; 32 bit pointer to next RFD
+rfd_ptr		dd	?				; 32 bit pointer to list of RBD's
+rfd_cnt		dw	?				; Length field of frame.
+rfd_size	dw	?				; Size of data (header RFD only)
+RFD_STRUCT	ends
+
+; Receive Buffer Descriptor
+RBD_STRUCT	struc
+rbd_status	dw	?				; Status word in RBD
+rbd_filler2	dw	?				; Not used
+rbd_link	dd	?				; 32 bit pointer to next RBD
+rbd_ptr		dd	?				; 32 bit pointer to actual buffer
+rbd_size	dw	?				; Size of the buffer
+rbd_filler1	dw	?				; Not used
+rbd_voffset	dw	?				; Virtual offset to data buffer
+RBD_STRUCT	ends
+
+
+WAIT_CMD_ACCEPTED macro
+	local	lab1
+	LOAD_PORT	SCB_CMD
+lab1:
+	in		al, dx
+	cmp		al, 0
+	jne		lab1
+	endm
+

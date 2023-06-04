@@ -1,0 +1,159 @@
+;****************************************************************************
+;
+; NET3C589.INF
+;
+; 3Com 3C589 EtherLink III LAN PC Card Win95 Setup File
+;
+; Copyright 1997 3Com Corporation
+;
+; Revision History
+;
+; %ver 1.0b
+;
+; 10/30/97 1.0a Initial Release to support NDIS3/NDIS4 driver installation
+; 02/20/97 1.0b Modified to support 3C589/Calvin 4.1 driver installation
+;
+;****************************************************************************
+
+[version]
+LayoutFile=layout.inf
+signature="$CHICAGO$"
+Class=Net
+provider=%V_MS%
+
+[Manufacturer]
+%V_3COM%=3COM
+
+[SourceDisksNames]
+51=%Disk_51_Desc%,,0
+
+[SourceDisksFiles]
+net3c589.inf =51,
+el589ND3.sys =51,ndis3_4
+el589ND4.sys =51,ndis3_4
+un3c589.exe  =51,ndis3_4
+tc589ndi.dll =51,ndis3_4
+
+[3COM]
+%3C589A.DeviceDesc%=3C589a1.ndi, PCMCIA\3Com_Corporation-3C589-75D5  ;3C589 card
+%3C589A.DeviceDesc%=3C589a2.ndi, PCMCIA\3Com_Corporation-3C589-3971  ;3C589 card
+%3C589A.DeviceDesc%=3C589a3.ndi, PCMCIA\3Com_Corporation-3C589-1090  ;3C589 card
+%3C589B.DeviceDesc%=3C589b.ndi,  PCMCIA\3Com_Corporation-3C589-ADF2  ;3C589B/3C589C card
+%3C589D.DeviceDesc%=3C589d.ndi,  PCMCIA\3Com_Corporation-3C589D-9CA6 ;3C589D card 
+
+[3C589a1.ndi]
+AddReg=3C589a1.ndi.reg,elnk3C589.ndi.reg
+CopyFiles=elnk3C589.ndi.CopyFiles,elnk3C589.ndis3.CopyFiles,elnk3C589.inf.CopyFiles,Win32.apps.CopyFiles
+
+[3C589a1.ndi.reg]
+HKR,Ndi,DeviceID,,"PCMCIA\3Com_Corporation-3C589-75D5"
+HKR,,AdapterType,,0100
+
+[3C589a2.ndi]
+AddReg=3C589a2.ndi.reg,elnk3C589.ndi.reg
+CopyFiles=elnk3C589.ndi.CopyFiles,elnk3C589.ndis3.CopyFiles,elnk3C589.inf.CopyFiles,Win32.apps.CopyFiles
+
+[3C589a2.ndi.reg]
+HKR,Ndi,DeviceID,,"PCMCIA\3Com_Corporation-3C589-3971"
+HKR,,AdapterType,,0100
+
+[3C589a3.ndi]
+AddReg=3C589a3.ndi.reg,elnk3C589.ndi.reg
+CopyFiles=elnk3C589.ndi.CopyFiles,elnk3C589.ndis3.CopyFiles,elnk3C589.inf.CopyFiles,Win32.apps.CopyFiles
+
+[3C589a3.ndi.reg]
+HKR,Ndi,DeviceID,,"PCMCIA\3Com_Corporation-3C589-1090"
+HKR,,AdapterType,,0100
+
+[3C589b.ndi]
+AddReg=3C589b.ndi.reg,elnk3C589.ndi.reg
+CopyFiles=elnk3C589.ndi.CopyFiles,elnk3C589.ndis3.CopyFiles,elnk3C589.inf.CopyFiles,Win32.apps.CopyFiles
+
+[3C589b.ndi.reg]
+HKR,Ndi,DeviceID,,"PCMCIA\3Com_Corporation-3C589-ADF2"
+HKR,,AdapterType,,0101
+
+[3C589d.ndi]
+AddReg=3C589d.ndi.reg,elnk3C589.ndi.reg
+CopyFiles=elnk3C589.ndi.CopyFiles,elnk3C589.ndis3.CopyFiles,elnk3C589.inf.CopyFiles,Win32.apps.CopyFiles
+
+[3C589d.ndi.reg]
+HKR,Ndi,DeviceID,,"PCMCIA\3Com_Corporation-3C589D-9CA6"
+HKR,,AdapterType,,0103
+
+[elnk3C589.ndi.reg]
+HKR,,589DIAG,,"3C589"
+HKR,Ndi,NdiInstaller,,"tc589ndi.dll, MyNdiProc"
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,el589ND3.sys
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+HKR,NDIS,LogDriverName,,"EL3C589"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,Ndi\Interfaces,DefUpper,,"ndis3"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis3"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+;HKR,Ndi\Install,ndis3,,"elnk3C589.ndis3"
+
+HKR,NDI,CardType,,"PCMCIA"
+
+HKR,,IOAddress,1,02,00,00,00
+HKR,NDI\params\IOAddress,resc,1,02,00,00,00
+HKR,NDI\params\IOAddress,ParamDesc,,"I/O Base Address"
+HKR,NDI\params\IOAddress,flag,1,30,00,00,00
+
+HKR,,IRQ,1,04,00,00,00
+HKR,NDI\params\IRQ,resc,1,04,00,00,00
+HKR,NDI\params\IRQ,ParamDesc,,"Interrupt"
+HKR,NDI\params\IRQ,flag,1,20,00,00,00
+
+; NDIS_VERSION parameters
+HKR,,NDIS_VERSION,,"AUTO"
+HKR,NDI\params\NDIS_VERSION,,,"AUTO"
+HKR,NDI\params\NDIS_VERSION,ParamDesc,,"NDIS Driver Version"
+HKR,NDI\params\NDIS_VERSION,flag,1,30,00,00,00
+HKR,NDI\params\NDIS_VERSION,type,,enum
+HKR,NDI\params\NDIS_VERSION,optional,,0
+HKR,Ndi\params\NDIS_VERSION\enum,AUTO,,"Auto Select"
+HKR,Ndi\params\NDIS_VERSION\enum,NDIS3,,"NDIS 3"
+HKR,Ndi\params\NDIS_VERSION\enum,NDIS4,,"NDIS 4"
+
+HKR,,OSType,,0
+
+;[elnk3C589.ndis3]
+;AddReg=ComsMD-On
+
+;[ComsMD-On]
+;HKLM,Software\Microsoft\Windows\CurrentVersion\Run,COMSMDEXE,,"comsmd.exe -on"
+;HKLM,Software\Microsoft\Windows\CurrentVersion\RunOnce,COMSMDEXE,,"comsmd.exe -setup"
+;HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\3ComNicUnInstall,DisplayName,,"3Com PC Card Diagnostics Utilities"
+;HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\3ComNicUnInstall,UninstallString,,"un3c589"
+
+[elnk3C589.ndi.CopyFiles]
+tc589ndi.dll
+
+[elnk3C589.ndis3.CopyFiles]
+el589ND3.sys
+el589ND4.sys
+
+[elnk3C589.inf.CopyFiles]
+net3c589.inf
+
+[Win32.apps.CopyFiles]
+un3c589.exe
+
+[DestinationDirs]
+DefaultDestDir =11
+elnk3C589.ndi.CopyFiles =11
+elnk3C589.ndis3.CopyFiles =11
+elnk3C589.inf.CopyFiles =17
+Win32.apps.CopyFiles =11
+
+[strings]
+V_MS="Microsoft"
+V_3COM="3Com"
+3C589A.DeviceDesc="3Com EtherLink III LAN PC Card (3C589)"
+3C589B.DeviceDesc="3Com EtherLink III LAN PC Card (3C589B/3C589C)"
+3C589D.DeviceDesc="3Com EtherLink III LAN PC Card (3C589D)"
+Disk_51_Desc="3Com 3C589 EtherLink III PC Card Installation Disk"

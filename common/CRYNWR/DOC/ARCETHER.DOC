@@ -1,0 +1,71 @@
+ARCEther Packet Driver:
+
+Novell 3.11 servers now have the possibility to route IP packets and to send
+IP traffic over ARCnet. The protocol numbers and framing types these servers
+use on ARCnet are described in RFC 1201. Because there is actually no packet
+driver which supports this framing, we decided to change the existing ARCNET
+packet driver so that  it supports the standard described by RFC 1201.
+                        
+Since there exists hardly any free software which supports ARCnet type packet
+drivers, we decided two show up for applications as Ethernet class 1 driver
+and transform Ethernet to ARCnet packets and vice versa within the driver. 
+This includes splitting and reassembling packets on ARCnet since Ethernet
+packets can be 1500 bytes long while the maximum size for single ARCnet 
+packets is 504 bytes. 
+
+Since you certainly don't want to log off from your network and reboot the PC 
+to use Telnet of FTP, the driver has to support Novell IPX packets as well. So 
+if you have the BYU IPX Shell, ARCEther allows you to work within your Novell 
+Network and at the same time use TCP/IP products written for Ethernet packet 
+drivers. 
+
+The usage of ARCEther is straight forward. If you start the program without 
+any command line parameters, it tells you
+
+usage: arcether [-n] [-d] [-w] <packet_int_no> <int-no> <io_addr> <mem_base>
+
+The "packet_int_no" is the interrupt number through which apllications can 
+access the packet driver.
+
+"int_no" is the IRQ your ARCnet card uses. Don't be afraid if you enter 2 and 
+the driver tells you that is uses int_no 9, thats okay.
+
+"io_addr" is the port through which the packet driver can communicate with the
+ARCnet card and is determined by the jumper settings on the card.
+
+"mem_base" is the segment of memory which the ARCnet card uses.
+
+The option -w and -d are the same as for all packet drivers. 
+
+-d tells the driver to delay the initialization of the ARCnet card until 
+   the first request arrives. You must start the driver with this this 
+   option if you boot your PC from the network because otherwise the Boot-ROM
+   cannot load the IPX-Shell. 
+
+-w tells the driver to use the window option
+
+The -n option is for ARCEther a very special option and has not the same 
+effect as for standard Ethernet packet drivers. If you use the -n option, 
+ARCEther assumes that it should build and expect Novell 802.3 packets instead 
+of Novell Bluebox packets. You should therefore use this option with the 1991 
+version of the IPX shell which sends and receives 802.3 packets. If you have an 
+older version of the IPX Shell, do not use the -n Option. 
+
+Another effect of the -n option is that the driver does not refuse requests 
+for a class 11 driver when you use this option since the new IPX-Shell 
+requires such a driver. Please remember that ARCEther is not really a class 11 
+driver and may hang your PC if other programms than the IPX-Shell access it 
+via class 11.
+
+There is one possible difficulty which the driver can't handle: The Server 
+does not access the ARCnet hardware through ARCEther but has its own TRXNET 
+driver. So Novell Servers may send packets which consist of more than 3 
+fragments or are longer than 1500 bytes. ARCEther cannot handle such packets 
+because it cannot request such a buffer from a client and simply does not 
+deliver such packets to any client application. 
+
+We tested ARCEther on our own Network and noticed that our Novell 3.11 
+Server never used such long packets, but maybe there are situations in which 
+Novell very uses long packets since Novell's TRXNET Driver supports a maximum 
+frame sze of 4602 bytes.
+

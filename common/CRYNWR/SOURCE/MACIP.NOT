@@ -1,0 +1,286 @@
+
+Two Packet Drivers for MacIP Networks: LOCALTLK.COM (v8) and MACIPETH.COM (v1)
+==============================================================================
+
+These two drivers give Packet Driver-compatible TCP/IP applications (such as
+Trumpet Winsock 2.x and 3.x, NCSA Telnet for DOS, KA9Q NOS, and IPRoute) the
+ability to communicate via MacIP networks (thus enabling them, most
+significantly, to send IP packets over LocalTalk hardware).
+
+
+Background information:
+======================
+
+A MacIP network is an Internet Protocol network (i.e. TCP/IP) running within
+an AppleTalk network.  During operation, TCP/IP nodes locate each other using
+the AppleTalk protocol family's Name Binding Protocol (NBP), and transmit
+packets to each other using AppleTalk's Datagram Delivery Protocol (DDP).
+Thus, any computer on the AppleTalk network can communicate with other
+computers using TCP/IP-based applications and services (in addition to
+AppleTalk-based applications and services).
+
+MacIP is particularly useful for convincing TCP/IP to run over LocalTalk
+hardware: while (as of this writing) no TCP/IP implementation directly
+supports LocalTalk, as a rule all AppleTalk implementations do, so running
+TCP/IP over AppleTalk (which in turn runs over LocalTalk) provides a solution.
+
+           Problem                   |             Solution
+           *******                   |             ********
+                                     |
+     |-----------------|             |        |-----------------|
+     | TCP/IP software |             |        | TCP/IP software |
+     |-----------------|             |        |-----------------|
+              |                      |                 |
+              |                      |            (via MacIP)
+             XXX                     |                 |
+     (not supported directly)        |        |--------------------|
+                                     |        | AppleTalk software |
+                                     |        |--------------------|
+                                     |                 |
+                                     |                 |
+     |--------------------|          |        |--------------------|
+     | LocalTalk hardware |          |        | LocalTalk hardware |
+     |--------------------|          |        |--------------------|
+                                     |
+
+MacIP can also run on AppleTalk networks based on other types of hardware
+(such as ethernet and token ring), but many of those types are directly
+supported by TCP/IP software, so the intermediary MacIP/AppleTalk layer is
+not necessary.  (It may only make matters more complicated.)
+
+MacIP networks can optionally contain a centralized server, known as a MacIP
+gateway, which simplifies administration of the network by allowing all IP
+addresses to be automatically assigned from one location (instead of being
+manually assigned and configured at each computer on the MacIP network).
+
+For more information about MacIP, see "Transmission of Internet Packets Over
+AppleTalk Networks", published by Apple Computer, Inc. in November 1994.  As
+of July 2000, that document can still be found on the Internet at:
+
+http://developer.apple.com/macos/opentransport/docs/dev/MacIP_Spec_94.html
+
+
+
+What the MacIP packet drivers need (AppleTalk software):
+=======================================================
+
+Since MacIP runs over AppleTalk networks, these drivers require that the
+computer be connected to an AppleTalk network, and that it have AppleTalk
+software installed.  In particular, the drivers work with the AppleTalk stack
+which has been marketed by Apple (as part of AppleShare PC) and later by
+Farallon (as part of PhoneNET Talk and PhoneNET PC).  It is not known whether
+other AppleTalk software (like COPSTalk for DOS) supports this driver as well.
+
+AppleTalk software generally comes with an installer program, which places
+several files on a disk.  These include the drivers for the network hardware
+(i.e. the LocalTalk/ethernet/etc. card through which the computer connects to
+the network), the AppleTalk stack itself, and a compatibility module (which
+allows programs -- including these packet drivers -- written to use older
+versions of the AppleTalk stack to work with newer versions as well).  The
+list of files (which may also be included in a batch file created by the
+installer program) will look something like this:
+
+LSL.COM         ; Link Support Layer (needed to use ODI network drivers, a
+                ; standard developed by Apple & Novell)
+????.COM        ; ODI driver for the network card (name depends on which card)
+ATALK.COM       ; AppleTalk stack
+COMPAT.COM      ; compatibility module (maybe; depends on which stack version)
+
+Note that the AppleTalk software keeps track of all hardware-related drivers
+and settings.  (Settings are stored in the NET.CFG file, which is created by
+the installer program.)  In fact, the MacIP packet drivers do not interact
+directly with hardware at all, but only with the AppleTalk stack.  This makes
+the packet drivers hardware-independent, and means that they require not even
+a single hardware setting in their command-line parameters (see below).
+
+
+
+Starting the MacIP packet drivers:
+=================================
+
+Once all AppleTalk software has loaded, the packet drivers are ready to begin
+operation.  They can be run with the following command-line usage:
+
+     LOCALTLK <packet_int_no> [ -g ] [ <IP address> ]
+
+        or
+
+     MACIPETH <packet_int_no> [ -g ] [ <IP address> ] [ <ARP TTL> ]
+
+(Note that the brackets [] only show that the information between them may be
+optional, and that they should not be included in the command line.)
+
+This is what each of the options does:
+
+     <packet_int_no> : specifies the software interrupt which client
+     applications (described below) will use to access the packet driver.
+
+     -g : tells the driver to look for a MacIP gateway on the AppleTalk
+     network, to receive an IP address assignment from the gateway, and to
+     send all outgoing packets to the gateway for distribution.
+
+     <IP address> : If the driver will use a MacIP gateway, then this item is
+     optional, and requests that the gateway assign a specific IP address.  If
+     the driver will not use a MacIP gateway, then this item is required, and
+     specifies (self-assigns) the IP address for the driver to use.
+
+     <ARP TTL> : (Address-Resolution-Protocol Time-To-Live)  This item is only
+     used in MACIPETH.COM, and only when the driver will not use a MacIP
+     gateway.  It specifies the number of minutes (default is 20) after which
+     the driver will forget the locations of other IP addresses on the
+     AppleTalk network, requiring them to be relearned.  (The driver learns
+     and relearns those locations through NBP address resolution; see above.)
+     The driver must remember the locations at least until client applications
+     (see below) forget their own address resolution information; otherwise,
+     the driver may accidentally send packets to the wrong location on the
+     AppleTalk network.  In other words, the driver's ARP TTL must be set as
+     high as or higher than the client applications' ARP TTLs.
+
+Once the driver has loaded and established itself on the network, it is
+available for use by the client applications which support it.
+
+
+
+What client applications can use the MacIP packet drivers:
+=========================================================
+
+TCP/IP software designed to use Class 1 (Bluebook ethernet) or Class 5 (MacIP)
+packet drivers can use these MacIP drivers.  (Software based upon network
+protocols other than TCP/IP cannot use them, because MacIP can transmit only
+TCP/IP packets.)  LOCALTLK.COM is, in fact, the one and only Class 5 packet
+driver, and MACIPETH.COM is a version modified to act like a Class 1 driver
+(MACIPETH = MACIP pretending to be ETHernet).
+
+LOCALTLK.COM:
+------------
+Most applications which use packet drivers can use Class 1, but only one known
+application supports Class 5.  That is a modified version of the KA9Q Network
+Operating System (NOS), by Phil Karn.  As of July 2000, the modified version
+is still available on the Internet at:
+
+ftp://ftp.ucsd.edu/hamradio/packet/tcpip/ltalk/
+
+Unfortunately, a problem exists in LOCALTLK.COM which severely limits its
+usefulness.  This problem, which only affects operation without a MacIP
+gateway, renders the driver unable to deliver packets to destinations on the
+far side of any router.  This means that the modified NOS plus LOCALTLK.COM is
+only useful when the computer will only send packets via MacIP which are bound
+for addresses on its own MacIP network (such as when the MacIP network has no
+routers, or when NOS is the only router on the MacIP network).  However,
+MACIPETH.COM contains a solution to this problem, and can work with the
+normal, unmodified version of NOS to provide full functionality even in the
+absence of a MacIP gateway.
+
+MACIPETH.COM:
+------------
+Here is a list of some notable TCP/IP applications which use Class 1 drivers,
+and can therefore work with MACIPETH.COM:
+
+     KA9Q NOS (the regular, non-specially-modified version)
+
+     NCSA Telnet for DOS (http://www.ncsa.uiuc.edu:80/SDG/Software/PCTelnet/)
+
+     IPRoute by Dave Mischler (http://www.mischler.com/iproute/), whose
+     Network Address Translation (NAT) feature allows sharing of a single
+     Internet connection among multiple computers on a MacIP network
+
+     Trumpet Winsock for Windows (http://www.trumpet.com), which allows
+     Winsock-based applications (e.g. Netscape Navigator, CU-SeeMe, Microsoft
+     Telnet) to access MacIP networks; Winsock version 3.x works under Windows
+     3.1 and 95, and version 2.x works under Windows 3.1 (versions of Winsock
+     newer than 3.x do not support packet drivers)
+
+Three considerations and a little batch file:
+--------------------------------------------
+First: MacIP networks have a Maximum Transmission Unit (MTU) of 586 bytes.
+This means that LOCALTLK.COM and MACIPETH.COM cannot send any packet longer
+than 586 bytes.  The drivers will simply drop any oversized packet that an
+application tries to send, so in order to make sure that all packets go out,
+it is necessary to specify an MTU of 586 bytes within all client applications.
+In Winsock, the MTU can be set in the File -> Setup... dialog box.  In NOS and
+IPRoute, the MTU can be set using the commands which first establish use of
+the packet driver.  For example:
+
+     KA9Q NOS:  attach packet 0x66 local 10 586 192.168.0.1
+     IPRoute:  packet local 0x66 192.168.0.1/24 mtu 586
+
+Second: A conflict appears to occur whenever the polled-mode ODI driver for
+the PhoneNET Card PC, LTALKP.COM, operates concurrently with IPRoute's serial
+port driver.  The conflict eventually crashes the router.  However, using the
+interrupt-mode driver for the PhoneNET Card PC, LTALK.COM, seems to eliminate
+the conflict.  Other polled-mode drivers may cause similar problems, but
+should those problems occur, switching to the corresponding interrupt-mode
+drivers should solve them.
+
+Third: In order for a packet driver to run under Windows (and be used by
+Winsock, for example), the WINPKT utility is needed, which makes packet
+drivers compatible with Windows memory management.  WINPKT is available at
+several places, including ftp://ftp.trumpet.com/winsock/winpkt.com.
+
+Last: Here, as a model, is an AUTOEXEC.BAT file which prepares the computer to
+run Winsock on a MacIP network with no gateway:
+
+echo off
+LSL
+LTALK /NAME=LTALK$                      (ODI driver for PhoneNet Card PC)
+ATALK
+COMPAT
+MACIPETH 0x66 192.168.0.1 15            (Winsock's ARP TTL <= 15 -- see above)
+WINPKT 0x66                             (tells WINPKT to find packet driver at
+                                         software interrupt 0x66)
+PATH c:\trumpet
+(Now run Windows, load Winsock, and run Navigator, Telnet, etc.)
+
+
+
+Some implementation-related details:
+===================================
+
+The MacIP spec describes a MacIP network as an extension of a TCP/IP network
+(to which it is connected through the gateway), and says that the gateway
+provides responses to address resolution requests from the TCP/IP network
+(like proxy ARP).  These drivers cannot perform proxy ARP, because they cannot
+see any networks besides the directly-attached AppleTalk network.  However, a
+router that uses one of these drivers will treat the MacIP network as a
+separate network anyway, so no outside ARP requests will ever be sent to MacIP
+nodes.  (It may make more sense to treat MacIP as a separate network than to
+view it as an extension of any other network.)
+
+Client TCP/IP applications which use Class 1 packet drivers send out ARP
+request packets in order to determine the locations of other hosts on an
+ethernet network.  However, MACIPETH.COM uses NBP address resolution to
+determine the locations of those other hosts (see "Background information"
+above), and never sends ARP request packets from client applications onto the
+MacIP network.  In order to satisfy the client applications' perceived need
+for ARP information, MACIPETH.COM answers all ARP request packets with
+falsified ARP response packets.  (Of course, the driver does not respond to
+requests looking for its own IP address; the driver persuades the application
+through a separate method that its own ethernet address is 00:00:C0:0D:D4:27.)
+When MACIPETH.COM is operating with a MacIP gateway, all ARP responses contain
+the ethernet address 00:00:C0:0D:D4:28, and so applications see the MacIP
+network as an ethernet network with two nodes: one for this IP address (:27)
+and one for all other IP addresses (:28).  When MACIPETH.COM is operating
+without a MacIP gateway, ARP responses contain addresses in the range between
+00:00:C0:0D:D4:00 and 00:00:C0:0D:D4:13, which the driver has associated
+with particular entries in its own internal NBP address resolution table.
+Therefore, applications see the MacIP network as an ethernet network with up
+to twenty-one nodes: one for this IP address (:27) and up to twenty for other
+IP addresses (between :00 and :13).  (Note that this reveals MACIPETH.COM's
+limitation of communicating with a fixed maximum number of twenty other MacIP
+nodes at once, which is due to a lack of programming knowledge on the part of
+this author.)  In addition, when MACIPETH.COM operates without a gateway, it
+causes all incoming IP packets to appear to come from the ethernet address
+00:00:C0:0D:D4:28.  In all, this falsification of ARP information should work
+without problems as long as no application makes assumptions based upon it,
+which so far none appear to do.
+
+
+
+The end!  I hope that someone finds it useful.
+
+-- Edwin Fukunaga
+efukunag@umich.edu
+http://www-personal.umich.edu/~efukunag/
+
+With many thanks to Katie Stevens, the University of California, Davis, who
+wrote the original LOCALTLK.COM, and to Jim Noble, who made later revisions.

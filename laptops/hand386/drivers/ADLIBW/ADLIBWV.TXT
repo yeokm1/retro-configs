@@ -1,0 +1,69 @@
+AdLib Waveform Driver for Windows 3.1 and Multimedia Windows
+----------------------------------------------------------
+
+ADLIBWV.DRV is a Windows WAVE driver. It requires either:
+  1) Windows 3.1 or
+  2) Windows 3.0 with Multimedia Extensions.
+
+Notes:
+  The AdLib card is supremely unsuited to generating waveform sound,
+  so the sound may only be slightly better than the internal speaker
+  driver. Like the speaker driver, the AdLib Waveform driver plays
+  exclusively, so Windows will not run programs or respond to the
+  user while sounds are playing. Unlike the internal speaker, you
+  hopefully have your AdLib connected to nicer speakers.
+
+  This driver is ONLY a waveform driver. To get MIDI sound from your
+  AdLib, use the AdLib MIDI driver that comes with Windows. They can
+  coexist but you can't play waveform and MIDI sound at the same time.
+
+Legal Stuff:
+------------
+
+Software and documentation Copyright (c) 1992 John Ridges. All rights
+reserved.
+
+This software is distributed AS IS with no warranty expressed or
+implied. Accordingly we are not asking you to pay for it. We do ask
+that if you use this software you also buy Intermission 3.0, the best
+screen saver for Windows.
+
+This driver may be distributed freely so long as:
+
+  1) All files are included: ADLIBWV.DRV, VADLIBWD.386, OEMSETUP.INF
+     and ADLIBWV.TXT.
+  2) No money is charged for this driver other than BBS or disk fees.
+     Not more than $5.00 may be charged for disk fees.
+
+Instructions for use:
+---------------------
+
+  1) Copy ADLIBWV.DRV, VADLIBWD.386 and OEMSETUP.INF to a floppy disk
+     or temporary subdirectory on your hard drive.
+
+  2) Run the Windows Control Panel. (Usually in the "Main" group.)
+     Double click the "Drivers" Icon.
+
+  3) Click the [Add...] button in the "Drivers" dialog box.
+
+  4) Select "Unlisted or Updated Driver" in the list box labeled
+     "List of Drivers" and click the [OK] button.
+
+  5) Type the path to the directory containing ADLIBWV.DRV in the
+     edit field and click the [OK] button.
+
+  6) Highlight the "AdLib driver" item in the list box and click the
+     [OK] button.
+
+  7) Click the [Close] button in the "Drivers" dialog.
+
+  8) Restart Windows.
+
+Misc Info:
+----------
+
+For more information on Intermission see Compuserve Forum WINAPA
+(go WINAPA) Library 16 (ICOM Simulations) or call ICOM at
+(708)520-4440 or (800)877-4266.
+
+Send comments to John Ridges at CIS 72000,2057.

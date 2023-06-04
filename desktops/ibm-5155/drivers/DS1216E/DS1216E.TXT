@@ -1,0 +1,124 @@
+Instructions for installing the Dallas Semiconductor 1216E
+M. Brutman
+February 2003
+
+
+
+Introduction
+
+Older PCs and XTs designed before the arrival of the PC AT generally did not
+have built-in clock and calendar function.  You manually set the date and time
+each time you turned on the PC.  Many add-in boards added a clock and
+calendar, but your system may not have such a board or the one it has may not
+be working.
+
+The Dallas Semiconductor 1216E chip can be used to add clock and calendar
+function to many old machines without requiring an add-in board.  This is
+especially important for machines where an add-in board can not be located, or
+there is not space for one.
+
+The DS 1216E is a hybrid chip.	It contains a 28 pin DIP socket, a small chip
+and a battery.	You install it underneath a 28 pin ROM chip, re-installing the
+ROM chip in the DIP socket provided by the DS 1216E.  The price of the chip
+is steep, but it is worth it.
+
+
+How it works
+
+Normally you only read the date and time from a clock and calendar chip,
+which makes installing it in a ROM chip socket ideal.  However, you do need
+to set the date and time occasionally.	How is this accomplished when there
+is no circuitry to write data to the chip?  (ROM chips can be read, but not
+written to, so motherboard circuitry generally doesn't allow for writes to
+ROM chips - it would be wasted.)  Dallas has a neat trick to get around the
+fact that you are in a ROM socket.  The DS 1216E constantly monitors the
+address lines going to the ROM chip.  If a certain sequence is detected, the
+DS 1216E cuts the ROM chip off and starts to interpret the next part of the
+sequence.  The effect is to use the address lines as data lines for
+programming the clock and calendar chip.  After programming is complete, the
+DS 1216E re-connects the ROM chip and then begins to monitor the address
+lines for the next occurrence of the special sequence.
+
+The sequence is relative long - 64 bits worth on one of the address pins.  The
+64 bits are chosen such that they would never look like valid memory accesses.
+Your chances on tripping the DS 1216E accidentally are 2^64, which is quite
+unlikely.
+
+
+Hardware Installation
+
+This isn't a complete document that will hand-hold you through the process.
+If you are uncomfortable, find help.
+
+First, find a 28 pin ROM chip that the DS 1216E can be installed underneath.
+Most often this will be a BIOS chip on your motherboard.  The DS 1216E will
+add some height so make sure that the original ROM chip will fit when it is
+reinstalled with the DS 1216E under it.  (Plan for about one half inch of
+additional height.)
+
+Although the DS 1216E will work in any location where software can 'wiggle'
+the address lines, the software that is included in this distribution is more
+specific.  The software is designed for a ROM chip that starts at F000:0000 in
+the PC memory map.  The ROM chip that the DS 1216E is designed to work with
+probably holds 32K of ROM, and the specific ROM chip you pick may not be at
+that exact address. Unless you want to fool with patching the software, you
+need to pick the ROM chip that responds to memory accesses at F000:000.
+
+There are two ways to figure out which ROM chip to install the DS 1216E under:
+
+    Brute force: Pick a ROM chip. Install the DS 1216E and hope the included
+    software works.  If it doesn't, either patch the software to work or
+    uninstall and try again with a different ROM chip. Be careful, all of
+    this stuff is delicate.
+
+    Scientific: Find the technical reference manual for your motherboard and
+    hope you can learn the correct ROM chip by finding it in the schematics.
+
+
+On a PCjr, it is the ROM chip closest to the cartridge ports.  This ROM chip
+responds to addresses from F000:0000 to F000:7FFF, which will work with the
+included software.
+
+Remove the ROM chip from the motherboard.  Use an IC puller to avoid bending
+the pins, and take precautions against static.	Remember the orientation of
+the chip - it will have a notch on one end.
+
+Install the ROM chip in the socket on the DS 1216E.  One end of the DS 1216E
+is notched, and that notch should line up with the notch of your ROM chip.
+Ensure that you do not accidently bend a pin the wrong way when installing.
+
+Install the combined ROM chip/DS 1216E package back in the ROM chip socket on
+the motherboard.  Mind the pins again ... you really don't want to find a
+replacement for a 20 year old ROM chip, do you?
+
+
+Software Installation
+
+Boot the machine to DOS and run the TESTCLK.EXE program.  This will ensure
+that the DS 1216E can be found and programmed.
+
+Next, use the DOS software to set the current date and time on the DS 1216E
+chip, and add the software to your AUTOEXEC.BAT file.  The program is called
+CLOCK.COM, and it does not stay resident in memory.
+
+If you change the date and time using the DOS DATE and TIME commands, it
+will *not* update the DS1216E - you need to use CLOCK.COM to update the DS
+1216E.	However, you should not have to do this often.
+
+An alternative design for the software would have been a device driver that
+stays resident and integrates with the DOS DATE and TIME commands.  I
+generally don't like that approach, as you rarely want to set the date and
+time - you are more interested in reading it at bootup.
+
+
+Credits
+
+This file is my work.  Nothing else is.  I was tempted to write code to do
+this, but I was lucky enough to find some code that already worked and worked
+well.  (Special thanks to 'RailDavid' for that code.)
+
+Zenith Data Systems is responsible for the provided code.  It is copyrighted
+code.  They did *not* provide licensing information or embed it in the
+comments of the provided source code.  Be responsible - use this, but
+remember where it came from and respect the copyright.
+

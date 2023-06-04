@@ -1,0 +1,8 @@
+Activate.exe is for use with crea1371.dll.
+This program keeps the crea1371.dll wave buffers active.
+
+To use multiple cards
+Rename crea1371.dll
+Then create a new activate that runs the name that you chose.
+
+

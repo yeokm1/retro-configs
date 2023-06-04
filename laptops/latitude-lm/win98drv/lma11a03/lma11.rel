@@ -1,0 +1,8 @@
+Release Notes for System BIOS vA11 for Latitude LM with Neomagic 2070.
+                                                                     
+1) Corrected system auto-detection for type of system DRAM   
+and adjusts hardware registers to optimize performance.
+
+2) Floppy disk drive was incorrectly being initialized after resume    
+from Suspend-to-Disk in NT 4.0. This has been fixed in this bios.
+

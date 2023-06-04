@@ -1,0 +1,19 @@
+CONTRAT DE LICENCE UTILISATEUR FINAL POUR LOGICIEL
+
+Xircom vous concède une licence non exclusive d'utilisation des copies des logiciels fournis avec ce produit aux conditions suivantes :
+
+VOUS POUVEZ :
+a - Utiliser le logiciel sur tout ordinateur ou réseau mais uniquement en association avec un produit Xircom;
+b - Autoriser des tiers à utiliser le logiciel directement ou sur un réseau informatique, mais uniquement s'il n'existe pas plus d'un utilisateur par produit Xircom utilisé en association;
+c - Réaliser uniquement le nombre de copies de sauvegarde et d'archivage du logiciel, sous forme lisible par l'ordinateur, nécessaires pour la sauvegarde du logiciel, et ce à condition de reproduire sur chaque copie toutes les informations relatives au fabricant.
+
+VOUS NE POUVEZ PAS :
+a - Réaliser l'une des opérations suivantes sur le logiciel ou la documentation annexe : modification, traduction, ingéniérie à rebours, décompilation, désassemblage, création de travaux dérivatifs ou copie (hormis à des fins d'archivage);
+b - Louer, transférer, céder ou accorder des droits portant sur le logiciel ou la documentation annexe (y compris conclure des accords en temps partagé) à un tiers, sous quelque forme que ce soit, sans accord écrit préalable de Xircom;
+c - Retirer du logiciel et de la documentation annexe des informations concernant le propriétaire, des étiquettes ou des marques.
+
+Le non-respect d'une des restrictions précédemment citées annule la présente licence. Il ne s'agit pas d'une vente. Le titre et les copyrights du logiciel et de la documentation annexe et toutes les copies demeurent la propriétés de Xircom, hormis les titres des logiciels livrés par Xircom suite à un contrat avec un autre fabricant, qui sont détenus par le fabricant initial et demeurent sa propriété. Aucun droit lié à la propriété intellectuelle inhérente à ces logiciels n'est transféré par la présente licence. Les codes logiciel pouvant être lus par l'utilisateur (code source), y compris les codes source des logiciels livrés par Xircom suite à un contrat avec un autre fabricant, ne sont pas non plus concédés par la présente licence.
+
+DROITS RESTREINTS ACCORDES AU GOUVERNEMENT AMERICAIN
+Le LOGICIEL et la documentation sont fournis avec des DROITS RESTREINTS. L'utilisation, la duplication et la diffusion par le Gouvernement sont restreintes conformément au sous-paragraphe (c)(1)(ii) de la clause Rights in Technical Data and Computer Software (Droits relatifs aux données techniques et logiciels informatiques) du DFARS 252.227-7013 ou, le cas échéant, aux sous-paragraphes (c)(1) et (c)(2) de Commercial Computer Software-Restricted Rights (Logiciels informatiques commerciaux-Droits restreints) du 48 CFR52.227-19. Le concédant/fabricant est Xircom, Inc., 2300 Corporate Center Drive, Thousand Oaks, CA 91320-1420.
+Ce contrat est régi par la législation de l'Etat de Californie.

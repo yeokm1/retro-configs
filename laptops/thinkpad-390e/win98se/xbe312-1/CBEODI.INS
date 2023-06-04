@@ -1,0 +1,51 @@
+InS_StArT
+CBEODI.COM
+1.1
+^Xircom CardBus Ethernet 10/100 Adapter,CBEODI.COM,0000P0
+?The Xircom CardBus Ethernet 10/100 Adapter runs on laptops equipped with a CardBus socket. All parameters default to automatic detection or selection if left blank.
+*00000P0(FRAME)Media Frame Type(s)
+@Ethernet_802.2
+Ethernet_802.3
+Ethernet_II
+Ethernet_SNAP
+$00000P0(IRQ)Adapter IRQ
+?If the computer system uses PCI interrupts on the CardBus bridge, this parameter is ignored. Leave this parameter blank for automatic detection.
+3
+15
+$00000P0(MEMORY)Adapter Memory Address
+?The adapter uses a 4 kbyte window aligned on 8 kbyte boundaries (C2000, C4000, etc). Leave this parameter blank for automatic detection.
+C0000
+EF000
+$00000P0(IOADDRESS)Adapter I/O Address
+?The adapter uses 128 I/O locations aligned on a 128 byte boundary (100, 180, etc.). Using this parameter will force the adapter to use I/O mode instead of memory mode. Leave this parameter blank for automatic detection.
+100
+FF80
+$00000P0(NODE ADDRESS)Optional Node Address
+020000000000
+FEFFFFFFFFFF
+$00000P0(SOCKET)CardBus Socket
+?Use this parameter to force the driver to use a particular socket. Leave this parameter blank for automatic detection.
+1
+4
+$00000P0(RXBUFFERSIZE)Receive buffer size (in packets)
+?Set the size of the adapter's receive packet buffer in decimal. Each packet adds approximately 1520 bytes to the resident size of the driver. Leave this parameter blank for the default size (15)
+1
+30
+$00000P0(TXBUFFERSIZE)Transmit buffer size (in packets)
+?Set the size of the adapter's transmit packet buffer in decimal. Each packet adds approximately 1520 bytes to the resident size of the driver. Leave this parameter blank for the default size (2)
+1
+10
+!00000P0(LINESPEED)Line speed
+?Select either 10 Mbits/sec or 100 Mbits/sec. Make sure your network cabling supports the speed you select. Leave this parameter blank for automatic detection (auto-negotiation).
+10
+100
+!00000P0(LINEMODE)Line mode
+?Select half-duplex or full-duplex mode. Your network hardware must support full-duplex if you select FULL. Leave this parameter blank for automatic detection (auto-negotiation).
+HALF
+FULL
+!00000P0(ERT)Early receive threshold
+?Slower machines should use a lower threshold. Leave this parameter blank for automatic detection
+LOW
+MEDIUM
+HIGH
+InS_EnD

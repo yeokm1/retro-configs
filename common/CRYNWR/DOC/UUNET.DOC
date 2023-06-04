@@ -1,0 +1,87 @@
+[[ Info file: archive-help    Updated: 03-Jan-92 by James Revell ]]
+[no save]
+
+1. How to reach UUNET's 900 number via uucp
+
+   Here are some sample a L.sys or Systems file lines suitable for
+   UUNET's 900 number:
+
+   # Simple line.
+   uunet Any ACU 19200 1-900-468-7727 in:--in:--in: uucp
+   #
+   # Set up for a Telebit.
+   uunet Any cua0 19200 cua0 "" ATX0S50=255S111=30DT19004687727\r CONNECT "" login: uucp
+
+   Modify as appropriate for your site, of course, to deal with your
+   local telephone system and uucp version.
+
+   All modems on the 900 lines are Telebit T2500s.  Note that these
+   modems first answer with V.32, then at 2400, 1200, and last with PEP
+   tones.  This "900" number charges $.50US per minute to the caller.
+
+
+2. Where the files are
+
+   This file of instructions exists as the file uunet!~/info/archive-help
+ 
+   uunet!~/ls-lR.Z contains a list of all files available.  This is the
+   compressed output of an `ls -lR' command.  This file is updated each
+   night.  (Note this file is currently about 520 Kbytes *compressed*).
+   Information on other indexes can be found in uunet!~/index/README.
+   The file uunet!~/info/layout details the basic organization of the
+   archive.
+
+
+3. File formats
+
+   Files with .Z endings are compressed.  The uncompress program is
+   available in uunet!~/compress.tar if you don't have it.
+
+   Some very large files have been split into several files for you.
+   This are usually evidenced by sequenced endings after a .Z ending.
+	eg: emacs/18.57.Z.01 .. emacs/18.57.Z.39
+   After you obtain all of the parts you need only concatenate them
+   in the proper order.
+	eg: cat 18.57.Z.* > emacs-18.57.Z
+
+
+4. uunet!~/tmp
+
+   Please refer to uunet!~/info/incoming-policy for information on the
+   use of our ~ftp/tmp directory.
+
+
+5. uucp file transfer advice (answers to FAQ)
+
+   You must write files you transfer to a directory which the user
+   "uucp" has write access.  That user, not you, will actually do the
+   transfer.  /usr/spool/uucppublic is the common place used.
+
+   You may see different pathnames for files in our archive which
+   equate to the same thing.  Our archive is actually /usr/spool/ftp
+   (aka ~ftp), but it also accessible as /usr/spool/uucppublic (aka
+   ~uucp, or just ~ for UUCP).  FTP folks see the archive as just /
+   (eg: ftp.uu.net:/).
+
+   Be sure you use absolute pathnames when specifying remote filename.
+   If you don't, your working directory will be prepended to the
+   pathname in the command.  uunet!file and uunet!~/file are different.
+   uunet!~/ is the best reference to the base of the archive via uucp.
+
+   Permission denied messages normally indicate a file name or
+   file access problem.  If you are using an old copy of our ls-lR.Z
+   to find files, you may be using an old filename.  Names change as
+   new versions appear, plus we're remodeling right now.
+
+   Beware when using shell meta-characters in transfers.  You need to
+   escape them in most circumstances (eg: the ! in csh).  Also note
+   that there are a number of UUCP implementations which do not handle
+   multi-file transfers correctly.  If you pass a * to the remote
+   system you may get 'access denied' messages.  These indicate a UUCP
+   problem, not a file problem.
+
+
+6. Further help
+
+   Send email to uunet!archive-request for assistance with archive
+   related issues.  We usually respond within the next business day.

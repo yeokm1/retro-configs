@@ -1,0 +1,100 @@
+
+; Windows 2000 Installation Script File
+;
+; PCMCIA 10/100 Ethernet Card INF file for Windows 2000
+;
+; (C) Copyright 1997-1999. PCMCIA Technology Inc. All rights reserved.
+
+[version]
+signature  = "$Windows NT$"
+Class      = Net
+ClassGUID  = {4d36e972-e325-11ce-bfc1-08002be10318}
+provider   = %V_MS%
+
+[Manufacturer]
+%V_PCMCIA%=PCMCIA
+
+[ControlFlags]
+ExcludeFromSelect   = PCMCIA\PCMCIA-10/100_Ethernet_Card-BD76
+ExcludeFromSelect   = PCMCIA\PCMCIA-10/100_Ethernet_Card-FEB4
+
+
+[PCMCIA]
+; DisplayName           Section         DeviceID
+; -----------           -------         --------
+%KEN0100%            = KEN0100.ndi ,  PCMCIA\PCMCIA-10/100_Ethernet_Card-BD76
+%KEN0100%            = KEN0100.ndi ,  PCMCIA\PCMCIA-10/100_Ethernet_Card-FEB4
+
+;------------------------------------------------------------------------------
+; PCMCIA 10Mbps Ethernet Card.
+;
+[KEN0100.ndi]
+Characteristics = 0x84
+BusType         = 8      ; PCMCIA Bus
+AddReg          = Common.reg,PcCard.ndi.reg
+CopyFiles       = PcCard.ndis3.CopyFiles
+
+[KEN0100.ndi.LogConfigOverride]
+LogConfig = Override
+
+
+[KEN0100.ndi.Services]
+AddService = KEN0100, 2, PcCard.Service, PcCard.AddEventLog
+
+[Common.reg]
+;Connection Type
+HKR,Ndi\params\ConnectionType,ParamDesc,,"Connection Type"
+HKR,Ndi\params\ConnectionType,default,,"0"
+HKR,Ndi\params\ConnectionType,type,,"enum"
+HKR,Ndi\params\ConnectionType\enum,0,,"AutoSense"
+HKR,Ndi\params\ConnectionType\enum,8,,"100BaseTx"
+HKR,Ndi\params\ConnectionType\enum,9,,"100BaseTx Full_Duplex"
+HKR,Ndi\params\ConnectionType\enum,2,,"10BaseT (Twisted_Pair)"
+HKR,Ndi\params\ConnectionType\enum,3,,"10BaseT Full_Duplex"
+
+;-------------------------------------------------------------------------------
+; Service and Driver
+;
+[PcCard.ndi.reg]
+HKR, Ndi,               Service,    0, "KEN0100"
+HKR,Ndi\Interfaces,DefUpper,,"ndis5"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,0,"ndis5"
+HKR,Ndi\Interfaces,LowerRange,0,"ethernet"
+
+[PcCard.ndis3.CopyFiles]
+PMNDIS3.sys,,,2
+
+[PcCard.Service]
+DisplayName         =   %Service.DispName%
+ServiceType         =   1 ;%SERVICE_KERNEL_DRIVER%
+StartType           =   3 ;%SERVICE_AUTO_START%
+ErrorControl        =   1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary       =   %12%\PMNDIS3.sys
+LoadOrderGroup      =   NDIS
+
+[PcCard.AddEventLog]
+AddReg = PcCard.AddEventLog.reg
+
+[PcCard.AddEventLog.reg]
+HKR,    ,   EventMessageFile,   0x00020000,"%%SystemRoot%%\System32\netevent.dll,%%SystemRoot%%\System32\drivers\PMNDIS3.sys"
+HKR,    ,   TypesSupported,     0x00010001, 7
+
+HKR,    ,   TextModeFlags,      0x00010001,0x0001
+
+[Override]
+IOConfig       =    20@300-37F%FFE0
+IRQConfig      =    3,4,5,7,9,10,11,12
+PcCardConfig   =    47::(W)
+
+[DestinationDirs]
+PcCard.ndis3.CopyFiles  =   12
+
+[Strings]
+V_MS                =   "Microsoft"
+Service.DispName    =   "PCMCIA 10/100 Ethernet Card"
+V_PCMCIA="PCMCIA Technology Inc."
+KEN0100="PCMCIA 10/100 Ethernet Card"
+Disk_Desc="PCMCIA 10/100 Ethernet Card Driver Diskette"
+
+

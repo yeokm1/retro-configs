@@ -1,0 +1,456 @@
+;******************************************************************************
+; NETCBE.INF
+;
+; Xircom CardBus Ethernet 10/100 Network Adapters
+; Installation File for Windows 95, 98 and 2000
+; Supports NDIS3, NDIS4 and NDIS5 drivers
+;
+; Copyright (c) 1998 - 2000 Xircom, Inc. All Rights Reserved
+;
+; $Date:   28 Jul 2000 12:34:10  $
+; $Revision:   1.32  $
+;
+;------------------------------------------------------------------------------
+
+;******************************************************************************
+; Version Section
+;------------------------------------------------------------------------------
+[Version]
+Signature	= "$Chicago$"
+Compatible	= 1
+Class		= Net
+ClassGUID	= {4d36e972-e325-11ce-bfc1-08002be10318}
+DriverVer	= 08/01/2000, 3.10.05.00
+Provider	= %COMPANY_NAME%
+CatalogFile	= NETCBE.CAT
+
+;******************************************************************************
+; Manufacturer
+;------------------------------------------------------------------------------
+[Manufacturer]
+%COMPANY_NAME% = Device
+
+[ControlFlags]
+ExcludeFromSelect = PCI\VEN_1011&DEV_0019&SUBSYS_0002115D, \
+                    PCI\VEN_115D&DEV_0003&SUBSYS_0181115D, \
+                    PCI\VEN_115D&DEV_0003&SUBSYS_1181115D, \
+                    PCI\VEN_115D&DEV_0003&SUBSYS_0182115D
+
+;******************************************************************************
+; Device
+;------------------------------------------------------------------------------
+[Device]
+%NIC1%		= Install_NIC1,PCI\VEN_1011&DEV_0019&SUBSYS_0002115D    ; CBE
+%NIC2%		= Install_NIC2,PCI\VEN_115D&DEV_0003&SUBSYS_0181115D    ; CBE2
+%NIC3%		= Install_NIC2,PCI\VEN_115D&DEV_0003&SUBSYS_1181115D    ; CBEM
+%NIC4%		= Install_NIC2,PCI\VEN_115D&DEV_0003&SUBSYS_0182115D    ; R2BE
+%NIC_ML%	= Install_NIC_ML, %NIC_ML_ID% ; Non PnP DeviceID, necessary for retail WIN95
+
+;******************************************************************************
+; Install
+;------------------------------------------------------------------------------
+
+[Install_NIC1]          ; CBE
+AddReg    = Addreg_NDIS, Addreg_NIC, Addreg_NIC1, Addreg_NIC_Params
+DelReg    = Delreg_NIC1_Params
+CopyFiles = CopyFiles_NIC 
+
+[Install_NIC1.NT]
+AddReg          = Addreg_NIC_Params, nt_reg
+DelReg          = Delreg_NICNT_Params
+Characteristics = 0x84   ; NCF_REMOVABLE | NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5      ; PCI
+CopyFiles       = NIC_CopyFiles
+
+[Install_NIC1.NT.Services]
+AddService = CBEN5, 2, NIC_Service, common_EventLog
+
+[Install_NIC2]          ; CBE2/CBEM/R2BE
+AddReg    = Addreg_NDIS, Addreg_NIC, Addreg_NIC2, Addreg_NIC_Params
+DelReg    = Delreg_NIC1_Params
+CopyFiles = CopyFiles_NIC
+
+[Install_NIC2.NT]
+AddReg          = Addreg_NIC_Params, nt_reg
+DelReg          = Delreg_NICNT_Params
+Characteristics = 0x84   ; NCF_REMOVABLE | NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5      ; PCI
+CopyFiles       = NIC_CopyFiles
+
+[Install_NIC2.NT.Services]
+AddService = CBEN5, 2, NIC_Service, common_EventLog
+
+[Install_NIC_ML]        ; WIN95 forced load support
+AddReg    = Addreg_NDIS, Addreg_NIC, Addreg_NIC_ML, Addreg_NIC_Params, Addreg_NIC_ML_Params
+LogConfig = LogConfig_IO, LogConfig_MEM
+
+; NT section to keep CHKINF from checking our Install_NIC_ML section
+[Install_NIC_ML.NT]
+AddReg    = nt_reg
+DelReg          = Delreg_NICNT_Params
+Characteristics = 0x84   ; NCF_REMOVABLE | NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 1      ; ISA
+
+; NT section to keep CHKINF from checking our Install_NIC_ML section
+[Install_NIC_ML.NT.Services]
+AddService = CBEN5, 2, NIC_Service
+
+;******************************************************************************
+; Add Registry
+;------------------------------------------------------------------------------
+[Addreg_NDIS]				               ; W9x Only Registry Entries
+HKR,    ,DevLoader,     ,"*ndis"
+HKR,    ,DeviceVxDs,    ,%NIC_DRIVERNAME%
+HKR,    ,EnumPropPages, ,"netdi.dll,EnumPropPages"
+
+; NDIS Info
+HKR,NDIS,LogDriverName,,%NIC_LOGDRIVERNAME%
+HKR,NDIS,MajorNdisVersion,1,5
+HKR,NDIS,MinorNdisVersion,1,0
+
+; Interfaces
+HKR,Ndi\Interfaces,DefUpper,,"ndis3,ndis4,ndis5"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis3,ndis4,ndis5"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+
+; Install
+HKR,Ndi\Install,ndis5,,"Copyfiles"
+HKR,Ndi,NdiInstaller,,"NDIW9X.DLL,NdiW9xProc"
+
+; Help section
+HKR,Ndi,HelpText,,%NIC_HELP%
+
+; NDIS Switcher
+HKR,                      ,     AUTO       , ,"NOTSET"
+HKR,                      ,     NDIS5      , ,"CBEN5.SYS"
+HKR,                      ,     NDIS4      , ,"CBEN4.SYS"
+HKR,                      ,     NDIS3      , ,"CBE.SYS"
+HKR,                      ,     KeyWords   , ,"PacketPriority"
+HKR,                      ,     NdisVersion, ,"AUTO"
+
+; NDIS Version Keyword
+HKR,Ndi\params\NdisVersion,     ParamDesc  ,0, "NdisVersion"
+HKR,Ndi\params\NdisVersion,     type       ,0, "enum"
+HKR,Ndi\params\NdisVersion,     default    ,0, "AUTO"
+HKR,Ndi\params\NdisVersion\enum,"AUTO"     ,0, "Auto Select"
+HKR,Ndi\params\NdisVersion\enum,"NDIS3"    ,0, "NDIS 3"
+HKR,Ndi\params\NdisVersion\enum,"NDIS4"    ,0, "NDIS 4"
+HKR,Ndi\params\NdisVersion\enum,"NDIS5"    ,0, "NDIS 5"
+
+; PacketPriority Entries for NDIS Switcher
+HKR, Ndi\Params\PacketPriority, "NDIS3"    ,0, "0"
+HKR, Ndi\Params\PacketPriority, "NDIS4"    ,0, "0"
+HKR, Ndi\Params\PacketPriority, "NDIS5"    ,0, "0,1"
+HKR, Ndi\Params\PacketPriority, "NSOS"     ,0, "95,95R2,98"
+
+[Addreg_NIC]
+HKR,,InterruptNumber,1,04,00,00,00
+HKR,,IoBaseAddress,1,02,00,00,00
+HKR,,MemoryBaseAddress,1,01,00,00,00
+
+[Addreg_NIC1]
+HKR,Ndi,DeviceID,,"PCI\VEN_1011&DEV_0019"       
+
+[Addreg_NIC2]
+HKR,Ndi,DeviceID,,"PCI\VEN_115D&DEV_0003"
+
+[Addreg_NIC_ML]					; WIN95 forced load support
+HKR,Ndi,CardType,,"LEGACY"
+HKR,Ndi,DeviceID,,%NIC_ML_ID%			; Non PNP DeviceID, necessary for SR1 WIN95
+   		
+;******************************************************************************
+; Logical Configurations
+;------------------------------------------------------------------------------
+[LogConfig_MEM]
+ConfigPriority=NORMAL
+IRQConfig=S:3,4,5,6,7,8,9,10,11,12,13,14,15
+MemConfig=1000@C0000-FFFFF%FFFFC000, 1000@10000000-FFFFFFFF%FFFFC000
+MemConfig=1000@C0000-FFFFF%FFFFC000, 1000@10000000-FFFFFFFF%FFFFC000
+
+[LogConfig_IO]
+ConfigPriority=DESIRED
+IRQConfig=S:3,4,5,6,7,8,9,10,11,12,13,14,15
+MemConfig=1000@C0000-FFFFF%FFFFC000, 1000@10000000-FFFFFFFF%FFFFC000
+MemConfig=1000@C0000-FFFFF%FFFFC000, 1000@10000000-FFFFFFFF%FFFFC000
+IOConfig=80@100-FFFFFF7F%FFFFFF80
+
+;******************************************************************************
+; Windows 2000 specific info
+;------------------------------------------------------------------------------
+
+[nt_reg]
+HKR, Ndi\Interfaces,     UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,     LowerRange, 0, "ethernet"
+HKR, Ndi,                Service,    0, "CBEN5"
+
+[NIC_Service]
+DisplayName     = %NIC_Service_DispName%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_DEMAND_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\cben5.sys
+LoadOrderGroup  = NDIS
+
+[common_EventLog]
+AddReg = common_AddEventLog_reg
+
+[common_AddEventLog_reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll,%%SystemRoot%%\System32\drivers\cben5.sys"
+HKR, , TypesSupported,   0x00010001, 7
+
+;******************************************************************************
+; Copy file sections
+;------------------------------------------------------------------------------
+
+[NIC_CopyFiles]
+cben5.sys,,,2
+
+[CopyFiles_NIC]
+ndiw9x.dll
+cbe.sys
+cben4.sys
+cben5.sys
+
+;******************************************************************************
+; Source Disk Names & Source Disk Files
+;------------------------------------------------------------------------------
+[SourceDisksNames]
+1=%NETWORK_DISK%,,, .\
+
+[SourceDisksFiles]
+%NIC_DRIVERNAME% = 1
+NETCBE.CAT   = 1
+CBE.SYS      = 1
+CBEN4.SYS    = 1
+CBEN5.SYS    = 1
+ndiw9x.dll   = 1
+
+;******************************************************************************
+; Destination Directories
+;------------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir	= 11 ; SYSTEM directory
+CopyFiles_NIC	= 11 ; SYSTEM directory
+NIC_CopyFiles	= 12 ; SYSTEM32\DRIVERS directory
+
+;******************************************************************************
+; Localizable Strings
+;------------------------------------------------------------------------------
+[Strings]
+COMPANY_NAME	= "Xircom"
+NIC1		= "Xircom CardBus Ethernet 10/100"
+NIC2		= "Xircom CardBus Ethernet II 10/100"
+NIC3		= "Xircom CardBus Ethernet 100 + Modem 56 (Ethernet Interface)"
+NIC4		= "Xircom RealPort2 CardBus Ethernet 10/100"
+NIC_ML		= "Xircom CardBus Ethernet 10/100 Adapter manual load"
+NIC_HELP	= "Xircom's CardBus Adapter works in a PCMCIA slot that supports CardBus for full 32-bit support that provides PCI speed in a mobile adapter."
+NIC_DRIVERNAME	= "cben5.sys"
+NIC_ML_ID	= "XIRCOM-CBE_10/100"
+
+NIC_LOGDRIVERNAME = "CBEN5"
+NIC_Service_DispName = "Xircom CardBus Ethernet 10/100 Adapter family"
+;--------------------------------------
+; Driver Disk names
+;--------------------------------------
+NETWORK_DISK = "Windows 95, 98 and NT Drivers Disk"
+
+;--------------------------------------
+; Context help
+;--------------------------------------
+
+;--------------------------------------
+; Parameters
+;--------------------------------------
+
+NetworkAddress          = "Network Address"
+LineConfig              = "Line Configuration"
+Negotiation             = "Line Negotiation"
+AutoD                   = "Auto Detect"
+10HD                    = "10 Mbps/Half Duplex"
+10FD                    = "10 Mbps/Full Duplex"
+100HD                   = "100 Mbps/Half Duplex"
+100FD                   = "100 Mbps/Full Duplex"
+ON                      = "On"
+OFF                     = "Off"
+InitDelay               = "Initialization Delay"
+LinkIntegrity           = "Link Integrity"
+TxBufferSize            = "Transmit Buffer Size"
+RxBufferSize            = "Receive Buffer Size"
+CableDetect             = "Cable Detect"
+AutoPolarity            = "Auto Polarity"
+DynamicLinkDetect       = "Dynamic Link Detect"
+PacketPriority          = "Packet Priority"
+InterruptStyle          = "InterruptStyle"
+PCIIRQ                  = "PCI IRQ"
+ISAIRQ                  = "ISA IRQ"
+SocketNumber            = "SocketNumber"
+Cache                   = "Cache"
+Latency                 = "Latency"
+DisableBurstMode        = "DisableBurstMode"
+DisablePrefetching      = "DisablePrefetching"
+DisableWritePosting     = "DisableWritePosting"
+
+;--------------------------------------
+; PNP Devices
+;--------------------------------------
+
+;******************************************************************************
+; Params
+;------------------------------------------------------------------------------
+[Addreg_NIC_Params]
+
+HKR, Ndi\Params\AutoPolarity,          ParamDesc,  0, %AutoPolarity%
+HKR, Ndi\Params\AutoPolarity,          type,       0, "enum"
+HKR, Ndi\Params\AutoPolarity,          default,    0, "1"
+HKR, Ndi\Params\AutoPolarity\enum,     "1",        0, %ON%
+HKR, Ndi\Params\AutoPolarity\enum,     "0",        0, %OFF%
+
+HKR, Ndi\Params\CableDetect,           ParamDesc,  0, %CableDetect%
+HKR, Ndi\Params\CableDetect,           type,       0, "enum"
+HKR, Ndi\Params\CableDetect,           default,    0, "1"
+HKR, Ndi\Params\CableDetect\enum,      "1",        0, %ON%
+HKR, Ndi\Params\CableDetect\enum,      "0",        0, %OFF%
+
+HKR, Ndi\Params\DynamicLinkDetect,     ParamDesc,  0, %DynamicLinkDetect%
+HKR, Ndi\Params\DynamicLinkDetect,     type,       0, "enum"
+HKR, Ndi\Params\DynamicLinkDetect,     default,    0, "1"
+HKR, Ndi\Params\DynamicLinkDetect\enum,"1",        0, %ON%
+HKR, Ndi\Params\DynamicLinkDetect\enum,"0",        0, %OFF%
+
+HKR, Ndi\Params\InitDelay,             ParamDesc,  0, %InitDelay%
+HKR, Ndi\Params\InitDelay,             type,       0, "INT"
+HKR, Ndi\Params\InitDelay,             default,    0, "0"
+HKR, Ndi\Params\InitDelay,             optional,   0, "1"
+HKR, Ndi\Params\InitDelay,             min,        0, "0"
+HKR, Ndi\Params\InitDelay,             max,        0, "60"
+HKR, Ndi\Params\InitDelay,             step,       0, "1"
+
+HKR, Ndi\Params\LineConfig,            ParamDesc,  0, %LineConfig%
+HKR, Ndi\Params\LineConfig,            type,       0, "enum"
+HKR, Ndi\Params\LineConfig,            default,    0, "0"
+HKR, Ndi\Params\LineConfig\enum,       "0",        0, %AutoD%
+HKR, Ndi\Params\LineConfig\enum,       "1",        0, %10HD%
+HKR, Ndi\Params\LineConfig\enum,       "2",        0, %10FD%
+HKR, Ndi\Params\LineConfig\enum,       "3",        0, %100HD%
+HKR, Ndi\Params\LineConfig\enum,       "4",        0, %100FD%
+
+HKR, Ndi\Params\Negotiation,           ParamDesc,  0, %Negotiation%
+HKR, Ndi\Params\Negotiation,           type,       0, "enum"
+HKR, Ndi\Params\Negotiation,           default,    0, "1"
+HKR, Ndi\Params\Negotiation\enum,      "1",        0, %ON%
+HKR, Ndi\Params\Negotiation\enum,      "0",        0, %OFF%
+
+HKR, Ndi\Params\LinkIntegrity,         ParamDesc,  0, %LinkIntegrity%
+HKR, Ndi\Params\LinkIntegrity,         type,       0, "enum"
+HKR, Ndi\Params\LinkIntegrity,         default,    0, "1"
+HKR, Ndi\Params\LinkIntegrity\enum,    "1",        0, %ON%
+HKR, Ndi\Params\LinkIntegrity\enum,    "0",        0, %OFF%
+
+HKR, Ndi\Params\NetworkAddress,        ParamDesc,  0, %NetworkAddress%
+HKR, Ndi\Params\NetworkAddress,        type,       0, "edit"
+HKR, Ndi\Params\NetworkAddress,        default,    0, ""
+HKR, Ndi\Params\NetworkAddress,        LimitText,  0, "12"
+HKR, Ndi\Params\NetworkAddress,        UpperCase,  0, "1"
+HKR, Ndi\Params\NetworkAddress,        optional,   0, "1"
+
+HKR, Ndi\Params\PacketPriority,        ParamDesc,  0, %PacketPriority%
+HKR, Ndi\Params\PacketPriority,        type,       0, "enum"
+HKR, Ndi\Params\PacketPriority,        default,    0, "0"
+HKR, Ndi\Params\PacketPriority\enum,   "1",        0, %ON%
+HKR, Ndi\Params\PacketPriority\enum,   "0",        0, %OFF%
+
+HKR, Ndi\Params\RXBUFFERSIZE,          ParamDesc,  0, %RxBufferSize%
+HKR, Ndi\Params\RXBUFFERSIZE,          type,       0, "INT"
+HKR, Ndi\Params\RXBUFFERSIZE,          default,    0, "30"
+HKR, Ndi\Params\RXBUFFERSIZE,          optional,   0, "1"
+HKR, Ndi\Params\RXBUFFERSIZE,          min,        0, "1"
+HKR, Ndi\Params\RXBUFFERSIZE,          max,        0, "100"
+HKR, Ndi\Params\RXBUFFERSIZE,          step,       0, "1"
+
+HKR, Ndi\Params\TXBUFFERSIZE,          ParamDesc,  0, %TxBufferSize%
+HKR, Ndi\Params\TXBUFFERSIZE,          type,       0, "INT"
+HKR, Ndi\Params\TXBUFFERSIZE,          default,    0, "10"
+HKR, Ndi\Params\TXBUFFERSIZE,          optional,   0, "1"
+HKR, Ndi\Params\TXBUFFERSIZE,          min,        0, "1"
+HKR, Ndi\Params\TXBUFFERSIZE,          max,        0, "100"
+HKR, Ndi\Params\TXBUFFERSIZE,          step,       0, "1"
+
+[Addreg_NIC_ML_Params]
+HKR, Ndi\Params\InterruptStyle,        ParamDesc,  0, %InterruptStyle%
+HKR, Ndi\Params\InterruptStyle,        type,       0, "enum"
+HKR, Ndi\Params\InterruptStyle,        default,    0, "0"
+HKR, Ndi\Params\InterruptStyle\enum,   0,          0, %AutoD%
+HKR, Ndi\Params\InterruptStyle\enum,   1,          0, %PCIIRQ%
+HKR, Ndi\Params\InterruptStyle\enum,   2,          0, %ISAIRQ%
+
+HKR, Ndi\Params\SocketNumber,          ParamDesc,  0, %SocketNumber%
+HKR, Ndi\Params\SocketNumber,          default,    0, "0"
+HKR, Ndi\Params\SocketNumber,          type,       0, "enum"
+HKR, Ndi\Params\SocketNumber\enum,     0,          0, %AutoD%
+HKR, Ndi\Params\SocketNumber\enum,     1,          0, "1"
+HKR, Ndi\Params\SocketNumber\enum,     2,          0, "2"
+HKR, Ndi\Params\SocketNumber\enum,     3,          0, "3"
+HKR, Ndi\Params\SocketNumber\enum,     4,          0, "4"
+
+HKR, Ndi\Params\CACHE,                 ParamDesc,  0, %Cache%
+HKR, Ndi\Params\CACHE,                 type,       0, "enum"
+HKR, Ndi\Params\CACHE,                 default,    0, "32"
+HKR, Ndi\Params\CACHE,                 optional,   0, "1"
+HKR, Ndi\Params\CACHE\enum,            0,          0, "0"
+HKR, Ndi\Params\CACHE\enum,            8,          0, "8"
+HKR, Ndi\Params\CACHE\enum,            16,         0, "16"
+HKR, Ndi\Params\CACHE\enum,            32,         0, "32"
+
+HKR, Ndi\Params\LATENCY,               ParamDesc,  0, %Latency%
+HKR, Ndi\Params\LATENCY,               type,       0, "INT"
+HKR, Ndi\Params\LATENCY,               default,    0, "32"
+HKR, Ndi\Params\LATENCY,               optional,   0, "1"
+HKR, Ndi\Params\LATENCY,               Min,        0, "0"
+HKR, Ndi\Params\LATENCY,               Max,        0, "255"
+HKR, Ndi\Params\LATENCY,               Step,       0, "1"
+
+HKR, Ndi\Params\NOBURST,               ParamDesc,  0, %DisableBurstMode%
+HKR, Ndi\Params\NOBURST,               type,       0, "enum"
+HKR, Ndi\Params\NOBURST,               default,    0, "ON"
+HKR, Ndi\Params\NOBURST,               optional,   0, "1"
+HKR, Ndi\Params\NOBURST\enum,          ON,         0, "ON"
+
+HKR, Ndi\Params\NOPREFETCH,            ParamDesc,  0, %DisablePrefetching%
+HKR, Ndi\Params\NOPREFETCH,            type,       0, "enum"
+HKR, Ndi\Params\NOPREFETCH,            default,    0, "ON"
+HKR, Ndi\Params\NOPREFETCH,            optional,   0, "1"
+HKR, Ndi\Params\NOPREFETCH\Enum,       ON,         0, "ON"
+
+HKR, Ndi\Params\NOWRITEPOST,           ParamDesc,  0, %DisableWritePosting%
+HKR, Ndi\Params\NOWRITEPOST,           type,       0, "enum"
+HKR, Ndi\Params\NOWRITEPOST,           default,    0, "ON"
+HKR, Ndi\Params\NOWRITEPOST,           optional,   0, "1"
+HKR, Ndi\Params\NOWRITEPOST\Enum,      ON,         0, "ON"
+
+[Delreg_NIC1_Params]
+;--------------------------------------
+; Old Keyword Cleanup
+;--------------------------------------
+HKR, Ndi\Params\DirectEnable
+HKR, Ndi\Params\DuplexMode
+HKR, Ndi\Params\EarlyReceive
+HKR, Ndi\Params\EarlyTransmit
+HKR, Ndi\Params\InterruptStyle
+HKR, Ndi\Params\SocketNumber
+HKR, Ndi\Params\MODE
+HKR, Ndi\Params\Mode
+HKR, Ndi\Params\LineMode
+HKR, Ndi\Params\LineSpeed
+
+[Delreg_NICNT_Params]
+;--------------------------------------
+; Old Keyword Cleanup
+;--------------------------------------
+HKR, Ndi\Params\EarlyReceive
+HKR, Ndi\Params\EarlyTransmit
+HKR, Ndi\Params\LEDEnabled
+HKR, Ndi\Params\MODE
+HKR, Ndi\Params\Mode
+HKR, Ndi\Params\LineMode
+HKR, Ndi\Params\LineSpeed

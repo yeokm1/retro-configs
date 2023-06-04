@@ -1,0 +1,86 @@
+
+   Packet Driver
+
+   Introduction:
+   -------------
+   This document describes the procedure to setup the Packet driver for
+   10/100M PCI Fast Ethernet Adapter.
+
+   Location of Driver:     \RTSPKT\RTSPKT.COM
+
+   Sample Configuration Files:
+   ---------------------------
+     AUTOEXEC.BAT
+        RTSPKT 0x60
+
+   Notes:
+   ------
+     1.  Load the packet driver using the software interrupt and any
+         optional switches if required.
+
+         Usage: RTSPKT [options] <software_int_no> [media type]
+
+         Example: RTSPKT -i 0x7e
+
+         The only required  parameter is the software  interrupt.  A packet
+         driver needs to have a software interrupt assigned to it for other
+         programs to access it. The recommended interrupt 0x7e. If you need
+         any of the  options  listed below,  place them before the software
+         interrupt on the command line.
+
+         -i - Force driver to report itself as 802.3 instead of Ethernet II.
+         -d - Delayed initialization.  Used for diskless booting
+         -n - NetWare conversion.  Converts 802.3 packets into 8137 packets
+         -w - Windows hack, obsoleted by winpkt
+         -p - Promiscuous mode disable
+         -h - Help
+         -u - Uninstall
+
+      2. Media type can be used to force the card to work on specific
+         speed and duplex mode. If no media type if specified, then
+         driver will read hardware configuration from EEPROM on the
+         card. The hardware configuration can be modified by running
+         'rset8139' on driver disk.
+
+              Media type: auto    = Auto_nogotiation
+                          10half  = 10M Half-Duplex
+                          10full  = 10M Full-Duplex
+                          100half = 100M Half-Duplex
+                          100full = 100M Full-Duplex
+
+         for example: RTSPKT 0x60 auto   ;Media type = Auto_nogotiation
+
+      3. Type command,C:\RTSPKT 0x60 100half, the screen will appear following
+         message:
+
+         Line Speed 100 Mbps
+         Half Duplex
+         System: [345]86 processor, PCI bus, Two 8259s
+         Packet driver software interrupt is 0x60
+         Interrupt number is 0x9
+         I/O port is 0x6100
+         My Ethernet address is 00:40:C7:29:29:AD
+
+      4. Installing Multiple LAN Adapters:
+
+         If there are multiple network cards on the main board. the user
+         run RTSPKT 0x60 directly, then the screen will display :
+
+         There are 2 network cards on your main board :
+         Card 1. IRQ= 0x9  I/O= 0x6100  NodeID= 00:40:C7:29:29:AD
+         Card 2. IRQ= 0xA  I/O= 0x6000  NodeID= 00:40:C7:29:29:64
+         Please select a Card No.(1-2): 1
+
+         System: [345]86 processor, PCI bus, Two 8259s
+         Packet driver software interrupt is 0x60
+         Interrupt number is 0x9
+         I/O port is 0x6100
+         My Ethernet address is 00:40:C7:29:29:AD
+
+      5. Installing multiple drivers:
+
+         If you want to install multiple cards each connecting to different
+         network, you have to install the driver multiple times, each with
+         different packet interrupt number. Then modify 'ioaddr' variable
+         in 'config.tel' to specify the packet inetrrupt you will use.
+

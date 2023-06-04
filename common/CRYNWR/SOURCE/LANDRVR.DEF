@@ -1,0 +1,21 @@
+LIBRARY		LANDRVR
+DESCRIPTION	"Windows Packet Driver"
+CODE		PRELOAD FIXED
+DATA		PRELOAD FIXED SINGLE
+HEAPSIZE	4096
+STACKSIZE	4096
+EXPORTS     	OpenEthernet
+		DriverInfo
+		AccessType
+		ReleaseType
+		SendPkt
+		TerminateLAN
+		GetAddress
+		ResetInterface
+		GetParameters
+		SetRcvMode
+		GetRcvMode
+		SetMultiCastList
+		GetMultiCastList
+		GetStatistics
+		SetAddress

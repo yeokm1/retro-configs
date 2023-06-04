@@ -1,0 +1,179 @@
+3Com Corporation
+NDIS 2.01 Drivers Installation Notes
+
+
+This procedure describes how to install Artisoft 
+LANtastic 6.0 using the 3Com NDIS 2.0 driver 
+ELPC3.DOS.  To install LANtastic from the DOS 
+prompt or from Windows, follow these steps:
+
+Installing from the DOS Prompt
+
+1. Insert Artisoft's LANtastic Install Disk 1 of 4 
+   in the diskette drive.
+
+2. Type:
+
+   INSTALL
+
+   This launches Windows and starts the 
+   installation of LANtastic.
+
+3. Go to step 4 under the "Installing from Windows" 
+   procedure and continue with the remaining 
+   steps.  
+
+
+Installing from Windows
+
+1. Launch Windows, if it is not already opened.  
+
+2. Select Run from the Windows File menu.
+
+3. Type:  
+
+   A:\INSTALL
+
+   If you are using a different drive, use the 
+   letter for that drive.
+
+4  Follow the instructions and answer the 
+   questions that appear. 
+
+5. Select NDIS Support for Network Adapters in the 
+   Select Network Adapter window.  
+
+6  When prompted, remove the LANtastic diskette, insert 
+   the EtherDisk diskette provided with the 3C589 PC Card, 
+   and press [Enter].  
+
+   The NDIS driver is copied to your hard drive. 
+
+7. When prompted, reinsert the LANtastic Install 
+   Disk 1 in the drive.
+
+8. Answer the questions concerning your PC name 
+   and drives based on your configuration. 
+
+
+
+Changes and Additions to PC Startup Files
+-----------------------------------------
+
+The following lines are added or changed in 
+these PC startup files:  
+
+AUTOEXEC.BAT File 
+
+call C:\LANTASTI\STARTNET.BAT
+
+
+CONFIG.SYS File 
+
+DEVICE=C:\LANTASTI\PROTMAN.DOS /I:C:\LANTASTI
+DEVICE=C:\LANTASTI\ELPC3.DOS     
+
+PROTOCOL.INI File 
+
+[PROTMAN]
+  DRIVERNAME = PROTMAN$
+  DYNAMIC = YES
+
+[ELPC3_NIF]
+  DRIVERNAME = ELPC3$ 
+
+
+STARTNET.BAT File 
+
+C:
+cd C:\LANTASTI
+
+SET LAN_CFG=C:\LANTASTI
+
+rem If LANtastic is disabled, skip everything.
+IF EXIST DISABLED GOTO :STARTNET_DONE
+
+@echo ===== Begin LANtastic configuration =====
+
+PATH C:\LANTASTI;C:\LANTASTI\NW;%PATH%
+SET LAN_DIR=C:\LANTASTI.NET
+SET NWDBPATH=C:\LANTASTI\NW
+
+LOADHIGH AI-NDIS BIND_TO=ELPC3_NIF
+
+AILANBIO @STARTNET.CFG
+
+REDIR ACME1111CT @STARTNET.CF ======> Just an example !!!
+
+IF EXIST NOSHARE GOTO :NOSHARE
+SERVER C:\LANTASTI.NET @STARTNET.CFG
+NET LOGIN \\ACME1111CT ======> Just an example !!!
+GOTO :CONTINUE
+
+:NOSHARE
+@echo LANtastic server was installed but turned off.
+
+:CONTINUE
+
+rem If CONNECT.BAT exists, run it to set up connections.
+IF EXIST CONNECT.BAT GOTO :CONNECT
+
+rem Otherwise set up connections specified 
+rem  during install.
+
+NET LOGIN/wait \\ABC        ======> Just an example !!!
+NET USE D: \\ABC\C-DRIVE    ======> Just an example !!!
+NET LPT TIMEOUT 10
+GOTO :CONNECT_DONE
+
+:CONNECT
+@echo Setting up LANtastic connections from CONNECT.BAT
+rem Build CONNECT.BAT like this: 
+rem        "NET SHOW/BATCH > C:\LANTASTI\CONNECT.BAT"
+rem   (or run the batch file SETNET.BAT)
+call CONNECT.BAT
+
+:CONNECT_DONE
+NET POSTBOX
+
+@echo ===== End LANtastic configuration =====
+
+:STARTNET_DONE
+cd \
+
+
+SYSTEM.INI File (Windows)
+
+[boot]
+shell=progman.exe
+network.drv=C:\LANTASTI\LANTNET.DRV
+
+[boot.description]
+network.drv=LANtastic for Windows Version 6.00
+
+[386Enh]
+network=*vnetbios,C:\LANTASTI\LANTASTI.386
+
+[network drivers]
+netcard=elpc3.dos 
+
+[LANtastic]
+Comment=Add 1 Network_IRQ per adapter, specify correct Irq values.
+Network_IRQ=15           
+
+
+WIN.INI  File (Windows)
+
+[windows]
+spooler=no
+load=NWPOPUP.EXE C:\LANTASTI\WNET.EXE
+run=C:\LANTASTI\MKWGROUP.EXE
+
+
+=========================================================
+
+
+
+                                
+(%VER NDIS - Artisoft Lantastik v2.1b)
+

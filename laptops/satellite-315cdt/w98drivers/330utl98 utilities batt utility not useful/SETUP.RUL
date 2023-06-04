@@ -1,0 +1,280 @@
+/************************************************************************/
+/*	Copyright(c) TOSHIBA Corp. 1998 All right reserved.					*/
+/************************************************************************/
+//
+//	Define Statics
+//
+#define APPBASE_PATH		""
+#define COMPANY_NAME		"Toshiba"
+#define PRODUCT_NAME		"Windows Utilities"
+#define PRODUCT_VERSION		"3.0"
+#define PRODUCT_KEY			"TOSSPK.EXE;SMPLSPKR.EXE;TLKCLOCK.EXE;TLKCALC.EXE;TLKKEYB.EXE;TLKMSG.EXE;TOSMKVCE.EXE"
+#define UNINSTALL_KEY		"TosSpchV30"
+#define APPBASE_DIR95		"Program Files\\Toshiba\\Speech System"
+#define BUILD_DATE			"19980424"
+
+#define SIZE_NEED_HDD_FREE	5000000		// Size of components.
+#define NU_COMP_LIB			"data.z"
+
+//
+//	Grobal Variables & Function Prototypes
+//
+declare
+	STRING	szFileSet,
+			szDeletePath,
+			szAppPath;
+	STRING	szProgram,
+			szTemp,
+			svUninstLogFile;
+	STRING	szMsg,
+			svMainDirectory[_MAX_STRING];
+	NUMBER	nResult,
+			nMeter;
+	BOOL	bIncludeTTS,
+			bIncludeSR,
+			bSpaceOk,
+			bSetupOk;
+	STRING	szNumValue,
+			szArgument;
+	NUMBER	nValue,
+			nvType,
+			nvSize
+
+	prototype SetupScreen();
+	prototype CheckRequirements();
+//	prototype ChkReInstall();
+	prototype ChkNewVer();
+	prototype ChkOldVer( STRING, STRING );
+	prototype CheckSpaceRequirements();
+	prototype CreateRegDBEntries();
+
+	prototype InclSharedDLLs();
+//	prototype CreateRegDBEntriesSR();
+
+
+//
+//	Main Routine
+//
+program
+
+StartHere:
+	SetupScreen();			//	Initialize Display
+
+	// Set installation info., which is required for registry entries.
+	//	InstallationInfo( COMPANY_NAME, PRODUCT_NAME, PRODUCT_VERSION, PRODUCT_KEY );
+
+
+WelcomeDlg:					//	Welcome Dlg
+	Disable( BACKBUTTON );
+	Welcome( "Toshiba Windows Utilities Upgrade for Windows98", 0 );
+	Enable( BACKBUTTON );
+	CheckRequirements();	//	Check Display
+
+	svMainDirectory = TARGETDISK ^ APPBASE_DIR95 ^ APPBASE_PATH;
+
+GetTargetDirectory:
+	szMsg = "";
+
+	//	Don't set install directory
+	//	if ( AskDestPath( "Install Directry", szMsg,
+	//			svMainDirectory, 0 ) = BACK ) then
+	//		goto WelcomeDlg;
+	//	endif;
+
+	nMeter = 0;
+
+	bSpaceOk = CheckSpaceRequirements();	//	Check Free Space
+	if ( bSpaceOk = FALSE ) then
+		goto GetTargetDirectory;
+	endif;
+
+	// Set installation info., which is required for registry entries.
+//	InstallationInfo( COMPANY_NAME, PRODUCT_NAME, PRODUCT_VERSION, PRODUCT_KEY );
+
+	// Set registry App Paths key information for the main application.
+//	szAppPath = svMainDirectory ^ "TTS;" + svMainDirectory ^ "SYSTEM";
+//	RegDBSetItem( REGDB_APPPATH, szAppPath );
+//	szProgram = svMainDirectory ^ "TTS\\TOSSPK.EXE";
+//	RegDBSetItem( REGDB_APPPATH_DEFAULT, szProgram );
+
+	// Define the "General" file set.
+	szFileSet = "General";
+//	TARGETDIR = svMainDirectory;
+
+	//
+	//	Install Files
+	//
+	FileSetBeginDefine( szFileSet );
+	SetStatusWindow( nMeter, "Updating Utilities ..." );
+
+	// general DLL
+	TARGETDIR = WINSYSDIR;
+	nResult = CompressGet( NU_COMP_LIB, "TApm.Dll",			SHAREDFILE | COMP_UPDATE_DATE );
+	nResult = CompressGet( NU_COMP_LIB, "THci.Dll",			SHAREDFILE | COMP_UPDATE_DATE );
+	nResult = CompressGet( NU_COMP_LIB, "TSci.Dll",			SHAREDFILE | COMP_UPDATE_DATE );
+
+	nResult = CompressGet( NU_COMP_LIB, "THotkey.Exe",		SHAREDFILE | COMP_UPDATE_DATE );
+	nResult = CompressGet( NU_COMP_LIB, "TFunckey.Exe",		SHAREDFILE | COMP_UPDATE_DATE );
+	nResult = CompressGet( NU_COMP_LIB, "TPwrProf.Dll",		SHAREDFILE | COMP_UPDATE_DATE );
+	nResult = CompressGet( NU_COMP_LIB, "TPwrMgr.Exe",		SHAREDFILE | COMP_UPDATE_DATE );
+
+	nResult = CompressGet( NU_COMP_LIB, "mfc42.dll",	SHAREDFILE | COMP_UPDATE_DATE );
+	nResult = CompressGet( NU_COMP_LIB, "msvcrt.dll",	SHAREDFILE | COMP_UPDATE_DATE );
+
+	TARGETDIR = WINDIR;
+	nResult = CompressGet( NU_COMP_LIB, "Tservice.Ini",	COMP_UPDATE_DATE );
+	nResult = CompressGet( NU_COMP_LIB, "TPwrMgr.Reg",	COMP_UPDATE_DATE );
+	nResult = CompressGet( NU_COMP_LIB, "TBattSmp.Reg",	COMP_UPDATE_DATE );
+
+	szDeletePath = WINDIR ^ "inf";
+	TARGETDIR = szDeletePath;
+	nResult = CompressGet( NU_COMP_LIB, "TVald.Inf",	COMP_UPDATE_DATE );
+	
+	szDeletePath = WINDIR ^ "system32\\drivers";
+	TARGETDIR = szDeletePath;
+	nResult = CompressGet( NU_COMP_LIB, "TVald.Sys",	SHAREDFILE | COMP_UPDATE_DATE );
+
+	//	Delete Maxtime
+	//	-->
+	szDeletePath = WINDIR ^ "Start Menu\\Programs\\Toshiba Utilities";
+	TARGETDIR = szDeletePath;
+	DeleteFolderIcon( szDeletePath, "MaxTime Manager" );
+
+	szDeletePath = "C:\\WinUtils";
+	TARGETDIR = szDeletePath;
+	DeleteFile( "Mxtime.Exe" );
+	DeleteFile( "Mxtime.Hlp" );
+	
+	TARGETDIR = WINDIR;
+	//	<--
+
+	// Set up progress indicator and information gauge.
+	Enable( STATUSDLG );
+	nMeter = 90;
+	StatusUpdate( ON, nMeter );
+
+	CreateRegDBEntries();
+
+	nResult = FileSetEndDefine( szFileSet );
+	if ( nResult < 0 ) then
+		MessageBox( "FileSetEndDefine Error", WARNING );
+	endif;
+
+	// Perform the file set.
+	nResult = FileSetPerformEz( szFileSet, 0 );
+	switch ( nResult )
+	case FS_DONE:		//	Successful completion.
+	case FS_CREATEDIR:	//	Create directory error.
+		MessageBox( TARGETDIR + "The path entered is not valid.", SEVERE );
+		abort;
+	default:			//	Group all other errors under default label.
+		NumToStr( szTemp, nResult );
+		MessageBox( "Install failure", SEVERE );
+		abort;
+	endswitch;
+
+Finish:
+	nMeter = 100;
+	SetStatusWindow( nMeter, "Installation is complete." );
+	Disable( LOGGING );
+
+	//	// SharedDLLs をさらにカウントアップ
+	//	InclSharedDLLs();
+
+	Delay( 1 );
+	
+	//	TPwrMgr Regs
+	LaunchAppAndWait( WINDIR ^ "Regedit.exe", "/s TPwrMgr.reg TBattSmp.reg", WAIT );
+	
+	Disable( STATUSDLG );
+
+	szMsg = "Please restart your computer before running installing programs and drivers. And after installation, please restart once more.";
+	if( RebootDialog( "Restart Windows", szMsg, SYS_BOOTWIN ) = 0) then
+		CommitSharedFiles( 0 );
+	endif;
+
+// modified end 97/09/29
+	exit;
+
+
+/************************************************************************/
+/*	SetupScreen															*/
+/*		...	Show Background												*/
+/************************************************************************/
+function SetupScreen()
+begin
+
+	Disable( BACKGROUND );
+	Enable( INDVFILESTATUS );
+	SetTitle( "Toshiba Windows Utilities" + "Setup", 24, WHITE );
+
+	// Caption bar text.
+	SetTitle( "Setup", 0, BACKGROUNDCAPTION );
+	Enable( BACKGROUND );
+end;
+
+
+/************************************************************************/
+/*	CheckRequirements													*/
+/*		...	Check Display Resolution									*/
+/************************************************************************/
+function CheckRequirements()
+	number	nvDx, nvDy;
+begin
+
+	// Check screen resolution.
+	GetExtents( nvDx, nvDy );
+	if (nvDy < 480) then
+		MessageBox( "VGA resolution is required for installation", WARNING );
+		exit;
+	endif;
+end;
+
+
+/************************************************************************/
+/*	CheckSpaceRequirements												*/
+/*		...	Check free space											*/
+/************************************************************************/
+function CheckSpaceRequirements();
+	number	nSize;
+begin
+
+	nSize = SIZE_NEED_HDD_FREE;
+
+	// Check space on target drive.
+	bSpaceOk = TRUE;
+	if ( GetDiskSpace( svMainDirectory ) < nSize ) then
+		szMsg = "The HDD don't have enough space for installation\n" +
+			"'" + svMainDirectory + "' \n";
+		MessageBeep(0);
+		MessageBox( szMsg, WARNING );
+		bSpaceOk = FALSE;
+	endif;
+	return bSpaceOk;
+end;
+
+
+/************************************************************************/
+/*	CreateRegDBEntries													*/
+/*		...	Set Regs													*/
+/************************************************************************/
+function CreateRegDBEntries()
+begin
+	nResult = RegDBSetDefaultRoot( HKEY_CLASSES_ROOT );
+	nResult = RegDBSetKeyValueEx( "CLSID\\{1C154BE0-D3C9-11d1-AE5C-000039277E05}\\InProcServer32", "", REGDB_STRING, "C:\\Windows\\System\\TPwrProf.Dll", -1 );
+	nResult = RegDBSetKeyValueEx( "CLSID\\{1C154BE0-D3C9-11d1-AE5C-000039277E05}\\InProcServer32", "ThreadingModel", REGDB_STRING, "Apartment", -1 );
+
+	nResult = RegDBSetDefaultRoot( HKEY_LOCAL_MACHINE );
+	nResult = RegDBSetKeyValueEx( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunServices", "TSPower", REGDB_STRING, "", -1 );
+	nResult = RegDBSetKeyValueEx( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunServices", "TDockNUndock", REGDB_STRING, "", -1 );
+	nResult = RegDBSetKeyValueEx( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunServices", "Cardoc", REGDB_STRING, "", -1 );
+	nResult = RegDBSetKeyValueEx( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunServices", "CDDock", REGDB_STRING, "", -1 );
+	nResult = RegDBSetKeyValueEx( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunServices", "TFunckey", REGDB_STRING, "TFunckey.Exe", -1 );
+	nResult = RegDBSetKeyValueEx( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunServices", "THotkey", REGDB_STRING, "THotkey.Exe", -1 );
+	nResult = RegDBSetKeyValueEx( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "TPwrMgr", REGDB_STRING, "TPwrMgr.Exe", -1 );
+	nResult = RegDBSetKeyValueEx( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "THotkey", REGDB_STRING, "", -1 );
+
+	nResult = RegDBSetKeyValueEx( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Controls Folder\\Power\\shellex\\PropertySheetHandlers\\Toshiba Power Exteinsions", "", REGDB_STRING, "{1C154BE0-D3C9-11d1-AE5C-000039277E05}", -1 );
+	
+	nResult = RegDBDeleteKey( "ENUM\\ACPI\\*TOS6200\\0" );
+end;

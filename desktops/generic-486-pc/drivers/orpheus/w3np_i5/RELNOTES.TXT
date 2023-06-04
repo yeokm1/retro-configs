@@ -1,0 +1,224 @@
+Release Notes for CS4232/36/36B/37B/38B Version 1.80 Windows 3.1 Driver   
+
+
+Release Date:  
+
+02/14/97  
+
+Release Information:  
+
+This release improves 3D audio support by adding 3D to the analog inputs.  It also improves
+the chip detection routines for the CS423xB family of audio codecs. There is a new DOS 
+diagnostic and DOS CD player.  The DOS driver (CS4232C.EXE) now loads CS4236B, CS4237B and 
+CS4238B RAM patches.
+
+Version Numbers:  
+
+2.01 T3	CS4232C.EXE
+4.03.2000 	CSFM.DRV
+1.80    	CS32BA11.DRV
+1.80	  	CS32BAIP.EXE
+1.80	  	CS32BAOP.EXE
+2.00	  	CS32BASP.EXE
+2.11	  	CSACBAT1.EXE
+1.80	  	CS32MIX.EXE
+1.80	  	CS32CFG.EXE
+1.80	  	CS32HMX.EXE
+1.80	  	CS32WSS.EXE
+1.80 	  	CS32INTR.EXE
+1.80	  	CWDIAG.EXE
+1.80	  	CSACGUCD.EXE
+1.80	  	CSPOWER.CPL
+1.0	  	CW3DCTRL.EXE
+79   	  	CS4232 Microcode
+6       	CS4232A Microcode
+55	  	CS4236 Microcode
+14	  	CS4236B\37B\38B Microcode
+
+List of Files:
+
+Disk 1
+LOGO.BMP             11,062  09-08-95  1:31a
+SETUP.INS            85,859  02-07-97  7:14p
+SETUP.DLL             6,224  09-08-95  1:31a
+SETUP.EXE            47,616  01-22-96  4:59a
+SETUP.INF             4,607  02-13-97  3:26p
+CSGROUP.EXE          22,016  09-08-95  1:31a
+RESOURCE.DLL          6,400  02-13-97  8:23p
+WINCM.DLL             8,192  09-08-95  2:10a
+DISK1.ID                 51  09-08-95  1:31a
+CWPNP.DLL            20,128  03-20-96 10:57p
+CWAUDIO.BIN           8,225  01-21-97 10:33a
+CS4232.INI              853  09-08-95  1:30a
+_INST16.EX_         276,270  01-24-96  1:19p
+_ISDEL.EXE            8,192  09-07-95  7:22p
+_SETUP.DLL           10,752  09-26-95 12:33a
+_SETUP.LIB           28,217  01-22-96  8:59p
+R180D1.Z            526,142  02-14-97  3:24p
+BWCC.DLL            157,472  04-20-94 12:00a COMPRESSED IN R180D1.Z
+CSACBAT1.INI            320  09-08-95  1:31a COMPRESSED IN R180D1.Z
+CS32BASP.EXE        312,868  09-08-95  1:31a COMPRESSED IN R180D1.Z
+CS32BAOP.EXE         42,800  02-12-97  6:46p COMPRESSED IN R180D1.Z CSFM.DRV             21,856  02-14-97  3:18p COMPRESSED IN R180D1.Z CS32BA11.DRV        112,560  02-12-97  6:43p COMPRESSED IN R180D1.Z MIDIMAP.CFG          38,386  09-08-95  1:30a COMPRESSED IN R180D1.Z MPU401.DRV            7,088  11-01-93 11:11a COMPRESSED IN R180D1.Z OEMSETUP.INF            252  09-08-95  1:31a COMPRESSED IN R180D1.Z VSNDSYS.386          75,357  02-13-97  7:59p COMPRESSED IN R180D1.Z CS32BA11.INI          5,138  02-12-96  1:31a COMPRESSED IN R180D1.Z CSWAVE.DLL           15,408  12-13-95  1:31a COMPRESSED IN R180D1.Z CS32BAIP.EXE         76,336  02-12-97  6:45p COMPRESSED IN R180D1.Z CSACBAT1.EXE         73,904  01-09-96  2:11a COMPRESSED IN R180D1.Z
+
+Disk 2
+DISK2.ID                 51  09-08-95  1:30a
+R180D2.Z          1,068,549  02-14-97  3:24p
+DIALOG.FON           48,624  10-18-93 12:00a COMPRESSED IN R180D2.Z
+CS32CFG.EXE         689,967  02-12-97  7:45p COMPRESSED IN R180D2.Z CWDIAG.EXE          135,816  02-13-97  3:33p COMPRESSED IN R180D2.Z DISK2.ID                 51  09-08-95  1:30a COMPRESSED IN R180D2.Z CS32HMX.EXE          30,751  02-12-97  7:46p COMPRESSED IN R180D2.Z CS32INTR.EXE        166,472  02-14-97 11:10a COMPRESSED IN R180D2.Z CS32MIX.EXE         234,906  02-14-97 11:05a COMPRESSED IN R180D2.Z CS32WSS.EXE          33,791  02-12-97  6:57p COMPRESSED IN R180D2.Z
+CS4232C.EXE          94,864  02-10-97  2:49p COMPRESSED IN R180D2.Z CSACGUCD.EXE        194,214  02-12-97  7:47p COMPRESSED IN R180D2.Z SOUNDTST.WAV         36,544  09-08-95  1:30a COMPRESSED IN R180D2.Z TEST.DAT              7,826  09-08-95  1:30a COMPRESSED IN R180D2.Z MSMIXMGR.DLL         12,688  10-18-93  2:00a COMPRESSED IN R180D2.Z CSPOWER.CPL           7,216  02-12-97  6:47p COMPRESSED IN R180D2.Z THREED.VBX           64,432  07-11-95  9:50a COMPRESSED IN R180D2.Z CW3DCTRL.EXE         36,859  02-12-97  6:55p COMPRESSED IN R180D2.Z CW3DW31.EXE         129,504  02-12-97  7:21p COMPRESSED IN R180D2.Z
+
+
+File Summary:
+
+SETUP.EXE	CrystalWare Windows 3.1 Installation Program.  It will install the necessary files, install the drivers, modify CONFIG.SYS and AUTOEXEC.BAT, backup important files, and over install existing Crystal drivers.
+
+SETUP.INF	Script file used by SETUP.EXE for installations.
+
+SETUP.INS	File used by SETUP.EXE for installations.
+
+SETUP.DLL 	File used by SETUP.EXE for installations.
+
+_INST16.EX_	File used by SETUP.EXE for installations
+
+_ISDEL.EXE	File used by SETUP.EXE for installations
+
+_SETUP.DLL	File used by SETUP.EXE for installations
+
+_SETUP.LIB	File used by SETUP.EXE for installations
+
+LOGO.BMP	File used by SETUP.EXE for installations.
+
+WINCM.DLL 	File used by SETUP.EXE for installations.
+
+CSGROUP.EXE	Installation program used when over installing existing Crystal drivers.
+
+RESOURCE.DLL	File used by SETUP.EXE for installations.
+
+CWPNP.DLL	File used by SETUP.EXE for installations.  Used to detect the PnP configuration of the host machine as a PnP, Configuration Manager, or override PnP configuration.
+
+DISK1.ID	Disk 1 ID used by SETUP.EXE.
+
+R180D1.Z	Compressed archive of disk 1 that is uncompressed at installation time.
+
+BWCC.DLL	Borland Dialog DLL required by CrystalWare mixer panels.
+
+CS32BA11.DRV	Windows 3.1 wave, aux, and mixer driver.
+
+CS32BA11.INI	File used by CS32BA11.DRV to save configuration and feature information.  
+
+VSNDSYS.386	Windows 3.1 virtual device driver.
+
+CS32BAIP.EXE	Windows 3.1 Input Panel.
+
+CS32BAOP.EXE 	Windows 3.1 Mixer Panel.
+
+CS32BASP.EXE 	Windows 3.1 Splash Panel.
+
+CSACBAT1.EXE	Windows 3.1 Business Audio Transport.  A sound recorder that supports multi-instances, OLE linking and embedding, and direct to disk recording.
+
+CSACBAT1.INI	File used by CSACBAT1.EXE to save configuration and customization information.
+
+CSWAVE.DLL    	File used by CSACBAT1.EXE.
+
+MIDIMAP.CFG	MIDIMAP Configuration that contains preconfigured midimaps for the Crystal FM driver and the MPU-401 driver.
+
+MPU401.DRV	Windows 3.1 MPU-401 MIDI Driver.
+
+OEMSETUP.INF	Windows install file for CSFM and MPU-401 MIDI driver.
+
+CSFM.DRV	Crystal FM MIDI driver.
+
+CSPOWER.CPL	Crystal Power Control Panel.  This Control Panel icon provides a way to do idle time-out for machines with Advanced Power Management.  After a set amount of time, the driver will power down parts of the chip to save power.
+
+MSMIXMGR.DLL	Windows 3.1 multimedia support file that provides enhanced mixer functionality for the Crystal Windows 3.1 driver.
+
+DISK2.ID 	Disk 2 ID used by SETUP.EXE.
+
+R180D2.Z 	Compressed archive of disk 2 that is uncompressed at installation time.
+
+CS32CFG.EXE	CS4232 DOS Configuration Program.  This GUI program will allow the user to adjust the configuration settings for a CS4232 card on a non-PnP system or on a system that has PnP overridden.  It will also report back the configuration information for PnP configured systems. 
+
+CS32HMX.EXE	CS4232 DOS Hot Key Mixer TSR.  This program will load a TSR which allows the user to adjust the Wave, FM, and Master Volume for the Sound Blaster settings.  This program supports early games that do not have volume adjustment in the game.
+
+CS32INTR.EXE	CS4232/CS4236/CS4236B/CS4237B/CS4238B Integrator program.  This program will launch the following other programs: CS32MIX, CSACGUCD, and CWDIAG.  
+
+CS32MIX.EXE 	DOS mixer used to set or adjust Sound Blaster mixer settings.  It will run as a GUI application or as a command line utility.
+
+CSACGUCD.EXE	DOS CD Player utility.  The program plays audio CDs through an installed CDROM, allowing rewind, fast forward, skip, and eject functions.  Requires MSCDEX to be loaded.
+
+CWDIAG.EXE	CS4232/36/36B/37B/38B DOS Diagnostics program.  This program tests the CS4232/CS4236 card in the following areas: codec, Sound Blaster, FM, MPU-401, and joystick.
+
+DIALOG.FON	Provides the fonts for CWDIAG.EXE.
+
+SOUNDTST.WAV	CWDIAG WAV file used in codec tests.
+
+TEST.DAT	CWDIAG data file used in the Synth playback test.
+
+CS4232C.EXE   	CS4232/36/36B/37B/38B Configuration Program.  A DOS device driver used to initialize and configure the card.  It runs in CONFIG.SYS or on a command line.
+
+CS4232.INI   	Default initialization parameters for CS4232C.EXE.
+
+CS32WSS.EXE 	CS4232 WSS Initialization.  Run this program after certain Sound Blaster DOS games, to setup and initialize the WSS codec.
+
+CWAUDIO.BIN	Data file containing Microcode for the CS4232, CS4232A, CS4236, CS4236B, CS4237B and CS4238B.  It is used by CS4232C.EXE.
+
+CW3DCTRL.EXE	CS4237B/CS4238B DOS 3D command-line mixer used to enable, disable, and set mixer values for 3d audio.
+
+CW3DW31.EXE	CS4237B/CS4238B Windows 3.1 applet used to enable, disable, and set mixer values for 3d audio.  
+
+General Information:
+
+3D Audio in DOS
+Use the 3d Audio DOS mixer, CW3DCTRL, to enable 3D audio in DOS.  Type CW3DCTRL /ON to 
+enable 3d Audio.  Type CW3DCTRL /? to get a usage statement on additional CW3DCTRL commands.
+The ability to 3D enhance analog inputs is lost while recording or while the VU Meter is on.
+
+3D Audio Limitations
+The 3D audio does not currently support selecting Loop as an input with 3D enabled.  
+Selecting the input "Loop" in the Business Audio Input will automatically disable 3D.
+
+Installing from the Hard Drive:
+When installing the software from the hard drive instead of using floppies, all of the files
+from the install disks must be copied to a single directory.  SETUP can then be run from 
+there.
+
+Driver Version Checking:
+The Windows driver, VxD, and FM driver must have the same internal version number in order
+to work.  The driver has version checking code for the various pieces.
+
+New Files
+This release has two new files.  CWDIAG.EXE to replace CW32DIAG.EXE and DIALOG.FON to 
+support CWDIAG.EXE.
+
+Bug Fixes:
+
+Windows Driver:
+* Capture is not possible for any input on CS4232 
+* Master Volume doesn't adjust monitored audio.  [Broken in this version. 1.51 doesn't 
+  duplicate] 
+* Master volume has no effect on the monitor volume. [old problem that showed up] 
+* Master Mute state can get broken by toggling VU on and off. 
+* MIC is left open on Mixer Panel. 
+* Turning VU Meter on/off is causing large audio pops
+* Turning VU Meter on/off will cause audio glitches.
+* Power Bug: Line Mute State Does Not Get Restored Properly After Power Down
+ 
+FM Driver
+* No stereo separation in FM. 
+
+DOS Driver:
+* CS4232C does not do a code download on CS423xB. 
+
+Installation:
+* SETUP need to be modified to install new applications, CW3DCTRL and CW3DW31 
+* Uninstal 1.00 deletes crystal software from the locations other than the installation 
+  directory 
+
+DOS Applications
+* CWDIAG is not detecting the Joystick.
+* CS32DIAG and CS32MIX do not function on certain platforms.
+* CWDIAG will not run if a mouse driver is not loaded.
+
+Release Notes 1.80	Crystal Semiconductor Confidenti
+
+

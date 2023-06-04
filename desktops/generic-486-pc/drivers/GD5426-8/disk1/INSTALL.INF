@@ -1,0 +1,203 @@
+# INSTALL.INF information file for INSTALL.EXE Application Installer Program
+# Copyright (c) 1992 by Jeffrey M. Richter - All rights reserved.
+# Copyright (c) 1995 Cirrus Logic, Inc. - All rights reserved.
+#
+# Notice: MAXIMUM LENGTH OF FILE THAT WILL BE PARSED = 20000 BYTES
+#
+# Last Date Modified:3/5/95
+# Last Modified By:Jeff Wong
+#
+[Initialize]
+
+ApplicationName   =   GD5426/28 English Installation
+DefaultDir{D}   =   {W}vgautil
+
+DstDiskSpaceApplication  =  1299
+;                         Setres.ini
+DstDiskSpaceWindows      =  154
+;                         fonts + "drivers"
+DstDiskSpaceSystem       =  698 +  1279
+
+ShowDirectoryCreateMeter = yes
+ShowInstructions         = yes
+ShowCopyFileDescription  = yes
+
+; ReadmeFile = utils\Reados2.txt
+ReadmeFile = 
+LanguageParseReadmeFile  = no
+
+;LoadDLL  =
+LoadDLL = alpine.dll
+
+
+[Background Title]
+
+English  = CL-GD542x Drivers and Utilities for Windows
+Dutch    = CL-GD542x Stuur- en hulpprogramma's voor Windows
+French   = Gestionnaires et utilitaires CL-GD542x pour Windows
+German   = CL-GD542x-Treiber und -Dienstprogramme f¸r Windows
+Italian  = Driver e utilit‡ di CL-GD542x per Windows
+Japanese = CL-GD542x ÉhÉâÉCÉo Ç∆ÉÜÅ[ÉeÉBÉäÉeÉB\010(Windowsî≈)
+Spanish  = Controladores y utilidades CL-GD542x para Windows
+Swedish  = CL-GD542x drivrutiner och funktioner fˆr Windows
+
+
+[Instructions]
+
+English  = Notice:   Before new display drivers can be installed, the Windows environment
+English  = must be running with one of Windows original display drivers, such as VGA or Super VGA.  If
+English  = this is not true, Exit now and using Windows Setup, change to one of these drivers.
+
+Dutch    = Let op:   Als u nieuwe schermstuurprogramma's wilt installeren moet Windows
+Dutch    = gestart zijn met een van de eigen stuurprogramma's, zoals VGA of SuperVGA. Zo niet,
+Dutch    = dan stopt u nu en stelt u een van deze stuurprogramma's in met Windows Setup.
+
+French   = Attention : Pour que l'installation des nouveaux gestionnaires d'affichage soit
+French   = possible, l'environnement Windows doit Ítre configurÈ avec un des gestionnaires
+French   = d'origine, tel que VGA ou Super VGA. Si ce n'est pas le cas, vous devez quitter et
+French   = utiliser le programme d'installation de Windows pour changer les paramËtres d'Ècran.
+
+German   = Hinweis:   Bevor neue Anzeigetreiber installiert werden kˆnnen, muﬂ Windows mit einem der
+German   = urspr¸nglichen Windows-Treiber, wie z.B. VGA oder Super VGA, ausgef¸hrt werden. Ist dies nicht
+German   = der Fall, beenden Sie das Programm jetzt, und wechseln Sie mit Windows-SETUP zu einem dieser Treiber ¸ber.
+
+Italian  = Nota:   prima di poter installare nuovi driver video, l'ambiente Windows deve essere
+Italian  = eseguito con uno dei driver originali di Windows, come ad esempio VGA o Super VGA. Se cosÏ
+Italian  = non fosse, uscire e impostare uno di questi driver utilizzando il Setup di Windows.
+
+Japanese = íçà”:   ÉfÉBÉXÉvÉåÉC ÉhÉâÉCÉoÇÉCÉìÉXÉgÅ[ÉãÇ∑ÇÈëOÇÕÅAWindowsïtëÆÇÃÉhÉâÉCÉo(VGAÅASVGAÇ»Ç«)Ç
+Japanese = égópÇµÇΩä¬ã´Ç…ÇµÇƒÇ≠ÇæÇ≥Ç¢°égópÉhÉâÉCÉoÇ™àŸÇ»ÇÈèÍçáÅAWindowsÇÃÉZÉbÉgÉAÉbÉvÇé¿çsÇµÇƒÅA
+Japanese = è„ãLÇÃèåèÇ…ïœçXÇµÇƒÇ≠ÇæÇ≥Ç¢°
+
+Spanish  = Advertencia: para poder instalar los nuevos controladores de pantalla, Windows debe estar
+Spanish  = utilizando alguno de sus controladores originales, ya sea VGA o Super VGA. Si no es Èste
+Spanish  = el caso, seleccione Salir y utilice Instalar Windows para activar uno de los controladores citados.
+
+Swedish  = Obs! Innan nya drivrutiner fˆr bildsk‰rmen kan installeras mÂste Windows-miljˆn kˆras med
+Swedish  = en originaldrivrutin fˆr Windows, t ex VGA eller Super-VGA. Om sÂ inte ‰r fallet avslutar du nu
+Swedish  = och ‰ndrar till nÂgon av dessa drivrutiner med hj‰lp av Windows installationsprogram.
+
+
+[Group Title]
+# Take away ';'and replace "title x" with a short translated title.
+
+;English  = clutls0.grp, title 0
+;Dutch    = clutls1.grp, title 1
+;French   = clutls2.grp, title 2
+;German   = clutls3.grp, title 3
+;Italian  = clutls4.grp, title 4
+;Japanese = clutls5.grp, title 5
+;Spanish  = clutls6.grp, title 6
+;Swedish  = clutls7.grp, title 7
+
+
+[Disks]
+
+1 = INSTALL Disk 1 of 2
+2 = INSTALL Disk 2 of 2
+
+
+[SrcDirs]
+
+10 = 
+
+
+[DstDirs]
+
+20 = 
+
+
+[Files]
+#------------------------------------Source==================Destination=============================
+# ( File description max.50, )       Disk - Dir : Filename,  Dir : Filename  (, o|n|e  default = O)
+#----------------------------------------------------------------------------------------------------
+
+Microsoft 3D Controls,               1-10: CTL3D.DLL,     S: CTL3D.DLL,     Exists already?
+16 Color Multi-Resolution Driver,    1-10: 16_1280.DR_,   S: 16_1280.DRV,   Overwrite
+16.8M Color Accelerated Driver,      1-10: 16M_640.DR_,   S: 16M_640.DRV,   Overwrite
+256 Color Accelerated Driver,        1-10: 256_1280.DR_,  S: 256_1280.DRV,  Overwrite
+64K Color Accelerated Driver,        1-10: 64K_1024.DR_,  S: 64K_1024.DRV,   Overwrite
+Oem Windows Setup File,              1-10: OEM542X.IN_,   S: OEM542X.INF,   Overwrite
+Enhanced Mode Grabber,               1-10: AVGA.3G_,      S: AVGA.3GR,      Exists already?
+Alpine Dynamic Library,              1-10: ALPINE.DLL,    S: ALPINE.DLL,    Exists already?
+Virtual Display Driver,              1-10: VDD54XX.38_,   S: VDD54XX.386,   Overwrite
+Large System Fixed Font,             1-10: 8514FIX.FO_,   S: 8514FIX.FON,   Exists already?
+Large System OEM Font,               1-10: 8514OEM.FO_,   S: 8514OEM.FON,   Exists already?
+Large System Font,                   1-10: 8514SYS.FO_,   S: 8514SYS.FON,   Exists already?
+CGA Mode Emulation Font,             1-10: CGA40850.FO_,  S: CGA40850.FON,  Exists already?
+CGA Mode Emulation Font,             1-10: CGA40WOA.FO_,  S: CGA40WOA.FON,  Exists already?
+CGA Mode Emulation Font,             1-10: CGA80850.FO_,  S: CGA80850.FON,  Exists already?
+CGA Mode Emulation Font,             1-10: CGA80WOA.FO_,  S: CGA80WOA.FON,  Exists already?
+Courier System Font,                 1-10: COURE.FO_,     S: COURE.FON,     Exists already?
+Large Courier Font,                  1-10: COURF.FO_,     S: COURF.FON,     Exists already?
+EGA Mode Emulation Font,             1-10: EGA40850.FO_,  S: EGA40850.FON,  Exists already?
+EGA Mode Emulation Font,             1-10: EGA40WOA.FO_,  S: EGA40WOA.FON,  Exists already?
+EGA Mode Emulation Font,             1-10: EGA80850.FO_,  S: EGA80850.FON,  Exists already?
+EGA Mode Emulation Font,             1-10: EGA80WOA.FO_,  S: EGA80WOA.FON,  Exists already?
+Modern Font,                         1-10: MODERN.FO_,    S: MODERN.FON,    Exists already?
+Times Roman Font,                    1-10: ROMAN.FO_,     S: ROMAN.FON,     Exists already?
+Script Font,                         1-10: SCRIPT.FO_,    S: SCRIPT.FON,    Exists already?
+Serif System Font,                   1-10: SERIFE.FO_,    S: SERIFE.FON,    Exists already?
+Large Serif System Font,             1-10: SERIFF.FO_,    S: SERIFF.FON,    Exists already?
+Small System Font,                   1-10: SMALLE.FO_,    S: SMALLE.FON,    Exists already?
+Larger Small System Font,            1-10: SMALLF.FO_,    S: SMALLF.FON,    Exists already?
+SansSerif System Font,               1-10: SSERIFE.FO_,   S: SSERIFE.FON,   Exists already?
+Large SansSerif System Font,         1-10: SSERIFF.FO_,   S: SSERIFF.FON,   Exists already?
+Symbol System Font,                  1-10: SYMBOLE.FO_,   S: SYMBOLE.FON,   Exists already?
+Large Symbol System font,            1-10: SYMBOLF.FO_,   S: SYMBOLF.FON,   Exists already?
+System Font,                         1-10: VGA850.FO_,    S: VGA850.FON,    Exists already?
+System Font,                         1-10: VGA860.FO_,    S: VGA860.FON,    Exists already?
+System Font,                         1-10: VGA861.FO_,    S: VGA861.FON,    Exists already?
+System Font,                         1-10: VGA863.FO_,    S: VGA863.FON,    Exists already?
+System Font,                         1-10: VGA865.FO_,    S: VGA865.FON,    Exists already?
+Standard Mode Grabber,               1-10: VGACOLOR.2G_,  S: VGACOLOR.2GR,  Exists already?
+Standard System Fixed Font,          1-10: VGAFIX.FO_,    S: VGAFIX.FON,    Exists already?
+Standard System OEM Font,            1-10: VGAOEM.FO_,    S: VGAOEM.FON,    Exists already?
+Standard System Font,                1-10: VGASYS.FO_,    S: VGASYS.FON,    Exists already?
+Setres Configuration File,           2-10: SETRES.IN_,    W: SETRES.INI,    Overwrite
+386 Enhanced DVA Driver,             2-10: DVA.38_,       S: DVA.386,       Overwrite
+DCI Provider,                        2-10: DCI5426.DR_,   S: DCI5426.DRV,   Overwrite
+DCI Manager,                         2-10: DCIMAN.DL_,    S: DCIMAN.DLL,    Overwrite
+Universal Draw Handler,              2-10: UDH.DL_,       S: UDH.DLL,       Overwrite
+Setres Configuration Utility,        2-10: SETRES.EX_,   20: SETRES.EXE,    Overwrite
+Setres Help File,                    2-10: SETRES.HL_,   20: SETRES.HLP,    Overwrite
+Setres Japanese Help File,           2-10: SETRESJP.HL_, 20: SETRESJP.HLP,  Overwrite
+Clmode Monitor/Resolution Utility,   2-10: CLMODE.EX_,   20: CLMODE.EXE,    Overwrite
+CLMode Help in German,               2-10: CLMODE.DE_,   20: CLMODE.DE,     Overwrite
+CLMode Help in English,              2-10: CLMODE.EN_,   20: CLMODE.EN,     Overwrite
+CLMode Help in Spanish,              2-10: CLMODE.ES_,   20: CLMODE.ES,     Overwrite
+CLMode Help in French,               2-10: CLMODE.FR_,   20: CLMODE.FR,     Overwrite
+CLMode Help in Italian,              2-10: CLMODE.IT_,   20: CLMODE.IT,     Overwrite
+CLMode Help in Dutch,                2-10: CLMODE.NL_,   20: CLMODE.NL,     Overwrite
+CLMode Help in Swedish,              2-10: CLMODE.SV_,   20: CLMODE.SV,     Overwrite
+CLMode Monitor Centering Utility TSR,2-10: CENTER.CO_,   20: CENTER.COM,    Overwrite
+CLMode Monitor TIMINGS.DAT,          2-10: TIMINGS.DA_,  20: TIMINGS.DAT,   Overwrite
+Power Management Help File,          2-10: PMSAVER.HL_,   W: PMSAVER.HLP,   Overwrite
+Power Management Screen Saver,       2-10: PMSAVER.SC_,   W: PMSAVER.SCR,   Overwrite
+Power Management TSR,                2-10: PM.EX_,        W: PM.EXE,        Overwrite
+;Additional Release Information,     2-10: README.TXT,   20: README.TXT,    Overwrite
+ID CHIP UTILITY,                     2-10: IDCHIP.EXE,   20: IDCHIP.EXE,    Overwrite
+
+[PM Info]
+
+DefaultPMGroup  =  VGAUtil.GRP  ,   VGA Utilities
+DeleteOldPMGroup = yes
+
+#----------------------------------------------------------------------------------------------------
+# (y|n,)   Dir: Filename (,Description)(,Icon #)(,m|p)(,Accelerator)
+#----------------------------------------------------------------------------------------------------
+
+Yes, 20: SETRES.EXE, SETRES Utility
+No, 20: READOS2.TXT, Release Information, 23, p
+
+#FOR MULTIDISK INSTALLATION COPY INI SECTION BELOW AND PLACE IN THE LAST DISK 
+[INI Info]
+#----------------------------------------------------------------------------------------------------
+# Dir: Filename, Section, Entry, Value ( or default directory {d})
+#----------------------------------------------------------------------------------------------------
+
+W:  SYSTEM.INI, Drivers, VIDS.DRAW, udh.dll
+W:  SYSTEM.INI, Drivers, DCI, DCI5426
+
+
+;[End] optional

@@ -1,0 +1,43 @@
+
+P o q e t   P l u s   E x p a n d e d   M e m o r y                   
+M a n a g e r   U s e r ' s   G u i d e 
+
+Revision 3.052-a
+July 6, 1994
+
+This document describes the Poqet Plus Expanded Memxory Manager (PQEMM)
+version 1.04 that is part of release 3.052 of the Plus Series System Software.
+
+In usage syntax descriptions, optional arguments for the utilities are
+enclosed in brackets ("[" and "]"). 
+
+The Poqet Plus Expanded Memory Manager (PQEMM) provides expanded memory
+support compatible with the Lotus/Intel/Microsoft (LIM) 4.0 Expanded Memory
+Specification, with some limitations.  These limitations are explained fully
+in Chapter 2 of the Poqet Plus Series Technical Reference.  PQEMM is loaded
+as a device driver in CONFIG.SYS. 
+
+Usage:         DEVICE=[path]PQEMM.SYS [/n:size]
+
+Parameters:    path:   The DOS pathname that specifies RAMDISK.SYS is 
+                       located.  This is usually "D:\".
+
+               size:   The size, in kilobytes, of the amount of memory 
+                       that PQEMM is to manage.  This amount of expanded 
+                       memory is automatically rounded up to the next 16K 
+                       page.  So, for instance, if you issue the command 
+                            DEVICE=D:\PQEMM.SYS /n:500
+                       PQEMM will allocate and manage 512K of expanded memory.
+ 
+                       If the size parameter is omitted, PQEMM will allocate 
+                       all available RAM for expanded memory.
+
+Notes:         The maximum amount of memory available to PQEMM is 1344 KB, 
+               minus any RAM used by RAMDISK.
+         
+               PQEMM must be loaded after RAMDISK.  RAMDISK and PQEMM share 
+               memory, so PQEMM can only manage memory left over by RAMDISK.
+
+Example:       To create 1 MB (1024K) of expanded memory managed by PQEMM, 
+               place the following command line in CONFIG.SYS:
+                    DEVICE=D:\PQEMM.SYS /n:1024

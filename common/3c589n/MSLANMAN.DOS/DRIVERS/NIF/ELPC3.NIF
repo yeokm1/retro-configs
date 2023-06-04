@@ -1,0 +1,10 @@
+Model = 3Com 3C589 EtherLink III PC Card v1.8 - Card Services
+Path = ETHERNET\ELPC3
+DeviceDriver = ELPC3.DOS
+DeviceName = ETHERLINKPC
+Type = NDIS
+        
+        
+        
+        
+        

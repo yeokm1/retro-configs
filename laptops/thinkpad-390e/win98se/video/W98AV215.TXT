@@ -1,0 +1,51 @@
+RELEASE NOTES FOR WIN9x DRIVER VERSION 2.15-T.00 
+------------------------------------------------
+
+RELEASE DATE:		6/05/2K
+DRIVER VERSION:		2.15.00T
+OPERATION SYSTEM:	WIN95/98
+PRODUCT:		NM2200
+
+DRIVER RELEASE CHECK LIST:
+
+- Verify Version Number: YES
+- Verify Installation  : YES
+- Verify DX Caps       : YES
+- WinBench 99 Performance: 6/05/2k
+- DVD PERFORMANCE      :  6/08/2k
+- RegressionTest       :  6/12/2K
+- WHQL TEST            :  NOT WHQL CANDIDATE 
+
+DISPLAY DRIVER - NMGC5.DRV - MKS Version 2.266
+----------------------------------------------
+Fixes:
+------
+- 
+   DDRAW DRIVER - NMGCDD5.DLL - MKS Version 5.136(DX7 Compatible)
+----------------------------------------------
+Fixes:
+------
+-  
+
+
+VDD - NMGC5VDD.VXD - MKS Version 4.78
+------------------------------------- 
+-  No changes.
+
+VDD2 - NMGC5VD2.VXD - MKS Version 4.10
+-------------------------------------- 
+-  No changes.
+
+VPM DRIVER -  MKS Version 1.18
+NMGC5_16.DLL - NMGC5_32.DLL - NMGC5VPM.DRV 
+--------------------------------------------
+-  No changes.
+
+PROPERTY SHEET - NEOMAGIC.DLL - MKS Version 1.44
+------------------------------------------------
+- 752: :Translation error in Finnish at NeoMagic display properties
+  
+  406: Strange Japanese message when enable dual display.
+
+  NON ISSUE:
+---------

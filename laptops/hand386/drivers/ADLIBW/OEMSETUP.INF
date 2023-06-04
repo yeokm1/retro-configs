@@ -1,0 +1,5 @@
+[disks]
+S = .,"AdLib Driver Disk"
+
+[Installable.Drivers]
+adlibwv = S:adlibwv.drv,"wave","AdLib wave driver","S:VADLIBWD.386",

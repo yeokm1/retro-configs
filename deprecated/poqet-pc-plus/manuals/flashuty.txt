@@ -1,0 +1,247 @@
+
+P o q e t   F l a s h   U t i l i t y                                  
+U s e r ' s   G u i d e 
+
+Revision 3.052-a
+July 6, 1994
+
+This document describes the Poqet Flash Utility (FLASHUTY), version 1.05
+that is part of release 3.052 of the Plus Series System Software.
+
+In usage syntax descriptions, optional arguments for the utilities are
+enclosed in brackets ("[" and "]"). 
+
+The Poqet Flash Utility (FLASHUTY) can be used to read, write, and erase the
+Flash ROM which holds the Plus Series BIOS as well as the contents of drive
+D:.  The Flash Utility can also be used to convert DOS file structures into
+image files that can be programmed onto the Flash disk (drive D:) inside the
+Plus Series products. 
+
+Because the Flash Utility can overwrite the BIOS of the Poqet Plus Series
+products, extreme care should be taken when using this utility.  If used
+improperly, the Flash Utility will destroy the BIOS in the product.  Because
+of this danger, this utility should not be generally distributed outside of
+Fujitsu Personal Systems and well-qualified VARs. 
+
+The general command line syntax for the Poqet Flash Utility is:
+     Display Flash ROM:    FLASHUTY /Dstart_addr[-end_addr]
+     Erase Flash ROM:      FLASHUTY /Estart_block[-end_block]
+     Write Flash ROM:      FLASHUTY /Wstart_block filename
+     Create File Image:    FLASHUTY /M[:size] pathname imagefile
+
+Reading Flash ROM
+-----------------
+When used with the "/D" option, the Flash Utility will display the contents
+of the specified address range on the screen. 
+
+Usage:         FLASHUTY /Dstart_addr[-end_addr]
+
+Parameters:    start_addr: The address at which the Flash Utility should start 
+               reading the Flash ROM.
+
+               end_addr:   The address at which the Flash Utility should stop 
+               reading the Flash ROM.
+
+Notes:         After displaying a block of Flash ROM, the Flash Utility will 
+               pause.  Pressing the ESC key will exit the Flash Utility, 
+               while pressing any other key will display the next block of 
+               Flash ROM.
+
+               The internal Flash drive (drive D:) of the Plus Series product 
+               occupies addresses 00000h - DFFFFh.
+
+               The BIOS of the Plus Series product occupies addresses 
+               E0000h - FFFFFh
+
+Example:       To display the contents of the internal Flash drive, issue the 
+               following command at the DOS prompt:
+                    FLASHUTY /d00000
+
+Erasing Flash ROM
+-----------------
+When used with the "/e" option, the Flash Utility will erase a section of the
+Flash ROM.
+
+Usage:         FLASHUTY /Estart_block[-end_block]
+
+Parameters:    start_block: The block address at which the Flash Utility 
+               should start erasing the Flash ROM.
+
+               end_block:   The block address at which the Flash Utility 
+               should stop erasing the Flash ROM.
+
+Notes:        A block address is a single digit that specifies a 64 KB block 
+              of Flash ROM to operate on.  Specifying block 0 will erase bytes 
+              00000h - 0FFFFh, specifying block 1 will erase bytes 10000h - 
+              1FFFFh, and so on, up to block F, which will erase bytes 
+              F0000h - FFFFFh.
+
+              The BIOS occupies blocks E and F.  The internal Flash drive (D:) 
+              occupies blocks 0 - D.
+
+              When erasing the Flash ROM, power management must be disabled, 
+              and external power must be applied to the unit.
+
+Example:      To erase the contents of the internal Flash drive, issue the 
+              following command from the DOS prompt:
+                   FLASHUTY /e0-D
+
+Programming Flash ROM
+---------------------
+When used with the "/W" option, the Flash Utility will read a binary file and
+program the contents of that file into the Flash ROM.  Use the "/W" parameter
+to update the BIOS of a Poqet Plus Series product, or to create or change the
+contents of the internal Flash drive (drive D:).
+
+Usage:         FLASHUTY /Wstart_block filename
+
+Parameters:    start_block: The block address at which the Flash Utility 
+               should start writing the Flash ROM.
+
+               filename:    The name of the image file with which to program 
+               the Flash ROM.
+
+Notes:         A block address is a single digit that specifies a 64 KB 
+               block of Flash ROM to operate on.  Specifying block 0 will 
+               program bytes 00000h - 0FFFFh, specifying block 1 will program 
+               bytes 10000h - 1FFFFh, and so on, up to block F, which will 
+               program bytes F0000h - FFFFFh.
+
+               The BIOS is located in blocks E and F.  The internal Flash 
+               drive (D:) is located in blocks 0 - D.
+
+               When writing the Flash ROM, power management must be disabled, 
+               and external power must be applied to the unit.
+
+               The Flash ROM does not have to be erased before being 
+               programmed with the "/W" option.
+
+               For detailed instructions on programming the internal Flash 
+               drive and the BIOS of the Plus Series products, see below.
+
+Example:       To write data from a file named BIOS.BIN into blocks E and F, 
+               which contain the Plus Series BIOS, issue the following command 
+               from the DOS prompt:
+                    FLASHUTY /we bios.bin
+
+               After executing this command, you should perform a master reset 
+               of the Plus Series product by pushing the Reset key while 
+               holding down the On/Off key (the green ON key on the Poqet PC 
+               Plus, or the green key on the Poqet Pad Plus).
+
+Creating Disk Images
+--------------------
+When used with the "/M" option, the Flash Utility will create an image of all
+of the files contained in a directory and its subdirectories.  This image
+file can then be used with the Flash Utility "/W" parameter to program the
+Plus Series Flash drive (drive D:).
+
+Usage:         FLASHUTY /m[:size] pathname imagefile
+
+Parameters:    size:      The size, in kilobytes, of the disk image to create. 
+                          Valid parameters are 512, 576, 640, 704, 768, 832, 
+                          and 896.  If omitted, the size will default to 
+                          512 KB. 
+
+               pathname:  The top directory of the directory structure which 
+                          is to be assembled into a disk image.
+
+               imagefile: The file into which the disk image is to be placed.
+
+Notes:         When creating disk images, the Flash Utility can be run on any 
+               standard MS-DOS computer.
+
+               This is the first step in creating the internal Flash drive on 
+               the Poqet Plus Series products.  For detailed instructions on 
+               this procedure, see below.
+
+Example:       Assume we have the following directory structure:
+
+                    C:\ 
+                    |
+                    +-- DOS
+                    |
+                    +-- APPS
+                    |   +-- WP
+                    |   |
+                    |   +-- IS
+                    |   |
+                    |   +-- AWORKS
+                    .
+                    .
+                 
+               To create a 640 KB image of the directory structure starting 
+               with the APPS subdirectory, and then place that image in 
+               A:\DRIVE.IMG, issue the following command from the DOS prompt:
+                    FLASHUTY /m:640 c:\apps a:\drive.img
+
+               This command will create the image file DRIVE.IMG and place 
+               the APPS, WP, IS, and AWORKS directories and their files in 
+               the image file.  When the image file is programmed into the 
+               Flash (using the "/W" option), drive D: will have the same 
+               directory structure as the APPS subdirectory -- the root 
+               directory of drive D: will have three subdirectories: 
+               WP, IS, and AWORKS.
+
+Programming the Flash Drive of a Plus Series Product
+----------------------------------------------------
+As an example, assume that the files contained in "C:\APPS" and its
+subdirectories are to be programmed into the Flash drive (drive D:) of a
+PoqetPad, and that those files occupy 754,234 bytes of disk space.  To
+program the Flash drive of a Plus Series product, perform the following steps.
+
+1)  Determine the amount of space required to hold all of the files that need 
+    to be placed on the Flash drive, and then decide which parameter to use 
+    with the "/M" option of the Flash Utility.
+
+    EXAMPLE: Our files occupy 754,234 bytes, so the parameter to the "/M" 
+    option would be 768.
+
+2)  Make an image of the directory structure by using the "FLASHUTY /M" 
+    command.  This step will be done on a desktop computer, with the image 
+    file being transferred to the PoqetPad Plus or Poqet PC Plus via a 
+    PCMCIA card inserted in a ThinCardDRIVE.
+
+    EXAMPLE: Assuming that the ThinCardDRIVE is drive D: on our desktop 
+    computer, we issue the command:
+         FLASHUTY /m:768 c:\apps d:\disk.img
+
+3)  Transfer the image file to a Poqet Plus Series product.
+
+4)  Disable power management on the Poqet Plus Series product and supply 
+    external power to it.
+
+5)  Use the Flash Utility to program the image onto the Flash drive of the 
+    Plus Series product.
+
+    EXAMPLE: Assuming that the image files is on a RAM card in drive A: of 
+    the Poqet Plus Series product, we issue the command
+         FLASHUTY /w0 a:\disk.img
+
+Updating the BIOS on a Plus Series Product
+------------------------------------------
+To update the BIOS on a Plus Series Product, perform the following steps. 
+Exercise extreme caution when performing this procedure.  If a mistake is
+made, the BIOS may be erased, rendering the computer unusable. 
+
+1)  Obtain a file containing the version of the BIOS that you want to program 
+    into the Plus Series product.
+
+2)  Disable power management on the Poqet Plus Series product and supply 
+    external power to it.
+
+3)  Use the Flash Utility to program the BIOS into the Plus Series product 
+    with the following command (assuming that the BIOS is in a file named 
+    BIOS.BIN in drive A:):
+         FLASHUTY /wE a:\bios.bin
+
+4)  Reset the computer to factory defaults by pressing the Reset key while 
+    holding the On/Off key (the green button on a PoqetPad Plus, or the 
+    green ON key on a Poqet PC Plus).  Continue to press the On/Off key 
+    until the BIOS banner is displayed on the screen.
+
+    WARNING: To avoid disastrous consequences, make sure that the first 
+    parameter to the Flash Utility command is "/wE".  Also make sure that 
+    the file specified in the Flash Utility command has a valid BIOS image 
+    in it.  Failure to do either one of these could result in the destruction 
+    of the computer's BIOS. 

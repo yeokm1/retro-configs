@@ -1,0 +1,133 @@
+***************************************************************************
+					INTRO.TXT
+***************************************************************************
+This file presents general information about the LSI Logic SDMS software 
+product. SDMS is a trademark of LSI Logic Corporation.
+
+This file is divided into the following sections:
+
+General Description
+Overview
+	SCSI BIOS
+	SCSI Device Drivers
+Before You Begin
+	Basic Rules For SCSI Host Adapter and Device Installation
+**************************************************************************
+
+
+*************************** General Description **************************
+
+The LSI Logic Storage Device Management System (SDMS) is a complete software 
+package that solves the increasingly complex problem of managing system
+I/O. It seamlessly addresses hardware and software interfaces by supporting
+LSI Logic's family of SCSI processors and controllers, and a wide range of 
+SCSI peripheral devices, while offering interoperability across application 
+programs, operating systems, and host platforms. SDMS consists of a resident
+SCSI BIOS that manages all SCSI controller or processor specific functions,
+and a series of SCSI device drivers that provide operating system and 
+peripheral specific support.
+
+SDMS provides a standard method to interface SCSI I/O subsystems with
+devices, operating systems, and application software. It also enhances
+system capabilities already provided by SCSI controllers and processors
+by facilitating multi-threaded I/O support, system-wide SCSI device access,
+and creation of new applications.
+
+
+******************************** Overview ********************************
+
+An LSI Logic SCSI controller or processor can control peripherals such as 
+hard disk drives, CD-ROM drives, tape drives, and removable media. SCSI 
+peripherals are intelligent devices that do not need the constant attention 
+required by non-intelligent devices. Up to 15 SCSI peripheral devices can 
+be connected (by using the SCSI bus) to a SCSI host bus adapter card on 
+which the SCSI controller or processor resides.
+
+A SCSI host bus adapter can also function as a secondary adapter in a system 
+which already has a primary hard drive controller card (IDE, ESDI, ST506). 
+Only SCSI host bus adapters will do this, expanding the possibilities for 
+system configuration.
+
+* SCSI BIOS *
+
+A SCSI BIOS is the bootable ROM code that manages SCSI hardware resources. It 
+is specific to an LSI Logic family of SCSI controllers or processors. An SDMS 
+SCSI BIOS integrates with a standard system BIOS, extending the standard disk 
+service routine provided through INT13h. It is also responsible for processing
+and executing SCSI requests communicated from a SCSI device driver or 
+application.
+
+An important feature of the SCSI BIOS is that it is completely operating 
+system independent. All ROM-based SCSI BIOS support booting from a SCSI hard 
+disk and can be ported to a variety of hardware platforms. They also support 
+16-bit and 32-bit operating systems running under real or protected addressing 
+modes.
+
+The SDMS SCSI BIOS provides a hardware independent interface which isolates the
+operating system drivers and SCSI application programs from the underlying 
+hardware. This enables a single driver to work with any host adapter or SCSI 
+controller which has an SDMS SCSI BIOS.
+
+During its boot time initialization, the SCSI BIOS determines if another hard 
+disk is already installed. If there is, the SCSI BIOS will map any SCSI drives 
+it finds behind the drive already installed. Otherwise, the SCSI BIOS will 
+install drives starting with the system boot drive. In this case, the system 
+will boot from a drive controlled by the SCSI BIOS. For more information on 
+SCSI BIOS control of hard disk drives, refer to the PCI Storage Device
+Management System SDMS 4.0 User's Guide. 
+
+* SCSI Device Drivers *
+
+The SCSI device drivers translate an operating system I/O request into a data 
+structure, and transport the structure to the SCSI BIOS. An LSI Logic SCSI
+device driver is operating system specific, but completely hardware
+independent. The hardware specifics are addressed by the SCSI BIOS.
+
+Although a driverless solution exists for some operating systems, and 
+provides adequate support for many applications, loading a driver (or drivers 
+in some cases) will provide additional features. Connecting peripherals other 
+than hard disk drives, for example, requires loading the appropriate 
+driver(s). 
+
+
+**************************** Before You Begin ********************************
+
+SDMS 4.0 software requires an IBM PC/AT or compatible computer with an 80386
+or higher microprocessor. An understanding of basic operating system commands
+is assumed. For background information on this subject, refer to the 
+SCSI-2 specification or the book SCSI: "Understanding the Small Computer 
+System Interface". Sources for these publications are listed in the preface of 
+the PCI Storage Device Management System SDMS 4.0 User's Guide. 
+
+Before using the SDMS 4.0 software, the LSI Logic SCSI controller should be 
+configured into your system, taking into account the configuration of other 
+host bus adapters and system resources (see Basic Rules... listed below).
+
+LSI Logic recommends that all data be backed up before making any changes 
+or installing any software, including LSI Logic SCSI controllers and software.
+Failure to adhere to this accepted computer practice may lead to loss of data.
+
+*  *  * Basic Rules For SCSI Host Bus Adapter and Device Installation *  *  *
+
+Both ends of the SCSI bus must be terminated. Refer to the hardware manuals 
+for the devices and the host adapter to determine what the terminators 
+are, and where they are located.
+
+Each SCSI device must be configured with a different ID number. Refer to the 
+hardware manuals for the devices and the host adapter to locate where the 
+jumpers or dip switches are for setting ID numbers. Usually the host   
+adapter is ID 7. The devices are then set at IDs 0 through 6 (plus 8 through 
+15 for wide SCSI). The bootable hard drive must have the lowest numerical ID. 
+
+The red or blue line on a standard SCSI cable (or the black line on one end 
+of a multicolored SCSI cable) designates pin one on the cable connector and 
+must connect to pin one on the device or host bus adapter connector. Refer to 
+the hardware manuals for the devices and the controller to locate pin one of 
+the connector.
+
+If the system already has an internal bootable hard drive (IDE, ESDI, ST506), 
+the drivers for the SCSI device(s) must reside on the internal bootable hard 
+drive.
+
+
+

@@ -1,0 +1,19 @@
+END-USER SOFTWARE LICENSE AGREEMENT
+
+Xircom grants you a non-exclusive license to use the copies of software programs supplied with this product on the following terms:
+
+YOU MAY:
+a - Use the software program on any computer or network but only in conjunction with any Xircom hardware product;
+b - Permit any other individuals to use the software program either directly or on a computer network, but only if there is no more than one user for each Xircom hardware product in use in conjunction with such use;
+c - Make only those number of backup and archival copies of the software program in machine readable form as are essential to backup use of the software program, provided that you reproduce all proprietary notices on each copy.
+
+YOU MAY NOT:
+a - Modify, translate, reverse engineer, decompile, disassemble, create derivative works based on, or copy (except for archival purposes) the program or the accompanying documentation;
+b - Rent, transfer, sublicense or grant any rights in the program or accompanying documentation (including any time-sharing arrangement) in any form to any other person without the prior written consent of Xircom;
+c - Remove any proprietary notices, labels, or marks on the program and accompanying documentation.
+
+Failure to comply with any of the above restrictions will terminate this license. This is not a sale. Title and copyrights to the program and accompanying documentation and any copies remain with Xircom, except that title to software programs shipped by Xircom through an agreement with another manufacturer is owned and retained by the original manufacturer, and no title to the intellectual property contained in such programs is transferred hereunder. The human readable code of the software program (source code), including the source code of programs shipped by Xircom through an agreement with another manufacturer, is not sublicensed hereunder.
+
+U.S. GOVERNMENT RESTRICTED RIGHTS
+The SOFTWARE and documentation are provided with RESTRICTED RIGHTS. Use, duplication, or disclosure by the Government is subject to restrictions as set forth in subparagraph (c)(1)(ii) of the Rights in Technical Data and Computer Software clause at DFARS 252.227-7013, or subparagraphs (c)(1) and (c)(2) of the Commercial Computer Software-Restricted Rights at 48 CFR52.227-19, as applicable. Contractor/manufacturer is Xircom, Inc., 2300 Corporate Center Drive, Thousand Oaks, CA 91320-1420.
+This Agreement is governed by the laws of the State of California.

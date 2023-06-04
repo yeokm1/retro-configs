@@ -1,0 +1,20 @@
+SOFTWARE-LIZENZVERTRAG FÜR ENDBENUTZER
+
+Xircom gewährt Ihnen unter folgenden Bedingungen eine einfache Lizenz für die Benutzung der Kopien der Softwareprogramme, die mit diesem Produkt geliefert wurden:
+
+ES IST IHNEN GESTATTET:
+a - das Softwareprogramm auf einem beliebigen Computer bzw. in einem beliebigen Netzwerk zu benutzen, jedoch nur in Verbindung mit einem Hardwareprodukt von Xircom;
+b - anderen Personen die Benutzung des Softwareprogramms entweder direkt oder in einem Computernetzwerk zu erlauben, jedoch nur, wenn es nicht mehr als einen Benutzer für jedes Hardwareprodukt von Xircom, das im Zusammenhang mit einer solchen Benutzung eingesetzt wurde, gibt;
+c - nur die Anzahl von Sicherungs- und Archivierungskopien des Softwareprogramms in maschinenlesbarer Form anzufertigen, die zu Sicherungszwecken für das Softwareprogramm benötigt werden, jedoch vorausgesetzt, daß Sie auf jeder Kopie alle eigentumsrechtlichen Hinweise reproduzieren.
+
+ES IST IHNEN UNTERSAGT:
+a - das Programm oder die Begleitdokumentation zu modifizieren, zu übersetzen, eine Produktfunktionsuntersuchung vorzunehmen, zu dekompilieren, zu demontieren, hierauf basierende, abgeleitete Werke zu erstellen oder diese (außer zu Archivierungszwecken)zu kopieren;
+b - jegliche Rechte am Programm oder der Begleitdokumentation (einschließlich etwaiger Timesharing-Vereinbarungen) ohne die vorherige schriftliche Genehmigung von Xircom in jeglicher Form an jegliche Personen zu vermieten, zu übertragen oder zu gewähren bzw. ihnen eine Unterlizenz hierfür zu erteilen;
+c - jegliche eigentumsrechtlichen Hinweise, Etiketten oder Kennzeichen vom Programm und der Begleitdokumentation zu entfernen.
+
+Diese Lizenz wird bei Nichteinhaltung einer der oben aufgeführten Einschränkungen gekündigt. Diese Lizenz stellt keinen Verkauf dar. Xircom behält das Eigentums- und Urheberrecht für das Programm und die Begleitdokumentation und etwaige Kopien mit Ausnahme dessen, daß der Originalhersteller das Eigentumsrecht für Softwareprogramme besitzt und behält, die im Rahmen einer Vereinbarung mit einem anderen Hersteller von Xircom geliefert werden, und mit dieser Lizenz wird kein Eigentumsrecht für das geistige Eigentum übertragen, das in diesen Programmen enthalten ist. 
+Für den visuell lesbaren Code des Softwareprogramms (den Quellcode), einschließlich des Quellcodes von Programmen, die im Rahmen einer Vereinbarung mit einem anderen Hersteller von Xircom geliefert werden, wird hiermit keine Unterlizenz gewährt.
+
+BESCHRÄNKTE RECHTE FÜR ANGEHÖRIGE DER US-REGIERUNG
+Die SOFTWARE und Dokumentation werden mit BESCHRÄNKTEN RECHTEN geliefert. Die Benutzung, Vervielfältigung oder Veröffentlichung durch die Regierung unterliegt wie zutreffend den in Unterabsatz (c)(1)(ii) der Klausel „Rights in Technical Data and Computer Software" (Rechte an technischen Daten und Computersoftware) in DFARS 252.227-7013 bzw. den Unterabsätzen (c)(1) und (c)(2) der „Commercial Computer Software-Restricted Rights" (Beschränkte Rechte für kommerzielle Computersoftware) in 48 CFR52.227-19 aufgeführten Beschränkungen. Der Unternehmer/Hersteller ist Xircom, Inc., 2300 Corporate Center Drive, Thousand Oaks, CA 91320-1420.
+Dieser Vertrag unterliegt den Gesetzen des Bundesstaates Kalifornien.

@@ -1,0 +1,300 @@
+unit Wodmessa;
+
+interface
+uses
+  SysUtils, WinTypes, WinProcs, Messages, Classes, Graphics, Controls,
+  wwrite,wpause,wopen,wreset,wsetvol,{pci,}Forms, Dialogs, StdCtrls,mmddk,unit2;
+
+
+
+
+function MyWodMessage(wDeviceID:word;wMessage:word;DWUSER:longint;lparam1,lparam2:longint):longint;export;
+
+implementation
+
+    function Mmsystem_DriverCallback(dwCallback:longint;uflags:word;
+     hdevice:word;uMessage:word;dwUser,lparam1,lparam2:longint):boolean; external 'mmsystem' name 'DriverCallback';
+
+
+function myDAC1GetDevcaps(wDeviceID:word;wMessage:word;DWUSER:longint;lparam1,lparam2:longint):longint;
+var ps:pchar;
+
+begin
+if(lparam1>0)then begin
+    pWAVEOUTCAPS(lparam1)^.wMid := MM_MICROSOFT;
+    pWAVEOUTCAPS(lparam1)^.wPid := MM_SNDBLST_WAVEOUT;
+    pWAVEOUTCAPS(lparam1)^.vDriverVersion := 2345;
+    pWAVEOUTCAPS(lparam1)^.dwFormats :=$FFFF;{A8800;{96,88,48,44,22,11}
+    pWAVEOUTCAPS(lparam1)^.wChannels := 2;
+    pWAVEOUTCAPS(lparam1)^.dwSupport := WAVECAPS_VOLUME or WAVECAPS_LRVOLUME or WAVECAPS_PLAYBACKRATE;
+    pWAVEOUTCAPS(lparam1)^.szPname[0]:='W';
+    pWAVEOUTCAPS(lparam1)^.szPname[1]:='a';
+    pWAVEOUTCAPS(lparam1)^.szPname[2]:='t';
+    pWAVEOUTCAPS(lparam1)^.szPname[3]:='l';
+    pWAVEOUTCAPS(lparam1)^.szPname[4]:='e';
+    pWAVEOUTCAPS(lparam1)^.szPname[5]:='r';
+    pWAVEOUTCAPS(lparam1)^.szPname[6]:=' ';
+    pWAVEOUTCAPS(lparam1)^.szPname[7]:='2';
+    pWAVEOUTCAPS(lparam1)^.szPname[8]:='0';
+    pWAVEOUTCAPS(lparam1)^.szPname[9]:='1';
+    pWAVEOUTCAPS(lparam1)^.szPname[10]:='6';
+    pWAVEOUTCAPS(lparam1)^.szPname[11]:=' ';
+    pWAVEOUTCAPS(lparam1)^.szPname[12]:=char(0);
+    move(drivername[1],pWAVEOUTCAPS(lparam1)^.szPname,ord(drivername[0]));
+    fillchar(pWAVEOUTCAPS(lparam1)^.szPname[ord(drivername[0])-1],32-(ord(drivername[0])),char(0));
+
+end;
+result:=MMSYSERR_NOERROR;{0peration is successful.}
+end;
+
+
+function MyWodMessage(wDeviceID:word;wMessage:word;DWUSER:longint;lparam1,lparam2:longint):longint;
+var lpFMT:pWAVEFORMAT;
+var lpwod:pWAVEOPENDESC;
+var lpwavehdr:pwavehdr;
+var tp:pointer;
+var lpmmt:tmmtime;
+{var pClient : PWAVEALLOC;}
+var ptempClient:PWAVEALLOC;{pointer to client information structure }
+var temp:longint;
+var str:string;
+var ld:byte;
+var wrd:word;
+{var ofs:shortint;}
+
+begin
+result:=MMSYSERR_NOTSUPPORTED;{Default Result}
+
+{we only support one device!}
+if not(wDeviceid=0)then begin
+{showmessage('Supports only one device!');}
+result:=MMSYSERR_BADDEVICEID;
+end;
+
+{have we started yet?}
+if not(wodEnabled)then begin
+
+if(wMessage=WODM_INIT)then begin
+{Initialize Wave Driver}
+wodEnabled:=true;
+result:=MMSYSERR_NOERROR;
+end else begin
+result:=MMSYSERR_NOTENABLED;
+showmessage('MMSYSERR_NOTENABLED');
+end;
+
+end else
+
+if(wMessage=WODM_GETNUMDEVS)then begin
+{Number of devices supported}
+result:=1;{one wave driver}
+end else
+if(wMessage=WODM_GETDEVCAPS)then begin
+{Get Device Capabilities}
+result:=myDAC1GetDevcaps(wDeviceID,wMessage,dwuser,lparam1,lparam2);
+end else
+if(wMessage=WODM_GETVOLUME)then begin
+{Get Volume}
+result:=myDAC1GetVol(wDeviceID,wMessage,dwuser,lparam1,lparam2);
+end else
+if(wMessage=WODM_SETVOLUME)then begin
+{Set volume}
+result:=myDAC1SetVol(wDeviceID,wMessage,dwuser,lparam1,lparam2);
+end else
+{
+not supported by this driver
+if(wMessage=WODM_PREPARE)then begin
+result:=MMSYSERR_NOTSUPPORTED;
+end else
+if(wMessage=WODM_UNPREPARE)then begin
+result:=MMSYSERR_NOTSUPPORTED;
+end else
+}
+if(wMessage=WODM_PAUSE)then begin
+result:=0;
+result:=myDAC1pause(wDeviceID,wMessage,dwuser,lparam1,lparam2);
+end else
+if(wMessage=WODM_RESTART)then begin
+{restarts playing of queue}
+{result:=0;}
+{showmessage('erm...');}
+result:=myDAC1restart(wDeviceID,wMessage,dwuser,lparam1,lparam2);
+{showmessage('well...!');}
+
+
+end else
+
+if(wMessage=WODM_BREAKLOOP)then begin
+{if you are playing}{dwflags=whdr_endloop}
+{DAC1looping(false);}
+if (opened>0)then begin
+if not(written.count=0)then begin
+pwavehdr(written.items[0])^.dwloops:=0;
+end;
+end;
+result:=MMSYSERR_NOERROR;{0peration is successful.}
+end else
+                                   
+if(wMessage=WODM_GETPOS)then begin
+{returns total bytes played since last reset}
+
+if (opened<1)then begin temp:=0; end else begin
+
+temp:=myuserinfo.lbytecount;
+if(temp>1)then begin
+
+{Since hardware is doing most of the work...
+if(mychannels=2)then  temp:=longint(temp shr 1);
+if(mybits=16)then temp:=longint(temp shr 1);
+}
+
+end;
+
+end;
+
+{who knows where we are?}
+if(pMMTIME(lparam1)^.wtype=time_Bytes)then begin
+pMMTIME(lparam1)^.cb:=temp;
+end else begin
+pMMTIME(lparam1)^.wtype:=time_samples;
+pMMTIME(lparam1)^.Sample:=temp;{adjust for sample time}
+end;
+
+{str:='Gp:'+inttohex(temp,8);
+writestr1(25,8,str);   }
+
+
+result:=MMSYSERR_NOERROR;{ok!}
+
+{result:=myDAC1GetPosition(wDeviceID,wMessage,dwuser,lparam1,lparam2);}
+end else
+
+if(wMessage=WODM_RESET)then begin
+result:=myDAC1reset(wDeviceID,wMessage,dwuser,lparam1,lparam2);
+result:=0;
+end else
+
+if(wMessage=WODM_CLOSE)then begin{close message}
+{can not close till queue clear}
+result:=0;
+result:=myDAC1close(wDeviceID,wMessage,dwuser,lparam1,lparam2);
+end else
+
+if(wMessage=WODM_OPEN)then begin{open message}
+result:=0;
+bhalf:=688{0x100};
+temp:=(bhalf div 2)-1;
+{!outport32(ens1371port+$34,temp);}
+
+if not(driverclosing) then begin
+runing:=true;
+result:=myDAC1open(wDeviceID,wMessage,dwuser,lparam1,lparam2);
+end else begin
+result:=MMSYSERR_ALLOCATED;
+end;
+end else
+
+if(wMessage=WODM_WRITE)then begin
+
+result:=MMSYSERR_NOERROR;{default}
+
+{}
+if (PWAVEHDR(lParam1)^.dwFlags and (
+WHDR_INQUEUE or WHDR_DONE or WHDR_PREPARED or WHDR_BEGINLOOP or WHDR_ENDLOOP))=0 then begin
+{showmessage('crazy write!');}
+end;
+
+{clear all flags but these}
+PWAVEHDR(lParam1)^.dwFlags :=PWAVEHDR(lParam1)^.dwFlags and(
+WHDR_INQUEUE or {can not write if in queue}
+WHDR_DONE or  { If done , we are writing to THIS chunk again}
+WHDR_PREPARED or {can not write if not prepared}
+WHDR_BEGINLOOP or {can begin loop}
+WHDR_ENDLOOP  or {end loop}
+WHDR_REALLYDONE {driver flag}
+);    {can end loop}
+
+{can not write if not prepared}
+if not((pwavehdr(lparam1)^.dwflags and whdr_Prepared)=whdr_Prepared)then begin
+{showmessage('come prepared !');}
+result:=result or WAVERR_UNPREPARED;
+end;
+
+
+{is that wavehdr pointer ok?}
+if (IsBadReadPtr(pwavehdr(lparam1),sizeof(twavehdr)))then begin
+{showmessage('bad wavehdr pointer');}
+result:=result or MMSYSERR_INVALPARAM;
+end;
+ld:=0;
+{if it is already in our Q, then we cannot do this}
+if ((pwavehdr(lparam1)^.dwflags and WHDR_INQUEUE)=WHDR_INQUEUE)then begin
+{result:=result or WAVERR_STILLPLAYING;}
+pwavehdr(lparam1)^.dwflags:=pwavehdr(lparam1)^.dwflags or WHDR_INQUEUE;{now in our que}
+{pwavehdr(lparam1)^.dwflags:=pwavehdr(lparam1)^.dwflags and not WHDR_DONE;{not done anymore}
+end else begin
+{Although it might have played before}
+{if not in our Q, then we can add it}
+pwavehdr(lparam1)^.dwflags:=pwavehdr(lparam1)^.dwflags or WHDR_INQUEUE;{now in our que}
+pwavehdr(lparam1)^.dwflags:=pwavehdr(lparam1)^.dwflags and not WHDR_DONE;{not done anymore}
+
+PWAVEHDR(lParam1)^.reserved:=longint(dwUser);
+written.add(lparam1); {we add it to the list}
+ld:=1;
+
+
+inch:=245;
+
+end;
+
+
+{store the pointer to my WAVEALLOC structure in the wavehdr}
+ptempclient:=pointer(dwuser);
+
+{write that data!}
+if not(opened=0)then begin
+{you have to take all the writes :)}
+if ((1=1))then begin
+
+
+
+if not(IsBadReadPtr(pwavehdr(lparam1),sizeof(twavehdr)))then begin
+{if(written.count=0)then begin
+waveheader:=lparam1;
+end;      }
+
+if(written.count>8000)then begin
+myuserinfo.LByteCount:=myuserinfo.LByteCount+PWAVEHDR(lParam1)^.dwBufferLength;
+decqueue;{We have too many;discard this one and send WOM_DONE}
+
+
+end;
+{result:=myDAC1write(wDeviceID,wMessage,dwuser,lparam1,lparam2);}
+
+end else begin
+{showmessage('bad write pointer!');}
+result:=result or MMSYSERR_NOTENABLED;
+end;
+
+
+end else begin
+showmessage('myDAC1write has crashed or not returned yet.');
+result:=result or MMSYSERR_NOTENABLED;
+end;
+
+end else begin
+{opened not 0}
+{showmessage('Open driver first!');}
+result:=result or MMSYSERR_NOTENABLED;
+end;
+
+end else
+begin
+{wMessage=WODM_?}
+end;
+
+end;
+
+
+
+end.

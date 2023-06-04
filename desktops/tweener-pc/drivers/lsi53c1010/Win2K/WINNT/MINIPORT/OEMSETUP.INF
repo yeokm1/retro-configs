@@ -1,0 +1,88 @@
+;
+; OEMSETUP.INF - version 2K.4 (Windows 2000 and above only)
+;
+; This is the INF file for Windows 2000 and above for the SYM_U3 based
+; PCI SCSI Cards (53C1010-33 and 53C1010-66)
+;
+; ********************************************************************
+;                                                                    *
+;   Copyright 2000 LSI Logic, Inc. All rights reserved.              *
+;                                                                    *
+;   This file is property of LSI Logic, Inc. and is licensed for     *
+;   use as is.  The receipt of or possession of this file does not   *
+;   convey any rights to modify its contents, in whole, or in part,  *
+;   without the specific written consent of LSI Logic, Inc.          *
+;                                                                    *
+; ********************************************************************
+
+[version]
+signature="$Windows NT$"
+Class=SCSIAdapter
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%LSI%
+DriverVer=08/31/2000,5.07.00
+CatalogFile=sym_u3.cat
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+
+[SourceDisksFiles]
+sym_u3.sys = 1
+sym_u3.cat = 1
+
+[SourceDisksNames]
+1 = "Symbios Ultra3 PCI SCSI Driver",,
+
+[Manufacturer]
+%LSI%=LSI
+
+[LSI]
+%DevDesc1% = SYM_U3_Inst, PCI\VEN_1000&DEV_0020
+%DevDesc2% = SYM_U3_Inst, PCI\VEN_1000&DEV_0021
+
+[ControlFlags]
+ExcludeFromSelect = PCI\VEN_1000&DEV_0020
+ExcludeFromSelect = PCI\VEN_1000&DEV_0021
+
+[SYM_U3_Inst]
+CopyFiles = @sym_u3.sys
+AddReg = SYM_U3_AddReg
+
+[SYM_U3_Inst.Services]
+AddService = Sym_u3, %SPSVCINST_ASSOCSERVICE%, SYM_U3_Service_Inst, Miniport_EventLog_Inst
+
+[SYM_U3_Service_Inst]
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_BOOT_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\sym_u3.sys
+LoadOrderGroup = SCSI Miniport
+AddReg         = pnpsafe_pci_addreg
+
+[SYM_U3_AddReg]
+HKLM,SYSTEM\CurrentControlSet\Services\Sym_u3\Parameters\Device,MaximumSGList,0x00010001,0x41
+HKLM,SYSTEM\CurrentControlSet\Services\Sym_u3\Parameters\Device,NumberOfRequests,0x00010001,0x80
+
+[pnpsafe_pci_addreg]
+HKR, "Parameters\PnpInterface", "5", 0x00010001, 0x00000001
+
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+[Strings]
+LSI = "LSI Logic"
+DevDesc1 = "Symbios Ultra3 PCI SCSI Adapter; 53C1010-33 Device"
+DevDesc2 = "Symbios Ultra3 PCI SCSI Adapter; 53C1010-66 Device"
+
+;*******************************************
+;Handy macro substitutions (non-localizable)
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_BOOT_START     = 0
+SERVICE_ERROR_NORMAL   = 1
+REG_EXPAND_SZ          = 0x00020000
+REG_DWORD              = 0x00010001

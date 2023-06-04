@@ -1,0 +1,67 @@
+;
+; SYM_U3.INF  - version 9X.3 for Windows 95/98
+;
+; This is the INF file for the following SYM_U3 based PCI SCSI Cards
+; (This includes the 1010-33 and 1010-66.)
+;
+; ***********************************************************************
+;                                                                       *
+;   Copyright 1994-2000 LSI Logic Corp. All rights reserved.            *
+;                                                                       *
+;   This file is property of LSI Logic Corp. and is licensed for        *
+;   for use as is.  The receipt of or possession of this file does      *
+;   not convey any rights to modify its contents, in whole, or in part, *
+;   without the specific written consent of LSI Logic Corp.             *
+;                                                                       *
+; ***********************************************************************
+
+[Version]
+Signature="$WINDOWS95$"
+Class=SCSIAdapter
+Provider=%LSI%
+DriverVer=09/01/2000,5.06.00
+;CatalogFile=sym_u39.cat
+
+[Manufacturer]
+%LSI%=LSI
+
+[LSI]
+%DevDesc1%=SYM_U3,PCI\VEN_1000&DEV_0020
+%DevDesc2%=SYM_U3,PCI\VEN_1000&DEV_0021
+
+[SYM_U3]
+Copyfiles=MoveMiniPort
+AddReg=SYM_U3.reg
+UpdateInis=IniUpdate
+
+[SYM_U3.reg]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+HKR,,PortDriver,,sym_u3.mpd
+
+[DestinationDirs]
+MoveMiniPort=12
+
+[SourceDisksFiles]
+sym_u3.mpd=1
+;sym_u39.cat=1
+
+[SourceDisksNames]
+1="Symbios Ultra3 PCI SCSI Driver Install Disk",,0
+
+[MoveMiniPort]
+sym_u3.mpd
+
+[IniUpdate]
+%31%\msdos.sys,Options,,"DoubleBuffer=1"
+%10%\ios.ini,SafeList,,"aspi8xx.sys     ; Symbios ASPI driver PMD exists"
+%10%\ios.ini,SafeList,,"symcd.sys       ; Symbios CD-ROM driver PMD exists"
+%10%\ios.ini,SafeList,,"symdisk.sys     ; Symbios disk driver PMD exists"
+
+[ControlFlags]
+CopyFilesOnly=PCI\VEN_1000&DEV_0020,PCI\VEN_1000&DEV_0021
+
+[Strings]
+LSI="LSI Logic, Inc."
+DevDesc1="Symbios Ultra3 PCI SCSI Adapter; 53C1010-33 Device"
+DevDesc2="Symbios Ultra3 PCI SCSI Adapter; 53C1010-66 Device"

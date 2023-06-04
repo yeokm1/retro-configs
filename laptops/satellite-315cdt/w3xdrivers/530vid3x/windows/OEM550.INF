@@ -1,0 +1,168 @@
+;****************************************************************************
+; CHIPS 6555X Display Drivers - 65550 2MB VRAM
+;****************************************************************************
+
+[disks]
+    a =. ,"CHIPS 6555X Driver Disk #1"
+    x =. ,"Microsoft Windows 3.1 Disk #2",disk2
+    1 =. ,"Microsoft Windows 3.1 Disk #1",disk1
+    2 =. ,"Microsoft Windows 3.1 Disk #2",disk2
+
+[data]
+    Version   = "3.10.040"
+
+[display]
+mm4480   = a:mm55x4.drv,  "* CHIPS Multi-Media 6555X 640x480x16",  "100,96,96",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W480X4
+mm4600   = a:mm55x4.drv,  "* CHIPS Multi-Media 6555X 800x600x16",  "100,96,96",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W600X4
+mm4768   = a:mm55x4.drv,  "* CHIPS Multi-Media 6555X 1024x768x16", "100,120,120",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W768X4
+mm41024  = a:mm55x4.drv,  "* CHIPS Multi-Media 6555X 1280x1024x16","100,120,120",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W1024X4
+mm41200  = a:mm55x4.drv,  "* CHIPS Multi-Media 6555X 1600X1200x16", "100,120,120",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,,  x:vgalogo.rle, W1200X4
+mm8480   = a:mm55x8.drv,  "* CHIPS Multi-Media 6555X 640x480x256", "100,96,96",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W480X8
+mm8600   = a:mm55x8.drv,  "* CHIPS Multi-Media 6555X 800x600x256", "100,96,96",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W600X8
+mm8768   = a:mm55x8.drv,  "* CHIPS Multi-Media 6555X 1024x768x256", "100,120,120",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,,  x:vgalogo.rle, W768X8
+mm15480  = a:mm55x15.drv, "* CHIPS Multi-Media 6555X 640x480x32K", "100,96,96",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W480X15
+mm15600  = a:mm55x15.drv, "* CHIPS Multi-Media 6555X 800x600x32K", "100,96,96",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W600X15
+mm16480  = a:mm55x16.drv, "* CHIPS Multi-Media 6555X 640x480x64K", "100,96,96",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W480X16
+mm16600  = a:mm55x16.drv, "* CHIPS Multi-Media 6555X 800x600x64K", "100,96,96",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W600X16
+mm24480  = a:mm55x24.drv, "* CHIPS Multi-Media 6555X 640x480x16M", "100,96,96",   a:chip.2gr, x:vgalogo.lgo, a:chip31.386, a:chip.3gr,, x:vgalogo.rle, W480X24
+
+
+
+[PortRight]
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=1"
+
+[PortLeft]
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=3"
+
+
+[W480X4]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=640X480"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=4"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=96"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+[W600X4]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=800X600"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=4"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=96"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+[W768X4]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=1024X768"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=4"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=120"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+[W1024X4]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=1280X1024"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=4"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=I"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=120"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+[W1200X4]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=1600x1200"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=4"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=I"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=120"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+
+[W480X8]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=640X480"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=8"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=96"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+[W600X8]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=800X600"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=8"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=96"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+[W768X8]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=1024X768"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=8"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=120"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+
+[W480X15]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=640X480"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=15"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=96"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+[W600X15]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=800X600"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=15"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=96"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+
+[W480X16]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=640X480"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=16"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=96"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+[W600X16]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=800X600"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=16"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=96"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"
+
+[W480X24]
+a:winmem32.dll,0:system,SYSTEM.INI,DISPLAY,"SCREEN-SIZE=","SCREEN-SIZE=640X480"
+,,SYSTEM.INI,DISPLAY,"COLOR-FORMAT=","COLOR-FORMAT=24"
+,,SYSTEM.INI,DISPLAY,"MONITOR-TYPE=","MONITOR-TYPE=NI"
+,,SYSTEM.INI,DISPLAY,"HARDWARE-CURSOR=","HARDWARE-CURSOR=0"
+,,SYSTEM.INI,DISPLAY,"DPI=","DPI=96"
+,,SYSTEM.INI,"display driver","DisplayOrientation=","DisplayOrientation=0"
+,,SYSTEM.INI,DISPLAY,"CursorAnimation=","CursorAnimation=1"
+,,SYSTEM.INI,"DRIVERS","VPM=","VPM=CHIPSVPM.DLL"

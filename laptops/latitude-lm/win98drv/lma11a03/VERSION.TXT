@@ -1,0 +1,6 @@
+Latitude LMP BIOS Upgrade Disk - A13
+PHLASH (FLASH1.BAT) version 1.29
+Dell version:
+LMP - A11
+MMX - A03
+

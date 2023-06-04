@@ -1,0 +1,42 @@
+
+P o q e t   R A M   D i s k   D r i v e r                              
+U s e r ' s   G u i d e 
+
+Revision 3.052-a
+July 6, 1994
+
+This document describes the Poqet RAM Disk Driver (RAMDISK) version 0.7 
+that is part of release 3.052 of the Plus Series System Software.
+
+In usage syntax descriptions, optional arguments for the utilities are
+enclosed in brackets ("[" and "]"). 
+
+The Poqet RAM Disk Driver (RAMDISK) allocates extended memory and creates a
+DOS "disk drive" that can be accessed as drive E:.  RAMDISK is loaded as a
+device driver in CONFIG.SYS. 
+
+Usage:         DEVICE=[path]RAMDISK.SYS [size]
+
+Parameters:    path:   The DOS pathname that specifies RAMDISK.SYS is 
+                       located.  This is usually "D:\".
+               size:   The size, in kilobytes, of the RAM disk to create.  
+                       This number must be a multiple of 32K.  If omitted, 
+                       RAMDISK will create a 32K RAM disk.
+
+Notes:         The drive created by RAMDISK is non-volatile, in that it 
+               will survive a warm boot (Ctl-Alt-Del) as well as a hard 
+               reset.  The contents of the RAM disk will be lost if one 
+               of the two events occur:
+               1) The size of the RAM disk is changed, or
+               2) All power is lost in the system (both the main battery 
+                  and the bridge battery discharge completely). 
+
+               The maximum size of a RAM disk created with RAMDISK is 1344K.
+
+               RAMDISK must precede PQEMM in CONFIG.SYS.  RAMDISK and 
+               PQEMM share memory, so any memory left over by RAMDISK 
+               is available to PQEMM.
+
+Example:       To create a 320K RAM disk, accessible as drive E:, 
+               place the following command line in CONFIG.SYS:
+                   DEVICE=D:\RAMDISK.SYS 320

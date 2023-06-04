@@ -1,0 +1,1 @@
+sntp -set sg.pool.ntp.org

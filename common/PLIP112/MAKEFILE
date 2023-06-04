@@ -1,0 +1,10 @@
+.asm.obj:
+ 	tasm $*;
+
+plip.com: head.obj plip.obj tail.obj
+	tlink /t/m head+plip+tail,plip;
+
+zip:
+	del *.obj
+	del *.map
+	zip -a plip

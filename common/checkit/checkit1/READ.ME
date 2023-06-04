@@ -1,0 +1,28 @@
+01/26/89  Release 1.10a
+
+		The following describes changes to CheckIt
+		      since the manual was printed.
+
+1) A low level hard disk format program has been added to the "Other" menu.
+   This program will perform a low level format for AT and 386 class PC hard
+   disks.  Options let you specify known bad tracks, the disk type, and the
+   interleave.
+   
+   Since this will destroy all data on your hard disk, USE EXTREME
+   CAUTION WHEN USING THIS FEATURE.
+
+2) A new command line option has been added to make it easier for CheckIt to
+   be run remotely with a program like Carbon Copy (copyright Meridian
+   Technology).  Simply use the "-remote" option as follows:
+
+	C>CHECKIT -remote
+
+   Presumably, this will be done from the remote PC after the remote control
+   program has connected.
+   
+   When this option is used, you cannot test any local devices such as the
+   keyboard, mouse, or joystick.  For the video test, only the video RAM is
+   checked.  All other attribute and color tests are not performed since you
+   cannot verify them from a remote site.  Finally, you cannot run any tests
+   on the serial ports since that would disconnect you.
+

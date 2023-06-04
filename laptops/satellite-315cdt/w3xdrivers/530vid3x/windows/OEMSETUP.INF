@@ -1,0 +1,6 @@
+[disks]
+1 =. ,"Chips and Technologies, Video Port Manager Drivers Disk",disk1
+
+[Installable.Drivers]
+; key         = filename,       type(s),     description, VxD(s), Default Params
+VPM           = 1:CHIPSVPM.DLL,    "VPM", "CHIPS Video Port Manager Driver",,

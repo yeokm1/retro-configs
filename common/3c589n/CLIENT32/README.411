@@ -1,0 +1,167 @@
+3Com Corporation
+Network Drivers Installation Notes
+
+
+NOVELL NETWARE 32-bit Drivers
+This document describes how to configure the 3C589D PC Card for 
+use with the Novell NetWare 32-bit drivers. These procedures are
+also described in the EtherLink III LAN PC Card User Guide.
+You can install the NetWare 32-bit driver for clients and servers. 
+The 32-bit network driver only works in a PC with Client 32 software 
+installed on it. The drivers are in the \CLIENT32 directory on the 
+EtherDisk diskette.
+
+
+NOTE: The following instructions assume that you have not
+      installed any other network adapter in the machine. If you
+      have been using a network connection on your PC,
+      some of the following instructions may not apply or may
+      produce different results. Contact  your MIS department
+      or network manager for further instructions.
+
+Before installing the network driver, you should know:
+
+      - Your Novell file server name
+      - Your network account user name and password (supplied
+        by your MIS department or network manager)
+
+Also, for a successful installation, you will need:
+
+- 3C589D LAN PC Card and the accompanying EtherDisk
+        diskette
+        
+
+Windows 95 without Client 32 Installed
+To install the driver in a PC without Client 32 installed, 
+perform the following steps:
+
+  1. Install the 3C589D PC Card and connect it 
+     to the network, as described in Chapter 2.
+
+  2. Copy the ODI3C589.INF file from the \client 
+     directory on the EtherDisk diskette to disk 1(setup) 
+     of the Client 32 for Windows 95 software.
+
+  3. Copy the 3C589.LAN driver to the LAN 
+     driver diskette (32 bit). 
+
+  4. Install Client 32 according to 
+     Novell's Client 32 documentation. 
+     The driver installation is complete.
+
+
+Windows 95 without Client 32 Installed using
+the Hard Drive or the Network
+
+To install the driver on a PC, using the network or 
+hard drive without Client 32 installed, perform the 
+following steps:
+
+  1. Install the 3C589D PC Card and connect it to the 
+     network, as described in Chapter 2.
+
+  2. Copy the ODI3C589.INF file and the 3C589.LAN 
+     driver to the \PUBLIC\CLIENT\WIN95\IBM_ENU directory. 
+
+  3. Install Client 32 according to Novell's Client 32
+     documentation.  The driver installation is complete.
+
+Windows 95 with Client 32 Installed
+To install the driver on a PC, using the network or 
+hard drive without Client 32 installed, perform 
+the following steps:
+
+  1. Remove adapters from the Network control panel 
+     for any cards that are no longer in the PC or are 
+     going to be removed including ODINSUP and 
+     any associated files. 
+
+  2. Copy the ODI3C589.INF file for the new 
+     PC Card into the C:\WINDOWS\INF directory. 
+
+  3. Switch to the Windows\INF directory.
+
+  4. Rename NET3COM.INF to NET3COM.OLD.
+
+  5. Reboot your PC.
+
+  6. Install the 3C589D PC Card and connect it to the 
+     network as described in Chapter 2 and reboot your PC.
+
+     Windows 95 automatically detects the PC Card. 
+     The Client 32 driver is loaded. 
+     You are prompted for Client 32 diskettes. 
+
+  7. Complete the Client 32 installation and reboot the PC. 
+     The driver installation is complete.
+
+
+DOS Client 32 
+To install the driver on a PC running DOS or 
+Windows 3.x, without Client 32 installed, 
+perform the following steps:
+
+  1. Copy the 3C589mgr.exe from the EtherDisk to C:\.
+
+  2. Edit the AUTOEXEC.BAT file to 
+     add the following line to the beginning of the file.
+     C:\3C589MGR.EXE
+
+  3. Run 3c589MGR.exe and write down the IRQ and 
+     PORT settings. 
+
+  4. Start the Client 32 installation using
+     the Client 32 NetWare documentation.  
+
+  5. When prompted for Disk 5 -LAN DRIVER or 
+     Third Party Diskette,insert the Etherdisk and give
+     the path A:\CLIENT32
+
+     When the Client32 installation is complete reboot the PC. 
+
+  6. On some laptops a special switch is needed when loading
+     the LAN driver in the STARTNET.BAT file.  If the LAN driver
+     does not successfully load, Edit the STARTNET.BAT file and
+     verify that the 3c589.Lan line looks similar to:
+     load c:\novell\client32\3c589.lan enabler port=X irq=Y Frame=ZZZ
+     Where X=the IRQ and Y=the Port as specified by 3c589mgr.exe.
+
+     The driver installation is complete.
+
+NetWare 4.11 32-bit Server Without Card Services
+To install the driver on a NetWare 4.11, perform the following steps:
+
+  1. Install the 3C589D PC Card and connect it to the 
+     network as described in Chapter 2.
+
+  2. Insert the EtherDisk diskette in the diskette drive.
+
+  3. Copy 3C589MGR.EXE and 3C589.LAN 
+     from the EtherDisk diskette to c:\nwserver. 
+
+  4. Add the 3c589mgr.exe 
+     to the AUTOEXEC.BAT file and save.
+     3C589MGR.EXE /IRQ=Y
+     (where Y is a free interrupt on the laptop.  This line must be
+      executed before running the SERVER.EXE command. Note the interrupt
+      and port address that is echoed.)
+     
+
+     After the SERVER.EXE is executed and Netware 4.11 has started
+     the following line 
+
+     
+     load c:\novell\client32\3c589.lan enabler port=X irq=Y Frame=ZZZ
+     (Where X=the IRQ and Y=the Port as specified by 3c589mgr.exe.  ZZZ
+      is the desired frame type, i.e Ethernet_802.2)
+     bind 3c589 IPX NET=XXX
+     The driver installation is complete.
+
+*Note: Although the 3C589.LAN driver is a fully supported driver by 
+Novell, some laptop keyboard implementations may not allow you to 
+break into the Novell debugger. 
+  
+
+(%VER README.411 v1.0a)
+ 
+

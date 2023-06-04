@@ -1,0 +1,21 @@
+*********************************************************************
+Release Notes for System BIOS vA03 for Latitude LM with Neomagic 2093.
+*********************************************************************
+
+1) Added support for 75Hz in 1024x768 VGA mode.
+
+2) Fixed issue with System time in CMOS not correctly updating. 
+
+3) Added support for 20X CDROM.   
+
+4) Added support for the use of the <Spacebar> to change values in
+   System Setup, in addition to the  '-' and '+' keys.
+
+5) Corrected problem with Systems not restoring the previous font
+   setting at boot.
+
+6) Updated the VGA BIOS to version 1.24.
+
+********************************************************************
+End of Release Notes
+********************************************************************

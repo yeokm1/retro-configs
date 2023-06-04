@@ -1,0 +1,662 @@
+; /////////////////////////////////////////////////////////////
+; //            MagicMedia256AV                              //
+; //            IBM ThinkPad Inf File                        //
+; //            Version 1.0.7                                //
+; /////////////////////////////////////////////////////////////
+
+[data]
+Version     = "1.16"
+ProductName = "MagicMedia256AV Series"
+
+[disks]
+; //////////////////////////////////////////////////////////////
+; //           Microsoft Windows Diskettes                    //
+; //////////////////////////////////////////////////////////////
+
+1 =., "Microsoft Windows 3.1 Disk #1",disk1
+2 =., "Microsoft Windows 3.1 Disk #2",disk2
+3 =., "Microsoft Windows 3.1 Disk #3",disk3
+4 =., "Microsoft Windows 3.1 Disk #4",disk4
+5 =., "Microsoft Windows 3.1 Disk #5",disk5
+6 =., "Microsoft Windows 3.1 Disk #6",disk6
+
+; //////////////////////////////////////////////////////////////
+; //                Driver Diskette's Name                    //
+; //    Translate diskette's name to each country language    //
+; //////////////////////////////////////////////////////////////
+
+N =.,"IBM ThinkPad MagicMedia256AV Windows 3.1 Driver Disk",diskn
+
+
+; /////////////////////////////////////////////////////////////////
+; //  PROF = <DRIVER.DRV>, <DRIVERS DESCRIPTION>, <RESOLUTION>,  //
+; //  <286 GRABBER>, <LOGO CODE>, <VDD DRIVER.386>, <386 GRABBER>//         
+; //  ,,<LOGO DATA>, <EXECUTION SECTION>                         //
+; //                                                             //
+; /////////////////////////////////////////////////////////////////
+
+; /////////////////////////////////////////////////////////////
+; // Translate Drivers Description for each country language //
+; /////////////////////////////////////////////////////////////
+[display]
+;PROF = <DRIVER>,       <DRIVER DESCRIPTION>,                        <RESOLUTION>,  <286 GRABBER>,  <LOGO CODE>,   <VDD>,        <386GRABR>,, <LOGO DATA>,   <EXECUTION SECTION>
+;-----  --------------- -------------------------------------------- -------------- --------------- -------------- ------------- ---------- - -------------- -------------------
+NM1PS = N:nm20xx8.drv,  "MagicMedia256AV  640x480  256 small fonts", "100,96,96",   N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM1S
+NM1PL = N:nm20xx8.drv,  "MagicMedia256AV  640x480  256 large fonts", "100,120,120", N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM1L
+NM2PS = N:nm20xx8.drv,  "MagicMedia256AV  800x600  256 small fonts", "100,96,96",   N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM2S
+NM2PL = N:nm20xx8.drv,  "MagicMedia256AV  800x600  256 large fonts", "100,120,120", N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM2L
+NM3PS = N:nm20xx8.drv,  "MagicMedia256AV 1024x768  256 small fonts", "100,96,96",   N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM3S
+NM3PL = N:nm20xx8.drv,  "MagicMedia256AV 1024x768  256 large fonts", "100,120,120", N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM3L
+NM4PS = N:nm20xx8.drv,  "MagicMedia256AV 1280x1024 256 small fonts", "100,96,96",   N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM4S
+NM4PL = N:nm20xx8.drv,  "MagicMedia256AV 1280x1024 256 large fonts", "100,120,120", N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM4L
+NM1HS = N:nm20xx16.drv, "MagicMedia256AV  640x480  64K small fonts", "100,96,96",   N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM1S
+NM1HL = N:nm20xx16.drv, "MagicMedia256AV  640x480  64K large fonts", "100,120,120", N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM1L
+NM2HS = N:nm20xx16.drv, "MagicMedia256AV  800x600  64K small fonts", "100,96,96",   N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM2S
+NM2HL = N:nm20xx16.drv, "MagicMedia256AV  800x600  64K large fonts", "100,120,120", N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM2L
+NM3HS = N:nm20xx16.drv, "MagicMedia256AV 1024x768  64K small fonts", "100,96,96",   N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM3S
+NM3HL = N:nm20xx16.drv, "MagicMedia256AV 1024x768  64K large fonts", "100,120,120", N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM3L
+NM1TS = N:nm20xx24.drv, "MagicMedia256AV  640x480  16M small fonts", "100,96,96",   N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM1S
+NM1TL = N:nm20xx24.drv, "MagicMedia256AV  640x480  16M large fonts", "100,120,120", N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM1L
+NM2TS = N:nm20xx24.drv, "MagicMedia256AV  800x600  16M small fonts", "100,96,96",   N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM2S
+NM2TL = N:nm20xx24.drv, "MagicMedia256AV  800x600  16M large fonts", "100,120,120", N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM2L
+NM3TS = N:nm20xx24.drv, "MagicMedia256AV 1024x768  16M small fonts", "100,96,96",   N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM3S
+NM3TL = N:nm20xx24.drv, "MagicMedia256AV 1024x768  16M large fonts", "100,120,120", N:vgacolor.2gr, N:vgalogo.lgo, N:nmxvdd.386, N:nmx.3gr, , N:vgalogo.rle, NM3L
+
+
+[COMMON]
+N:NM20XX8.DRV,  0:SYSTEM,,,,
+N:NM20XX16.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DLL, 0:SYSTEM,,,,
+N:NM20XX24.LIN, 0:SYSTEM,,,,
+N:NEO24.LIN,    0:SYSTEM,,,,
+N:NEOSVGA.DLL,  0:SYSTEM,,,,
+N:NEOVGA.DLL,   0:SYSTEM,,,,
+N:NMXVDD.386,   0:SYSTEM,,,,
+N:NMX.3GR,      0:SYSTEM,,,,
+N:DCINEO.DRV,   0:SYSTEM, system.ini, drivers, "DCI=",       "DCI=DCINEO"
+N:VPMNEO.DRV,   0:SYSTEM, system.ini, drivers, "vpm=",       "vpm=VPMNEO.DRV"
+N:UDH.DLL,      0:SYSTEM, system.ini, drivers, "vids.draw=", "vids.draw=UDH.DLL"
+N:ICCVID.DRV,   0:SYSTEM, system.ini, drivers, "VIDC.CVID=", "VIDC.CVID=iccvid.drv"
+N:IYVU9.DLL,    0:SYSTEM, system.ini, drivers, "VIDC.YVU9=", "VIDC.YVU9=iyvu9.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV31=", "VIDC.IV31=ir32.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV32=", "VIDC.IV32=ir32.dll"
+N:DCIMAN.DLL,   0:SYSTEM,,,,
+N:VER.DLL,      0:SYSTEM,,,,
+N:VGACOLOR.2GR, 0:SYSTEM,,,,
+N:VGALOGO.LGO,  0:SYSTEM,,,,
+N:VGALOGO.RLE,  0:SYSTEM,,,,
+N:VGASYS.FON,   0:SYSTEM,,,,
+N:VGAFIX.FON,   0:SYSTEM,,,,
+N:VGAOEM.FON,   0:SYSTEM,,,,
+N:8514SYS.FON,  0:SYSTEM,,,,
+N:8514FIX.FON,  0:SYSTEM,,,,
+N:8514OEM.FON,  0:SYSTEM,,,,
+N:CGA40WOA.FON, 0:SYSTEM,,,,
+N:CGA80WOA.FON, 0:SYSTEM,,,,
+N:EGA40WOA.FON, 0:SYSTEM,,,,
+N:EGA80WOA.FON, 0:SYSTEM,,,,
+N:CGA40850.FON, 0:SYSTEM,,,,
+N:CGA80850.FON, 0:SYSTEM,,,,
+N:EGA40850.FON, 0:SYSTEM,,,,
+N:EGA80850.FON, 0:SYSTEM,,,,
+N:SSERIFE.FON,  0:SYSTEM,,,,
+N:SSERIFF.FON,  0:SYSTEM,,,,
+N:COURE.FON,    0:SYSTEM,,,,
+N:COURF.FON,    0:SYSTEM,,,,
+N:SERIFE.FON,   0:SYSTEM,,,,
+N:SERIFF.FON,   0:SYSTEM,,,,
+N:SYMBOLE.FON,  0:SYSTEM,,,,
+N:SYMBOLF.FON,  0:SYSTEM,,,,
+N:SMALLE.FON,   0:SYSTEM,,,,
+N:SMALLF.FON,   0:SYSTEM,,,,
+N:ROMAN.FON,    0:SYSTEM,,,,
+N:SCRIPT.FON,   0:SYSTEM,,,,
+N:MODERN.FON,   0:SYSTEM,,,,
+
+
+; //////////////////////////////////////////////////////////////
+; //                  386 Grabber Section                     //
+; // copy these fonts depending on the 386 grabber being used //
+; //////////////////////////////////////////////////////////////
+[nmx.3gr]
+N:CGA40WOA.FON,N:CGA40850.FON
+N:CGA80WOA.FON,N:CGA80850.FON
+N:EGA40WOA.FON,N:EGA40850.FON
+N:EGA80WOA.FON,N:EGA80850.FON
+
+
+; //////////////////////////////////////////////////////////////
+; //            E X E C U T I O N     S E C T I O N           //
+; //////////////////////////////////////////////////////////////
+
+; //////////////////////////////////////////////////////////////////////////
+; // <N:File>,<Destination>, <INI File>, <Section>, <Old Line>, <New Line //
+; // N:File  =  File on MagicMedia Setup Disk                             //
+; // Destination = Windows Directories                                    //
+; //               + 0: Windows Root Directory                            //
+; //               + 0:SYSTEM WINDOWS\SYSTEM directory                    //
+; // INI File  =  .INI file to be modified or created                     //
+; // Section   =  [Section] in .INI file to be modified or created        //
+; // Old Line  =  Old Text to be removed from Section of .INI file        //
+; // NewLine   =  New Texxt to be added to Section of .INI file           //
+; //////////////////////////////////////////////////////////////////////////
+
+
+; //////////////////////////////////////////////
+; // 6 4 0 x 4 8 0   S M A L L   F O N T      //
+; //////////////////////////////////////////////
+[NM1S]
+,,system.ini, NeoMagic, "Resolution=", "Resolution=640x480"
+,,system.ini, NeoMagic, "dpi=",        "dpi=96"
+,,system.ini, NeoMagic, "BESTFIT=",    "BESTFIT=1"
+,,system.ini, NeoMagic, "AUTORES=",    "AUTORES=OFF"
+N:NM20XX8.DRV,  0:SYSTEM,,,,
+N:NM20XX16.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DLL, 0:SYSTEM,,,,
+N:NM20XX24.LIN, 0:SYSTEM,,,,
+N:NEO24.LIN,    0:SYSTEM,,,,
+N:NEOVGA.DLL,   0:SYSTEM,,,,
+N:NEOSVGA.DLL,  0:SYSTEM,,,,
+N:NMXVDD.386,   0:SYSTEM,,,,
+N:NMX.3GR,      0:SYSTEM,,,,
+N:DCINEO.DRV,   0:SYSTEM, system.ini, drivers, "DCI=",       "DCI=DCINEO"
+N:VPMNEO.DRV,   0:SYSTEM, system.ini, drivers, "vpm=",       "vpm=VPMNEO.DRV"
+N:UDH.DLL,      0:SYSTEM, system.ini, drivers, "vids.draw=", "vids.draw=UDH.DLL"
+N:ICCVID.DRV,   0:SYSTEM, system.ini, drivers, "VIDC.CVID=", "VIDC.CVID=iccvid.drv"
+N:IYVU9.DLL,    0:SYSTEM, system.ini, drivers, "VIDC.YVU9=", "VIDC.YVU9=iyvu9.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV31=", "VIDC.IV31=ir32.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV32=", "VIDC.IV32=ir32.dll"
+N:DCIMAN.DLL,   0:SYSTEM,,,,
+N:VER.DLL,      0:SYSTEM,,,,
+N:VGACOLOR.2GR, 0:SYSTEM,,,,
+N:VGALOGO.LGO,  0:SYSTEM,,,,
+N:VGALOGO.RLE,  0:SYSTEM,,,,
+N:VGASYS.FON,   0:SYSTEM,,,,
+N:VGAFIX.FON,   0:SYSTEM,,,,
+N:VGAOEM.FON,   0:SYSTEM,,,,
+N:8514SYS.FON,  0:SYSTEM,,,,
+N:8514FIX.FON,  0:SYSTEM,,,,
+N:8514OEM.FON,  0:SYSTEM,,,,
+N:CGA40WOA.FON, 0:SYSTEM,,,,
+N:CGA80WOA.FON, 0:SYSTEM,,,,
+N:EGA40WOA.FON, 0:SYSTEM,,,,
+N:EGA80WOA.FON, 0:SYSTEM,,,,
+N:CGA40850.FON, 0:SYSTEM,,,,
+N:CGA80850.FON, 0:SYSTEM,,,,
+N:EGA40850.FON, 0:SYSTEM,,,,
+N:EGA80850.FON, 0:SYSTEM,,,,
+N:SSERIFE.FON,  0:SYSTEM,,,,
+N:SSERIFF.FON,  0:SYSTEM,,,,
+N:COURE.FON,    0:SYSTEM,,,,
+N:COURF.FON,    0:SYSTEM,,,,
+N:SERIFE.FON,   0:SYSTEM,,,,
+N:SERIFF.FON,   0:SYSTEM,,,,
+N:SYMBOLE.FON,  0:SYSTEM,,,,
+N:SYMBOLF.FON,  0:SYSTEM,,,,
+N:SMALLE.FON,   0:SYSTEM,,,,
+N:SMALLF.FON,   0:SYSTEM,,,,
+N:ROMAN.FON,    0:SYSTEM,,,,
+N:SCRIPT.FON,   0:SYSTEM,,,,
+N:MODERN.FON,   0:SYSTEM,,,,
+
+
+; //////////////////////////////////////////////
+; // 6 4 0 x 4 8 0   L A R G E   F O N T      //
+; //////////////////////////////////////////////
+[NM1L]
+,,system.ini, NeoMagic, "Resolution=", "Resolution=640x480"
+,,system.ini, NeoMagic, "dpi=",        "dpi=120"
+,,system.ini, NeoMagic, "BESTFIT=",    "BESTFIT=1"
+,,system.ini, NeoMagic, "AUTORES=",    "AUTORES=OFF"
+N:NM20XX8.DRV,  0:SYSTEM,,,,
+N:NM20XX16.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DLL, 0:SYSTEM,,,,
+N:NM20XX24.LIN, 0:SYSTEM,,,,
+N:NEO24.LIN,    0:SYSTEM,,,,
+N:NEOVGA.DLL,   0:SYSTEM,,,,
+N:NEOSVGA.DLL,  0:SYSTEM,,,,
+N:NMXVDD.386,   0:SYSTEM,,,,
+N:NMX.3GR,      0:SYSTEM,,,,
+N:DCINEO.DRV,   0:SYSTEM, system.ini, drivers, "DCI=",       "DCI=DCINEO"
+N:VPMNEO.DRV,   0:SYSTEM, system.ini, drivers, "vpm=",       "vpm=VPMNEO.DRV"
+N:UDH.DLL,      0:SYSTEM, system.ini, drivers, "vids.draw=", "vids.draw=UDH.DLL"
+N:ICCVID.DRV,   0:SYSTEM, system.ini, drivers, "VIDC.CVID=", "VIDC.CVID=iccvid.drv"
+N:IYVU9.DLL,    0:SYSTEM, system.ini, drivers, "VIDC.YVU9=", "VIDC.YVU9=iyvu9.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV31=", "VIDC.IV31=ir32.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV32=", "VIDC.IV32=ir32.dll"
+N:DCIMAN.DLL,   0:SYSTEM,,,,
+N:VER.DLL,      0:SYSTEM,,,,
+N:VGACOLOR.2GR, 0:SYSTEM,,,,
+N:VGALOGO.LGO,  0:SYSTEM,,,,
+N:VGALOGO.RLE,  0:SYSTEM,,,,
+N:VGASYS.FON,   0:SYSTEM,,,,
+N:VGAFIX.FON,   0:SYSTEM,,,,
+N:VGAOEM.FON,   0:SYSTEM,,,,
+N:8514SYS.FON,  0:SYSTEM,,,,
+N:8514FIX.FON,  0:SYSTEM,,,,
+N:8514OEM.FON,  0:SYSTEM,,,,
+N:CGA40WOA.FON, 0:SYSTEM,,,,
+N:CGA80WOA.FON, 0:SYSTEM,,,,
+N:EGA40WOA.FON, 0:SYSTEM,,,,
+N:EGA80WOA.FON, 0:SYSTEM,,,,
+N:CGA40850.FON, 0:SYSTEM,,,,
+N:CGA80850.FON, 0:SYSTEM,,,,
+N:EGA40850.FON, 0:SYSTEM,,,,
+N:EGA80850.FON, 0:SYSTEM,,,,
+N:SSERIFE.FON,  0:SYSTEM,,,,
+N:SSERIFF.FON,  0:SYSTEM,,,,
+N:COURE.FON,    0:SYSTEM,,,,
+N:COURF.FON,    0:SYSTEM,,,,
+N:SERIFE.FON,   0:SYSTEM,,,,
+N:SERIFF.FON,   0:SYSTEM,,,,
+N:SYMBOLE.FON,  0:SYSTEM,,,,
+N:SYMBOLF.FON,  0:SYSTEM,,,,
+N:SMALLE.FON,   0:SYSTEM,,,,
+N:SMALLF.FON,   0:SYSTEM,,,,
+N:ROMAN.FON,    0:SYSTEM,,,,
+N:SCRIPT.FON,   0:SYSTEM,,,,
+N:MODERN.FON,   0:SYSTEM,,,,
+
+
+; //////////////////////////////////////////////
+; // 8 0 0 x 6 0 0   S M A L L   F O N T      //
+; //////////////////////////////////////////////
+[NM2S]
+,,system.ini, NeoMagic, "Resolution=", "Resolution=800x600"
+,,system.ini, NeoMagic, "dpi=",        "dpi=96"
+,,system.ini, NeoMagic, "BESTFIT=",    "BESTFIT=1"
+,,system.ini, NeoMagic, "AUTORES=",    "AUTORES=OFF"
+N:NM20XX8.DRV,  0:SYSTEM,,,,
+N:NM20XX16.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DLL, 0:SYSTEM,,,,
+N:NM20XX24.LIN, 0:SYSTEM,,,,
+N:NEO24.LIN,    0:SYSTEM,,,,
+N:NEOVGA.DLL,   0:SYSTEM,,,,
+N:NEOSVGA.DLL,  0:SYSTEM,,,,
+N:NMXVDD.386,   0:SYSTEM,,,,
+N:NMX.3GR,      0:SYSTEM,,,,
+N:DCINEO.DRV,   0:SYSTEM, system.ini, drivers, "DCI=",       "DCI=DCINEO"
+N:VPMNEO.DRV,   0:SYSTEM, system.ini, drivers, "vpm=",       "vpm=VPMNEO.DRV"
+N:UDH.DLL,      0:SYSTEM, system.ini, drivers, "vids.draw=", "vids.draw=UDH.DLL"
+N:ICCVID.DRV,   0:SYSTEM, system.ini, drivers, "VIDC.CVID=", "VIDC.CVID=iccvid.drv"
+N:IYVU9.DLL,    0:SYSTEM, system.ini, drivers, "VIDC.YVU9=", "VIDC.YVU9=iyvu9.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV31=", "VIDC.IV31=ir32.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV32=", "VIDC.IV32=ir32.dll"
+N:DCIMAN.DLL,   0:SYSTEM,,,,
+N:VER.DLL,      0:SYSTEM,,,,
+N:VGACOLOR.2GR, 0:SYSTEM,,,,
+N:VGALOGO.LGO,  0:SYSTEM,,,,
+N:VGALOGO.RLE,  0:SYSTEM,,,,
+N:VGASYS.FON,   0:SYSTEM,,,,
+N:VGAFIX.FON,   0:SYSTEM,,,,
+N:VGAOEM.FON,   0:SYSTEM,,,,
+N:8514SYS.FON,  0:SYSTEM,,,,
+N:8514FIX.FON,  0:SYSTEM,,,,
+N:8514OEM.FON,  0:SYSTEM,,,,
+N:CGA40WOA.FON, 0:SYSTEM,,,,
+N:CGA80WOA.FON, 0:SYSTEM,,,,
+N:EGA40WOA.FON, 0:SYSTEM,,,,
+N:EGA80WOA.FON, 0:SYSTEM,,,,
+N:CGA40850.FON, 0:SYSTEM,,,,
+N:CGA80850.FON, 0:SYSTEM,,,,
+N:EGA40850.FON, 0:SYSTEM,,,,
+N:EGA80850.FON, 0:SYSTEM,,,,
+N:SSERIFE.FON,  0:SYSTEM,,,,
+N:SSERIFF.FON,  0:SYSTEM,,,,
+N:COURE.FON,    0:SYSTEM,,,,
+N:COURF.FON,    0:SYSTEM,,,,
+N:SERIFE.FON,   0:SYSTEM,,,,
+N:SERIFF.FON,   0:SYSTEM,,,,
+N:SYMBOLE.FON,  0:SYSTEM,,,,
+N:SYMBOLF.FON,  0:SYSTEM,,,,
+N:SMALLE.FON,   0:SYSTEM,,,,
+N:SMALLF.FON,   0:SYSTEM,,,,
+N:ROMAN.FON,    0:SYSTEM,,,,
+N:SCRIPT.FON,   0:SYSTEM,,,,
+N:MODERN.FON,   0:SYSTEM,,,,
+
+
+; //////////////////////////////////////////////
+; // 8 0 0 x 6 0 0   L A R G E   F O N T      //
+; //////////////////////////////////////////////
+[NM2L]
+,,system.ini, NeoMagic, "Resolution=", "Resolution=800x600"
+,,system.ini, NeoMagic, "dpi=",        "dpi=120"
+,,system.ini, NeoMagic, "BESTFIT=",    "BESTFIT=1"
+,,system.ini, NeoMagic, "AUTORES=",    "AUTORES=OFF"
+N:NM20XX8.DRV,  0:SYSTEM,,,,
+N:NM20XX16.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DLL, 0:SYSTEM,,,,
+N:NM20XX24.LIN, 0:SYSTEM,,,,
+N:NEO24.LIN,    0:SYSTEM,,,,
+N:NEOVGA.DLL,   0:SYSTEM,,,,
+N:NEOSVGA.DLL,  0:SYSTEM,,,,
+N:NMXVDD.386,   0:SYSTEM,,,,
+N:NMX.3GR,      0:SYSTEM,,,,
+N:DCINEO.DRV,   0:SYSTEM, system.ini, drivers, "DCI=",       "DCI=DCINEO"
+N:VPMNEO.DRV,   0:SYSTEM, system.ini, drivers, "vpm=",       "vpm=VPMNEO.DRV"
+N:UDH.DLL,      0:SYSTEM, system.ini, drivers, "vids.draw=", "vids.draw=UDH.DLL"
+N:ICCVID.DRV,   0:SYSTEM, system.ini, drivers, "VIDC.CVID=", "VIDC.CVID=iccvid.drv"
+N:IYVU9.DLL,    0:SYSTEM, system.ini, drivers, "VIDC.YVU9=", "VIDC.YVU9=iyvu9.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV31=", "VIDC.IV31=ir32.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV32=", "VIDC.IV32=ir32.dll"
+N:DCIMAN.DLL,   0:SYSTEM,,,,
+N:VER.DLL,      0:SYSTEM,,,,
+N:VGACOLOR.2GR, 0:SYSTEM,,,,
+N:VGALOGO.LGO,  0:SYSTEM,,,,
+N:VGALOGO.RLE,  0:SYSTEM,,,,
+N:VGASYS.FON,   0:SYSTEM,,,,
+N:VGAFIX.FON,   0:SYSTEM,,,,
+N:VGAOEM.FON,   0:SYSTEM,,,,
+N:8514SYS.FON,  0:SYSTEM,,,,
+N:8514FIX.FON,  0:SYSTEM,,,,
+N:8514OEM.FON,  0:SYSTEM,,,,
+N:CGA40WOA.FON, 0:SYSTEM,,,,
+N:CGA80WOA.FON, 0:SYSTEM,,,,
+N:EGA40WOA.FON, 0:SYSTEM,,,,
+N:EGA80WOA.FON, 0:SYSTEM,,,,
+N:CGA40850.FON, 0:SYSTEM,,,,
+N:CGA80850.FON, 0:SYSTEM,,,,
+N:EGA40850.FON, 0:SYSTEM,,,,
+N:EGA80850.FON, 0:SYSTEM,,,,
+N:SSERIFE.FON,  0:SYSTEM,,,,
+N:SSERIFF.FON,  0:SYSTEM,,,,
+N:COURE.FON,    0:SYSTEM,,,,
+N:COURF.FON,    0:SYSTEM,,,,
+N:SERIFE.FON,   0:SYSTEM,,,,
+N:SERIFF.FON,   0:SYSTEM,,,,
+N:SYMBOLE.FON,  0:SYSTEM,,,,
+N:SYMBOLF.FON,  0:SYSTEM,,,,
+N:SMALLE.FON,   0:SYSTEM,,,,
+N:SMALLF.FON,   0:SYSTEM,,,,
+N:ROMAN.FON,    0:SYSTEM,,,,
+N:SCRIPT.FON,   0:SYSTEM,,,,
+N:MODERN.FON,   0:SYSTEM,,,,
+
+
+; //////////////////////////////////////////////
+; // 1 0 2 4 x 7 6 8   S M A L L   F O N T    //
+; //////////////////////////////////////////////
+[NM3S]
+,,system.ini, NeoMagic, "Resolution=", "Resolution=1024x768"
+,,system.ini, NeoMagic, "dpi=",        "dpi=96"
+,,system.ini, NeoMagic, "BESTFIT=",    "BESTFIT=1"
+,,system.ini, NeoMagic, "AUTORES=",    "AUTORES=OFF"
+N:NM20XX8.DRV,  0:SYSTEM,,,,
+N:NM20XX16.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DLL, 0:SYSTEM,,,,
+N:NM20XX24.LIN, 0:SYSTEM,,,,
+N:NEO24.LIN,    0:SYSTEM,,,,
+N:NEOVGA.DLL,   0:SYSTEM,,,,
+N:NEOSVGA.DLL,  0:SYSTEM,,,,
+N:NMXVDD.386,   0:SYSTEM,,,,
+N:NMX.3GR,      0:SYSTEM,,,,
+N:DCINEO.DRV,   0:SYSTEM, system.ini, drivers, "DCI=",       "DCI=DCINEO"
+N:VPMNEO.DRV,   0:SYSTEM, system.ini, drivers, "vpm=",       "vpm=VPMNEO.DRV"
+N:UDH.DLL,      0:SYSTEM, system.ini, drivers, "vids.draw=", "vids.draw=UDH.DLL"
+N:ICCVID.DRV,   0:SYSTEM, system.ini, drivers, "VIDC.CVID=", "VIDC.CVID=iccvid.drv"
+N:IYVU9.DLL,    0:SYSTEM, system.ini, drivers, "VIDC.YVU9=", "VIDC.YVU9=iyvu9.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV31=", "VIDC.IV31=ir32.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV32=", "VIDC.IV32=ir32.dll"
+N:DCIMAN.DLL,   0:SYSTEM,,,,
+N:VER.DLL,      0:SYSTEM,,,,
+N:VGACOLOR.2GR, 0:SYSTEM,,,,
+N:VGALOGO.LGO,  0:SYSTEM,,,,
+N:VGALOGO.RLE,  0:SYSTEM,,,,
+N:VGASYS.FON,   0:SYSTEM,,,,
+N:VGAFIX.FON,   0:SYSTEM,,,,
+N:VGAOEM.FON,   0:SYSTEM,,,,
+N:8514SYS.FON,  0:SYSTEM,,,,
+N:8514FIX.FON,  0:SYSTEM,,,,
+N:8514OEM.FON,  0:SYSTEM,,,,
+N:CGA40WOA.FON, 0:SYSTEM,,,,
+N:CGA80WOA.FON, 0:SYSTEM,,,,
+N:EGA40WOA.FON, 0:SYSTEM,,,,
+N:EGA80WOA.FON, 0:SYSTEM,,,,
+N:CGA40850.FON, 0:SYSTEM,,,,
+N:CGA80850.FON, 0:SYSTEM,,,,
+N:EGA40850.FON, 0:SYSTEM,,,,
+N:EGA80850.FON, 0:SYSTEM,,,,
+N:SSERIFE.FON,  0:SYSTEM,,,,
+N:SSERIFF.FON,  0:SYSTEM,,,,
+N:COURE.FON,    0:SYSTEM,,,,
+N:COURF.FON,    0:SYSTEM,,,,
+N:SERIFE.FON,   0:SYSTEM,,,,
+N:SERIFF.FON,   0:SYSTEM,,,,
+N:SYMBOLE.FON,  0:SYSTEM,,,,
+N:SYMBOLF.FON,  0:SYSTEM,,,,
+N:SMALLE.FON,   0:SYSTEM,,,,
+N:SMALLF.FON,   0:SYSTEM,,,,
+N:ROMAN.FON,    0:SYSTEM,,,,
+N:SCRIPT.FON,   0:SYSTEM,,,,
+N:MODERN.FON,   0:SYSTEM,,,,
+
+
+; //////////////////////////////////////////////
+; // 1 0 2 4 x 7 6 8   L A R G E   F O N T    //
+; //////////////////////////////////////////////
+[NM3L]
+,,system.ini, NeoMagic, "Resolution=", "Resolution=1024x768"
+,,system.ini, NeoMagic, "dpi=",        "dpi=120"
+,,system.ini, NeoMagic, "BESTFIT=",    "BESTFIT=1"
+,,system.ini, NeoMagic, "AUTORES=",    "AUTORES=OFF"
+N:NM20XX8.DRV,  0:SYSTEM,,,,
+N:NM20XX16.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DLL, 0:SYSTEM,,,,
+N:NM20XX24.LIN, 0:SYSTEM,,,,
+N:NEO24.LIN,    0:SYSTEM,,,,
+N:NEOVGA.DLL,   0:SYSTEM,,,,
+N:NEOSVGA.DLL,  0:SYSTEM,,,,
+N:NMXVDD.386,   0:SYSTEM,,,,
+N:NMX.3GR,      0:SYSTEM,,,,
+N:DCINEO.DRV,   0:SYSTEM, system.ini, drivers, "DCI=",       "DCI=DCINEO"
+N:VPMNEO.DRV,   0:SYSTEM, system.ini, drivers, "vpm=",       "vpm=VPMNEO.DRV"
+N:UDH.DLL,      0:SYSTEM, system.ini, drivers, "vids.draw=", "vids.draw=UDH.DLL"
+N:ICCVID.DRV,   0:SYSTEM, system.ini, drivers, "VIDC.CVID=", "VIDC.CVID=iccvid.drv"
+N:IYVU9.DLL,    0:SYSTEM, system.ini, drivers, "VIDC.YVU9=", "VIDC.YVU9=iyvu9.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV31=", "VIDC.IV31=ir32.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV32=", "VIDC.IV32=ir32.dll"
+N:DCIMAN.DLL,   0:SYSTEM,,,,
+N:VER.DLL,      0:SYSTEM,,,,
+N:VGACOLOR.2GR, 0:SYSTEM,,,,
+N:VGALOGO.LGO,  0:SYSTEM,,,,
+N:VGALOGO.RLE,  0:SYSTEM,,,,
+N:VGASYS.FON,   0:SYSTEM,,,,
+N:VGAFIX.FON,   0:SYSTEM,,,,
+N:VGAOEM.FON,   0:SYSTEM,,,,
+N:8514SYS.FON,  0:SYSTEM,,,,
+N:8514FIX.FON,  0:SYSTEM,,,,
+N:8514OEM.FON,  0:SYSTEM,,,,
+N:CGA40WOA.FON, 0:SYSTEM,,,,
+N:CGA80WOA.FON, 0:SYSTEM,,,,
+N:EGA40WOA.FON, 0:SYSTEM,,,,
+N:EGA80WOA.FON, 0:SYSTEM,,,,
+N:CGA40850.FON, 0:SYSTEM,,,,
+N:CGA80850.FON, 0:SYSTEM,,,,
+N:EGA40850.FON, 0:SYSTEM,,,,
+N:EGA80850.FON, 0:SYSTEM,,,,
+N:SSERIFE.FON,  0:SYSTEM,,,,
+N:SSERIFF.FON,  0:SYSTEM,,,,
+N:COURE.FON,    0:SYSTEM,,,,
+N:COURF.FON,    0:SYSTEM,,,,
+N:SERIFE.FON,   0:SYSTEM,,,,
+N:SERIFF.FON,   0:SYSTEM,,,,
+N:SYMBOLE.FON,  0:SYSTEM,,,,
+N:SYMBOLF.FON,  0:SYSTEM,,,,
+N:SMALLE.FON,   0:SYSTEM,,,,
+N:SMALLF.FON,   0:SYSTEM,,,,
+N:ROMAN.FON,    0:SYSTEM,,,,
+N:SCRIPT.FON,   0:SYSTEM,,,,
+N:MODERN.FON,   0:SYSTEM,,,,
+
+
+; //////////////////////////////////////////////
+; // 1 2 8 0 x 1 0 2 4   S M A L L   F O N T  //
+; //////////////////////////////////////////////
+[NM4S]
+,,system.ini, NeoMagic, "Resolution=", "Resolution=1280x1024"
+,,system.ini, NeoMagic, "dpi=",        "dpi=96"
+,,system.ini, NeoMagic, "BESTFIT=",    "BESTFIT=1"
+,,system.ini, NeoMagic, "AUTORES=",    "AUTORES=OFF"
+N:NM20XX8.DRV,  0:SYSTEM,,,,
+N:NM20XX16.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DLL, 0:SYSTEM,,,,
+N:NM20XX24.LIN, 0:SYSTEM,,,,
+N:NEO24.LIN,    0:SYSTEM,,,,
+N:NEOVGA.DLL,   0:SYSTEM,,,,
+N:NEOSVGA.DLL,  0:SYSTEM,,,,
+N:NMXVDD.386,   0:SYSTEM,,,,
+N:NMX.3GR,      0:SYSTEM,,,,
+N:DCINEO.DRV,   0:SYSTEM, system.ini, drivers, "DCI=",       "DCI=DCINEO"
+N:VPMNEO.DRV,   0:SYSTEM, system.ini, drivers, "vpm=",       "vpm=VPMNEO.DRV"
+N:UDH.DLL,      0:SYSTEM, system.ini, drivers, "vids.draw=", "vids.draw=UDH.DLL"
+N:ICCVID.DRV,   0:SYSTEM, system.ini, drivers, "VIDC.CVID=", "VIDC.CVID=iccvid.drv"
+N:IYVU9.DLL,    0:SYSTEM, system.ini, drivers, "VIDC.YVU9=", "VIDC.YVU9=iyvu9.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV31=", "VIDC.IV31=ir32.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV32=", "VIDC.IV32=ir32.dll"
+N:DCIMAN.DLL,   0:SYSTEM,,,,
+N:VER.DLL,      0:SYSTEM,,,,
+N:VGACOLOR.2GR, 0:SYSTEM,,,,
+N:VGALOGO.LGO,  0:SYSTEM,,,,
+N:VGALOGO.RLE,  0:SYSTEM,,,,
+N:VGASYS.FON,   0:SYSTEM,,,,
+N:VGAFIX.FON,   0:SYSTEM,,,,
+N:VGAOEM.FON,   0:SYSTEM,,,,
+N:8514SYS.FON,  0:SYSTEM,,,,
+N:8514FIX.FON,  0:SYSTEM,,,,
+N:8514OEM.FON,  0:SYSTEM,,,,
+N:CGA40WOA.FON, 0:SYSTEM,,,,
+N:CGA80WOA.FON, 0:SYSTEM,,,,
+N:EGA40WOA.FON, 0:SYSTEM,,,,
+N:EGA80WOA.FON, 0:SYSTEM,,,,
+N:CGA40850.FON, 0:SYSTEM,,,,
+N:CGA80850.FON, 0:SYSTEM,,,,
+N:EGA40850.FON, 0:SYSTEM,,,,
+N:EGA80850.FON, 0:SYSTEM,,,,
+N:SSERIFE.FON,  0:SYSTEM,,,,
+N:SSERIFF.FON,  0:SYSTEM,,,,
+N:COURE.FON,    0:SYSTEM,,,,
+N:COURF.FON,    0:SYSTEM,,,,
+N:SERIFE.FON,   0:SYSTEM,,,,
+N:SERIFF.FON,   0:SYSTEM,,,,
+N:SYMBOLE.FON,  0:SYSTEM,,,,
+N:SYMBOLF.FON,  0:SYSTEM,,,,
+N:SMALLE.FON,   0:SYSTEM,,,,
+N:SMALLF.FON,   0:SYSTEM,,,,
+N:ROMAN.FON,    0:SYSTEM,,,,
+N:SCRIPT.FON,   0:SYSTEM,,,,
+N:MODERN.FON,   0:SYSTEM,,,,
+
+
+; /////////////////////////////////////////////
+; // 1 2 8 0 x 1 0 2 4   LARGE   F O N T     //
+; /////////////////////////////////////////////
+[NM4L]
+,,system.ini, NeoMagic, "Resolution=", "Resolution=1280x1024"
+,,system.ini, NeoMagic, "dpi=",        "dpi=120"
+,,system.ini, NeoMagic, "BESTFIT=",    "BESTFIT=1"
+,,system.ini, NeoMagic, "AUTORES=",    "AUTORES=OFF"
+N:NM20XX8.DRV,  0:SYSTEM,,,,
+N:NM20XX16.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DRV, 0:SYSTEM,,,,
+N:NM20XX24.DLL, 0:SYSTEM,,,,
+N:NM20XX24.LIN, 0:SYSTEM,,,,
+N:NEO24.LIN,    0:SYSTEM,,,,
+N:NEOVGA.DLL,   0:SYSTEM,,,,
+N:NEOSVGA.DLL,  0:SYSTEM,,,,
+N:NMXVDD.386,   0:SYSTEM,,,,
+N:NMX.3GR,      0:SYSTEM,,,,
+N:DCINEO.DRV,   0:SYSTEM, system.ini, drivers, "DCI=",       "DCI=DCINEO"
+N:VPMNEO.DRV,   0:SYSTEM, system.ini, drivers, "vpm=",       "vpm=VPMNEO.DRV"
+N:UDH.DLL,      0:SYSTEM, system.ini, drivers, "vids.draw=", "vids.draw=UDH.DLL"
+N:ICCVID.DRV,   0:SYSTEM, system.ini, drivers, "VIDC.CVID=", "VIDC.CVID=iccvid.drv"
+N:IYVU9.DLL,    0:SYSTEM, system.ini, drivers, "VIDC.YVU9=", "VIDC.YVU9=iyvu9.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV31=", "VIDC.IV31=ir32.dll"
+N:IR32.DLL,     0:SYSTEM, system.ini, drivers, "VIDC.IV32=", "VIDC.IV32=ir32.dll"
+N:DCIMAN.DLL,   0:SYSTEM,,,,
+N:VER.DLL,      0:SYSTEM,,,,
+N:VGACOLOR.2GR, 0:SYSTEM,,,,
+N:VGALOGO.LGO,  0:SYSTEM,,,,
+N:VGALOGO.RLE,  0:SYSTEM,,,,
+N:VGASYS.FON,   0:SYSTEM,,,,
+N:VGAFIX.FON,   0:SYSTEM,,,,
+N:VGAOEM.FON,   0:SYSTEM,,,,
+N:8514SYS.FON,  0:SYSTEM,,,,
+N:8514FIX.FON,  0:SYSTEM,,,,
+N:8514OEM.FON,  0:SYSTEM,,,,
+N:CGA40WOA.FON, 0:SYSTEM,,,,
+N:CGA80WOA.FON, 0:SYSTEM,,,,
+N:EGA40WOA.FON, 0:SYSTEM,,,,
+N:EGA80WOA.FON, 0:SYSTEM,,,,
+N:CGA40850.FON, 0:SYSTEM,,,,
+N:CGA80850.FON, 0:SYSTEM,,,,
+N:EGA40850.FON, 0:SYSTEM,,,,
+N:EGA80850.FON, 0:SYSTEM,,,,
+N:SSERIFE.FON,  0:SYSTEM,,,,
+N:SSERIFF.FON,  0:SYSTEM,,,,
+N:COURE.FON,    0:SYSTEM,,,,
+N:COURF.FON,    0:SYSTEM,,,,
+N:SERIFE.FON,   0:SYSTEM,,,,
+N:SERIFF.FON,   0:SYSTEM,,,,
+N:SYMBOLE.FON,  0:SYSTEM,,,,
+N:SYMBOLF.FON,  0:SYSTEM,,,,
+N:SMALLE.FON,   0:SYSTEM,,,,
+N:SMALLF.FON,   0:SYSTEM,,,,
+N:ROMAN.FON,    0:SYSTEM,,,,
+N:SCRIPT.FON,   0:SYSTEM,,,,
+N:MODERN.FON,   0:SYSTEM,,,,
+
+
+; ////////////////////////////////////////
+; //    F O N T S    S E C T I O N      //
+; ////////////////////////////////////////
+
+[sysfonts]
+N:vgasys.fon,  "VGA (640x480) resolution System Font",     "100,96,96"
+N:8514sys.fon, "8514/a (1024x768) resolution System Font", "100,120,120"
+
+[fixedfonts]
+N:vgafix.fon,  "VGA (640x480) resolution Fixed System Font",     "100,96,96"
+N:8514fix.fon, "8514/a (1024x768) resolution Fixed System Font", "100,120,120"
+
+[oemfonts]
+N:vgaoem.fon,  "VGA (640x480) resolution Terminal Font (USA/Europe)",     "100,96,96",1
+N:8514oem.fon, "8514/a (1024x768) resolution Terminal Font (USA/Europe)", "100,120,120",1
+
+; ///////////////////////////////////////////////////////////////
+; //  Install only fonts that apply to the resolution selected //
+; //  on the display menu.                                     //
+; ///////////////////////////////////////////////////////////////
+[fonts]
+N:SSERIFE.FON, "MS Sans Serif 8,10,12,14,18,24 (VGA res)",    "100,96,96"
+N:SSERIFF.FON, "MS Sans Serif 8,10,12,14,18,24 (8514/a res)", "100,120,120"
+
+N:COURE.FON,   "Courier 10,12,15 (VGA res)",    "100,96,96"
+N:COURF.FON,   "Courier 10,12,15 (8514/a res)", "100,120,120"
+
+N:SERIFE.FON,  "MS Serif 8,10,12,14,18,24 (VGA res)",    "100,96,96"
+N:SERIFF.FON,  "MS Serif 8,10,12,14,18,24 (8514/a res)", "100,120,120"
+
+N:SYMBOLE.FON, "Symbol 8,10,12,14,18,24 (VGA res)",    "100,96,96"
+N:SYMBOLF.FON, "Symbol 8,10,12,14,18,24 (8514/a res)", "100,120,120"
+
+N:SMALLE.FON,  "Small Fonts (VGA res)",    "100,96,96"
+N:SMALLF.FON,  "Small Fonts (8514/a res)", "100,120,120"
+
+N:ROMAN.FON,   "Roman (Plotter)",  "CONTINUOUSSCALING"
+N:SCRIPT.FON,  "Script (Plotter)", "CONTINUOUSSCALING"
+N:MODERN.FON,  "Modern (Plotter)", "CONTINUOUSSCALING"
+
+
+; ////////////////////////////
+; //  E N D    S C R I P T  //
+; ////////////////////////////
+

@@ -1,0 +1,20 @@
+3Com Corporation
+EtherDisk Diskette for the EtherLink III LAN  PC Card 
+EtherLink/PC Card Compatibility Guide
+
+
+ To access the current listing of compatible hardware/software for the 
+ EtherLink III LAN PC Card (3C589), call 3Com's CardFacts FAX Service. 
+ CardFacts is an automated FAX-back service available 24 hours a day,
+ 7 days a week.  To access CardFacts from anywhere in the world dial 
+ (1) (408) 727-7021 on your touch-tone phone and select Option 1.  
+ Request document number 4319 for the PC Card Hardware Compatibility Guide
+ and document number 9071 for the Software Compatibility Guide.  The
+ documents will be sent to your FAX machine.
+
+ Document number 9999 provides a listing of all currently available
+ documents on CardFacts.
+
+
+  (%VER  Compatibility Guide v1.2a)
+

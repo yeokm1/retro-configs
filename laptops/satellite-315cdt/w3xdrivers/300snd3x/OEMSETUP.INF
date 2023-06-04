@@ -1,0 +1,6 @@
+[disks]
+1=.\,"YAMAHA OPL3-SA Driver"
+
+[Installable.Drivers]
+OPL3SA = 1:opl3sa.drv, "Wave,MIDI,AUX,MIXER,joystick", "YAMAHA OPL3-SA WAVE & MIDI","1:vopl3sa.386,1:vymixd.386"
+

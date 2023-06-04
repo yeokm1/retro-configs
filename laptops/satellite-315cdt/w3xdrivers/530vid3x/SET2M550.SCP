@@ -1,0 +1,130 @@
+/**************************************************************************
+ *                                                                        *
+ *      Script file for Driver SETUP program                              *
+ *                                                                        *
+ *      First Edition:  February 28, 1990                                 *
+ *      Modification:   November 5, 1991 (for 65520)                      *
+ *      Modification:   April 14, 1994 (for File Compression)             *
+ *      Modification:   August 4, 1994 (for C&T Video Chip Detection)     *
+ *      Modification:   January 4, 1994 (for 512K video detection         *
+ *                      and Japanese Environment support)                 *
+ *      Modification:   July 11, 1995 (for 65550 Video Driver)            *
+ *      (C) Copyright 1990-1996, Chips and Technologies, Inc.             *
+ *                                                                        *
+ **************************************************************************/
+
+NOZIP   /* This version uncompresses compressed files */
+
+/**************************************************************************
+ *      Resolution and Utility Definition                                 *
+ **************************************************************************/
+ASSIGN  RALL,       "All Resolutions"
+ASSIGN  R768C256,   "Resolution = 1024x768, Color = 256"
+ASSIGN  R600C256,   "Resolution =  800x600, Color = 256"
+ASSIGN  R480C256,   "Resolution =  640x480, Color = 256"
+ASSIGN  R400C256,   "Resolution =  640x400, Color = 256"
+ASSIGN  R768C16,    "Resolution = 1024x768, Color = 16"
+ASSIGN  R600C16,    "Resolution =  800x600, Color = 16"
+ASSIGN  R480C16,    "Resolution =  640x480, Color = 16"
+ASSIGN  R600C2,     "Resolution =  800x600, Color = 2"
+ASSIGN  T132x25,    "Text Resolution = 132x25"
+ASSIGN  T132x50,    "Text Resolution = 132x50"
+ASSIGN  R600T132x50,"Resolution =  800x600, Text = 132x50"
+ASSIGN  R600T132x25,"Resolution =  800x600, Text = 132x25"
+ASSIGN  R600T80x50, "Resolution =  800x600, Text =  80x50"
+ASSIGN  R600T80x25, "Resolution =  800x600, Text =  80x25"
+ASSIGN  SETCOL,     "<<<      SETCOL.COM      >>>"
+
+/**************************************************************************
+ *      Path Definition                                                   *
+ **************************************************************************/
+ASSIGN  WINDOWS, "WINDOWS"
+
+ASSIGN  Disk1,  "Driver Disk #1"
+
+/**************************************************************************
+ *      Allocated Path with disk                                          *
+ **************************************************************************/
+
+ALLOC   Disk1, WINDOWS
+
+
+/**************************************************************************
+ *      COLOR ATTRIBUTES FOR EACH SCREEN                                  *
+ **************************************************************************/
+ATTRIBUTE {
+	LOGO    15,  1          /* Foreground, Background */
+	MENU1   15,  1, 4       /* Foreground, Background, Highlight */
+	MENU2   15,  3, 4       /* Foreground, Background, Highlight */
+	OTHERS  15,  2          /* Foreground, Background */
+}
+
+/**************************************************************************
+ *      LOGO Menu Definition                                              *
+ **************************************************************************/
+MENU LOGO {
+MESSAGE 2,15,"DISPLAY DRIVER SETUP PROGRAM   - Version 2.10 -"
+MESSAGE 4,15,"(C) Copyright 1992,1996, Chips and Technologies, Inc."
+/* MESSAGE 7,15,"EVALUATION ONLY - NOT FOR SALE" */
+MESSAGE 8,15,"DECOMPILATION OR DISASSEMBLY PROHIBITED"
+MESSAGE 11,15,"CHIPS 6555X Display Drivers"
+/* MESSAGE 14,15,"Preliminary Version 1.2.7" */
+MESSAGE 14,15,"Production Version 1.2.7.2"
+MESSAGE 18,15,"<<< Press any key to continue >>>"
+}
+
+
+/**************************************************************************
+ *      MENU1 Menu Definition                                             *
+ **************************************************************************/
+MENU MENU1 {
+MESSAGE 1,15,    "Select any Application Driver to install"
+LINE    WN_31,   "Windows Version 3.1 (6555X accelerated drivers)"
+}
+
+/**************************************************************************
+ *      MENU2 ENTRY Definition                                            *
+ *      Copying Definition                                                *
+ **************************************************************************/
+
+WINDOW  WN_31 {
+	EXTRACT WINDOWS
+	PATH "C:\WINDOWS"
+	SCREEN WINDOWS31_ALL {
+		ENTRY   RALL
+                COPY    "CHIPSVPM.DL$", "SYSTEM\CHIPSVPM.DLL"
+                COPY    "OEMSETUP.INF", "SYSTEM\OEMSETUP.INF"
+                COPY    "CHIPSMM.in$", "CHIPSMM.ini"
+                COPY    "OEM2M550.INF",  "SYSTEM\OEM6555x.INF"
+		COPY    "WINMEM32.DL$","SYSTEM\WINMEM32.DLL"
+		COPY    "MM55X4.DR$",  "SYSTEM\MM55X4.DRV"
+		COPY    "MM55X8.DR$",  "SYSTEM\MM55X8.DRV"
+		COPY    "MM55X16.DR$", "SYSTEM\MM55X15.DRV"
+		COPY    "MM55X16.DR$", "SYSTEM\MM55X16.DRV"
+		COPY    "MM55X24.DR$", "SYSTEM\MM55X24.DRV"
+                COPY    "DPGRAB.DL$",  "SYSTEM\DPGRAB.DLL"
+                COPY    "VDDD.38$",    "SYSTEM\VDDD.386"
+                COPY    "CHIP31.38$",  "SYSTEM\CHIP31.386"
+		COPY    "CHIP.2G$",    "SYSTEM\CHIP.2GR"
+		COPY    "CHIP.3G$",    "SYSTEM\CHIP.3GR"
+                /* COPY    "CHIPSMM.IN$","SYSTEM\CHIPSMM.INI" */
+                COPY    "CHIPSCPL.CP$","SYSTEM\CHIPSCPL.CPL"
+                COPY    "CHIPSCPL.HL$","SYSTEM\CHIPSCPL.HLP"
+		COPY    "CHIPSCPL.IN$","CHIPSCPL.INI"
+		COPY    "8514FIX.FO$", "SYSTEM\8514FIX.FON"
+		COPY    "8514OEM.FO$", "SYSTEM\8514OEM.FON"
+		COPY    "8514SYS.FO$", "SYSTEM\8514SYS.FON"
+		COPY    "COURF.FO$",   "SYSTEM\COURF.FON"
+		COPY    "SERIFF.FO$",  "SYSTEM\SERIFF.FON"
+		COPY    "SMALLF.FO$",  "SYSTEM\SMALLF.FON"
+		COPY    "SSERIFF.FO$", "SYSTEM\SSERIFF.FON"
+		COPY    "SYMBOLF.FO$", "SYSTEM\SYMBOLF.FON"
+	}
+	GUIDE WN_31 {
+                LAYOUT  60, 6
+		"  Change to your Windows directory and type SETUP  "
+		"  to run the Windows Setup program.  Choose one of "
+		"  the new drivers marked by an *.  Please refer to "
+		"  the User's Guide to complete the installation.   "
+	}
+}

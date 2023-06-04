@@ -1,0 +1,266 @@
+
+P o q e t   S y s t e m   S e t u p   U t i l i t y                    
+U s e r ' s   G u i d e 
+
+Revision 3.052-a
+July 6, 1994
+
+This document describes the Poqet System Setup Utility (PQSETUP), version 3.02
+that is part of release 3.052 of the Plus Series System Software.
+
+In usage syntax descriptions, optional arguments for the utilities are
+enclosed in brackets ("[" and "]"). 
+
+The Poqet System Setup Utility (PQSETUP) will change various system
+parameters, including power management settings and serial port
+configurations.  
+
+The command line syntax of PQSETUP is: 
+
+PQSETUP [/?] [/F] [/K=country] [/V=video] [/P=power_mode] [/O=off_timer] 
+        [/B=x;y;z] [/A=x;y;z] [/C=x;y;z] [/M=backlight] [/L=bl_timer] 
+        [/R=port_config] [/S=cpu_speed] [/X=access_code] [/E=serial_mode] 
+
+These options are described  in detail below. 
+
+/?             If no option is specified or the "/?" option is used, 
+or             PQSETUP will display a brief description of all the commands 
+"no options"   and options that can be specified for PQSETUP.
+
+/F             The "/F" option will reset the system settings to the 
+               factory defaults.
+
+/K=country     The "/K" option sets the default system country code to 
+               <country>. See the Plus Series Technical Reference Guide for 
+               a list of valid country codes.
+
+               Default: country = 00 (USA)
+               
+               Example: "PQSETUP /K=01" sets the country code to the United 
+                        Kingdom.
+
+/V=video       The "/V" option sets the default video adapter to either CGA 
+               or MDA.  If <video> is "C" then the default video adapter will 
+               be the CGA-compatible adapter.  If <video> is "M" then the 
+               MDA-compatible adapter will be used.
+
+               Default: video = C (CGA mode)
+
+               Example: "PQSETUP /V=M" sets the default video adapter to 
+                        MDA-compatible.
+
+/P=power_mode  The "/P" option sets the default power management (PM) mode to 
+               that specified by <power_mode>.  Common values for <power_mode>
+               are "00" (PM off), "02" (PM on), and "82" (communications mode).
+               See the Plus Series Technical Reference Guide for a complete 
+               list of valid power management modes.
+
+               Default: power_mode = 02 (PM on)
+
+               Example: "PQSETUP /P=00" turns power management off.
+
+/O=off_timer   The "/O" option sets the power down timer to the value specified
+               by <off_timer>.  <Off_timer> specifies the number of "power 
+               management ticks" that must elapse before the system will 
+               auto-suspend when the system is idle and power management is 
+               active.  A power management tick is 27.5 msec.  The value of 
+               <off_timer> is hexadecimal, and can range from 0000 to FFFF.
+
+               Default: off_timer = 2228 (4 minutes)
+
+               Example: "PQSETUP /O=088A" will set the auto-suspend timer to 
+               1 minute.
+
+/B= x;y;z      The "/B" option sets the search order for a DOS boot drive.
+               The values <x>, <y>, and <z> can be any of the Plus Series 
+               drive letters: "A", "B", "C", or "D".
+
+               Default: C;C;C (the system will always boot from drive C:)
+
+               Example: "PQSETUP /B=A;B;C" will set the system to boot from 
+                        drive A:.  If there is no card in drive A:, then the 
+                        system will boot from drive B:.  If there is no card 
+                        in drive B:, then the system will boot from drive C:.
+
+/A=x;y;z       The "/A" option sets the search order for AUTOEXEC.BAT.  
+               The values <x>, <y>, and <z> can be any of the Plus Series 
+               drive letters: "A", "B", "C", or "D".
+
+               Default: A;D;C (the system will search for AUTOEXEC.BAT first 
+                        on drive A:, then on drive D:, then on drive C:)
+
+               Example: "PQSETUP /A=A;B;C" will set the system to search for 
+                        AUTOEXEC.BAT on drive A:.  If there is no AUTOEXEC.BAT 
+                        on drive A:, then the system will look on drive B:.  
+                        If it is not found on drive B:, then the system will 
+                        look on drive C:.
+
+/C=x;y;z       The "/C" option sets the search order for CONFIG.SYS.  The 
+               values <x>, <y>, and <z> can be any of the Plus Series drive 
+               letters: "A", "B", "C", or "D".
+
+               Default: A;D;C (the system will search for CONFIG.SYS first on 
+                        drive A:, then on drive D:, then on drive C:)
+
+               Example: "PQSETUP /C=A;B;C" will set the system to search for 
+                        CONFIG.SYS on drive A:.  If there is no CONFIG.SYS on 
+                        drive A:, then the system will look on drive B:.  If 
+                        it is not found on drive B:, then the system will 
+                        look on drive C:.
+
+/M=backlight   The "/M" option turns the backlight either on or off, and will 
+               change the default backlight setting when the system boots or 
+               is resumed from standby mode (with the green On/Off button). 
+               If <backlight> is "00", then the backlight will turn off and 
+               will be off when the system is resumed.  If <backlight> is 
+               "01", then the backlight will be turned on, and it will be on 
+               when the system is resumed.
+
+               Default: backlight = 00 (backlight off)
+
+               Example: "PQSETUP /M=01" will turn the backlight on, and set 
+                        the system default so that the backlight will be on 
+                        whenever the system boots up or is resumed.
+
+/L=bl_timer    The "/L" option sets the backlight-off timer to the value 
+               specified by <bl_timer>.   <bl_timer> specifies the number of 
+               "power management ticks" that must elapse before the backlight 
+               will be shut off (if it is on) when the system is idle and 
+               power management is active.  One power management tick is 
+               27.5 msec.  The value of <bl_timer> is hexadecimal, and can
+               range from 0000 to FFFF.
+
+               Default: bl_timer = 2228 (4 minutes)
+
+               Example: "PQSETUP /L=088A" will set the backlight-off timer 
+                        to 1 minute.
+
+/R=port_config The "/R" option configures the serial port hardware in a Plus 
+               Series product.  The parameter <port_config> specifies the 
+               actual configuration of the serial port hardware.
+
+               <Port_config> consists of two letters and two numbers, in the 
+               format "xynm", where:
+
+               a) x specifies where device #1 will be directed, and y 
+                  specifies where device #2 will be directed.  x can be:
+                  D: device 1 is disabled
+                  I: device 1 directed to infrared serial port (PoqetPad 
+                     Plus only)
+                  R: device 1 directed to RS-232 port
+                  T: device 1 directed to TTL serial port
+
+                  y can be:
+                  D: device 2 is disabled
+                  I: device 2 directed to infrared serial port (PoqetPad 
+                     Plus only)
+                  B: device 2 directed to barcode reader port
+                  T: device 2 directed to TTL serial port
+
+                  Valid combinations of x and y are "DD", "DI", "DB", "RD", 
+                  "TD", "RI", "TB","IB", and "RT". 
+
+                  A dash ("-") preceding either device identifier indicates 
+                  that the corresponding device will have its polarity 
+                  inverted.  This option is only valid with the barcode 
+                  reader (B), infrared (I), and TTL (T) devices only.
+
+               b) n specifies which communications port (COM1: or COM2) will 
+                  be used for the first enabled device. "1" specifies COM1: 
+                  and "2" specifies COM2:.  The second enabled device will 
+                  use the other communications port.
+
+               c) m specifies which hardware interrupt, or IRQ, will be used 
+                  by the comm port specified by the n parameter.  The valid 
+                  options are "3" (specifying IRQ3) and "4" (specifying IRQ4).
+                  The IBM-PC/XT standard specifies that COM1: should use IRQ4 
+                  and COM2: should use IRQ3.
+
+               If both serial ports are to be disabled, the m and n parameters 
+               do not need to be specified, so you can simply issue the 
+               command "PQSETUP /R=DD".
+
+               Default:  port_config = RD14 (COM1: is a standard RS-232 serial 
+                         port using IRQ4, and COM2: is disabled).
+
+               Examples: If you want to connect an inverted polarity barcode 
+                         reader  on COM1:, you would issue the command
+                             PQSETUP /R=D-B14
+
+                         Note that the IRQ number must be specified, even 
+                         though it conforms to the IBM-PC standard.  Note also 
+                         that even though the "B" specifying the barcode 
+                         reader is the second device specified, it is put on 
+                         COM1: because the "1" that specifies COM1: refers to 
+                         the first enabled device, which happens to be the 
+                         barcode reader.  
+
+                         To put an inverted polarity barcode reader on COM1:, 
+                         and the infrared port on COM2:, the command would be
+                              PQSETUP /R=I-B23
+
+/S=cpu_speed   The "/S" option specifies the maximum clock frequency at which 
+               power management will allow the system to run. The parameter 
+               <cpu_speed> specifies the frequency as follows:  
+
+               cpu_speed    maximum clock frequency
+                   0                2 Mhz
+                   1                4 Mhz
+                   2                8 Mhz
+                   3               16 Mhz
+ 
+               Default: cpu_speed = 3 (maximum clock frequency is 16 Mhz)
+
+               Example: "PQSETUP /S=2" sets the max. clock speed to 8 MHz.
+
+/X=access_code The "/X" option enables or disables access to the pop-up 
+               configuration utility through the on-screen button on the 
+               PoqetPad Plus or the hotkey sequence (Fn+ESC) on the Poqet PC 
+               Plus (or a Poqet Pad Plus with a keyboard).  The "/X" option 
+               also controls whether the user has the ability to modify the 
+               power management settings through the use of the on-screen 
+               button on the PoqetPad Plus or the hotkey sequence (Fn+F2) on 
+               the Poqet PC Plus or the PoqetPad Plus with a keyboard.
+
+               The parameter <access_code> specifies which kinds of access are 
+               to be allowed or disallowed.  <Access_code> consists of two 
+               letters the format "xy" where:
+
+               a) x specifies whether you want to enable or disable the 
+                  option; x can be one of:
+                  E: enable option
+                  D: disable option
+
+               b) y specifies the option you want to affect;  y can be one of:
+                  P: enable/disable the ability to modify power management 
+                     settings
+                  S: enable/disable the ability to invoke pop-up configuration 
+                     utility
+                  B: enable/disable the ability to modify power management 
+                     settings and to invoke the pop-up configuration utility
+
+               Default: access_code = EB (power management can be changed, 
+                        and the pop-up configurator can be accessed)
+
+               Example: "PQSETUP /X=DP" will keep the user from modifying 
+                        the power management settings.
+
+/E=serial_mode The "/E" option controls the status of the incoming modem 
+               control signals when one of the communications ports is 
+               configured for the barcode reader port or the infrared port.
+               The parameter <serial_mode> specifies the polarity of the 
+               modem control signals Carrier Detect (CD), Clear To Send 
+               (CTS), and Data Set Ready (DSR).  If <serial_mode> is "00" 
+               then the modem control signals will be inactive.  If 
+               <serial_mode> is "01" then the modem control signals will 
+               be active.
+
+               Default: serial_mode = 00 (the modem control signals are 
+                        inactive)
+
+               Example: "PQSETUP /E=01" will set the CD, CTS, and DSR signals 
+                        to their active state when the barcode reader port or 
+                        infrared port is in use.
+
+               This option is effective only on certain hardware revisions of 
+               the Plus Series Products.

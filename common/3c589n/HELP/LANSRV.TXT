@@ -1,0 +1,129 @@
+3Com (R)  Corporation 
+Installing IBM LAN Server 4.0 for DOS and OS/2  
+
+
+OS/2
+======
+
+This procedure describes how to install the NDIS driver 
+for LAN Server 4.0.  OS/2 must already be installed on 
+your computer.  To install the NDIS driver for the 3C589 
+EtherLink III LAN PC Card, follow these steps:
+
+ 1. Open an OS/2 prompt.
+
+ 2. Insert the LAN Server MPTS (Multi-Protocol Transport 
+    Services) disk 1 in your diskette drive.  
+
+ 3. Make that drive your current drive.  Type: 
+       A: [Enter]
+
+ 4. Type:
+    Install [Enter]
+
+ 5. Select OK.
+
+ 6. Select Install.
+
+ 7. Select a target drive and then choose OK,
+
+    The default drive is C.
+
+ 8. Insert disk 2 when prompted and select OK.
+
+ 9. Select OK when the MPTS installation is complete.  
+
+10. Select  Configure.
+
+11. Select LAN Adapters and Protocols 
+    and then choose Configure.
+
+12. Select Other Adapters and then choose OK.
+
+13. Insert the 3Com EtherDisk diskette in the 
+    diskette drive and enter the drive letter and path to 
+    the 3Com NDIS drivers.  For example, type:
+
+      A:\NDIS\OS2
+
+14. Select OK.
+
+15. Select 3Com EtherLink III PC Card for 
+    OS/2 and then choose Add. 
+
+16. Under Current Configuration, select 3Com 
+    EtherLink III PC Card for OS/2 and then choose 
+    Edit. 
+
+17. Enter the 12-digit address of your EtherLink 
+    III LAN PC Card and then choose OK. 
+
+      The address is found on the back of the 
+      PC Card following the characters EA=.  
+
+18. Select the protocol(s) you will be using with 
+    your network and then choose Add.  
+
+19. Select your protocol(s) under Current 
+    Configuration and then choose Edit.
+
+20. Enter the 12-digit address of your 
+    EtherLink III LAN PC card and then choose OK.  
+
+21. Select  OK. 
+
+22. Select  Close.  
+
+23. Select  Exit.  
+
+24. Select Update CONFIG.SYS and choose Exit.  
+
+25. Select OK.
+
+26. Select Exit.
+
+27. Quit OS/2 and reboot for the changes to take effect.
+
+28. Follow the IBM instructions on installing 
+    LAN Server to complete the installation.
+
+
+
+
+DOS
+======
+
+IBM DOS Lan Services Install v4.0
+
+
+1. Insert the disk labeled "Dos Lan Services Disk 1" into 
+   your disk drive.
+
+2. Change to that drive and type in "INSTALL"
+
+3. Choose the directory you want the software installed to.
+   The default is "C:\NET".
+
+4. A menu will appear that provides a list of  Network Cards.
+   Choose "Network card not shown in the list below..." 
+
+5. Type in "A:\IBM_40 and remove the "Dos Lan Services Disk 1"
+   diskette and insert the EtherDisk.
+
+6. The next menu should display "3Com 3C589 EtherLink III 
+   PC Card.
+
+7. Additional menus will appear, choose the appropriate options
+   for your network environment. Refer to the IBM manual if 
+   there are questions regarding these menus.
+
+8. After completing the installation you must copy ELPC3X.DOS 
+   to C:\NET before rebooting.
+
+
+=========================================================
+
+
+
+(%VER NDIS - IBM LAN Server v2.1c)
+

@@ -1,0 +1,10 @@
+[PE3OS2V2_NIF]
+ Type = NDIS
+ Title = "Xircom Pocket Ethernet Adapter III"
+ Version = 1.00
+ DriverName = XIRCOM$
+ XPORTS = NETBEUI LANDD
+
+[File]
+ Name = PE3NDIS.OS2
+ Path = IBMCOM\MACS

@@ -1,0 +1,61 @@
+IBM ThinkPad                                           February 26, 1999
+Video Features Diskette (NM2200) for Windows 3.1 for 390E
+
+Version 1.16
+========================================================================
+
+
+What This Diskette Does
+-----------------------
+This package provides the display driver for Windows 3.1 users.
+The display driver enables or updates the display function of
+the following ThinkPad computers:
+
+  - ThinkPad 390E
+
+To determine if you have to update the display driver or not, please
+refer to the "Summary of Changes" section.
+
+To update the display driver, please refer to the "Installation Guide"
+section.
+
+
+Released Versions
+-----------------
+Version 1.16     Initial release
+
+
+Summary of Changes
+------------------
+Where: <n.nn>  Diskette version (for example, 1.00 means Version 1.00)
+       (New)   New function or enhancement
+       (Fix)   Correction to existing function
+
+<1.16>
+ -(New) Initial release for ThinkPad 390E.
+
+
+Installation Guide
+------------------
+(Note)
+To determine if you have to update the display driver or not, please
+refer to the "Summary of Changes" section.
+
+  1. Don't enter Windows 3.1.
+  2. Change to C:\WINDOWS directory at DOS mode.
+  3. Type SETUP to run Windows' setup program.
+  4. Use UP direction key to high-light DISPLAY item and press ENTER key.
+  5. Use DOWN direction key to OTHER item and press ENTER key.
+  6. Insert driver diskette into drive A and press ENTER key.
+  7. Select one prefer mode in the list and press ENTER key.
+  8. Press ENTER key to process copying files.
+  9. Back to DOS mode and finish installation.
+
+
+Trademarks
+----------
+  * IBM and ThinkPad are registered trademarks of IBM Corporation.
+  * Windows is a registered trademark of Microsoft Corporation.
+
+  Other company, product, and service names may be registered trademarks,
+  trademarks or service marks of others.

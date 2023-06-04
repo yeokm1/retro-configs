@@ -1,0 +1,225 @@
+unit Wout;
+
+interface
+
+uses
+  Messages, SysUtils, Classes, Graphics, Controls,
+  Forms, Dialogs, MMSystem, StdCtrls, Spin;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Memo1: TMemo;
+    ScrollBar1: TScrollBar;
+    SpinEdit1: TSpinEdit;
+    ScrollBar2: TScrollBar;
+    procedure Button1Click(Sender: TObject);
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure ScrollBar2Change(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.DFM}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+ NumDevs     : Integer;
+ waveCaps    : TWaveOutCaps;
+ Volume      : longint;
+ Left, Right : Word;
+ Version     : Word;
+ tmp,ste:byte;
+ tog:boolean;
+ x,y:real;
+var nam:pchar;
+begin
+memo1.lines.clear;
+
+{// We should have at least one device}
+  NumDevs := waveOutGetNumDevs;
+  Edit1.Text := Format('Number of devices %d', [NumDevs]);
+{// for the 1st device (hard-coded)}
+{// Get Device Caps}
+  waveOutGetDevCaps(spinedit1.value, @waveCaps, SizeOf(waveCaps));
+{// Show device caps}
+{  memo1.lines.add('wMid='+inttostr(waveCaps.wMid)+';'+'wPid='+inttostr(wavecaps.wPid));}
+{  Memo1.Lines.Add('szsupport: '+inttostr(waveCaps.dwsupport));}
+  nam:=waveCaps.szPName;
+  nam[31]:=char(0);{maximum of 32 chars}
+  Memo1.Lines.Add('szPName: '+strpas(nam));
+  Version := waveCaps.vDriverVersion;
+  Memo1.Lines.Add(Format('Driver Version: %d.%d', [Hi(Version), Lo(Version)]));
+  Case waveCaps.wChannels of
+    1 : Memo1.Lines.Add('MONO');
+    2 : Memo1.Lines.Add('Stereo');
+  End;
+{ // Standard formats}
+  If waveCaps.dwSupport AND WAVECAPS_PITCH <> 0 Then memo1.lines.add('Pitch adjustment');
+  If waveCaps.dwSupport AND WAVECAPS_LRVOLUME <> 0 Then memo1.lines.add('Independent L/R volume');
+
+
+
+x:=11.025;
+y:=1;
+tog:=true;
+ste:=1;
+for tmp:=0 to 11 do begin
+tog:=not tog;
+if(y>2)then ste:=2 else ste:=1;
+if((waveCaps.dwFormats shr tmp) and 1)=1 then begin
+memo1.lines.add(inttostr(trunc(x))+' kHz ('+inttostr(byte(tog)+1)+' channel) '+inttostr(ste * 8)+'bits');
+end;
+
+if(y=4)then begin x:=x*2;{+11.025};y:=0; end;
+y:=y+1;
+end;
+
+
+if(1=2) then begin
+memo1.lines.add('');
+ If waveCaps.dwFormats AND WAVE_FORMAT_1M08 <> 0 Then
+  Memo1.Lines.Add('11.025 kHz, mono, 8-bit');
+ If waveCaps.dwFormats AND WAVE_FORMAT_1M16 <> 0 Then
+  Memo1.Lines.Add('11.025 kHz, mono, 16-bit');
+
+ If waveCaps.dwFormats AND WAVE_FORMAT_1S08
+  <> 0 Then Memo1.Lines.Add('11.025 kHz, stereo, 8-bit  ');
+ If waveCaps.dwFormats AND WAVE_FORMAT_1S16
+  <> 0 Then Memo1.Lines.Add('11.025 kHz, stereo, 16-bit  ');
+ If waveCaps.dwFormats AND WAVE_FORMAT_2S08
+  <> 0 Then Memo1.Lines.Add('22.05 kHz, mono, 8-bit  ');
+ If waveCaps.dwFormats AND WAVE_FORMAT_2S16
+  <> 0 Then Memo1.Lines.Add('22.05 kHz, mono, 16-bit  ');
+ If waveCaps.dwFormats AND WAVE_FORMAT_4M08
+  <> 0 Then Memo1.Lines.Add('22.05 kHz, stereo, 8-bit  ');
+ If waveCaps.dwFormats AND WAVE_FORMAT_4M16
+  <> 0 Then Memo1.Lines.Add('22.05 kHz, stereo, 16-bit  ');
+ If waveCaps.dwFormats AND WAVE_FORMAT_4S08
+  <> 0 Then Memo1.Lines.Add('44.1 kHz, mono, 8-bit  ');
+ If waveCaps.dwFormats AND WAVE_FORMAT_4S16
+  <> 0 Then Memo1.Lines.Add('44.1 kHz, stereo, 16-bit  ');
+  end;
+
+
+ If waveCaps.dwFormats AND $1000
+  <> 0 Then Memo1.Lines.Add('48 kHz, mono, 8-bit  ');
+ If waveCaps.dwFormats AND $2000
+  <> 0 Then Memo1.Lines.Add('48 kHz, stereo, 8-bit  ');
+ If waveCaps.dwFormats AND $4000
+  <> 0 Then Memo1.Lines.Add('48 kHz, mono, 16-bit  ');
+ If waveCaps.dwFormats AND $8000
+  <> 0 Then Memo1.Lines.Add('48 kHz, stereo, 16-bit  ');
+
+{Higer sample rate!}
+ If waveCaps.dwFormats AND $10000
+  <> 0 Then Memo1.Lines.Add('?????, mono, 8-bit  ');
+ If waveCaps.dwFormats AND $20000
+  <> 0 Then Memo1.Lines.Add('?????, stereo, 8-bit  ');
+ If waveCaps.dwFormats AND $40000
+  <> 0 Then Memo1.Lines.Add('?????, mono, 16-bit  ');
+ If waveCaps.dwFormats AND $80000
+  <> 0 Then Memo1.Lines.Add('?????, stereo, 16-bit  ');
+
+{Maxium sample rate!}
+ If waveCaps.dwFormats AND $100000
+  <> 0 Then Memo1.Lines.Add('?????, mono, 8-bit  ');
+ If waveCaps.dwFormats AND $200000
+  <> 0 Then Memo1.Lines.Add('?????, stereo, 8-bit  ');
+ If waveCaps.dwFormats AND $400000
+  <> 0 Then Memo1.Lines.Add('?????, mono, 16-bit  ');
+ If waveCaps.dwFormats AND $800000
+  <> 0 Then Memo1.Lines.Add('?????, stereo, 16-bit  ');
+
+{Super sample rate!}
+ If waveCaps.dwFormats AND $1000000
+  <> 0 Then Memo1.Lines.Add('?????, mono, 8-bit  ');
+ If waveCaps.dwFormats AND $2000000
+  <> 0 Then Memo1.Lines.Add('?????, stereo, 8-bit  ');
+ If waveCaps.dwFormats AND $4000000
+  <> 0 Then Memo1.Lines.Add('?????, mono, 16-bit  ');
+ If waveCaps.dwFormats AND $8000000
+  <> 0 Then Memo1.Lines.Add('?????, stereo, 16-bit  ');
+
+{Maxium sample rate!}
+ If waveCaps.dwFormats AND $1000000
+  <> 0 Then Memo1.Lines.Add('?????, mono, 8-bit  ');
+ If waveCaps.dwFormats AND $2000000
+  <> 0 Then Memo1.Lines.Add('?????, stereo, 8-bit  ');
+ If waveCaps.dwFormats AND $4000000
+  <> 0 Then Memo1.Lines.Add('?????, mono, 16-bit  ');
+ If waveCaps.dwFormats AND $8000000
+  <> 0 Then Memo1.Lines.Add('?????, stereo, 16-bit  ');
+
+  {
+WAVE_FORMAT_1S08	11.025 kHz, stereo, 8-bit
+WAVE_FORMAT_1S16	11.025 kHz, stereo, 16-bit
+WAVE_FORMAT_2M08	22.05 kHz, mono, 8-bit
+WAVE_FORMAT_2M16	22.05 kHz, mono, 16-bit
+WAVE_FORMAT_2S08	22.05 kHz, stereo, 8-bit
+WAVE_FORMAT_2S16	22.05 kHz, stereo, 16-bit
+WAVE_FORMAT_4M08	44.1 kHz, mono, 8-bit
+WAVE_FORMAT_4M16	44.1 kHz, mono, 16-bit
+WAVE_FORMAT_4S08	44.1 kHz, stereo, 8-bit
+WAVE_FORMAT_4S16	44.1 kHz, stereo, 16-bit
+}
+
+{// If Volume Control Supported}
+  If waveCaps.dwSupport AND WAVECAPS_VOLUME <> 0 Then
+   Begin
+    waveOutGetVolume(0, @Volume);
+    Left  := Word(Volume);
+    Right := Word(Volume shr 16);
+    scrollbar1.position:=($FF00-left)shr 8;
+    scrollbar2.position:=($FF00-right)shr 8;
+
+{// Show values of WAVE Device on volume control panel}
+    Edit2.Text := Format('Left : %d, Right : %d', [Left, Right]);
+{   waveOutSetVolume(0, $40008000);}
+   End;
+
+
+
+end;
+
+procedure TForm1.ScrollBar1Change(Sender: TObject);
+var lo:longint;
+var w1,w2:word;
+begin
+w1:=$FF00-word(scrollbar1.position shl 8);
+w2:=$FF00-word(scrollbar2.position shl 8);
+lo:=longint(w2) shl 16;
+lo:=lo+longint(w1);
+
+
+
+WAVEOUTSETVOLUME(
+spinedit1.value,lo
+);
+lo:=0;
+WAVEOUTGETVOLUME(spinedit1.value,@lo);
+caption:=inttohex(lo,8);
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+WAVEOUTSETVOLUME(0, $000000);
+end;
+
+procedure TForm1.ScrollBar2Change(Sender: TObject);
+var lo:longint;
+begin
+ScrollBar1Change(sender);
+end;
+
+end.

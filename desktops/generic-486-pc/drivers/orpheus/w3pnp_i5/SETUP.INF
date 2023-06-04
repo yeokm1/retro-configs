@@ -1,0 +1,179 @@
+;
+; SETUP configuration file
+; For Win 31 Version 1.80
+
+[Setup]
+PackageName="CS4232 WSS 2.00 Windows 3.1 Software"
+SetupName="Orpheus Sound Card Setup"
+SetupTitle=""Orpheus Sound Card (IRQ5)",20
+Caption="Crystal Version 1.80 Software"
+SetupVersion="1.80"
+SpaceRequired=3000000
+FirstDisk=1
+ConfigMode=0                              ; Configure = 0, Fixed = 1
+ConfigOptions=111                         ; Off = 0, Options = 1, 2, 4, ...
+Product=1                                 ; Kit type
+DisplayNoPnPWarning=0                     ; No = 0, Yes = 1
+EnablePnP=1                               ; No = 0, Yes = 1
+InstallMPU401=1                           ; No = 0, Yes = 1
+
+; Ex. LaunchApp=notepad.exe,"readme.txt"
+LaunchApp=
+LaunchSet=
+LaunchSetMsg=
+
+[KeyFiles]
+InputApplet=cs32baip.exe
+OutputApplet=cs32baop.exe
+SplashApplet=cs32basp.exe
+DriverFile=cs32ba11.drv
+VxdFile=vsndsys.386
+IniFile=cs32ba11.ini
+BIniFile=csacbat1.ini
+DosIniFile=cs4232.ini
+FmFile=csfm.drv
+MidiFile=mpu401.drv
+
+[Mixer]
+;CS4232DOSMixer="&2\cs32mix /c=13 /l=13"
+
+[sndsys.drv]
+SingleModeDMA=0
+; Generic = 0, WSS Compatible = 1
+MsftHardware=0
+MsftSupport=1
+AutoSelect=0
+MidiPlay=1
+OldMSDosGameCompatibility=1
+OldMSDOSGameIOAddress=220
+BlasterSupport=CS4232
+Duplex=Full
+IOAddress=530
+DMAADC=0
+DMADAC=1
+Interrupt=5
+OEMHardware=
+FMMixer=Line
+CDMixer=Aux2
+LineMixer=Aux1
+BinFile="&2\cwaudio.bin"
+
+[mpu401.drv]
+port=330
+int=9
+
+[csfm.drv]
+portFM=388
+int=0
+
+[PNP]
+WssIO=534
+WssInt=5
+WssDmaPlay=1
+WssDmaCapture=0
+SbIO=220
+OplIO=388
+OplInt=disable
+GameIO=200
+4232IO=538
+4232Int=disable
+MPU401IO=330
+MPU401Int=9
+CDIO=disable
+CDInt=disable
+CDDma=disable
+
+[PMGroups]
+AppCount=4
+; path\filename,group file,group name,description,icon file,icon #
+App0=&2\cs32baip.exe,crystal.grp,"Crystal","Audio Input",,
+App1=&2\cs32baop.exe,crystal.grp,"Crystal","Audio Mixer",,
+App2=&2\csacbat1.exe,crystal.grp,"Crystal","Audio Transport",,
+App3=&2\cw3dw31.exe,crystal.grp,"Crystal","3D Audio Control",,
+;App4=&2\cs32basp.exe,startup.grp,"StartUp","CrystalWare",,
+
+[Dirs]
+DirCount=3                      ; Must be >= 2
+0=\windows
+1=\windows\system
+2=\crystal
+3=
+
+; Registration key,registration value
+
+[Reg]
+RegCount=5
+Reg0=CrystalBAT,"BAT"
+Reg1=CrystalBAT\protocol\StdFileEditing\verb\1,"Edit"
+Reg2=CrystalBAT\protocol\StdFileEditing\verb\0,"Play"
+Reg3=CrystalBAT\protocol\StdFileEditing\server,"&2\csacbat1.exe"
+Reg4=.wav,"CrystalBAT"
+
+; FileCount = number of files
+; Filex = disk #,tgt filename,src filename,dir #,opt1,opt2,opt3
+;  dir #: 0=WINDOWS, 1=WINDOWS\SYSTEM, 2=, 3=
+;  opt1,opt2,opt3,opt4: b=create backup, i=immediate, v=version check, c=compression (src filename = compressed file)
+
+[Files]
+FileCount=29
+File0=1,cs32baip.exe,r180d1.z,2,c
+File1=1,cs32baop.exe,r180d1.z,2,c
+File2=1,cs32basp.exe,r180d1.z,2,c
+File3=1,cs32ba11.ini,r180d1.z,0,c
+File4=1,cs32ba11.drv,r180d1.z,1,c
+File5=1,vsndsys.386,r180d1.z,1,i,c
+File6=1,oemsetup.inf,r180d1.z,1,c
+File7=1,bwcc.dll,r180d1.z,1,c
+File8=1,csfm.drv,r180d1.z,1,c
+File9=1,cswave.dll,r180d1.z,2,c
+File10=1,csacbat1.exe,r180d1.z,2,c
+File11=1,csacbat1.ini,r180d1.z,0,c
+File12=1,midimap.cfg,r180d1.z,1,b,c
+File13=1,mpu401.drv,r180d1.z,1,c
+;File14=2,cs4232c.exe,r180d2.z,2,i,c
+File14=2,cs32hmx.exe,r180d2.z,2,i,c
+File15=2,cs32mix.exe,r180d2.z,2,i,c
+File16=2,csacgucd.exe,r180d2.z,2,i,c
+File17=2,cwdiag.exe,r180d2.z,2,i,c
+File18=2,soundtst.wav,r180d2.z,2,i,c
+File19=2,test.dat,r180d2.z,2,i,c
+File20=2,cs32intr.exe,r180d2.z,2,i,c
+File21=2,cs32wss.exe,r180d2.z,2,i,c
+File22=2,cs32cfg.exe,r180d2.z,2,i,c
+File23=2,msmixmgr.dll,r180d2.z,1,i,v,c
+File24=2,cw3dctrl.exe,r180d2.z,2,i,c
+File25=2,cw3dw31.exe,r180d2.z,2,i,c
+File26=2,threed.vbx,r180d2.z,1,i,c
+File27=2,cspower.cpl,r180d2.z,1,c
+File28=2,dialog.fon,r180d2.z,2,i,c
+;File29=2,resource.bin,r180d2,z,2,i,c
+
+[Strings]
+StringCount=0
+X0=
+
+; Crystal Custom Section
+;
+; INI files
+; Add item
+; OEMx=0,ini path/filename,section,keyname,value,value,"message"
+; Replace item
+; OEMx=0,ini path/filename,section,keyname,old value,new value,"message"
+;
+; AUTOEXEC.BAT: p=path/env, s=string, r=replace
+; OEMx=1,"message",<p,s,r>,"string","ref key",<BEFORE|AFTER|REPLACE|COMMAND>,"message"
+;
+; CONFIG.SYS: d=driver, s=string, c=command
+; OEMx=2,d,device driver name,"ref key",<BEFORE|AFTER>,"message"
+; OEMx=2,s,"string","ref key",<BEFORE|AFTER>,"message"
+; OEMx=2,c,"string",value,"message"
+; OEMMsg="message"
+;
+; DELETE ITEM
+; OEMx=3,ini path/filename,section,keyname,value,"message"
+
+[OEM]
+OEMCount=0
+OEM0=
+OEMMsg=
+

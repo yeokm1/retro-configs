@@ -1,0 +1,2 @@
+Xircom Modem Activity Log
+Product,Firmware,Date/Time,Time Zone,Line Type,Call Type,Number Called,Initial Rx,Initial Tx,Final Rx,Final Tx,Duration,Protocol,Compression,Error Control,Noise Level,Termination Cause,

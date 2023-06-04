@@ -1,0 +1,1231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<title>Xircom CardBus Ethernet PC Card - Troubleshooting</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body bgcolor="#ffffff">
+
+<h1><img src="XLOGO.gif" border="0" width="125" height="27"></h1>
+<div style="  ">
+  <a href="index.htm"><img src="TOCBOOK.gif" border="0" width="16" height="15"></a><font
+  face="Arial,Helvetica"> <a href="index.htm">Table of Contents</a> |&nbsp;<a
+  href="setup.htm"><img src="arrowbk.gif" border="0" width="13" height="14"></a><a
+  href="setup.htm">Previous Page</a> | <a href="support.htm">Next Page</a></font><a
+  href="support.htm"><img src="arrownt.gif" border="0" width="14" height="15"></a>
+</div>
+<h1><font face="Arial,Helvetica">Xircom CardBus Ethernet PC Card<br>
+<font color="#FF0000">Troubleshooting</font></font></h1>
+<p><b>Note:</b> The technical information in this online documentation is valid
+for the following Xircom products: RealPort2 CardBus Ethernet 10/100, RealPort
+CardBus Ethernet 10/100, CardBus Ethernet II 10/100, and CardBus Ethernet
+10/100.</p>
+<font face="Arial,Helvetica">This section provides the following general
+troubleshooting information:</font>
+<ul>
+  <li><font face="Arial,Helvetica"><a href="#README">Reviewing the README.TXT
+    file</a></font></li>
+  <li><font face="Arial,Helvetica"><a href="#CONFIG">Configuration Notes by
+    Operating System</a></font></li>
+  <li><font face="Arial,Helvetica"><a href="#GENERAL">General Troubleshooting
+    Checklist</a></font></li>
+  <li><font face="Arial,Helvetica"><a href="#KEYWORD">Keyword Alphabetical
+    Reference</a></font></li>
+</ul>
+<h2><a name="README"></a><font face="Arial,Helvetica">Reviewing the README.TXT
+file for late-breaking information</font></h2>
+<table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#FF0000"
+bordercolor="#FFFFFF">
+  <tr>
+    <td width="100%"><img src="space.gif" border="0" width="1" height="1"></td>
+  </tr>
+</table>
+<p><font face="Arial,Helvetica">Consult the README.TXT file located on your </font><font
+size="-1">Xircom </font><font face="Arial,Helvetica">compact disc for the latest
+technical information.</font>
+<p><b><font face="Arial,Helvetica">To view the README file:</font></b>
+<ul>
+  <li>Run SETUP from the Xircom compact disc and select &quot;View Readme
+    File.&quot;</li>
+</ul>
+<h2><a name="CONFIG"></a><font face="Arial,Helvetica">Configuration Notes by
+Operating System</font></h2>
+<table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#FF0000"
+bordercolor="#FFFFFF">
+  <tr>
+    <td width="100%"><img src="space.gif" border="0" width="1" height="1"></td>
+  </tr>
+</table>
+<p>Configuration notes are available for the following operating systems:
+<ul>
+  <li><a href="#CONFIG2000">Windows 2000 Troubleshooting</a></li>
+  <li><font face="Arial,Helvetica"><a href="#Windows ME Troubleshooting">Windows
+    Me (Millennium Edition) Troubleshooting</a></font></li>
+  <li><a href="#CONFIG95">Windows 2000, Me, 98 and 95 Driver Parameters</a></li>
+  <li><a href="#CONFIGNT">Windows NT 4.0</a></li>
+  <li><a href="#CONFIGOS2">IBM OS/2</a></li>
+  <li><a href="#CONFIG32">Novell Client 32</a></li>
+</ul>
+<h3><a name="CONFIG2000"></a>Windows 2000 Troubleshooting</h3>
+<h5><font face="Arial">Upgrading your Windows 2000 Drivers</font></h5>
+<p><font face="Arial">Windows 2000 contains built-in drivers for some models of
+the Xircom CardBus Ethernet PC Card, as well for other Xircom PC Cards. The
+built-in drivers are functional but may lack some features of later releases To
+update the Windows 2000 driver do the following:</font></p>
+<ol>
+  <li><font face="Arial">With your Xircom PC Card already installed and
+    inserted, go to Start, Settings, Control Panel, double-click on Network and
+    Dial-up Connections, and double-click on Local Area Connection. Select
+    Properties.</font>
+  <li><font face="Arial">Click the Configure button on the top of the Local Area
+    Connection Properties screen, just under the &quot;Connect using&quot;
+    listing for your Xircom CardBus Ethernet PC Card model. Next select the
+    Driver tab, and click the Update Driver button. This starts the Upgrade
+    Device Driver Wizard. Click Next. On the next screen select &quot;Search for
+    a suitable driver for my device (recommended)&quot;. Click Next. On the
+    Locate Driver Files screen, select &quot;Specify a location&quot;, and click
+    Next. Enter the path to the Xircom compact disc (for example, if your CD-ROM
+    drive is E, type &quot;E:\&quot;).</font>
+  <li><font face="Arial">The Wizard will announce that it has a suitable driver
+    already installed, and that it has also found other drivers suitable for
+    this device. Select the &quot;Install one of the other drivers&quot; check
+    box and click Next. You will then see a screen showing both the
+    Microsoft-supplied driver, and the new Xircom driver (identified as
+    &quot;RealPort2 CardBus Ethernet 10/100&quot; or &quot;Xircom CardBus
+    Ethernet 10/100.&quot; and with a path listed to the Xircom compact disc).
+    Pick the appropriate Xircom driver, and click Next.</font>
+  <li><font face="Arial">You will be notified that Microsoft has not digitally
+    signed the software, and asked if you want to continue the installation.
+    Click Yes. The updated drivers will then be copied to your computer. Click
+    Finish, then Close. Click OK to close the Local Area Connection Properties
+    box. Reboot the machine to utilize the new driver.&nbsp;</font></li>
+  <li><font face="Arial">To access the new driver setting, repeat step 1 above,
+    click the Configure button, and select the Advanced tab.&nbsp;</font></li>
+</ol>
+<h3><a name="Windows ME Troubleshooting"></a><b><font face="Arial,Helvetica">Windows
+Me (Millennium Edition) Troubleshooting</font></b></h3>
+<table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#FF0000"
+bordercolor="#FFFFFF">
+  <tr>
+    <td width="100%"><img src="space.gif" border="0" width="1" height="1"></td>
+  </tr>
+</table>
+<h5><font face="Arial">Upgrading your Windows Me Drivers</font></h5>
+<p><font face="Arial">Windows Me includes built-in drivers for the </font>RealPort2
+CardBus Ethernet 10/100, RealPort CardBus Ethernet 10/100, CardBus Ethernet II
+10/100, and CardBus Ethernet 10/100.<font face="Arial"> These built-in drivers
+are functional but may lack the newest features of the release included on your
+Xircom compact disc. </font>Xircom recommends that you upgrade to the latest
+Xircom drivers to take advantage of the full functionality of your Xircom card. <font
+face="Arial">To update the Windows Millennium driver after completing <a
+href="setup.htm#Me">plug and play installation</a> of the Windows Me built-in
+driver, proceed as follows:</font></p>
+<ol start="1" type="1">
+  <li class="MsoNormal" style="     ">After Windows Me has installed the
+    built-in driver, the New Hardware Found Wizard will disappear. Insert the
+    Xircom CD-ROM.</li>
+  <li class="MsoNormal" style="     ">Go to Start, Settings, Control Panel,
+    System, Device Manager. <b>Note:</b> If you don't see the System icon in the
+    Control Panel window, click the link &quot;view all Control Panel
+    options,&quot; then double-click the System icon and select the Device
+    Manager tab.</li>
+  <li class="MsoNormal" style="     "><span
+    style="font-family: Times New Roman;  color: #3366FF;   "><font face="Arial"
+    color="#000000">Under Network Adapters find</font></span> and select the
+    Xircom card listing (for example,<font face="Arial"> &quot;RealPort2 CardBus
+    Ethernet 10/100&quot; or &quot;Xircom CardBus Ethernet 10/100&quot;).</font></li>
+  <li class="MsoNormal" style="     ">Click &quot;Properties&quot; then click
+    the &quot;Driver&quot; tab and &quot;Update Driver.&quot;</li>
+  <li class="MsoNormal" style="     ">On the Update Device Driver Wizard, click
+    &quot;Search for a better driver than the one your device is using now&quot;
+    and check &quot;Specify a location.&quot; In the text box, type the path to
+    the Xircom CD-ROM. For example, if your CD-ROM is drive E then type E:\ and
+    click Next. It may take several seconds for Windows to search for the
+    driver.</li>
+  <li class="MsoNormal" style="     ">The Update Device Driver Wizard will
+    indicate it is ready to install the new driver. Click Next.</li>
+  <li class="MsoNormal" style="     ">The Wizard will indicate that the updated
+    driver has been installed. Click Finish and then close any open Device
+    Manager windows.<br>
+    <b>Note:</b> If you did not do so after completing the initial <a
+    href="Setup.htm#Me">plug and play installation</a>, run SETUP now to install
+    Xircom utilities and online documentation onto your hard drive. Proceed as
+    follows:</li>
+  <li>Click Start, and then Run. Type the path to the SETUP.EXE program on the
+    Xircom compact disc (for example, if your CD-ROM drive is E, type
+    E:\SETUP.EXE), then click OK.&nbsp;</li>
+  <li>On the menu that appears, <font face="Arial">click &quot;Install Software
+    and Tools&quot; and follow the onscreen instructions. Xircom online
+    documentation and utilities will be copied to your hard drive and installed
+    under Start, Programs, Xircom Utilities. You must have Microsoft Internet
+    Explorer or Netscape Navigator installed to view the online documentation.</font></li>
+  <li><font face="Arial">To change the country configuration of your modem, run
+    CountrySelect under Start, Programs, Xircom Utilities. Choose the country
+    from which you will make modem calls, then click Save and Exit.</font></li>
+</ol>
+<h2><a name="CONFIG95"></a><font face="Arial"> Driver Parameters for Windows
+2000, Me, 98, and 95</font></h2>
+<p class="SUBSUB"><b><font face="Arial">Default Settings and Configurable
+Parameters&nbsp;</font></b></p>
+<p class="BasicBody"><font face="Arial">By default the Xircom CardBus Ethernet
+PC Card software automatically selects the NDIS driver required by your system.
+The NdisVersion keyword can also be manually set to a particular version of the
+NDIS driver. Files required for each version of the NDIS driver are: CBE.SYS
+(NDIS3), CBEN4.SYS (NDIS4), and CBEN5.SYS (NDIS5). See Note 1 following the
+Driver Parameters table.</font></p>
+<p class="BasicBody"><font face="Arial">The user-configurable parameters listed
+below can be modified using the Network Control Panel built into Windows. The
+Control Panel applet queries the user for parameter selections and then sets the
+corresponding parameters in the registry. The following user-configurable
+parameters may be set by selecting the Advanced tab of the driver Properties:</font></p>
+<table border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="124" valign="top">
+      <p class="BasicBody"><b><font size="2" face="Arial">Parameter</font></b></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="BasicBody"><b><font size="2" face="Arial">Default</font></b></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="BasicBody"><b><font size="2" face="Arial">Valid Values</font></b></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Autopolarity&nbsp;</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS"><font size="2" face="Arial">ON</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">ON</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">&nbsp;</td>
+    <td width="60" valign="top">&nbsp;</td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">OFF</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">CableType&nbsp;</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Autodetect</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">10B2 (coax)</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">&nbsp;</td>
+    <td width="60" valign="top">&nbsp;</td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">10BT/100BTX (TP)</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Dynamiclinkdetect&nbsp;</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS"><font size="2" face="Arial">ON</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">ON</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">&nbsp;</td>
+    <td width="60" valign="top">&nbsp;</td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">OFF</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Early Transmit</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS"><font size="2" face="Arial">ON</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">ON</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">&nbsp;</td>
+    <td width="60" valign="top">&nbsp;</td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">OFF</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Initialization Delay&nbsp;</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS"><font size="2" face="Arial">3 seconds</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">1 - 60 seconds</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Line Mode</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Autodetect</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Full Duplex</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">&nbsp;</td>
+    <td width="60" valign="top">&nbsp;</td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Half Duplex</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Line Speed</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Autodetect</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">10Mbps</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">&nbsp;</td>
+    <td width="60" valign="top">&nbsp;</td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">100Mbps</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Link Integrity</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS"><font size="2" face="Arial">ON</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">ON</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">&nbsp;</td>
+    <td width="60" valign="top">&nbsp;</td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">OFF</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Mode</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS"><font size="2" face="Arial">I/O</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">I/O</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">&nbsp;</td>
+    <td width="60" valign="top">&nbsp;</td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Memory Mapped&nbsp;</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Ndisversion</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS"><font size="2" face="Arial">Autoselect</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">See note 1 below</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS"><font size="2" face="Arial">NetworkAddress</font></p>
+    </td>
+    <td width="60" valign="top">&nbsp;</td>
+    <td width="88" valign="top">
+      <p class="DOS"><font size="2" face="Arial">See note 2 below</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="124" valign="top">
+      <p class="DOS" style="
+  "><font size="2" face="Arial">TransmitBufferSize</font></p>
+    </td>
+    <td width="60" valign="top">
+      <p class="DOS" style="
+  "><font size="2" face="Arial">11,264</font></p>
+    </td>
+    <td width="88" valign="top">
+      <p class="DOS" style="
+  "><font size="2" face="Arial">1024-29696</font></p>
+    </td>
+  </tr>
+</table>
+<p class="BasicBody"><font face="Arial"><b><i>Note 1:</i></b> Valid NDIS
+versions displayed and selectable vary with the operating system:</font></p>
+<table border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="148" valign="top">
+      <p class="BasicBody"><font size="2" face="Arial">Windows 95OSR2:</font></p>
+    </td>
+    <td width="148" valign="top">
+      <p class="BasicBody"><font size="2" face="Arial">AutoSelect, NDIS3, NDIS4</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="148" valign="top">
+      <p class="BasicBody"><font size="2" face="Arial">Windows 98 and 98SE:</font></p>
+    </td>
+    <td width="148" valign="top">
+      <p class="BasicBody"><font size="2" face="Arial">AutoSelect, NDIS3, NDIS4,
+      NDIS5</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="148" valign="top">
+      <p class="BasicBody"><font size="2" face="Arial">Windows 2000 and Me:</font></p>
+    </td>
+    <td width="148" valign="top">
+      <p class="BasicBody"><font size="2" face="Arial">&quot;NdisVersion&quot;
+      does not exist and NDIS5 is the default driver. The Ndis Switcher is not
+      used with Windows 2000 or Windows Me.</font></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="148" valign="top">
+      <p class="BasicBody"><font size="2" face="Arial">Windows NT 4.0:</font></p>
+    </td>
+    <td width="148" valign="top">
+      <p class="BasicBody"><font size="2" face="Arial">&quot;NdisVersion&quot;
+      is not supported. Point to root to install NDIS4 driver (default); point
+      to NDIS3 folder to install NDIS3.</font></p>
+    </td>
+  </tr>
+</table>
+<p class="BasicBody"><font face="Arial">AutoSelect (the default) will choose the
+highest NDIS version supported by the OS.&nbsp; The user can also manually
+switch between the different supported versions of NDIS by going to NdisVersion
+in the network properties of the adapter and selecting the desired driver. Only
+drivers supported by the particular OS will be shown.</font></p>
+<i><b><span style="font-size: 10.0pt;     "><font face="Arial">Note 2:</font></span></b></i><font
+face="Arial"><i><b>&nbsp;</b></i> The network node address can be modified by
+specifying a value for ‘NetworkAddress’ such as ‘0080C7112233’. If the
+user does NOT specify a ‘NetworkAddress’ then the CBE.SYS driver uses the
+network node address contained in the Xircom Ethernet PC Card Information
+Structure.</font>
+<h3><a name="CONFIGNT"></a>Windows NT 4.0</h3>
+<p>CBE.SYS, CBENT.SYS, and CBEN4.SYS driver parameters can be modified using the
+Windows NT Network Control Panel. This applet uses the OEMSETNT.INF file to set
+the corresponding parameters in the registry. For definitions of these keywords
+see the <a href="#KEYWORD">Keyword alphabetical reference</a>.</p>
+<table border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>&nbsp;<font size="2">Parameter</font></b>
+    <td><font size="2"><b>Default</b></font>
+    <td><font size="2"><b>Valid Values</b></font></td>
+  </tr>
+  <tr>
+    <td><font size="2">CableDetect</font></td>
+    <td align="center"><font size="2">ON</font></td>
+    <td><font size="2">OFF</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">ON</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">DirectEnable</font></td>
+    <td align="center"><font size="2">AutoDetect</font></td>
+    <td><font size="2">AutoDetect</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">OFF</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">ON</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">EarlyTransmit</font></td>
+    <td align="center"><font size="2">OFF</font></td>
+    <td><font size="2">OFF</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">ON</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">InterruptNumber</font></td>
+    <td align="center"><font size="2">11</font></td>
+    <td><font size="2">3&nbsp;- 15</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">InterruptStyle</font></td>
+    <td align="center"><font size="2">&nbsp;AutoDetect</font></td>
+    <td><font size="2">AutoDetect</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">PCI IRQ</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">ISA IRQ</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">IOBaseAddress</font></td>
+    <td align="center"><font size="2">0xF800</font></td>
+    <td><font size="2">0x1000-0xF800</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LineMode</font></td>
+    <td align="center"><font size="2">Half-Duplex</font></td>
+    <td><font size="2">AutoDetect</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">Half-Duplex</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">Full-Duplex</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LineSpeed</font></td>
+    <td align="center"><font size="2">AutoDetect</font></td>
+    <td><font size="2">AutoDetect</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">10 Mbps</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">100 Mbps</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LinkIntegrity</font></td>
+    <td align="center"><font size="2">ON</font></td>
+    <td><font size="2">OFF</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">ON</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">MemoryMapped BaseAddress</font></td>
+    <td align="center"><font size="2">5B80000</font></td>
+    <td><font size="2">0xC0000-B000C000</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">Socket</font></td>
+    <td align="center"><font size="2">AutoDetect</font></td>
+    <td><font size="2">AutoDetect</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">1</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">2</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">&nbsp;</font></td>
+    <td align="center"><font size="2">&nbsp;</font></td>
+    <td><font size="2">3</font></td>
+  </tr>
+</table>
+<p><b>For Network Administrators Only.</b> To modify the network node address
+manually, use the Run command, type regedit and press Enter. Select
+HKEY_LOCAL_MACHINE, System, CurrentControlSet, Services, CBE. On the Edit menu,
+select New, String Value. Rename the new value NetworkAddress (no spaces, case
+sensitive) and press Enter. Then double-click NetworkAddress and enter the 12
+digit address (no spaces) in the Value Data box and click OK.</p>
+<h3><a name="CONFIGOS2"></a>IBM OS/2</h3>
+<p>The following paragraphs present configuration guidelines for the OS/2 NDIS2
+and ODI drivers. An explanation of each keyword can be found in the <a
+href="#KEYWORD">Keyword alphabetical reference</a>.</p>
+<p>All of the drivers described here automatically detect the speed of the
+network to which the adapter is attached (10Mbps or 100Mbps), unless otherwise
+noted. Speed can also be specified with the LINESPEED keyword.</p>
+<p>Full-duplex operation must be explicitly configured with the LINEMODE
+keyword, unless the adapter is being connected to a hub which supports n-way
+auto-negotiation. In this case the adapter will auto-detect full-duplex
+operation.</p>
+<p><b>OS/2 NDIS Driver Configuration Notes</b></p>
+<p>The OS/2 NDIS driver <b>CBENDIS.OS2 </b>conforms to the Microsoft LAN Manager
+Network Driver Interface Specification (NDIS) version 2.0.1. It is an IBM
+OS/2-based device driver for use with OS/2 versions 2.0 and later.</p>
+<p>The files required for using CBENDIS.OS2 are:</p>
+<table border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="125"><font size="2"><b>PROTOCOL.INI&nbsp;&nbsp;&nbsp;</b></font></td>
+    <td width="338"><font size="2">Configuration and binding information file</font></td>
+  </tr>
+  <tr>
+    <td width="125"><font size="2"><b>CBEOS2.NIF&nbsp;&nbsp;&nbsp;</b></font></td>
+    <td width="338"><font size="2">Xircom installation file for Microsoft LAN
+      Manager</font></td>
+  </tr>
+  <tr>
+    <td width="125"><font size="2"><b>CBENDIS.OS2&nbsp;&nbsp;&nbsp;</b></font></td>
+    <td width="338"><font size="2">Xircom OS/2 NDIS driver</font></td>
+  </tr>
+</table>
+<p>If any parameters need to be changed, use an ASCII text editor to modify the
+PROTOCOL.INI file with the appropriate keywords and values.</p>
+<p>Keyword syntax for PROTOCOL.INI can be found below. Keywords are not case
+sensitive, and can be abbreviated to a unique sequence of initial characters
+(for example, IN for INTERRUPT, IO for IOADDRESS). An explanation of each
+keyword can be found in the Keyword Alphabetical Reference.</p>
+<p><b>NDIS Keywords (CBENDIS.OS2)</b></p>
+<table cellpadding="0" border="1" cellspacing="0">
+  <tr>
+    <td><b><font size="2">Keyword</font></b></td>
+    <td><b><font size="2">Default</font></b></td>
+    <td><b><font size="2">Valid Values</font></b></td>
+  </tr>
+  <tr>
+    <td><font size="2">DRIVERNAME=</font></td>
+    <td><font size="2">&nbsp;</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">XIRCOM$</font></td>
+    <td><font size="2">(REQUIRED FIRST ITEM IN PROTOCOL.INI)</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">MEMORY</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">C000&nbsp;-&amp;nbspEF00</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">IOADDRESS</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">100&nbsp;-&amp;nbspFF80</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">IRQ</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">3&nbsp;-&amp;nbsp15</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">SOCKET</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">1&nbsp;-&amp;nbsp4</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">MODE</font></td>
+    <td><font size="2">MEM</font></td>
+    <td><font size="2">IO or MEM</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOCHECK</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOLED</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">TXBUFFERSIZE</font></td>
+    <td><font size="2">2</font></td>
+    <td><font size="2">1&nbsp;-&amp;nbsp10</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">RXBUFFERSIZE</font></td>
+    <td><font size="2">15</font></td>
+    <td><font size="2">1&nbsp;-&amp;nbsp30</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOEARLYRX</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOEARLYTX</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LINESPEED</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">10 or 100</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LINEMODE</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">HALF or FULL</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LINKDISABLE</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">CACHE</font></td>
+    <td><font size="2">32</font></td>
+    <td><font size="2">0, 4, 8, 16, or 32</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOWRITEPOST</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOPREFETCH</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">VERBOSE</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+</table>
+<p><b>OS/2 ODI Driver Configuration Notes</b></p>
+<p>The OS/2 ODI driver <b>CBEODI.OS2</b> conforms to the Novell ODI Developer's
+Guide for OS/2 Client Driver Hardware Specific Modules version 2.1. It is an IBM
+OS/2-based device driver for use with OS/2 versions 2.0 and later. The Novell
+OS/2 workstation ODI stack including CBEODI.OS2 supports Novell's NetWare
+Requestor for OS/2 networking client environment.</p>
+<p>Files required for using CBEODI.OS2 include Novell OS/2 Requestor files and
+the following files:</p>
+<table border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="96"><font size="2"><b>NET.CFG&nbsp;&nbsp;</b></font></td>
+    <td width="201"><font size="2">Network configuration file</font></td>
+  </tr>
+  <tr>
+    <td width="96"><font size="2"><b>CBEODI.OS2&nbsp;&nbsp;</b></font></td>
+    <td width="201"><font size="2">Xircom ODI driver for OS/2</font></td>
+  </tr>
+</table>
+<p>If any parameters need to be changed, use an ASCII text editor to open and
+modify the NET.CFG file and insert the appropriate keywords and values after the
+line</p>
+<div align="left">
+  <blockquote>
+    <pre><b>LINK DRIVER CBEODI</b></pre>
+  </blockquote>
+</div>
+<p>Keyword syntax for NET.CFG can be found below. Keywords are not case
+sensitive, and can be abbreviated to a unique sequence of initial characters
+(for example, IN for INTERRUPT, IO for IOADDRESS). An explanation of each
+keyword can be found in the <a href="#KEYWORD">Keyword alphabetical reference</a>.</p>
+<p><b>ODI (CBEODI.OS2) Keywords</b></p>
+<table cellpadding="0" border="1" cellspacing="0">
+  <tr>
+    <td><b><font size="2">Keyword</font></b></td>
+    <td><b><font size="2">Default</font></b></td>
+    <td><b><font size="2">Valid Values</font></b></td>
+  </tr>
+  <tr>
+    <td><font size="2">MEMORY</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">C000&nbsp;-&nbsp;EF00</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">IOADDRESS</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">100&nbsp;-&nbsp;FF80</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">IRQ</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">3&nbsp;-&nbsp;15</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">SOCKET</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">1&nbsp;-&nbsp;4</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">MODE</font></td>
+    <td><font size="2">MEM</font></td>
+    <td><font size="2">IO or MEM</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOCHECK</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOLED</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">TXBUFFERSIZE</font></td>
+    <td><font size="2">2</font></td>
+    <td><font size="2">1&nbsp;-&nbsp;10</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">RXBUFFERSIZE</font></td>
+    <td><font size="2">15</font></td>
+    <td><font size="2">1&nbsp;-&nbsp;30</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOEARLYRX</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOEARLYTX</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LINESPEED</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">10 or 100</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LINEMODE</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">HALF or FULL</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LINKDISABLE</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">CACHE</font></td>
+    <td><font size="2">8</font></td>
+    <td><font size="2">0, 4, 8, 16, or 32</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOWRITEPOST</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOPREFETCH</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">VERBOSE</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+</table>
+<h3><a name="CONFIG32"></a>Novell Client 32</h3>
+<p><b>Novell Client32 Driver Settings (for driver CBE.LAN)</b></p>
+<p>The driver CBE.LAN conforms to the Novell ODI NetWare Server Driver
+Development Tool Kit Driver Specification version 3.2. It is a 32-bit driver.
+The NetWare Server ODI stack including CBE.LAN supports NetWare versions 3.11,
+3.12, and 4.01.</p>
+<p><b>Novell Client 32 Driver Keywords</b></p>
+<p>Parameters for configuring the Novell server driver must be specified on the
+command line.</p>
+<table cellpadding="0" border="1" cellspacing="0">
+  <tr>
+    <td><b><font size="3">Keyword</font></b></td>
+    <td><b><font size="3">Default</font></b></td>
+    <td><b><font size="3">Valid Values</font></b></td>
+  </tr>
+  <tr>
+    <td><font size="2">MEMORY</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">C000 - FFFFE000</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">IOADDRESS</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">100 - FF80</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">IRQ</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">3&nbsp;-&amp;&nbsp;15</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">SOCKET</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">1&nbsp;-&amp;&nbsp;4</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">MODE</font></td>
+    <td><font size="2">MEM</font></td>
+    <td><font size="2">IO or MEM</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOLED</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">TXBUFFERSIZE</font></td>
+    <td><font size="2">10</font></td>
+    <td><font size="2">1&nbsp;-&amp;&nbsp;100</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">RXBUFFERSIZE</font></td>
+    <td><font size="2">30</font></td>
+    <td><font size="2">1&nbsp;-&amp;&nbsp;100</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOEARLYRX</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOEARLYTX</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LINESPEED</font></td>
+    <td><font size="2">AUTO</font></td>
+    <td><font size="2">10 or 100</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LINEMODE</font></td>
+    <td><font size="2">HALF</font></td>
+    <td><font size="2">HALF or FULL</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">LINKDISABLE</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">CACHE</font></td>
+    <td><font size="2">32</font></td>
+    <td><font size="2">0, 4, 8, 16, or 32</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">NOWRITEPOST</font></td>
+    <td><font size="2">NOT PRESENT</font></td>
+    <td><font size="2">&nbsp;</font></td>
+  </tr>
+</table>
+<h2><font face="Arial,Helvetica"><a name="GENERAL"></a>General Troubleshooting
+Checklist</font></h2>
+<table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#FF0000"
+bordercolor="#FFFFFF">
+  <tr>
+    <td width="100%"><img src="space.gif" border="0" width="1" height="1"></td>
+  </tr>
+</table>
+<p>If the troubleshooting information provided for your operating system has not
+proven helpful, please review the following troubleshooting measures before
+calling Xircom Customer Support:</p>
+<ul type="square">
+  <li>Review the README file. It contains important information (including known
+    incompatibilities and machine specific issues) that may solve your problem.
+    Run SETUP from the Xircom compact disc and select &quot;View Readme
+    File.&quot;</li>
+  <li>Obtain current versions of drivers from the Xircom website at <a
+    href="http://www.xircom.com">http://www.xircom.com</a>.</li>
+  <li>Boot the computer in a clean environment (press F8 or hold down the Shift
+    key to bypass loading of CONFIG.SYS and AUTOEXEC.BAT), then use the Xircom
+    test utility to see if the adapter is functioning and detecting network
+    traffic.</li>
+  <li>When loading drivers or running the test utility, have the dongle cable
+    attached to the CardBus adapter.</li>
+  <li>Under Novell, ensure that the FRAME TYPE you are using is the same as that
+    of the file server. The server frame type should be specified as the first
+    frame type in the NET.CFG.</li>
+  <li>In a twisted pair environment, try plugging directly into the hub or
+    concentrator.</li>
+  <li>Try using a network connection that works for another computer.</li>
+  <li>Try using the Xircom adapter on a different computer.</li>
+  <li>Try another Xircom adapter if available.</li>
+  <li>If your computer has multiple PC Card sockets, move the adapter to another
+    socket.</li>
+  <li>If you have more than one PC Card device in your computer, remove the
+    non-Xircom PC Card devices during your configuration/testing.</li>
+  <li>Make sure you are using the most recent version of Card and Socket
+    Services. Call the computer manufacturer or the company that makes the Card
+    and Socket Services. Upgrading to new drivers from Xircom may also be
+    required, as new Card and Socket Services software is released.</li>
+  <li>Test the Xircom adapter without loading Card and Socket Services to see if
+    there is a conflict between the Xircom adapter configuration and that of
+    Card and Socket Services. The interrupt, memory address location, and I/O
+    address specified to the Card and Socket service drivers must match the
+    Xircom configurations in NET.CFG or PROTOCOL.INI (if used).</li>
+  <li>If you own several models of Xircom CardBus adapters, ensure you are using
+    the appropriate driver for the currently inserted adapter.</li>
+  <li>Make sure that the Xircom adapter is not conflicting (interrupt, memory
+    address, I/O address) with any other adapters or hardware that is installed
+    in the computer (including sounds cards, CD-ROM drives and PEN devices).</li>
+  <li>Try loading the CardBus drivers at different memory locations (i.e.: C800,
+    CC00, D400, D800).</li>
+  <li>Try using different interrupt locations (i.e.: 5, 10, 11).</li>
+  <li>Try using different port addresses (i.e.: 280, 290, 310, 320).</li>
+</ul>
+<h2><font face="Arial,Helvetica"><a name="KEYWORD"></a>Keyword Alphabetical
+Reference</font></h2>
+<table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#FF0000"
+bordercolor="#FFFFFF">
+  <tr>
+    <td width="100%"><img src="space.gif" border="0" width="1" height="1"></td>
+  </tr>
+</table>
+<dl>
+  <dt><b>?</b></dt>
+  <dd>Displays command summary for driver<br>
+    &nbsp;</dd>
+  <dt><b>AUTO POLARITY</b></dt>
+  <dd>An auto polarity setting of ON will provide compensation for polarity
+    reversed cables in cases where the automatic correction of a particular
+    10/100 switch is not compatible with the correction provided by the Xircom
+    CardBus Ethernet PC Card.<br>
+  </dd>
+  <dt><b>CACHE</b></dt>
+  <dd>Sets the system cache line size on the CardBus Bridge. Valid arguments are
+    system dependent and may include only 0 (cache disabled), 4, 8, 16, or 32.
+    Changing this parameter may affect network performance.<br>
+  </dd>
+  <div align="left">
+    <dt style="  "><font size="2" face="Arial"><b>DYNAMICLINKDETECT</b>&nbsp;&nbsp;&nbsp;</font></dt>
+  </div>
+  <dd>
+    <p style="  " align="left"><font face="Arial" size="2">allows the Ethernet
+    interface to be configured so that it is only initialized if an active
+    connection to the network is detected at boot time. Set this parameter to
+    OFF to prevent conflicts between LAN and remote dial-up connections on the
+    same network under Windows 98 and 95. &nbsp;</font><br>
+    &nbsp;</dd>
+  <dt><b>XIRCOM$</b></dt>
+  <dd>Required as first item in the XIRCOM section of the PROTOCOL.INI file for
+    the CBENDIS driver.<br>
+    &nbsp;</dd>
+  <dt><b>INITIALIZATION DELAY</b></dt>
+  <dd>Prevents forwarding of network requests for a user-selectable period of
+    time. Delays can be added in the range of from 1 to 60 seconds. In most
+    cases a delay of from 1 to 3 seconds will be sufficient to resolve problems
+    with forwarding of network traffic.</dd>
+  <dt><b>INT</b>
+  <dd>See IRQ.<br>
+    &nbsp;</dd>
+  <dt><b>INTERRUPT</b></dt>
+  <dd>See IRQ.<br>
+    &nbsp;</dd>
+  <dt><b>INTERRUPTSTYLE</b></dt>
+  <dd><b>For 32-bit NDIS3 Driver (CBE.SYS) only</b>: INTERRUPTSTYLE forces the
+    driver to use ISA IRQ routing or PCI IRQ routing. Some CardBus bridges have
+    the capability of supporting both PCI and ISA style IRQ routing. Valid
+    parameters are AutoDetect, PCI-IRQ, and ISA-IRQ. The default keyword is
+    AutoDetect.<br>
+    &nbsp;</dd>
+  <dt><a name="IOADDRESS"><b><font color="#000000">IOADDRESS and IOBASEADDRESS</font></b></a></dt>
+  <dd>Specifies the base I/O address of the Xircom adapter I/O ports, in
+    hexadecimal notation. The Xircom CardBus adapter requires 128 contiguous I/O
+    addresses if run in I/O mode. If using memory-mapped I/O mode, no I/O ports
+    are necessary. If this parameter is not specified the driver will detect an
+    I/O port automatically.<br>
+    &nbsp;</dd>
+  <dt><b>I/O PORT</b></dt>
+  <dd>See IOADDRESS.<br>
+    &nbsp;</dd>
+  <dt><a name="IRQ"><b><font color="#000000">IRQ</font></b></a></dt>
+  <dd>Specifies a hardware interrupt for use by the adapter. If the computer
+    system uses PCI interrupts on the CardBus Bridge, this parameter is ignored
+    (unless the ISAIRQ keyword is used as an override). If this parameter is not
+    specified the driver will detect an IRQ automatically.<br>
+    &nbsp;</dd>
+  <dt><b>ISAIRQ</b></dt>
+  <dd>Use this keyword to force the driver to use ISA IRQ routing. Some CardBus
+    bridges have the capability of supporting both PCI and ISA style IRQ
+    routing. The driver automatically determines the best choice for this option
+    unless this keyword is used as an override.<br>
+    &nbsp;</dd>
+  <dt><b>LINEMODE</b></dt>
+  <dd><b>-- For 16-bit DOS Drivers:</b> LINEMODE selects either half-duplex or
+    full-duplex mode for the network. Valid parameters are AUTO, HALF or FULL.
+    Selecting full-duplex enables the CardBus Ethernet II 10/100 Adapter to send
+    and receive data simultaneously when connected to a full-duplex hub. Default
+    is AUTO.</dd>
+  <dd><b>-- For 32-bit NDIS3 Driver (CBE.SYS):</b> LINEMODE selects either
+    half-duplex or full-duplex mode for the network. Valid parameters are
+    AutoDetect, Half Duplex, and Full-Duplex. Selecting full-duplex enables the
+    CardBus Ethernet II 10/100 Adapter to send and receive data simultaneously
+    when connected to a full-duplex hub. Default is keyword is AutoDetect.<br>
+    &nbsp;</dd>
+  <dt><b>LINESPEED</b></dt>
+  <dd><b>-- For 16-bit DOS Drivers:</b> LINESPEED forces operation to 10 or
+    100Mbps. If the keyword is not present the line speed will be automatically
+    detected (default).</dd>
+  <dd><b>-- For 32-bit NDIS3 Driver (CBE.SYS):</b> LINESPEED forces operation to
+    10 or 100Mbps. Valid parameters are AutoDetect, 10Mbps, and 100Mbps. Default
+    is AutoDetect.<br>
+    &nbsp;</dd>
+  <dt><b>LINKDISABLE</b></dt>
+  <dd>Disables link integrity for non-IEEE 10BASE-T networks such as StarLAN 10.
+    Without this keyword in the driver command line, the driver defaults to link
+    integrity ENABLED.<br>
+    &nbsp;</dd>
+  <dt><b>MEM</b></dt>
+  <dd>See MEMORY.<br>
+    &nbsp;</dd>
+  <dt><a name="MEMORY"><font color="#000000" face="Arial"><b>MEMORY</b></font></a></dt>
+  <dd>Specifies the host PC memory location for the Xircom adapter in
+    hexadecimal notation, when MODE MEMORY (memory-mapped I/O) is being used
+    (see MODE). The memory block occupies 4 Kbytes of host memory.<br>
+    &nbsp;</dd>
+  <dt><b>MODE</b></dt>
+  <dd>Set this keyword to IO to disable requests for memory-mapped mode on
+    systems that only support an I/O-driven card. The MEMORY setting provides
+    increased performance on computers that allow simultaneous availability of
+    memory and I/O resources.</dd>
+</dl>
+<p style="  " align="left"><font face="Arial" size="2"><b>NDISVERSION</b>&nbsp;&nbsp;&nbsp;</font></p>
+<blockquote>
+  <p style="  " align="left"><font face="Arial" size="2">allows automatic NDIS
+  version selection for installs under Windows 2000, 98, and 95. AutoSelect (the
+  default) will choose the highest NDIS version supported by the operating
+  system. The user can also manually switch between the different supported
+  versions of NDIS by going to NDISVERSION in the network properties of the
+  adapter and selecting the required driver. Only drivers supported by the
+  operating system will be shown. NDIS driver selection is not supported by
+  Windows NT 4.0. The NDIS4 driver can be installed by default from the root of
+  the Xircom CD.</font></p>
+</blockquote>
+<dl>
+  <dt><a name="NETWORKADDRESS"><font color="#000000" size="2" face="Arial"><b>NETWORKADDRESS</b></font></a></dt>
+  <dd>Allows user to override adapters unique network node address by specifying
+    a different node address.<br>
+    &nbsp;</dd>
+  <dt><b>NOCHECK</b></dt>
+  <dd>Disables verification of adapter resources. If the driver detection and
+    verification code is causing problems when loading, this keyword can be used
+    to turn the feature off.<br>
+    &nbsp;</dd>
+  <dt><b>NODEADDRESS</b></dt>
+  <dd>See NETWORKADDRESS.<br>
+    &nbsp;</dd>
+  <dt><b>NOEARLYRX</b></dt>
+  <dd>Disables Advanced Look-ahead Pipelining features of the adapter. This
+    keyword may be used to troubleshoot systems that have inexplicable network
+    problems. Using this keyword may negatively impact performance.<br>
+    &nbsp;</dd>
+  <dt><b>NOEARLYTX</b></dt>
+  <dd>Disables early transmit capability of the Adapter. This keyword may be
+    used to troubleshoot systems that have inexplicable network problems. Using
+    this keyword may negatively impact performance.<br>
+    &nbsp;</dd>
+  <dt><b>NOLED</b></dt>
+  <dd>Turns off LED indicators on LAN adapter module to conserve power.<br>
+    &nbsp;</dd>
+  <dt><b>NOPREFETCH</b></dt>
+  <dd>Disables prefetching in memory-mapped I/O mode by turning off this
+    capability on the CardBus bridge. Using this keyword may negatively impact
+    performance.<br>
+    &nbsp;</dd>
+  <dt><b>NOWRITEPOST</b></dt>
+  <dd>Disables write posting by turning off this capability on the CardBus
+    bridge. Using this keyword may negatively impact performance.<br>
+    &nbsp;</dd>
+  <dt><b>PCIIRQ</b></dt>
+  <dd>Use this keyword to force the driver to use PCI IRQ routing. Some CardBus
+    bridges have the capability of supporting both PCI and ISA style IRQ
+    routing. The driver automatically determines the best choice for this option
+    unless this keyword is used as an override.<br>
+    &nbsp;</dd>
+  <dt><b>PORT</b></dt>
+  <dd>(ODI) See IOADDRESS.<br>
+    &nbsp;</dd>
+  <dt><b>RXBUFFERSIZE</b></dt>
+  <dd>Sets the size of the adapter receive packet buffer. This is a number in
+    decimal in the range 1 - 30 for 16-bit drivers and 1 - 100 for the 32-bit
+    ODI driver. Each packet adds approximately 1520 bytes to the resident size
+    of the driver. The default is 15 packets.<br>
+    &nbsp;</dd>
+  <dt><b>S</b></dt>
+  <dd>(ODI) (MS-DOS command line only) displays LAN drivers resident in memory.<br>
+    &nbsp;</dd>
+  <dt><b>SINT</b></dt>
+  <dd>(Packet Driver) is a number from hexadecimal 60 to 80 designating a
+    software interrupt. Default is 60.<br>
+    &nbsp;</dd>
+  <dt><b>SOCKET</b></dt>
+  <dd><b>-- For 16-bit DOS Drivers:</b> identifies the number of the host
+    computers PC Card slot or socket into which the Xircom CardBus adapter is
+    inserted. If a socket number is specified, only the specified socket is
+    checked for the Xircom adapter. If no socket is specified, all sockets are
+    searched until the Xircom adapter is found.</dd>
+  <dd><b>-- For 32-bit NDIS3 Driver (CBE.SYS):</b> identifies the number of the
+    host computer's PC slot or socket into which the Xircom CardBus adapter is
+    inserted. Valid parameters are AutoDetect, 1, 2, 3, and 4. If a socket
+    number is specified, only the specified socket is checked for the Xircom
+    adapter. The default keyword is AutoDetect, and the driver will then
+    automatically check all slots for the Xircom CardBus adapter.<br>
+    &nbsp;</dd>
+  <dt><b>TXBUFFERSIZE</b></dt>
+  <dd>Sets the size of the adapter transmit packet buffer. This is the number of
+    transmit packets in decimal in the range 1 - 10 for 16-bit drivers and 1 -
+    100 for the 32-bit ODI driver. Each packet adds approximately 1520 bytes to
+    the resident size of the driver. The default is 2 packets.<br>
+    &nbsp;</dd>
+  <dt><b>U</b></dt>
+  <dd>(ODI)(MS-DOS command line only) unloads driver from memory.<br>
+    &nbsp;</dd>
+  <dt><b>VERBOSE</b></dt>
+  <dd>Displays additional configuration information when the driver loads,
+    including information about the CardBus controller on the PCI to CardBus
+    bridge on the host computer.</dd>
+</dl>
+<table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#FF0000"
+bordercolor="#FFFFFF">
+  <tr>
+    <td width="100%"><img src="space.gif" border="0" width="1" height="1"></td>
+  </tr>
+</table>
+<p><a href="index.htm"><img src="TOCBOOK.gif" border="0" width="16" height="15"></a><img
+src="XLOGO.gif" border="0" align="RIGHT" width="125" height="27"><font
+face="Arial,Helvetica"><a href="index.htm">Table of Contents</a> |&nbsp;<a
+href="setup.htm"><img src="arrowbk.gif" border="0" width="13" height="14"></a><a
+href="setup.htm">Previous Page</a> | <a href="support.htm">Next Page</a></font><a
+href="support.htm"><img src="arrownt.gif" border="0" width="14" height="15"></a><br>
+&nbsp;<br>
+&nbsp;
+
+</body>
+
+</html>

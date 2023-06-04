@@ -1,0 +1,31 @@
+3Com Corporation
+Installation Disk Update Notes For 3C589N.exe (Ver 5.4.1)
+
+Version History:
+
+5.4.1 - Updates From Ver 5.4
+-------------------------------------------------
+Install.exe	4/21/97		ver. 1.1z
+elpc3.dos	5/14/97		ver. 1.9 (Hidden f)
+3c589.com       12/22/97        ver. 2.25 (Hidden a)
+patch.txt       8/9/98		ver. 5.4.1
+odi3c589.inf    2/27/98
+readme.411	2/27/98		ver. 1.0a
+
+
+
+5.4 - Shipping EtherDisk 3C589X.exe (Ver 5.4)
+-------------------------------------------------
+
+5.4 is the current shipping Installation Diskette for
+the 3C589D and 3CXE589D series adapters. It is also 
+compatible with all 3C589, 3C589B, and 3C589C series
+adapters.
+
+
+
+
+
+
+(%VER PATCH.TXT - Installation Disk Update Notes For 3C589N.exe v5.4.1)
+

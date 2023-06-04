@@ -1,0 +1,20 @@
+; MACRO  POPFF
+;   Used for the Intel 286 to mask a design flaw.
+;   Use $POPFF instead of POPF	- simulate popping flags using IRET instead.
+;
+ifndef	CODE386
+$POPFF	MACRO
+		LOCAL	$1, $2
+		jmp	$1			; jump around iret
+$2:		iret				; Pop CS, IP, flags
+$1:		push	cs
+		call	$2			; CALL within segment
+						; program will continue here
+	ENDM
+
+else
+$POPFF	MACRO
+		popf
+	ENDM
+endif
+

@@ -1,0 +1,8 @@
+[Adapter_types]
+CardBus Ethernet 10/100 Adapter
+CardBus Ethernet II 10/100 Adapter
+RealPort CardBus Ethernet 10/100 Adapter
+RealPort2 CardBus Ethernet Adapter 10/100
+
+[Version]
+3.12

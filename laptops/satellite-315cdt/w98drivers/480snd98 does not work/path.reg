@@ -1,0 +1,10 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SETUP]
+"SourcePath"="C:\\WINDOWS\\OPTIONS\\CABS\\"
+
+[HKEY_CLASSES_ROOT\AudioCD\shell\play\command]
+@="C:\\WINDOWS\\CDPLAYER.EXE /Play %1"
+
+
+

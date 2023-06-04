@@ -1,0 +1,629 @@
+Microsoft (R) Macro Assembler Version 6.11		    06/29/00 11:15:53
+.\dbg.asm						     Page 1 - 1
+
+
+
+ 0000				code	segment para public
+					assume	cs:code, ds:code
+				;;++, 00/01/31, hu-tiong
+				IFDEF	DEBUGDOS
+				include debug.asm
+			      C 
+			      C 
+ 0000 00		      C init_disp_flag	db	0
+ 0001 00		      C intr08_sem	db	0
+			      C 
+ 0002 07		      C attr		db	07h
+ 0003 00		      C debug_mode	db	0
+			      C 
+ 0004 0000		      C disp_seg	dw	?
+ 0006 00		      C active_page	db	?
+ 0007 00		      C debug_page	db	?
+ 0008 0000		      C cur_ptr 	dw	?
+ 000A 0000		      C start_ptr	dw	?
+ 000C 0000		      C end_ptr 	dw	?
+ 000E 0000		      C ap_start_ptr	dw	?
+			      C 
+ 0010 00		      C pc_model	db	?
+ 0011 00000000		      C old_int08	dd	?
+ 0015 00000000		      C old_int09	dd	?
+ 0019 00000000		      C old_int10	dd	?
+ 001D 00000000		      C old_int13	dd	?
+			      C 
+ 0021 00		      C disk_busy	db	0
+ 0022 00		      C video_busy	db	0
+			      C 
+ 0023 00		      C key_request	db	?
+ 0024 00		      C hot_key 	db	?
+			      C 
+ 0025 00		      C debug_cnt	db	0
+			      C 
+			      C 	PUBLIC	init_debug
+ 0026			      C init_debug     proc  near
+ 0026  2E: 80 3E 0000 R	      C 	cmp	cs:init_disp_flag, 0
+       00
+ 002C  74 01		      C 	je	do_initdisp
+ 002E  C3		      C 	ret
+ 002F			      C do_initdisp:
+ 002F  50		      C 	push	ax
+ 0030  53		      C 	push	bx
+ 0031  51		      C 	push	cx
+ 0032  52		      C 	push	dx
+			      C 
+			      C 	; get current video mode
+ 0033  B4 0F		      C 	mov	ah, 0Fh
+ 0035  CD 10		      C 	int	10h
+			      C ;	int	11h
+			      C 
+ 0037  2E: C7 06 0004 R	      C 	mov	cs:disp_seg, 0B000H
+       B000
+ 003E  3C 07		      C 	cmp	al, 7
+ 0040  74 07		      C 	je	set_active_page
+ 0042  2E: C7 06 0004 R	      C 	mov	cs:disp_seg, 0B800H
+       B800
+ 0049			      C set_active_page:
+ 0049  2E: 88 3E 0006 R	      C 	mov	cs:active_page, bh
+			      C 
+ 004E  32 DB		      C 	xor	bl, bl
+ 0050  86 DF		      C 	xchg	bl, bh
+			      C 
+ 0052  B8 1000		      C 	mov	ax, 4096
+ 0055  F7 E3		      C 	mul	bx
+ 0057  2E: A3 000E R	      C 	mov	cs:ap_start_ptr, ax
+			      C 
+ 005B  FE C3		      C 	inc	bl
+ 005D  80 FB 04		      C 	cmp	bl, 4
+ 0060  75 02		      C 	jne	set_debug_page
+ 0062  B3 00		      C 	mov	bl, 0
+			      C 
+ 0064			      C set_debug_page:
+ 0064  2E: 88 1E 0007 R	      C 	mov	cs:debug_page, bl
+			      C 
+ 0069  B8 1000		      C 	mov	ax, 4096
+ 006C  F7 E3		      C 	mul	bx
+ 006E  2E: A3 000A R	      C 	mov	cs:start_ptr, ax
+ 0072  2E: A3 0008 R	      C 	mov	cs:cur_ptr, ax
+			      C 
+ 0076  05 0FA0		      C 	add	ax, 4000
+ 0079  2E: A3 000C R	      C 	mov	cs:end_ptr, ax
+			      C 
+ 007D  E8 0205		      C 	call	setup_intr
+			      C 
+ 0080  5A		      C 	pop	dx
+ 0081  59		      C 	pop	cx
+ 0082  5B		      C 	pop	bx
+ 0083  58		      C 	pop	ax
+ 0084  C3		      C 	ret
+ 0085			      C init_debug     endp
+			      C 
+			      C 	PUBLIC	b_char
+ 0085			      C b_char	proc  near
+ 0085  50		      C 	push	ax
+ 0086  53		      C 	push	bx
+ 0087  06		      C 	push	es
+			      C 
+ 0088  2E: 8A 26 0002 R	      C 	mov	ah, cs:attr
+ 008D  2E: 8B 1E 0004 R	      C 	mov	bx, cs:disp_seg
+ 0092  8E C3		      C 	mov	es, bx
+ 0094  2E: 8B 1E 0008 R	      C 	mov	bx, cs:cur_ptr
+ 0099  26: 89 07	      C 	mov	word ptr es:[bx], ax
+ 009C  B0 2A		      C 	mov	al, '*'
+ 009E  26: 89 47 02	      C 	mov	word ptr es:[bx+2], ax
+ 00A2  83 C3 02		      C 	add	bx, 2
+ 00A5  2E: 3B 1E 000C R	      C 	cmp	bx, cs:end_ptr
+ 00AA  76 18		      C 	jna	@F
+ 00AC  2E: 8B 1E 000A R	      C 	mov	bx, cs:start_ptr
+ 00B1  80 FC 07		      C 	cmp	ah, 07h
+ 00B4  74 08		      C 	je	inver_attr
+ 00B6  2E: C6 06 0002 R	      C 	mov	cs:attr, 07h
+       07
+ 00BC  EB 06		      C 	jmp	@F
+ 00BE			      C inver_attr:
+ 00BE  2E: C6 06 0002 R	      C 	mov	cs:attr, 70h
+       70
+ 00C4			      C @@:
+ 00C4  2E: 89 1E 0008 R	      C 	mov	cs:cur_ptr, bx
+			      C 
+ 00C9  07		      C 	pop	es
+ 00CA  5B		      C 	pop	bx
+ 00CB  58		      C 	pop	ax
+ 00CC  C3		      C 	ret
+ 00CD			      C b_char	endp
+			      C 
+ 00CD 30 31 32 33 34 35	      C debug_char_tab	db	'0123456789ABCDEF'
+       36 37 38 39 41 42
+       43 44 45 46
+			      C 
+			      C 	PUBLIC	b_byte
+ 00DD			      C b_byte	proc	near
+ 00DD  50		      C 	push	ax
+ 00DE  53		      C 	push	bx
+			      C 
+ 00DF  33 DB		      C 	xor	bx, bx
+ 00E1  8A E0		      C 	mov	ah, al
+ 00E3  8A DC		      C 	mov	bl, ah
+ 00E5  D0 EB		      C 	shr	bl, 1
+ 00E7  D0 EB		      C 	shr	bl, 1
+ 00E9  D0 EB		      C 	shr	bl, 1
+ 00EB  D0 EB		      C 	shr	bl, 1
+ 00ED  2E: 8A 87 00CD R	      C 	mov	al, cs: debug_char_tab[bx]
+ 00F2  E8 FF90		      C 	call	b_char
+ 00F5  8A DC		      C 	mov	bl, ah
+ 00F7  80 E3 0F		      C 	and	bl, 0FH
+ 00FA  2E: 8A 87 00CD R	      C 	mov	al, cs: debug_char_tab[bx]
+ 00FF  E8 FF83		      C 	call	b_char
+			      C 
+ 0102  5B		      C 	pop	bx
+ 0103  58		      C 	pop	ax
+ 0104  C3		      C 	ret
+ 0105			      C b_byte	endp
+			      C 
+			      C 
+			      C ;************************************************************************
+			      C ;
+			      C ; Display a character on the sreen with specified postiton and attribute
+			      C ;
+			      C ; Input:
+			      C ;	DH = row (0 is top)
+			      C ;	DL = column (0 is left)
+			      C ;	BL = color attribute
+			      C ;	AL = character
+			      C ;
+			      C 	PUBLIC	d_char
+ 0105			      C d_char	proc near
+ 0105  06		      C 	push	es
+ 0106  50		      C 	push	ax
+ 0107  53		      C 	push	bx
+ 0108  52		      C 	push	dx
+ 0109  57		      C 	push	di
+			      C 
+ 010A  8A E3		      C 	mov	ah, bl
+ 010C  50		      C 	push	ax		; save (character, attribute) in stack
+			      C 
+ 010D  B0 50		      C 	mov	al, 80
+ 010F  F6 E6		      C 	mul	dh
+ 0111  32 F6		      C 	xor	dh, dh
+ 0113  03 C2		      C 	add	ax, dx
+ 0115  D1 E0		      C 	shl	ax, 1
+			      C 
+ 0117  2E: 8B 1E 0004 R	      C 	mov	bx, cs:disp_seg
+ 011C  8E C3		      C 	mov	es, bx
+ 011E  8B D8		      C 	mov	bx, ax
+			      C 
+ 0120  2E: 03 1E 000A R	      C 	add	bx, cs:start_ptr
+			      C 
+ 0125  58		      C 	pop	ax		; (AL, AH) = (character, attribute)
+ 0126  26: 89 07	      C 	mov	es:[bx], ax
+			      C 
+ 0129  5F		      C 	pop	di
+ 012A  5A		      C 	pop	dx
+ 012B  5B		      C 	pop	bx
+ 012C  58		      C 	pop	ax
+ 012D  07		      C 	pop	es
+ 012E  C3		      C 	ret
+ 012F			      C d_char	     endp
+			      C 
+			      C ;************************************************************************
+			      C ;
+			      C ; Display a byte value in hexdecimal on the sreen
+			      C ; with specified postiton and attribute
+			      C ;
+			      C ; Input:
+			      C ;	DH = row (0 is top)
+			      C ;	DL = column (0 is left)
+			      C ;	BL = color attribute
+			      C ;	AL = byte value
+			      C ;
+			      C 	PUBLIC	d_byte
+ 012F			      C d_byte	proc near
+ 012F  50		      C 	push	ax
+ 0130  51		      C 	push	cx
+			      C 
+ 0131  33 C9		      C 	xor	cx, cx
+ 0133  8A E0		      C 	mov	ah, al
+ 0135  8A CC		      C 	mov	cl, ah
+ 0137  D0 E9		      C 	shr	cl, 1
+ 0139  D0 E9		      C 	shr	cl, 1
+ 013B  D0 E9		      C 	shr	cl, 1
+ 013D  D0 E9		      C 	shr	cl, 1
+ 013F  2E: 8A 87 00CD R	      C 	mov	al, cs: debug_char_tab[bx]
+ 0144  E8 FFBE		      C 	call	d_char
+ 0147  8A CC		      C 	mov	cl, ah
+ 0149  80 E1 0F		      C 	and	cl, 0FH
+ 014C  2E: 8A 87 00CD R	      C 	mov	al, cs: debug_char_tab[bx]
+ 0151  E8 FFB1		      C 	call	d_char
+			      C 
+ 0154  59		      C 	pop	cx
+ 0155  58		      C 	pop	ax
+ 0156  C3		      C 	ret
+ 0157			      C d_byte	endp
+			      C 
+ 0157			      C get_pc_model proc  near
+ 0157  1E		      C 	push	ds
+ 0158  52		      C 	push	dx
+ 0159  2E: C6 06 0010 R	      C 	mov	cs:pc_model, 2
+       02
+ 015F  F9		      C 	stc
+ 0160  B4 C4		      C 	mov	ah, 0c4h
+ 0162  CD 15		      C 	int	15h
+ 0164  73 15		      C 	jnc	ps2_model			;PS2 model (50 or 80)
+ 0166  B8 F000		      C 	mov	ax,0f000h
+ 0169  8E D8		      C 	mov	ds,ax
+ 016B  80 3E FFFE FC	      C 	cmp	byte ptr ds:[0fffeh], 0fch
+ 0170  5A		      C 	pop	dx
+ 0171  1F		      C 	pop	ds
+ 0172  74 06		      C 	je	at_model
+ 0174  2E: C6 06 0010 R	      C 	mov	cs:pc_model, 1			;XT model
+       01
+ 017A			      C at_model:
+ 017A  C3		      C 	ret
+ 017B			      C ps2_model:
+ 017B  5A		      C 	pop	dx
+ 017C  1F		      C 	pop	ds
+ 017D  C3		      C 	ret
+ 017E			      C get_pc_model endp
+			      C ;
+			      C ;
+ = 00AD			      C DIS_KBD EQU	0adh
+ = 00AE			      C ENA_KBD EQU	0aeh
+ 017E			      C disable_keyboard proc
+ 017E  50		      C 	push	ax
+ 017F  2E: 80 3E 0010 R	      C 	cmp	cs:pc_model, 1
+       01
+ 0185  74 05		      C 	je	is_xt_0
+ 0187  B0 AD		      C 	mov	al, DIS_KBD
+ 0189  E8 0012		      C 	call	ship_it
+ 018C			      C is_xt_0:
+ 018C			      C not_int9_bottom_0:
+ 018C  58		      C 	pop	ax
+ 018D  C3		      C 	ret
+ 018E			      C disable_keyboard endp
+			      C ;
+			      C ;
+ 018E			      C enable_keyboard proc
+ 018E  50		      C 	push	ax
+ 018F  2E: 80 3E 0010 R	      C 	cmp	cs:pc_model, 1
+       01
+ 0195  74 05		      C 	je	is_xt_1
+ 0197  B0 AE		      C 	mov	al, ENA_KBD
+ 0199  E8 0002		      C 	call	ship_it
+ 019C			      C is_xt_1:
+ 019C			      C not_int9_bottom_1:
+ 019C  58		      C 	pop	ax
+ 019D  C3		      C 	ret
+ 019E			      C enable_keyboard endp
+			      C ;
+			      C ;
+ 019E			      C ship_it proc
+ 019E  9C		      C 	pushf
+ 019F  51		      C 	push	cx
+ 01A0  50		      C 	push	ax
+ 01A1  FA		      C 	cli
+ 01A2  2B C9		      C 	sub	cx,cx
+ 01A4			      C ship_1:
+ 01A4  E4 64		      C 	in	al, 64h
+ 01A6  A8 02		      C 	test	al, 02h
+ 01A8  E0 FA		      C 	loopnz	ship_1
+ 01AA  58		      C 	pop	ax
+ 01AB  59		      C 	pop	cx
+ 01AC  E6 64		      C 	out	64h, al
+ 01AE  9D		      C 	popf
+ 01AF  C3		      C 	ret
+ 01B0			      C ship_it endp
+			      C 
+			      C 
+ 01B0			      C intr13	proc  far
+ 01B0  FA		      C 	cli
+ 01B1  2E: C6 06 0021 R	      C 	mov	cs:disk_busy, 1
+       01
+ 01B7  9C		      C 	pushf
+ 01B8  2E: FF 1E 001D R	      C 	call	cs:old_int13
+ 01BD  2E: C6 06 0021 R	      C 	mov	byte ptr cs:disk_busy,0
+       00
+ 01C3  CA 0002		      C 	ret	2
+ 01C6			      C intr13 endp
+			      C 
+ 01C6			      C intr10	proc  far
+ 01C6  FA		      C 	cli
+ 01C7  2E: C6 06 0022 R	      C 	mov	byte ptr cs:video_busy, 1
+       01
+ 01CD  9C		      C 	pushf
+ 01CE  2E: FF 1E 0019 R	      C 	call	cs:old_int10
+ 01D3  2E: C6 06 0022 R	      C 	mov	byte ptr cs:video_busy, 0
+       00
+ 01D9  CF		      C 	iret
+ 01DA			      C intr10	endp
+			      C 
+ 01DA			      C intr09	proc  far
+ 01DA  FA		      C 	cli
+			      C 
+ 01DB  50		      C 	push	ax
+ 01DC  1E		      C 	push	ds
+			      C 
+ 01DD  E4 60		      C 	in	al, 60h
+			      C 
+ 01DF  3C 2B		      C 	cmp	al, 2bh 		; '|'
+ 01E1  75 1E		      C 	jne	hook_old_intr09
+			      C 
+ 01E3  2E: A2 0024 R	      C 	mov	cs:hot_key, al
+			      C 
+			      C 	; Get keyboard flag from BIOS data
+ 01E7  1E		      C 	push	ds
+ 01E8  B8 0040		      C 	mov	ax, 40h
+ 01EB  8E D8		      C 	mov	ds, ax
+ 01ED  A0 0017		      C 	mov	al, ds:[17h]
+ 01F0  1F		      C 	pop	ds
+			      C 
+ 01F1  8A E0		      C 	mov	ah, al
+ 01F3  80 E4 0F		      C 	and	ah, 00001111b
+ 01F6  80 FC 0C		      C 	cmp	ah, 00001100b		; ALT_FLAG=08h, CTRL_FLAG=04h
+ 01F9  75 06		      C 	jne	hook_old_intr09
+			      C 
+ 01FB  2E: C6 06 0023 R	      C 	mov	cs:key_request, 1
+       01
+			      C 
+ 0201			      C hook_old_intr09:
+ 0201  FA		      C 	cli
+ 0202  9C		      C 	pushf
+ 0203  2E: FF 1E 0015 R	      C 	call	cs:old_int09
+			      C 
+ 0208			      C intr09_exit:
+ 0208  FA		      C 	cli
+			      C 
+ 0209  1F		      C 	pop	ds
+ 020A  58		      C 	pop	ax
+			      C 
+ 020B  CF		      C 	iret
+ 020C			      C intr09	endp
+			      C 
+ 020C			      C intr08	proc far
+ 020C  FA		      C 	cli
+			      C 
+ 020D  2E: FE 06 0025 R	      C 	inc	cs:debug_cnt
+			      C 
+ 0212  9C		      C 	pushf
+ 0213  2E: FF 1E 0011 R	      C 	call	cs:old_int08
+			      C 
+ 0218  FA		      C 	cli
+ 0219  2E: FE 06 0001 R	      C 	inc	cs:intr08_sem
+ 021E  2E: 80 3E 0001 R	      C 	cmp	cs:intr08_sem, 1
+       01
+ 0224  74 01		      C 	je	do_intr08
+			      C 
+ 0226  CF		      C 	iret
+			      C 
+ 0227			      C do_intr08:
+ 0227  FA		      C 	cli
+			      C 
+ 0228  1E		      C 	push	ds
+ 0229  06		      C 	push	es
+			      C 
+ 022A  50		      C 	push	ax
+ 022B  53		      C 	push	bx
+ 022C  51		      C 	push	cx
+ 022D  52		      C 	push	dx
+			      C 
+ 022E  0E		      C 	push	cs
+ 022F  1F		      C 	pop	ds
+			      C 
+			      C ;-- check if hot key pressed
+			      C ;------------------------------------------------------------------------
+ 0230  80 3E 0023 R 00	      C 	cmp	key_request, 0
+ 0235  74 40		      C 	je	intr08_exit
+ 0237  80 3E 0021 R 01	      C 	cmp	disk_busy, 1
+ 023C  74 39		      C 	je	intr08_exit
+ 023E  80 3E 0022 R 01	      C 	cmp	video_busy, 1
+ 0243  74 32		      C 	je	intr08_exit
+			      C 
+			      C ;-- hot key action here
+			      C ;------------------------------------------------------------------------
+			      C 	; toggle between debug/active page
+ 0245  8B 0E 000A R	      C 	mov	cx, start_ptr
+ 0249  80 3E 0003 R 00	      C 	cmp	debug_mode, 0
+ 024E  74 04		      C 	je	toggle_page
+ 0250  8B 0E 000E R	      C 	mov	cx, ap_start_ptr
+			      C 
+ 0254			      C toggle_page:
+			      C ;;;;;	mov	ah, 05h
+			      C ;;;;;	int	10h
+			      C 
+ 0254  D1 E9		      C 	shr	cx, 1
+			      C 
+ 0256  BA 03D4		      C 	mov	dx, 03D4h
+ 0259  B0 0C		      C 	mov	al, 12
+ 025B  EE		      C 	out	dx, al
+			      C 
+ 025C  BA 03D5		      C 	mov	dx, 03D5h
+ 025F  8A C5		      C 	mov	al, ch
+ 0261  EE		      C 	out	dx, al
+			      C 
+ 0262  BA 03D4		      C 	mov	dx, 03D4h
+ 0265  B0 0D		      C 	mov	al, 13
+ 0267  EE		      C 	out	dx, al
+			      C 
+ 0268  BA 03D5		      C 	mov	dx, 03D5h
+ 026B  8A C1		      C 	mov	al, cl
+ 026D  EE		      C 	out	dx, al
+			      C 
+ 026E  F6 16 0003 R	      C 	not	debug_mode
+			      C 
+ 0272  C6 06 0023 R 00	      C 	mov	key_request, 0
+			      C 
+ 0277			      C intr08_exit:
+ 0277  5A		      C 	pop	dx
+ 0278  59		      C 	pop	cx
+ 0279  5B		      C 	pop	bx
+ 027A  58		      C 	pop	ax
+			      C 
+ 027B  07		      C 	pop	es
+ 027C  1F		      C 	pop	ds
+			      C 
+ 027D  FA		      C 	cli
+ 027E  2E: C6 06 0001 R	      C 	mov	cs:intr08_sem, 0
+       00
+			      C 
+ 0284  CF		      C 	iret
+ 0285			      C intr08	endp
+			      C 
+ 0285			      C setup_intr	  proc	near
+ 0285  50		      C 	push	ax
+ 0286  53		      C 	push	bx
+ 0287  51		      C 	push	cx
+ 0288  52		      C 	push	dx
+			      C 
+ 0289  1E		      C 	push	ds
+ 028A  06		      C 	push	es
+			      C 
+ 028B  E8 FEC9		      C 	call	get_pc_model
+			      C 
+ 028E  FA		      C 	cli
+			      C 
+ 028F  0E		      C 	push	cs
+ 0290  1F		      C 	pop	ds
+			      C 
+			      C ; setup INT 13
+ 0291  B8 3513		      C 	mov	ax, 3513h
+ 0294  CD 21		      C 	int	21h
+ 0296  89 1E 001D R	      C 	mov	word ptr old_int13, bx
+ 029A  8C 06 001F R	      C 	mov	word ptr old_int13+2, es
+			      C 
+ 029E  B8 2513		      C 	mov	ax, 2513h
+ 02A1  8D 16 01B0 R	      C 	lea	dx, intr13
+ 02A5  CD 21		      C 	int	21h
+			      C 
+			      C ; setup INT 10
+ 02A7  B8 3510		      C 	mov	ax, 3510h
+ 02AA  CD 21		      C 	int	21h
+ 02AC  89 1E 0019 R	      C 	mov	word ptr old_int10, bx
+ 02B0  8C 06 001B R	      C 	mov	word ptr old_int10+2, es
+			      C 
+ 02B4  B8 2510		      C 	mov	ax, 2510h
+ 02B7  8D 16 01C6 R	      C 	lea	dx, intr10
+ 02BB  CD 21		      C 	int	21h
+			      C 
+			      C ; setup INT 9
+ 02BD  B8 3509		      C 	mov	ax, 3509h
+ 02C0  CD 21		      C 	int	21h
+ 02C2  89 1E 0015 R	      C 	mov	word ptr old_int09, bx
+ 02C6  8C 06 0017 R	      C 	mov	word ptr old_int09+2, es
+			      C 
+ 02CA  B8 2509		      C 	mov	ax, 2509h
+ 02CD  8D 16 01DA R	      C 	lea	dx, intr09
+ 02D1  CD 21		      C 	int	21h
+			      C 
+			      C ; setup INT 8
+ 02D3  B8 3508		      C 	mov	ax, 3508h
+ 02D6  CD 21		      C 	int	21h
+ 02D8  89 1E 0011 R	      C 	mov	word ptr old_int08, bx
+ 02DC  8C 06 0013 R	      C 	mov	word ptr old_int08+2, es
+			      C 
+ 02E0  B8 2508		      C 	mov	ax, 2508h
+ 02E3  8D 16 020C R	      C 	lea	dx, intr08
+ 02E7  CD 21		      C 	int	21h
+			      C 
+ 02E9  FB		      C 	sti
+			      C 
+ 02EA  07		      C 	pop	es
+ 02EB  1F		      C 	pop	ds
+			      C 
+ 02EC  5A		      C 	pop	dx
+ 02ED  59		      C 	pop	cx
+ 02EE  5B		      C 	pop	bx
+ 02EF  58		      C 	pop	ax
+ 02F0  C3		      C 	ret
+ 02F1			      C setup_intr  endp
+			      C 
+			      C  
+			      C 
+				ENDIF	;-- DEBUGDOS
+				;;++
+ 02F1				code	ends
+					end
+ 
+Microsoft (R) Macro Assembler Version 6.11		    06/29/00 11:15:53
+.\dbg.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+code . . . . . . . . . . . . . .	16 Bit	 02F1	  Para	  Public  
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+b_byte . . . . . . . . . . . . .	P Near	 00DD	  code	Length= 0028 Public
+b_char . . . . . . . . . . . . .	P Near	 0085	  code	Length= 0048 Public
+d_byte . . . . . . . . . . . . .	P Near	 012F	  code	Length= 0028 Public
+d_char . . . . . . . . . . . . .	P Near	 0105	  code	Length= 002A Public
+disable_keyboard . . . . . . . .	P Near	 017E	  code	Length= 0010 Private
+enable_keyboard  . . . . . . . .	P Near	 018E	  code	Length= 0010 Private
+get_pc_model . . . . . . . . . .	P Near	 0157	  code	Length= 0027 Private
+init_debug . . . . . . . . . . .	P Near	 0026	  code	Length= 005F Public
+intr08 . . . . . . . . . . . . .	P Far	 020C	  code	Length= 0079 Private
+intr09 . . . . . . . . . . . . .	P Far	 01DA	  code	Length= 0032 Private
+intr10 . . . . . . . . . . . . .	P Far	 01C6	  code	Length= 0014 Private
+intr13 . . . . . . . . . . . . .	P Far	 01B0	  code	Length= 0016 Private
+setup_intr . . . . . . . . . . .	P Near	 0285	  code	Length= 006C Private
+ship_it  . . . . . . . . . . . .	P Near	 019E	  code	Length= 0012 Private
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+DEBUGDOS . . . . . . . . . . . .	Text   	 
+DIS_KBD  . . . . . . . . . . . .	Number	 00ADh	 
+ENA_KBD  . . . . . . . . . . . .	Number	 00AEh	 
+GEN_VER  . . . . . . . . . . . .	Text   	 8
+HOMEPNA  . . . . . . . . . . . .	Text   	 
+MAJ_VER  . . . . . . . . . . . .	Text   	 1
+MIN_VER  . . . . . . . . . . . .	Text   	 2
+SINGLE_PORT  . . . . . . . . . .	Text   	 
+SW_ONE_PKT . . . . . . . . . . .	Text   	 
+active_page  . . . . . . . . . .	Byte	 0006	  code	
+ap_start_ptr . . . . . . . . . .	Word	 000E	  code	
+at_model . . . . . . . . . . . .	L Near	 017A	  code	
+attr . . . . . . . . . . . . . .	Byte	 0002	  code	
+cur_ptr  . . . . . . . . . . . .	Word	 0008	  code	
+debug_char_tab . . . . . . . . .	Byte	 00CD	  code	
+debug_cnt  . . . . . . . . . . .	Byte	 0025	  code	
+debug_mode . . . . . . . . . . .	Byte	 0003	  code	
+debug_page . . . . . . . . . . .	Byte	 0007	  code	
+disk_busy  . . . . . . . . . . .	Byte	 0021	  code	
+disp_seg . . . . . . . . . . . .	Word	 0004	  code	
+do_initdisp  . . . . . . . . . .	L Near	 002F	  code	
+do_intr08  . . . . . . . . . . .	L Near	 0227	  code	
+end_ptr  . . . . . . . . . . . .	Word	 000C	  code	
+hook_old_intr09  . . . . . . . .	L Near	 0201	  code	
+hot_key  . . . . . . . . . . . .	Byte	 0024	  code	
+init_disp_flag . . . . . . . . .	Byte	 0000	  code	
+intr08_exit  . . . . . . . . . .	L Near	 0277	  code	
+intr08_sem . . . . . . . . . . .	Byte	 0001	  code	
+intr09_exit  . . . . . . . . . .	L Near	 0208	  code	
+inver_attr . . . . . . . . . . .	L Near	 00BE	  code	
+is_xt_0  . . . . . . . . . . . .	L Near	 018C	  code	
+is_xt_1  . . . . . . . . . . . .	L Near	 019C	  code	
+key_request  . . . . . . . . . .	Byte	 0023	  code	
+not_int9_bottom_0  . . . . . . .	L Near	 018C	  code	
+not_int9_bottom_1  . . . . . . .	L Near	 019C	  code	
+old_int08  . . . . . . . . . . .	DWord	 0011	  code	
+old_int09  . . . . . . . . . . .	DWord	 0015	  code	
+old_int10  . . . . . . . . . . .	DWord	 0019	  code	
+old_int13  . . . . . . . . . . .	DWord	 001D	  code	
+pc_model . . . . . . . . . . . .	Byte	 0010	  code	
+ps2_model  . . . . . . . . . . .	L Near	 017B	  code	
+set_active_page  . . . . . . . .	L Near	 0049	  code	
+set_debug_page . . . . . . . . .	L Near	 0064	  code	
+ship_1 . . . . . . . . . . . . .	L Near	 01A4	  code	
+start_ptr  . . . . . . . . . . .	Word	 000A	  code	
+toggle_page  . . . . . . . . . .	L Near	 0254	  code	
+video_busy . . . . . . . . . . .	Byte	 0022	  code	
+
+	   0 Warnings
+	   0 Errors

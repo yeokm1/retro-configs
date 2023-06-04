@@ -1,0 +1,33 @@
+
+Packet drivers for WaveLAN
+--------------------------
+
+There are 2 packet drivers for WaveLAN, one for the AT machine,
+called WAVEAT.COM and one for the MCA machine, called WAVEMC.COM.
+
+They accept the following command-line switches:
+
+
+<n>		optional, 
+                when specified performs the Novell raw frame to
+                ethernet_II conversion, to be used with Bringham-
+                Young University IPX for packet drivers.
+
+<packet_int_no>	required,
+                specifies the software interrupt the driver will use
+
+
+<io_base>       AT only, required
+                must match the IO base address strapped on the WaveLAN
+                card; possible values: 0x300, 0x390, 0x3c0, 0x3e0
+                The MCA driver "searches" for the WaveLAN board, so
+                no IO base required.
+
+<nwid>		optional
+                when specified, this NWID is used in stead of the
+                programmed NWID. It does not change the programmed
+                NWID.
+
+
+The drivers conform to version 1.09 of the Packet Driver Spec.
+
