@@ -14,13 +14,20 @@ Demo video of the Hand386 running some games and applications.
 
 ## Specifications
 
-* ALI M6117 with chipset (386SX-40)
+* Ali M6117 with chipset (386SX-40)
 * Chips and Tech F65535 256K graphics
-* 8MB RAM
-* CF card slot
-* USB slot for flash drives using CH375 chip
-* Connector for VGA output, PS/2 mouse and keyboard
-* Connector for 8-bit ISA bus extender
+* YMF262-M OPL3 with YAC512 DAC
+* OPL3-driven speakers
+* PC-speaker
+* 8MiB RAM
+* 2500 mAh battery
+* 128 x 150 x 16mm (measured dimensions)
+* Ports
+  * CF card slot
+  * USB slot for flash drives using CH375 chip
+  * Connector for VGA output, PS/2 mouse and keyboard
+  * Connector for 8-bit ISA bus extender
+  * Headphone jack
 
 <img src="photos/hand386-delivered.jpg" width="500">
 
@@ -42,7 +49,7 @@ Since the device does not natively have a floppy controller, one will either hav
 
 I opted with the latter approach. I installed DOS 6.22 and WFW 3.11 on the CF card using another system. Then moved the card back to the Hand386 to continue installing other programs.
 
-This technique can work on Windows 95 as well. You will ant to do that as it will take about 2-3 hours for the native installation to complete due to the slow CPU speed. When you move the CF card, start the Add hardware wizard for Windows 95 to detect the changed hardware to install the drivers.
+This technique can work on Windows 95 as well. You will want to do that as it will take about 2-3 hours for the native installation to complete due to the slow CPU speed. When you move the CF card, start the Add hardware wizard for Windows 95 to detect the changed hardware to install the drivers.
 
 ### CH375
 
@@ -66,7 +73,7 @@ It requires an initial configuration of the address and interrupt settings. I us
 
 ### BIOS
 
-Non much configuration is required. However if the BIOS is reset accidentally or otherwise, the PS/2 mouse port will be disable by default which needs to re-enabled.
+Not much configuration is required. However if the BIOS is reset accidentally or otherwise, the PS/2 mouse port will be disabled by default which needs to re-enabled manually.
 
 To enter the BIOS, press and hold the `del` key while turning on the power.
 
@@ -80,3 +87,6 @@ Mouse enabled
 
 1. Manuals: Provided by the store
 2. [C&T F65535 datasheet](http://old.vgamuseum.info/images/stories/doc/chips/f65535.pdf)
+3. [Ali M6117D datasheet](https://www.dmp.com.tw/app/webcamera/pdf/m6117d.pdf)
+4. [AMIC A420616AS-50F datasheet](https://www.alldatasheet.com/view.jsp?Searchword=A420616AS-50F)
+5. [39SF512_SS datasheetT](https://www.mouser.com/datasheet/2/268/40284-287606.pdf)
