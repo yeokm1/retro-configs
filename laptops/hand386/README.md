@@ -15,7 +15,7 @@ Demo video of the Hand386 running some games and applications.
 ## Specifications
 
 * Ali M6117 with chipset (386SX-40)
-* Chips and Tech F65535 256K graphics
+* Chips and Tech F65535
 * YMF262-M OPL3 with YAC512 DAC
 * OPL3-driven speakers
 * PC-speaker
@@ -24,7 +24,7 @@ Demo video of the Hand386 running some games and applications.
 * 128 x 150 x 16mm (measured dimensions)
 * Ports
   * CF card slot
-  * USB slot for flash drives using CH375 chip
+  * USB port for flash drives
   * Connector for VGA output, PS/2 mouse and keyboard
   * Connector for 8-bit ISA bus extender
   * Headphone jack
