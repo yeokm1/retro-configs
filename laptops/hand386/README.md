@@ -29,7 +29,7 @@ These are the items that are delivered
 * 2GB CF card
 * 3-slot 8-bit ISA extender
 * 2x30 pin 2.00mm pitch IDC ribbon cable
-* VGA, PS/2 mouse and keyboard breakout borad
+* VGA, PS/2 mouse and keyboard breakout board
 * 2x6 pin 2.00mm pitch IDC ribbon cable
 * 2A USB charger
 * USB to barrel jack charge cable
