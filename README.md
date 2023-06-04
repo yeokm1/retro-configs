@@ -91,7 +91,7 @@ The NEC Versa 40EC laptop is only configured for DOS 6.22.
 
 <img src="laptops/versa-v40/photos/versa-front.jpg" width="400">
 
-## 6. [Hand386](laptopns/hand386) (2023)
+## 6. [Hand386](laptops/hand386) (2023)
 
 This is a new 386-based palmtop released in 2023. It runs on DOS 6.22 and Windows for Workgroups (WFW) 3.11.
 
