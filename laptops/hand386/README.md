@@ -49,7 +49,7 @@ Since the device does not natively have a floppy controller, one will either hav
 
 I opted with the latter approach. I installed DOS 6.22 and WFW 3.11 on the CF card using another system. Then moved the card back to the Hand386 to continue installing other programs.
 
-This technique can work on Windows 95 as well. You will want to do that as it will take about 2-3 hours for the native installation to complete due to the slow CPU speed. When you move the CF card, start the Add hardware wizard for Windows 95 to detect the changed hardware to install the drivers.
+This technique can work on Windows 95 as well. You will want to do that as it will take about 2-3 hours for the native Win95 installation to complete due to the slow CPU speed. When you move the CF card, start the Add hardware wizard for Windows 95 to detect the changed hardware to install the drivers.
 
 ### CH375
 
