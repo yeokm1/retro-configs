@@ -111,8 +111,8 @@ I was experimenting in getting an Real-time clock to work with this system with 
 
 Many thanks to Aitor Gómez's [RTC ISA 8 Bits XT](https://hackaday.io/project/168972-rtc-isa-8-bits-pcxt) and his help. I managed to reprogram his board to use the `240h` address and get it to work.
 
-1. [RTC SPLD Binaries](https://github.com/spark2k06/hardware/tree/master/RTC8088/SPLD)
-2. [RTC Program from dieymir](http://www.vcfed.org/forum/showthread.php?71958-RTC-ISA-8-bits-(Very-Low-Profile)&p=606650#post606650)
+1. [RTC SPLD Binaries](https://github.com/spark2k06/RTC8088)
+2. [RTC Program from dieymir](https://forum.vcfed.org/index.php?threads/rtc-isa-8-bits-very-low-profile.73126/post-909159)
 
 <img src="photos/5155-isartc.jpg" width="500">
 
