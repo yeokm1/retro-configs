@@ -23,8 +23,7 @@ PATH %PATH%;D:\DRIVERS\MTCP2023
 SET MTCPCFG=C:\MTCP.CFG
 SET TZ=UTC-8
 LH D:\DRIVERS\3C509.COM 0x60
-rem dhcp
-rem sntp -set sg.pool.ntp.org
+d:\drivers\rtcm8088\get_rtc.exe 576
 GOTO END
 
 :END

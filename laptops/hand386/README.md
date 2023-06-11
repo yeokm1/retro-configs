@@ -41,6 +41,30 @@ These are the items that are delivered
 * 2A USB charger
 * USB to barrel jack charge cable
 
+## ISA Docking station
+
+<img src="photos/hand386-isa-cards.jpg" width="500">
+
+3 cards are populated:
+
+* 3Com 3C905B-TPO NIC
+* Blasterboard (Sound Blaster 2.0 clone)
+* RTC
+
+The cards and ISA backplane are placed on a vertical bracket riser that was initially meant for external PCIe GPUs. Thanks to awesome PC backward compatibility, even ISA cards can fit there as well.
+
+### 3C905
+
+The 16-bit ISA 3C905B-TPO card can operate in 8-bit mode.
+
+It requires an initial configuration of the address and interrupt settings. I used the 8088-compatible tool from [here](https://github.com/hackerb9/3C509B-nestor) to do that.
+
+### RTC
+
+The RTC performance of this device is quite poor in my opinion at an approximate error of 1 minute every 1-2 hours. On some occasions, the time is outright lost altogether. To workaround this issue, I opted to use a dedicated [RTC ISA 8 bits (Very Low Profile)](https://www.tindie.com/products/spark2k06/rtc-isa-8-bits-very-low-profile-2/).
+
+This is the [RTC Program](https://github.com/wilco2009/RTC_micro8088) used to work with the RTC board.
+
 ## Configuration
 
 ### OS Installation
@@ -50,6 +74,18 @@ Since the device does not natively have a floppy controller, one will either hav
 I opted with the latter approach. I installed DOS 6.22 and WFW 3.11 on the CF card using another system. Then moved the card back to the Hand386 to continue installing other programs.
 
 This technique can work on Windows 95 as well. You will want to do that as it will take about 2-3 hours for the native Win95 installation to complete due to the slow CPU speed. When you move the CF card, start the Add hardware wizard for Windows 95 to detect the changed hardware to install the drivers.
+
+### BIOS
+
+Not much configuration is required. However if the BIOS is reset accidentally or otherwise, the PS/2 mouse port will be disabled by default which needs to re-enabled manually.
+
+To enter the BIOS, press and hold the `del` key while turning on the power.
+
+<img src="photos/hand386-bios-mouse.jpg" width="500">
+
+Go to `Advanced CMOS setup` -> `Mouse Support` and enable it.
+
+Mouse enabled
 
 ### CH375
 
@@ -64,24 +100,6 @@ The Adlib (OPL) Midi driver is provided by WFW 3.11 by default so simply install
 A third-party driver that uses the OPL chip to generate PCM sounds can be found [here](https://archive.org/details/ADLIBW_ZIP).
 
 Note that there is no known means to disable the onboard OPL chip. If you install an OPL-capable card on the bus extender like a Sound Blaster, both will generate the FM output.
-
-### 3C905
-
-This is for my external 16-bit ISA 3C905B-TPO card which can operate in 8-bit mode.
-
-It requires an initial configuration of the address and interrupt settings. I used the 8088-compatible tool from [here](https://github.com/hackerb9/3C509B-nestor) to do that.
-
-### BIOS
-
-Not much configuration is required. However if the BIOS is reset accidentally or otherwise, the PS/2 mouse port will be disabled by default which needs to re-enabled manually.
-
-To enter the BIOS, press and hold the `del` key while turning on the power.
-
-<img src="photos/hand386-bios-mouse.jpg" width="500">
-
-Go to `Advanced CMOS setup` -> `Mouse Support` and enable it.
-
-Mouse enabled
 
 ## References
 
