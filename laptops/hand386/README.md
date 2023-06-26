@@ -75,6 +75,15 @@ I opted with the latter approach. I installed DOS 6.22 and WFW 3.11 on the CF ca
 
 This technique can work on Windows 95 as well. You will want to do that as it will take about 2-3 hours for the native Win95 installation to complete due to the slow CPU speed. When you move the CF card, start the Add hardware wizard for Windows 95 to detect the changed hardware to install the drivers.
 
+### Video
+
+By default, the video BIOS locks the screen resolution to 640x480 60Hz with the right portion being cutoff. The typical DOS resolution is 720x400 70Hz (80x25 text mode). 
+
+<img src="photos/hand386-crt-mode.jpg" width="500">
+Left shows the default mode, right shows the typical mode.
+
+We can use CT.COM obtained from the [driver pack](https://oemdrivers.com/graphics-chips-f65545) (meant for 65545) to switch it to the typical mode.
+
 ### BIOS
 
 Not much configuration is required. However if the BIOS is reset accidentally or otherwise, the PS/2 mouse port will be disabled by default which needs to re-enabled manually.
