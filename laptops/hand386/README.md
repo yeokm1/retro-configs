@@ -94,8 +94,6 @@ To enter the BIOS, press and hold the `del` key while turning on the power.
 
 Go to `Advanced CMOS setup` -> `Mouse Support` and enable it.
 
-Mouse enabled
-
 ### CH375
 
 I faced some issues with using the default `CH375DOS.sys` as it can't mount some of my flash drivers properly. 
