@@ -85,13 +85,7 @@ In Win 98SE
 
 In WFW 3.11
 
-## 5. [NEC Versa 40EC](laptops/versa-v40) (1994)
-
-The NEC Versa 40EC laptop is only configured for DOS 6.22.
-
-<img src="laptops/versa-v40/photos/versa-front.jpg" width="400">
-
-## 6. [Hand386](laptops/hand386) (2023)
+## 5. [Hand386](laptops/hand386) (2023)
 
 This is a new 386-based palmtop released in 2023. It runs on DOS 6.22 and Windows for Workgroups (WFW) 3.11.
 
@@ -164,6 +158,12 @@ The Poqet PC Plus is a small IBM PC/XT compatible released by Fujitsu in the ear
 <img src="deprecated/poqet-pc-plus/photos/pqplus-front.jpg" width="500">
 
 This PC failed before I could take a photo of it in a running state.
+
+# 5. [NEC Versa 40EC](laptops/versa-v40) (1994)
+
+The NEC Versa 40EC laptop is only configured for DOS 6.22.
+
+<img src="deprecated/versa-v40/photos/versa-front.jpg" width="400">
 
 
 # Sources
