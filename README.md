@@ -193,4 +193,5 @@ The NEC Versa 40EC laptop is only configured for DOS 6.22.
 23. [3c589 Packet driver](http://download.caltech.se/download/fluke/DAQ/NetDAQ/disk2/packet/)
 24. [3C589N DOS and Windows drivers](http://files.mpoli.fi/hardware/NET/3COM/3C589N.ZIP)
 25. [Win95 OSR2 boot disk](https://winworldpc.com/product/microsoft-windows-boot-disk/95-osr2x)
+26. [PFE500c drivers](https://www.driverguide.com/driver/amp/detail.php?driverid=114194)
 
