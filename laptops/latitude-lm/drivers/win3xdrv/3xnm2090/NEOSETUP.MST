@@ -1,0 +1,171 @@
+'**************************************************************************
+'*                       NeoMagic Video Configuration Setup
+'**************************************************************************
+
+'$DEFINE DEBUG  ''Define for script development/debugging
+
+'$INCLUDE 'setupapi.inc'
+'$INCLUDE 'msdetect.inc'
+
+
+''Dialog ID's
+CONST WELCOME       = 100
+CONST ASKQUIT       = 200
+CONST DESTPATH      = 300
+CONST EXITFAILURE   = 400
+CONST EXITQUIT      = 600
+CONST EXITSUCCESS   = 700
+CONST OPTIONS       = 800
+CONST APPHELP       = 900
+CONST BADPATH       = 6400
+CONST RESTART       = 1000
+
+CONST LOGO = 1
+GLOBAL OPTCUR$      ''Option selection from option dialog.
+
+GLOBAL WinDir$
+GLOBAL WinSysDir$
+
+DECLARE SUB Install
+DECLARE FUNCTION MakePath (szDir$, szFile$) AS STRING
+DECLARE FUNCTION GetPrivateProfileString LIB "Kernel" (SectionName$, KeyName$,Default$, ReturnedString$, Size As Integer,FileName$) AS INTEGER
+DECLARE FUNCTION IsCurrentUsed () AS INTEGER
+
+INIT:
+    CUIDLL$ = "mscuistf.dll"            ''Custom user interface dll
+    
+    HELPPROC$ = "FHelpDlgProc"          ''Help dialog procedure
+
+    SetBitmap CUIDLL$, LOGO
+    SetTitle "NeoMagic Video Configuration Setup"
+
+    szInf$ = GetSymbolValue("STF_SRCINFPATH")
+    IF szInf$ = "" THEN
+	szInf$ = GetSymbolValue("STF_CWDDIR") + "NEOSETUP.INF"
+    END IF
+    ReadInfFile szInf$
+
+    WinDir$ = GetWindowsDir()
+    WinSysDir$ = GetWindowsSysDir()
+
+WELCOME:
+    sz$ = UIStartDlg(CUIDLL$, WELCOME, "FInfoDlgProc", APPHELP, HELPPROC$)
+    IF sz$ = "CONTINUE" THEN
+	UIPop 1
+    ELSE
+	GOSUB ASKQUIT
+	GOTO WELCOME
+    END IF
+
+
+
+
+    Install
+
+
+QUIT:
+    ON ERROR GOTO ERRQUIT
+
+    IF ERR = 0 THEN
+	dlg% = EXITSUCCESS
+    ELSEIF ERR = STFQUIT THEN
+	dlg% = EXITQUIT
+    ELSE
+	dlg% = EXITFAILURE
+    END IF
+QUITL1:
+    sz$ = UIStartDlg(CUIDLL$, dlg%, "FInfo0DlgProc", 0, "")
+    IF sz$ = "REACTIVATE" THEN
+	GOTO QUITL1
+    END IF
+    UIPop 1
+
+    
+    IF ERR = 0 THEN
+	  sz$ = UIStartDlg(CUIDLL$, RESTART, "FInfoDlgProc", APPHELP, HELPPROC$)
+    END IF
+    
+    END
+
+ERRQUIT:
+    i% = DoMsgBox("Setup sources were corrupted, please contact your software provider.", "Setup Message", MB_OK+MB_TASKMODAL+MB_ICONHAND)
+    END
+
+
+
+
+ASKQUIT:
+    sz$ = UIStartDlg(CUIDLL$, ASKQUIT, "FQuitDlgProc", 0, "")
+
+    IF sz$ = "EXIT" THEN
+	UIPopAll
+	ERROR STFQUIT
+    ELSEIF sz$ = "REACTIVATE" THEN
+	GOTO ASKQUIT
+    ELSE
+	UIPop 1
+    END IF
+    RETURN
+
+
+
+'**
+'** Purpose:
+'**     Builds the copy list and performs all installation operations.
+'** Arguments:
+'**     none.
+'** Returns:
+'**     none.
+'*************************************************************************
+SUB Install STATIC
+
+    SrcDir$ = GetSymbolValue("STF_SRCDIR")
+
+	SrcDir$ = SrcDir$ + "files\"
+    AddSectionFilesToCopyList "Windows", SrcDir$, WinDir$
+    AddSectionFilesToCopyList "System", SrcDir$, WinSysDir$
+    CopyFilesInCopyList
+
+    CreateIniKeyValue WinDir$ + "system.ini", "Drivers", "VIDS.DRAW", "UDH.DLL", cmoOverwrite
+    CreateIniKeyValue WinDir$ + "system.ini", "Drivers", "VIDC.CVID", "ICCVID.DRV", cmoOverwrite
+    CreateIniKeyValue WinDir$ + "system.ini", "Drivers", "VIDC.YVU9", "IYVU9.DLL", cmoOverwrite
+    CreateIniKeyValue WinDir$ + "system.ini", "Drivers", "VIDC.IV31", "IR32.DLL", cmoOverwrite
+    CreateIniKeyValue WinDir$ + "system.ini", "Drivers", "VIDC.IV32", "IR32.DLL", cmoOverwrite
+    CreateIniKeyValue WinDir$ + "system.ini", "Drivers", "DCI", "DCINEO", cmoOverwrite
+    CreateIniKeyValue WinDir$ + "system.ini", "Drivers", "VPM", "VPMNEO.DRV", cmoOverwrite
+    CreateIniKeyValue WinDir$ + "system.ini", "Neomagic", "PackageVersion", "4.34", cmoOverwrite
+
+END SUB
+
+
+
+'**
+'** Purpose:
+'**     Appends a file name to the end of a directory path,
+'**     inserting a backslash character as needed.
+'** Arguments:
+'**     szDir$  - full directory path (with optional ending "\")
+'**     szFile$ - filename to append to directory
+'** Returns:
+'**     Resulting fully qualified path name.
+'*************************************************************************
+FUNCTION MakePath (szDir$, szFile$) STATIC AS STRING
+    IF szDir$ = "" THEN
+	MakePath = szFile$
+    ELSEIF szFile$ = "" THEN
+	MakePath = szDir$
+    ELSEIF MID$(szDir$, LEN(szDir$), 1) = "\" THEN
+	MakePath = szDir$ + szFile$
+    ELSE
+	MakePath = szDir$ + "\" + szFile$
+    END IF
+END FUNCTION
+
+FUNCTION IsCurrentUsed() STATIC AS INTEGER
+    i% = GetPrivateProfileString("386Enh","display","",vdd$, 15, WinDir$ + "system.ini")
+    IF vdd$ = "nmxvdd.386" THEN
+       IsCurrentUsed = 1
+    ELSE
+       IsCurrentUsed = 0
+    END IF
+END FUNCTION

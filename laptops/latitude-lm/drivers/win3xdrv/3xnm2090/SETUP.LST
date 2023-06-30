@@ -1,0 +1,22 @@
+[Params]
+	WndTitle   = NeoMagic Video Configuration Setup
+	WndMess    = Initializing Setup...
+	TmpDirSize = 500
+	TmpDirName = ~msstfqf.t
+	CmdLine    = _mstest neosetup.mst /C "/S %s %s"
+	DrvModName = DSHELL
+
+[Files]
+	neosetup.mst  = neosetup.mst
+	neosetup.inf  = neosetup.inf
+	setupapi.inc = setupapi.inc
+	msdetect.inc = msdetect.inc
+	mscomstf.dll = mscomstf.dll
+	msinsstf.dll = msinsstf.dll
+	msuilstf.dll = msuilstf.dll
+	msshlstf.dll = msshlstf.dll
+	mscuistf.dll = mscuistf.dll
+	msdetstf.dll = msdetstf.dll
+	_mstest.exe  = _mstest.exe
+	_mssetup.exe = _mssetup.exe
+

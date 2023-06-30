@@ -69,9 +69,15 @@ In WFW 3.11
 
 ## 3. [Dell Latitude LM M166ST](laptops/latitude-lm) (1996)
 
-<img src="laptops/latitude-lm/photos/lm-front.jpg" width="500">
+A barebones Pentium MMX laptop configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
 
-A barebones Pentium MMX laptop configured to boot Windows 98SE.
+<img src="laptops/latitude-lm/photos/lm-wfw.jpg" width="500">
+
+In Windows for Workgroups 3.11
+
+<img src="laptops/latitude-lm/photos/lm-win98.jpg" width="500">
+
+In Windows 98SE
 
 ## 4. [Toshiba Satellite 315CDT](laptops/satellite-315cdt) (1996)
 
@@ -194,4 +200,5 @@ The NEC Versa 40EC laptop is only configured for DOS 6.22.
 24. [3C589N DOS and Windows drivers](http://files.mpoli.fi/hardware/NET/3COM/3C589N.ZIP)
 25. [Win95 OSR2 boot disk](https://winworldpc.com/product/microsoft-windows-boot-disk/95-osr2x)
 26. [PFE500c drivers](https://www.driverguide.com/driver/amp/detail.php?driverid=114194)
+27. [Cardsoft 3.1](https://archive.org/details/simpletechnology_pcmcia21cardsocket_systemsoftcardsoftv31_cardview)
 

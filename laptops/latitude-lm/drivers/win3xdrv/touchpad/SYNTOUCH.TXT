@@ -1,0 +1,762 @@
+
+                      SYNTOUCH for DOS
+
+                  Guide to Option Settings
+
+
+
+CONFIGURING THE SYNTOUCH DRIVER
+==============================
+
+The SYNTOUCH driver is preconfigured with default settings
+that many people find suitable for general use. However, it
+also supports a wide range of hardware and software settings
+to handle almost any situation.
+
+You can override the default settings by adding option
+switches to the SYNTOUCH command line, or through statements
+in the MOUSE.INI configuration file. Command line options
+are more convenient for temporary adjustments or frequently
+changed items, while MOUSE.INI is the better place for your
+long-term preferences. This distinction reflects the fact
+that SYNTOUCH reads the MOUSE.INI settings only when you
+first load the driver into memory. Therefore, any changes to
+MOUSE.INI will not take effect until you either reboot the
+system or remove the driver from memory and reload it.
+Conversely, most of the resident driver settings can be
+changed simply by issuing new SYNTOUCH commands.
+
+During its initial load, SYNTOUCH normally looks for
+MOUSE.INI in the same directory where the driver resides. To
+specify a different location, set the MOUSE environment
+variable to the desired drive and path (e.g., SET
+MOUSE=C:\BIN) before loading the driver. This technique lets
+you keep multiple copies of MOUSE.INI for different
+purposes, without wasting disk space on identical copies of
+the driver.
+
+
+TESTING YOUR INSTALLATION
+=========================
+
+From the DOS prompt, type SYNTOUCH TEST to run a simple
+diagnostic test built into the driver. If the driver loads
+successfully (or was already loaded before this command),
+the following line will appear after the copyright and
+status messages:
+
+   -- Test mode active: press a key to quit --
+
+While test mode is active, a mouse cursor appears on the
+current DOS screen, tracking the motion of your pointing
+device. The test mode cursor also responds to button presses
+by changing to the letter "P" (primary), "S" (secondary),
+"A" (auxiliary), or "*" (multiple buttons).
+
+When you are finished with test mode, press a keyboard key
+to quit and return to the DOS prompt.
+
+
+REFERENCE: OPTION SETTINGS
+==========================
+
+This section provides full details on all SYNTOUCH command
+line switches and MOUSE.INI statements, including background
+information and explanatory notes.
+
+You can type SYNTOUCH /? from the DOS prompt at any time to
+display a summary of the command line options. (This assumes
+SYNTOUCH.COM is in the current directory or on your DOS
+PATH.)
+
+Mouse Type
+----------
+
+The first time you run a newly installed SYNTOUCH driver, it
+automatically searches for supported mouse types on various
+hardware ports. This search may take up to several seconds.
+If it succeeds (as it usually does), the result is written
+to MOUSE.INI so future loads can avoid the delay. No option
+switches are needed in this case.
+
+   NOTE: As used in this document, the term "mouse"
+   refers to any compatible pointing device, including
+   trackpads and trackballs as well as conventional mice.
+
+Certain mouse types or nonstandard ports cannot be detected;
+in these cases, you must supply more information to the
+driver. Use the material in this section to determine the
+appropriate command line options. When you find the right
+switch or switches (and verify that the mouse is working
+properly), place the equivalent settings in MOUSE.INI to
+indicate your configuration.
+
+The MouseType setting and associated switches actually
+describe the computer port where your mouse is attached.
+Because these options address the same ports as the driver's
+automatic search, their most common use is simply to speed
+the loading process. Users with multiple pointing devices
+can also use this method to specify which device should be
+activated. The following list matches the search order used
+by the driver:
+
+     Switch    MOUSE.INI
+     ------    -------------------
+      /Z       MouseType = PS2
+      /C1      MouseType = Serial1
+      /C2      MouseType = Serial2
+      /C3      MouseType = Serial3
+      /C4      MouseType = Serial4
+      /I1      MouseType = InPort1
+      /I2      MouseType = InPort2
+      /B       MouseType = Bus
+
+Serial mice can be further classified by their low-level
+data formats, named here for the originating vendors. This
+option is mandatory for Mouse Systems compatible mice, which
+unlike other types cannot be detected through software. (For
+the same reason, Mouse Systems compatibles also require an
+explicit port number unless used on the default COM1.)
+
+     Switch    MOUSE.INI                       Comments
+     ------    --------------------------      -----------
+      /MI      CompatibleWith = Microsoft      2-button
+      /LOM     CompatibleWith = LogitechM      "M+" series
+      /LOC     CompatibleWith = LogitechC      "C" series
+      /MO      CompatibleWith = MouseSystems   3-button
+
+Adding a "!" character to any of the serial format options
+(e.g., "SYNTOUCH /MI!" or "CompatibleWith = Microsoft!")
+tells the driver to force the specified installation, even
+if the mouse does not respond to detection attempts. If you
+specify the Mouse Systems format (always undetectable), the
+"!" is assumed.
+
+The remaining cases which require more information involve
+nonstandard ports, especially custom serial ports. If your
+system is in this category, you probably already know about
+it, having acquired such specialized hardware for your own
+reasons. Otherwise, installation failures are more likely
+due to physical problems such as loose connections or
+hardware malfunctions.
+
+Before turning to the most general case, we must note a lack
+of uniformity among the "standard" serial port designations.
+Ports COM1 and COM2 are assumed to use the same addresses
+and interrupts on all systems, but COM3 and COM4 are not:
+
+      Port     AT-Bus         PS/2 (Microchannel)
+      ----     -----------    -------------------
+      COM1     03F8h, IRQ4    03F8h, IRQ4
+      COM2     02F8h, IRQ3    02F8h, IRQ3
+      COM3     03E8h, IRQ4    3220h, IRQ3
+      COM4     02E8h, IRQ3    3228h, IRQ3
+
+If the driver does not recognize your use of COM3 or COM4,
+it may be misinterpreting your system type. You can override
+the automatic determination by adding the suffix "A" or "P"
+to the serial port command line switch. For example, /C3P
+specifies COM3 with PS/2-compatible addressing, while /C4A
+specifies COM4 with AT-compatible addressing. If the
+override works, you can supply the equivalent base address
+and IRQ through MOUSE.INI, as described next.
+
+The most flexible way of specifying a serial port requires
+both a base port address (3 or 4 hexadecimal digits) and IRQ
+number, using the following syntax:
+
+     Switch    MOUSE.INI
+     ------    -----------------------------
+      /BAx     BaseAddress = x (hexadecimal)
+      /IRQn    IRQnumber = n (2-5, 7, 10-15)
+
+If you specify a base address, you must also include the IRQ
+number. (In this case, any /Cn switch or MouseType setting
+is ignored. However, you can still use the serial format
+switches or CompatibleWith setting). Be careful with these
+parameters, as incorrect values can disrupt other devices!
+
+When specified without a base address, the IRQ parameter is
+assumed to modify an otherwise standard port designator.
+This usage also applies to the InPort and Bus mouse types,
+provided that the hardware can be suitably configured.
+
+Button Mapping
+--------------
+
+The following options let you swap or rearrange the
+available mouse buttons to suit your convenience. With a
+three-button mouse, you can also redefine the third button
+to provide a click lock function (described next).
+
+     Switch    MOUSE.INI
+     ------    -------------------------
+     /KPnSm    PrimaryButton = n (1-3)
+               SecondaryButton = m (1-3)
+
+To describe the button actions seen by your applications, we
+use the terms Primary, Secondary and Auxiliary instead of
+Left, Right and Middle. This more precise usage emphasizes
+the fact that applications do not read the physical buttons.
+In other words, what they consider a "left click" comes from
+whichever button you designate as Primary.
+
+The mapping options refer to physical buttons by number:
+
+     3-button mouse:  left = 1, middle = 2, right = 3.
+     2-button mouse:  left = 1,    . . .    right = 3.
+
+With a 2-button mouse, the driver also accepts references to
+button 2 as the right button. But calling it button 3 has
+the advantage of compatibility with all mouse types.
+
+Turning to examples, one common use of button mapping
+reverses the primary and secondary buttons for left-handers,
+so they can perform most mouse operations with the index
+finger. This is accomplished through the command switch
+/KP3S1 or setting PrimaryButton = 3 and SecondaryButton = 1.
+
+With 3-button mice, note that you do not specify the
+auxiliary button directly. Instead, when you specify the
+primary and secondary buttons, the driver automatically
+assigns the auxiliary role to the remaining button. For
+example, /KP1S2 moves the secondary role to the middle
+button, so the right button becomes the auxiliary.
+
+Click Lock
+----------
+
+Because few applications recognize more than two buttons,
+the click lock option provides an alternate function for the
+auxiliary button on a 3-button mouse (normally the middle
+button, unless the buttons have been remapped.) This option
+has no effect on a 2-button mouse.
+
+     Switch    MOUSE.INI
+     ------    ---------------
+      /KC      ClickLock = On
+      /K       ClickLock = Off
+
+With click lock enabled, pressing and releasing the
+auxiliary button is equivalent to pressing and holding the
+primary button. The primary button stays down (as seen by
+applications) until you the next time you press and release
+any button.
+
+In other words, click lock makes the auxiliary button act
+like a latched version of the primary button. It lets you
+use the mouse to drag objects without having to hold any
+buttons down.
+
+Orientation
+-----------
+
+This option lets you rotate the apparent direction of mouse
+motion, as viewed on the display. Such action is required
+when a clip-on trackball is mounted on the left side of a
+laptop keyboard. (Otherwise the screen pointer appears to
+move backwards and upside down.) Less dramatic adjustments
+can also be helpful to mouse users, by compensating for
+different hand positions.
+
+     Switch    MOUSE.INI
+     ------    -------------------------
+      /Or      RotationAngle = r (0-359)
+
+In the case of the left-mounted trackball, the /O180 switch
+will provide 180 degrees of rotation, compensating for the
+mounting position. Check the result, making additional fine
+adjustments as necessary, until you are satisfied with how
+the screen pointer tracks your physical motion. After
+finding your preferred rotation angle, edit MOUSE.INI to
+store this setting for future use.
+
+Mouse users can simply experiment with different settings,
+or take a more analytical approach: Imagine a "north/south"
+line on your desk or mouse pad, in the direction that feels
+most natural for up-and-down screen motion. Estimate the
+rotation angle from this axis, proceeding clockwise to the
+centerline of the mouse. The angle must be expressed as a
+positive number. For example, 30 degrees counter-clockwise
+would be expressed as /O330 (i.e., 360 minus 30). This
+example setting might describe a right-handed user who
+prefers holding the mouse with a slight inward twist.
+
+Memory Regions
+--------------
+
+To maximize the amount of conventional memory (below 640K)
+available to DOS applications, the SYNTOUCH driver attempts
+to move its resident portion to other regions, if available.
+These regions include expanded memory (EMS 3.0 or higher),
+the High Memory Area (64K beginning at 1MB), and Upper
+Memory Blocks (between 640K and 1MB).
+
+As long as your memory manager or other necessary system
+files are loaded before the driver, this relocation proceeds
+automatically. You don't have to use the MS-DOS LOADHIGH or
+DEVICEHIGH commands, or their third-party equivalents. In
+fact, the driver's built-in relocator often succeeds in
+cases where external loaders fail. It also has the ability
+to split the driver between multiple regions.
+
+The following options provide explicit control over the
+driver's memory usage, letting you enable or disable access
+to each of the supported memory types:
+
+     Switch    MOUSE.INI
+     ------    ------------
+      /E       Memory = EMS
+      /E-      Memory = NoEMS
+      /HI      Memory = HMA
+      /HI-     Memory = NoHMA
+      /U       Memory = UMB
+      /U-      Memory = NoUMB
+      /LOW     Memory = LowMem
+
+You can specify multiple memory settings (separated by
+commas) in a single MOUSE.INI statement. For example, the
+following syntax will prevent all relocation attempts:
+
+     Memory = NoEMS, NoHMA, NoUMB
+
+In the example above, the simple statement "Memory = LowMem"
+or the /LOW switch would yield the same result.
+
+Power Management
+----------------
+
+In some cases, the power conserving features of laptop
+computers or energy-efficient desktop systems may interfere
+with normal mouse operation. SYNTOUCH uses two strategies to
+address this problem:
+
+ * Advanced Power Management (APM) is an industry standard
+   specification that allows hardware and software from
+   different vendors to cooperate in various power saving
+   modes. SYNTOUCH includes full APM support as a standard
+   feature, requiring no option settings or switches.
+
+ * Mouse Power Management is a SYNTOUCH option intended for
+   older systems (primarily laptops) whose power saving
+   modes are not APM-compatible. It allows the driver to
+   detect and recover from power interruptions that may not
+   fully restore the hardware state. This option is normally
+   disabled, because few systems require it.
+
+     Switch    MOUSE.INI
+     ------    -------------------------
+      /MPM     MousePowerManagement = On
+      /MPM-    MousePowerManagement = Off
+
+If your mouse behaves erratically after returning from
+"sleep" mode, try the /MPM switch. If the problem goes away,
+you can then edit MOUSE.INI to change the default setting.
+
+Sensitivity
+-----------
+
+Sensitivity settings define how much the on-screen pointer
+moves in response to physical motion of your mouse or
+compatible pointing device.
+
+As shown below, you can set different sensitivities for
+horizontal and vertical motion. This feature can be helpful
+in specific situations, such as navigating spreadsheets.
+However, a uniform setting for both dimensions (specified by
+the /S switch) usually feels more natural.
+
+     Switch    MOUSE.INI
+     ------    ---------------------------------
+      /Hn      HorizontalSensitivity = n (5-100)
+      /Vn      VerticalSensitivity = n (5-100)
+      /Sn       - n/a -
+
+Each setting takes values from 5 to 100, in steps of 5.
+(Other numbers in this range are rounded to the nearest
+valid step.) The default values are 50 in each dimension.
+Smaller values make the pointer easier to control, while
+larger values let you cover more of the screen with less
+hand motion.
+
+Acceleration
+------------
+
+Acceleration profiles provide a dynamic adjustment of the
+current sensitivity settings. In other words, sensitivity is
+concerned only with how FAR you move the physical device,
+while acceleration also depends on how FAST you move it.
+
+The driver includes four built-in acceleration profiles,
+which you select by number (profile 2, the default, gives
+"Medium" acceleration):
+
+     Switch    MOUSE.INI                       Description
+     ------    -----------------------------   ------------
+      /P1      ActiveAccelerationProfile = 1   Slow
+      /P2      ActiveAccelerationProfile = 2   Medium
+      /P3      ActiveAccelerationProfile = 3   Fast
+      /P4      ActiveAccelerationProfile = 4   Unaccelerated
+
+The descriptive names also appear in MOUSE.INI, along with
+data tables that define each of the standard profiles. By
+editing the data, serious hackers can create their own
+custom profiles. (This is not a project for the novice!)
+
+Pointer Appearance
+==================
+
+Forcing the Default Text Cursor
+-------------------------------
+
+Enabling this option prevents applications from changing the
+standard inverse-block "software cursor" used as a mouse
+pointer in most text-based programs. It has no effect on
+graphics-based programs, or on those using the text-mode
+"hardware cursor" provided by the video adapter.
+
+     Switch    MOUSE.INI
+     ------    ------------------------
+      /M       ForceDefaultCursor = Off
+      /M1      ForceDefaultCursor = On
+
+Some applications use different mouse pointer types to
+provide useful status information. Therefore, this option
+should be restricted to specific programs whose changes make
+the pointer too difficult to see.
+
+Display Delay for LCD Screens
+-----------------------------
+
+This option addresses a common problem with passive-matrix
+liquid crystal displays (LCDs). Rapidly moving images, such
+as the mouse pointer, may seem to disappear because the
+display responds too slowly for each intermediate position
+to become visible.
+
+     Switch    MOUSE.INI
+     ------    -----------------------------
+      /Nn      CursorDisplayDelay = n (0-10)
+
+Increasing the delay between screen updates gives each image
+more time to register on the LCD display. On the other hand,
+large delay values tend to make the pointer feel sluggish
+and less precise in its response. The best strategy is to
+use the lowest delay setting that keeps the moving pointer
+from getting lost.
+
+Pointer Color Options (Graphics Only)
+-------------------------------------
+
+Several color-related options affect the way the mouse
+pointer appears in most graphics-based applications.
+
+First, the PointerColor options are effective in all
+graphics video modes. Assuming the current program has not
+replaced the standard mouse pointer with its own design,
+these options produce the following results:
+
+ * Normal (the default setting) gives a bright white arrow
+   pointer with black outline.
+
+ * Reverse gives a black arrow pointer with bright white
+   outline.
+
+ * Transparent gives a "see through" pointer that changes
+   color depending on the material it passes over (an effect
+   similar to the standard text-mode mouse pointer).
+
+     Switch    MOUSE.INI
+     ------    ---------------------
+      /PCN     PointerColor = Normal
+      /PCR     PointerColor = Reverse
+      /PCT     PointerColor = Transparent
+
+Additional control is available in 16-color and 256-color
+graphics modes, provided that the pointer is actually being
+drawn by the mouse driver (not the underlying application).
+
+Referring to the normal arrow pointer and its outline as
+Foreground and Background, you can change the colors used
+for these elements through the following syntax:
+
+     Switch    MOUSE.INI
+     ------    ------------------------------------------
+      /PFn     Foreground = color (default: Bright White)
+      /PBn     Background = color (default: Black)
+
+       n       Color Name            n       Color Name
+      ---      -----------          ---      --------------
+       0       Black                 8       Bright Black
+       1       Blue                  9       Bright Blue
+       2       Green                10       Bright Green
+       3       Cyan                 11       Bright Cyan
+       4       Red                  12       Bright Red
+       5       Magenta              13       Bright Magenta
+       6       Yellow               14       Bright Yellow
+       7       White                15       Bright White
+
+If you use the command line switches without numeric
+arguments, they revert to the default values /PF15 /PB0.
+
+Pointer Growth Options
+----------------------
+
+This option group lets you enhance the mouse pointer
+visibility through various forms of static or dynamic
+growth.
+
+     Switch    MOUSE.INI
+     ------    ---------------------
+      /PSS     PointerSize = Small
+      /PSM     PointerSize = Medium
+      /PSL     PointerSize = Large
+      /PG      Growth = On
+      /PG-     Growth = Off
+      /PZ      Zoomable = On
+      /PZ-     Zoomable = Off
+      /PTn     Threshold = n (1-100)
+      /PDn     Delay = n (1-100)
+
+The most important setting in this group is PointerSize,
+which selects a small (default), medium or large pointer.
+What you see on-screen will vary depending on the current
+application (its video and mouse handling strategies) and on
+the remaining settings:
+
+ * Small (the default setting) entirely disables all pointer
+   growth features, regardless of the other settings.
+
+ * Medium changes the text-mode mouse pointer to a tall and
+   wide cross shape. Depending on the Zoomable setting, the
+   standard graphics-mode pointer will either grow by 50% or
+   acquire a shadow highlight.
+
+ * Large changes the text-mode mouse pointer to a hollow box
+   shape, three times taller and wider than the small
+   setting. Depending on the Zoomable setting, the standard
+   graphics-mode pointer will either double in height and
+   width or acquire a shadow highlight.
+
+The Growth setting controls whether the PointerSize effects
+described above are static or dynamic:
+
+ * Growth = On applies the Medium or Large settings only
+   while the pointer is moving. When motion stops, the Small
+   pointer returns.
+
+ * Growth = Off (the default) keeps the specified size
+   constant, whether the pointer is moving or not.
+
+The Zoomable setting controls how the Medium and Large
+pointers actually appear in graphics-based applications.
+This setting has no effect in text mode.
+
+ * Zoomable = On selects a "true growth" strategy, drawing
+   the Medium and Large pointers as magnified versions of
+   the Small pointer. This strategy provides the maximum
+   possible emphasis for difficult viewing conditions.
+
+ * Zoomable = Off (the default) substitutes a shadow effect
+   for the Medium and Large pointers. This strategy provides
+   less emphasis than zooming, while still making it easier
+   to follow the moving pointer.
+
+Threshold and Delay values control the timing of PointerSize
+effects when growth is enabled. When growth is disabled
+(preventing the pointer from changing size), these settings
+are ignored.
+
+ * Threshold specifies how fast the mouse can move (on a
+   scale of 1 to 100) before pointer growth occurs. A low
+   threshold triggers growth very easily, while higher
+   values require more motion. The default value is 20.
+
+ * Delay specifies how long pointer growth lasts (on a scale
+   of 1 to 100) after mouse motion stops. Low values cause
+   the pointer to shrink back quickly, while larger delays
+   allow more "settle" time. Each unit equals roughly one
+   tenth of a second. The default value is 3.
+
+Command line switches make it easy to experiment with
+various combinations of pointer settings. For example, try
+"SYNTOUCH /PSL /PG /PZ /PF4 /PB12" to give your graphics-
+based DOS programs a large, dynamic zooming red pointer with
+a bright yellow outline. When you find the combination you
+like best, translate the switches into MOUSE.INI settings,
+where you can store them to replace the built-in defaults.
+
+
+SYNAPTICS TOUCHPAD OPTIONS
+==========================
+
+The SYNTOUCH driver includes several features specific to
+the Synaptics TouchPad. These options have no effect on
+other pointing devices.
+
+Touch Threshold
+---------------
+
+This option controls how much finger pressure is required to
+register on the sensor. Lower numbers represent higher
+sensitivity.
+
+     Switch    MOUSE.INI
+     ------    ------------------------------------
+      /Tn      TouchThreshold = n (0-7, default: 3)
+
+Tips for adjusting TouchThreshold for best performance:
+
+ * If the Synaptics TouchPad jitters constantly, even with
+   no finger present, then TouchThreshold is much too low.
+
+ * If the cursor hops around as you lower your finger onto
+   the sensor or lift your finger away, TouchThreshold may
+   be slightly too low.
+
+ * If the pad responds to the lightest touch, but not if the
+   finger is held slightly off the surface, then
+   TouchThreshold is about right.
+
+ * If the cursor feels "sticky" when you put your finger
+   down to move it, TouchThreshold may be slightly too high.
+
+ * If the cursor never moves when you touch your finger to
+   the pad, or only if you exert noticeable pressure with
+   your finger, then TouchThreshold is much too high.
+
+Gestures
+========
+
+The Synaptics TouchPad allows the user to tap on the pad to
+simulate mouse events such as clicking or dragging.
+
+     Switch    MOUSE.INI
+     ------    -----------------------------
+      /G-      EnableGestures = Off
+      /G       EnableGestures = On (default)
+
+With "Off", tapping on the pad does not generate a click.
+Only the physical switches can be used to generate clicks.
+
+With "On", the options described below control the
+correspondence of gestures to mouse button events.
+
+Primary Gestures
+----------------
+
+When gestures are enabled, this option specifies which left
+button actions can be simulated.
+
+     Switch    MOUSE.INI
+     ------    --------------------------------
+      /GPT     PrimaryGestures = Tap
+      /GPD     PrimaryGestures = Drag (default)
+      /GPL     PrimaryGestures = DragLock
+
+With "Tap", a light tap on the pad is equivalent to a click
+of the left button switch. There is no way to simulate
+holding the switch down ("dragging") using taps.
+
+With "Drag", taps can generate both clicks and drags. The
+drag gesture is like a double-click where the finger stays
+on the pad on the second click.  (Two short taps without
+holding the finger down still work to generate a double-
+click.) The drag ends as soon as the finger is lifted. If
+you run out of travel during a drag, just hold down the
+corresponding physical switch before lifting your finger.
+
+With "DragLock", the drag gesture begins a locking drag. To
+begin a drag, use the same gesture described above. The drag
+continues until you tap again on the pad.
+
+Secondary Gestures
+------------------
+
+When gestures are enabled, this option supports variants of
+the tap and drag gestures for clicking the second (right)
+mouse button.
+
+     Switch    MOUSE.INI
+     ------    ----------------------------------
+      /GSN     SecondaryGestures = None (default)
+      /GSH     SecondaryGestures = Hop
+      /GSC     SecondaryGestures = Corner
+
+To do a "Hop" gesture, lift the finger from the pad and
+bring it down a good distance to the left or right of its
+original position. Bring the finger down in a regular tap or
+drag gesture to click or drag the right mouse button.
+
+If hops are enabled, you must tap fairly close to where you
+last held your finger, or lift your finger for a second or
+two before tapping, in order to generate a left-button
+click.
+
+The "Corner" gesture is simply a normal tap or drag gesture
+originating in a small zone at the upper right hand corner
+of the pad. With this option selected, taps in the corner
+zone will be interpreted as right button events; taps in
+other locations will remain left button events.
+
+Edge Motion
+-----------
+
+The edge motion option causes the cursor to glide in a
+constant direction whenever the finger rests against one of
+the four edges of the sensor pad. It allows the user to move
+a large distance without lifting the finger; this is
+especially useful for dragging objects across the screen
+without using DragLock.
+
+     Switch    MOUSE.INI
+     ------    -------------------------------
+      /EM0     EdgeMotion = Off
+      /EM1     EdgeMotion = Drag (default)
+      /EM2     EdgeMotion = On
+
+If EdgeMotion is "Drag", edge motion only occurs during a
+drag gesture, not during normal pointing.
+
+     Switch    MOUSE.INI
+     ------    ----------------------------------------
+      /En      EdgeMargins = L R T B (default: 5 5 5 5)
+      /ELn
+      /ERn
+      /ETn
+      /EBn
+
+The MOUSE.INI syntax uses four integers in the range 0-15 to
+specify the distance from each pad edge (left, right, top,
+bottom) at which edge motion begins. From the command line,
+use /En to set all margins to a single "n" value, or the
+other switches to set the edge margins individually.
+
+Increase the value for a particular edge if you find it hard
+to produce edge motion on that edge; decrease the value if
+you find edge motion coming on when you are still out in the
+middle of the pad.
+
+Virtual Buttons
+---------------
+
+Through gestures and/or physical buttons, the Synaptics
+TouchPad normally behaves like a two-button mouse. However,
+for times when a third button would be useful, this option
+provides an alternative.
+
+     Switch    MOUSE.INI
+     ------    ------------------------
+      /VBn     VirtualButtons = n (2,3)
+
+With VirtualButtons=2 (default), the physical buttons act
+like the left and right buttons of a standard mouse.
+
+With VirtualButtons=3, the physical buttons act like the
+middle and right buttons (respectively) of a three-button
+mouse. Left button clicks may be produced through the tap
+gesture.
+
+   NOTE: If gestures are disabled by the /G- switch or
+   the statement EnableGestures=Off, the virtual button
+   count is forced back to 2.

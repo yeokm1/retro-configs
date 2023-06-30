@@ -1,0 +1,54 @@
+Neomagic Installation Package
+-----------------------------
+
+VERSION:
+--------
+Package Version: 4.34
+Language: English
+
+CONTENTS
+--------
+NEOMAGIC Control Panel Utility:
+
+	File: NEOMAGIC.EXE
+	Size: 204,814 Bytes
+	Date: 04/23/97
+	Version: 2.06
+
+DRIVERS
+	File: NM20XX8.DRV
+	Size: 170,688 Bytes
+	Date: 05/14/97
+	Version: 1.18
+
+	File: NM20XX16.DRV
+	Size: 173,568 Bytes
+	Date: 05/14/97
+	Version: 1.18
+
+	File: NM20XX24.DRV
+	Size: 39472
+	Date: 10/07/96
+	Version: 1.9
+
+	File: NMXVDD.386
+	Size: 36999 Bytes
+	Date: 03/06/97
+	Version: 1.30
+
+	File: NMX.3GR
+	Size: 15360 Bytes
+	Date: 04/21/92
+
+DCI DRIVERS:
+	File: DCINEO.DRV
+	Size: 35024 Bytes
+	Date: 05/16/97
+	Version: 1.9 
+	
+
+VPM DRIVERS:
+	File: VPMNEO.DRV
+	Size: 13312 Bytes
+	Date: 10/29/96
+	Version: 1.5

@@ -1,0 +1,16 @@
+WINDOWS 3.1x DRIVER INSTALLATION PROCEDURE
+
+1.  Insert Windows 3.1x display driver installation diskette.
+2.  Boot Windows 3.1x.
+3.  Pull-down File menu and select Run option.
+4.  Type 'A:\SETUP' and hit <ENTER>.
+5.  After Setup will start initializing driver setup, select
+    'OK' when prompted to continue with Setup.
+6.  After Setup completes, enter Control Panel and select
+    'Video Configuration' program icon.
+7.  Once in Video Configuration program, select preferred
+    settings then hit 'OK'.
+8.  Then select Restart if want changes to take effect.  If
+    want to have changes take effect next time booting Windows
+    then select 'Continue'.
+

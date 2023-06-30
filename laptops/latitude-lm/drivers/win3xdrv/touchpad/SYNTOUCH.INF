@@ -1,0 +1,92 @@
+; SYNTOUCH.INF
+;
+; Installs Windows 95 drivers for Synaptics TouchPad
+
+[Version]
+Signature="$CHICAGO$"
+Class=Mouse
+Provider=%Provider%
+
+[SourceDisksNames]
+1=%DiskID%,,0
+
+[SourceDisksFiles]
+readme.txt      = 1
+syntouch.txt    = 1
+syntouch.com    = 1
+mouse.ini	= 1
+syntouch.hlp	= 1
+xmvmd.386	= 1
+sfttabs.dll	= 1
+xpoint.exe	= 1
+syntouch.dll	= 1
+syntouch.drv	= 1
+
+[DestinationDirs]
+DefaultDestDir  = 30,syntouch
+
+[Manufacturer]
+%SynMfg%=SynMfg
+
+[SynMfg]
+%SynPad%=SynPad
+
+[SynPad]
+DelReg=Prev.DelReg
+AddReg=SynPad.AddReg
+CopyFiles=SynPad.Copy
+UpdateInis=SynPad.Ini
+UpdateIniFields=SynPad.NoLoad
+UpdateAutoBat=SynPad.AutoBat
+Restart
+
+[Prev.DelReg]
+HKR,,DevLoader
+HKR,,MouseDriver
+HKR,,MouseType
+HKR,,ComInfo
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Mouse\shellex\PropertySheetHandlers\DriverPages"
+
+[SynPad.AddReg]
+HKR,,MouseType,,"Synaptics TouchPad"
+HKR,,NoSetupUI,,1
+
+[SynPad.Copy]
+readme.txt
+syntouch.txt
+syntouch.com
+mouse.ini
+syntouch.hlp
+xmvmd.386
+sfttabs.dll
+xpoint.exe
+syntouch.dll
+syntouch.drv
+
+[SynPad.Ini]
+system.ini,boot,,"mouse.drv=%30%\syntouch\syntouch.drv"
+system.ini,boot.description,,"mouse.drv=%SynPadDesc%"
+system.ini,386Enh,,"mouse=%30%\syntouch\xmvmd.386"
+
+[SynPad.NoLoad]
+win.ini, windows, load, *gui.exe,,1		; Genius MouseMate
+win.ini, windows, load, *wbuttons.exe,,1	; Logitech MouseWare
+win.ini, windows, load, *csrchng.exe,,1		; Cursor changer
+win.ini, windows, load, *ptr*.exe,,1		; Alternate pointers
+win.ini, windows, load, *point*.exe,,1		; Pointer, Xpoint, etc.
+
+[SynPad.AutoBat]
+UnSet=mouse
+CmdDelete=*mous*
+CmdDelete=*glide
+CmdDelete=*gpoint
+CmdDelete=*s*touch
+CmdDelete=*felix
+CmdAdd=syntouch
+
+[Strings]
+Provider="LCS/Telegraphics"
+SynMfg="Synaptics"
+SynPad="Synaptics TouchPad"
+SynPadDesc="Synaptics TouchPad"
+DiskID="Synaptics TouchPad Install Disk"
