@@ -56,6 +56,8 @@ The machine is configured to dual-boot into the primary partitions containing DO
 
 <img src="photos/t42-dos622-bootmenu.jpg" width="500">
 
+The drivers required to support the Intel networking are heavy on memory so a choice is provided on whether to load them.
+
 #### WFW 3.11
 
 <img src="photos/t42-wfw311.jpg" width="500">
@@ -67,13 +69,19 @@ The machine is configured to dual-boot into the primary partitions containing DO
 
 <img src="photos/t42-dos622.jpg" width="500">
 
-* EMM386 NOEMS configuration to enable `devicehigh` and `loadhigh`
+* JEMMEX combined XMS and EMS driver that is required for SBEMU
 * Intel ODI drivers
 * ODI to Packet shim
 * MTCP environment variables
 * Cutemouse
 
 The IBM PC card drivers have been REMed out for reference.
+
+<img src="photos/t42-sbemu.jpg" width="500">
+
+Sound Blaster and OPL3 support is provided by the [SBEMU](https://github.com/crazii/SBEMU) driver. 
+
+A strange quirk that I found of this current driver with respect to using [Dr Sbaitso TTS](https://en.wikipedia.org/wiki/Dr._Sbaitso) is that the TTS will hang if this is the first app that is launched. Some other app needs to use the virtual Sound Blaster hardware first then we quit that and launch the TTS then the TTS will work.
 
 #### GRUB options
 
@@ -139,3 +147,5 @@ It is not necessary to hide partition when booting between DOS6.22 and Win 98SE.
 3. [Win 3.1 AC97 drivers](http://turkeys4me.byethost4.com/programs/index.htm)
 4. [Linksys WPC54Gv3 drivers](https://www.wireless-driver.com/linksys-wpc54g-wireless-windows-me-2000-xp-drivers-utility/)
 5. Dualbooting DOS and Win95: [Just setting active](http://retropcbuilder.blogspot.com/2016/11/dual-booting-dos-and-windows-95-follow.html) and [Hiding partitions](http://retropcbuilder.blogspot.com/2016/11/dual-booting-ms-dos-622windows-31-and.html).
+6. [SBEMU](https://github.com/crazii/SBEMU)
+7. [JEMMEX](https://github.com/Baron-von-Riedesel/Jemm)

@@ -1,0 +1,23 @@
+
+  1. About AHCICD
+
+  AHCICD is a JLM to access AHCI optical disks, "inspired" by Rudolph R. Loew's
+  AHCICD.SYS. To load it, add the following line to your CONFIG.SYS:
+
+   DEVICE=JLOAD.EXE AHCICD.DLL [options]
+
+  options are:
+
+   /C:device select AHCI controller if more than one exists.
+   /D:name   set device name. Required.
+   /Q        no displays unless errors occur.
+   /R        relocate AHCI regions [CL/FIS/CT] to extended memory.
+
+
+  2. Hints
+
+  - AHCI uses tables that may be located in the XBDA - so if the XBDA is to
+    be moved, setting option /R is required.
+  - AHCICD.DLL needs JLOAD v5.83 - older versions won't disable caching
+    of the controller's memory-mapped registers.
+

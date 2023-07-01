@@ -201,4 +201,5 @@ The NEC Versa 40EC laptop is only configured for DOS 6.22.
 25. [Win95 OSR2 boot disk](https://winworldpc.com/product/microsoft-windows-boot-disk/95-osr2x)
 26. [PFE500c drivers](https://www.driverguide.com/driver/amp/detail.php?driverid=114194)
 27. [Cardsoft 3.1](https://archive.org/details/simpletechnology_pcmcia21cardsocket_systemsoftcardsoftv31_cardview)
+28. [JEMM](https://github.com/Baron-von-Riedesel/Jemm)
 
