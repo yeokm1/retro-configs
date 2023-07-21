@@ -70,7 +70,7 @@ NiCD Battery pack for reference
 
 ## Configuration
 
-The PC can be set to boot from the SRAM card however the BIOS (accessible via Fn+Esc) settings will we wiped if the system loses power. 
+The PC can be set to boot from the SRAM card however the BIOS (accessible via Fn+Esc) settings will be wiped if the system loses power. 
 
 The 512K SRAM card is also too small to hold significant data. So most of it the non-boot related data is placed on the 32MB CF card.
 
