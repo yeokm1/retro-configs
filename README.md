@@ -202,4 +202,6 @@ The NEC Versa 40EC laptop is only configured for DOS 6.22.
 26. [PFE500c drivers](https://www.driverguide.com/driver/amp/detail.php?driverid=114194)
 27. [Cardsoft 3.1](https://archive.org/details/simpletechnology_pcmcia21cardsocket_systemsoftcardsoftv31_cardview)
 28. [JEMM](https://github.com/Baron-von-Riedesel/Jemm)
+29. [MS-DOS 3.30 install disks](https://winworldpc.com/product/ms-dos/3x)
+30. [Windows 1.04 install disks](https://winworldpc.com/product/windows-10/104)
 

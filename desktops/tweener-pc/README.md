@@ -22,6 +22,14 @@ A very retro BIOS POST screen from yesteryears.
 
 Video of bootup sequence: https://www.youtube.com/watch?v=SrTD2QFwS8w
 
+<img src="photos/tweener-gotek-external.jpg" width="500">
+
+I recently switched the floppy drive to a Gotek flashed with FlashFloppy firmware.
+
+<img src="photos/tweener-gotek-pins.jpg" width="500">
+
+A piezo is added virtual motor sounds. Jumpers are placed on JC and S1 to select for IBM PC compatible according to this [documentation](https://github.com/keirf/flashfloppy/wiki/Initial-Setup).
+
 ## Specifications
 
 <img src="photos/tweener-cpu.jpg" width="300">
