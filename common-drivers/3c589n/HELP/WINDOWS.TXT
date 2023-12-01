@@ -1,0 +1,35 @@
+WINDOWS.TXT file
+3Com Corporation
+3Com EtherLink III LAN PC Card (3C589 PC Card)
+Windows Installation Information
+    
+
+Windows 3.x or Windows for Workgroups (WFW)
+-------------------------------------------
+If NetWare is the network operating system, then the 3Com AutoLink program
+can be used for the driver installation.
+
+For non-NetWare environments, install the client software as specified by 
+your network operating system vendor. Windows 3.x and WFW have internal 
+support for Microsoft networking environments.
+
+
+Windows 95 and Windows NT
+-------------------------
+Proceed directly to Windows 95.  Do not configure the adapter from the 
+3Com EtherDisk diskette.  Windows 95 Plug and Play will complete the
+installation for Novell, Microsoft, and most other network operating 
+systems.
+
+
+Windows NT
+----------
+Use the configuration software provided on this EtherDisk diskette to 
+automatically set adapter parameters suitable for this PC. Then proceed 
+to Windows NT to install client software for Novell, Microsoft, and most
+other network operating systems.
+
+
+        (%VER WINDOWS.TXT - Windows Installation Information V1.0a)
+
+

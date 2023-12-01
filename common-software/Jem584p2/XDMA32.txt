@@ -1,0 +1,51 @@
+
+ 1. About XDMA32
+
+ XDMA32 is a JLM based on Jack R. Ellis' XDMA Ultra-DMA HD driver.
+ It supports PCI IDE controllers running in "legacy" or "native" mode.
+
+
+ 2. Usage
+ 
+ To load XDMA32, add the following line to your CONFIG.SYS:
+
+   DEVICE=JLOAD.EXE XDMA32.DLL [options]
+
+ options are:
+
+  /B   always use XMS buffer for file i/o. Might be useful in virtualized
+       environments which can't handle DMA properly for all addresses.
+       This switch is more restrictive than /L, and it disables /F.
+  /F   "fast", uses DMA "scatter/gather" method to allow transfers
+       which cross a physical 64 kB boundary. Might not work with all
+       controllers, so use with care! (The "fast" is a historical
+       remnant, on modern systems there will be no significant difference
+       in speed.)
+  /L   limits DMA to "low memory" below 640 kB. Addresses above are 
+       handled through the XMS buffer.
+  /Mn  set/restrict UDMA mode to n (0 <= n <= 7).
+  /Q   quiet mode.
+  /W   handle (non-UDMA) drives which are capable of Multiword-DMA.
+
+
+  3. Features & Restrictions
+
+  - XDMA32 supports up to 4 PCI IDE controllers. May be changed in XDMA32.ASM
+    ( NUMCTRL constant ).
+  - XDMA32 supports up to 8 HDs. May be changed in XDMA32.ASM
+    ( NUMDSK constant ).
+  - HDs are accessed using either CHS, LBA28 or LBA48 addressing, so there's
+    no (practical) size restriction.
+  - XDMA32 has no device ID associated with it - hence jload cannot detect
+    currently if the driver is already installed.
+  - SATA controllers running in AHCI mode are ignored.
+  - the XDMA32 driver needs just 48 bytes in conventional or upper memory.
+  - a 128 kB extended memory block is allocated as a buffer to be used if the
+    current transfer address is incompatible with DMA access.
+
+
+  4. License
+
+  XDMA32 is released under the GNU GPL v2. See GNU_GPL.TXT for details.
+
+  Japheth

@@ -1,0 +1,38 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+
+This software (PKT8000.COM, PKT8016.COM, PKT8115.COM, and
+PKT8232.COM) has been licensed from Crynwr Software for use with
+SMC's LMAC libraries.  The software is proprietary to SMC, who may or
+may not wish to sublicense, with or without source, as they wish.
+
+I have made this decision with some trepidation, as Crynwr has taken
+action against companies that distribute Crynwr-derived drivers
+without source.  In fact, SMC was perfectly willing to do a standard
+full-source distribution.  It was my decision that using SMC's
+standard LMAC libraries would be easier and better in the long term.
+
+SMC's corporate philosophy in re third-party drivers continues in
+Western Digital's tradition of full disclosure.  All technical
+information is available, as are their LMAC libraries.  Because of
+their cooperation, I feel safe in distributing these drivers without
+a requirement of source availability.
+
+If you have any questions, please direct them to me, not SMC.
+
+Russell Nelson
+nelson@crynwr.com
+315-268-1925 voice
+315-268-9201 FAX
+Crynwr Software
+11 Grant St.
+Potsdam, NY 13676
+
+-----BEGIN PGP SIGNATURE-----
+Version: 2.4
+
+iQCVAgUBLe4id6bBSWSDlCdBAQFwmgP/cv7EApJSnmFCmdke4R7duNMm0y4SR2F8
+occlw/tUFRZA4g7WnSlhih9mVlJ3ZXZDY0Zdog1dJ4PM/Ct53Lq+DP9ZF91XmYns
+kEq6WPCqnhtd5ryNusY8qh2QzJ0/nfOhEdzwOS33b2/9mT5vdqb0ZaNRHvRUyFb7
+uDBuVaqnKXk=
+=tpzE
+-----END PGP SIGNATURE-----

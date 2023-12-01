@@ -1,0 +1,66 @@
+3Com Corporation
+Network Drivers Installation Notes
+
+              WINDOWS 3.1X AND NOVELL NETWARE
+
+
+This document describes how to configure the LAN PC Card
+for use with Windows V3.1x (Not Windows for Workgroups) and
+Novell NetWare. These procedures are also described in the
+EtherLink III LAN PC Card User Guide.
+
+NOTE: The following instructions assume you have not installed
+      any other network adapter in the PC. If networking
+      has already been installed, some of the instructions will
+      not apply or appear accurate. Consult with your MIS 
+      department for further instructions.
+
+Before installing the network driver, you should know the 
+transport used in the Novell Network (typically IPX/SPX) and
+have access to the following software components:
+
+    - Novell NetWare VLM Client disks for DOS and Windows
+    - The EtherDisk diskette that came with your 3C589D LAN PC Card.
+
+Installation Instructions
+
+1.  Boot the PC in DOS. If the PC starts up in Windows,
+    exit Windows to return to the DOS prompt. 
+
+2.  Place the Novell VLM client disk #1 in the floppy drive. Type:
+
+        a:\install <Enter>.
+
+    This opens the NetWare client installation screen.
+
+3.  Use the down arrow key to move from line to line. Ensure 
+    that the information is correct. When you are asked to select
+    the driver for your network card, press <Enter> to see the
+    list of supported adapters. At the bottom of the list, find
+    and select Other Drivers.
+
+4.  When prompted for a driver disk, put the EtherDisk in your 
+    floppy drive and press <Enter>. 3Com EtherLink III LAN
+    PC Card Adapter should appear as the first item on the
+    list. Click to select it and press <ENTER>.
+
+5.  Specify the frame type by pressing <ENTER> and choosing the
+    appropriate type from the list. Press <Enter> to select your
+    choice. (You will not need to select an I/O Base. Use the
+    default.)
+
+6.  Press F10 to return to the main installation screen. Position
+    the cursor on line 6 and press <Enter>. The installer
+    prompts for several diskettes and notifies you when the
+    installation is complete.
+
+7.  Press <Enter> to exit the installation program and return to DOS.
+
+8. Reboot the PC by hitting <CTRL><ALT><DEL>. When you 
+    go into Windows You will be able to LOGIN to the 
+    Novell Servers.
+
+(%VER NWDOSODI.TXT v1.0a)
+
+ 
+

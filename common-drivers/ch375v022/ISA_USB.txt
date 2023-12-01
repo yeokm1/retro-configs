@@ -1,0 +1,59 @@
+CH375 New Driver by FreddyV
+V0.22
+
+This driver is an optimized version of the V1.9A
+For Computer Hobbyist Only, Don't sell and use it at your own Risk.
+
+To be used with the CH375 Based industrial boards found on ebay/Aliexpress
+
+How to use ?
+
+Add a line in the CONFIG.SYS :
+
+DEVICE=CH375DOS.SYS @260 %0
+
+@ is the I/O Port
+% is the speed parameter, this one is still active for the Board init if you want to try on faster machine.
+No IRQ Needed
+
+! Warning Use % instead of # for Speed (# is IRQ and is not used)
+
+It has been tested on a 286 8MHz Maximum, for 286 12MHJz or more (386), you can test by increasing the Delay value.
+
+V88 : Optimized for 8088
+V86 : Optimized for 8086 / 16Bit memory BUS
+V16 : For the LoTech board in 16Bit Mode (Add 1 to the IP Port : @2C1 instead of @2C0)
+286 : Optimized for V20/V30/286
+
+Test for V0.2:
+--------------
+
+8086 8MHz (Amstrad 3086):
+V86: Write=192 Kb/s Read=200 Kb/s
+
+8088 4.77MHz (5160):
+V88: Write=127 Kb/s Read=141 Kb/s
+V18: Write=147 Kb/s Read=170 Kb/s
+
+Revision History:
+
+25/05/22 V0.1:
+- IRQ Number no more read (Not Wired on the board)
+- When no parameters are used : I/O 260h and Speed 0 By default
+
+- Optimized for 8088/8086 CPU : Use a faster machine may not work. (Feedback Welcome)
+- Speed increase for Read/Write
+
+29/05/22 V0.2:
+- Write Speed increased
+- Added multiple version (TEST)
+
+29/05/22 V0.21
+- IMPORTANT BUG FIX : Forgot a "CLD" instruction, possible data corruption (Both V0.1 and V0.2)
+- BUG : 286 Version is not working
+
+30/06/22 V0.22
+- BUG Fix : IRQ and Speed parameters were reversed, so the Speed was 3 by Default
+- 286 Version tested on 286 8MHz
+- Some Useless code removed
+- Added some display : DOS Version, Chipo Version, Partition number

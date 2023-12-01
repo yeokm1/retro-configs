@@ -1,0 +1,239 @@
+
+################################################################################
+
+  Name: 	 RTSPKT.100
+
+  Version:	 V1.00
+
+  Released By:	 David	Tang
+
+  Release Date:  1997.06.02
+
+  Changed File:
+
+  Reason:	 for Realtek RTL8139 fast ethernet controller
+			10 Mb/s 100 Mb/s
+
+################################################################################
+
+
+  Name: 	 RTSPKT.200
+
+  Version:	 V2.00
+
+  Released By:	 Jack Chen
+
+  Release Date:  1997.08.21
+
+  Changed File:  8129.ASM
+		 RTSPKT.ASM
+
+  Reason:	 for Realtek RTL8139 (F Version) fast ethernet controller
+			10 Mb/s 100 Mb/s
+
+################################################################################
+
+  Name: 	 RTSPKT.300
+
+  Version:	 V.300
+
+  Released By:	 Kinston  Huang
+
+  Release Date:  1997.11.07
+
+  Changed File:  8129.asm,head.asm,getnum,asm
+
+  Reason:
+	(1) cancel 'e', 'f' params, force speed and duplex mode by rset8139.
+	(2) set IFG=11.
+	    Activate/Deactivate Dvrload.
+	    Leave SubVendorID unused.
+	(3) support shared interrupt
+#############################################################################
+
+  Name: 	 RTSPKT.301
+
+  Version:	 V.301
+
+  Released By:	 Kinston  Huang
+
+  Release Date:  1998.03.03
+
+  Changed File:  8129.asm
+
+  Reason:
+	.Improve parameter setting.
+
+#############################################################################
+
+  Name: 	 RTSPKT.314
+
+  Version:	 V3.14
+
+  Released By:	 Season Chen
+
+  Release Date:  1998.09.16
+
+  Changed File:  8129.asm
+		 8129.inc
+		 rtfpkt.asm
+
+  Reason:	Fix bug of loss packet when wrap is enable
+
+
+#############################################################################
+
+  Name: 	 RTSPKT.315
+
+  Version:	 V3.15
+
+  Released By:	 Season Chen
+
+  Release Date:  1999.01.05
+
+  Changed File:  8129.asm
+		 rtfpkt.asm
+
+  Reason:	1.Fix bug of receive mode 4 and mode 5
+		2.Make sure the IO,MEM,and Bus Master bits are enabled
+
+
+#############################################################################
+
+  Name: 	 RTSPKT.316
+
+  Version:	 V3.16
+
+  Released By:	 Owen Wei
+
+  Release Date:  1999.03.22
+
+  Changed File:  8129.asm
+		 rtfpkt.asm
+		 tail.asm
+
+  Reason:	 1. Improve the performance of data transmission.
+		 2. Change the title of the driver.
+
+
+#############################################################################
+
+  Name: 	 RTSPKT.317
+
+  Version:	 V3.17
+
+  Released By:	 Season Chen
+
+  Release Date:  1999.05.10
+
+  Changed File:  8129.asm
+		 rtfpkt.asm
+
+  Reason:	1.Fix bug of receive mode 4,5,6
+		2.Change chip version message to RTL8139(X)
+
+
+#############################################################################
+
+  Name: 	 RTSPKT.318
+
+  Version:	 V3.18
+
+  Released By:	 Owen Wei
+
+  Release Date:  1999.09.09
+
+  Changed File:  rtfpkt.asm
+
+  Reason:	1.Enable the "Bus Master", "Memory Space" and "IO Space"
+		  bits of the Command register in PCI Configuration Space.
+		2.Let the connected switch or hub display the same information
+		  of tx/rx speed and duplex mode as the options of the user
+		  when the user doesn't use auto-negotiation.
+		3.Support the patch of Vendor ID and Device ID.
+
+
+#############################################################################
+
+  Name: 	 RTSPKT.319
+
+  Version:	 V3.19
+
+  Released By:	 Owen Wei
+
+  Release Date:  2000.02.23
+
+  Changed File:  rtfpkt.asm, tail.asm, 8129.inc, head.asm
+
+  Reason:	 1. User can specify one 8139 card by providing the bus number
+		    and device number arguments in the command line.
+		 2. Support CardBus.
+
+
+#############################################################################
+
+  Name: 	 RTSPKT.320
+
+  Version:	 V3.20
+
+  Released By:	 Season Chen
+
+  Release Date:  2000.03.08
+
+  Changed File:  rtfpkt.asm, 8129.asm, 8129.inc
+
+  Reason:	 1. Not always enable "Bus Master" bit of command register in
+		    PCI Configuration Space. Enable this bit only when it is
+		    not enabled.
+		 2. Set Rx FIFO Threshold from no_Rx_threshold bytes to 64 bytes.
+		    Set Rx Max DMA Burst Size from 16 bytes to 1024 bytes.
+		    Set Tx Max DMA Burst Size from 16 bytes to 1024 bytes.
+
+
+#############################################################################
+
+  Name: 	 RTSPKT_S.320
+
+  Version:	 V3.20
+
+  Released By:	 Season Chen
+
+  Release Date:  2000.03.08
+
+  Changed File:  rtfpkt.asm, 8129.asm, 8129.inc
+
+  Reason:	 1. Change Rx Buffer Size from 32K to 8K to reduce driver
+		    size from 58K to 33K.
+
+
+#############################################################################
+
+  Name: 	 RTSPKT_S.330
+
+  Version:	 V3.30
+
+  Released By:	 Victor Hsu
+
+  Release Date:  2000.10.02
+
+  Changed File:  rtfpkt.asm, 8129.asm
+
+  Reason:	 1.Fix the bug about "SET_ADDRESS" call not function.Must enable EEM0,EEM1 to 1,1.
+		 2.Fix the bug on "-n" command.
+
+#############################################################################
+
+  Name:         RTSPKT.340
+
+  Version:      V3.40
+
+  Released By:  Owen Wei
+
+  Release Date: 2002.06.17
+
+  Changed File: RTFPKT.ASM, TAIL.ASM
+
+  Reason:       1. Fix the "Sharing IRQ" related issue when the users select one card
+                   by the bus_number and device_number.
+
+#############################################################################

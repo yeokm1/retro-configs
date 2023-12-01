@@ -1,0 +1,6 @@
+        Model = PCMCIA 10/100 Ethernet Card
+         Path = ETHERNET\EN0100A
+ DeviceDriver = PMNDIS.dos
+   DeviceName = PMNDIS$
+         Type = NDIS
+    Mediatype = ETHERNET

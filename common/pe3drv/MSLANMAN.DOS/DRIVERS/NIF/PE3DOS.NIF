@@ -1,8 +1,0 @@
-
-
-Model = Xircom Pocket Ethernet Adapter III
-Path = Ethernet\XIRCOM
-DeviceDriver = @lanroot\Drivers\Ethernet\XIRCOM\PE3NDIS.EXE
-DeviceName = Xircom$
-Type = NDIS
-

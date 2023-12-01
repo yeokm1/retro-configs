@@ -1,0 +1,26 @@
+;=============================================================================
+; 3Com 3C589 EtherLink III PC CARD
+; OEM Network Setup Information file for IBM LAN Server 4.0
+; (C) Copyright 1994 3Com Corporation
+; %VER 3Com EtherLink III PC CARD OEMSETUP.INF vLS1.1
+;=============================================================================
+
+[data]
+type=network
+version="3.11.101"
+
+[netcard]
+ELPC3="3Com 3C589 EtherLink III PC Card", 0, NDIS, Ethernet, REAL, ELPC3_INST, ELPC3_INI
+
+[ELPC3_INST]
+NETDIR=1:ELPC3.DOS
+device=ELPC3.DOS, @NETDIR\ELPC3.DOS
+
+[ELPC3_INI]
+DriverName=ELPC3$
+io=IOADDRESS,,hex,"0x200,0x3A0,0x10",0x300
+param=MAXTRANSMITS,"Maximun Transmits",int,"2,50,1",6
+slot=SLOT, "Adapter Slot Number",int,"1,8,1",1.0x02
+
+
+

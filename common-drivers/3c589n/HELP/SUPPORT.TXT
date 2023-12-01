@@ -1,0 +1,188 @@
+3Com Corporation
+EtherDisk Diskette for the EtherLink III LAN PC Card 
+Technical Support
+
+
+3Com offers worldwide adapter support 24 hours a day, 
+seven days a week, through automated on-line systems.
+
+
+CardBoard Bulletin Board Service (BBS)
+--------------------------------------
+
+You can obtain software drivers, updates, patches, and 
+fixes on CardBoard, 3Com's menu-driven bulletin board 
+service.  CardBoard also provides product information 
+and diagnostic programs.  For access, call the CardBoard
+telephone number nearest you and set up your modem as 
+follows:
+
+France  (33) (1) 69 86 69 54
+        Up to 9600 baud, 8 data bits, no parity, 
+        1 stop bit
+
+Germany (49) 89 62732 188/189
+        Up to 9600 baud, 8 data bits, no parity, 
+        1 stop bit
+
+Italy   (39) (2) 27 30 06 80
+        Up to 9600 baud, 8 data bits, no parity, 
+        1 stop bit
+
+U.K.    (44) (44) 2 278278
+        Up to 14400 baud (or 38400 with compression 
+        support), 8 data bits, no parity, 1 stop bit
+
+U.S.    (1) (847) 262-6000
+        Up to 14400 baud, 8 data bits, no parity, 
+        1 stop bit
+
+For information on additional international CardBoard 
+access numbers, contact your local 3Com office.  A 
+list of international sales offices appears later 
+in this document.
+
+3ComFacts
+---------
+This automated fax service sends printed installation 
+diagrams, configuration drawings, troubleshooting 
+instructions, and technical articles to your fax machine.  
+To access 3ComFacts, call the numbers shown below from 
+anywhere in the world, using a touch-tone telephone:
+
+     North America:  (1) (408) 727-7021
+     Europe:  (44) (442) 278279
+     Elsewhere:  Contact your local 3Com office for 
+                 an updated list of access numbers.
+        
+Local access is also available within the following 
+countries using the numbers below:
+
+     UK -       0800 626403
+     France -   05 908158
+     Germany -  0130 818063
+     Italy -    1678 99085
+     Sweden -   020 792954
+     Netherlands - 06 0228049
+     Denmark -  800 17319
+     Norway -   050 11062
+     Finland -  9800 14444
+ 
+Within 3ComFacts, choose CardFacts for adapter 
+information or NetFacts for network system product 
+information.  
+ 
+To access the current listing of compatible 
+hardware/software for the EtherLink III PC Card (3C589) 
+adapter from 3ComFacts, choose CardFacts and request 
+document 4319 for the PC Card Hardware Compatibility 
+Guide and document 9071 for the Software Compatibility 
+Guide.  The documents will be sent to your FAX machine.
+
+
+Novell Technical Support
+------------------------
+
+For information on technical support for Novell's 
+products:
+
+     - Call 1-800-NETWARE (Novell's main phone number is 
+       801-429-7000)
+     - Refer to NETWIRE on CompuServe
+     - Contact your local Novell network supplier or 
+       authorized service center.
+
+Microsoft Technical Support
+---------------------------
+
+For information on technical support for Microsoft's 
+products:
+ 
+    - Call 1-206-454-2030
+    - Contact your local Microsoft network supplier 
+      or authorized service center.
+
+IBM
+---
+
+For information on technical support for IBM's products, 
+contact your local IBM network supplier or authorized 
+service center.
+
+Support from Your Network Supplier
+----------------------------------
+
+If additional assistance is required, contact your network 
+supplier.  Many suppliers are authorized 3Com service 
+partners that are qualified to provide a variety of 
+services, including network planning, installation, 
+hardware maintenance, application training, and support 
+services.
+
+ U.S. and Canada
+
+ Call the following number to locate your local 3Com sales 
+ office:
+
+ U.S.     (1) (800) NET-3Com
+
+ The 3Com sales office will refer you to the nearest 3Com 
+ authorized service partner.
+
+ Outside the U.S. and Canada
+
+ To locate a 3Com authorized service partner near you, 
+ contact your local 3Com sales office.
+
+ Australia                (61) 2 959 3020
+ Belgium/Netherlands      (31) 25 032 2120
+ France                   (33) 1 698 66800
+ Germany                  (49) 89 627320
+ Hong Kong                (852) 868-9111
+ Italy                    (39) 2 2730 2041
+ Japan                    (81) 3 3243 9234
+ Nordic                   (46) 8 703 4870
+ Singapore                (65) 321 8929
+ Taiwan                   (886) 2 577 4352
+ U.K.                     (44) 628 890 670
+
+ When you contact a 3Com authorized service partner 
+ for assistance, have the following information ready:
+
+ - Diagnostic error messages
+ - A list of system hardware and software, including 
+   revision levels
+ - Detail on recent configuration changes, if applicable.
+
+3Com's service partner will determine what action needs 
+to be taken to resolve the problem.  3Com service partners 
+can verify hardware failures and advise you when it is more 
+cost-effective to replace, rather than repair, a product.
+
+Returning Products for Repair
+-----------------------------
+
+A product sent directly to 3Com for repair must first be 
+assigned a Return Materials Authorization number (RMA).  
+A product sent to 3Com without an RMA number will be 
+returned to the sender unopened, at the sender's expense.
+When you call for an RMA number, be prepared to provide 
+the product name,serial number, and diagnostic error 
+messages.  Payment, shipping instructions, and turnaround 
+time will be confirmed when the RMA number is assigned.
+
+To obtain an RMA number, call or fax:
+
+Europe            Phone  (44) (44) 2 278127
+                  Fax    (44) (44) 2 236824
+
+U.S.              Phone  (800) NET-3COM
+                  Fax    (408) 326-7290
+
+NOTE:  RMA forms (except Europe) are available on CardFacts.  
+Dial (408) 727-7021.
+
+ Outside Europe    Phone  (408) 492-1790
+ and the U.S.      Fax    (408) 326-7290
+
+ (%VER  Technical Support v2.2ja )

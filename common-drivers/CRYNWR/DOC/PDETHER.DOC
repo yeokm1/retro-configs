@@ -1,0 +1,279 @@
+		Ethernet Packet Driver MLID, v1.03
+			don provan 2/11/93
+
+Introduction
+------------
+
+PDEther.Exe is an ODI to Packet Driver adaptor.  It provides an ODI
+interface for an arbitrary Ethernet Packet Driver.  This allows ODI
+access to any Ethernet board which has a Packet Driver and also
+allows Packet Driver applications and ODI applications using
+different network layer protocols to coexist in the same DOS system.
+
+
+Using PDEther
+-------------
+
+In Packet Driver terms, PDEther is an application.  In ODI terms, it
+is a LAN driver, also know as a "link driver" or "MLID".  The loading
+sequence will be something like this:
+
+1. Load the packet driver supporting your card.
+2. Load LSL.
+3. Load PDEther.
+4. Load IPXODI, NetX, and/or other ODI applications.
+
+Like all good ODI modules, PDEther reads Net.Cfg for configuration
+information.  The next section of this document describes PDEther's
+requirements for Net.Cfg, including a description of PDEther's Link
+Driver section.
+
+
+Net.Cfg
+-------
+
+You must configure at least one 1514 byte ODI receive buffers in the
+Link Support section of the Net.Cfg file using the Buffers keyword:
+
+	Link Support
+		Buffers 4 1514
+
+A few extra buffers may allow PDEther to handle congested conditions
+better.  If no buffers are allocated or they are not 1514 bytes long,
+PDEther prints a warning message.
+
+Some packet drivers will work with smaller buffer sizes, but it is
+difficult to tell which will and which won't.  For that reason, i
+recommend always using 1514 byte ODI buffers but, on the other hand,
+PDEther will try to muddle through even if 1514 byte buffers are not
+available.
+
+Your Net.Cfg file should also contain a Link Driver section for
+PDEther.  Such a section begins with the unindented text "Link
+Driver PDEther".  As is normal in the Net.Cfg file, the section
+continues until the next unindented line.  (In other words, all lines
+in the Link Driver section should be indented by one or more spaces
+or tabs.)
+
+PDEther ignores case, extra white space, and comments when reading
+Net.Cfg.  Comments begin with "#" and continue to the end of the
+current line.
+
+The Link Driver section of the Net.Cfg file supports three keywords:
+
+INT <hex interrupt>
+
+	The INT line specifies the software interrupt of the Packet
+	Driver PDEther should use.  The value is a hex number
+	between 60 hex and 80 hex.  The number may optionally be
+	preceeded by "0x" to indicate a hex number, but the number is
+	read in hex whether or not the "0x" is present.  If PDEther
+	sees no INT line, it uses the Packet Driver at software
+	interrupt 60 hex.
+
+FRAME Ethernet_II
+
+	This is just the standard frame type parameter that all MLIDs
+	support.  Since this driver only supports Ethernet, only
+	"Ethernet_II" is accepted.  For the same reason, this line is
+	entirely optional.
+
+PROTOCOL <protocol name> <hex E-type> Ethernet_II
+
+	This is the standard protocol identification line.  The
+	protocol name (case insensitive) identifies the protocol
+	to LSL.  E-type is a hex number indicating the Ethernet type
+	value for this protocol.  (Again, it may be preceeded by "0x",
+	but it is always interpretted in hex.)  The media name is
+	Ethernet_II.  Again, Ethernet_II is the only media supported,
+	so contrary to standard Net.Cfg practice, specifying
+	Ethernet_II is optional.
+
+===>>>	*ALL* protocols PDEther is to support must be specified
+	in the Link Driver section, since PDEther must be able to
+	tell the Packet Driver specifically about any protocols
+	PDEther wants to receive.  There is one typical Novell exception:
+	IPX is set up automatically if it is not specified explicitly.
+
+	On the other hand, do *not* specify protocols which the
+	packet driver is supporting directly.  Doing so will make
+	PDEther take control of those protocols, so the packet driver
+	application won't be able to use them.
+
+Here are some example lines.  By the way, if you are using an ODI
+TCP/IP protocol stack, these are the protocol lines you will need
+in your Net.Cfg file to tell PDEther about the IP protocols.
+
+	Int 60
+	Frame Ethernet_II
+	Protocol IP   800  Ethernet_II
+	Protocol ARP  806  Ethernet_II
+	Protocol RARP 8035 Ethernet_II
+
+
+Loading a Packet Driver
+-----------------------
+
+PDEther supports the 1.09 Packet Driver specification, which is
+still the most recent revision.  I have no particular reason to think
+it wouldn't work on older Packet Driver interfaces, since it uses
+no features flagged as new in 1.09, but i've only used it with 1.09
+drivers.
+
+Releases of the Clarkson Packet Drivers since release 7 support
+version 1.09 of the spec.  Release 7 was also the first Packet
+Drivers which support the "raw" 802.3 IPX framing convention via
+"-n" switch described below.  The "Clarkson Packet Drivers" have
+been purchased by Crynwr Software.  Several additional releases
+have been done since Release 7.
+
+The details of loading a Packet Driver should be provided with your
+Packet Driver and are beyond the scope of this document.  Generally,
+you tell the packet driver which software interrupt to use and how
+to talk to the hardware through parameters on the command line.
+
+Standard Packet Drivers take *all* input in decimal by default,
+although you may specify hex by using the "0x" prefix.  This is
+counter-intuitive, since almost all parameters to any packet driver
+are numbers which make little or no sense in decimal, so be on guard
+for this common error.
+
+Standard Packet Drivers take the software interrupt as the first
+argument.  The software interrupt *must* agree with the INT parameter
+in the Link Driver PDEther section of the Net.Cfg file.  (But again,
+remember to prefix the packet driver parameter with "0x".  The INT
+parameter in Net.Cfg is always interpreted as a hex number.)
+
+If your network uses the popular "Ethernet_802.3" frame type (the
+proprietary Novell "raw" 802.3 framing type) for IPX traffic, give
+the Packet Driver the "-n" switch to get that framing for IPX
+traffic.  This tells the Standard Packet Drivers to send IPX traffic
+in the "raw" 802.3 format.  The "-n" switch does not affect other
+protocols.  The default IPX protocol ID (8137 hex) *must* be used so
+the Packet Driver can identify IPX packets.
+
+Note that when using the "-n" switch, you continue to specify
+"Ethernet_II" in the Net.Cfg file; you do *not* indicate the frame
+type Ethernet_802.3 as you would in a normal ODI Link Driver.  The
+"raw" 802.3 framing is handled by the Packet Driver without PDEther's
+knowledge.
+
+Here's an example of a typical packet driver command line which loads
+a Packet Driver on software interrupt 60 hex to support an NE2000
+ethernet card on hardware interrupt 5, port 340 hex, using normal
+Ethernet framing.
+
+	ne2000 0x60 5 0x340
+
+To load the same Packet Driver but have it send IPX packets using
+Novell's default Ethernet_802.3 framing instead of the more proper
+Ethernet_II, use a command line like this:
+
+	ne2000 -n 0x60 5 0x340
+
+
+Limitations
+-----------
+
+Although most Packet Drivers now support 802.3/802.2 and
+802.3/802.2/SNAP, PDEther does not support those two framing
+types.
+
+Some of the less important features of the Packet Driver are not
+supported.  For example, it cannot deal with a Packet Driver
+supporting multiple boards.
+
+PDEther does not handle DOS interrupts exactly right, so it can hang
+under high load in certain conditions.  I've only seen this problem
+when PDEther is subjected to ODI test suites designed to identify
+this particular failing of an ODI driver.  I have not seen a PDEther
+hang in real life.
+
+If you are using PDEther under applications other than IPX, each
+protocol (except IPX) must be explicitly listed in the PDEther's Link
+Driver section.  Although "normal" from the point of view of the
+Net.Cfg design, it is quite abnormal in practice.  Novell's TCPIP for
+ODI, for example, will automatically add the TCP/IP protocol IDs if
+they are not present, but THIS DOES *NOT* HELP PDEther which must
+find them in its section of Net.Cfg.  This is unfortunate.  Failure
+to list the protocols in the Net.Cfg file is not a detectable error
+so all the software will be satisfied, but no arriving packets will
+be delivered to IP.
+
+
+Common Problems
+---------------
+
+Here are some of the more common problems encountered by people using
+PDEther.
+
+
+Problem: "When I run PDEther, my packet driver TCP/IP applications
+stops working."
+
+Solution: You've probably included PROTOCOL lines for IP, ARP, or RARP
+in the LINK DRIVER PDETHER section of net.cfg.  These lines tell
+PDEther to take control of those protocols, so they are no longer
+available for your packet driver application.  Remove those lines.
+
+
+Problem: "When I'm using PDEther along with Novell's LAN WorkPlace
+for DOS, my packet driver based TCP/IP applications don't work, or
+sometimes my packet driver applications are fine and it's LAN
+WorkPlace that doesn't work."
+
+Solution: This has nothing to do with PDEther.  You cannot run two
+TCP/IP applications on the same DOS node at the same time.  (Well,
+that's not entirely true, but talk to a packet driver guru to get the
+details.  The hint is "pktmux".)
+
+
+Problem: "Everything goes fine with PDEther until i try to do a large
+NetWare file copy.  Then my connection hangs."
+
+Solution: Usually this is because the BUFFERS specified in your
+net.cfg's LINK SUPPORT section are too small or not specified.
+Increase the buffer size to 1514.  (Actually, it's possible that
+there are packet drivers that require buffers even larger than that.
+If 1514 isn't good enough, you might try increasing it even more.)
+
+
+Problem: "Nothing happens" or "Something isn't right".
+
+Solution: Specify the -v switch when you load PDEther.  This will tell
+you a few things about PDEther's view of the world.  This may give you
+a clue.  In particular, it will tell you which net.cfg file LSL told
+PDEther to read, so you can check to make sure the configuration
+information is coming from the net.cfg file you think it is.
+
+
+Bibliography
+------------
+
+FTP Software, "PC/TCP Packet Driver Specification", version 1.09,
+September, 1989.  Available through anonymous FTP somewhere on
+vax.ftp.com.
+
+Novell, "Open Data-Link Interface Developer's Guide for
+NetWare DOS Workstation Drivers", Revision A, 30 January 1991.
+
+Novell, "ODI Developer's LAN Driver ToolKit Guide for DOS Workstation
+HSMs", Revision B, 5 June 1992, Novell part number 107-000010-001.
+Available through anonymous FTP on sjf-lwp.novell.com in
+odi/specs/dos_odi.zip.
+
+Novell, "Open Data-Link Interface Developer's Guide for DOS
+Workstation Protocol Stacks", version 1.10, 18 March 1992.
+Available through anonymous FTP on sjf-lwp.novell.com in
+odi/specs/stack_d.zip.
+
+
+Conclusion
+----------
+
+Let me know if you have any problems.  If i can find the time, i'll
+try to fix them.
+
+					don provan
+					donp@novell.com
+					2/11/93

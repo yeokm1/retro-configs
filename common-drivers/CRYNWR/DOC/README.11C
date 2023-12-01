@@ -1,0 +1,61 @@
+
+     Supplement to Release 11.x of the Crynwr Packet Driver Collection
+
+The files in this archive replace files in the 11.x release.
+
+3C509.ASM     Driver for 3COM 3C509.  The version number was incorrect in 11.x
+3C509.COM
+82595.INC     Include file for LAN595.ASM, defining symbols particular to 82595.
+AT1500.COM    Driver for Allied-Telesis 1500T and 1500BT
+HOWTOGET.IT   Instructions on obtaining the full 11.x driver set.
+LAN595.ASM    Driver for boards using Intel's 82595
+LAN595.COM
+LAN595IO.ASM
+LANCE.ASM     Include file for drivers based on AMD's LANCE and PC-Net/ISA.
+NE2100.COM    Driver for Novell NE2100 and other PC-Net/ISA adapters.
+NI6510.COM    Driver for Racal/Interlan NI6510.
+PKTWATCH.ASM  Program to display packets as they arrive.
+PKTWATCH.COM
+README.GEN    This file
+SMC_WD.ASM    Driver for Western Digital WD-80?3*, SMC Elite series, and
+SMC_WD.COM      IBM Ethernet Adapter/A, and SMC Elite/16 Ultra.
+
+
+For the entire packet driver collection, along with the exact details
+of the copyright (COPYING.DOC), see HOWTOGET.IT for availability.
+
+For the copyright, see COPYING.DOC.  In part it says that: Anyone
+with a copy of the drivers may give it away, and the source code for
+all modules must be available.
+
+NO WARRANTY, see COPYING.DOC, but support for packet drivers is
+available, see SUPPORT.DOC.
+
+Installation:
+
+A packet driver has at least one parameter.  The usage message will
+tell you what additional parameters are needed.  You can get the
+usage message by running the driver with no parameters.
+
+The first parameter is the software interrupt. A packet
+driver needs to have a software interrupt assigned to it for other
+programs to access it.  I recommend 0x7e.
+
+Additional parameters often include the hardware irq, the I/O
+address, and the memory base address.  All parameters must be
+specified in C-style representation. Decimal is expressed as 11,
+hexadecimal is expressed as 0x0B, octal is expressed as 013.  Any
+numbers that the packet driver prints will be in the same notation.
+
+Notes:
+
+Please report problems.  I cannot guarantee that I will work on your
+problem if you are not a Crynwr customer.  I CAN guarantee that I
+will not work on it if you don't report it to me.  Written reports
+are preferred to phone calls.
+
+Russell Nelson
+nelson@crynwr.com
+315-268-1925 voice
+315-268-9201 FAX
+Crynwr Software, 11 Grant St., Potsdam, NY 13676

@@ -1,0 +1,34 @@
+ASM	=	masm /L
+LINK	=	link
+CC	=	cl
+
+all:	drivers
+
+drivers:	hpfepkt.com
+
+head.obj: head.asm defs.asm makefile
+	$(ASM) $*;
+
+tail.obj: tail.asm defs.asm printnum.asm decout.asm digout.asm chrout.asm \
+	crlf.asm verifypi.asm getnum.asm getdig.asm skipblk.asm printea.asm \
+	pkterr.asm getenv.asm makefile
+	$(ASM) $*;
+
+hpfepkt.obj: hpfepkt.asm hpfepkt.inc defs.asm block.asm timeout.asm makefile
+#	$(ASM) /DHP_PROD /DPRE_REL $*;
+	$(ASM) /DHP_PROD $*;
+
+hpfepkt.com: head.obj hpfepkt.obj tail.obj
+	$(LINK) head hpfepkt tail,hpfepkt;
+	exe2com hpfepkt
+	del hpfepkt.exe
+
+versions: nul
+	grep -o "version.equ" *.asm
+
+clean: nul
+	del *.obj
+	del *.com
+	del *.exe
+	del *.map
+    	del *.lst

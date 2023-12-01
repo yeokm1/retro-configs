@@ -1,0 +1,43 @@
+This zip can be found in %dosdir%\drivers\net\crynwr
+
+Aquila crynwr.zip\AQUILA.com
+AT&T Starlan/Ethernet crynwr.zip\AT&T.com
+AT&T LanPACER/StarStation crynwr.zip\AT&T_LP.com
+Allied-Telesis AT1500 crynwr.zip\pktcmd=AT1500.com
+Allied-Telesis AT1700 crynwr.zip\AT1700.com
+Cabletron DNI crynwr.zip\CTRONDNI.com
+Ether-T PC/AT crynwr.zip\DAVIDSYS.com
+Digital Equipment Corporation DEPCA crynwr.zip\DEPCA.com
+Tiara crynwr.zip\TIARA.com
+Multi-Tech EN301 crynwr.zip\EN301.com
+ES3210 crynwr.zip\ES3210.com
+ICL EtherTeam16 crynwr.zip\ETHIIE.com
+EXOS 205 crynwr.zip\EXOS205.com
+MITEL EXPRESS CARD crynwr.zip\EXPRESS.com
+HP PC LAN crynwr.zip\HPPCLAN.com
+HP 27247B/27252A crynwr.zip\HPPCLANP.com
+BICC ISOLAN crynwr.zip\ISOLAN.com
+BICC ISOLink crynwr.zip\ISOLINK.com
+Kodiak Raven 16 crynwr.zip\KODIAK16.com
+Kodiak Raven 8 crynwr.zip\KODIAK8.com
+Kodiak Kombo crynwr.zip\KODIAKK.com
+Intel LAN 595 crynwr.zip\LAN595.com
+Apple LocalTalk PC Card crynwr.zip\LOCALTLK.com
+Mylex crynwr.zip\MYLEX.com
+NCR ET105 crynwr.zip\NCRET105.com
+NE1000 crynwr.zip\NE1000.com
+Interlan NI5010 crynwr.zip\NI5010.com
+MICOM-Interlan NI5210 crynwr.zip\NI5210.com
+Racal Interlan NI6510 crynwr.zip\NI6510.com
+MICOM-Interlan NI9210 crynwr.zip\NI9210.com
+NTI 16 crynwr.zip\NTI16.com
+Ottawa PI crynwr.zip\PI.com
+SMC 8xxx crynwr.zip\PKT8000.com
+SMC 8115 crynwr.zip\PKT8115.com
+SLIP 8250 crynwr.zip\SLIP8250.com
+SMC/WD/IBM crynwr.zip\SMC_WD.com
+Thomas-Conrad TCENET crynwr.zip\TCENET.com
+Token Express Pro crynwr.zip\TPROPKT.com
+UB PC/NIC crynwr.zip\UBNICPC.com
+UBNICPS2 crynwr.zip\UBNICPS2.com
+Digital Equipment Corporation VAXmate crynwr.zip\VAXMATE.com

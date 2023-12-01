@@ -1,0 +1,43 @@
+The 11.4 release of the Crynwr packet driver for the Digital
+Semiconductor series of Ethernet controllers fixes the following
+problems:
+  o The receiver wasn't looping until all packets had been received,
+    so that if an interrupt was lost, packet reception could be
+    delayed until the next packet had been received.
+
+The 11.3 release of the Crynwr packet driver for the Digital
+Semiconductor series of Ethernet controllers fixes the following
+problems:
+  o The timer wasn't being hooked properly, so that when the tulip rx
+or tx machine got confused, it wasn't being repaired quickly enough.
+  o The send_pkt routine wasn't setting cy if a transmit error occurred
+
+The 11.2 release of the Crynwr packet driver for the Digital
+Semiconductor series of Ethernet controllers fixes the following
+problems:
+  o The set_address call was unimplemented.
+
+The 11.1 release of the Crynwr packet driver for the Digital
+Semiconductor series of Ethernet controllers is based on the 2.62 NDIS
+2.0 (DOS) source code (with permission).  The 2.60->2.62 change fixes
+the following problems:
+
+	Mode: 21143 Autosense.  BNC media is not automatically detected.
+This is an enhancement that has been made to the v2.62 driver.
+
+	Mode: 21041 Autosense.  When AUI media is connected, driver
+declares BNC.  This is an inherited bug that was in the v2.60 driver.
+Fixed in v2.62.
+
+The 11.0 release of the Crynwr packet driver for the Digital
+Semiconductor series of Ethernet controllers is based on the 2.60 NDIS
+2.0 (DOS) source code (with permission).  For the lineage of that
+driver, see the release.txt that comes with it.
+
+This driver has been tested with pdtstnet, ka9q's nos, Trumpet
+Software International's Trumpet Winsock, and Beame & Whiteside's
+BWTCP.  All three of the Ethernet controllers have been tested in two
+different machines.  No anomolies have been seen (that haven't been
+fixed :).
+
+-russ <nelson@crynwr.com>

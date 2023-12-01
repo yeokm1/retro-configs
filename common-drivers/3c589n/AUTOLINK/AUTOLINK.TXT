@@ -1,0 +1,32 @@
+AUTOLINK.TXT File
+3Com Corporation
+3Com EtherLink III LAN PC Card (3C589 PC Card)
+Installing Server Support for AutoLink
+
+
+ 3Com's auto installation software, AutoLink, copies the NetWare DOS
+ Requester software from the EtherDisk diskette to the system you are 
+ configuring for NetWare.  You may have newer versions of this software from 
+ another source.  If so, the Autolink program can download the NetWare
+ client software from the server instead of the EtherDisk diskette.  This
+ feature can be used to install newer versions of the software or to 
+ customize your installation.
+ 
+ Autolink can also install basic Netware support for Windows 3.1X and 
+ Windows For Workgroups 3.11.  These two options can be specified by using
+ install.exe in the root directory of EtherDisk.
+ 
+ AutoLink installs the NetWare client software from the EtherDisk diskette,
+ then starts it, and connects to a server.  Once connected, AutoLink looks
+ in the LOGIN directory of the server for a file called 3INSTALL.BAT.  If
+ this file exists, AutoLink will spawn it.
+ 
+ If you want to deliver installations specific to your environment, your
+ system administrator can create a batch file named 3INSTALL.BAT to copy
+ specific software required during your client installation process.  For
+ example, you may have multiple protocols, unique configurations, special
+ application software, or non-NetWare clients in your network environment.
+
+   (%VER AUTOLINK.TXT - Server Support for Auto Installation V1.0a)
+
+

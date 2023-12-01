@@ -1,0 +1,24 @@
+3Com Corporation
+Network Drivers Installation Notes
+
+NOVELL NETWARE 32-bit Drivers
+
+This file contains information for installing the Novell Netware
+32-bit server driver contained on the 3Com EtherDisk diskette, 
+on a Netware version 3.12, or 4.x server.  
+
+The 32-bit Netware server driver provided with the 3C589D LAN PC Card
+is only supported under Novell Netware version 4.11.  
+
+Although 3Com does not support the use of this driver in a Netware
+3.12, or 4.X server environment, driver patches are available from
+Novell to allow backwards compatibility.  
+
+The file required from Novell is LANDR9.EXE and is available from the
+Novell FTP site at ftp.novell.com/pub/updates/nwos.  
+
+The file is a self extracting executable.
+
+
+(%VER README.3&4 v1.0a)
+

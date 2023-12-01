@@ -1,0 +1,82 @@
+3Com Corporation
+Network Drivers Installation Notes
+
+      WINDOWS 95 AND MICROSOFT WINDOWS NETWORKING
+
+
+This document describes how to configure the 3C589D PC Card for 
+use with Windows 95 and Microsoft Windows Networking. These
+procedures are also described in the EtherLink III LAN PC 
+User Guide, Chapter 3.
+
+NOTE: The following instructions assume that you have not
+      installed any other network adapter in the machine. If you
+      have been using a network connection on your computer,
+      some of the following instructions may not apply or may
+      produce different results. Refer to your MIS department
+      or system manager for instructions.
+
+Before installing the network driver, you should know the
+following:
+
+      The name of your Windows 95 workgroup or:
+      The name of the NT Domain or NT Workgroup to which
+      you belong
+
+Also, for a successful installation, you will need:
+
+      - Windows 95 system installation files (either on hard
+        disk, floppy diskettes, or CD)
+      - 3C589D PC Card and the accompanying EtherDisk
+        diskette
+
+Windows 95 Version 4.00.950 and 4.00.950A
+1. Boot Windows 95 with both sockets empty.
+   open the Control Panel and double click on the System icon.
+2. Select the Device Manager tab.
+3. Double-click on the PCMCIA socket category.
+   The installed PCMCIA controller driver is listed. 
+4. Confirm that there is no red x or yellow exclamation point
+   on this device.
+5. Click Cancel to exit the Device Manager.
+6. Insert the 3C589D PC Card in either PC Card slot in your PC.
+   The New Hardware Found window appears and states 
+   that it has detected the 3Com Corporation - 3C589D PC Card 
+   has been detected.
+7. Insert the EtherDisk diskette.
+8. Select Driver from Disk provided by manufacturer and click OK.
+   The Install from Disk window appears.
+9. Click OK to copy the manufacturers files from A:\.
+10.If Windows 95 files are requested, enter the path to the files
+   and click OK.
+   The 3C598D installation is complete.
+11.Restart the PC to login to the network.
+
+Windows 95 Version 4.00.95B
+1. Boot Windows 95 with both sockets empty.
+2. Open the Control Panel and double-click on the System icon.
+3. Select the Device Manager tab.
+4. Double-click on the PCMCIA sSocket cateogry.
+   The installed PCMCIA controller driver is listed. 
+5. Confirm that there is no red x or yellow exclamation point
+   on this device.
+6. Click Cancel to exit the Device Manager.
+7. Insert the 3C589D PC Card in either PC Card slot in your PC.
+8. The Update Device Driver wizard window appears and states 
+   that it has detected the 3Com Corporation - 3C589D PC Card 
+   has been detected.
+9. Insert the EtherDisk diskette and click Next to begin driver
+   installation.
+   The following message appears: "Windows found the following updated 
+   driver for this device:3Com EtherLink III PCMCIA (3C589D)"
+10.Click Finish to accept the driver.
+11.Insert the Windows 95 CD-ROM or type the path to the 
+   Windows 95 installation files (typically C:\windows\options\cabs).
+12.If during installation, the 3Com driver cannot be found, enter A:\
+   to point windows to the driver.
+
+   The 3C598D PC Card network driver installation is complete.
+13.Restart the PC to login to the network.
+
+(%VER WIN95NDIS3.TXT v1.0d)
+

@@ -1,8 +1,0 @@
-
- Start  Stop   Length Name               Class
-
- 00000H 03BFFH 03C00H CODE               CODE
- 03C00H 03C00H 00000H _TEXT              CODE
- 03C00H 04A40H 00E41H INIT               CODE
-
-

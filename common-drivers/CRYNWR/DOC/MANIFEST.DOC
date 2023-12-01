@@ -1,0 +1,253 @@
+The drivers are distributed in three files:
+drivers.zip, which contains executables and documentation,
+drivers1.zip, which contains the first half of the sources, and
+drivers2.zip, which contains the second half of the sources.
+
+3C501.ASM     Driver for 3COM 3C501.
+3C501.COM
+3C503.ASM     Driver for 3COM 3C503.
+3C503.COM
+3C505.ASM     Driver for 3COM 3C505.
+3C505.COM
+3C507.ASM     Driver for 3COM 3C507.
+3C507.COM
+3C507.DOC     Notes on installing the 3C507 in a system.
+3C509.ASM     Driver for 3COM 3C509.
+3C509.COM
+3C523.ASM     Driver for 3COM 3C523.
+3C523.COM
+8250DEFS.ASM  Definitions for the Intel 8250.
+82586.ASM     Include file for drivers based on Intel's 82586.
+8390.ASM      Include file for drivers based on National's 8390.
+8390.INC      Definitions for National's DP8390 Ethernet controller.
+8530INC.ASM   Definitions for Intel's 8530 SCC.
+AQUILA.ASM    Driver for ADI's Aquila cards.
+AQUILA.COM
+AR450.ASM     Driver for Telesystems SLW ARLAN 450.
+AR450.COM
+ARCETHER.ASM  Driver for ARCNET that simulates an Ethernet driver.
+ARCETHER.COM
+ARCETHER.DOC
+ARCNET.ASM    Driver for ARCNET.
+ARCNET.COM      (requires a recompiled version of Phil Karn (KA9Q)'s NOS.)
+AT&T.ASM      Driver for AT&T Ethernet and Starlan.
+AT&T.COM
+AT&T_LP.ASM   Driver for AT&T LanPACER/StarStation.
+AT&T_LP.COM
+AT1500.ASM    Driver for Allied-Telesis 1500T and 1500BT
+AT1500.COM
+AT1700.ASM    Driver for Allied-Telesis 1700T and 1700BT
+AT1700.COM
+BIBLIO.DOC    Bibliography of published packet driver articles.
+BUGS.DOC      Possible bugs to be aware of.
+CHANGES.DOC   Changes from release to release.
+CHROUT.ASM    Subroutine to print a single character.
+COPYING.DOC   The Free Software Foundation's General Public License.
+CRLF.ASM      Subroutine to print a CRLF.
+CRYNWR.WAV    .WAV audio file of a native Welsh speaker pronouncing Crynwr.
+CTRONDNI.ASM  Driver for Cabletron DNI Exxxx.
+CTRONDNI.COM
+DAVIDSYS.ASM  Driver for David Systems Inc Ether-T.
+DAVIDSYS.COM
+DE600.ASM     Driver for D-Link Pocket LAN Adapter.
+DE600.COM
+DECOUT.ASM    Subroutine to print a 32 bit decimal number.
+DEFS.ASM      Definitions and macros.
+DEPCA.ASM     Driver for Digital Equipment DEPCA.
+DEPCA.COM
+DESQVIEW.ASM  Code to get IBMTOKEN working under DESQView.
+DESQVIEW.DOC  Documentation on running the packet drivers with DESQView.
+DIGOUT.ASM    Subroutines to print 1, 2, 4, and 8 digit hex numbers.
+DK86960.ASM   Driver for Fujitsu's NICE demo card
+DK86960.COM
+DK86965.ASM   Driver for Fujitsu's EtherCoupler demo card
+DK86965.COM
+DLLPKT.NOT    Notes on Harry Stok's packet driver-over-DLL (Pathworks driver).
+DUMP.C        Source of the trace dumper.
+DUMP.EXE
+DUMPHEX.ASM   Subroutine to print a line of sixteen bytes in hex and ASCII
+ECOUPLER.ASM  Include file for drivers based on Fujitsu's EtherCoupler.
+EEP15.INC     Include file for Allied Telesis AT1500.
+EEP17.INC     Include file for Allied Telesis AT1700.
+EN301.ASM     Driver for Multitech EN-301.
+EN301.COM
+ES3210.ASM    Driver for Racal/Interlan's ES3210 EISA adapter.
+ES3210.COM
+ETHERSL.ASM   Driver for SLIP that emulates an Ethernet driver
+ETHERSL.COM
+ETHIIE.ASM    Driver for ICL EtherTeam16 (formerly Nokia Data Ethernet IIe).
+ETHIIE.COM
+EXE2COM.C     Chris Dunford's Exe2bin replacement.
+EXE2COM.DOC
+EXE2COM.EXE
+EXOS205.ASM   Driver for Microdyne (formerly EXOS/Excelan) EXOS205T
+EXOS205.COM
+EXP16.ASM     Driver for Intel EtherExpress.
+EXP16.COM
+EXP16.INC
+EXP16CON.ASM
+EXP16MCA.ASM
+EXPRESS.ASM   Driver for Mitel Express ISDN adapter.
+EXPRESS.COM
+F965.INC      Fujitsu 86965 (EtherCoupler) definitions.
+GETDIG.ASM    Subroutine to convert an ASCII character into 0..15.
+GETEA.ASM     Subroutine to convert an ASCII Ethernet address into six bytes.
+GETENV.ASM    Subroutine to get a string from the environment.
+GETNUM.ASM    Subroutine to convert ASCII digits into four bytes.
+GOPHER.DOC    Notes on UMinn's Gopher, a distributed document delivery service.
+GPL.DOC       Notes on the GNU General Public License, by Craig Burley
+HEAD.ASM      Resident device independent generic code.
+HEXOUT.ASM    Subroutines for debugging code
+HOWTOGET.IT   Instructions on obtaining that which you already have.
+HPPCLAN.ASM   Driver for HP EtherTwist.
+HPPCLAN.COM
+HPPCLANP.ASM  Driver for HP EtherTwist, HP27242B and HP27250A.
+HPPCLANP.COM
+IBMTOKEN.ASM  Driver for IBM Token Ring Adapter.
+IBMTOKEN.COM
+IBMTOKEN.NOT  Notes on installing the IBMTOKEN driver.
+INSTALL.DOC   ASCII installation documentation.
+INSTALL.PS    PostScript installation documentation.
+INTCHK.ASM    Subroutine to compare against the packet driver signature.
+IO16.ASM      Subroutine for 16-bit I/O loops.
+IO8.ASM       Subroutine for 8-bit I/O loops.
+IPXPKT.ASM    Driver for Novell IPX code (IP over IPX).
+IPXPKT.COM
+IPXPKT.DOC    Instructions for using IPXPKT.
+IPXPKT.NOT    Some notes from the author.
+IPXSTAT.C     Statistics for the IP over IPX packet driver.
+IPXSTAT.EXE
+ISOLAN.ASM    Driver for BICC Isolan 4110-0.
+ISOLAN.COM
+ISOLINK.ASM   Driver for BICC Isolan 4110-2/3.
+ISOLINK.COM
+KODIAK.ASM    Include file for Kodiak's drivers based on SEEQ 8005
+KODIAK.INC    Definitions for Kodiak's drivers based on SEEQ 8005
+KODIAK16.ASM  Driver for Kodiak Technology's Kodiak~16 10BT
+KODIAK16.COM
+KODIAK8.ASM   Driver for Kodiak Technology's Kodiak~8 10BT
+KODIAK8.COM
+KODIAKK.ASM   Driver for Kodiak Technology's Kombo
+KODIAKK.COM
+LANCE.ASM     Include file for drivers based on AMD's LANCE and PC-Net/ISA.
+LANCE.INC     Include file for the NTI16 driver.
+LINE.ASM      Subroutine to draw a graphics line.
+LOCALTLK.ASM  Driver for Apple LocalTalk PC Card, Sun/TOPS FlashCard.
+LOCALTLK.COM    (requires a modified version of Phil Karn (KA9Q)'s NOS.
+LOCALTLK.NOT
+MAKEFILE      Makefile.  Uses tasm and tlink, but MS may work.
+MAKEFILE.AWK  AWK Script and batch file to keep makefile in sync with itself.
+MAKEFILE.BAT    I use oak.oakland.edu:/pub/msdos/awk/awk320.zip.
+MANIFEST.DOC  This file.
+MANIFEST.AWK  AWK script to help create this file.
+MEMTEST.ASM   Subroutine to test for the presence of RAM.
+MOVEMEM.ASM   Subroutine to quickly do a memory-to-memory copy.
+MULTICRC.ASM  Subroutine to calculate a 64-bit hash table for multicasts.
+MYLEX.ASM     Driver for Mylex's LNE-890B
+MYLEX.COM
+NB.ASM        Driver for NetBIOS.
+NB.COM
+NB.NOT        NetBIOS instructions.
+NCRET105.ASM  Driver for NCR ET-105.
+NCRET105.COM
+NE1000.ASM    Driver for Novell NE1000.
+NE1000.COM
+NE2.ASM       Driver for Novell NE/2.
+NE2.COM
+NE2000.ASM    Driver for Novell NE2000.
+NE2000.COM
+NE2100.ASM    Driver for Novell NE2100 and other PC-Net/ISA adapters.
+NE2100.COM
+NI5010.ASM    Driver for Interlan NI5010.
+NI5010.COM
+NI5210.ASM    Driver for MICOM-Interlan NI5210.
+NI5210.COM
+NI6510.ASM    Driver for Racal/Interlan NI6510.
+NI6510.COM
+NI9210.ASM    Driver for MICOM-Interlan NI9210.
+NI9210.COM
+NOVELL.DOC    Instructions for running NetWare over packet drivers.
+NOVELL.NOT    Brian Meek's explanation of ECONFIG for Novell users.
+NTI16.ASM     Driver for NTI 1002/DP-16.
+NTI16.COM
+OCCUPIED.ASM  Subroutine to test for occupied memory.
+ORDER.DOC     Packet driver support order form.
+PACKET.DOC    Joe R. Doupnik's "Packet drivers made simple"
+PACKET_D.109  Packet driver spec version 1.09
+PDIPX103.ZIP  Intel's packet driver shell for IPX-over-packet-drivers.
+PI.ASM        Driver for the Ottawa PI Amateur Radio board.
+PI.COM
+PI.DOC
+PIINC.ASM
+PIXEL.ASM     Subroutine to draw pixels on EGA/VGA screen.
+PKTADDR.ASM   Program to get/set the packet driver address.
+PKTADDR.COM
+PKTALL.ASM    Program to receive and discard all packets.
+PKTALL.COM
+PKTCHK.ASM    Source of the packet driver installation checker.
+PKTCHK.COM
+PKTD35.SYS    SunSelect's PC-NFS drivers.
+PKTD40A.SYS   SunSelect's PC-NFS drivers.
+PKTDRVR.C     Turbo C interface code.
+PKTDRVR.H     Turbo C interface code.
+PKTERR.ASM    Subroutine to print packet driver error messages.
+PKTMODE.ASM   Program to get/set the packet driver receive mode.
+PKTMODE.COM
+PKTMULTI.ASM  Program to get/set the packet driver multicast list.
+PKTMULTI.COM
+PKTSEND.ASM   Program to send arbitrary packets.
+PKTSEND.COM
+PKTSTAT.ASM   Program to print the statistics.
+PKTSTAT.COM
+PKTTRAF.ASM   Program to display traffic graphically.
+PKTTRAF.COM
+PKTWATCH.ASM  Program to display packets as they arrive.
+PKTWATCH.COM
+PLIP.ASM      Parallel port IP.  Very similar to SLIP, except that it has the
+PLIP.COM        Ethernet header and connects two PC's via parallel ports.
+PLIP.DOC
+POPF.ASM      Include file to fix the early 80286 POPF bug.
+PRINTEA.ASM   Subroutine to print Ethernet addresses.
+PRINTNUM.ASM  Subroutine to print a number in decimal and hex.
+PROMBOOT.NOT  Notes on booting off Novell and switching to the packet driver.
+QUEUE.ASM     Subroutine to queueing things in a FIFO.
+READ.ME       A Very Important File.
+SEEPKT.C      Source of a sample program to print packets.  Shows how you can
+SEEPKT.EXE      interface to packet drivers from C.
+SERSUB.ASM    Serial port debugging code, used by Express.
+SKELETON.ASM  Skeleton for a packet driver.
+SKIPBLK.ASM   Subroutine to skip past blanks.
+SLIP8250.ASM  Driver for SLIP driver using IBM-PC 8250.
+SLIP8250.COM
+SLIPMERG.ASM  Include file for SLIP drivers.
+SMC_WD.ASM    Driver for Western Digital WD-80?3*, SMC Elite series, and
+SMC_WD.COM      IBM Ethernet Adapter/A.
+SNMP.NOT      Notes on Bob Crosson's free SNMP monitor.
+SOFTWARE.DOC  Notes on software that works with packet drivers.
+SUPPORT.DOC   How to get support for packet drivers.
+T7231.ASM     Include file for drivers based on AT&T's T7231.
+TAIL.ASM      Non-resident device independent generic code.
+TCENET.ASM    Driver for Thomas-Conrad's TC5045 adapter.
+TCENET.COM
+TERMIN.ASM    Source of the packet driver terminator.
+TERMIN.COM
+TIARA.ASM     Driver for Tiara LANcard/E.
+TIARA.COM
+TIMEOUT.ASM   Subroutine to check for excessive time spent looping.
+TRACE.ASM     Source of the packet driver tracer.
+TRACE.COM
+UBNICPC.ASM   Driver for Ungermann-Bass PC/NIC.
+UBNICPC.COM
+UBNICPS2.ASM  Driver for Ungermann-Bass NIC-PS/2.
+UBNICPS2.COM
+UUNET.DOC     Notes on getting sources from uunet.uu.net via UUCP
+VAXMATE.ASM   Driver for DEC's Vaxmate.
+VAXMATE.COM
+VERIFYPI.ASM  Subroutine to verify the packet interrupt.
+WD8003E.ASM   Points people to the new name for the driver, smc_wd.
+WD8003E.COM
+WINPKT.ASM    Shim for Windows Enhanced mode.
+WINPKT.COM
+WORKERS.DOC   People who've put effort into the packet drivers.
+ZNOTE.ASM     Driver for Zenith Data Systems' Z-Note.
+ZNOTE.COM

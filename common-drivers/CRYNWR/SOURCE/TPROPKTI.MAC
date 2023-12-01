@@ -1,0 +1,9 @@
+;input a word from I/O port
+inw	macro
+	call	inw_routine
+	endm
+
+; Write a word to an I/O port
+outw	macro
+	call	outw_routine
+	endm

@@ -1,0 +1,22 @@
+
+;; Windows for Workgroups 3.11
+;; OEMSETUP.INF
+
+[data]
+type=network
+version=3.11.250
+
+
+[disks]
+1 =. ,"PCMCIA 10/100 Ethernet Card Driver Diskette", disk1
+
+[netcard]
+EN0100A="PCMCIA 10/100 Ethernet Card",0,ndis,ethernet,real,EN0100A,PMNDIS_nif
+
+[EN0100A]
+ndis2=1:PMNDIS.DOS
+
+[PMNDIS_nif]
+drivername=PMNDIS$,0x10
+param=INTERRUPT,,text,"3,4,5,9,10,11","5"
+param=IOBASE,,text,"0x300,0x320,0x340,0x360,0x240,0x280","0x300"

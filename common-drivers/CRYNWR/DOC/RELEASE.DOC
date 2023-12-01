@@ -1,0 +1,52 @@
+                  STANDARD MICROSYSTEMS CORPORATION
+
+                            Packet Driver
+                      For Ethernet LAN Adapters
+
+                         RELEASE INFORMATION
+
+   This software is licensed by SMC for use by its customers only.
+        Copyright (c) 1995-1996 Standard Microsystems Corporation.
+                         All rights reserved.
+
+                  Version 11.61      12 May 1996
+
+
+VERSION HISTORY
+
+-- Version 11.61 (Current Version) --
+
+   Updated to LMAC 1.04
+
+-- Version 11.60 --
+
+   Added support for 9332BDT
+
+-- Version 11.50 --
+
+   Fixed the bug wherein a recently-received packet would be
+   retransmitted.
+
+-- Version 11.40 --
+
+   Initial version developed by Crynwr.  Based on Clarkson Packet
+   Driver. Supports SMCPower EtherCards.
+
+
+This commercial computer software and documentation is provided with
+RESTRICTED RIGHTS.  Use, duplication, or disclosure by the
+Government is subject to restrictions set forth in subparagraph
+(c) (1) (ii) of the Rights in Technical Data and Computer Software
+clause at DFARS 252.227-7013, or subparagraphs (c) (1) and (2) of the
+Commercial Computer Software -- Restricted Rights clause at
+FAR 52.227-19, or Alternate III of the Rights in Data -- General
+clause at FAR 52.227-14, as applicable.  The manufacturer /
+subcontractor is Standard Microsystems Corporation,   80 Arkay Drive,
+Hauppauge,  NY    11788. 
+
+
+SMC and Standard Microsystems are registered trademarks; and EtherEZ,
+EtherCard Elite 16 Ultra, EtherCard Elite 16T Ultra, EtherCard Elite
+16C Ultra, EliteSeries, EZStart, and SuperDisk are trademarks of 
+Standard Microsystems Corporation.  Other product and company names 
+are registered trademarks or trademarks of their respective holders.

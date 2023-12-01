@@ -1,8 +1,0 @@
-; Lantastic 6.0 installation file
-
-Model = Pocket Ethernet Adapter III
-Path = Ethernet\XIRCOM
-DeviceDriver = @lanroot\ndis\PE3NDIS.EXE
-DeviceName = Xircom$
-Type = NDIS
-

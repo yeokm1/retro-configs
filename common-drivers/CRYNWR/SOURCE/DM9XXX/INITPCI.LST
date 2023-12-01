@@ -1,0 +1,2949 @@
+Microsoft (R) Macro Assembler Version 6.11		    08/31/01 09:41:39
+.\initpci.asm						     Page 1 - 1
+
+
+				;*****************************************************************************
+				;* Name : INITPCI.ASM
+				;*
+				;* All rights reserved by DAVICOM, 1996
+				;*
+				;* Description :
+				;*	. Calls the PCI BIOS to find DM9100 handle & configure information.
+				;*	. Store io_addr, int_no & ChipRev.
+				;*
+				;* Functions :
+				;*	. initpci
+				;*	. InitAdapterProbe
+				;*	. InitPCICheckBIOS
+				;*	. InitPCIFindDevice
+				;*	. InitPCIGetPCIID
+				;*	. InitPCIGetBase
+				;*	. InitDM9100RegOffsets
+				;*	. PCIResourceCheck
+				;*	. InitConfigRegRead
+				;*	. InitConfigRegWrite
+				;*	. GetAdapterConfig
+				;*	. InitPrintMessage
+				;*	. InitPrintHexByte
+				;*	. InitScanPCIBus
+				;*	. AllocatePhysicalBlock
+				;*
+				;* Author : Spenser Tsai
+				;*
+				;* Date : 05/17/96'
+				;*
+				;* Change Notes :
+				;* Date - Modifier
+				;*     Cause :
+				;*  Modified :
+				;*    Result :
+				;
+				; Maintainers:
+				;
+				; John H.T. Ho		htho
+				;
+				;
+				; Revision History:
+				;
+				; Date	     Modfier.	Modification Descriptions
+				; ---------- ---------- ------------------------------------------
+				; 2000.7.18	htho	enable PnP OS in BIOS will disable I/O Space Access
+				;
+				;*
+				;*****************************************************************************
+					.Model	TINY
+					.386
+
+				;   +-------------------------------------------------------------------+
+				;   |		      P C I   B I O S	S E R V I C E S 		|
+				;   +-------------------------------------------------------------------+
+				;
+				; The following constants define the PCI BIOS calling interface
+				;
+
+ = 001A				PCI_BIOS_INT			EQU  1Ah	; "int" interface to PCI BIOS
+
+ = 00B1				PCI_FUNCTION_ID 		EQU  0B1h
+ = 0001				PCI_BIOS_PRESENT		EQU  001h
+ = 0002				PCI_FIND_PCI_DEVICE		EQU  002h
+ = 0003				PCI_FIND_PCI_CLASS_CODE 	EQU  003h
+ = 0006				PCI_GENERATE_SPECIAL_CYCLE	EQU  006h
+ = 0008				PCI_READ_CONFIG_BYTE		EQU  008h
+ = 0009				PCI_READ_CONFIG_WORD		EQU  009h
+ = 000A				PCI_READ_CONFIG_DWORD		EQU  00Ah
+ = 000B				PCI_WRITE_CONFIG_BYTE		EQU  00Bh
+ = 000C				PCI_WRITE_CONFIG_WORD		EQU  00Ch
+ = 000D				PCI_WRITE_CONFIG_DWORD		EQU  00Dh
+
+ = 00020000			PCI_CLASS_CODE_ETHER_CTRL   EQU  000020000h
+
+				;   +-------------------------------------------------------------------+
+				;   |		P C I	 D E V I C E S	   I N F O R M A T I O N	|
+				;   +-------------------------------------------------------------------+
+				;
+				; The following defines attributes and data regarding several PCI devices.
+				;
+
+				; Two Intel Host-to-PCI bridges' (PCI) device ID
+ = 0483				iCDC_82424_ID			EQU  0483h
+ = 04A3				iPCMC_82434_ID			EQU  04A3h
+
+				;;include hw.inc
+				include hardware.asd
+			      C 
+			      C ; This file contains the hardware constants for addressing the UM9100
+			      C ; chip on PCI platforms.
+			      C ;
+			      C 
+			      C ;; DEC
+			      C ;;PCIID_DM9100_DEVICE_ID	 EQU 00009h
+			      C ;;PCIID_VENDOR_ID		 EQU 01011h
+			      C 
+			      C ;; DAVICOM
+			      C ;;PCIID_DM9100_DEVICE_ID	 EQU 09100h
+			      C ;;PCIID_VENDOR_ID		 EQU 01060h
+			      C 
+ = 9102			      C PCIID_DM9102_DEVICE_ID		EQU	9102h
+			      C 
+ = 9100			      C PCIID_DM9100_DEVICE_ID	       EQU 09100h
+ = 1282			      C PCIID_VENDOR_ID 	       EQU 01282h
+			      C 
+ = 9009			      C PCIID_DM9009_DEVICE_ID		EQU 09009H
+			      C 
+ = 0000			      C DM9100_CHIP			EQU 0
+ = 0001			      C DM9009_CHIP			EQU 1
+ = 0002			      C DM9102_CHIP			EQU 2
+ = 000A			      C DC21X4_CHIP			EQU 10
+			      C 
+			      C 
+			      C ; Hardware offsets for PCI based Adapter
+			      C ;
+ = 0000			      C HW_K_REG_CR0		   EQU 000h
+ = 0008			      C HW_K_REG_CR1		   EQU 008h
+ = 0010			      C HW_K_REG_CR2		   EQU 010h
+ = 0018			      C HW_K_REG_CR3		   EQU 018h
+ = 0020			      C HW_K_REG_CR4		   EQU 020h
+ = 0028			      C HW_K_REG_CR5		   EQU 028h
+ = 0030			      C HW_K_REG_CR6		   EQU 030h
+ = 0038			      C HW_K_REG_CR7		   EQU 038h
+ = 0040			      C HW_K_REG_CR8		   EQU 040h
+ = 0048			      C HW_K_REG_CR9		   EQU 048h
+ = 0050			      C HW_K_REG_CR10		   EQU 050h
+ = 0058			      C HW_K_REG_CR11		   EQU 058h
+ = 0060			      C HW_K_REG_CR12		   EQU 060h
+ = 0068			      C HW_K_REG_CR13		   EQU 068h
+ = 0070			      C HW_K_REG_CR14		   EQU 070h
+ = 0078			      C HW_K_REG_CR15		   EQU 078h
+			      C 
+ = 0000			      C HW_K_REG_PCIID			EQU 00h
+ = 0004			      C HW_K_REG_PCICS		     EQU 04h
+ = 0008			      C HW_K_REG_PCIRV		     EQU 08h
+ = 000C			      C HW_K_REG_PCILT		     EQU 0Ch
+ = 0010			      C HW_K_REG_PCIIO		     EQU 10h
+ = 003C			      C HW_K_REG_PCIINT 	      EQU 3Ch
+ = 0040			      C HW_K_REG_PCIUSR 	      EQU 40h
+			      C 
+			      C ;
+			      C ; Bit mask definitions for CSRs
+			      C ;
+ = FFF80000		      C CR0_M_RESERVED		       EQU 0FFF80000h
+ = 00060000		      C CR0_M_TXAP			EQU 000060000h
+ = 00010000		      C CR0_M_DAS		       EQU 000010000h
+ = C000			      C CR0_M_CA		      EQU 00000C000h
+ = 3F00			      C CR0_M_BL		      EQU 000003F00h
+ = 0080			      C CR0_M_RESERVED07		      EQU 000000080h
+ = 007C			      C CR0_M_DGW		       EQU 00000007Ch
+ = 0002			      C CR0_M_BA		      EQU 000000002h
+ = 0001			      C CR0_M_SR		      EQU 000000001h
+ = 0013			      C CR0_V_RESERVED		       EQU 19
+ = 0011			      C CR0_V_TXAP			EQU 17
+ = 0010			      C CR0_V_DAS		       EQU 16
+ = 000E			      C CR0_V_CA		      EQU 14
+ = 0008			      C CR0_V_BL		      EQU 8
+ = 0007			      C CR0_V_RESERVED07		      EQU 7
+ = 0002			      C CR0_V_DGW		       EQU 2
+ = 0001			      C CR0_V_BA		      EQU 1
+ = 0000			      C CR0_V_SR		      EQU 0
+			      C 
+ = 0000			      C CR0_K_TXAP_NONE 		EQU 0
+ = 0001			      C CR0_K_TXAP_200_USEC		EQU 1
+ = 0002			      C CR0_K_TXAP_800_USEC		EQU 2
+ = 0003			      C CR0_K_TXAP_1600_USEC		EQU 3
+ = 0004			      C CR0_K_TXAP_128_USEC		EQU 4
+			      C 
+ = 0000			      C CR0_K_CA_0LW		      EQU 0
+ = 0001			      C CR0_K_CA_8LW		      EQU 1
+ = 0002			      C CR0_K_CA_16LW		      EQU 2
+ = 0003			      C CR0_K_CA_32LW		      EQU 3
+			      C 
+ = 0000			      C CR0_K_BL_0LW		      EQU 0
+ = 0001			      C CR0_K_BL_1LW		      EQU 1
+ = 0002			      C CR0_K_BL_2LW		      EQU 2
+ = 0004			      C CR0_K_BL_4LW		      EQU 4
+ = 0008			      C CR0_K_BL_8LW		      EQU 8
+ = 0010			      C CR0_K_BL_16LW		      EQU 16
+ = 0020			      C CR0_K_BL_32LW		      EQU 32	  ; currently invalid
+			      C 
+ = 0000			      C CR0_K_DGW_0LW		       EQU 0
+ = 0001			      C CR0_K_DGW_1LW		       EQU 1
+ = 0002			      C CR0_K_DGW_2LW		       EQU 2
+ = 0003			      C CR0_K_DGW_3LW		       EQU 3
+ = 0004			      C CR0_K_DGW_4LW		       EQU 4
+			      C 
+ = FFFFFFFE		      C CR1_M_RESERVED		       EQU 0FFFFFFFEh
+ = 0001			      C CR1_M_TPD		       EQU 000000001h
+ = 0001			      C CR1_V_RESERVED		       EQU 1
+ = 0000			      C CR1_V_TPD		       EQU 0
+			      C 
+ = FFFFFFFE		      C CR2_M_RESERVED		       EQU 0FFFFFFFEh
+ = 0001			      C CR2_M_RPD		       EQU 000000001h
+ = 0001			      C CR2_V_RESERVED		       EQU 1
+ = 0000			      C CR2_V_RPD		       EQU 0
+			      C 
+ = FC000000		      C CR5_M_RESERVED			EQU 0FC000000h
+ = 03800000		      C CR5_M_SBEB			EQU 003800000h
+ = 00700000		      C CR5_M_TXS			EQU 000700000h
+ = 000E0000		      C CR5_M_RXS			EQU 0000E0000h
+ = 00010000		      C CR5_M_NIS			EQU 000010000h
+ = 8000			      C CR5_M_AIS			EQU 000008000h
+ = 4000			      C CR5_M_RESERVED_2		EQU 000004000h
+ = 2000			      C CR5_M_SBE			EQU 000002000h
+ = 0800			      C CR5_M_GPT			EQU 000000800h
+ = 0400			      C CR5_M_ETI			EQU 000000400h
+ = 0200			      C CR5_M_RXWT			EQU 000000200h
+ = 0100			      C CR5_M_RXPS			EQU 000000100h
+ = 0080			      C CR5_M_RXDU			EQU 000000080h
+ = 0040			      C CR5_M_RXCI			EQU 000000040h
+ = 0020			      C CR5_M_TXFU			EQU 000000020h
+ = 0010			      C CR5_M_RESERVED_3		EQU 000000010h
+ = 0008			      C CR5_M_TXJT			EQU 000000008h
+ = 0004			      C CR5_M_TXDU			EQU 000000004h
+ = 0002			      C CR5_M_TXPS			EQU 000000002h
+ = 0001			      C CR5_M_TXCI			EQU 000000001h
+ = 001A			      C CR5_V_RESERVED			EQU 26
+ = 0017			      C CR5_V_SBEB			EQU 23
+ = 0014			      C CR5_V_TXS			EQU 20
+ = 0011			      C CR5_V_RXS			EQU 17
+ = 0010			      C CR5_V_NIS			EQU 16
+ = 000F			      C CR5_V_AIS			EQU 15
+ = 000E			      C CR5_V_RESERVED_2		EQU 14
+ = 000D			      C CR5_V_SBE			EQU 13
+ = 000B			      C CR5_V_GPT			EQU 11
+ = 000A			      C CR5_V_ETI			EQU 10
+ = 0009			      C CR5_V_RXWT			EQU 9
+ = 0008			      C CR5_V_RXPS			EQU 8
+ = 0007			      C CR5_V_RXDU			EQU 7
+ = 0006			      C CR5_V_RXCI			EQU 6
+ = 0005			      C CR5_V_TXFU			EQU 5
+ = 0004			      C CR5_V_RESERVED_3		EQU 4
+ = 0003			      C CR5_V_TXJT			EQU 3
+ = 0002			      C CR5_V_TXDU			EQU 2
+ = 0001			      C CR5_V_TXPS			EQU 1
+ = 0000			      C CR5_V_TXCI			EQU 0
+			      C 
+ = 0000			      C CR5_K_SBEB_PARITY_ERROR 	EQU 0
+ = 0001			      C CR5_K_SBEB_MASTER_ABORT 	EQU 1
+ = 0002			      C CR5_K_SBEB_TARGET_ABORT 	EQU 2
+			      C 
+ = 0000			      C CR5_K_TXS_STOPPED		EQU 0
+ = 0001			      C CR5_K_TXS_RUN_DESC_ACCESS	EQU 1
+ = 0002			      C CR5_K_TXS_RUN_SETUP_MOVE	EQU 2
+ = 0003			      C CR5_K_TXS_RUN_MOVE_DATA 	EQU 3
+ = 0004			      C CR5_K_TXS_RUN_WRITE_OWNER	EQU 4
+ = 0005			      C CR5_K_TXS_RUN_WAIT		EQU 5
+ = 0006			      C CR5_K_TXS_RUN_WRITE_STATUS	EQU 6
+ = 0007			      C CR5_K_TXS_SUSPEND		EQU 7
+			      C 
+ = 0000			      C CR5_K_RXS_STOPPED		EQU 0
+ = 0001			      C CR5_K_RXS_RUN_DESC_ACCESS	EQU 1
+ = 0002			      C CR5_K_RXS_RUN_WAIT		EQU 2
+ = 0003			      C CR5_K_RXS_RUN_MOVE_DATA 	EQU 3
+ = 0004			      C CR5_K_RXS_RUN_WRITE_OWNER	EQU 4
+ = 0005			      C CR5_K_RXS_RUN_WRITE_STATUS	EQU 5
+ = 0006			      C CR5_K_RXS_SUSPEND		EQU 6
+ = 0007			      C CR5_K_RXS_PURGE 		EQU 7
+			      C 
+ = 02000000		      C CR6_M_DM9009_ALWAYS		EQU 002000000h	;;DM9009 reserved bits
+ = 80000000		      C CR6_M_RESERVED1_1		EQU 080000000h	;;Always 1
+ = 40000000		      C CR6_M_RXA			EQU 040000000h	;;Reveive All(30)
+ = 20000000		      C CR6_M_RESERVED2_1		EQU 020000000h
+ = 38000000		      C CR6_M_RESERVED3_0		EQU 038000000h	;;Always 0
+ = 04000000		      C CR6_M_RESERVED4_1		EQU 004000000h
+ = 01000000		      C CR6_M_SCM			EQU 001000000h	;;Scrambler Mode(24)
+ = 00800000		      C CR6_M_MSF			EQU 000800000h	;;MII Symbol Function(23)
+ = 00400000		      C CR6_M_TXTM			EQU 000400000h	;;Transmit Threshold Mode(22)
+ = 00200000		      C CR6_M_SFT			EQU 000200000h	;;Store and Forward Transmission(21)
+ = 00100000		      C CR6_M_STT			EQU 000100000h	;;Shortest Transmit Threshold(20)
+ = 00080000		      C CR6_M_HBD			EQU 000080000h	;;HartBit Disable(19)
+ = 00040000		      C CR6_M_MSPS			EQU 000040000h	;;MII/SRL Port Select(18)
+ = 00020000		      C CR6_M_RESERVED5_0		EQU 000020000h
+ = 00010000		      C CR6_M_RESERVED6_0		EQU 000010000h
+ = C000			      C CR6_M_TSB			EQU 00000C000h	;;Threshold Setup Bits(15:14)
+ = 2000			      C CR6_M_TXSC			EQU 000002000h	;;Transmit Start/stop Command(13)
+ = 1000			      C CR6_M_FCM			EQU 000001000h	;;Force Collision Mode(12)
+ = 0C00			      C CR6_M_LBM			EQU 000000C00h	;;LookBack Mode(11:10)
+ = 0200			      C CR6_M_FDM			EQU 000000200h	;;Full_Duplex Mode(9)
+ = 0100			      C CR6_M_ISRW			EQU 000000100h	;;Inhibit Simultaneous Read/Write
+ = 0080			      C CR6_M_PAM			EQU 000000080h	;;Pass All Multicast(7)
+ = 0040			      C CR6_M_PM			EQU 000000040h	;;Promiscuous Mode(6)
+ = 0020			      C CR6_M_RESERVED8_0		EQU 000000020h
+ = 0010			      C CR6_M_IAFM			EQU 000000010h	;;Inverse Address Mode(4)
+ = 0008			      C CR6_M_PBF			EQU 000000008h	;;Pass Bad Frame(3)
+ = 0004			      C CR6_M_HOFM			EQU 000000004h	;;Hash-Only Filtering Mode(2)
+ = 0002			      C CR6_M_RXSC			EQU 000000002h	;;Received Start/stop Command(1)
+ = 0001			      C CR6_M_HPFM			EQU 000000001h	;;Hash/Perfect Filtering Mode(0)
+ = 0018			      C CR6_V_SCM			EQU 24
+ = 0017			      C CR6_V_MSF			EQU 23
+ = 0016			      C CR6_V_TXTM			EQU 22
+ = 0015			      C CR6_V_SFT			EQU 21
+ = 0014			      C CR6_V_STT			EQU 20
+ = 0013			      C CR6_V_HBD			EQU 19
+ = 0012			      C CR6_V_MSPS			EQU 18
+ = 000E			      C CR6_V_TSB			EQU 14
+ = 000D			      C CR6_V_TXSC			EQU 13
+ = 000C			      C CR6_V_FCM			EQU 12
+ = 000A			      C CR6_V_LBM			EQU 10
+ = 0009			      C CR6_V_FDM			EQU 9
+ = 0007			      C CR6_V_PAM			EQU 7
+ = 0006			      C CR6_V_PM			EQU 6
+ = 0004			      C CR6_V_IAFM			EQU 4
+ = 0003			      C CR6_V_PBF			EQU 3
+ = 0002			      C CR6_V_HOFM			EQU 2
+ = 0001			      C CR6_V_RXSC			EQU 1
+ = 0000			      C CR6_V_HPFM			EQU 0
+			      C 
+ = 0000			      C CR6_K_10MB_TSB_72_BYTES 	EQU 0
+ = 0001			      C CR6_K_10MB_TSB_96_BYTES 	EQU 1
+ = 0002			      C CR6_K_10MB_TSB_128_BYTES	EQU 2
+ = 0003			      C CR6_K_10MB_TSB_160_BYTES	EQU 3
+			      C 
+ = 0000			      C CR6_K_100MB_TSB_128_BYTES	EQU 0
+ = 0001			      C CR6_K_100MB_TSB_256_BYTES	EQU 1
+ = 0002			      C CR6_K_100MB_TSB_512_BYTES	EQU 2
+ = 0003			      C CR6_K_100MB_TSB_1024_BYTES	EQU 3
+			      C 
+ = 00280000		      C CR6_K_100MB_INIT	       EQU (CR6_M_HBD) OR (CR6_M_SFT)
+			      C 
+			      C ; Define the transmit FIFO threshold that we will use, and the corresponding
+			      C ; minimum packet size for which we may need software CRC calculation.
+			      C ;
+ = CR6_K_10MB_TSB_72_BYTES    C CR6_K_10MB_TSB_DEFAULT		EQU	CR6_K_10MB_TSB_72_BYTES ; use max threshold
+			      C ;;--- DM9009's CR6 default value
+			      C ;;CR6_DM9009_INIT		  EQU	  CR6_M_DM9009_ALWAYS OR CR6_M_RXA OR CR6_M_HBD OR CR6_M_PAM OR CR6_K_10MB_TSB_128_BYTES
+ = 02080082		      C CR6_DM9009_INIT 		EQU	CR6_M_DM9009_ALWAYS OR CR6_M_HBD OR CR6_M_PAM OR CR6_K_10MB_TSB_128_BYTES
+			      C 
+ = 0090			      C SW_CRC_MIN			EQU 144 		; CRC packet size min
+			      C 
+ = FFFE0000		      C CR7_M_RESERVED1 		EQU 0FFFE0000h
+ = 00010000		      C CR7_M_NISE			EQU 000010000h
+ = 8000			      C CR7_M_AISE			EQU 000008000h
+ = 4000			      C CR7_M_RESERVED2 		EQU 000004000h
+ = 2000			      C CR7_M_SBEE			EQU 000002000h
+ = 1000			      C CR7_M_RESERVED3 		EQU 000001000h
+ = 0800			      C CR7_M_GPTE			EQU 000000800h
+ = 0400			      C CR7_M_ETIE			EQU 000000400h
+ = 0200			      C CR7_M_RXWTE			EQU 000000200h
+ = 0100			      C CR7_M_RXPSE			EQU 000000100h
+ = 0080			      C CR7_M_RXDUE			EQU 000000080h
+ = 0040			      C CR7_M_RXCIE			EQU 000000040h
+ = 0020			      C CR7_M_TXFUE			EQU 000000020h	;;Transmit FIFO Underflow Enable(5)
+ = 0010			      C CR7_M_RESERVED4 		EQU 000000010h
+ = 0008			      C CR7_M_TXJTE			EQU 000000008h
+ = 0004			      C CR7_M_TXDUE			EQU 000000004h
+ = 0002			      C CR7_M_TXPSE			EQU 000000002h
+ = 0001			      C CR7_M_TXCIE			EQU 000000001h
+ = 0011			      C CR7_V_RESERVED1 		EQU 17
+ = 0010			      C CR7_V_NISE			EQU 16
+ = 000F			      C CR7_V_AISE			EQU 15
+ = 000E			      C CR7_V_RESERVED2 		EQU 14
+ = 000D			      C CR7_V_SBEE			EQU 13
+ = 000B			      C CR7_V_GPTE			EQU 11
+ = 000A			      C CR7_V_ETIE			EQU 10
+ = 0009			      C CR7_V_RXWTE			EQU 9
+ = 0008			      C CR7_V_RXPSE			EQU 8
+ = 0007			      C CR7_V_RXDUE			EQU 7
+ = 0006			      C CR7_V_RXCIE			EQU 6
+ = 0005			      C CR7_V_TXFUE			EQU 5
+ = 0004			      C CR7_V_RESERVED4 		EQU 4
+ = 0003			      C CR7_V_TXJTE			EQU 3
+ = 0002			      C CR7_V_TXDUE			EQU 2
+ = 0001			      C CR7_V_TXPSE			EQU 1
+ = 0000			      C CR7_V_TXCIE			EQU 0
+			      C 
+ = 0000			      C CR7_K_DEFAULT_OFF	       EQU 0
+ = 00018041		      C CR7_K_DEFAULT_ON	       EQU CR7_M_NISE OR CR7_M_AISE OR CR7_M_RXCIE OR CR7_M_TXCIE
+			      C 
+			      C 
+ = FFFE0000		      C CR8_M_RESERVED		       EQU 0FFFE0000h
+ = 00010000		      C CR8_M_MISSED_FRAME_OVERFLOW    EQU 000010000h
+ = FFFF			      C CR8_M_MIDDED_FRAME_COUNT       EQU 00000FFFFh
+ = 0011			      C CR8_V_RESERVED		       EQU 17
+ = 0010			      C CR8_V_MISSED_FRAME_OVERFLOW    EQU 16
+ = 0000			      C CR8_V_MIDDED_FRAME_COUNT       EQU 0
+			      C 
+			      C ;;CR9_M_DN			 EQU 080000000h
+			      C ;;CR9_M_RESERVED		 EQU 07FFFFF00h
+			      C ;;CR9_M_DT			 EQU 0000000FFh
+			      C ;;CR9_V_DN			 EQU 31
+			      C ;;CR9_V_RESERVED		 EQU 8
+			      C ;;CR9_V_DT			 EQU 0
+			      C 
+ = FFFF0000		      C CR11_M_RESERVED 	       EQU 0FFFF0000h
+ = FFFF			      C CR11_M_FDX_AUTO_CONFIG	       EQU 00000FFFFh
+ = 0010			      C CR11_V_RESERVED 	       EQU 16
+ = 0000			      C CR11_V_FDX_AUTO_CONFIG	       EQU 0
+			      C 
+			      C ; CR12 constants
+ = FFFFFE00		      C CR12_M_RESERVED 	EQU 0FFFFFE00h
+ = 0100			      C CR12_M_GPC		EQU 000000100h
+ = 00FF			      C CR12_M_MD		EQU 0000000FFh
+ = 0004			      C CR12_M_LNK		EQU 000000004h
+ = 0002			      C CR12_M_NCR		EQU 000000002h
+			      C 
+ = 0009			      C CR12_V_RESERVED 	EQU 9
+ = 0008			      C CR12_V_GPC		EQU 8
+ = 0000			      C CR12_V_MD		EQU 0
+			      C 
+ = 013F			      C CR12_K_INIT_VAL 	EQU 00000013Fh
+ = 0008			      C CR12_K_ONBOARD_LOOPBACK EQU 000000008h
+ = 000A			      C CR12_K_INBOARD_LOOPBACK EQU 00000000Ah
+ = 000B			      C CR12_K_NORMAL_MODE	EQU 00000000Bh
+			      C 
+ = FFFF0000		      C CR13_M_RESERVED 	       EQU 0FFFF0000h
+ = 8000			      C CR13_M_OE57		       EQU 000008000h
+ = 4000			      C CR13_M_OE24		       EQU 000004000h
+ = 2000			      C CR13_M_OE13		       EQU 000002000h
+ = 1000			      C CR13_M_IE		       EQU 000001000h
+ = 0F00			      C CR13_M_SEL		       EQU 000000F00h
+ = 0080			      C CR13_M_ASE		       EQU 000000080h
+ = 0040			      C CR13_M_SIM		       EQU 000000040h
+ = 0020			      C CR13_M_ENI		       EQU 000000020h
+ = 0010			      C CR13_M_EDP		       EQU 000000010h
+ = 0008			      C CR13_M_AUI		       EQU 000000008h
+ = 0004			      C CR13_M_CAC		       EQU 000000004h
+ = 0002			      C CR13_M_PS		       EQU 000000002h
+ = 0001			      C CR13_M_SRL		       EQU 000000001h
+ = 0010			      C CR13_V_RESERVED 	       EQU 16
+ = 000F			      C CR13_V_OE57		       EQU 15
+ = 000E			      C CR13_V_OE24		       EQU 14
+ = 000D			      C CR13_V_OE13		       EQU 13
+ = 000C			      C CR13_V_IE		       EQU 12
+ = 0008			      C CR13_V_SEL		       EQU 8
+ = 0007			      C CR13_V_ASE		       EQU 7
+ = 0006			      C CR13_V_SIM		       EQU 6
+ = 0005			      C CR13_V_ENI		       EQU 5
+ = 0004			      C CR13_V_EDP		       EQU 4
+ = 0003			      C CR13_V_AUI		       EQU 3
+ = 0002			      C CR13_V_CAC		       EQU 2
+ = 0001			      C CR13_V_PS		       EQU 1
+ = 0000			      C CR13_V_SRL		       EQU 0
+			      C 
+			      C ; values associated with 93LC46B Serial ROM
+			      C ;============================================
+ = 0040			      C SROM_93LC46B_LEN	EQU	64  ; In words. That is 128 Bytes.
+			      C 
+			      C 
+			      C ; SROM version and field codes
+			      C ;-----------------------------
+ = 0001			      C UM9100_SROM_V0_1	EQU	01h
+ = 0003			      C UM9100_SROM_V0_3	EQU	03h
+ = 0012			      C SROM_FORMAT_OFF 	EQU	12h
+ = 0013			      C SROM_ADAPTER_COUNT_OFF	EQU	13h
+ = 0014			      C SROM_IEEE_OFF		EQU	14h
+ = 001A			      C SROM_ADAPTER0_OFF	EQU	1Ah
+ = 007E			      C SROM_CHECKSUM_OFF	EQU	7Eh
+ = 0003			      C FNET_MEDIA_BLK_SIZE	EQU	03h
+ = 0071			      C FNET_COMM_MASK		EQU	71H
+ = 0012			      C FNET_COMM_OFF		EQU	12H
+			      C 
+			      C ; 90100 SROM definitions (SROM_93LC46B)
+			      C ;----------------------------------------
+ = 0019			      C SROM_93LC46B_MAX_CYCLES 	EQU 25
+ = 003F			      C SROM_93LC46B_LAST_ADDRESS	EQU 03Fh
+ = 0006			      C SROM_93LC46B_LAST_ADDRESS_BIT	EQU 6	  ;Special assembler implementation
+ = 0008			      C SROM_M_Output_Data		EQU 8
+			      C 
+ = 4000			      C SROM_CR9_READ  EQU 04000h
+ = 2000			      C SROM_CR9_WRITE EQU 02000h
+ = 0800			      C SROM_SEL_SROM	EQU 0800h
+ = 0004			      C SROM_DATA_1	EQU 04h
+ = 0000			      C SROM_DATA_0	EQU 0
+ = 0002			      C SROM_CLK	EQU 02h
+ = 0001			      C SROM_CS 	EQU 01h
+			      C 
+			      C ; Define a structure that contains the values to be written to the registers to
+			      C ; configure the SIA for a particular mode.
+			      C ;
+ 000C			      C SIA_CONFIG	STRUCT
+ 0000  00000000		      C 	CR13   DWORD   ?
+ 0004  00000000		      C 	CR14   DWORD   ?
+ 0008  00000000		      C 	CR15   DWORD   ?
+			      C SIA_CONFIG	ENDS
+			      C 
+			      C SIA_CONFIG_PTR	TYPEDEF PTR SIA_CONFIG
+			      C 
+ = 0005			      C SIA_Config_Autodetect	equ	5h	    ; flag to do autodetect speed & Half-Duplex
+ = 0004			      C SIA_Config_AutoFD	equ	4h	    ; flag to do autodetect speed & Full-Duplex
+ = 0000			      C TPFD_SIAConfig		equ	0h
+ = 0001			      C TP_SIAConfig		equ	1h
+ = 0002			      C BNC_SIAConfig		equ	2h
+ = 0003			      C AUI_SIAConfig		equ	3h
+			      C 
+ = FFFF0000		      C PCIID_M_DEVICE_ID		 EQU 0FFFF0000h
+ = FFFF			      C PCIID_M_VENDOR_IO		 EQU 00000FFFFh
+ = 0010			      C PCIID_V_DEVICE_ID		 EQU 16
+ = 0000			      C PCIID_V_VENDOR_IO		 EQU 0
+			      C 
+ = 80000000		      C PCICS_M_PARITY_ERROR		 EQU 080000000h
+ = 40000000		      C PCICS_M_SYSTEM_ERROR		 EQU 040000000h
+ = 20000000		      C PCICS_M_MASTER_ABORT		 EQU 020000000h
+ = 10000000		      C PCICS_M_TARGET_ABORT		 EQU 010000000h
+ = 08000000		      C PCICS_M_RESERVED		 EQU 008000000h
+ = 06000000		      C PCICS_M_DEVSEL			 EQU 006000000h
+ = 01000000		      C PCICS_M_DATA_PARITY		 EQU 001000000h
+ = 00800000		      C PCICS_M_BACK_TO_BACK		 EQU 000800000h
+ = 007FFC00		      C PCICS_M_RESERVED_2		 EQU 0007FFC00h
+ = 0200			      C PCICS_M_SERR_ENABLE		 EQU 000000200h
+ = 0180			      C PCICS_M_RESERVED_3		 EQU 000000180h
+ = 0040			      C PCICS_M_PARITY_ERROR_DETECTED	 EQU 000000040h
+ = 0038			      C PCICS_M_RESERVED_4		 EQU 000000038h
+ = 0004			      C PCICS_M_BUS_MASTER		 EQU 000000004h
+ = 0002			      C PCICS_M_MEMORY_ACCESS		 EQU 000000002h
+ = 0001			      C PCICS_M_IO_ACCESS		 EQU 000000001h
+ = 001F			      C PCICS_V_PARITY_ERROR		 EQU 31
+ = 001E			      C PCICS_V_SYSTEM_ERROR		 EQU 30
+ = 001D			      C PCICS_V_MASTER_ABORT		 EQU 29
+ = 001C			      C PCICS_V_TARGET_ABORT		 EQU 28
+ = 001B			      C PCICS_V_RESERVED		 EQU 27
+ = 0019			      C PCICS_V_DEVSEL			 EQU 25
+ = 0018			      C PCICS_V_DATA_PARITY		 EQU 24
+ = 0017			      C PCICS_V_BACK_TO_BACK		 EQU 23
+ = 000A			      C PCICS_V_RESERVED_2		 EQU 10
+ = 0009			      C PCICS_V_SERR_ENABLE		 EQU 9
+ = 0007			      C PCICS_V_RESERVED_3		 EQU 7
+ = 0006			      C PCICS_V_PARITY_ERROR_DETECTED	 EQU 6
+ = 0003			      C PCICS_V_RESERVED_4		 EQU 3
+ = 0002			      C PCICS_V_BUS_MASTER		 EQU 2
+ = 0001			      C PCICS_V_MEMORY_ACCESS		 EQU 1
+ = 0000			      C PCICS_V_IO_ACCESS		 EQU 0
+			      C 
+ = FF000000		      C PCIRV_M_BASE_CLASS		 EQU 0FF000000h
+ = 00FF0000		      C PCIRV_M_SUB_CLASS		 EQU 000FF0000h
+ = FF00			      C PCIRV_M_RESERVED		 EQU 00000FF00h
+ = 00F0			      C PCIRV_M_Revision_Major_Number	 EQU 0000000F0h
+ = 000F			      C PCIRV_M_Revision_Minor_Number	 EQU 00000000Fh
+ = 0018			      C PCIRV_V_BASE_CLASS		 EQU 24
+ = 0010			      C PCIRV_V_SUB_CLASS		 EQU 16
+ = 0008			      C PCIRV_V_RESERVED		 EQU 8
+ = 0004			      C PCIRV_V_Revision_Major_Number	 EQU 4
+ = 0000			      C PCIRV_V_Revision_Minor_Number	 EQU 0
+			      C 
+ = FFFF0000		      C PCILT_M_RESERVED		 EQU 0FFFF0000h
+ = FF00			      C PCILT_M_LATENCY_TIMER		 EQU 00000FF00h
+ = 00FF			      C PCILT_M_RESERVED_2		 EQU 0000000FFh
+ = 0010			      C PCILT_V_RESERVED		 EQU 16
+ = 0008			      C PCILT_V_LATENCY_TIMER		 EQU 8
+ = 0000			      C PCILT_V_RESERVED_2		 EQU 0
+			      C 
+ = FFFFFF80		      C PCIIO_M_PCI_IO_BASE_ADDRESS	 EQU 0FFFFFF80h
+ = 007E			      C PCIIO_M_RESERVED		 EQU 00000007Eh
+ = 0001			      C PCIIO_M_MEMORY_IO		 EQU 000000001h
+ = 0007			      C PCIIO_V_PCI_IO_BASE_ADDRESS	 EQU 7
+ = 0001			      C PCIIO_V_RESERVED		 EQU 1
+ = 0000			      C PCIIO_V_MEMORY_IO		 EQU 0
+			      C 
+ = FFFFFF80		      C PCIMEM_M_PCI_MEM_BASE_ADDRESS	  EQU 0FFFFFF80h
+ = 007E			      C PCIMEM_M_RESERVED		  EQU 00000007Eh
+ = 0001			      C PCIMEM_M_MEMORY_SPACE		  EQU 000000001h
+ = 0007			      C PCIMEM_V_PCI_MEM_BASE_ADDRESS	  EQU 7
+ = 0001			      C PCIMEM_V_RESERVED		  EQU 1
+ = 0000			      C PCIMEM_V_MEMORY_SPACE		  EQU 0
+			      C 
+ = FFFF0000		      C PCIINT_M_RESERVED		  EQU 0FFFF0000h
+ = FF00			      C PCIINT_M_INTERRUPT_PIN		  EQU 00000FF00h
+ = 00FF			      C PCIINT_M_INTERRUPT_LINE 	  EQU 0000000FFh
+ = 0010			      C PCIINT_V_RESERVED		  EQU 16
+ = 0008			      C PCIINT_V_INTERRUPT_PIN		  EQU 8
+ = 0000			      C PCIINT_V_INTERRUPT_LINE 	  EQU 0
+			      C 
+ = FFFF0000		      C PCIUSR_M_RESERVED		  EQU 0FFFF0000h
+ = FF00			      C PCIUSR_M_USER_SPECIAL_USE	  EQU 00000FF00h
+ = 00FF			      C PCIUSR_M_RESERVED_2		  EQU 0000000FFh
+ = 0010			      C PCIUSR_V_RESERVED		  EQU 16
+ = 0008			      C PCIUSR_V_USER_SPECIAL_USE	  EQU 8
+ = 0000			      C PCIUSR_V_RESERVED_2		  EQU 0
+			      C 
+ = 00C0			      C HW_K_SETUP_FRAME_SIZE		EQU 192
+			      C 
+			      C ;
+			      C ;  Descriptor definitions
+			      C ;
+			      C ;     Transmit Descriptor
+			      C ;     -------------------
+			      C ;
+			      C ; The DM9100 Transmit Descriptor is described in the DM9100 specification.
+			      C ; The names of the fields, TDES0-3 are taken straight from the spec.
+			      C ; This structure, and the associated constants, define the format of the
+			      C ; transmit descriptor used by the DM9100. A transmit descriptor must
+			      C ; be allocated a physically contiguous, longword aligned region of memory. The
+			      C ; transmit buffers to which the descriptors point may be of arbitrary alignment
+			      C ; and size.
+			      C ;
+			      C ; The p_XmtBuffer and p_XmtNext fields of the descriptor are unique to this
+			      C ; driver implementation. They are virtual NEAR pointers to the transmit buffer
+			      C ; and the next descriptor respectively. The descriptor skip length in CR0 is
+			      C ; set to 1 longword in order to skip this extra longword at the end of each
+			      C ; descriptor.
+			      C ;
+			      C 
+ 0020			      C XMT_DESCRIPTOR	STRUC
+ 0000  00000000		      C    TDES0       DD 0
+ 0004  00000000		      C    TDES1       DD 0
+ 0008  00000000		      C    TDES2       DD 0
+ 000C  00000000		      C    TDES3       DD 0
+ 0010  0000		      C    p_XmtBuffer DW 0
+ 0012  0000		      C    p_XmtNext   DW 0
+ 0014  00000000		      C    p_Dummy1    DD 0
+ 0018  00000000		      C    p_Dummy2    DD 0
+ 001C  00000000		      C    p_Dummy3    DD 0
+			      C XMT_DESCRIPTOR	ENDS
+			      C 
+ = 80000000		      C TDES0_M_OWN		EQU 080000000h	; OWN Bit 1=MAC 0=Host
+ = 8000			      C TDES0_M_ES		EQU 000008000h	; Error Summary (UF|EC|LC|NC|LO|TO|LF)
+ = 4000			      C TDES0_M_TXJT		EQU 000004000h	; Transmit Jabber Expired
+ = 0800			      C TDES0_M_LOC		EQU 000000800h	; Loss of Carrier
+ = 0400			      C TDES0_M_NC		EQU 000000400h	; No Carrier
+ = 0200			      C TDES0_M_LC		EQU 000000200h	; Late Collision
+ = 0100			      C TDES0_M_EC		EQU 000000100h	; Excessive Collisions
+ = 0080			      C TDES0_M_HF		EQU 000000080h	; Heartbeat Fail
+ = 0078			      C TDES0_M_CC		EQU 000000078h	; Collision Count
+ = 0004			      C TDES0_M_LF		EQU 000000004h	; Link Fail
+ = 0002			      C TDES0_M_FUE		EQU 000000002h	; FIFO Underflow Error
+ = 0001			      C TDES0_M_DE		EQU 000000001h	; Deferred
+			      C 
+ = 001F			      C TDES0_V_OWN		EQU 31
+ = 000F			      C TDES0_V_ES		EQU 15
+ = 000E			      C TDES0_V_TXJT		EQU 14
+ = 000B			      C TDES0_V_LOC		EQU 11
+ = 000A			      C TDES0_V_NC		EQU 10
+ = 0009			      C TDES0_V_LC		EQU 9
+ = 0008			      C TDES0_V_EC		EQU 8
+ = 0007			      C TDES0_V_HF		EQU 7
+ = 0003			      C TDES0_V_CC		EQU 3
+ = 0002			      C TDES0_V_LF		EQU 2
+ = 0001			      C TDES0_V_FUE		EQU 1
+ = 0000			      C TDES0_V_DE		EQU 0
+			      C 
+ = 80000000		      C TDES1_M_CI		EQU 080000000h	; Completion Interrupt
+ = 40000000		      C TDES1_M_ED		EQU 040000000h	; End Segment
+ = 20000000		      C TDES1_M_BD		EQU 020000000h	; Begin Segment
+ = 10000000		      C TDES1_M_FMB1		EQU 010000000h	; Filtering Mode Bit 1
+ = 08000000		      C TDES1_M_SETF		EQU 008000000h	; Setup Frame
+ = 04000000		      C TDES1_M_CAD		EQU 004000000h	; CRC Append Disable
+ = 02000000		      C TDES1_M_EOR		EQU 002000000h	; End of Ring
+ = 01000000		      C TDES1_M_CE		EQU 001000000h	; Chain Enable
+ = 00800000		      C TDES1_M_PD		EQU 000800000h	; Padding Disable
+ = 00400000		      C TDES1_M_FMB0		EQU 000400000h	; Filtering Mode Bit 0
+ = 003FF800		      C TDES1_M_BL2		EQU 0003FF800h	; Size in bytes of Buffer 2
+ = 07FF			      C TDES1_M_BL1		EQU 0000007FFh	; Size in bytes of Buffer 1
+			      C 
+			      C ;;-+, 980415, Hu-Tiong
+			      C ;;TDES1_M_DUMMY 	  EQU TDES1_M_EOR AND (not (TDES1_M_BL2 OR TDES1_M_BL1 OR TDES1_M_ED OR TDES1_M_BD))
+ = 01000000		      C TDES1_M_DUMMY		EQU TDES1_M_CE AND (not (TDES1_M_BL2 OR TDES1_M_BL1 OR TDES1_M_ED OR TDES1_M_BD))
+			      C ;;-+
+			      C 
+ = 001F			      C TDES1_V_CI		EQU 31
+ = 001E			      C TDES1_V_ED		EQU 30
+ = 001D			      C TDES1_V_BD		EQU 29
+ = 001C			      C TDES1_V_FMB1		EQU 28
+ = 001B			      C TDES1_V_SETF		EQU 27
+ = 001A			      C TDES1_V_CAD		EQU 26
+ = 0019			      C TDES1_V_EOR		EQU 25
+ = 0018			      C TDES1_V_CE		EQU 24
+ = 0017			      C TDES1_V_PD		EQU 23
+ = 0016			      C TDES1_V_FMB0		EQU 22
+ = 000B			      C TDES1_V_BL2		EQU 11
+ = 0000			      C TDES1_V_BL1		EQU 0
+			      C 
+ = 05F0			      C XMT_BUFFER_SIZE 	EQU 1520
+			      C 
+			      C ;
+			      C ;     Receive Descriptor
+			      C ;     ------------------
+			      C ;
+			      C ;
+			      C ; The DM9100 Receive Descriptor is described in the DM9100 specification.
+			      C ; The names of the fields, RDES0-3 are takes straight from the spec.
+			      C ; This structure, and the associated constants, define the format of the
+			      C ; receive descriptor used by the DM9100. A receive descriptor must be
+			      C ; allocated a physically contiguous, longword aligned region of memory. The
+			      C ; receive buffers to which the descriptors point must also be physically
+			      C ; contiguous and longword alignedand a MOD 4 length.
+			      C ;
+			      C ; The p_RcvBuffer and p_RcvNext fields of the descriptor are unique to this driver
+			      C ; implementation. They are virtual NEAR pointers to the receive buffer and
+			      C ; the next descriptor respectively. The descriptor skip length in CR0 is
+			      C ; set to 1 longword in order to skip this extra longword at the end of each
+			      C ; descriptor.
+			      C ;
+			      C 
+ 0020			      C RCV_DESCRIPTOR	STRUC
+ 0000  00000000		      C    RDES0	 DD 0
+ 0004  00000000		      C    RDES1	 DD 0
+ 0008  00000000		      C    RDES2	 DD 0
+ 000C  00000000		      C    RDES3	 DD 0
+ 0010  0000		      C    p_RcvBuffer	 DW 0
+ 0012  0000		      C    p_RcvNext	 DW 0
+ 0014  00000000		      C    p_Dummy1	 DD 0
+ 0018  00000000		      C    p_Dummy2	 DD 0
+ 001C  00000000		      C    p_Dummy3	 DD 0
+			      C RCV_DESCRIPTOR	ENDS
+			      C 
+ = 80000000		      C RDES0_M_OWN		EQU 080000000h	; OWN bit 0=HOST 1=MAC
+ = 7FFF0000		      C RDES0_M_LENGTH		EQU 07FFF0000h	; Length of frame in bytes including CRC
+ = 8000			      C RDES0_M_ES		EQU 000008000h	; Error Summary (OF|CE|CS|TL|LE|RF)
+ = 4000			      C RDES0_M_DUE		EQU 000004000h	;;Descriptor Unavailable Error
+			      C 					; Length Error (rcv buffer too small)
+ = 3000			      C RDES0_M_LBOM		EQU 000003000h	; Data Type
+ = 0800			      C RDES0_M_RF		EQU 000000800h	; Runt Frame
+ = 0400			      C RDES0_M_MF		EQU 000000400h	; MCast frame
+ = 0200			      C RDES0_M_BD		EQU 000000200h	; Begin Descriptor
+ = 0100			      C RDES0_M_ED		EQU 000000100h	; End Descriptor
+ = 0080			      C RDES0_M_EFL		EQU 000000080h	; Excessive Frame Length (>1518 bytes)
+ = 0040			      C RDES0_M_LCS		EQU 000000040h	; Late Collision Seen
+ = 0020			      C RDES0_M_FT		EQU 000000020h	; Frame Type 1=DIX 0=802.3
+ = 0010			      C RDES0_M_RXWT		EQU 000000010h	; Receive Watchdog Expired (frame >2K)
+ = 0008			      C RDES0_M_PLE		EQU 000000008h	; Physical Layer Error
+ = 0004			      C RDES0_M_AE		EQU 000000004h	; Alignment Error
+ = 0002			      C RDES0_M_CE		EQU 000000002h	; CRC Error
+ = 0001			      C RDES0_M_FOE		EQU 000000001h	; FIFO Overflow Error
+			      C 
+ = 001F			      C RDES0_V_OWN		EQU 31
+ = 0010			      C RDES0_V_LENGTH		EQU 16
+ = 000F			      C RDES0_V_ES		EQU 15
+ = 000E			      C RDES0_V_DUE		EQU 14
+ = 000C			      C RDES0_V_LBOM		EQU 12
+ = 000B			      C RDES0_V_RF		EQU 11
+ = 000A			      C RDES0_V_MF		EQU 10
+ = 0009			      C RDES0_V_BD		EQU 9
+ = 0008			      C RDES0_V_ED		EQU 8
+ = 0007			      C RDES0_V_EFL		EQU 7
+ = 0006			      C RDES0_V_LCS		EQU 6
+ = 0005			      C RDES0_V_FT		EQU 5
+ = 0004			      C RDES0_V_RXWT		EQU 4
+ = 0002			      C RDES0_V_AE		EQU 2
+ = 0001			      C RDES0_V_CE		EQU 1
+ = 0000			      C RDES0_V_FOE		EQU 0
+			      C 
+ = 0001			      C RDES0_K_FT_DIX		EQU 1
+ = 0000			      C RDES0_K_FT_802		EQU 0
+			      C 
+ = 0000			      C RDES0_K_LBOM_NORMAL	EQU 0
+ = 0001			      C RDES0_K_LBOM_INTERNAL	EQU 1
+ = 0002			      C RDES0_K_LBOM_EXTERNAL	EQU 2
+ = 0003			      C RDES0_K_LBOM_RESERVED	EQU 3
+			      C 
+ = 02000000		      C RDES1_M_EOR		EQU 002000000h	; End Of Ring
+ = 01000000		      C RDES1_M_CE		EQU 001000000h	; Chain Enable
+ = 003FF800		      C RDES1_M_BL2		EQU 0003FF800h	; Size in bytes of buffer 2 (MOD 4)
+ = 07FF			      C RDES1_M_BL1		EQU 0000007FFh	; Size in bytes of buffer 1 (MOD 4)
+			      C 
+ = 0019			      C RDES1_V_EOR		EQU 25
+ = 0018			      C RDES1_V_CE		EQU 24
+ = 000B			      C RDES1_V_BL2		EQU 11
+ = 0000			      C RDES1_V_BL1		EQU 0
+			      C 
+ = 0620			      C RCV_BUFFER_SIZE 	EQU 620h   ; Smallest MOD 4 length that can accommodate MTU
+			      C ;;RCV_BUFFER_SIZE	  EQU 1520   ; Smallest MOD 4 length that can accommodate MTU
+			      C 
+			      C ;; SROM contents structure
+ 0082			      C SROM_NS_Contents	STRUC
+ 0000  0000		      C   NS_SS_Vendor_ID    DW      0		     ; Sub-System Vendor ID
+ 0002  0000		      C   NS_SS_ID	     DW      0		     ; Sub-System ID
+ 0004  0000		      C   NS_Cardbus_Low     DW      0		     ; Cardbus CIS Pointer Low
+ 0006  0000		      C   NS_Cardbus_High    DW      0		     ; Cardbus CIS Pointer High
+ 0008  0008 [		      C   NS_ID_Reserved1    DB      8 DUP (0)	     ; Reserved
+        00
+       ]
+ 0010  00		      C   NS_ID_Bk_Crc	     DB      0		     ; ID Block CRC
+ 0011  00		      C   NS_ID_Reserved2    DB      0		     ; Reserved
+ 0012  03		      C   NS_SROM_version    DB      03h	     ; SROM Format Version
+ 0013  01		      C   NS_Controller_cnt  DB      01h	     ; Controller Count
+ 0014  0006 [		      C   NS_Ether_Addr      DB      6 DUP (0)	     ; IEEE Network Address
+        00
+       ]
+ 001A  00		      C   NS_Dev_Number      DB      0		     ; Controller Device Number
+ 001B  001E		      C   NS_IL_Offset	     DW      1Eh	     ; Controller Info Leaf Offset
+ 001D  00		      C   NS_Inf_Reserved3   DB      0		     ; Reserved
+			      C ;; -- Info Leaf
+ 001E  0000		      C   NS_Sel_Conn_type   DW      0		     ; Selected Connection Type
+ 0020  80		      C   NS_Gen_Pur_Ctrl    DB      80h	     ; General Purpose Control
+ 0021  06		      C   NS_Blk_cnt	     DB      6		     ; Block Count
+			      C ;; -- Info Leaf Block
+ 0022  8E		      C   NS_F1_Length_0     DB      8Eh	     ; Format 1 length bytes
+ 0023  01		      C   NS_Type1	     DB      1		     ; Extended format type 1
+ 0024  01		      C   NS_PHY_Number      DB      1		     ; PHY Address
+ 0025  00		      C   NS_GPR_Seq_Len     DB      0		     ; GPR sequence Length
+ 0026  02		      C   NS_RST_Seq_Len     DB      2		     ; Reset Sequence Length
+ 0027  80		      C   NS_RST_Seq_0	     DB      80h	     ; Reset Sequence 0
+ 0028  00		      C   NS_RST_Seq_1	     DB      00h	     ; Reset Sequence 1
+ 0029  7800		      C   NS_Media_Cap	     DW      7800h	     ; Media Capabilities
+ 002B  01E0		      C   NS_Nway_Adv	     DW      01E0h	     ; Nway Advertisemnet
+ 002D  5000		      C   NS_FDX_Map	     DW      5000h	     ; Full Duplex Bits
+ 002F  1800		      C   NS_TTM_Map	     DW      1800h	     ; Tx Theshold Mode Bits
+			      C ;; --
+ 0031  85		      C   NS_F1_Length_1     DB      85h	     ; Format 1 length
+ 0032  80		      C   NS_Type2	     DB      80h	     ; New Delay Type
+ 0033  2000		      C   NS_Delay_Seq_0     DW      2000h	     ;
+ 0035  4000		      C   NS_Delay_seq_1     DW      4000h	     ;
+			      C ;; --
+ 0037  85		      C   NS_F1_Length_2     DB      85h
+ 0038  00		      C   NS_Type3	     DB      00h
+ 0039  00		      C   NS_10BaseT_Code    DB      00h
+ 003A  00		      C   NS_GprData10	     DB      00h
+ 003B  001D		      C   NS_Comm10	     DW      001Dh
+			      C ;; --
+ 003D  85		      C   NS_F1_Length_3     DB      85h
+ 003E  00		      C   NS_Type4	     DB      00h
+ 003F  01		      C   NS_100BaseT_Code   DB      01h
+ 0040  00		      C   NS_GprData100      DB      00h
+ 0041  008D		      C   NS_Comm100	     DW      008Dh
+			      C ;; --
+ 0043  85		      C   NS_F1_Length_4     DB      85h
+ 0044  00		      C   NS_Type5	     DB      00h
+ 0045  04		      C   NS_10BaseFD_Code   DB      04h
+ 0046  00		      C   NS_GprData10FD     DB      00h
+ 0047  001D		      C   NS_Comm10FD	    DW	    001Dh
+			      C ;; --
+ 0049  85		      C   NS_F1_Length_5     DB      85h
+ 004A  00		      C   NS_Type6	     DB      00h
+ 004B  05		      C   NS_100BaseFD	     DB      05h
+ 004C  00		      C   NS_GprData100FD    DB      00h
+ 004D  008D		      C   NS_Comm100FD	     DW      008Dh
+ 004F  0031 [		      C   NS_Reserved4	     DB      49 DUP (0)
+        00
+       ]
+ 0080  0002 [		      C   NS_SROM_CRC	     DB      2 DUP (0)
+        00
+       ]
+			      C SROM_NS_Contents	ENDS
+			      C 
+ 006D			      C SROM_MotolorA_Contents	      STRUC
+ 0000  0000		      C   MA_SS_Vendor_ID    DW      0		     ; Sub-System Vendor ID
+ 0002  0000		      C   MA_SS_ID	     DW      0		     ; Sub-System ID
+ 0004  0000		      C   MA_Cardbus_Low     DW      0		     ; Cardbus CIS Pointer Low
+ 0006  0000		      C   MA_Cardbus_High    DW      0		     ; Cardbus CIS Pointer High
+ 0008  0008 [		      C   MA_ID_Reserved1    DB      8 DUP (0)	     ; Reserved
+        00
+       ]
+ 0010  00		      C   MA_ID_Bk_Crc	     DB      0		     ; ID Block CRC
+ 0011  00		      C   MA_ID_Reserved2    DB      0		     ; Reserved
+ 0012  03		      C   MA_SROM_version    DB      03h	     ; SROM Format Version
+ 0013  01		      C   MA_Controller_cnt  DB      01h	     ; Controller Count
+ 0014  0006 [		      C   MA_Ether_Addr      DB      6 DUP (0)	     ; IEEE Network Address
+        00
+       ]
+ 001A  00		      C   MA_Dev_Number      DB      0		     ; Controller Device Number
+ 001B  001E		      C   MA_IL_Offset	     DW      1Eh	     ; Controller Info Leaf Offset
+ 001D  00		      C   MA_Inf_Reserved3   DB      0		     ; Reserved
+			      C ;; -- Info Leaf
+ 001E  0000		      C   MA_Sel_Conn_type   DW      0		     ; Selected Connection Type
+ 0020  80		      C   MA_Gen_Pur_Ctrl    DB      80h	     ; General Purpose Control
+ 0021  06		      C   MA_Blk_cnt	     DB      6		     ; Block Count
+			      C ;; -- Info Leaf Block
+ 0022  85		      C   MA_F1_Length_2     DB      85h
+ 0023  00		      C   MA_Type3	     DB      00h
+ 0024  00		      C   MA_10BaseT_Code    DB      00h
+ 0025  00		      C   MA_GprData10	     DB      00h
+ 0026  001D		      C   MA_Comm10	     DW      001Dh
+			      C ;; --
+ 0028  85		      C   MA_F1_Length_3     DB      85h
+ 0029  00		      C   MA_Type4	     DB      00h
+ 002A  01		      C   MA_100BaseT_Code   DB      01h
+ 002B  00		      C   MA_GprData100      DB      00h
+ 002C  008D		      C   MA_Comm100	     DW      008Dh
+			      C ;; --
+ 002E  85		      C   MA_F1_Length_4     DB      85h
+ 002F  00		      C   MA_Type5	     DB      00h
+ 0030  04		      C   MA_10BaseFD_Code   DB      04h
+ 0031  00		      C   MA_GprData10FD     DB      00h
+ 0032  001D		      C   MA_Comm10FD	    DW	    001Dh
+			      C ;; --
+ 0034  85		      C   MA_F1_Length_5     DB      85h
+ 0035  00		      C   MA_Type6	     DB      00h
+ 0036  05		      C   MA_100BaseFD	     DB      05h
+ 0037  00		      C   MA_GprData100FD    DB      00h
+ 0038  008D		      C   MA_Comm100FD	     DW      008Dh
+ 003A  0031 [		      C   MA_Reserved4	     DB      49 DUP (0)
+        00
+       ]
+ 006B  0002 [		      C   MA_SROM_CRC	     DB      2 DUP (0)
+        00
+       ]
+			      C SROM_MotolorA_Contents	      ENDS
+			      C  
+			      C 
+				include rtdata.inc
+			      C EXTRN ChipType:BYTE
+			      C EXTRN p_PhysBlockVirt:WORD
+			      C EXTRN p_PhysBlockPhys:DWORD
+			      C EXTRN PhysBlockSize:WORD
+			      C 
+			      C EXTRN p_CR0:WORD
+			      C EXTRN p_CR1:WORD
+			      C EXTRN p_CR2:WORD
+			      C EXTRN p_CR3:WORD
+			      C EXTRN p_CR4:WORD
+			      C EXTRN p_CR5:WORD
+			      C EXTRN p_CR6:WORD
+			      C EXTRN p_CR7:WORD
+			      C EXTRN p_CR8:WORD
+			      C EXTRN p_CR9:WORD
+			      C EXTRN p_CR10:WORD
+			      C EXTRN p_CR11:WORD
+			      C EXTRN p_CR12:WORD
+			      C EXTRN p_CR13:WORD
+			      C EXTRN p_CR14:WORD
+			      C EXTRN p_CR15:WORD
+			      C 
+			      C EXTRN p_PCIID:WORD
+			      C EXTRN p_PCICS:WORD
+			      C EXTRN p_PCIRV:WORD
+			      C EXTRN p_PCILT:WORD
+			      C EXTRN p_PCIIO:WORD
+			      C 
+			      C EXTRN   PICIntOff : BYTE
+			      C EXTRN   PICIntOn : BYTE
+			      C EXTRN   PICIntMask : WORD
+			      C EXTRN   PICAckSlave : BYTE
+			      C 
+
+				;---------------------------------------------------------------------------
+
+ 0000				code	segment para public
+					assume	cs:code, ds:code
+
+				extern	io_addr : word
+				extern	int_no	: byte
+				EXTRN	free_mem : WORD
+
+ 0000 00000000			PCIIDVal		 DD 0  ; The value that was read from PCIID
+
+
+					PUBLIC PCIHandle
+ 0004 0000			PCIHandle DW 0	       ; This word is a catenation of the PCI bus number and
+						       ; PCI device number. These two bytes are passed to
+						       ; each PCI BIOS call, and uniquely identify the adapter.
+						       ; This value is determined at init time when probing
+						       ; for the adapter, or verifying a user specified
+						       ; devlice number.
+
+				;
+				; The PIC variables control access to the PIC chip. The PIC chip handles the
+				; delivery of hardware interrupts to the CUP in an Intel based PC AT/XT. The
+				; IRQ of the adapter is determined at init time, in the GetAdapterConfig
+				; function in the module MACINIT.ASM
+
+						PUBLIC ChipRev
+ 0006 00			ChipRev 	DB ?	; chip revision, read from PCIRV register at init time
+ 0007 00000000			InitConfigCR6Dummy     DD ?    ; CR6  value from EISA BIOS
+
+ 000B 30 31 32 33 34 35		InitHexByteTable   DB "0123456789ABCDEF" ; Translation table for InitPrintHexByte
+       36 37 38 39 41 42
+       43 44 45 46
+
+				;
+				; Driver Messages
+				;
+
+ = 000D				CR EQU 0Dh	; ASCII Carriage Return
+ = 000A				LF EQU 0Ah	; ASCII Line Feed
+ 001B 44 4D 39 20 2D 20		InitMsg_no_adap     DB 'DM9 - Could not locate adapter, please insert DM9 card.',CR,LF
+       43 6F 75 6C 64 20
+       6E 6F 74 20 6C 6F
+       63 61 74 65 20 61
+       64 61 70 74 65 72
+       2C 20 70 6C 65 61
+       73 65 20 69 6E 73
+       65 72 74 20 44 4D
+       39 20 63 61 72 64
+       2E 0D 0A
+ 0054 = 0039			InitMsg_no_adap_len EQU $ - InitMsg_no_adap
+ 0054 43 6F 75 6C 64 20		InitMsg_bad_slot_id	DB 'Could not locate adapter at specified SLOT.',CR,LF
+       6E 6F 74 20 6C 6F
+       63 61 74 65 20 61
+       64 61 70 74 65 72
+       20 61 74 20 73 70
+       65 63 69 66 69 65
+       64 20 53 4C 4F 54
+       2E 0D 0A
+ 0081 = 002D			InitMsg_bad_slot_id_len EQU $ - InitMsg_bad_slot_id
+ 0081 4D 41 43 20 49 6E		InitMsg_error	    DB 'MAC Init Error: '
+       69 74 20 45 72 72
+       6F 72 3A 20
+ 0091 = 0010			InitMsg_error_len   EQU $ - InitMsg_error
+ 0091 50 43 49 20 42 49		InitMsg_PCI_PCIINT   DB 'PCI BIOS configured IRQ illegal for Intel platform.',CR,LF
+       4F 53 20 63 6F 6E
+       66 69 67 75 72 65
+       64 20 49 52 51 20
+       69 6C 6C 65 67 61
+       6C 20 66 6F 72 20
+       49 6E 74 65 6C 20
+       70 6C 61 74 66 6F
+       72 6D 2E 0D 0A
+ 00C6 = 0035			InitMsg_PCI_PCIINT_len	EQU $ - InitMsg_PCI_PCIINT
+ 00C6 50 43 49 20 42 49		InitMsg_PCI_PCIIO   DB 'PCI BIOS configured I/O base illegal for Intel platform.',CR,LF
+       4F 53 20 63 6F 6E
+       66 69 67 75 72 65
+       64 20 49 2F 4F 20
+       62 61 73 65 20 69
+       6C 6C 65 67 61 6C
+       20 66 6F 72 20 49
+       6E 74 65 6C 20 70
+       6C 61 74 66 6F 72
+       6D 2E 0D 0A
+ 0100 = 003A			InitMsg_PCI_PCIIO_len  EQU $ - InitMsg_PCI_PCIIO
+ 0100 50 43 49 20 42 49		InitMsg_PCI_PCICS   DB 'PCI BIOS failed to enable I/O operation.',CR,LF
+       4F 53 20 66 61 69
+       6C 65 64 20 74 6F
+       20 65 6E 61 62 6C
+       65 20 49 2F 4F 20
+       6F 70 65 72 61 74
+       69 6F 6E 2E 0D 0A
+ 012A = 002A			InitMsg_PCI_PCICS_len  EQU $ - InitMsg_PCI_PCICS
+				;;----------------------------------------------------------------------------
+
+				;--------------------------------------------------------------------+
+				; Name : initpci
+				;
+				; Description:
+				; Call the Probe function, which probes PCI space looking for the adapter,
+				; and returns the IO base address in AX.
+				;
+				;
+				; Enter :
+				; Return :
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+					PUBLIC initpci
+ 012A				initpci PROC
+ 012A  06				push	es
+ 012B  56				push	si
+ 012C  53				push	bx
+ 012D  51				push	cx
+ 012E				idi_probe_for_adapter:
+
+ 012E  E8 0032				call InitAdapterProbe		;; Get PCIhandle & io_addr
+ 0131  83 F8 00				cmp  ax, 0			;; If ax=1 is not found, exit with error
+ 0134  74 08				jz   idi_adapter_found
+ 0136  B8 001B R			mov  ax, OFFSET InitMsg_no_adap
+ 0139  BB 0039				mov  bx, InitMsg_no_adap_len
+ 013C  EB 0D				jmp  idi_error
+
+ 013E				idi_adapter_found:
+ 013E  E8 0143				call InitDM9100RegOffsets      ;;Initialize DM9 register offsets
+
+ 0141  E8 01E4				call PCIResourceCheck	      ;    Check PCI configuration
+ 0144  72 05				jc  idi_error		      ;    If carry set, AX and BX are set
+								      ;    with appropriate error message.
+								      ;    Abort Init, perint error.
+
+ 0146				idi_get_info:
+				;;	  call GetAdapterConfig       ;    Get Adapter Configuration
+									;; Get int_no & ChipRev
+				;;	  or   ax, ax			  ;    was it successful?
+				;;	  jne  idi_slot_bad		  ;    branch if not
+
+ 0146  B8 0000				mov	ax, 0
+ 0149  EB 13				jmp  idi_exit
+
+				;;idi_slot_bad:
+				;;	  mov  ax, OFFSET InitMsg_bad_slot_id
+				;;	  mov  bx, InitMsg_bad_slot_id_len
+
+ 014B				idi_error:
+ 014B  BE 0081 R			mov  si, OFFSET InitMsg_error
+ 014E  B9 0010				mov  cx, InitMsg_error_len
+ 0151  E8 030E				call InitPrintMessage
+ 0154  8B F0				mov  si, ax
+ 0156  8B CB				mov  cx, bx
+ 0158  E8 0307				call InitPrintMessage
+ 015B  B8 FFFF				mov	ax, 0ffffh
+ 015E				idi_exit:
+ 015E  59				pop cx
+ 015F  5B				pop bx
+ 0160  5E				pop si
+ 0161  07				pop es
+ 0162  C3				ret
+ 0163				initpci ENDP
+
+
+				;--------------------------------------------------------------------+
+				; Name : InitAdapterProbe
+				;
+				; Description: Get the PCI handle & I/O Base address of device.
+				;
+				; Enter :
+				; Return :
+				;	Success  - AX=0.
+				;	Failure  - AX=1.
+				;
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+					PUBLIC InitAdapterProbe
+ 0163				InitAdapterProbe  PROC	NEAR
+
+ 0163  51				push cx
+
+ 0164  E8 001F				call InitPCICheckBIOS	;;PCI BIOS is present?
+ 0167  72 18				jc   iap_error_exit	;;Not present
+ 0169  B8 0000				mov  ax, 0		;
+ 016C  E8 003D				call InitPCIFindDevice	;;Is DM9 Device ID ? return AX = PCI Handle
+ 016F  72 10				jc   iap_error_exit	;;Not found DM9
+ 0171  A3 0004 R			mov  PCIHandle, ax	;;Save PCI Handle
+ 0174  E8 00ED				call InitPCIGetBase	;;Get IO base address  ;;Reurn IO Base in AX
+ 0177  72 08				jc   iap_error_exit
+ 0179  A3 0000 E			mov	io_addr, ax
+ 017C  B8 0000				mov  ax, 0		;; Return value
+ 017F  EB 03				jmp  SHORT iap_exit
+ 0181				iap_error_exit:
+ 0181  B8 0001				mov  ax, 1		;    return(AX==1)
+ 0184				iap_exit:
+ 0184  59				pop cx
+ 0185  C3				ret
+ 0186				InitAdapterProbe  ENDP
+
+
+				;--------------------------------------------------------------------+
+				; Name : InitPCICheckBIOS
+				;
+				; Description: Checks for the existance of the PCI BIOS.
+				;
+				; Enter : None
+				;
+				; Return :
+				;	Carry flag clear - PCI BIOS present.
+				;	Carry flag set	 - PCI BIOS not present
+				;
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+ 0186				InitPCICheckBIOS  PROC	NEAR
+ 0186  50				push ax
+ 0187  53				push bx
+ 0188  51				push cx
+ 0189  66| 52				push edx
+ 018B  06				push es
+
+ 018C  B4 B1				mov  ah, PCI_FUNCTION_ID	;; 0B1h
+ 018E  B0 01				mov  al, PCI_BIOS_PRESENT	;; 01h
+ 0190  CD 1A				int  PCI_BIOS_INT
+
+ 0192  72 11				jc   ipcb_exit					;;PCI BIOS is't present
+
+ 0194  0A E4				or   ah, ah		   ; AH should be 0
+ 0196  75 0C				jnz  ipcb_error_exit
+
+ 0198  66| 81 FA 20494350		cmp  edx, ' ICP'           ; Check for 'PCI ' string in EDX
+ 019F  75 03				jne  ipcb_error_exit
+
+ 01A1  F8				clc			   ; Signal success
+ 01A2  EB 01				jmp  ipcb_exit
+
+ 01A4				ipcb_error_exit:
+ 01A4  F9				stc
+
+ 01A5				ipcb_exit:
+ 01A5  07				pop  es
+ 01A6  66| 5A				pop  edx
+ 01A8  59				pop  cx
+ 01A9  5B				pop  bx
+ 01AA  58				pop  ax
+ 01AB  C3				ret
+ 01AC				InitPCICheckBIOS  ENDP
+
+				;--------------------------------------------------------------------+
+				; Name : InitPCIFindDevice
+				;
+				; Description: Calls the PCI BIOS routin to get the board PCI index in AX.
+				;
+				; Enter :
+				;
+				; Return :
+				;	Carry flag clear - Device found, handle is in AX.
+				;	Carry flag set	 - Device not found.
+				;
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+ 01AC				InitPCIFindDevice  PROC  NEAR
+
+ 01AC  53				push bx
+ 01AD  66| 51				push ecx
+ 01AF  52				push dx
+ 01B0  56				push si
+ 01B1  57				push di
+
+				;;-+, 980311, Hu-Tiong
+				;;	mov  dx, ax	; dx will keep the DM9100 board PCI
+				;;			; index
+					extrn	SlotNum: word
+
+ 01B2  83 3E 0000 E 00			cmp	SlotNum, 0
+ 01B7  74 04				je	UserNotSpecifySlot
+
+ 01B9  FF 0E 0000 E			dec	SlotNum
+ 01BD				UserNotSpecifySlot:
+				;;-+
+ 01BD  BE 0000				mov  si,  0	; SI = PCI Device Index (include other
+							; vendors card)
+ 01C0  BF 0000				mov  di,  0	; DI = Current DM9100 board
+							; existance index
+
+ 01C3				ipfd_find_dev_loop:
+ 01C3  66| B9 00020000			mov  ecx, PCI_CLASS_CODE_ETHER_CTRL	; ECX = Class code of ethernet
+										; controller (000020000h)
+ 01C9  B4 B1				mov  ah, PCI_FUNCTION_ID
+ 01CB  B0 03				mov  al, PCI_FIND_PCI_CLASS_CODE	;; 03h
+ 01CD  CD 1A				int  PCI_BIOS_INT
+
+ 01CF  72 72				jc   ipfd_exit
+
+ 01D1  8B C3				mov  ax, bx		   ; BX holds PCI handle on successful exit
+
+ 01D3  E8 0074				call InitPCIGetPCIID	    ; Check if DM9100, Return ECX = PCIID
+
+ 01D6  66| 89 0E 0000 R			mov  PCIIDVal, ecx	    ; Get PCIIDVal
+				;;cmp	  cx, 1011h
+				;;je	  ipfd_check_dev_id
+ 01DB  81 F9 1282			cmp  cx, PCIID_VENDOR_ID  ; Not DEC vendor ID (1011h)
+ 01DF  74 03				je   ipfd_check_dev_id
+ 01E1  46				inc  si
+ 01E2  EB DF				jmp  ipfd_find_dev_loop
+
+ 01E4				ipfd_check_dev_id:
+ 01E4  66| 81 E1 FFFF0000		and  ecx, PCIID_M_DEVICE_ID	   ; Check device ID (0FFFF0000h)
+ 01EB  66| C1 E9 10			shr  ecx, PCIID_V_DEVICE_ID	 ;; 16
+
+				;;cmp	  cx, 0009h
+				;;jne	  ipfd_check_DM9102_id
+				;;mov	  ChipType, DC21X4_CHIP
+				;;jmp	  pfd_find
+
+ 01EF				ipfd_check_DM9102_id:
+ 01EF  81 F9 9102			cmp	cx, PCIID_DM9102_DEVICE_ID
+ 01F3  75 07				jne	ipfd_check_UM9100_id
+ 01F5  C6 06 0000 E 02			mov	ChipType, DM9102_CHIP
+ 01FA  EB 1D				jmp	pfd_find
+
+ 01FC				ipfd_check_UM9100_id:
+ 01FC  81 F9 9100			cmp  cx,  PCIID_DM9100_DEVICE_ID ; Check 90100 device ID (00009h)
+ 0200  75 07				jne   pfd_not_find_DM9100
+ 0202  C6 06 0000 E 00			mov	ChipType, DM9100_CHIP
+ 0207  EB 10				jmp	pfd_find
+
+ 0209				pfd_not_find_DM9100:
+ 0209  81 F9 9009			cmp	cx, PCIID_DM9009_DEVICE_ID
+ 020D  75 07				jne	 pfd_not_find_DM9009
+ 020F  C6 06 0000 E 01			mov	ChipType, DM9009_CHIP
+ 0214  EB 03				jmp	pfd_find
+
+ 0216				pfd_not_find_DM9009:
+ 0216  46				inc  si
+ 0217  EB AA				jmp  ipfd_find_dev_loop
+
+ 0219				pfd_find:
+				;;-+, 980311, Hu-Tiong
+				;;	cmp	di, dx			;;Check device slot if multi-adapters
+ 0219  3B 3E 0000 E			cmp	di, SlotNum
+				;;-+
+ 021D  74 04				je	ipfd_signal_success
+ 021F  47				inc	di
+ 0220  46				inc	si
+ 0221  EB A0				jmp	ipfd_find_dev_loop
+
+
+ 0223				ipfd_signal_success:
+				;;;;++, 2000.7.18, htho, enable PnP OS in BIOS will disable I/O Space Access
+ 0223  50				push	ax			; preserve the PCI handle
+
+ 0224  8B D8				mov	bx, ax
+ 0226  B4 B1				mov	ah, PCI_FUNCTION_ID
+ 0228  B0 0A				mov	al, PCI_READ_CONFIG_DWORD
+ 022A  BF 0004				mov	di, 4			; PCI Command & Status Register */
+ 022D  CD 1A				int	PCI_BIOS_INT
+
+				;	or	ecx, (PCICS_M_BUS_MASTER OR PCICS_M_MEMORY_ACCESS OR PCICS_M_IO_ACCESS)
+ 022F  66| 83 C9 07			or	ecx, 7
+ 0233  5B				pop	bx
+ 0234  53				push	bx
+ 0235  B4 B1				mov	ah, PCI_FUNCTION_ID
+ 0237  B0 0D				mov	al, PCI_WRITE_CONFIG_DWORD
+ 0239  BF 0004				mov	di, 4			; PCI Command & Status Register */
+ 023C  CD 1A				int	PCI_BIOS_INT
+
+ 023E  58				pop	ax			; restore the PCI handle
+				;;;;++
+ 023F  F8				clc			   ; Signal success
+
+ 0240  EB 01				jmp  ipfd_exit
+
+ 0242				ipfd_error_exit:
+ 0242  F9				stc
+
+ 0243				ipfd_exit:
+ 0243  5F				pop  di
+ 0244  5E				pop  si
+ 0245  5A				pop  dx
+ 0246  66| 59				pop  ecx
+ 0248  5B				pop  bx
+ 0249  C3				ret
+ 024A				InitPCIFindDevice  ENDP
+
+				;--------------------------------------------------------------------+
+				; Name : InitPCIGetPCIID
+				;
+				; Description: Get the PCIID value of the device.
+				;
+				; Enter : AX = Handle of device.
+				;
+				; Return :
+				;	Carry flag clear - Success, PCIID in ECX.
+				;	Carry flag set	 - Failure.
+				;
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+ 024A				InitPCIGetPCIID  PROC  NEAR
+ 024A  66| 50				push eax
+ 024C  53				push bx
+ 024D  57				push di
+
+ 024E  8B D8				mov  bx, ax			;; PCI Handler
+ 0250  BF 0000				mov  di, HW_K_REG_PCIID      ;; 00h
+ 0253  B4 B1				mov  ah, PCI_FUNCTION_ID	;; 0B1h
+ 0255  B0 0A				mov  al, PCI_READ_CONFIG_DWORD	;; 0Ah
+ 0257  CD 1A				int  PCI_BIOS_INT		;; 1Ah
+
+ 0259  72 04				jc   ipgc_exit
+
+ 025B  F8				clc			   ; Signal success
+
+ 025C  EB 01				jmp  ipgc_exit
+
+ 025E				ipgc_error_exit:
+ 025E  F9				stc
+
+ 025F				ipgc_exit:
+ 025F  5F				pop  di
+ 0260  5B				pop  bx
+ 0261  66| 58			    pop eax
+ 0263  C3				ret
+ 0264				InitPCIGetPCIID  ENDP
+
+				;--------------------------------------------------------------------+
+				; Name : InitPCIGetBase
+				;
+				; Description: Calls the PCI BIOS to get IO base address.
+				;
+				; Enter : AX = Handle of device.
+				;
+				; Return :
+				;	Carry flag clear - Success, IO Base is in AX.
+				;	Carry flag set	 - Failure.
+				;
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+ 0264				InitPCIGetBase	PROC  NEAR
+ 0264  53				push bx
+ 0265  66| 51				push ecx
+ 0267  57				push di
+
+ 0268  8B D8				mov  bx, ax			;; Handle
+ 026A  BF 0010				mov  di, HW_K_REG_PCIIO      ;; 10h
+ 026D  B4 B1				mov  ah, PCI_FUNCTION_ID
+ 026F  B0 0A				mov  al, PCI_READ_CONFIG_DWORD
+ 0271  CD 1A				int  PCI_BIOS_INT
+
+ 0273  72 0A				jc   ipgb_exit
+
+ 0275  66| 83 E1 80			and  ecx, PCIIO_M_PCI_IO_BASE_ADDRESS	     ;;(0FFFFFF80h)
+
+ 0279  8B C1				mov  ax, cx
+
+ 027B  F8				clc			   ; Signal success
+
+ 027C  EB 01				jmp  ipgb_exit
+
+ 027E				ipgb_error_exit:
+ 027E  F9				stc
+
+ 027F				ipgb_exit:
+ 027F  5F				pop  di
+ 0280  66| 59				pop  ecx
+ 0282  5B				pop  bx
+ 0283  C3				ret
+ 0284				InitPCIGetBase	ENDP
+
+				;--------------------------------------------------------------------+
+				; Name : InitDM9100RegOffsets
+				;
+				; Description: Sets up pointers to DM9100's registers.
+				;
+				; Enter : io_addr
+				;
+				; Return :
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+ 0284				InitDM9100RegOffsets  PROC NEAR
+ 0284  50				push  ax
+ 0285  A1 0000 E			mov	ax, io_addr
+
+ 0288				itro_pci_init:
+ 0288  A3 0000 E			mov   p_CR0, ax
+ 028B  83 06 0000 E 00			add   p_CR0, HW_K_REG_CR0
+ 0290  A3 0000 E			mov   p_CR1, ax
+ 0293  83 06 0000 E 08			add   p_CR1, HW_K_REG_CR1
+ 0298  A3 0000 E			mov   p_CR2, ax
+ 029B  83 06 0000 E 10			add   p_CR2, HW_K_REG_CR2
+ 02A0  A3 0000 E			mov   p_CR3, ax
+ 02A3  83 06 0000 E 18			add   p_CR3, HW_K_REG_CR3
+ 02A8  A3 0000 E			mov   p_CR4, ax
+ 02AB  83 06 0000 E 20			add   p_CR4, HW_K_REG_CR4
+ 02B0  A3 0000 E			mov   p_CR5, ax
+ 02B3  83 06 0000 E 28			add   p_CR5, HW_K_REG_CR5
+ 02B8  A3 0000 E			mov   p_CR6, ax
+ 02BB  83 06 0000 E 30			add   p_CR6, HW_K_REG_CR6
+ 02C0  A3 0000 E			mov   p_CR7, ax
+ 02C3  83 06 0000 E 38			add   p_CR7, HW_K_REG_CR7
+ 02C8  A3 0000 E			mov   p_CR8, ax
+ 02CB  83 06 0000 E 40			add   p_CR8, HW_K_REG_CR8
+ 02D0  A3 0000 E			mov   p_CR9, ax
+ 02D3  83 06 0000 E 48			add   p_CR9, HW_K_REG_CR9
+ 02D8  A3 0000 E			mov   p_CR10, ax
+ 02DB  83 06 0000 E 50			add   p_CR10, HW_K_REG_CR10
+ 02E0  A3 0000 E			mov   p_CR11, ax
+ 02E3  83 06 0000 E 58			add   p_CR11, HW_K_REG_CR11
+ 02E8  A3 0000 E			mov   p_CR12, ax
+ 02EB  83 06 0000 E 60			add   p_CR12, HW_K_REG_CR12
+ 02F0  A3 0000 E			mov   p_CR13, ax
+ 02F3  83 06 0000 E 68			add   p_CR13, HW_K_REG_CR13
+ 02F8  A3 0000 E			mov   p_CR14, ax
+ 02FB  83 06 0000 E 70			add   p_CR14, HW_K_REG_CR14
+ 0300  A3 0000 E			mov   p_CR15, ax
+ 0303  83 06 0000 E 78			add   p_CR15, HW_K_REG_CR15
+
+ 0308  C7 06 0000 E 0000		mov   p_PCIID, HW_K_REG_PCIID
+ 030E  C7 06 0000 E 0004		mov   p_PCICS, HW_K_REG_PCICS
+ 0314  C7 06 0000 E 0008		mov   p_PCIRV, HW_K_REG_PCIRV
+ 031A  C7 06 0000 E 000C		mov   p_PCILT, HW_K_REG_PCILT
+ 0320  C7 06 0000 E 0010		mov   p_PCIIO, HW_K_REG_PCIIO
+
+ 0326				itro_exit:
+ 0326  58				pop   ax
+ 0327  C3				ret
+ 0328				InitDM9100RegOffsets  ENDP
+
+				;--------------------------------------------------------------------+
+				; Name : PCIResourceCheck
+				;
+				; Description:
+				; This routine checks the following:
+				;
+				; 1) Configured interrupt level is between 0 and 15. The PCI PCIINT register
+				;    allows 8 bits to encode the interrupt level. On an Intel platform, we
+				;    should never see a value larger than 15. Should a larger value be
+				;    programmed, driver init is aborted, and the user notified.
+				;
+				; 2) Base I/O address is no larger than 0FFFFh. The PCI PCIIO register allows
+				;    for a 32 bit I/O base address. On an Intel platform, the I/O address space
+				;    is limited to 16 bits. Should PCI BIOS neglect to initialize the upper
+				;    sixteen bits <31:16> to zero, the card would be unaccessible, since the
+				;    IO address decoding would be screwed up. If this error occurrs, init is
+				;    aborted, and the user notified.
+				;
+				; 3) Bus Master operation and I/O space access should be enabled. The PCI
+				;    PCICS register has two fields of interest here. The DM9100 adapter
+				;    requires the Bus Master Operation bit to be asserted, as well as the
+				;    I/O Space Access bit. Should either of these bits be deasserted, driver
+				;    init is aborted, and the user notified.
+				;
+				; Enter : None
+				;
+				; Return :
+				;	Success - Carry Clear.
+				;	Failure - Carry Set, AX points to error message, BX is length.
+				;
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+ 0328				PCIResourceCheck  PROC	NEAR
+					;; Save Interrupt level in AL
+ 0328  BA 003C				mov  dx, HW_K_REG_PCIINT
+ 032B  E8 0090				call InitConfigRegRead		   ; Read PCIINT, return in EAX
+ 032E  66| 25 000000FF			and  eax, PCIINT_M_INTERRUPT_LINE    ;; (0000000FFh)
+ 0334  3C 0F				cmp  al, 0fh			   ; Is interrupt out of range?
+ 0336  76 09				jbe  set_pic		      ; No.
+ 0338  B8 0091 R			mov  ax, OFFSET InitMsg_PCI_PCIINT   ; Yes. Get ptr to error message
+ 033B  BB 0035				mov  bx, InitMsg_PCI_PCIINT_len
+ 033E  F9				stc				   ; signal error...
+ 033F  EB 7C				jmp  ipsc_exit			   ; ...and exit
+
+ 0341				set_pic:
+ 0341  A2 0000 E			mov	int_no, al		;; Store IRQ
+ 0344  83 F8 05				cmp  ax, 5		       ; Are we at IRQ5?
+ 0347  75 17				jne  slave_int		   ; Nope, then we have a slave interrupt
+ 0349  C6 06 0000 E 20			mov  PICIntOff,   020h	       ; For IRQ5, set the OFF mask...
+ 034E  C6 06 0000 E DF			mov  PICIntOn,	  0DFh	       ; ...and the ON mask
+ 0353  C7 06 0000 E 0021		mov  PICIntMask,  021h	       ; The mask register is in the MASTER PIC
+ 0359  C6 06 0000 E 00			mov  PICAckSlave, 000h	       ; And we don't have to ACK the slave
+ 035E  EB 1D				jmp  pic_done
+
+ 0360				slave_int:
+ 0360  83 E8 08				sub  ax, 8		       ; For slave convert 8->15 to 0->7
+ 0363  8B C8				mov  cx, ax		       ; load the 0->7 value into CX as a count
+ 0365  B8 0001				mov  ax, 1		       ; Init AL to 00000001
+ 0368  D3 E0				shl  ax, cl		       ; and shift AL CL times
+ 036A  A2 0000 E			mov  PICIntOff,   al	       ; AL now holds OFF mask
+ 036D  F6 D0				not  al 		       ; complement AL to make ON mask
+ 036F  A2 0000 E			mov  PICIntOn,	  al	       ; and save it
+ 0372  C7 06 0000 E 00A1		mov  PICIntMask,  0A1h	       ; The mask register is in the SLAVE PIC
+ 0378  C6 06 0000 E 01			mov  PICAckSlave, 001h	       ; And we DO name to ACK the slave
+
+ 037D				pic_done:
+ 037D  8B 16 0000 E			mov  dx, p_PCIRV		; -> chip revision register
+ 0381  E8 003A				call InitConfigRegRead	       ; read it
+ 0384  A2 0006 R			mov  ChipRev, al	       ; save chip revision level
+
+ 0387				ipsc_PCIINT_ok:
+ 0387  BA 0010				mov  dx, HW_K_REG_PCIIO
+ 038A  E8 0031				call InitConfigRegRead		   ; Read PCIIO ;;return in EAX
+ 038D  66| A9 FFFF0000			test eax, 0FFFF0000h		   ; Is IO Base address out of range?
+ 0393  74 09				jz   ipsc_PCIIO_ok		    ; No.
+ 0395  B8 00C6 R			mov  ax, OFFSET InitMsg_PCI_PCIIO   ; Yes. Get ptr to error message
+ 0398  BB 003A				mov  bx, InitMsg_PCI_PCIIO_len
+ 039B  F9				stc				   ; signal error...
+ 039C  EB 1F				jmp  ipsc_exit			   ; ...and exit
+
+ 039E				ipsc_PCIIO_ok:
+ 039E  BA 0004				mov  dx, HW_K_REG_PCICS
+ 03A1  E8 001A				call InitConfigRegRead		   ; Read PCICS
+ 03A4  66| 83 C8 04			or   eax, PCICS_M_BUS_MASTER  ; Turn on bus master bit (000000004h)
+ 03A8  E8 0031				call InitConfigRegWrite 	   ; Write it to configuration space
+
+ 03AB  66| A9 00000001			test eax, PCICS_M_IO_ACCESS	    ; Is IO Access bit clear?(00000001h)
+ 03B1  74 03				jz   ipsc_PCICS_error		    ; Yes, signal error
+ 03B3  F8				clc				   ; Both bits set, signal success...
+ 03B4  EB 07				jmp  ipsc_exit			   ; ...and exit
+ 03B6				ipsc_PCICS_error:
+ 03B6  B8 0100 R			mov  ax, OFFSET InitMsg_PCI_PCICS   ; Error(s). Get ptr to error message
+ 03B9  BB 002A				mov  bx, InitMsg_PCI_PCICS_len
+ 03BC  F9				stc				   ; signal error and exit
+ 03BD				ipsc_exit:
+ 03BD  C3				ret
+ 03BE				PCIResourceCheck  ENDP
+
+				;*********************
+				;* InitConfigRegRead *
+				;*********************
+				;
+				; This function determines the bus in use, and takes the appropriate action
+				; for reading the configuration register pointed to by DX. The retults are
+				; returned in EAX. All other registers preserved.
+				;
+				; Algorithm:
+				; BEGIN
+				;    if (PCIBus flag set)
+				;	Make PCI BIOS call
+				;    else
+				;	Issue IN instruction
+				;    return (EAX)
+				; END
+
+						   PUBLIC InitConfigRegRead
+ 03BE				InitConfigRegRead  PROC  NEAR
+ 03BE				icrr_pci_read:
+ 03BE  66| 51				push ecx			      ; For PCI bus, issue BIOS call
+ 03C0  53				push bx
+ 03C1  57				push di
+
+ 03C2  B4 B1				mov  ah, PCI_FUNCTION_ID
+ 03C4  B0 0A				mov  al, PCI_READ_CONFIG_DWORD
+ 03C6  8B 1E 0004 R			mov  bx, PCIHandle
+ 03CA  8B FA				mov  di, dx
+ 03CC  81 E7 00FF			and  di, 0FFh			      ; PCI Offset = DX and 00FF
+ 03D0  CD 1A				int  PCI_BIOS_INT
+
+ 03D2  66| 8B C1			mov  eax, ecx
+ 03D5  5F				pop  di
+ 03D6  5B				pop  bx
+ 03D7  66| 59				pop  ecx
+ 03D9  EB 00				jmp  icrr_exit
+ 03DB				icrr_exit:
+ 03DB  C3				ret
+ 03DC				InitConfigRegRead  ENDP
+
+				;**********************
+				;* InitConfigRegWrite *
+				;**********************
+				;
+				; This function writes to the device's configuration space.
+				; It writes the contents of EAX into register pointed to by DX.
+				; All other registers are preserved.
+				;
+				; Algorithm:
+				; BEGIN
+				;     if (PCIBus flag set)
+				;	 make PCI Bios call
+				;     else
+				;	 Issue OUT instruction
+				; END
+
+						PUBLIC InitConfigRegWrite
+ 03DC				InitConfigRegWrite  PROC  NEAR
+ 03DC				icrw_pci_write:
+ 03DC  66| 51				push ecx
+ 03DE  53				push bx
+ 03DF  57				push di
+ 03E0  66| 8B C8			mov  ecx, eax
+ 03E3  B4 B1				mov  ah, PCI_FUNCTION_ID
+ 03E5  B0 0D				mov  al, PCI_WRITE_CONFIG_DWORD
+ 03E7  8B 1E 0004 R			mov  bx, PCIHandle
+ 03EB  8B FA				mov  di, dx
+ 03ED  81 E7 00FF			and  di, 0FFh			      ; PCI Offset = DX and 00FF
+
+ 03F1  CD 1A				int  PCI_BIOS_INT
+
+ 03F3  5F				pop  di
+ 03F4  5B				pop  bx
+ 03F5  66| 59				pop  ecx
+ 03F7  EB 02				jmp  icrw_exit
+
+ 03F9				icrw_eisa_write:
+ 03F9  66| EF				out   dx, eax			       ; For EISA bus, just do an OUT
+
+ 03FB				icrw_exit:
+ 03FB  C3				ret
+ 03FC				InitConfigRegWrite  ENDP
+
+
+				;--------------------------------------------------------------------+
+				; Name : GetAdapterConfig
+				;
+				; Description: Extract the configuration information for the DM9100.
+				;
+				; Enter :
+				;
+				; Return :
+				;	Success - AX=0.
+				;	Failure - AX = None-Zero.
+				;
+				; Destroied registers :
+				;
+				;---------------------------------------------------------------------+
+ 03FC				GetAdapterConfig  PROC NEAR
+ 03FC  53				push bx
+ 03FD  51				push cx
+ 03FE  57				push di
+ 03FF  56				push si
+ 0400  66| 50				push eax
+
+				;
+				; For PCI Bus, read the PCIINT register, and verify that the configured interrupt
+				; is in the range of 0-15. The interrupt read from the register is the actual
+				; interrupt level, and needs no decoding. There is no sanity check on the
+				; value done here. PCI values are sanity checked in a separate routine.
+				; InitPCISanityCheck
+				;
+ 0402  BA 003C				mov  dx, HW_K_REG_PCIINT	 ; Read PCI PCIINT to get int level
+ 0405  E8 FFB6				call InitConfigRegRead
+ 0408  66| 25 000000FF			and  eax, PCIINT_M_INTERRUPT_LINE    ; Mask off int level(000000FFh)
+
+				;
+				; At this point, AL holds the configured interrupt level.
+				;
+ 040Eigc_stash_irq:
+ 040E  A2 0000 E			mov	int_no, al		;; Store IRQ
+
+ 0411  83 F8 05				cmp  ax, 5		       ; Are we at IRQ5?
+ 0414  75 17				jne  igc_slave_int	       ; Nope, then we have a slave interrupt
+ 0416  C6 06 0000 E 20			mov  PICIntOff,   020h	       ; For IRQ5, set the OFF mask...
+ 041B  C6 06 0000 E DF			mov  PICIntOn,	  0DFh	       ; ...and the ON mask
+ 0420  C7 06 0000 E 0021		mov  PICIntMask,  021h	       ; The mask register is in the MASTER PIC
+ 0426  C6 06 0000 E 00			mov  PICAckSlave, 000h	       ; And we don't have to ACK the slave
+ 042B  EB 1D				jmp  igc_pic_done
+
+ 042D				igc_slave_int:
+ 042D  83 E8 08				sub  ax, 8		       ; For slave convert 8->15 to 0->7
+ 0430  8B C8				mov  cx, ax		       ; load the 0->7 value into CX as a count
+ 0432  B8 0001				mov  ax, 1		       ; Init AL to 00000001
+ 0435  D3 E0				shl  ax, cl		       ; and shift AL CL times
+ 0437  A2 0000 E			mov  PICIntOff,   al	       ; AL now holds OFF mask
+ 043A  F6 D0				not  al 		       ; complement AL to make ON mask
+ 043C  A2 0000 E			mov  PICIntOn,	  al	       ; and save it
+ 043F  C7 06 0000 E 00A1		mov  PICIntMask,  0A1h	       ; The mask register is in the SLAVE PIC
+ 0445  C6 06 0000 E 01			mov  PICAckSlave, 001h	       ; And we DO name to ACK the slave
+
+ 044A				igc_pic_done:
+
+ 044A  8B 16 0000 E			mov  dx, p_PCIRV		; -> chip revision register
+ 044E  E8 FF6D				call InitConfigRegRead	       ; read it
+ 0451  A2 0006 R			mov  ChipRev, al	       ; save chip revision level
+ 0454  B8 0000				mov  ax, 0		       ; return SUCCESS
+
+ 0457				igc_exit:
+ 0457  8B C8				mov  cx, ax
+ 0459  66| 58				pop  eax
+ 045B  8B C1				mov  ax, cx
+ 045D  5E				pop si
+ 045E  5F				pop di
+ 045F  59				pop cx
+ 0460  5B				pop bx
+ 0461  C3				ret
+ 0462				GetAdapterConfig  ENDP
+
+				;********************
+				;* InitPrintMessage *
+				;********************
+				;
+				; This function prints a message pointed to by DS:SI, that is CX bytes long.
+				; This function uses the BIOS video service at INT 10 to provide an OS
+				; independent method for displaying messages to the console during driver
+				; init.
+				;
+				; All registers and flags are saved.
+				;
+				; Arguments:  DS:SI - Far pointer to message to print
+				;		 CX - Message length in bytes
+				;
+				; Algorithm:
+				;
+				; BEGIN
+				;    save flags
+				;    clear direction flag
+				;    do {
+				;      get char at DS:(SI++)
+				;      call INT 10 to print to console
+				;      CX--
+				;    while (CX != 0)
+				;    restore flags
+				; END
+				;
+						  PUBLIC InitPrintMessage
+ 0462				InitPrintMessage  PROC NEAR
+
+ 0462  56				push si
+ 0463  50				push ax
+ 0464  53				push bx
+ 0465  51				push cx
+ 0466  9C				pushf		;    save flags
+ 0467  FC				cld		;    clear direction flag
+ 0468  BB 000F				mov  bx,0Fh	;    Set video attributes for INT 10 call ;;Bright white
+ 046B				pm_loop:		;    do {
+ 046B  AC				lodsb		;      get char at DS:(SI++)
+ 046C  B4 0E				mov  ah,0EH
+ 046E  CD 10				int  10H	;      call BIOS INT 10 to print to console
+ 0470  E2 F9				loop pm_loop	;      CX--
+							;    while (CX != 0)
+ 0472  9D				popf		;    restore flags
+ 0473  59				pop cx
+ 0474  5B				pop bx
+ 0475  58				pop ax
+ 0476  5E				pop si
+ 0477  C3				ret
+
+ 0478				InitPrintMessage  ENDP
+
+				;********************
+				;* InitPrintHexByte *
+				;********************
+				;
+				; This function simply prints the hex byte in AL at the console. All
+				; registers are preserved.
+				;
+						  PUBLIC InitPrintHexByte
+ 0478				InitPrintHexByte  PROC	NEAR
+ 0478  50				push ax
+ 0479  53				push bx
+ 047A  51				push cx
+
+ 047B  8B C8				mov  cx,ax		      ; Save AX in CX momentarily
+ 047D  BB 000B R			mov  bx,OFFSET InitHexByteTable   ; Place offset of translation table in BX
+ 0480  24 F0				and  al,0F0H		      ; Get AL upper nibble
+ 0482  C0 E8 04				shr  al,4		      ; Shift it into place
+ 0485  D7				xlat			      ; Convert AL to ASCII equivalent
+ 0486  B4 0E				mov  ah,0EH		      ; Load 'Teletype' function code in AH
+ 0488  BB 000F				mov  bx,0FH		      ; Set video attribute for INT 10 call
+ 048B  CD 10				int  10H		      ; Call BIOS video service
+
+ 048D  8B C1				mov  ax,cx		      ; Restore AX
+ 048F  BB 000B R			mov  bx,OFFSET InitHexByteTable   ; Place offset of translation table in BX
+ 0492  24 0F				and  al,0FH		      ; Get AL lower nibble
+ 0494  D7				xlat			      ; Convert AL to ASCII equivalent
+ 0495  B4 0E				mov  ah,0EH		      ; Load 'Teletype' function code in AH
+ 0497  BB 000F				mov  bx,0FH		      ; Set video attribute for INT 10 call
+ 049A  CD 10				int  10H		      ; Call BIOS video service
+
+ 049C  59				pop  cx
+ 049D  5B				pop  bx
+ 049E  58				pop  ax
+ 049F  C3				ret
+
+ 04A0				InitPrintHexByte  ENDP
+
+
+				include dm9100.mac
+			      C 
+			      C ;********************
+			      C ;* DSSI_TO_PHYSICAL *
+			      C ;********************
+			      C ;
+			      C ; This macro expands to the operating system specific method of converting
+			      C ; a virtual address in DS:SI to a physical address in EAX.
+			      C ;
+			      C 
+			      C DSSI_TO_PHYSICAL macro
+			      C 
+			      C         push ebx
+			      C         xor eax,eax
+			      C         xor ebx,ebx
+			      C         mov ax,ds
+			      C         mov bx,si
+			      C         shl eax,4
+			      C         add eax,ebx
+			      C         pop ebx
+			      C 
+			      C         endm
+			      C 
+			      C ;
+			      C ; The following two macros are used to enable/disable interrupts at the
+			      C ; adapter interrupt mask register.
+			      C ;
+			      C ENABLE_ADAPTER_INTERRUPT MACRO
+			      C         push   eax
+			      C         push   dx
+			      C         mov    dx, p_CR7
+			      C         mov    eax, CR7_K_DEFAULT_ON
+			      C         out    dx, eax
+			      C         pop    dx
+			      C         pop    eax
+			      C         ENDM
+			      C 
+			      C DISABLE_ADAPTER_INTERRUPT MACRO
+			      C         push   eax
+			      C         push   dx
+			      C 
+			      C         mov    dx, p_CR7
+			      C         mov    eax, CR7_K_DEFAULT_OFF
+			      C         out    dx, eax
+			      C 
+			      C         pop    dx
+			      C         pop    eax
+			      C 
+			      C         ENDM
+			      C 
+			      C ;**********
+			      C ;
+			      C ; ENTER_ISR
+			      C ;
+			      C ; This macro expands into the operating system specific preamble for the
+			      C ; device ISR. For MS-DOS, a local stack is created.
+			      C ; This macro is used in conjunction with the EXIT_ISR macro.
+			      C ;
+			      C ;**********
+			      C 
+			      C ENTER_ISR macro
+			      C 
+			      C ;
+			      C ; If this is MSDOS, save all general registers, and the segment registers
+			      C ;
+			      C         pushad                          ; Save general regs on calling stack
+			      C         push    ds                      ; Save the DS on the CALLING stack
+			      C         push    es                      ; Save the ES on the CALLING stack
+			      C 
+			      C         mov     ax, cs                  ; DS = CS
+			      C         mov     ds, ax
+			      C 
+			      C         endm
+			      C 
+			      C ;**********
+			      C ;
+			      C ; EXIT_ISR
+			      C ;
+			      C ; This macro expands into the operating system specific exit code for the
+			      C ; device ISR. For MS-DOS, the stack is restored, and a return from
+			      C ; interrupt is issued. 
+			      C ;
+			      C ;**********
+			      C 
+			      C EXIT_ISR macro
+			      C 
+			      C ;
+			      C ; For MS-DOS, restore the stack, and issue an IRET
+			      C ;
+			      C 
+			      C         pop  es                 ; Restore ES from the CALLING Stack
+			      C         pop  ds                 ; Restore DS from the CALLING Stack
+			      C 
+			      C         popad                   ; Restore general registers
+			      C         iret
+			      C 
+			      C         endm
+			      C 
+			      C ;**********
+			      C ;
+			      C ; POP_REGISTERS
+			      C ;
+			      C ; This macro expands into code to restore the stack.  It is used for DOS
+			      C ; interrupt sharing.  Note that the stack in use should be the one used by
+			      C ; the caller.
+			      C ;
+			      C ;**********
+			      C 
+			      C POP_REGISTERS macro
+			      C 
+			      C         pop  es                 ; Restore ES from the CALLING Stack
+			      C         pop  ds                 ; Restore DS from the CALLING Stack
+			      C 
+			      C         popad                   ; Restore general registers
+			      C 
+			      C         endm
+			      C 
+			      C SAVE_DOS_STACK  macro
+			      C 
+			      C         mov     cs:[save_int_ss], ss            ;; save the stack
+			      C         mov     cs:[save_int_sp], sp            ;; save the stack offset
+			      C         mov     ax, cs                          ; SS = CS
+			      C         mov     ss, ax
+			      C         mov     sp, OFFSET our_stack              ;; set the local stack
+			      C         endm
+			      C 
+			      C RESTORE_DOS_STACK  macro
+			      C 
+			      C         mov  ss, cs:[save_int_ss]               ;; Restore calling stack
+			      C         mov  sp, cs:[save_int_sp]
+			      C 
+			      C         endm
+			      C 
+			      C ;**********
+			      C ;
+			      C ; ACK_PIC_INTERRUPT
+			      C ;
+			      C ; This macro expands into the operating system specific code to acknowledge
+			      C ; the PIC hardware interrupt. 
+			      C ;
+			      C ;**********
+			      C 
+			      C ACK_PIC_INTERRUPT macro
+			      C         LOCAL   ack_master
+			      C 
+			      C         mov     al, 20h                 ; issue EOI to PIC(s), Non-specific EOI
+			      C         test    CS:PICAckSlave,0FFh
+			      C         jz      ack_master
+			      C         out     0A0h, al                ; issue EOI to the slave PIC
+			      C ack_master:
+			      C         out     020h, al                ; issue EOI to the master PIC
+			      C 
+			      C         endm
+			      C 
+				include xmt.inc
+			      C EXTRN   XmtNumBuffers : WORD
+			      C EXTRN   XmtInit : NEAR
+			      C EXTRN  XmtReset:NEAR
+			      C EXTRN  XmtDisable:NEAR
+			      C 
+				include rcv.inc
+			      C EXTRN   RcvNumBUffers : WORD
+			      C EXTRN   RcvInit : NEAR
+			      C EXTRN RcvDisable:NEAR
+			      C EXTRN RcvReset:NEAR
+			      C 
+			      C 
+
+				;
+				; DOS EMM Virtual DMA Services structures and constants
+				;
+
+ 0010				DDSStruc  STRUC
+ 0000  00000000			   DDSSize	DD ?
+ 0004  00000000			   DDSOffset	DD ?
+ 0008  0000			   DDSSegment	DW ?
+ 000A  0000			   DDSID	DW ?
+ 000C  00000000			   DDSPhysical	DD ?
+				DDSStruc  ENDS
+
+ = 0040				EMMMagicSegment  EQU  0040h   ; Location 0040:007B is the magic EMM active
+ = 007B				EMMMagicOffset	 EQU  007Bh   ; byte in DOS. If bit <5> is set in this location
+ = 0020				EMMMagicMask	 EQU  20h     ; then the driver is being loaded high.
+
+ 04A0 00			EMMActiveFlag	DB  0		; Flag indicating that EMM386 or other VDS
+								; Memory Manager is active in DOS.
+
+ 04A1 00000000 00000000		DDSBlock	DDSStruc<>	; Structure for accessing VDS services in DOS.
+       0000 0000 00000000
+
+ 04B1 0000			p_EndVirt      DW 0
+ 04B3 00000000			p_EndPhys      DD 0
+
+				;*****************************
+				;* AllocatePhysicalBlock *
+				;*****************************
+				;
+				; This function allocates and initializes the physical block of memory used
+				; for Transmit and Receive DMA operations.
+				;
+				; Returns: Carry set if error, clear if success. All registers preserved.
+				;
+				; Algorithm:
+				; BEGIN
+				;    Call XmtInit with null arg to size Xmt block
+				;    Call RcvInit with null arg to size Rcv block
+				;    Calculate physical address of block starting at EndOfDataSegment
+				;    Call XmtInit with actual args to init Xmt module
+				;    Update physical and virtual pointers with byte count returned by XmtInit
+				;    Call RcvInit with actual args to init Rcv module
+				;    Update physical and virtual pointers with byte count returned by RcvInit
+				;
+				;
+					PUBLIC AllocatePhysicalBlock
+ 04B7				AllocatePhysicalBlock PROC NEAR
+ 04B7  66| 60				pushad
+
+								    ; Call XmtInit with null address args
+ 04B9  66| 68 00000000			push   DWORD PTR 0	    ; to get block size in AX
+ 04BF  68 0000				push   WORD PTR 0
+ 04C2  E8 0000 E			call   XmtInit		;; Return Bytes used in AX (XMT.ASM)
+ 04C5  83 C4 06				add    sp, 6		;; Pop Stack
+ 04C8  A3 0000 E			mov    PhysBlockSize, AX    ; Init PhysBlockSize with AX
+
+								    ; Call RcvInit with null address args
+ 04CB  66| 68 00000000			push   DWORD PTR 0	    ; to get block size in AX
+ 04D1  68 0000				push   WORD PTR 0
+ 04D4  E8 0000 E			call   RcvInit		;; Return Bytes used in AX (RCV.ASM)
+ 04D7  83 C4 06				add    sp, 6		;; Pop Stack
+ 04DA  01 06 0000 E			add    PhysBlockSize, AX    ; Add AX to running total in PhysBlockSize
+				;				;; PhysBlockSize = Total number of bytes for Xmt/Rcv.
+				; At this point, PhysBlockSize contiains the size, in bytes, of the combined
+				; requrements of the transmit and receive modules.
+				;
+
+				;
+				; In DOS, first check to see if a memory manager with virtual DMA services
+				; is active. This is done by checking the 'magic' memory location 0040:007B
+				; bit<5>. If this bit is set, the virtual DMA serices package is available
+				; in software INT 4Bh. If it is not set, we can assume that linear=physical
+				; (physical = (SEG*16) + OFFSET).
+				;
+ 04DE  06				push es
+ 04DF  56				push si
+ 04E0  B8 0040				mov  ax, EMMMagicSegment	;; 0040h
+ 04E3  8E C0				mov  es, ax
+ 04E5  B8 007B				mov  ax, EMMMagicOffset 	;; 007Bh
+ 04E8  8B F0				mov  si, ax
+ 04EA  26: 8A 04			mov  al, BYTE PTR ES:[SI]
+ 04ED  24 20				and  al, EMMMagicMask
+ 04EF  A2 04A0 R			mov  EMMActiveFlag, al
+ 04F2				iapb_no_emm:
+ 04F2  5E				pop  si
+ 04F3  07				pop  es
+
+ 04F4  8B 36 0000 E			mov si, free_mem	   ;  DS:SI Points to EODS
+
+ 04F8  F6 06 04A0 R FF			test EMMActiveFlag, 0FFh
+ 04FD  75 17				jnz  iapb_emm_active
+
+					DSSI_TO_PHYSICAL		   ;  DS:SI to physical in EAX
+ 04FF  66| 53		     1	        push ebx
+ 0501  66| 33 C0	     1	        xor eax,eax
+ 0504  66| 33 DB	     1	        xor ebx,ebx
+ 0507  8C D8		     1	        mov ax,ds
+ 0509  8B DE		     1	        mov bx,si
+ 050B  66| C1 E0 04	     1	        shl eax,4
+ 050F  66| 03 C3	     1	        add eax,ebx
+ 0512  66| 5B		     1	        pop ebx
+
+ 0514  EB 2F				jmp iapb_continue
+
+ 0516				iapb_emm_active:			   ;   EMM is active, so...
+ 0516  8C D8				mov   ax, ds
+ 0518  8E C0				mov   es, ax		;; ES = DS
+ 051A  BF 04A1 R			mov   di, OFFSET DDSBlock
+ 051D  66| 33 DB			xor   ebx, ebx
+ 0520  8B 1E 0000 E			mov   bx, PhysBlockSize
+ 0524  66| 26: 89 1D			mov   ES:[di].DDSStruc.DDSSize, ebx ;	Lock down a block of memory
+ 0528  66| 0F B7 DE			movzx ebx, si			    ;; EndOfDataSegment
+ 052C  66| 26: 89 5D 04			mov   ES:[di].DDSStruc.DDSOffset, ebx ;   Starting at EndOfDataSegment
+ 0531  26: 89 45 08			mov   ES:[di].DDSStruc.DDSSegment, ax
+ 0535  B4 81				mov   ah, 81h			;; LOCK DMA REGION
+ 0537  B0 03				mov   al, 03h
+ 0539  BA 0000				mov   dx, 0
+ 053C  CD 4B				int   4Bh			   ;   Call DMA Lock Service
+ 053E  72 17				jc    iapb_error_exit		   ;   Any errors, abort init
+ 0540  66| 26: 8B 45 0C			mov   eax, ES:[di].DDSStruc.DDSPhysical
+
+ 0545				iapb_continue:
+
+				;
+				; At this point, DS:SI points to the end of the data segment, and EAX
+				; holds the physical address of DS:SI. Now call the transmit and receive
+				; init functions with real parameters.
+				;
+
+ 0545  89 36 04B1 R			mov    p_EndVirt, si
+ 0549  89 36 0000 E			mov    p_PhysBlockVirt, si
+ 054D  66| A3 04B3 R			mov    p_EndPhys, eax
+ 0551  66| A3 0000 E			mov    p_PhysBlockPhys, eax
+
+ 0555  EB 03				jmp    iapb_done	    ; Return success
+
+
+ 0557				iapb_error_exit:
+ 0557  F9				stc				  ; Indicate Failure
+ 0558  EB 0B				jmp  iapb_exit			  ; Exit
+
+ 055A				iapb_done:
+ 055A  A1 04B1 R			mov ax, p_EndVirt
+ 055D  03 06 0000 E			add ax, PhysBlockSize		;; Init. Ds + (Xmt/Rcv buffer)
+ 0561  A3 0000 E			mov free_mem, ax	  ; Update EndOfDataSegment(Physical)
+ 0564  F8				clc				  ; Indicate Success
+
+ 0565				iapb_exit:
+ 0565  66| 61				popad
+ 0567  C3				ret
+ 0568				AllocatePhysicalBlock ENDP
+ 0568				code		ends
+
+						end
+ 
+Microsoft (R) Macro Assembler Version 6.11		    08/31/01 09:41:39
+.\initpci.asm						     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+ACK_PIC_INTERRUPT  . . . . . . .	Proc
+DISABLE_ADAPTER_INTERRUPT  . . .	Proc
+DSSI_TO_PHYSICAL . . . . . . . .	Proc
+ENABLE_ADAPTER_INTERRUPT . . . .	Proc
+ENTER_ISR  . . . . . . . . . . .	Proc
+EXIT_ISR . . . . . . . . . . . .	Proc
+POP_REGISTERS  . . . . . . . . .	Proc
+RESTORE_DOS_STACK  . . . . . . .	Proc
+SAVE_DOS_STACK . . . . . . . . .	Proc
+
+
+Structures and Unions:
+
+                N a m e                  Size
+                                         Offset      Type
+
+DDSStruc . . . . . . . . . . . .	 0010
+  DDSSize  . . . . . . . . . . .	 0000	     DWord
+  DDSOffset  . . . . . . . . . .	 0004	     DWord
+  DDSSegment . . . . . . . . . .	 0008	     Word
+  DDSID  . . . . . . . . . . . .	 000A	     Word
+  DDSPhysical  . . . . . . . . .	 000C	     DWord
+RCV_DESCRIPTOR . . . . . . . . .	 0020
+  RDES0  . . . . . . . . . . . .	 0000	     DWord
+  RDES1  . . . . . . . . . . . .	 0004	     DWord
+  RDES2  . . . . . . . . . . . .	 0008	     DWord
+  RDES3  . . . . . . . . . . . .	 000C	     DWord
+  p_RcvBuffer  . . . . . . . . .	 0010	     Word
+  p_RcvNext  . . . . . . . . . .	 0012	     Word
+  p_Dummy1 . . . . . . . . . . .	 0014	     DWord
+  p_Dummy2 . . . . . . . . . . .	 0018	     DWord
+  p_Dummy3 . . . . . . . . . . .	 001C	     DWord
+SIA_CONFIG . . . . . . . . . . .	 000C
+  CR13 . . . . . . . . . . . . .	 0000	     DWord
+  CR14 . . . . . . . . . . . . .	 0004	     DWord
+  CR15 . . . . . . . . . . . . .	 0008	     DWord
+SROM_MotolorA_Contents . . . . .	 006D
+  MA_SS_Vendor_ID  . . . . . . .	 0000	     Word
+  MA_SS_ID . . . . . . . . . . .	 0002	     Word
+  MA_Cardbus_Low . . . . . . . .	 0004	     Word
+  MA_Cardbus_High  . . . . . . .	 0006	     Word
+  MA_ID_Reserved1  . . . . . . .	 0008	     Byte
+  MA_ID_Bk_Crc . . . . . . . . .	 0010	     Byte
+  MA_ID_Reserved2  . . . . . . .	 0011	     Byte
+  MA_SROM_version  . . . . . . .	 0012	     Byte
+  MA_Controller_cnt  . . . . . .	 0013	     Byte
+  MA_Ether_Addr  . . . . . . . .	 0014	     Byte
+  MA_Dev_Number  . . . . . . . .	 001A	     Byte
+  MA_IL_Offset . . . . . . . . .	 001B	     Word
+  MA_Inf_Reserved3 . . . . . . .	 001D	     Byte
+  MA_Sel_Conn_type . . . . . . .	 001E	     Word
+  MA_Gen_Pur_Ctrl  . . . . . . .	 0020	     Byte
+  MA_Blk_cnt . . . . . . . . . .	 0021	     Byte
+  MA_F1_Length_2 . . . . . . . .	 0022	     Byte
+  MA_Type3 . . . . . . . . . . .	 0023	     Byte
+  MA_10BaseT_Code  . . . . . . .	 0024	     Byte
+  MA_GprData10 . . . . . . . . .	 0025	     Byte
+  MA_Comm10  . . . . . . . . . .	 0026	     Word
+  MA_F1_Length_3 . . . . . . . .	 0028	     Byte
+  MA_Type4 . . . . . . . . . . .	 0029	     Byte
+  MA_100BaseT_Code . . . . . . .	 002A	     Byte
+  MA_GprData100  . . . . . . . .	 002B	     Byte
+  MA_Comm100 . . . . . . . . . .	 002C	     Word
+  MA_F1_Length_4 . . . . . . . .	 002E	     Byte
+  MA_Type5 . . . . . . . . . . .	 002F	     Byte
+  MA_10BaseFD_Code . . . . . . .	 0030	     Byte
+  MA_GprData10FD . . . . . . . .	 0031	     Byte
+  MA_Comm10FD  . . . . . . . . .	 0032	     Word
+  MA_F1_Length_5 . . . . . . . .	 0034	     Byte
+  MA_Type6 . . . . . . . . . . .	 0035	     Byte
+  MA_100BaseFD . . . . . . . . .	 0036	     Byte
+  MA_GprData100FD  . . . . . . .	 0037	     Byte
+  MA_Comm100FD . . . . . . . . .	 0038	     Word
+  MA_Reserved4 . . . . . . . . .	 003A	     Byte
+  MA_SROM_CRC  . . . . . . . . .	 006B	     Byte
+SROM_NS_Contents . . . . . . . .	 0082
+  NS_SS_Vendor_ID  . . . . . . .	 0000	     Word
+  NS_SS_ID . . . . . . . . . . .	 0002	     Word
+  NS_Cardbus_Low . . . . . . . .	 0004	     Word
+  NS_Cardbus_High  . . . . . . .	 0006	     Word
+  NS_ID_Reserved1  . . . . . . .	 0008	     Byte
+  NS_ID_Bk_Crc . . . . . . . . .	 0010	     Byte
+  NS_ID_Reserved2  . . . . . . .	 0011	     Byte
+  NS_SROM_version  . . . . . . .	 0012	     Byte
+  NS_Controller_cnt  . . . . . .	 0013	     Byte
+  NS_Ether_Addr  . . . . . . . .	 0014	     Byte
+  NS_Dev_Number  . . . . . . . .	 001A	     Byte
+  NS_IL_Offset . . . . . . . . .	 001B	     Word
+  NS_Inf_Reserved3 . . . . . . .	 001D	     Byte
+  NS_Sel_Conn_type . . . . . . .	 001E	     Word
+  NS_Gen_Pur_Ctrl  . . . . . . .	 0020	     Byte
+  NS_Blk_cnt . . . . . . . . . .	 0021	     Byte
+  NS_F1_Length_0 . . . . . . . .	 0022	     Byte
+  NS_Type1 . . . . . . . . . . .	 0023	     Byte
+  NS_PHY_Number  . . . . . . . .	 0024	     Byte
+  NS_GPR_Seq_Len . . . . . . . .	 0025	     Byte
+  NS_RST_Seq_Len . . . . . . . .	 0026	     Byte
+  NS_RST_Seq_0 . . . . . . . . .	 0027	     Byte
+  NS_RST_Seq_1 . . . . . . . . .	 0028	     Byte
+  NS_Media_Cap . . . . . . . . .	 0029	     Word
+  NS_Nway_Adv  . . . . . . . . .	 002B	     Word
+  NS_FDX_Map . . . . . . . . . .	 002D	     Word
+  NS_TTM_Map . . . . . . . . . .	 002F	     Word
+  NS_F1_Length_1 . . . . . . . .	 0031	     Byte
+  NS_Type2 . . . . . . . . . . .	 0032	     Byte
+  NS_Delay_Seq_0 . . . . . . . .	 0033	     Word
+  NS_Delay_seq_1 . . . . . . . .	 0035	     Word
+  NS_F1_Length_2 . . . . . . . .	 0037	     Byte
+  NS_Type3 . . . . . . . . . . .	 0038	     Byte
+  NS_10BaseT_Code  . . . . . . .	 0039	     Byte
+  NS_GprData10 . . . . . . . . .	 003A	     Byte
+  NS_Comm10  . . . . . . . . . .	 003B	     Word
+  NS_F1_Length_3 . . . . . . . .	 003D	     Byte
+  NS_Type4 . . . . . . . . . . .	 003E	     Byte
+  NS_100BaseT_Code . . . . . . .	 003F	     Byte
+  NS_GprData100  . . . . . . . .	 0040	     Byte
+  NS_Comm100 . . . . . . . . . .	 0041	     Word
+  NS_F1_Length_4 . . . . . . . .	 0043	     Byte
+  NS_Type5 . . . . . . . . . . .	 0044	     Byte
+  NS_10BaseFD_Code . . . . . . .	 0045	     Byte
+  NS_GprData10FD . . . . . . . .	 0046	     Byte
+  NS_Comm10FD  . . . . . . . . .	 0047	     Word
+  NS_F1_Length_5 . . . . . . . .	 0049	     Byte
+  NS_Type6 . . . . . . . . . . .	 004A	     Byte
+  NS_100BaseFD . . . . . . . . .	 004B	     Byte
+  NS_GprData100FD  . . . . . . .	 004C	     Byte
+  NS_Comm100FD . . . . . . . . .	 004D	     Word
+  NS_Reserved4 . . . . . . . . .	 004F	     Byte
+  NS_SROM_CRC  . . . . . . . . .	 0080	     Byte
+XMT_DESCRIPTOR . . . . . . . . .	 0020
+  TDES0  . . . . . . . . . . . .	 0000	     DWord
+  TDES1  . . . . . . . . . . . .	 0004	     DWord
+  TDES2  . . . . . . . . . . . .	 0008	     DWord
+  TDES3  . . . . . . . . . . . .	 000C	     DWord
+  p_XmtBuffer  . . . . . . . . .	 0010	     Word
+  p_XmtNext  . . . . . . . . . .	 0012	     Word
+  p_Dummy1 . . . . . . . . . . .	 0014	     DWord
+  p_Dummy2 . . . . . . . . . . .	 0018	     DWord
+  p_Dummy3 . . . . . . . . . . .	 001C	     DWord
+
+
+Types:
+
+                N a m e                  Size     Attr
+
+SIA_CONFIG_PTR . . . . . . . . .	 0002	  PTR SIA_CONFIG 
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+code . . . . . . . . . . . . . .	16 Bit	 0568	  Para	  Public  
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+AllocatePhysicalBlock  . . . . .	P Near	 04B7	  code	Length= 00B1 Public
+GetAdapterConfig . . . . . . . .	P Near	 03FC	  code	Length= 0066 Private
+InitAdapterProbe . . . . . . . .	P Near	 0163	  code	Length= 0023 Public
+InitConfigRegRead  . . . . . . .	P Near	 03BE	  code	Length= 001E Public
+InitConfigRegWrite . . . . . . .	P Near	 03DC	  code	Length= 0020 Public
+InitDM9100RegOffsets . . . . . .	P Near	 0284	  code	Length= 00A4 Private
+InitPCICheckBIOS . . . . . . . .	P Near	 0186	  code	Length= 0026 Private
+InitPCIFindDevice  . . . . . . .	P Near	 01AC	  code	Length= 0126 Private
+InitPCIGetBase . . . . . . . . .	P Near	 0264	  code	Length= 0020 Private
+InitPCIGetPCIID  . . . . . . . .	P Near	 024A	  code	Length= 001A Private
+InitPrintHexByte . . . . . . . .	P Near	 0478	  code	Length= 0028 Public
+InitPrintMessage . . . . . . . .	P Near	 0462	  code	Length= 0016 Public
+PCIResourceCheck . . . . . . . .	P Near	 0328	  code	Length= 0096 Private
+initpci  . . . . . . . . . . . .	P Near	 012A	  code	Length= 0039 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0001h	 
+@code  . . . . . . . . . . . . .	Text   	 DGROUP
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+AUI_SIAConfig  . . . . . . . . .	Number	 0003h	 
+BNC_SIAConfig  . . . . . . . . .	Number	 0002h	 
+CR0_K_BL_0LW . . . . . . . . . .	Number	 0000h	 
+CR0_K_BL_16LW  . . . . . . . . .	Number	 0010h	 
+CR0_K_BL_1LW . . . . . . . . . .	Number	 0001h	 
+CR0_K_BL_2LW . . . . . . . . . .	Number	 0002h	 
+CR0_K_BL_32LW  . . . . . . . . .	Number	 0020h	 
+CR0_K_BL_4LW . . . . . . . . . .	Number	 0004h	 
+CR0_K_BL_8LW . . . . . . . . . .	Number	 0008h	 
+CR0_K_CA_0LW . . . . . . . . . .	Number	 0000h	 
+CR0_K_CA_16LW  . . . . . . . . .	Number	 0002h	 
+CR0_K_CA_32LW  . . . . . . . . .	Number	 0003h	 
+CR0_K_CA_8LW . . . . . . . . . .	Number	 0001h	 
+CR0_K_DGW_0LW  . . . . . . . . .	Number	 0000h	 
+CR0_K_DGW_1LW  . . . . . . . . .	Number	 0001h	 
+CR0_K_DGW_2LW  . . . . . . . . .	Number	 0002h	 
+CR0_K_DGW_3LW  . . . . . . . . .	Number	 0003h	 
+CR0_K_DGW_4LW  . . . . . . . . .	Number	 0004h	 
+CR0_K_TXAP_128_USEC  . . . . . .	Number	 0004h	 
+CR0_K_TXAP_1600_USEC . . . . . .	Number	 0003h	 
+CR0_K_TXAP_200_USEC  . . . . . .	Number	 0001h	 
+CR0_K_TXAP_800_USEC  . . . . . .	Number	 0002h	 
+CR0_K_TXAP_NONE  . . . . . . . .	Number	 0000h	 
+CR0_M_BA . . . . . . . . . . . .	Number	 0002h	 
+CR0_M_BL . . . . . . . . . . . .	Number	 3F00h	 
+CR0_M_CA . . . . . . . . . . . .	Number	 C000h	 
+CR0_M_DAS  . . . . . . . . . . .	Number	 00010000h   
+CR0_M_DGW  . . . . . . . . . . .	Number	 007Ch	 
+CR0_M_RESERVED07 . . . . . . . .	Number	 0080h	 
+CR0_M_RESERVED . . . . . . . . .	Number	 FFF80000h   
+CR0_M_SR . . . . . . . . . . . .	Number	 0001h	 
+CR0_M_TXAP . . . . . . . . . . .	Number	 00060000h   
+CR0_V_BA . . . . . . . . . . . .	Number	 0001h	 
+CR0_V_BL . . . . . . . . . . . .	Number	 0008h	 
+CR0_V_CA . . . . . . . . . . . .	Number	 000Eh	 
+CR0_V_DAS  . . . . . . . . . . .	Number	 0010h	 
+CR0_V_DGW  . . . . . . . . . . .	Number	 0002h	 
+CR0_V_RESERVED07 . . . . . . . .	Number	 0007h	 
+CR0_V_RESERVED . . . . . . . . .	Number	 0013h	 
+CR0_V_SR . . . . . . . . . . . .	Number	 0000h	 
+CR0_V_TXAP . . . . . . . . . . .	Number	 0011h	 
+CR11_M_FDX_AUTO_CONFIG . . . . .	Number	 FFFFh	 
+CR11_M_RESERVED  . . . . . . . .	Number	 FFFF0000h   
+CR11_V_FDX_AUTO_CONFIG . . . . .	Number	 0000h	 
+CR11_V_RESERVED  . . . . . . . .	Number	 0010h	 
+CR12_K_INBOARD_LOOPBACK  . . . .	Number	 000Ah	 
+CR12_K_INIT_VAL  . . . . . . . .	Number	 013Fh	 
+CR12_K_NORMAL_MODE . . . . . . .	Number	 000Bh	 
+CR12_K_ONBOARD_LOOPBACK  . . . .	Number	 0008h	 
+CR12_M_GPC . . . . . . . . . . .	Number	 0100h	 
+CR12_M_LNK . . . . . . . . . . .	Number	 0004h	 
+CR12_M_MD  . . . . . . . . . . .	Number	 00FFh	 
+CR12_M_NCR . . . . . . . . . . .	Number	 0002h	 
+CR12_M_RESERVED  . . . . . . . .	Number	 FFFFFE00h   
+CR12_V_GPC . . . . . . . . . . .	Number	 0008h	 
+CR12_V_MD  . . . . . . . . . . .	Number	 0000h	 
+CR12_V_RESERVED  . . . . . . . .	Number	 0009h	 
+CR13_M_ASE . . . . . . . . . . .	Number	 0080h	 
+CR13_M_AUI . . . . . . . . . . .	Number	 0008h	 
+CR13_M_CAC . . . . . . . . . . .	Number	 0004h	 
+CR13_M_EDP . . . . . . . . . . .	Number	 0010h	 
+CR13_M_ENI . . . . . . . . . . .	Number	 0020h	 
+CR13_M_IE  . . . . . . . . . . .	Number	 1000h	 
+CR13_M_OE13  . . . . . . . . . .	Number	 2000h	 
+CR13_M_OE24  . . . . . . . . . .	Number	 4000h	 
+CR13_M_OE57  . . . . . . . . . .	Number	 8000h	 
+CR13_M_PS  . . . . . . . . . . .	Number	 0002h	 
+CR13_M_RESERVED  . . . . . . . .	Number	 FFFF0000h   
+CR13_M_SEL . . . . . . . . . . .	Number	 0F00h	 
+CR13_M_SIM . . . . . . . . . . .	Number	 0040h	 
+CR13_M_SRL . . . . . . . . . . .	Number	 0001h	 
+CR13_V_ASE . . . . . . . . . . .	Number	 0007h	 
+CR13_V_AUI . . . . . . . . . . .	Number	 0003h	 
+CR13_V_CAC . . . . . . . . . . .	Number	 0002h	 
+CR13_V_EDP . . . . . . . . . . .	Number	 0004h	 
+CR13_V_ENI . . . . . . . . . . .	Number	 0005h	 
+CR13_V_IE  . . . . . . . . . . .	Number	 000Ch	 
+CR13_V_OE13  . . . . . . . . . .	Number	 000Dh	 
+CR13_V_OE24  . . . . . . . . . .	Number	 000Eh	 
+CR13_V_OE57  . . . . . . . . . .	Number	 000Fh	 
+CR13_V_PS  . . . . . . . . . . .	Number	 0001h	 
+CR13_V_RESERVED  . . . . . . . .	Number	 0010h	 
+CR13_V_SEL . . . . . . . . . . .	Number	 0008h	 
+CR13_V_SIM . . . . . . . . . . .	Number	 0006h	 
+CR13_V_SRL . . . . . . . . . . .	Number	 0000h	 
+CR1_M_RESERVED . . . . . . . . .	Number	 FFFFFFFEh   
+CR1_M_TPD  . . . . . . . . . . .	Number	 0001h	 
+CR1_V_RESERVED . . . . . . . . .	Number	 0001h	 
+CR1_V_TPD  . . . . . . . . . . .	Number	 0000h	 
+CR2_M_RESERVED . . . . . . . . .	Number	 FFFFFFFEh   
+CR2_M_RPD  . . . . . . . . . . .	Number	 0001h	 
+CR2_V_RESERVED . . . . . . . . .	Number	 0001h	 
+CR2_V_RPD  . . . . . . . . . . .	Number	 0000h	 
+CR5_K_RXS_PURGE  . . . . . . . .	Number	 0007h	 
+CR5_K_RXS_RUN_DESC_ACCESS  . . .	Number	 0001h	 
+CR5_K_RXS_RUN_MOVE_DATA  . . . .	Number	 0003h	 
+CR5_K_RXS_RUN_WAIT . . . . . . .	Number	 0002h	 
+CR5_K_RXS_RUN_WRITE_OWNER  . . .	Number	 0004h	 
+CR5_K_RXS_RUN_WRITE_STATUS . . .	Number	 0005h	 
+CR5_K_RXS_STOPPED  . . . . . . .	Number	 0000h	 
+CR5_K_RXS_SUSPEND  . . . . . . .	Number	 0006h	 
+CR5_K_SBEB_MASTER_ABORT  . . . .	Number	 0001h	 
+CR5_K_SBEB_PARITY_ERROR  . . . .	Number	 0000h	 
+CR5_K_SBEB_TARGET_ABORT  . . . .	Number	 0002h	 
+CR5_K_TXS_RUN_DESC_ACCESS  . . .	Number	 0001h	 
+CR5_K_TXS_RUN_MOVE_DATA  . . . .	Number	 0003h	 
+CR5_K_TXS_RUN_SETUP_MOVE . . . .	Number	 0002h	 
+CR5_K_TXS_RUN_WAIT . . . . . . .	Number	 0005h	 
+CR5_K_TXS_RUN_WRITE_OWNER  . . .	Number	 0004h	 
+CR5_K_TXS_RUN_WRITE_STATUS . . .	Number	 0006h	 
+CR5_K_TXS_STOPPED  . . . . . . .	Number	 0000h	 
+CR5_K_TXS_SUSPEND  . . . . . . .	Number	 0007h	 
+CR5_M_AIS  . . . . . . . . . . .	Number	 8000h	 
+CR5_M_ETI  . . . . . . . . . . .	Number	 0400h	 
+CR5_M_GPT  . . . . . . . . . . .	Number	 0800h	 
+CR5_M_NIS  . . . . . . . . . . .	Number	 00010000h   
+CR5_M_RESERVED_2 . . . . . . . .	Number	 4000h	 
+CR5_M_RESERVED_3 . . . . . . . .	Number	 0010h	 
+CR5_M_RESERVED . . . . . . . . .	Number	 FC000000h   
+CR5_M_RXCI . . . . . . . . . . .	Number	 0040h	 
+CR5_M_RXDU . . . . . . . . . . .	Number	 0080h	 
+CR5_M_RXPS . . . . . . . . . . .	Number	 0100h	 
+CR5_M_RXS  . . . . . . . . . . .	Number	 000E0000h   
+CR5_M_RXWT . . . . . . . . . . .	Number	 0200h	 
+CR5_M_SBEB . . . . . . . . . . .	Number	 03800000h   
+CR5_M_SBE  . . . . . . . . . . .	Number	 2000h	 
+CR5_M_TXCI . . . . . . . . . . .	Number	 0001h	 
+CR5_M_TXDU . . . . . . . . . . .	Number	 0004h	 
+CR5_M_TXFU . . . . . . . . . . .	Number	 0020h	 
+CR5_M_TXJT . . . . . . . . . . .	Number	 0008h	 
+CR5_M_TXPS . . . . . . . . . . .	Number	 0002h	 
+CR5_M_TXS  . . . . . . . . . . .	Number	 00700000h   
+CR5_V_AIS  . . . . . . . . . . .	Number	 000Fh	 
+CR5_V_ETI  . . . . . . . . . . .	Number	 000Ah	 
+CR5_V_GPT  . . . . . . . . . . .	Number	 000Bh	 
+CR5_V_NIS  . . . . . . . . . . .	Number	 0010h	 
+CR5_V_RESERVED_2 . . . . . . . .	Number	 000Eh	 
+CR5_V_RESERVED_3 . . . . . . . .	Number	 0004h	 
+CR5_V_RESERVED . . . . . . . . .	Number	 001Ah	 
+CR5_V_RXCI . . . . . . . . . . .	Number	 0006h	 
+CR5_V_RXDU . . . . . . . . . . .	Number	 0007h	 
+CR5_V_RXPS . . . . . . . . . . .	Number	 0008h	 
+CR5_V_RXS  . . . . . . . . . . .	Number	 0011h	 
+CR5_V_RXWT . . . . . . . . . . .	Number	 0009h	 
+CR5_V_SBEB . . . . . . . . . . .	Number	 0017h	 
+CR5_V_SBE  . . . . . . . . . . .	Number	 000Dh	 
+CR5_V_TXCI . . . . . . . . . . .	Number	 0000h	 
+CR5_V_TXDU . . . . . . . . . . .	Number	 0002h	 
+CR5_V_TXFU . . . . . . . . . . .	Number	 0005h	 
+CR5_V_TXJT . . . . . . . . . . .	Number	 0003h	 
+CR5_V_TXPS . . . . . . . . . . .	Number	 0001h	 
+CR5_V_TXS  . . . . . . . . . . .	Number	 0014h	 
+CR6_DM9009_INIT  . . . . . . . .	Number	 02080082h   
+CR6_K_100MB_INIT . . . . . . . .	Number	 00280000h   
+CR6_K_100MB_TSB_1024_BYTES . . .	Number	 0003h	 
+CR6_K_100MB_TSB_128_BYTES  . . .	Number	 0000h	 
+CR6_K_100MB_TSB_256_BYTES  . . .	Number	 0001h	 
+CR6_K_100MB_TSB_512_BYTES  . . .	Number	 0002h	 
+CR6_K_10MB_TSB_128_BYTES . . . .	Number	 0002h	 
+CR6_K_10MB_TSB_160_BYTES . . . .	Number	 0003h	 
+CR6_K_10MB_TSB_72_BYTES  . . . .	Number	 0000h	 
+CR6_K_10MB_TSB_96_BYTES  . . . .	Number	 0001h	 
+CR6_K_10MB_TSB_DEFAULT . . . . .	Text   	 CR6_K_10MB_TSB_72_BYTES
+CR6_M_DM9009_ALWAYS  . . . . . .	Number	 02000000h   
+CR6_M_FCM  . . . . . . . . . . .	Number	 1000h	 
+CR6_M_FDM  . . . . . . . . . . .	Number	 0200h	 
+CR6_M_HBD  . . . . . . . . . . .	Number	 00080000h   
+CR6_M_HOFM . . . . . . . . . . .	Number	 0004h	 
+CR6_M_HPFM . . . . . . . . . . .	Number	 0001h	 
+CR6_M_IAFM . . . . . . . . . . .	Number	 0010h	 
+CR6_M_ISRW . . . . . . . . . . .	Number	 0100h	 
+CR6_M_LBM  . . . . . . . . . . .	Number	 0C00h	 
+CR6_M_MSF  . . . . . . . . . . .	Number	 00800000h   
+CR6_M_MSPS . . . . . . . . . . .	Number	 00040000h   
+CR6_M_PAM  . . . . . . . . . . .	Number	 0080h	 
+CR6_M_PBF  . . . . . . . . . . .	Number	 0008h	 
+CR6_M_PM . . . . . . . . . . . .	Number	 0040h	 
+CR6_M_RESERVED1_1  . . . . . . .	Number	 -80000000h   
+CR6_M_RESERVED2_1  . . . . . . .	Number	 20000000h   
+CR6_M_RESERVED3_0  . . . . . . .	Number	 38000000h   
+CR6_M_RESERVED4_1  . . . . . . .	Number	 04000000h   
+CR6_M_RESERVED5_0  . . . . . . .	Number	 00020000h   
+CR6_M_RESERVED6_0  . . . . . . .	Number	 00010000h   
+CR6_M_RESERVED8_0  . . . . . . .	Number	 0020h	 
+CR6_M_RXA  . . . . . . . . . . .	Number	 40000000h   
+CR6_M_RXSC . . . . . . . . . . .	Number	 0002h	 
+CR6_M_SCM  . . . . . . . . . . .	Number	 01000000h   
+CR6_M_SFT  . . . . . . . . . . .	Number	 00200000h   
+CR6_M_STT  . . . . . . . . . . .	Number	 00100000h   
+CR6_M_TSB  . . . . . . . . . . .	Number	 C000h	 
+CR6_M_TXSC . . . . . . . . . . .	Number	 2000h	 
+CR6_M_TXTM . . . . . . . . . . .	Number	 00400000h   
+CR6_V_FCM  . . . . . . . . . . .	Number	 000Ch	 
+CR6_V_FDM  . . . . . . . . . . .	Number	 0009h	 
+CR6_V_HBD  . . . . . . . . . . .	Number	 0013h	 
+CR6_V_HOFM . . . . . . . . . . .	Number	 0002h	 
+CR6_V_HPFM . . . . . . . . . . .	Number	 0000h	 
+CR6_V_IAFM . . . . . . . . . . .	Number	 0004h	 
+CR6_V_LBM  . . . . . . . . . . .	Number	 000Ah	 
+CR6_V_MSF  . . . . . . . . . . .	Number	 0017h	 
+CR6_V_MSPS . . . . . . . . . . .	Number	 0012h	 
+CR6_V_PAM  . . . . . . . . . . .	Number	 0007h	 
+CR6_V_PBF  . . . . . . . . . . .	Number	 0003h	 
+CR6_V_PM . . . . . . . . . . . .	Number	 0006h	 
+CR6_V_RXSC . . . . . . . . . . .	Number	 0001h	 
+CR6_V_SCM  . . . . . . . . . . .	Number	 0018h	 
+CR6_V_SFT  . . . . . . . . . . .	Number	 0015h	 
+CR6_V_STT  . . . . . . . . . . .	Number	 0014h	 
+CR6_V_TSB  . . . . . . . . . . .	Number	 000Eh	 
+CR6_V_TXSC . . . . . . . . . . .	Number	 000Dh	 
+CR6_V_TXTM . . . . . . . . . . .	Number	 0016h	 
+CR7_K_DEFAULT_OFF  . . . . . . .	Number	 0000h	 
+CR7_K_DEFAULT_ON . . . . . . . .	Number	 00018041h   
+CR7_M_AISE . . . . . . . . . . .	Number	 8000h	 
+CR7_M_ETIE . . . . . . . . . . .	Number	 0400h	 
+CR7_M_GPTE . . . . . . . . . . .	Number	 0800h	 
+CR7_M_NISE . . . . . . . . . . .	Number	 00010000h   
+CR7_M_RESERVED1  . . . . . . . .	Number	 FFFE0000h   
+CR7_M_RESERVED2  . . . . . . . .	Number	 4000h	 
+CR7_M_RESERVED3  . . . . . . . .	Number	 1000h	 
+CR7_M_RESERVED4  . . . . . . . .	Number	 0010h	 
+CR7_M_RXCIE  . . . . . . . . . .	Number	 0040h	 
+CR7_M_RXDUE  . . . . . . . . . .	Number	 0080h	 
+CR7_M_RXPSE  . . . . . . . . . .	Number	 0100h	 
+CR7_M_RXWTE  . . . . . . . . . .	Number	 0200h	 
+CR7_M_SBEE . . . . . . . . . . .	Number	 2000h	 
+CR7_M_TXCIE  . . . . . . . . . .	Number	 0001h	 
+CR7_M_TXDUE  . . . . . . . . . .	Number	 0004h	 
+CR7_M_TXFUE  . . . . . . . . . .	Number	 0020h	 
+CR7_M_TXJTE  . . . . . . . . . .	Number	 0008h	 
+CR7_M_TXPSE  . . . . . . . . . .	Number	 0002h	 
+CR7_V_AISE . . . . . . . . . . .	Number	 000Fh	 
+CR7_V_ETIE . . . . . . . . . . .	Number	 000Ah	 
+CR7_V_GPTE . . . . . . . . . . .	Number	 000Bh	 
+CR7_V_NISE . . . . . . . . . . .	Number	 0010h	 
+CR7_V_RESERVED1  . . . . . . . .	Number	 0011h	 
+CR7_V_RESERVED2  . . . . . . . .	Number	 000Eh	 
+CR7_V_RESERVED4  . . . . . . . .	Number	 0004h	 
+CR7_V_RXCIE  . . . . . . . . . .	Number	 0006h	 
+CR7_V_RXDUE  . . . . . . . . . .	Number	 0007h	 
+CR7_V_RXPSE  . . . . . . . . . .	Number	 0008h	 
+CR7_V_RXWTE  . . . . . . . . . .	Number	 0009h	 
+CR7_V_SBEE . . . . . . . . . . .	Number	 000Dh	 
+CR7_V_TXCIE  . . . . . . . . . .	Number	 0000h	 
+CR7_V_TXDUE  . . . . . . . . . .	Number	 0002h	 
+CR7_V_TXFUE  . . . . . . . . . .	Number	 0005h	 
+CR7_V_TXJTE  . . . . . . . . . .	Number	 0003h	 
+CR7_V_TXPSE  . . . . . . . . . .	Number	 0001h	 
+CR8_M_MIDDED_FRAME_COUNT . . . .	Number	 FFFFh	 
+CR8_M_MISSED_FRAME_OVERFLOW  . .	Number	 00010000h   
+CR8_M_RESERVED . . . . . . . . .	Number	 FFFE0000h   
+CR8_V_MIDDED_FRAME_COUNT . . . .	Number	 0000h	 
+CR8_V_MISSED_FRAME_OVERFLOW  . .	Number	 0010h	 
+CR8_V_RESERVED . . . . . . . . .	Number	 0011h	 
+CR . . . . . . . . . . . . . . .	Number	 000Dh	 
+ChipRev  . . . . . . . . . . . .	Byte	 0006	  code	Public
+ChipType . . . . . . . . . . . .	Byte	 0000	  External
+DC21X4_CHIP  . . . . . . . . . .	Number	 000Ah	 
+DDSBlock . . . . . . . . . . . .	DDSStruc  04A1	   code	
+DM9009_CHIP  . . . . . . . . . .	Number	 0001h	 
+DM9100_CHIP  . . . . . . . . . .	Number	 0000h	 
+DM9102_CHIP  . . . . . . . . . .	Number	 0002h	 
+EMMActiveFlag  . . . . . . . . .	Byte	 04A0	  code	
+EMMMagicMask . . . . . . . . . .	Number	 0020h	 
+EMMMagicOffset . . . . . . . . .	Number	 007Bh	 
+EMMMagicSegment  . . . . . . . .	Number	 0040h	 
+FNET_COMM_MASK . . . . . . . . .	Number	 0071h	 
+FNET_COMM_OFF  . . . . . . . . .	Number	 0012h	 
+FNET_MEDIA_BLK_SIZE  . . . . . .	Number	 0003h	 
+GEN_VER  . . . . . . . . . . . .	Text   	 0
+HOMEPNA  . . . . . . . . . . . .	Text   	 
+HW_K_REG_CR0 . . . . . . . . . .	Number	 0000h	 
+HW_K_REG_CR10  . . . . . . . . .	Number	 0050h	 
+HW_K_REG_CR11  . . . . . . . . .	Number	 0058h	 
+HW_K_REG_CR12  . . . . . . . . .	Number	 0060h	 
+HW_K_REG_CR13  . . . . . . . . .	Number	 0068h	 
+HW_K_REG_CR14  . . . . . . . . .	Number	 0070h	 
+HW_K_REG_CR15  . . . . . . . . .	Number	 0078h	 
+HW_K_REG_CR1 . . . . . . . . . .	Number	 0008h	 
+HW_K_REG_CR2 . . . . . . . . . .	Number	 0010h	 
+HW_K_REG_CR3 . . . . . . . . . .	Number	 0018h	 
+HW_K_REG_CR4 . . . . . . . . . .	Number	 0020h	 
+HW_K_REG_CR5 . . . . . . . . . .	Number	 0028h	 
+HW_K_REG_CR6 . . . . . . . . . .	Number	 0030h	 
+HW_K_REG_CR7 . . . . . . . . . .	Number	 0038h	 
+HW_K_REG_CR8 . . . . . . . . . .	Number	 0040h	 
+HW_K_REG_CR9 . . . . . . . . . .	Number	 0048h	 
+HW_K_REG_PCICS . . . . . . . . .	Number	 0004h	 
+HW_K_REG_PCIID . . . . . . . . .	Number	 0000h	 
+HW_K_REG_PCIINT  . . . . . . . .	Number	 003Ch	 
+HW_K_REG_PCIIO . . . . . . . . .	Number	 0010h	 
+HW_K_REG_PCILT . . . . . . . . .	Number	 000Ch	 
+HW_K_REG_PCIRV . . . . . . . . .	Number	 0008h	 
+HW_K_REG_PCIUSR  . . . . . . . .	Number	 0040h	 
+HW_K_SETUP_FRAME_SIZE  . . . . .	Number	 00C0h	 
+InitConfigCR6Dummy . . . . . . .	DWord	 0007	  code	
+InitHexByteTable . . . . . . . .	Byte	 000B	  code	
+InitMsg_PCI_PCICS_len  . . . . .	Number	 002Ah	 
+InitMsg_PCI_PCICS  . . . . . . .	Byte	 0100	  code	
+InitMsg_PCI_PCIINT_len . . . . .	Number	 0035h	 
+InitMsg_PCI_PCIINT . . . . . . .	Byte	 0091	  code	
+InitMsg_PCI_PCIIO_len  . . . . .	Number	 003Ah	 
+InitMsg_PCI_PCIIO  . . . . . . .	Byte	 00C6	  code	
+InitMsg_bad_slot_id_len  . . . .	Number	 002Dh	 
+InitMsg_bad_slot_id  . . . . . .	Byte	 0054	  code	
+InitMsg_error_len  . . . . . . .	Number	 0010h	 
+InitMsg_error  . . . . . . . . .	Byte	 0081	  code	
+InitMsg_no_adap_len  . . . . . .	Number	 0039h	 
+InitMsg_no_adap  . . . . . . . .	Byte	 001B	  code	
+LF . . . . . . . . . . . . . . .	Number	 000Ah	 
+MAJ_VER  . . . . . . . . . . . .	Text   	 1
+MIN_VER  . . . . . . . . . . . .	Text   	 4
+PCICS_M_BACK_TO_BACK . . . . . .	Number	 00800000h   
+PCICS_M_BUS_MASTER . . . . . . .	Number	 0004h	 
+PCICS_M_DATA_PARITY  . . . . . .	Number	 01000000h   
+PCICS_M_DEVSEL . . . . . . . . .	Number	 06000000h   
+PCICS_M_IO_ACCESS  . . . . . . .	Number	 0001h	 
+PCICS_M_MASTER_ABORT . . . . . .	Number	 20000000h   
+PCICS_M_MEMORY_ACCESS  . . . . .	Number	 0002h	 
+PCICS_M_PARITY_ERROR_DETECTED  .	Number	 0040h	 
+PCICS_M_PARITY_ERROR . . . . . .	Number	 -80000000h   
+PCICS_M_RESERVED_2 . . . . . . .	Number	 007FFC00h   
+PCICS_M_RESERVED_3 . . . . . . .	Number	 0180h	 
+PCICS_M_RESERVED_4 . . . . . . .	Number	 0038h	 
+PCICS_M_RESERVED . . . . . . . .	Number	 08000000h   
+PCICS_M_SERR_ENABLE  . . . . . .	Number	 0200h	 
+PCICS_M_SYSTEM_ERROR . . . . . .	Number	 40000000h   
+PCICS_M_TARGET_ABORT . . . . . .	Number	 10000000h   
+PCICS_V_BACK_TO_BACK . . . . . .	Number	 0017h	 
+PCICS_V_BUS_MASTER . . . . . . .	Number	 0002h	 
+PCICS_V_DATA_PARITY  . . . . . .	Number	 0018h	 
+PCICS_V_DEVSEL . . . . . . . . .	Number	 0019h	 
+PCICS_V_IO_ACCESS  . . . . . . .	Number	 0000h	 
+PCICS_V_MASTER_ABORT . . . . . .	Number	 001Dh	 
+PCICS_V_MEMORY_ACCESS  . . . . .	Number	 0001h	 
+PCICS_V_PARITY_ERROR_DETECTED  .	Number	 0006h	 
+PCICS_V_PARITY_ERROR . . . . . .	Number	 001Fh	 
+PCICS_V_RESERVED_2 . . . . . . .	Number	 000Ah	 
+PCICS_V_RESERVED_3 . . . . . . .	Number	 0007h	 
+PCICS_V_RESERVED_4 . . . . . . .	Number	 0003h	 
+PCICS_V_RESERVED . . . . . . . .	Number	 001Bh	 
+PCICS_V_SERR_ENABLE  . . . . . .	Number	 0009h	 
+PCICS_V_SYSTEM_ERROR . . . . . .	Number	 001Eh	 
+PCICS_V_TARGET_ABORT . . . . . .	Number	 001Ch	 
+PCIHandle  . . . . . . . . . . .	Word	 0004	  code	Public
+PCIIDVal . . . . . . . . . . . .	DWord	 0000	  code	
+PCIID_DM9009_DEVICE_ID . . . . .	Number	 9009h	 
+PCIID_DM9100_DEVICE_ID . . . . .	Number	 9100h	 
+PCIID_DM9102_DEVICE_ID . . . . .	Number	 9102h	 
+PCIID_M_DEVICE_ID  . . . . . . .	Number	 FFFF0000h   
+PCIID_M_VENDOR_IO  . . . . . . .	Number	 FFFFh	 
+PCIID_VENDOR_ID  . . . . . . . .	Number	 1282h	 
+PCIID_V_DEVICE_ID  . . . . . . .	Number	 0010h	 
+PCIID_V_VENDOR_IO  . . . . . . .	Number	 0000h	 
+PCIINT_M_INTERRUPT_LINE  . . . .	Number	 00FFh	 
+PCIINT_M_INTERRUPT_PIN . . . . .	Number	 FF00h	 
+PCIINT_M_RESERVED  . . . . . . .	Number	 FFFF0000h   
+PCIINT_V_INTERRUPT_LINE  . . . .	Number	 0000h	 
+PCIINT_V_INTERRUPT_PIN . . . . .	Number	 0008h	 
+PCIINT_V_RESERVED  . . . . . . .	Number	 0010h	 
+PCIIO_M_MEMORY_IO  . . . . . . .	Number	 0001h	 
+PCIIO_M_PCI_IO_BASE_ADDRESS  . .	Number	 FFFFFF80h   
+PCIIO_M_RESERVED . . . . . . . .	Number	 007Eh	 
+PCIIO_V_MEMORY_IO  . . . . . . .	Number	 0000h	 
+PCIIO_V_PCI_IO_BASE_ADDRESS  . .	Number	 0007h	 
+PCIIO_V_RESERVED . . . . . . . .	Number	 0001h	 
+PCILT_M_LATENCY_TIMER  . . . . .	Number	 FF00h	 
+PCILT_M_RESERVED_2 . . . . . . .	Number	 00FFh	 
+PCILT_M_RESERVED . . . . . . . .	Number	 FFFF0000h   
+PCILT_V_LATENCY_TIMER  . . . . .	Number	 0008h	 
+PCILT_V_RESERVED_2 . . . . . . .	Number	 0000h	 
+PCILT_V_RESERVED . . . . . . . .	Number	 0010h	 
+PCIMEM_M_MEMORY_SPACE  . . . . .	Number	 0001h	 
+PCIMEM_M_PCI_MEM_BASE_ADDRESS  .	Number	 FFFFFF80h   
+PCIMEM_M_RESERVED  . . . . . . .	Number	 007Eh	 
+PCIMEM_V_MEMORY_SPACE  . . . . .	Number	 0000h	 
+PCIMEM_V_PCI_MEM_BASE_ADDRESS  .	Number	 0007h	 
+PCIMEM_V_RESERVED  . . . . . . .	Number	 0001h	 
+PCIRV_M_BASE_CLASS . . . . . . .	Number	 FF000000h   
+PCIRV_M_RESERVED . . . . . . . .	Number	 FF00h	 
+PCIRV_M_Revision_Major_Number  .	Number	 00F0h	 
+PCIRV_M_Revision_Minor_Number  .	Number	 000Fh	 
+PCIRV_M_SUB_CLASS  . . . . . . .	Number	 00FF0000h   
+PCIRV_V_BASE_CLASS . . . . . . .	Number	 0018h	 
+PCIRV_V_RESERVED . . . . . . . .	Number	 0008h	 
+PCIRV_V_Revision_Major_Number  .	Number	 0004h	 
+PCIRV_V_Revision_Minor_Number  .	Number	 0000h	 
+PCIRV_V_SUB_CLASS  . . . . . . .	Number	 0010h	 
+PCIUSR_M_RESERVED_2  . . . . . .	Number	 00FFh	 
+PCIUSR_M_RESERVED  . . . . . . .	Number	 FFFF0000h   
+PCIUSR_M_USER_SPECIAL_USE  . . .	Number	 FF00h	 
+PCIUSR_V_RESERVED_2  . . . . . .	Number	 0000h	 
+PCIUSR_V_RESERVED  . . . . . . .	Number	 0010h	 
+PCIUSR_V_USER_SPECIAL_USE  . . .	Number	 0008h	 
+PCI_BIOS_INT . . . . . . . . . .	Number	 001Ah	 
+PCI_BIOS_PRESENT . . . . . . . .	Number	 0001h	 
+PCI_CLASS_CODE_ETHER_CTRL  . . .	Number	 00020000h   
+PCI_FIND_PCI_CLASS_CODE  . . . .	Number	 0003h	 
+PCI_FIND_PCI_DEVICE  . . . . . .	Number	 0002h	 
+PCI_FUNCTION_ID  . . . . . . . .	Number	 00B1h	 
+PCI_GENERATE_SPECIAL_CYCLE . . .	Number	 0006h	 
+PCI_READ_CONFIG_BYTE . . . . . .	Number	 0008h	 
+PCI_READ_CONFIG_DWORD  . . . . .	Number	 000Ah	 
+PCI_READ_CONFIG_WORD . . . . . .	Number	 0009h	 
+PCI_WRITE_CONFIG_BYTE  . . . . .	Number	 000Bh	 
+PCI_WRITE_CONFIG_DWORD . . . . .	Number	 000Dh	 
+PCI_WRITE_CONFIG_WORD  . . . . .	Number	 000Ch	 
+PICAckSlave  . . . . . . . . . .	Byte	 0000	  External
+PICIntMask . . . . . . . . . . .	Word	 0000	  External
+PICIntOff  . . . . . . . . . . .	Byte	 0000	  External
+PICIntOn . . . . . . . . . . . .	Byte	 0000	  External
+PhysBlockSize  . . . . . . . . .	Word	 0000	  External
+RCV_BUFFER_SIZE  . . . . . . . .	Number	 0620h	 
+RDES0_K_FT_802 . . . . . . . . .	Number	 0000h	 
+RDES0_K_FT_DIX . . . . . . . . .	Number	 0001h	 
+RDES0_K_LBOM_EXTERNAL  . . . . .	Number	 0002h	 
+RDES0_K_LBOM_INTERNAL  . . . . .	Number	 0001h	 
+RDES0_K_LBOM_NORMAL  . . . . . .	Number	 0000h	 
+RDES0_K_LBOM_RESERVED  . . . . .	Number	 0003h	 
+RDES0_M_AE . . . . . . . . . . .	Number	 0004h	 
+RDES0_M_BD . . . . . . . . . . .	Number	 0200h	 
+RDES0_M_CE . . . . . . . . . . .	Number	 0002h	 
+RDES0_M_DUE  . . . . . . . . . .	Number	 4000h	 
+RDES0_M_ED . . . . . . . . . . .	Number	 0100h	 
+RDES0_M_EFL  . . . . . . . . . .	Number	 0080h	 
+RDES0_M_ES . . . . . . . . . . .	Number	 8000h	 
+RDES0_M_FOE  . . . . . . . . . .	Number	 0001h	 
+RDES0_M_FT . . . . . . . . . . .	Number	 0020h	 
+RDES0_M_LBOM . . . . . . . . . .	Number	 3000h	 
+RDES0_M_LCS  . . . . . . . . . .	Number	 0040h	 
+RDES0_M_LENGTH . . . . . . . . .	Number	 7FFF0000h   
+RDES0_M_MF . . . . . . . . . . .	Number	 0400h	 
+RDES0_M_OWN  . . . . . . . . . .	Number	 -80000000h   
+RDES0_M_PLE  . . . . . . . . . .	Number	 0008h	 
+RDES0_M_RF . . . . . . . . . . .	Number	 0800h	 
+RDES0_M_RXWT . . . . . . . . . .	Number	 0010h	 
+RDES0_V_AE . . . . . . . . . . .	Number	 0002h	 
+RDES0_V_BD . . . . . . . . . . .	Number	 0009h	 
+RDES0_V_CE . . . . . . . . . . .	Number	 0001h	 
+RDES0_V_DUE  . . . . . . . . . .	Number	 000Eh	 
+RDES0_V_ED . . . . . . . . . . .	Number	 0008h	 
+RDES0_V_EFL  . . . . . . . . . .	Number	 0007h	 
+RDES0_V_ES . . . . . . . . . . .	Number	 000Fh	 
+RDES0_V_FOE  . . . . . . . . . .	Number	 0000h	 
+RDES0_V_FT . . . . . . . . . . .	Number	 0005h	 
+RDES0_V_LBOM . . . . . . . . . .	Number	 000Ch	 
+RDES0_V_LCS  . . . . . . . . . .	Number	 0006h	 
+RDES0_V_LENGTH . . . . . . . . .	Number	 0010h	 
+RDES0_V_MF . . . . . . . . . . .	Number	 000Ah	 
+RDES0_V_OWN  . . . . . . . . . .	Number	 001Fh	 
+RDES0_V_RF . . . . . . . . . . .	Number	 000Bh	 
+RDES0_V_RXWT . . . . . . . . . .	Number	 0004h	 
+RDES1_M_BL1  . . . . . . . . . .	Number	 07FFh	 
+RDES1_M_BL2  . . . . . . . . . .	Number	 003FF800h   
+RDES1_M_CE . . . . . . . . . . .	Number	 01000000h   
+RDES1_M_EOR  . . . . . . . . . .	Number	 02000000h   
+RDES1_V_BL1  . . . . . . . . . .	Number	 0000h	 
+RDES1_V_BL2  . . . . . . . . . .	Number	 000Bh	 
+RDES1_V_CE . . . . . . . . . . .	Number	 0018h	 
+RDES1_V_EOR  . . . . . . . . . .	Number	 0019h	 
+RcvDisable . . . . . . . . . . .	L Near	 0000	  code	External
+RcvInit  . . . . . . . . . . . .	L Near	 0000	  code	External
+RcvNumBUffers  . . . . . . . . .	Word	 0000	  code	External
+RcvReset . . . . . . . . . . . .	L Near	 0000	  code	External
+SIA_Config_AutoFD  . . . . . . .	Number	 0004h	 
+SIA_Config_Autodetect  . . . . .	Number	 0005h	 
+SINGLE_PORT  . . . . . . . . . .	Text   	 
+SROM_93LC46B_LAST_ADDRESS_BIT  .	Number	 0006h	 
+SROM_93LC46B_LAST_ADDRESS  . . .	Number	 003Fh	 
+SROM_93LC46B_LEN . . . . . . . .	Number	 0040h	 
+SROM_93LC46B_MAX_CYCLES  . . . .	Number	 0019h	 
+SROM_ADAPTER0_OFF  . . . . . . .	Number	 001Ah	 
+SROM_ADAPTER_COUNT_OFF . . . . .	Number	 0013h	 
+SROM_CHECKSUM_OFF  . . . . . . .	Number	 007Eh	 
+SROM_CLK . . . . . . . . . . . .	Number	 0002h	 
+SROM_CR9_READ  . . . . . . . . .	Number	 4000h	 
+SROM_CR9_WRITE . . . . . . . . .	Number	 2000h	 
+SROM_CS  . . . . . . . . . . . .	Number	 0001h	 
+SROM_DATA_0  . . . . . . . . . .	Number	 0000h	 
+SROM_DATA_1  . . . . . . . . . .	Number	 0004h	 
+SROM_FORMAT_OFF  . . . . . . . .	Number	 0012h	 
+SROM_IEEE_OFF  . . . . . . . . .	Number	 0014h	 
+SROM_M_Output_Data . . . . . . .	Number	 0008h	 
+SROM_SEL_SROM  . . . . . . . . .	Number	 0800h	 
+SW_CRC_MIN . . . . . . . . . . .	Number	 0090h	 
+SW_ONE_PKT . . . . . . . . . . .	Text   	 
+SlotNum  . . . . . . . . . . . .	Word	 0000	  code	External
+TDES0_M_CC . . . . . . . . . . .	Number	 0078h	 
+TDES0_M_DE . . . . . . . . . . .	Number	 0001h	 
+TDES0_M_EC . . . . . . . . . . .	Number	 0100h	 
+TDES0_M_ES . . . . . . . . . . .	Number	 8000h	 
+TDES0_M_FUE  . . . . . . . . . .	Number	 0002h	 
+TDES0_M_HF . . . . . . . . . . .	Number	 0080h	 
+TDES0_M_LC . . . . . . . . . . .	Number	 0200h	 
+TDES0_M_LF . . . . . . . . . . .	Number	 0004h	 
+TDES0_M_LOC  . . . . . . . . . .	Number	 0800h	 
+TDES0_M_NC . . . . . . . . . . .	Number	 0400h	 
+TDES0_M_OWN  . . . . . . . . . .	Number	 -80000000h   
+TDES0_M_TXJT . . . . . . . . . .	Number	 4000h	 
+TDES0_V_CC . . . . . . . . . . .	Number	 0003h	 
+TDES0_V_DE . . . . . . . . . . .	Number	 0000h	 
+TDES0_V_EC . . . . . . . . . . .	Number	 0008h	 
+TDES0_V_ES . . . . . . . . . . .	Number	 000Fh	 
+TDES0_V_FUE  . . . . . . . . . .	Number	 0001h	 
+TDES0_V_HF . . . . . . . . . . .	Number	 0007h	 
+TDES0_V_LC . . . . . . . . . . .	Number	 0009h	 
+TDES0_V_LF . . . . . . . . . . .	Number	 0002h	 
+TDES0_V_LOC  . . . . . . . . . .	Number	 000Bh	 
+TDES0_V_NC . . . . . . . . . . .	Number	 000Ah	 
+TDES0_V_OWN  . . . . . . . . . .	Number	 001Fh	 
+TDES0_V_TXJT . . . . . . . . . .	Number	 000Eh	 
+TDES1_M_BD . . . . . . . . . . .	Number	 20000000h   
+TDES1_M_BL1  . . . . . . . . . .	Number	 07FFh	 
+TDES1_M_BL2  . . . . . . . . . .	Number	 003FF800h   
+TDES1_M_CAD  . . . . . . . . . .	Number	 04000000h   
+TDES1_M_CE . . . . . . . . . . .	Number	 01000000h   
+TDES1_M_CI . . . . . . . . . . .	Number	 -80000000h   
+TDES1_M_DUMMY  . . . . . . . . .	Number	 01000000h   
+TDES1_M_ED . . . . . . . . . . .	Number	 40000000h   
+TDES1_M_EOR  . . . . . . . . . .	Number	 02000000h   
+TDES1_M_FMB0 . . . . . . . . . .	Number	 00400000h   
+TDES1_M_FMB1 . . . . . . . . . .	Number	 10000000h   
+TDES1_M_PD . . . . . . . . . . .	Number	 00800000h   
+TDES1_M_SETF . . . . . . . . . .	Number	 08000000h   
+TDES1_V_BD . . . . . . . . . . .	Number	 001Dh	 
+TDES1_V_BL1  . . . . . . . . . .	Number	 0000h	 
+TDES1_V_BL2  . . . . . . . . . .	Number	 000Bh	 
+TDES1_V_CAD  . . . . . . . . . .	Number	 001Ah	 
+TDES1_V_CE . . . . . . . . . . .	Number	 0018h	 
+TDES1_V_CI . . . . . . . . . . .	Number	 001Fh	 
+TDES1_V_ED . . . . . . . . . . .	Number	 001Eh	 
+TDES1_V_EOR  . . . . . . . . . .	Number	 0019h	 
+TDES1_V_FMB0 . . . . . . . . . .	Number	 0016h	 
+TDES1_V_FMB1 . . . . . . . . . .	Number	 001Ch	 
+TDES1_V_PD . . . . . . . . . . .	Number	 0017h	 
+TDES1_V_SETF . . . . . . . . . .	Number	 001Bh	 
+TPFD_SIAConfig . . . . . . . . .	Number	 0000h	 
+TP_SIAConfig . . . . . . . . . .	Number	 0001h	 
+UM9100_SROM_V0_1 . . . . . . . .	Number	 0001h	 
+UM9100_SROM_V0_3 . . . . . . . .	Number	 0003h	 
+UserNotSpecifySlot . . . . . . .	L Near	 01BD	  code	
+XMT_BUFFER_SIZE  . . . . . . . .	Number	 05F0h	 
+XmtDisable . . . . . . . . . . .	L Near	 0000	  code	External
+XmtInit  . . . . . . . . . . . .	L Near	 0000	  code	External
+XmtNumBuffers  . . . . . . . . .	Word	 0000	  code	External
+XmtReset . . . . . . . . . . . .	L Near	 0000	  code	External
+free_mem . . . . . . . . . . . .	Word	 0000	  code	External
+iCDC_82424_ID  . . . . . . . . .	Number	 0483h	 
+iPCMC_82434_ID . . . . . . . . .	Number	 04A3h	 
+iap_error_exit . . . . . . . . .	L Near	 0181	  code	
+iap_exit . . . . . . . . . . . .	L Near	 0184	  code	
+iapb_continue  . . . . . . . . .	L Near	 0545	  code	
+iapb_done  . . . . . . . . . . .	L Near	 055A	  code	
+iapb_emm_active  . . . . . . . .	L Near	 0516	  code	
+iapb_error_exit  . . . . . . . .	L Near	 0557	  code	
+iapb_exit  . . . . . . . . . . .	L Near	 0565	  code	
+iapb_no_emm  . . . . . . . . . .	L Near	 04F2	  code	
+icrr_exit  . . . . . . . . . . .	L Near	 03DB	  code	
+icrr_pci_read  . . . . . . . . .	L Near	 03BE	  code	
+icrw_eisa_write  . . . . . . . .	L Near	 03F9	  code	
+icrw_exit  . . . . . . . . . . .	L Near	 03FB	  code	
+icrw_pci_write . . . . . . . . .	L Near	 03DC	  code	
+idi_adapter_found  . . . . . . .	L Near	 013E	  code	
+idi_error  . . . . . . . . . . .	L Near	 014B	  code	
+idi_exit . . . . . . . . . . . .	L Near	 015E	  code	
+idi_get_info . . . . . . . . . .	L Near	 0146	  code	
+idi_probe_for_adapter  . . . . .	L Near	 012E	  code	
+igc_exit . . . . . . . . . . . .	L Near	 0457	  code	
+igc_pic_done . . . . . . . . . .	L Near	 044A	  code	
+igc_slave_int  . . . . . . . . .	L Near	 042D	  code	
+igc_stash_irq  . . . . . . . . .	L Near	 040E	  code	
+int_no . . . . . . . . . . . . .	Byte	 0000	  code	External
+io_addr  . . . . . . . . . . . .	Word	 0000	  code	External
+ipcb_error_exit  . . . . . . . .	L Near	 01A4	  code	
+ipcb_exit  . . . . . . . . . . .	L Near	 01A5	  code	
+ipfd_check_DM9102_id . . . . . .	L Near	 01EF	  code	
+ipfd_check_UM9100_id . . . . . .	L Near	 01FC	  code	
+ipfd_check_dev_id  . . . . . . .	L Near	 01E4	  code	
+ipfd_error_exit  . . . . . . . .	L Near	 0242	  code	
+ipfd_exit  . . . . . . . . . . .	L Near	 0243	  code	
+ipfd_find_dev_loop . . . . . . .	L Near	 01C3	  code	
+ipfd_signal_success  . . . . . .	L Near	 0223	  code	
+ipgb_error_exit  . . . . . . . .	L Near	 027E	  code	
+ipgb_exit  . . . . . . . . . . .	L Near	 027F	  code	
+ipgc_error_exit  . . . . . . . .	L Near	 025E	  code	
+ipgc_exit  . . . . . . . . . . .	L Near	 025F	  code	
+ipsc_PCICS_error . . . . . . . .	L Near	 03B6	  code	
+ipsc_PCIINT_ok . . . . . . . . .	L Near	 0387	  code	
+ipsc_PCIIO_ok  . . . . . . . . .	L Near	 039E	  code	
+ipsc_exit  . . . . . . . . . . .	L Near	 03BD	  code	
+itro_exit  . . . . . . . . . . .	L Near	 0326	  code	
+itro_pci_init  . . . . . . . . .	L Near	 0288	  code	
+p_CR0  . . . . . . . . . . . . .	Word	 0000	  External
+p_CR10 . . . . . . . . . . . . .	Word	 0000	  External
+p_CR11 . . . . . . . . . . . . .	Word	 0000	  External
+p_CR12 . . . . . . . . . . . . .	Word	 0000	  External
+p_CR13 . . . . . . . . . . . . .	Word	 0000	  External
+p_CR14 . . . . . . . . . . . . .	Word	 0000	  External
+p_CR15 . . . . . . . . . . . . .	Word	 0000	  External
+p_CR1  . . . . . . . . . . . . .	Word	 0000	  External
+p_CR2  . . . . . . . . . . . . .	Word	 0000	  External
+p_CR3  . . . . . . . . . . . . .	Word	 0000	  External
+p_CR4  . . . . . . . . . . . . .	Word	 0000	  External
+p_CR5  . . . . . . . . . . . . .	Word	 0000	  External
+p_CR6  . . . . . . . . . . . . .	Word	 0000	  External
+p_CR7  . . . . . . . . . . . . .	Word	 0000	  External
+p_CR8  . . . . . . . . . . . . .	Word	 0000	  External
+p_CR9  . . . . . . . . . . . . .	Word	 0000	  External
+p_EndPhys  . . . . . . . . . . .	DWord	 04B3	  code	
+p_EndVirt  . . . . . . . . . . .	Word	 04B1	  code	
+p_PCICS  . . . . . . . . . . . .	Word	 0000	  External
+p_PCIID  . . . . . . . . . . . .	Word	 0000	  External
+p_PCIIO  . . . . . . . . . . . .	Word	 0000	  External
+p_PCILT  . . . . . . . . . . . .	Word	 0000	  External
+p_PCIRV  . . . . . . . . . . . .	Word	 0000	  External
+p_PhysBlockPhys  . . . . . . . .	DWord	 0000	  External
+p_PhysBlockVirt  . . . . . . . .	Word	 0000	  External
+pfd_find . . . . . . . . . . . .	L Near	 0219	  code	
+pfd_not_find_DM9009  . . . . . .	L Near	 0216	  code	
+pfd_not_find_DM9100  . . . . . .	L Near	 0209	  code	
+pic_done . . . . . . . . . . . .	L Near	 037D	  code	
+pm_loop  . . . . . . . . . . . .	L Near	 046B	  code	
+set_pic  . . . . . . . . . . . .	L Near	 0341	  code	
+slave_int  . . . . . . . . . . .	L Near	 0360	  code	
+
+	   0 Warnings
+	   0 Errors

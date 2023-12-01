@@ -1,0 +1,46 @@
+DLLPKT is not a TSR packet driver, but instead it spawns a program needing a
+packet driver after installing a basic packet driver simulation at INT 61.
+After termination of the subprogram, all portals left open by the program
+are closed and all other resources used by DLLPKT are returned to the OS.
+
+If, for example, you want to use SOSS to make some disk or file services
+available via NFS, you simply start it with `DLLPKT SOSS /r'.
+
+The program is released under the GNU public license version 1, of course
+without any warranty. It works most of the time, but on some systems it
+occasionally stops transmitting packets every now and then. I was unable
+to fix this bug. (That's why it took me so long to release it...)
+
+The distribution comes in two flavours:
+DLLPKT.ZIP: Contains the executables, sources and user manual. This is all
+you need if you simply want to use it.
+DLLPKSRC.ZIP: Idem, but also contains REPORT.PS, an excerpt of the report
+on my practical training period at the Measurement and Control section of
+the department of Electrical Engineering at Eindhoven University, of which
+DLLPKT was one of the results.
+
+For now, the files are available by anonymous ftp from:
+gem.stack.urc.tue.nl (131.155.2.59):
+/pub/dllpkt.zip
+/pub/dllpksrc.zip
+
+If the maintainers of some of the more well-known ftp sites would like to
+give these files a more permanent place, please contact me.
+
+If you intend to free the package from its bugs and limitations, please
+share the results with the supervisor of this project:
+Wim Beckers    ermimwei@er.ele.tue.nl
+
+The current version of DLLPKT does not work in conjunction with Desqview or
+Windows. A Desqview aware version is available on request. A Windows version
+does not exist at this moment, but integrating it with VPKT would be a
+solution.
+
+For those of you who are still a happy owner of a VaxMate, suggestions for
+adapting DLLPKT to the Vaxmate are also available on request. Since I don't
+have access to any VaxMate machine, the suggested adaptation was never tested.
+
+Just hoping to be of some use to someone out there,
+Harry Stox
+harry@stack.urc.tue.nl
+

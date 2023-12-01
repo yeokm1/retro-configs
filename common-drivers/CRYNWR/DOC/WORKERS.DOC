@@ -1,0 +1,85 @@
+The following people have put resources into improving packet drivers.
+Order of listing is more or less chronological.  Email addresses may
+not longer be current, and in fact, some are not.
+
+John Romkey <romkey@elf.com>, who created the spec in the first place.
+James van Bokkelen <jbvb@ftp.com>, who is maintaining the spec.
+Karl Auerbach <karl@empirical.com>, who adapted MIT's PC/IP to use the packet
+	driver spec and wrote a packet driver for the TRW-2000.
+Phil Karn <karn@ucsd.edu>, who added a packet driver interface to
+	his code, and supplied C code for the 3c501 and SLIP8250 drivers.
+Bill Doster <Bill_Doster@um.cc.umich.edu>, who wrote a NI5010 driver in C for
+	Phil Karn's net.
+Russell Nelson <nelson@crynwr.com>, who created the packet driver
+	skeleton and adapted several existing drivers to it.
+Bob Clements <clements@bbn.com>, who wrote the WD8003E and 3c503 drivers.
+Brad Clements <bkc@omnigate.clarkson.edu>, who adapted NCSA Telnet to use the
+	packet driver spec.
+(Bob and Brad are not related.)
+The Wollongong Group, in the person of Leo J. McLaughlin (now <ljm@ftp.com>,
+	which has committed to supporting the spec.
+3Com, in the person of <Eric_Siegel@dsd.3mail.3com.com>, has been helpful
+	in getting 3Com's documention to packet driver authors.
+Dan Lanciani <ddl@harvard.edu>, who wrote the 3c523 driver.
+Denis DeLaRoca <delaroca@denis.oac.ucla.edu>, who added hardware handshake
+	to the SLIP8250 driver.
+John Grover <JGROVER@maine.bitnet>, who optimized the SLIP8250 driver to
+	work at 38.4 Kbps.
+Rainer Toebbicke <RTB@CERNVM.bitnet> who wrote the BICC Isolan driver.
+Jan Engvald LDC <xjeldc@gemini.ldc.lu.se>, who improved the wd8003e driver,
+	and added MicroChannel support.
+Krishnan Gopalan <gkrishn@eng.clemson.edu> and
+Gregg Stefancik <wstef@eng.clemson.edu> of Clemson University Engineering
+	Computer Operations, who wrote the packet driver for the 3c505 card.
+Vance Morrison <morrison@acns.nwu.edu> added starlan support to the wd8003e
+	driver.
+Brian Fisher <fisherb@qucdn.queensu.ca>, who wrote an "Ethernet" packet driver
+	for the IBM Token Ring Adapter card.
+Eric Henderson <No longer at BYU> of Brigham Young University, who wrote
+	a packet driver for Novell's NE1000 and NE2000.
+Joe Doupnik <jrd@cc.usu.edu> improved head.asm by adding some comments and
+	brought it further into line with the PDS, added promiscuous mode to
+	the wd8003e driver, and modified the PC/IP netwatch to use packet
+	drivers.
+David Horne <71271.1141@CompuServe.COM>, who wrote a packet driver for Novell's
+	NE2000.
+Michael Haberler <mah@wu-wien.ac.at>, who wrote an IP over NetBIOS packet
+	driver.
+Paul Kranenburg <rulcs!kranenbu@relay.eu.net>, who wrote an IP over IPX packet
+	driver.
+David E. Johnson <dave@tacky.cs.olemiss.edu>, who fixed the 3c505 driver.
+James A. Harvey <IJAH400@indyvax.iupui.edu>, who fixed the AT test in tail.asm
+	and the 3c503 lockup problem.
+Anto Prijosoesilo <anto@anto.acs.unt.edu>, who fixed a bug related to DMA in
+	the ni6510 driver.
+John Mann <johnm@vaxc.cc.monash.edu.au>, who submitted some code to delay the
+	etopen and convert between Novell's pseudo IEEE 802.3 packets and
+	Ethernet packets.
+Drew Daniel Perkins <ddp+@andrew.cmu.edu>, who designed and implemented
+	as_send_pkt (asynchronous send) for the wd8013ebt, and improved
+	pktsend in the process
+Katie Stevens <kstevens@ucdavis.edu>, who wrote a LocalTalk driver.
+Steven Wallace <wallaces@ucs.indiana.edu>, who added a hack for MS-Windows.
+Reinhard Strebler <RZ40@DKAUNI2.BITNET>, who hacked on termin, and slip8250.
+Martin Knoblauch <XBR2D96D@DDATHD21.BITNET>, who fixed ni5010 promiscuous mode.
+Tobias Reber <dok235@cvx12.inet.dkfz-heidelberg.de>, who fixed the 3c523.
+Gregory T Small <gts@violet.Berkeley.EDU>, who found a bug in the packet
+	interrupt verification.
+Dave Price <dapx@cs.aber.ac.uk> wrote a packet driver for the Mitel
+	Express ISDN card.
+Doug Smith <smithdg@clutx.clarkson.edu> ported the ni6510 driver to the
+	depca card.
+Don Provan <donp@xlnvax.novell.com> fixed a bug in the -n switch code.
+John Baird <J.Baird@tahi.lincoln.ac.nz> wrote some ipxpkt documentation.
+Sylvan Butler <sbutl@bert.cs.byu.edu> fixed two bugs in ubnicpc.
+Markku Toijala <mto@xerver.icl.fi> who submitted a packet driver for
+	the ICL EtherTeam16 (formerly Nokia Data), and some fixes for
+	IBMTOKEN.
+Chris Elmquist, <elmquist@SSESCO.com>, who modified the Tiara packet driver
+	to work on the Multitech EN301.
+Michael Martineau <martinea@hawk.nstn.ns.ca> submitted modifications
+	to the SLIP8250 driver to make it a simulated Ethernet
+	driver, calling it ETHERSL.
+
+New additions to the list of names and email addresses of
+contributors are now in CHANGES.DOC.

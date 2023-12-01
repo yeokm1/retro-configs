@@ -1,0 +1,306 @@
+The following freely copyable software supports the packet driver
+spec.  All of these files are available to customers of Crynwr
+Software (see SUPPORT.DOC) for a nominal copying fee.  All of the
+following directory names and files are valid as of September 9, 1993.
+
+
+The Packet Driver Specification, version 1.09
+
+	vax.ftp.com:pub/packet-d.ascii
+	vax.ftp.com:pub/packet-d.mss
+
+The Crynwr collection of packet drivers.
+
+	SimTel's msdos/pktdrvr/00index.txt
+	SimTel's msdos/pktdrvr/drivers.zip
+	SimTel's msdos/pktdrvr/drivers1.zip
+	SimTel's msdos/pktdrvr/drivers2.zip
+
+NCSA's Telnet.
+
+	ftp.ncsa.uiuc.edu:PC/Telnet/msdos/INDEX
+	ftp.ncsa.uiuc.edu:PC/Telnet/msdos/tel2306b.zip
+	ftp.ncsa.uiuc.edu:PC/Telnet/msdos/tel2306s.zip
+
+CUTCP, Rutger's version of Clarkson's version of NCSA Telnet.
+
+	ftp-ns.rutgers.edu:pub/msdos/cutcp/current
+
+Archie, Clarkson's archie client
+
+	ftp.clarkson.edu:pub/cutcp/archie.zip
+
+Charon, IPX - TCP/IP email/printer gateway.
+
+	ftp.clarkson.edu:pub/cutcp/charon-3.4/charon.zip
+	ftp.clarkson.edu:pub/cutcp/charon40.zip
+
+PDEther, Don Provan's ODI-over-packet-driver shim.
+
+	sjf-lwp.novell.com:odi/pdether/pde103.zip
+
+Odipkt, Dan Lanciani's packet-driver-over-ODI shim.
+
+	hsdndev.harvard.edu:pub/odipkt/net.cfg
+	hsdndev.harvard.edu:pub/odipkt/odipkt.8
+	hsdndev.harvard.edu:pub/odipkt/odipkt.asm
+	hsdndev.harvard.edu:pub/odipkt/odipkt.com
+
+Oditrpkt, Ben James' packet-driver-over-ODI-token-ring shim.  It
+	makes an ODI token ring driver appear as Ethernet to the
+	packet driver client.
+
+	datacomm.ucc.okstate.edu:pub/oditrpkt/beta9.zip
+	datacomm.ucc.okstate.edu:pub/oditrpkt/beta1116.zip
+
+Phil Karn's TCP/IP package (freely copyable only for radio amateurs and
+	educational institutions.  Others should contact him.)
+
+	Phil's latest version of NOS is always available for FTP from
+	ucsd.edu:hamradio/packet/tcpip/ka9q/rcsdsrc.zip
+	Also get rcs:
+	ucsd.edu:hamradio/packet/tcpip/ka9q/rcs56b.zip
+
+	Many people also publish modified versions of NOS:
+	ucsd.edu:hamradio/packet/tcpip/*
+
+BYU's older packet driver IPX.COM.
+
+	A copy is kept in SimTel's msdos/pktdrvr/novell.zip
+
+Intel's newer packet driver IPX.COM.
+
+	A copy is kept in SimTel's msdos/pktdrvr/pdipx103.zip
+
+Vance Morrison's PCROUTE and PCBRIDGE.
+
+	ftp.acns.nwu.edu:pub/pcroute/pcbridge1.21.src.tar.Z
+	ftp.acns.nwu.edu:pub/pcroute/pcbridge1.21.tar.Z
+	ftp.acns.nwu.edu:pub/pcroute/pcroute2.24.src.tar.Z
+	ftp.acns.nwu.edu:pub/pcroute/pcroute2.24.tar.Z
+
+NuPOP, Phil `pib' Burns POP/FTP/Telnet/Finger/Gopher client.
+
+	ftp.acns.nwu.edu:pub/nupop/README.1ST
+	ftp.acns.nwu.edu:pub/nupop/nupop103.zip
+
+IRC, an IRC (Internet Relay Chat) client.
+
+	biochemistry.cwru.edu:pub/trumpet/irc100.zip
+
+TRUMPET, an NNTP newsreader.
+
+	TRUMPET is a DOS based news reader which has a nice
+	front-end.  It does NOT require Windows, but only requires a
+	packet driver.
+
+	The release as of this writing is 1.06b.  Note that the version
+	number is reflected in the filename.
+
+	ftp.utas.edu.au:pc/trumpet
+	biochemistry.cwru.edu:pub/trumpet/00index
+	biochemistry.cwru.edu:pub/wintrump
+
+TRUMPET WinSock, a shareware winsock-compatible Windows TCP/IP stack
+
+	biochemistry.cwru.edu:pub/trumpwsk/winsock.zip
+
+SLIPPER and CSLIPPER, SLIP packet drivers
+
+	ftp.utas.edu.au:pc/trumpet
+
+Jan Engvald's PDCLKSET, a program to set the time on a PC from a TIME server.
+
+        It can use BOOTP to supply IP number and other info.
+        PDCLKSET can assign the proper normal or dls timezone name to
+        an environment variable (TZ is used by most systems).
+        There is also a powerful buildt in ping client and server.
+        The PDTBUILD program, which is included in the ZIP package, looks
+        at all ARP broadcasts and generates a table with all the IP hosts
+        on this (sub)net.
+
+        PDCLKxxx.ZIP is available at SimTel's msdos/pktdrvr/
+        and at ftp.lu.se:pub/network/pdclkset.
+
+Columbia University's Kermit:
+
+	MS-KERMIT 3.13 and up includes a TCP/IP telnet client.
+
+	kermit.columbia.edu:kermit/bin/msvibm.zip
+	kermit.columbia.edu:kermit/a/msr313.pch
+
+Harry Stox's DLLPKT, a shim that implements a packet driver over
+	DEC's DLL.  See DLLPKT.NOT.
+
+	ftp.stack.urc.tue.nl:pub/msdos/dllpkt/dllpkt.zip
+	ftp.stack.urc.tue.nl:pub/msdos/dllpkt/dllpksrc.zip
+
+Brian Angus's PKTDLL (effectively an assembly language TSR rewrite of
+	DLLPKT) loads over any DLL driver to provide a packet driver API.
+
+	kermit.cc.columbia.edu:/packet-drivers/new/pktdll.*
+
+IPXTCPIP, Jerzy Tarasiuk's automatic IP assigner
+
+	A copy is kept in SimTel's msdos/pktdrvr/ipxtcpip.zip
+
+Broadcast, Kai Getrost's PC Broadcast client.  Broadcast is a
+	Macintosh talk program.
+
+	The release as of this writing is 1.1.  Note that the version
+	number is reflected in the filename.
+
+	caisr2.caisr.cwru.edu:pub/net/bdcst11.zip
+
+CIRCA RARP server, a program to automatically assign IP addresses
+	based on Ethernet address.
+
+	pine.circa.ufl.edu:pub.pc.rarp/rarp.zip
+
+UNC's WAIS client.
+
+	sunsite.unc.edu:/pub/wais/DOS/*
+
+Joe Doupnik's version of Dan Lanciani's Harvard version of CMU's version of MIT's PC-IP.
+
+	netlab.usu.edu:netwatch/pcip96.zip
+
+Dan Lanciani's Harvard version of CMU's version of MIT's PC-IP.
+
+	The source for PC-IP is available from
+	hsdndev.harvard.edu:pub/pcip/pcip.tar.Z
+	hsdndev.harvard.edu:pub/pcip/doc.tar.Z
+	hsdndev.harvard.edu:pub/pcip/readme
+	hsdndev.harvard.edu:pub/pcip/readme.cmu
+	The binaries for PC-IP compiled for packet drivers are:
+	hsdndev.harvard.edu:pub/pcip/bin/packet/*.exe
+	hsdndev.harvard.edu:pub/pcip/bin/general/*.exe
+
+Stan's Own Server (NFS server).
+
+	spdcc.com:pub/sos/soss.zoo
+	spdcc.com:pub/sos/sossexe.zoo
+A version "couple of bugs fixed: IP numbers and subdirectories with
+extensions)" is available from:
+	hilbert.wharton.upenn.edu:pub/tcpip/soss.zip
+
+PC-NFS drivers.
+
+	Available from same place as Clarkson collection of packet drivers.
+	Look for compat.tar.Z, or compat.zip (identical contents, different
+	archiver).  Note that you need to purchase PC-NFS from Sun in order
+	to use this package.
+
+NDIS shim, provides a packet driver over an NDIS driver.  There are
+	several versions of it.
+
+	vax.ftp.com:pub/packet.driver/pubdom/ndis/dis_pkt.asm
+	vax.ftp.com:pub/packet.driver/pubdom/ndis/dis_pkt.dos
+	vax.ftp.com:pub/packet.driver/pubdom/ndis/protman.sys
+	vax.ftp.com:pub/packet.driver/pubdom/ndis/readme
+	netlab.usu.edu:[.novell]dis_pkt.zip
+	hsdndev.harvard.edu:pub/dis_pkt/dis_pktx.asm (Experimental)
+	hsdndev.harvard.edu:pub/dis_pkt/dis_pktx.dos (Experimental)
+
+Windows QVT Telnet
+
+	The release as of this writing is 3.81.  Note that the version
+	number is reflected in the filename.
+
+	biochemistry.cwru.edu:pub/qvtnet/qvtnt39.zip
+
+Erick Engele's Waterloo TCP (freely copyable TCP/IP library), telnet
+	server, ftp client, smtp server, whois client, finger client,
+	ping client/server.
+
+	ftp-ns.rutgers.edu:pub/msdos/wattcp/*
+
+Luigi Rizzo's GNU tar modified to write over a network.
+
+	pical3.iet.unipi.it:pub/deit_wattcp (tcp-ip libraries) and
+	pical3.iet.unipi.it:pub/net_tar (the modified tar program)
+
+Luigi Rizzo's PCSERVER, a program to remotely access Transputer
+	networks via TCP/IP
+
+	pical3.iet.unipi.it:pub/pcserver
+
+Bruce Campbell's resident BOOTP service.  A TSR that fakes a bootp
+	response, returning parameters it was given on its command line.
+
+	ftp-ns.rutgers.edu:pub/msdos/wattcp/readme.1st
+
+University of Minnesota's Gopher client.  The Internet Gopher is a
+	distributed document delivery service.  See GOPHER.DOC.  
+
+	boombox.micro.umn.edu:pub/gopher/PC_client/docs/pcgopher.txt
+	boombox.micro.umn.edu:pub/gopher/PC_client/00README
+
+University of Minnesota's POPmail POP2 client.
+
+	POPmail is a POP2 client that will let you read your mail stored
+	on a machine running a POP2 server.  Fetch
+	boombox.micro.umn.edu:pub/POPmail/msdos/00README
+	to decide which files to get.
+
+
+University of Minnesota's SLIPDIAL.
+
+	SLIPDIAL is a program to dial a SLIP server, log in, capture
+	the assigned IP address, stuff it into NCSA Telnet's
+	config.tel, and run slip8250.  Fetch
+	boombox.micro.umn.edu:pub/slipdial/README
+	to decide which files to get.
+
+
+Bob Crosson's SNMP monitor.  See SNMP.NOT.
+
+	enh.nist.gov:misc/snmpsrc.zip
+	enh.nist.gov:misc/snmpsup.zip
+
+Mississippi State University's LPD server.
+
+	A beta test version of a freeware LPD for MSDOS can be found
+	in the ftp-archive. It uses some version of Clarkson or NCSA
+	libraries and workes quite well in some first tests here.
+
+	tacky.cs.olemiss.edu:pub/lpd/lpd.zip
+	tacky.cs.olemiss.edu:pub/lpd/lpdsrc.zip
+	computone.com:pub/other/lpd/lpd.zip
+	computone.com:pub/other/lpd/lpdsrc.zip
+
+DNPAP's Network analyzers.
+
+	dnpap.et.tudelft.nl:/pub/Fergie/frgbin2.zip
+
+	The DNPAP ethernet monitor, using packet drivers to capture frames
+	from the net. Statistics  are displayed on the screen.  It can run
+	either standalone or using SNMP. It supersedes out previous monitors
+	Netmon, Spectre and Beholder. Contains the executables of Fergie and
+	Gobbler with some configuration and documentation files.
+
+	dnpap.et.tudelft.nl:/pub/Fergie/frgsrc2.zip
+
+	Contains full source code. You will need a Borland C compiler
+	to compile it. We are  very interested to be kept informed
+	on further developments, and people who succeed in
+	recompiling the software. So if you do, send a mail to
+	fergie@dnpap.et.tudelft.nl
+
+PCS's Linda, TP/Linda parallel processing system
+
+	The release as of this writing is 1.1.  Note that the version
+	number is reflected in the filename.
+
+	SimTel's msdos/lan/pcprl11.zip
+
+DJGPP (free 32-bit C compiler) (coming in version 1.11).
+
+	ftp.clarkson.edu:pub/msdos/djgpp/*
+
+Merit's PPP packet driver
+
+	merit.edu:/pub/ppp/ncsappp.txt
+	merit.edu:/pub/ppp/ncsappp.zip
+	merit.edu:/pub/ppp/etherppp.zip
+

@@ -1,0 +1,125 @@
+
+What this document is all about
+-------------------------------
+
+        This is the documentation for the YAPCBR, Yet Another  PC
+BRidge.  This  software  has  been developed by the Department of
+Computer Science, IIT, Bombay, India.
+
+Copyright
+---------
+
+For the copyright, see COPYING.DOC.
+
+
+General Information
+-------------------
+
+        This  bridge  belongs  to  the  class  of  Self  Learning
+Transparent bridges.  You can use any Ethernet cards (or a mix of
+cards from different vendors) for this bridge. All  you  need  to
+have  is  the  appropriate packet drivers for these cards. Packet
+drivers for most of the ethernet cards are in public  domain  and
+can  be obtained from crynwr.com. This bridge can be set up using
+a PC or AT (hard  disk  is  not  necessary,  a  floppy  drive  is
+sufficient)  running  MSDOS  ver  3.0  or  higher.  This is not a
+spanning tree bridge and hence cannot  detect  loops  in  network
+paths.
+
+Installation Procedure:
+-----------------------
+
+1. Put the ethernet cards in the PC expansion slots  with  proper
+jumper/switch settings.
+
+
+2. You can have up to four network segments  (so  correspondingly
+four ethernet cards). Load the packet drivers for these cards. Be
+careful with IRQs, I/O Base address and Memory  Base  address  if
+any.   See  to it that the addresses and interrupts you have used
+do not clash.
+
+
+Choose  the  software  interrupts  from   0x60   onwards,   these
+interrupts  have  to  be consecutive. e.g., 0x60 and 0x61 for two
+cards, 0x60, 0x61, 0x62 for a three card bridge, etc.
+
+
+3. The bridge maintains the  table  of  node  addresses  and  the
+corresponding  segments.  This  table is built up dynamically. By
+default this table is cleared every 60 minutes.  If  you  have  a
+network  where  the cards are shifted from one segment to another
+frequently, then set this parameter to a small value (minimum one
+minute) and vice versa (the maximum is 1000 minutes).
+
+Usage
+------
+
+A:> yapcbr <no of interfaces> [Hash Table Flush Time In Minutes]
+
+e.g. A batch file in our department looks like this
+
+rem   A sample batch file which loads the packet drivers and starts the bridge
+rem   Load the packet driver for the network interfaces
+de100pd 0x60 3 0xd000 0x300
+de100pd 0x61 2 0xd200 0x320
+de100pd 0x62 5 0xc000 0x340
+rem This bridge has three interfaces, and hash table flush time is 40 mins
+yapcbr 3 40
+
+Runtime Commands available:
+---------------------------
+
+   S : Packet Statistics
+   C : Clear the hash table
+   R : Reset this bridge
+
+
+Compiling :
+-----------
+
+        This software has been compiled using TurboC++ Ver1.0. It
+has the following files. Select large model for compiling.
+
+BRIDGE   BAT       305  /* an example batch file */
+BRIDGE   DOC      3814  /* this very file */
+COPYING  DOC     12375  /* GNU's General Public License */
+TURBOC   CFG        26
+TCCONFIG TC       1808  /* config files needed for TurboC */
+MAIN     C        9252  /* the main program */
+YAPCBR   H        5630  /* the header file */
+YAPCBR   C        8298  /* the packet driver - C interface */
+YAPCBR   EXE     35025  /* the standalone executable file */
+PKVEC    ASM      6604  /* pkt driver interrupt handler */
+TIMER    C        1810  /* timer interrupt handler */
+YAPCBR   PRJ      6572  /* tc++ project file for this software */
+SCREEN   C        3946  /* some screen management routines */
+
+Acknowledgments
+----------------
+
+We thank all our colleagues, especially K.V. Ramani  for  helping
+us  out  with  the  code and Vinod Kulkarni for testing.  We also
+thank Prof. S.S.S.P.Rao for initial inspiration.
+
+Final Comment
+-------------
+
+No flames please. This may not be the fastest  and  the  best  PC
+bridge available but it works :-) We want more and more people to
+test this software, and send  us  bug  reports  (along  with  bug
+fixes,  if  possible),  suggestions  and  more  importantly, some
+PERFORMANCE/BENCHMARK figures.
+
+Our Postal address is
+        Nitin Kaulavkar, <nitin@cse.iitb.ernet.in>
+        Department of Computer Science and Engg,
+        Indian Institute of Technology,
+        Powai, Bombay, 400 076
+        India.
+
+Our email address is
+        Internet : yapcbr@cse.iitb.ernet.in
+
+
+Thanks and enjoy. :-) :-)

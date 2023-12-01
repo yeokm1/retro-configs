@@ -1,2 +1,0 @@
-
-FRAME_MTU         EQU  1514

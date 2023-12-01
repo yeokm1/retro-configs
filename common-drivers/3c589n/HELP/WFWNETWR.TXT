@@ -1,0 +1,68 @@
+3Com Corporation
+Network Drivers Installation Notes
+
+    WINDOWS FOR WORKGROUPS v3.11 AND NOVELL NETWARE
+
+
+This document describes how to configure the 3C589 card for
+use with Windows for Workgroups v3.11 and Novell NetWare.
+
+NOTE: The following instructions assume that you have not
+      installed any other network adapter in the machine. If you
+      have been using a network connection on your computer,
+      some of the following instructions may not apply or may
+      produce different results. Refer to your MIS department
+      or system manager for further instructions.
+
+Before installing the network driver, you should know about the
+following:
+
+      -The Frame type used in the network (802.2 is the
+       default).
+      -The name of your Novell file server.
+
+Also, for a successful installation, you will need:
+
+      - Novell NetWare VLM Client disks for DOS and Windows 
+      - 3C589 LAN card and the accompanying EtherDisk
+        diskette
+     
+Installation Instructions:
+
+1.  Boot the system in DOS. If the system starts up in windows,
+    close Windows and exit to DOS.
+
+2.  Place the Novell VLM client disk #1 in the floppy drive and
+    type:
+
+        a:install <enter>
+
+3.  This opens the NetWare Client Installation window. Use the
+    arrow keys to move between fields. Verify that the
+    information on each line is correct.
+
+4.  In the field asking you to select the driver for your network
+    card, press Enter to see the list of support drivers. At the
+    bottom of the list, select OTHER DRIVERS and press <ENTER>.
+
+5.  At the prompt for a driver disk, put the EtherDisk in your
+    floppy drive, and press Enter. Select 3Com EtherLink III
+    LAN PC Card Adapter v1.1 and press Enter.
+
+6.  Select the frame type by pressing Enter and choosing the
+    appropriate type from the list. After your selection is made,
+    press Enter again. You will not need to select an "I/O
+    Base", as the default is appropriate for our drivers. Press
+   <F10> to return to the main installation screen.
+
+7.  To install the driver, select line 6 from this screen and
+    press <ENTER>. During the installation process, you 
+    will be asked for specific floppy diskettes. Follow the
+    instructions on the screen. When the installer finishes,
+    press Enter.
+
+8.  Reboot the system.
+
+(%VER WFWNETWR.TXT v1.0d)
+
+

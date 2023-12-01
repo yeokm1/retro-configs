@@ -1,0 +1,95 @@
+     ========================================================================
+
+		      SystemSoft's CardSoft(TM) Version 3.1
+			   The PCMCIA Software Suite
+				   05/19/1994
+
+     ========================================================================
+
+     Thank you for purchasing SystemSoft's CardSoft(TM) 3.1 PCMCIA software.
+     
+     Your CardSoft 3.1 software is compatible with PC architectures and 
+     PC-Cards which comply to the Personal Computer Memory Card International 
+     Association's (PCMCIA) 2.0 through 2.1 specifications.  This CardSoft 
+     package consists of drivers and utilities which will allow you to 
+     utilize your PCMCIA hardware and firmware to the fullest extent.  
+     
+     Please review this document carefully. There are special software notes 
+     listed below that might be applicable to your system. 
+
+		
+     ---------------------------
+     CardSoft 3.1 Software Notes   
+     ---------------------------
+
+     MEMORY MANAGERS
+ 
+	When using a memory manager you must exclude a memory range 
+	needed for the CardSoft software.  It is optimal to exclude a 64K 
+	range.  For example, if using EMM386, the device line listed in 
+	the CONFIG.SYS file should appear as follow:
+
+			DEVICE=C:\DOS\EMM386.EXE X=D000-DFFF
+
+	(where X=D000-DFFF excludes the memory range D000-DFFF).
+
+        If you are running Microsoft Windows, you also must place a line in 
+        the SYSTEM.INI file to exclude this range.  In the Windows sub-
+        directory, the file SYSTEM.INI should have the following line:
+
+                        EMMEXCLUDE=D000-DFFF
+
+        listed immediately after the [386Enh] heading.
+
+
+
+     TDK CD02x ETHERNET CARDS (Preliminary)
+
+	If you wish to use the TDK CD02x Ethernet card with CardSoft 3.1,
+	it is necessary to make one small change to enable this card.  In
+	the subdirectory where CardSoft is installed, a file exists called
+	CARDID.INI.  Edit this file and add the following line to the 
+	[Libraries] section:
+
+			CardLib=TDKLAN2.CLB
+
+	Save the CARDID.INI file and reboot your system.
+
+
+
+     ADVANCED POWER MANAGEMENT
+
+	If your system is designed to conserve battery life through the 
+	use of Advanced Power Management drivers, it may be necessary to
+	load the CardSoft CS_APM driver.  This driver will allow CardSoft 
+	3.1 to properly handle the Power Management cycles issued by the 
+	BIOS.  Contact your system vendor to determine if your system 
+	supports Advanced Power Management.
+
+	To install CS_APM.EXE please edit your CONFIG.SYS file and add 
+	the following line after the other CardSoft 3.1 files listed:
+		      
+			INSTALL=C:\CARDSOFT\CS_APM.EXE
+
+	Save the CONFIG.SYS file and reboot your system.
+
+
+
+     XIRCOM CE-10BT AND CE-10B2 ETHERNET LAN CARDS
+
+	The CardSoft 3.1 package provides support for the Xircom CE-10BT and
+	CE-10B2 Ethernet cards.  In most cases, you should use the software 
+	drivers supplied by Xircom to enable this LAN card.  
+
+	In the event that you want CardSoft 3.1 to configure the Xircom 
+	cards, it is necessary to make one small change.  In the subdirectory 
+	where CardSoft is installed, a file exists called CARDID.INI.  
+	Edit this file and add the following line to the [Libraries] 
+	section:
+
+			CardLib=XIRCOM.CLB
+
+	Save the CARDID.INI file and reboot your system.
+	
+	
+     
