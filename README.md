@@ -99,6 +99,14 @@ This is a new 386-based palmtop released in 2023. It runs on DOS 6.22 and Window
 
 Here the system is running Descent on lowest quality setting.
 
+## 6. [Book8088v2](laptops/book8088) (2023)
+
+This is a new 8088-based subnotebook released in 2023. I have set it up to run DOS 6.22, Win 1.03 and Win 2.03.
+
+<img src="laptops/book8088/photos/book8088-front.jpg" width="600">
+
+Here it is shown running CGA Compatibility tester.
+
 # Virtual Machines
 
 Not exactly retro PCs but I just wanted to store the settings I use for my virtual playgrounds. This is typically for me to do quick and dirty testing without powering up my actual retro-PCs.
