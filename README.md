@@ -173,7 +173,7 @@ The Poqet PC Plus is a small IBM PC/XT compatible released by Fujitsu in the ear
 
 This PC failed before I could take a photo of it in a running state.
 
-# 5. [NEC Versa 40EC](laptops/versa-v40) (1994)
+# 5. [NEC Versa 40EC](deprecated/versa-v40) (1994)
 
 The NEC Versa 40EC laptop is only configured for DOS 6.22.
 
