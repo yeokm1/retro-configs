@@ -1,7 +1,7 @@
 # retro-configs
 Collection of my DOS configurations and drivers of my retro machines. Decided to open source my configurations in case it might help you.
 
-Common drivers and software not specific to a particular system are located in the [common](common) folder.
+Common drivers and software not specific to a particular system are located in the [common-drivers](common-drivers) or [common-software](common-software) folders.
 
 Each of the title links will bring you to subpages with more detailed information.
 
