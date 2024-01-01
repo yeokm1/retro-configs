@@ -1,0 +1,1009 @@
+    CHKCPU
+    02/02/2023
+    by Jan Steunebrink
+
+    Homepage: http://web.inter.nl.net/hcc/J.Steunebrink/
+    E-mail  : J.Steunebrink@net.HCC.nl
+
+    CPU Identification utility v1.27.1
+    ----------------------------------
+
+Introduction
+------------
+After a CPU and/or motherboard upgrade, it can be difficult to find the
+correct motherboard jumper settings for clockspeed, clock multiplier,
+and (for 486 only) internal cache Write-Back/Write-Through mode selection.
+I wrote the CHKCPU utility to have an easy check on these settings.
+On the other hand, CHKCPU is also useful for checking the CPU type and speed
+on a given machine and, due to its text-based output, information from CHKCPU
+can easily be used to get CPU info from each machine in a network by calling
+CHKCPU from the network log-on script.
+
+The program
+-----------
+The program comes in a ZIP-file (CKCPU1271.ZIP) which should contain the
+following 5 files: CHKCPU.BAT  ;a batch file for easy use of the program
+                   CHKCPU.EXE  ;the program
+                   CHKCPU.TXT  ;this text file
+                   REPORT.BAT  ;a batch file for reporting CHKCPU problems
+                   REPORT.TXT  ;explains the use of REPORT.BAT.
+The files have a date-time stamp of 02/02/23 - 1:27 am.
+The program is written in assembly language and it is freeware.
+
+The program is started by typing CHKCPU at the command prompt.
+CHKCPU can be run from the DOS prompt or from a DOS-box within Windows.
+CHKCPU is designed to run under DOS 5.0 or higher, or any 32-bit version of
+Windows. The behavior of CHKCPU under OS/2 is unknown.
+
+For complete information, I recommend running CHKCPU after a clean boot
+to DOS, without an expanded memory manager (EMM386 or QEMM) loaded.
+On most CPUs, CHKCPU can indicate the Clock multiplier and Bus clock speed
+only in 'Real mode'.
+
+To have a quick check on the CPU details under Windows, without opening a DOS
+window and typing the required commands, unzip the CHKCPU.BAT and CHKCPU.EXE
+files in a folder and double-click on the CHKCPU.BAT file in explorer.
+
+
+CHKCPU output examples
+----------------------
+On my upgraded 586 PC, CHKCPU displays the following information:
+
+ CPU Identification utility v1.27.1               (c) 1997-2022 Jan Steunebrink
+ ------------------------------------------------------------------------------
+ CPU Vendor and Model: AMD K6-III+ 400/450/475/500/550
+ Internal CPU speed  : 601.2 MHz  (using internal Time Stamp Counter)
+ Clock Multiplier    : 6.0 
+ Bus clock speed     : 100.2 MHz
+ CPU-ID Vendor string: AuthenticAMD
+ CPU-ID Name string  : AMD-K6(tm)-III Processor
+ CPU-ID Signature    : 0005D0
+                       |||||+- Stepping or sub-model no.
+                       ||||+- Model: Indicates CPU Model and 486 L1 cache mode
+                       |||+- Family: 4=486, Am5x86, Cx5x86
+                       |||           5=Pentium, Nx586, Cx6x86, K5/K6, C6, mP6
+                       |||           6=PentiumPro/II/III, CxMII/III, Athlon, C3
+                       |||           F=Pentium4, Athlon64
+                       ||+- Type: 0=Standard, 1=Overdrive, 2=2nd Dual Pentium
+                       |+- Ext. Model: Extends the Base Model to an 8-bit value
+                       +- Ext. Family: Extends the Base Family value
+ Current CPU mode    : Real
+ Internal (L1) cache : Enabled in Write-Back mode
+
+On my Celeron M laptop CHKCPU shows:
+
+ CPU Identification utility v1.27.1               (c) 1997-2022 Jan Steunebrink
+ ------------------------------------------------------------------------------
+ CPU Vendor and Model: Intel Celeron M 410/420/423/430 C0-step
+ Internal CPU speed  : 1727.6 MHz  (using internal Time Stamp Counter)
+ Clock Multiplier    : 13.0
+ Bus clock speed     : 132.8 MHz (QDR)
+ CPU-ID Vendor string: GenuineIntel
+ CPU-ID Name string  : Intel(R) Celeron(R) M CPU        430  @ 1.73GHz
+ CPU-ID Signature    : 0006E8
+                       |||||+- Stepping or sub-model no.
+                       ||||+- Model: Indicates CPU Model and 486 L1 cache mode
+                       |||+- Family: 4=486, Am5x86, Cx5x86
+                       |||           5=Pentium, Nx586, Cx6x86, K5/K6, C6, mP6
+                       |||           6=PentiumPro/II/III, CxMII/III, Athlon, C3
+                       |||           F=Pentium4, Athlon64
+                       ||+- Type: 0=Standard, 1=Overdrive, 2=2nd Dual Pentium
+                       |+- Ext. Model: Extends the Base Model to an 8-bit value
+                       +- Ext. Family: Extends the Base Family value
+ Current CPU mode    : Real
+ Internal (L1) cache : Enabled in Write-Back mode
+
+
+More CPU details
+----------------
+Apart from these 'Normal' displays, CHKCPU supports command-line switches
+to get another format or to display additional CPU information.
+You can get a list of these switches with the command CHKCPU /? or /H
+The following switches are supported:
+- With CHKCPU /C you get the CPUID only mode. In this mode, any code that
+  does more than CPUID data processing, like speed measurement, is skipped.
+  So this mode works like a safe detection mode and can be used for
+  troubleshooting problems when using CHKCPU.
+- With CHKCPU /D you get the Debug mode. It displays a dump of raw OS and
+  relevant CPUID level information. Great for troubleshooting "Unknown"
+  indications or getting info on new CPU models.
+- With CHKCPU /F you get the Frequency mode. It displays the CPU Speed only.
+  Intended for use in scripts. The output is in MHz but has no trailing 'MHz'.
+- With CHKCPU /I you force the use of the Instruction timing method for CPU
+  speed measurement. Useful if the TSC method gives an incorrect reading.
+- With CHKCPU /R you force the use of Real (or Virtual) mode. Protected
+  mode via the DOS Protected Mode Interface is then not used.
+- With CHKCPU /S you get a Short display of CPU Type and Speed only.
+  Intended for use in network logon scripts. The output has no trailing CR.
+- With CHKCPU /V you get the Verbose mode. It displays additional CPUID info
+  like CPU features, Instruction set extensions, and the sizes of the L1 and
+  integrated L2/L3 cache.
+  Some CPU features are only displayed for specific CPUs. These are:
+   'CPU Serial Number Enabled' for the PentiumIII,
+   'Hyper-Threading technology', 'Execute Disable protection', '64-bit support'
+   and 'Virtualization Technology' for the Pentium 4, Core (2), Athlon 64 and
+   later models.
+  The Instruction set extensions line displays if MMX, 3DNow, SSE, SSE2, SSE3,
+  SSSE3, SSE4.1, SSE4.2, SSE4A, AES, AVX, AVX2, F16C, FMA3, FMA4, XOP, and SHA
+  support is present. Note that only supported instruction sets are displayed.
+  For CPUs with split Data/Instruction L1 caches, the combined value is shown.
+  On Multi-Core CPUs, the sizes of the L1 and L2 cache are indicated for each
+  core and the number of caches per CPU package is indicated as well.
+   Note that when a combined L2 cache is used by the CPU in question, the nbr
+   of L2 caches present is less than the nbr of cores.
+  A L3 cache, if present, is usually a single combined cache.
+
+Switches can be combined. Example: CHKCPU /S /C gives a short display of
+the CPU type only. The speed is not displayed.
+The /D switch has priority over the /V switch, the /S switch has priority over
+the /D and /V switches, the /F switch has priority over the /S, /D, and /V
+switches, and the /H or /? switch has priority over all other switches.
+
+On 8086/8088-80286 CPUs only the /C, /S, and /H or /? switches are supported.
+
+
+CHKCPU /V under Windows Vista on my Athlon 64 X2 box looks like:
+
+ CPU Identification utility v1.27.1               (c) 1997-2022 Jan Steunebrink
+ ------------------------------------------------------------------------------
+ CPU Vendor and Model: AMD Athlon 64 X2 3800+-4600+ E4-rev.
+ Internal CPU speed  : 2199.4 MHz  (using internal Time Stamp Counter)
+ Clock Multiplier    : Available only in Real Mode!
+ CPU-ID Vendor string: AuthenticAMD
+ CPU-ID Name string  : AMD Athlon(tm) 64 X2 Dual Core Processor 4200+
+ CPU-ID Signature    : 020FB1
+ CPU Features        : Floating-Point Unit on chip  : Yes
+                       Time Stamp Counter           : Yes
+                       Cool'n'Quiet support         : Yes
+                       Hyper-Threading Technology   : No
+                       Execute Disable protection   : Yes
+                       64-bit support               : Yes
+                       Virtualization Technology    : No
+ Instr set extensions: MMX, 3DNow!, SSE, SSE2, SSE3
+ Current CPU mode    : Protected
+ Internal (L1) cache : Enabled in Write-Back mode
+ Size of L1 cache    : 2 x 128 KB
+ Integrated L2 cache : 2 x 512 KB
+
+
+Specific CPU Family and Vendor support
+--------------------------------------
+CHKCPU recognizes any 8086/8088 or higher CPU, however detailed information
+can only be displayed for CPUs which support the CPUID instruction or
+Cyrix CPUs with Device Identification Register (DIR) support.
+This detailed support covers some 486 and all 586/Pentium and higher CPUs.
+CHKCPU recognizes CPUs from Intel, AMD, NEC, NexGen, Cyrix/IBM/TI, UMC, IDT,
+VIA, Rise, Transmeta, SiS, and DMP.
+If CHKCPU is run on a 8086/8088/80286/386 or (non-Cyrix) 486 CPU without CPUID
+support, the CPU will be indicated as a 'Classic' model with proper CPU and/or
+FPU identification and a shortened display with only speed and (if present)
+cache information will follow.
+
+On Cyrix 6x86/6x86MX/MII CPUs, the CPUID instruction can be disabled via a CPU
+configuration register. On some PCs the BIOS disables CPUID during boot-up.
+If this is the case, CHKCPU will show a - No CPUID - message to advise you of
+this condition, but the 6x86 CPU details will still be displayed.
+
+On IDT and VIA CPUs, the CPUID Vendor string and Signature can be programmed
+to any value. CHKCPU checks for this condition and temporarily disables this
+programming to show the real Vendor string and Signature of these CPUs.
+However, this check can only be done in 'Real mode' and is therefore skipped
+if the CPU is in 'Virtual or Protected mode' (EMM386, Windows).
+
+
+Clock multiplier and CPU speed
+------------------------------
+Since the Intel 486DX2 hit the market, most CPUs run internally faster
+than externally.
+The Internal CPU speed display indicates the true internal CPU clock speed.
+The internal CPU clock speed = Bus clock X Clock multiplier.
+The Bus clock is the speed of the motherboard clock.
+On Pentium class CPUs, the clock multiplier is usually selectable in steps
+of 0.5 (x1.5, x2, x2.5, x3 etc.).
+Some CPUs have a fixed multiplier factor (Celeron, PentiumIII/4), and some
+use fractional factors like x1.75 (K5) or x2.33 (Winchip-2A).
+Modern CPUs (Athlon64/Pentium4) use whole numbers as multiplier factor.
+
+Most CPUs provide data on which Clock multiplier setting they are running.
+CHKCPU will display the Clock multiplier when available, and also
+calculate and displays the Bus clock speed in this case.
+Note that the classic Pentiums, like the Intel Pentium I, Pentium MMX, and
+AMD K6 do not provide any clock multiplier data.
+
+For Intel CPUs the internal speed equals the rating. So a Pentium 200 will
+run internally at 200 MHz. (66.6 x 3)
+For AMD, Cyrix, and Rise CPUs the internal speed can be lower than the PR
+rating due newer and more efficient design.
+For the K6-2 and later AMD CPUs upto 1400MHz, the internal speed equals the
+rating but modern CPUs use a performance figure as rating.
+
+CHKCPU measures the CPU speed by accurately timing the execution of a bunch of
+slow 'Divide' instructions.
+For Pentium class CPUs however, the internal Time Stamp Counter (TSC) is used
+whenever possible to further improve the accuracy of the speed measurement.
+A message behind the CPU speed display indicates if the TSC is used.
+As using the TSC would crash the program when the CPU is in 'Virtual mode',
+the CPU speed measurement switches back to the (less accurate) instruction
+timing method when the CPU is not in 'Real or Protected mode'.
+
+
+Internal (L1) cache mode
+------------------------
+CHKCPU detects if the internal (Level 1) cache is disabled or enabled.
+If enabled, CHKCPU indicates if the cache operates in the Write-Through
+(read only cache) or Write-Back (read and write cache) mode.
+For the 486 CPU family, this information is derived from the CPU-ID signature.
+For Cyrix 486/5x86 CPUs, Configuration Control Register #2 (C2h) bit 1 (WBAK
+ - Write Back Cache Interface Pins Enable) supplies this information.
+
+The Pentium and higher CPU families normally operate their L1 cache in
+Write-Back mode. Exceptions are: the Nx586, the Intel Pentium 63/83 ODP (P24T),
+the Cyrix 6x86/6x86MX/MII, and the DMP Vortex86.
+The Nx586 and Vortex86 have only Write-Through mode and are indicated as such.
+The P24T can operate in either the Write-Through or Write-Back mode.
+For this CPU, CHKCPU uses a special routine to detect the difference.
+The Cyrix 6x86 series usually operates in Write-Back mode but can be switched
+to Write-Through mode by enabling CR0 bit 29 (NW - No Write-back).
+Note that the Cyrix MediaGX/GXm has the definition of this NW bit (CR0 bit 29)
+reversed and on this model it is named NW - No Write-Through.
+So on the GX/GXm the NW bit has to be disabled to get Write-Back mode!
+CHKCPU checks this NW bit and displays the L1 cache mode accordingly.
+For all other Pentium class CPUs, CHKCPU assumes Write-Back mode.
+
+Note that for both the Nx586 and the P24T the CPU needs to be in 'Real mode'
+to be able to check the L1 cache mode.
+This check is therefore skipped if these CPUs are not running in 'Real mode'.
+
+
+Cache size detection
+--------------------
+In the Verbose mode, when using the /V command-line switch, CHKCPU displays
+the sizes of the CPU's internal L1, L2, and L3 caches when present.
+On most Pentium class, and all later CPUs, data for the cache sizes is provided
+by the CPU via the CPUID instruction.
+If the CPU, like the 386/486 and early Pentium/K5, doesn't provide any cache
+data, CHKCPU uses a table with known L1 cache sizes for each CPU model and
+displays this assumed value.
+However, on 386/486 CPUs CHKCPU attemps to measure the L1 cache size via a timing
+routine and displays this value. But if a zero cache size is measured, like when
+the L1 cache is disabled, CHKCPU switches back to the assumed table value.
+Also under Windows, when the L1 size timing method would be unreliable, CHKCPU
+switches back to the assumed table value display.
+Anytime an assumed L1 cache size is displayed, you see an '(assumed, not measured)'
+indication behind the L1 cache value.
+As integrated L2 and L3 caches only appeared in later CPU models, their sizes
+are always derived from CPUID data.
+
+
+Other display details
+---------------------
+The CPU-ID Name string is only displayed when supported by the CPU.
+This name string is stored in the CPU and is usually programmed into the CPU
+by the manufacturer or by the BIOS at boottime.
+
+
+Error and Unknown messages
+--------------------------
+If CHKCPU is unable to detect the CPU Vendor you get an "Unknown" indication.
+If CHKCPU is unable to detect the CPU Model you'll see -Unknown model-.
+"Unknown" indications are also possible if CHKCPU is unable to detect the
+Clock Multiplier or L1 cache size.
+
+If a Cyrix CPU is detected but no DIR support is found you get:
+ Cyrix Device Id Regs: - DIR registers could not be found -
+This is correct on the early Cx486 CPUs but most Cx486 and all Cx5x86 and
+later Cyrix CPUs should support the Device Identification Registers.
+
+On CPUs without CPUID support, CHKCPU will indicate:
+ CPU-ID Vendor string: - No CPUID -
+This is the case on 8086/8088, 80286, 386 and most 486 CPUs, on the DMP Vortex86,
+and on the Cyrix/IBM 5x86.
+
+
+Acknowledgments
+---------------
+I could not have written this program without the hard work of these people:
+- Christian Ludloff http://www.sandpile.org/ for his unsurpassed amount and
+  detail of CPU information.
+- Grzegorz Mazur http://grafi.ii.pw.edu.pl/gbm/x86/ for publishing the basic
+  algorithms for CPU detection.
+- Frank van Gilluwe, author of "The Undocumented PC" (second edition); still
+  my favorite hardware book.
+  The internal CPU speed detection routine according the instruction timing
+  method and the L1 size timing method are based on ideas from his book.
+
+
+Feedback requested
+------------------
+If you encounter an "Unknown" message or if you have any questions regarding
+this program, please send me an E-mail with your CPU details and
+the CHKCPU /V and CHKCPU /D outputs.
+You can use DOS's redirect and append functions to get the outputs in a file.
+E.g. CHKCPU /V > MYCPU.TXT and CHKCPU /D >> MYCPU.TXT
+Or you can use the enclosed REPORT.BAT file to generate a MYCPU.TXT report.
+
+J.Steunebrink@net.HCC.nl
+
+------------------------------------------------------------------------------
+CHKCPU revision history:
+
+Version 1.27.1
+02/02/2023
+- This is a maintainance release.
+- Fixed a bug that hanged the PC with an EMM386 error when running CHKCPU
+  in Virtual mode on a 386 or 486 CPU without CPUID support.
+
+Version 1.27
+12/12/2022
+- After a pause of 5 years, I've made an updated version of CHKCPU again.
+  This update also marks the 25th anniversary of this tool. :-)
+  The main focus of this update is to add and improve support for older CPUs,
+  to better serve the retro computing community.
+  But I've added support for more recent (2017-2019) CPU models as well. 
+- Added support for 8086/8088, V20/V30, 80186/80188, and 80286 CPUs.
+- Added detection of an additional 8087, 80287, or 387 class FPU.
+- Rewritten the CPU detection algorithm to allow for a more detailed detection
+  of a wide variety of 386 and 486 CPU models without CPUID support.
+- Improved the detection of early Cyrix/TI 486 CPUs without DIR support, like
+  the Cx486S A-step, Cx486SLC/DLC, and TI486SXLC(2)/SXL(2) models.
+- Added support for IBM 386SLC and 486SLC(2)/DLC2/BL2/BL3 CPUs.
+- Improved L1 cache size detection on 386/486/5x86 CPUs.
+- Removed the automatic enabling of CPUID support on Cyrix/IBM 6x86/6x86MX CPUs,
+  so that CHKCPU can now be used to check if the BIOS disabled CPUID on these CPUs.
+- Fixed recognition of the Pentium 120/133 overdrive processor for P5 socket.
+- Fixed the DMP Vortex86DX/MX detection.
+- Added a DMP-ID display to the Debug mode for Vortex86 CPUs.
+- Fixed a hang in Debug mode on 386 and early 486 systems.
+- Added IDT Winchip 2A fractional multiplier support.
+- Fixed the IDT Winchip 2B detection.
+- Fixed the too high CPU speed reading on the AMD K5 and Rise mP6 CPUs, when
+  the TSC is not used (instruction timing method).
+- Added multiplier support for AMD family 16h, and 17h models.
+- Updated the CPU data for these new models:
+  . AMD:
+    - Ryzen 9 4900H(S) Octa-Core with Graphics for Mobile (Renoir),
+    - Ryzen 7 4700U/4800H/4800U Octa-Core with Graphics for Mobile (Renoir),
+    - Ryzen 5 4500U/4600H/4600U Hexa-Core with Graphics for Mobile (Renoir),
+    - Ryzen 3 4300U Quad-Core with Graphics for Mobile (Renoir),
+    - Ryzen 9 3900X/3950X 12/16-Core for Desktop (Matisse),
+    - Ryzen 7 3700X/3800X Octa-Core for Desktop (Matisse),
+    - Ryzen 5 3600/3600X Hexa-Core for Desktop (Matisse),
+    - EPYC 7232P/7252/7262/7272/7282/7302(P)/7352/7402(P)/7452/7502(P)/7532/7542/7552/7642/7662
+      /7702(P)/7742/7H12 8/12/16/24/32/48/64-Core for Server (Rome),
+    - Ryzen Threadripper 3960X/3970X/3990X 24/32/64-Core for Desktop (Castle Peak),
+    - Ryzen 5 3400G Quad-Core with Graphics for Desktop (Picasso),
+    - Ryzen 3 3200G Quad-Core with Graphics for Desktop (Picasso),
+    - Athlon 3000G Dual-Core with Graphics for Desktop (Picasso),
+    - Ryzen 7 3700U/3750H Quad-Core with Graphics for Mobile (Picasso),
+    - Ryzen 5 3500U/3550H/3580U Quad-Core with Graphics for Mobile (Picasso),
+    - Ryzen 3 3300U Quad-Core with Graphics for Mobile (Picasso),
+    - Ryzen 3 3200U Dual-Core with Graphics for Mobile (Picasso),
+    - Athlon 300U Dual-Core with Graphics for Mobile (Picasso),
+    - Ryzen 5 2400G/2400GE Quad-Core with Graphics for Desktop (Raven Ridge),
+    - Ryzen 3 2200G/2200GE Quad-Core with Graphics for Desktop (Raven Ridge),
+    - Athlon 200GE/220GE/240GE Dual-Core with Graphics for Desktop (Raven Ridge),
+    - Ryzen 7 2700U/2800H Quad-Core with Graphics  for Mobile (Raven Ridge),
+    - Ryzen 5 2500U/2600H Quad-Core with Graphics for Mobile (Raven Ridge),
+    - Ryzen 3 2300U Quad-Core with Graphics for Mobile (Raven Ridge),
+    - Ryzen 3 2200U Dual-Core with Graphics for Mobile (Raven Ridge),
+    - Ryzen Threadripper 2920X/2950X/2970WX/2990WX 12/16/24/32-Core for Desktop (Colfax),
+    - Ryzen 7 2700/2700X Octa-Core for Desktop (Pinnacle Ridge),
+    - Ryzen 5 2600/2600E/2600X Hexa-Core for Desktop (Pinnacle Ridge),
+    - Ryzen 5 2500X Quad-Core for Desktop (Pinnacle Ridge),
+    - Ryzen 3 2300X Quad-Core for Desktop (Pinnacle Ridge),
+    - EPYC 7251/7261/7281/7301/7351(P)/7401(P)/7451/7501/7551(P)/7601 8/16/24/32-Core
+      for Server (Naples),
+    - Ryzen Threadripper 1900X/1920X/1950X 8/12/16-Core for Desktop (Whitehaven),
+    - Ryzen 3 1200/1300X Quad-Core for Desktop (Summit Ridge).
+  . DMP/SiS:
+    - SiS 550/551/552 SoC (Vortex86 original)
+    - Vortex86DX2, Vortex86DX3, Vortex86EX, Vortex86EX2 SoC 
+  . Intel:
+    - Core i7 Quad-Core Mobile i7-10510U/10610U series (Comet Lake-U),
+    - Core i5 Quad-Core Mobile i5-10210U/10310U series (Comet Lake-U),
+    - Core i3 Dual-Core Mobile i3-10110U series (Comet Lake-U),
+    - Pentium Dual-Core Mobile 6400U series (Comet Lake-U),
+    - Celeron Dual-Core Mobile 5200U/5300U series (Comet Lake-U),
+    - Core i7 Quad-Core Mobile i7-8560U/8660U series (Whiskey Lake-U),
+    - Core i5 Quad-Core Mobile i5-8260U/8360U series (Whiskey Lake-U),
+    - Core i3 Dual-Core Mobile i3-8140U series (Whiskey Lake-U),
+    - Pentium Dual-Core Mobile 5400U series (Whiskey Lake-U),
+    - Celeron Dual-Core Mobile 4200U/4300U series (Whiskey Lake-U),
+    - Core i7 Quad-Core Mobile i7-8500U/8600U series (Kaby Lake Refresh),
+    - Core i5 Quad-Core Mobile i5-8200U/8300U series (Kaby Lake Refresh),
+    - Core i3 Dual-Core Mobile i3-7000U/8100U series (Kaby Lake Refresh),
+    - Pentium Dual-Core Mobile 4400U series (Kaby Lake Refresh),
+    - Xeon 3100/4100/5100/6100/8100 series (Skylake-SP),
+    - Xeon 4/6/8/10/14/18-Core W-2100 series (Skylake-W),
+    - Core i9 10/12/14/16/18-Core 7900X/9900X series (Skylake-X),
+    - Core i7 6/8-Core 7800X/9800X series (Skylake-X).
+
+Version 1.26
+06/06/2017
+- Updated the CPU data for these new models:
+  . AMD:
+    - Ryzen 7 1700/1700X/1800X Octa-Core for Desktop (Summit Ridge),
+    - Ryzen 5 1600/1600X Hexa-Core for Desktop (Summit Ridge),
+    - Ryzen 5 1400/1500X Quad-Core for Desktop (Summit Ridge),
+    - E2-9010/A6-9210/A9-9410 Dual-Core APU for Notebooks (Stoney Ridge),
+    - A10-9600/A12-9700/FX-9800 series Quad-Core APU for Notebooks (Bristol Ridge),
+    - A8-9600/A10-9700/A12-9800 Quad-Core APU for Desktop (Bristol Ridge),
+    - A6-9500 Dual-Core APU for Desktop (Bristol Ridge),
+    - Athlon X4 900 series Quad-Core for Desktop (Bristol Ridge),
+    - Athlon X4 800 series Quad-Core for Desktop (Godavari/Carrizo),
+    - E2-7110/A4-7210/A6-7310/A8-7410 Quad-Core APU for Notebooks (Carrizo-L),
+    - E2-6110/A4-6210/A6-6310/A8-6410 Quad-Core APU for Notebooks (Beema),
+    - E1-6010/-7010 Dual-Core APU for Notebooks (Beema/Carrizo-L).
+  . Intel:
+    - Xeon Quad-Core E3-1200v6/1500v6 Family (Kaby Lake),
+    - Core i7 Quad-Core i7-7700/7800HQ/7900HQ series (Kaby Lake),
+    - Core i5 Quad-Core i5-7300HQ/7400/7500/7600 series (Kaby Lake),
+    - Core i3 Dual-Core i3-7100/7300 series (Kaby Lake),
+    - Pentium Dual-Core G4500/G4600 series (Kaby Lake),
+    - Celeron Dual-Core G3900 series (Kaby Lake),
+    - Core i7 Dual-Core Mobile i7-7500U/7600U series (Kaby Lake),
+    - Core i5 Dual-Core Mobile i5-7200U/7300U series (Kaby Lake),
+    - Core i3 Dual-Core Mobile i3-7100U series (Kaby Lake),
+    - Pentium Dual-Core Mobile 4400U/Y series (Kaby Lake),
+    - Celeron Dual-Core Mobile 3800U/3900U/Y series (Kaby Lake),
+    - Xeon 4/8/10/14/16/18/20/22/24-Core E7-4800/8800 v4 Family (Broadwell-EX),
+    - Xeon 4/6/8/10/12/14/16/18/20/22-Core E5-1600/2600/4600 v4 Family (Broadwell-EP),
+    - Core i7 Six/Octa/Deca-Core i7-6800K/6850K/6900K/6950X R0-step (Broadwell-E).
+- Added AES, AVX, AVX2, F16C, FMA3, FMA4, XOP, SHA instruction set extension support.
+- Expanded the Debug display with CPUID level 00000007h.
+- Adapted the core count logic for AMD Ryzen (Family 17h and newer) CPUs to show
+  the correct number of L1 and L2 caches on these models.
+
+Version 1.25
+01/01/2016
+- Updated the CPU data for these new models:
+  . AMD:
+    - A8-8600P/A10-8700P/FX-8800P series Quad-Core APU for Notebooks (Carrizo),
+    - A6-8500P series Dual-Core APU for Notebooks (Carrizo),
+    - A8-7600/-8600/A10-7800/-8700/-8800 series Quad-Core APU for Desktop (Godavari),
+    - A4-8300/A6-8500 series Dual-Core APU for Desktop (Godavari),
+    - A8-7600/A10-7700/-7800 series Quad-Core APU for Desktop (Kaveri),
+    - A6-7400 series Dual-Core APU for Desktop (Kaveri),
+    - A8-/A10-/FX-7000 series Quad-Core APU for Notebooks (Kaveri),
+    - A6-7000 series Dual-Core APU for Notebooks (Kaveri),
+    - Athlon X2/X4 400/800 series Dual/Quad-Core for Desktop (Kaveri),
+    - Athlon X2/X4 300/700 series Dual/Quad-Core for Desktop (Trinity/Richland),
+    - Sempron X2 240/250 Dual-Core for Desktop (Trinity/Richland).
+  . Intel:
+    - Xeon Quad-Core E3-1200v5/1500v5 Family (Skylake),
+    - Core i7 Quad-Core i7-6700/6800HQ/6900HQ series (Skylake),
+    - Core i5 Quad-Core i5-6300HQ/6400/6500/6600 series (Skylake),
+    - Core i3 Dual-Core i3-6100/6300 series (Skylake),
+    - Pentium Dual-Core G4400/G4500 series (Skylake),
+    - Celeron Dual-Core G3900 series (Skylake),
+    - Core i7 Dual-Core Mobile i7-6500U/6600U series (Skylake),
+    - Core i5 Dual-Core Mobile i5-6200U/6300U series (Skylake),
+    - Core i3 Dual-Core Mobile i3-6100U series (Skylake),
+    - Pentium Dual-Core Mobile 4400U/Y series (Skylake),
+    - Celeron Dual-Core Mobile 3800U series (Skylake),
+    - Xeon Quad-Core E3-1200v4 Family (Broadwell),
+    - Core i7 Quad-Core (Mobile) i7-5700/5800HQ/5900HQ series (Broadwell),
+    - Core i5 Quad-Core (Mobile) i5-5500R/5600 series (Broadwell),
+    - Core i7 Dual-Core Mobile i7-5500U/5600U series (Broadwell),
+    - Core i5 Dual-Core Mobile i5-5200U/5300U(H) series (Broadwell),
+    - Core i3 Dual-Core Mobile i3-5000U/5100U series (Broadwell),
+    - Pentium Dual-Core Mobile 3800U series (Broadwell),
+    - Celeron Dual-Core Mobile 3200U series (Broadwell),
+    - Xeon 4/8/10/12/14/16/18-Core E7-4800/8800 v3 Family (Haswell-EX),
+    - Xeon 4/6/8/10/12/14/16/18-Core E5-1400/1600/2400/2600/4600 v3 Family (Haswell-EN/EP),
+    - Core i7 Six/Octa-Core i7-5820K/5930K/5960X R2-step (Haswell-E).
+- Fixed a bug where Pentium Dual-Core desktop models were detected as mobile versions.
+  This bug affected Sandy Bridge, Ivy Bridge, and Haswell Pentium models.
+- Added support for software changeable multipliers on the Cyrix 5x86.
+- Corrected the L1 cache mode indication on the Cyrix MediaGX/GXm.
+- Added multiplier support for the Cyrix MediaGX/GXm.
+
+Version 1.24
+06/06/2014
+- Updated the CPU data for these new models:
+  . AMD:
+    - Opteron Quad-Core X1150/X2150 (Kabini),
+    - Athlon 5150/5350 Quad-Core APU for Desktop (Kabini),
+    - Sempron 2650/3850 Dual/Quad-Core APU for Desktop (Kabini),
+    - A4-5000/A6-5200 Quad-Core APU for Notebooks (Kabini),
+    - E2-3800 Quad-Core APU for ultra-thin (Kabini),
+    - E1-2100/E1-2500/E2-3000 Dual-Core APU for ultra-thin (Kabini),
+    - A8-7600/A10-7700K/A10- 7850K(B) Quad-Core APU for Desktop (Kaveri),
+    - A8-6500/-6600/A10-6700/-6800 series Quad-Core APU for Desktop (Richland),
+    - A4-4000/A4-6300/A6-6400 series Dual-Core APU for Desktop (Richland),
+    - A8-5500M/A10-5700M series Quad-Core APU for Notebooks (Richland),
+    - A4-5100M/A6-5300M series Dual-Core APU for Notebooks (Richland),
+    - FX-9370-BE/9590-BE Eight-Core (Vishera),
+    - E1-1500/E2-2000 Dual-Core APU (Zacate).
+  . Intel:
+    - Xeon 6/8/10/12/15-Core E7-2800/4800/8800 V2 Family (Ivy Bridge-EX),
+    - Xeon 4/6/8/10/12-Core E5-1400/1600/2400/2600/4600 V2 Family,
+    - Xeon Dual/Quad-Core E3-1200V3 Family (Haswell),
+    - Core i7 Quad/Six-Core i7-4820K/4930K/4960X S1-step (Ivy Bridge-E),
+    - Core i7 Quad-Core i7-4700 series C0-step (Haswell),
+    - Core i7 Quad-Core Mobile i7-4700Q/4800Q/4900Q/4900X series (Haswell),
+    - Core i7 Quad-Core Mobile i7-4700HQ/4800HQ/4900HQ series (Crystal Well),
+    - Core i7 Dual-Core Mobile i7-4500M(U)/4600M(U) series (Haswell),
+    - Core i5 Quad-Core i5-4400/4500/4600 series (Haswell),
+    - Core i5 Quad-Core Mobile i5-4500R/4600R series (Crystal Well),
+    - Core i5 Dual-Core (Mobile) i5-4200M(U)/4300M(U)/4500 series (Haswell),
+    - Core i3 Dual-Core (Mobile) i3-4000M(U)/4100(U)/4300 series (Haswell),
+    - Pentium Dual-Core G3200/G3400 series (Haswell),
+    - Pentium Dual-Core Mobile 3500 series (Haswell),
+    - Celeron Dual-Core G1800 series (Haswell),
+    - Celeron Dual-Core Mobile 2900 series (Haswell),
+    - Atom Dual/Quad/Octa-Core C2300/C2500/C2700 series (Avoton),
+    - Atom Dual-Core S1200 series (Centerton).
+- Fixed the L1 and L2 cache count on AMD Family 16h (Kabini) models.
+- Added logic to distinguish an Intel Pentium III Xeon model 7 or model 8
+  from a Pentium III with the same CPUID signature.
+- Fixed the CPU Name string display for Intel Pentium III models 8 and A.
+- Fixed the mutiplier indication on Core 2 and later Intel models. The
+  multiplier on these CPUs can now be shown in x0.5 steps (i.s.o. x1.0 steps),
+  and multipliers above 31 are supported as well.
+- Dropped the use of DOS graphic characters in the output of CHKCPU, to avoid
+  the strange ÄÄÄÄ characters under Windows.
+
+Version 1.23
+02/02/2013
+- Updated the CPU data for these new models:
+  . AMD:
+    - Opteron 4/8/12/16-Core 6300-series C0-step (Abu Dhabi),
+    - Opteron Six/Eight-Core 4300-series C0-step (Seoul),
+    - Opteron Quad/Eight-Core 3300-series C0-step (Delhi),
+    - FX 4/6/8-Core 4300/6300/8300 series C0-step (Vishera),
+    - A8-4555M Quad-Core APU for Notebooks (Trinity),
+    - A4-4355M Dual-Core APU for Notebooks (Trinity),
+    - C-60/C-70 Dual-Core Mobile APU C0-step (Ontario).
+  . Intel:
+    - Xeon Quad/Six-Core 3600/5600 series (Westmere-EP),
+    - Core i7 Six-Core i7-3970X C2-step (Sandy Bridge-E),
+    - Core i7 Quad-Core Mobile i7-3740QM/3840QM/3940XM E1-step (Ivy Bridge),
+    - Core i7 Quad-Core Mobile i7-3630QM/3632QM/3635QM E1-step (Ivy Bridge),
+    - Core i7 Dual-Core Mobile i7-3537U/3540M/3689Y L1-step (Ivy Bridge),
+    - Core i5 Dual-Core Mobile i5-3339Y/3439Y L1-step (Ivy Bridge),
+    - Core i3 Dual-Core Mobile i3-3130M/3227U/3229Y L1-step (Ivy Bridge),
+    - Pentium Dual-Core G2000 series (Ivy Bridge),
+    - Pentium Dual-Core Mobile 2000/2100 series (Ivy Bridge),
+    - Celeron Dual-Core G1600 series (Ivy Bridge),
+    - Celeron Dual-Core Mobile 1000 series (Ivy Bridge),
+    - Pentium Dual-Core Mobile 900 series (Sandy Bridge),
+    - Celeron Dual-Core Mobile 800 series (Sandy Bridge),
+    - Atom Dual-Core Z2760 for tablets (Cloverview).
+- Bugfixes in this CHKCPU revision: None.
+
+Version 1.22
+09/09/2012
+- Updated the CPU data for these new models:
+  . AMD:
+    - Opteron Quad/Eight-Core 3200-series (Zurich),
+    - A8-5500/A8-5600K/A10-5700/A10-5800K Quad-Core APU for Desktop (Trinity),
+    - A4-5300/A6-5400K Dual-Core APU for Desktop (Trinity),
+    - A8-4500M/A10-4600M/A10-4655M Quad-Core APU for Notebooks (Trinity),
+    - A4-4300M/A6-4400M/A6-4455M Dual-Core APU for Notebooks (Trinity),
+    - E1-1200/E2-1800 Dual-Core APU (Zacate),
+    - Phenom II X4 650T/840T/960T/970BE E0-step (Zosma),
+    - Phenom II X4 970/975/980 C3-step (Deneb),
+    - Athlon II X4 615e/620e/645/650 C3-step,
+    - Athlon II X4 638/641 (for FM1 socket),
+    - Athlon II X3 420e/450/455/460 C3-step,
+    - Athlon II X2 270u/265/B28 C3-step,
+    - Phenom II X4 Mobile N950/N970/P940/P960/X940 (Champlain),
+    - Phenom II X3 Mobile N850/N870/P840/P860 (Champlain),
+    - Phenom II X2 Mobile N640/N660/P650 (Champlain),
+    - Athlon II X2 Mobile N350/N370/P340/P360 (Champlain),
+    - Turion II X2 Mobile M560 (Caspian),
+    - Turion II X2 Neo Mobile K645/K685 C3-step,
+    - Athlon II X2 Mobile M360 (Caspian),
+    - Athlon II Neo Mobile K145/K345 C3-step,
+    - V-series Mobile V140/V160 C3-step,
+    - Sempron 130/145/150 C3-step,
+    - Sempron (Mobile) 130/M140 C2-step,
+    - Turion X2 Ultra ZM-87 B1-step,
+    - Athlon Mobile QI-46 B1-step.
+  . Intel:
+    - Xeon Quad/Six/Eight-Core E5-1400/1600/2400/2600/4600 Family,
+    - Xeon Dual/Quad-Core E3-1200V2 Family (Ivy Bridge),
+    - Core i7 Quad/Six-Core i7-3820/3930K/3960X C2-step (Sandy Bridge-E),
+    - Core i7 Quad-Core i7-3770/3770K/3770S/3770T E1-step (Ivy Bridge),
+    - Core i7 Quad-Core Mobile i7-3600Q/3700Q/3800Q/3900X series (Ivy Bridge),
+    - Core i7 Dual-Core Mobile i7-3500M(U)/3600U series (Ivy Bridge),
+    - Core i5 Quad-Core i5-3300/3400/3500 series (Ivy Bridge),
+    - Core i5 Dual-Core (Mobile) i5-3200M/3300M/3400 series (Ivy Bridge),
+    - Core i3 Dual-Core (Mobile) i3-3100M/3200 series (Ivy Bridge),
+    - Pentium Dual-Core G2100 series (Ivy Bridge),
+    - Celeron G465 (Sandy Bridge),
+    - Atom Dual-Core D2550/N2600/N2800 (Cedarview).
+- Fixed a bug in the Short display mode on some Intel Core i3/i5/i7 models
+  with less than 4MB L3 cache.
+- Fixed a bug that didn't allow multiplier indications in 0.5 steps on
+  AMD Family 15h CPUs.
+- Fixed the L1 and L2 cache count on AMD Family 15h CPUs (Bulldozer).
+- Fixed the L2 cache size display on VIA Samuel 2 and Ezra(-T) CPUs.
+- Expanded the Debug display with (AMD) CPUID levels 8000001Dh and 8000001Eh.
+
+Version 1.21
+02/02/2012
+- Updated the CPU data for these new models:
+  . AMD:
+    - Opteron 4/8/12/16-Core 6200-series (Interlagos),
+    - Opteron Six/Eight-Core 4200-series (Valencia),
+    - Opteron Eight/Twelve-Core 6140/6180,
+    - FX 4/6/8-Core series (Buldozer/Zambezi),
+    - Phenom II X6 1035T/1045T/1065T/1075T/1100T-BE,
+    - Phenom II X2 560/565/570,
+    - Athlon II X4 631/651 (for FM1 socket),
+    - A6-3600 series/A8-3800 series Quad-Core APU,
+    - A6-3500 Triple-Core APU,
+    - E2-3200/A4-3300/A4-3400 Dual-Core APU,
+    - A6-3400M series/A8-3500M series Mobile Quad-Core APU,
+    - E2-3000M/A4-3300M series Mobile Dual-Core APU,
+    - E-series Single- and Dual-Core APU,
+    - C-series Single- and Dual-Core APU.
+  . Intel:
+    - Xeon Six/Eight/Ten-Core E7-2800/4800/8800 Family,
+    - Core i7 Six-Core i7-3930K/3960X (Sandy Bridge-E),
+    - Core i7 Six-Core i7-980/990X,
+    - Core i7 Quad-Core i7-2600/2600K/2600S/2700K,
+    - Core i7 Quad-Core Mobile i7-2600Q/2700Q/2800Q/2900X series,
+    - Core i7 Dual-Core Mobile i7-2600M series,
+    - Core i5 Quad-Core i5-2300/2400/2500 series,
+    - Core i5 Dual-Core Mobile i5-2400M/2500M series,
+    - Core i3 Dual-Core i3-2100 series,
+    - Core i3 Dual-Core Mobile i3-2300M series,
+    - Core i7 Dual-Core Mobile i7-620LM/640M/660LM/680UM K0-step,
+    - Core i5 Dual-Core i5-650/660/661 K0-step,
+    - Core i5 Dual-Core Mobile i5-460M/470UM/480M/560UM/560M/580M K0-step,
+    - Core i3 Dual-Core Mobile i3-330M/380UM/380M/390M K0-step,
+    - Pentium Dual-Core G6960 K0-step and G600/G800 series,
+    - Pentium Dual-Core Mobile U5600/P6100/P6200/P6300 and B900 series,
+    - Celeron Dual-Core G500 series and Mobile B800 series,
+    - Celeron Dual-Core Mobile U3405/U3600/P4500/P4505/P4600 K0-step,
+    - Celeron G440/G460 and Mobile 787/797/B710/B720,
+    - Atom Dual-Core N570/D2500/D2700,
+    - Atom Z600/Z615/Z625/Z650/Z670.
+- Updated the L1 cache data for Intel CPUs.
+- Expanded the L1, L2, and L3 cache size detection to use CPUID Level 4 data
+  on newer Intel models. Sandy Bridge and later series don't provide cache
+  descriptors via CPUID Level 2 anymore, but use Level 4 parameters instead.
+- Fixed the multiplier detection on AMD family 11h, 12h, 14h, and 15h models.
+
+Version 1.20
+09/09/2010
+- Updated the CPU data for these new models:
+  . AMD:
+    - Opteron Six-Core 4162/4164/4170/4174/4176/4180/4184,
+    - Opteron Quad-Core 4122/4130,
+    - Phenom II X6 1055T/1090T-BE,
+    - Athlon II X4 605e/610e/630/635/640,
+    - Athlon II X3 405e/415e/435/440/445,
+    - Athlon II X2 260u/215/240e/245(e)/250/255/260,
+    - Athlon X2 5000+,
+    - Phenom II X4 Mobile P920/N930/X920-BE,
+    - Phenom II X3 Mobile P820/N830,
+    - Phenom II X2 Mobile N620/X620-BE,
+    - Turion II X2 Mobile P520/N530,
+    - Turion II X2 Neo Mobile K625/K665,
+    - Athlon II X2 Mobile P320/N330,
+    - Athlon II Neo Mobile K125/K325,
+    - Athlon V Mobile V105/V120.
+  . Intel:
+    - Xeon Octa-Core X6550/L7555/X7550/X7560, 
+    - Xeon Six-Core W3680/L5638/L5640/E5645/X5650/X5660/X5680/E6540/
+                    E7530/E7540/L7545/X7542,
+    - Xeon Quad-Core X3480/W5590/L5609/L5618/L5630/E6510/E7520, 
+    - Xeon Dual-Core E5503,
+    - Core i7 Six-Core i7-970,
+    - Core i7 Quad-Core i7-870S/875K/880,
+    - Core i7 Quad-Core Mobile i7-740QM/840QM/940XM,
+    - Core i7 Dual-Core Mobile i7-620M/660UE/660UM,
+    - Core i5 Quad-Core i5-760,
+    - Core i5 Dual-Core i5-655K/680,
+    - Core i5 Dual-Core Mobile i5-430UM/450M/520E/520M/540UM/540M,
+    - Core i3 Dual-Core i3-530/540/550/560,
+    - Core i3 Dual-Core Mobile i3-330E/330UM/350M/370M,
+    - Pentium Dual-Core E5500/E6700,
+    - Pentium Dual-Core Mobile P6000/U5400,
+    - Celeron Dual-Core E3500,
+    - Celeron Dual-Core Mobile P4500/P4505/U3400,
+    - Atom Dual-Core D525/N550, Atom D425/N455/N475/Z560.
+- Removed the display for SSE5 support, because AMD dropped this function.
+
+Version 1.19
+04/04/2010
+- Updated the CPU data for these new models:
+  . AMD:
+    - Opteron Twelve-Core 6164/6168/6172/6174/6176
+    - Opteron Eight-Core 6124/6128/6134/6136
+    - Phenom II X4 820/910/925/945/955/965/B93/B95,
+    - Phenom II X3 B73/B75,
+    - Phenom II X2 545/550/555/B53/B55,
+    - Athlon II X4 635, Athlon II X3 440,
+    - Athlon II X2 250u/260u/235/255/B22/B24,
+    - Turion II X2 Mobile M540/M660,
+    - Athlon II X2 Mobile M340,
+    - Sempron Mobile M120.
+  . Intel:
+    - Xeon Quad/Six-Core E5620/E5630/E5640/X5667/X5670/X5677, 
+    - Xeon Dual-Core L3406,
+    - Core i7 Six-Core i7-980X,
+    - Core i7 Quad-Core i7-860S/930/960,
+    - Core i7 Dual-Core Mobile i7-610E/620LE/620(L)M/640(L)M,
+    - Core i5 Quad-Core i5-750S,
+    - Core i5 Dual-Core i5-650/660/661/670,
+    - Core i5 Dual-Core Mobile i5-430M/520M/540M,
+    - Core i3 Dual-Core i3-530/540,
+    - Core i3 Dual-Core Mobile i3-330M/350M,
+    - Core 2 Quad Q9505,
+    - Pentium Dual-Core E2210/E6600/G6950,
+    - Pentium Dual-Core Mobile T4300/T4400,
+    - Celeron Dual-Core E3400/T3000/T3100/T3300,
+    - Celeron 220,
+    - Celeron Mobile M570,
+    - Atom Dual-Core D510, Atom D410/N450/N470.
+  . VIA:
+    - Nano U1700/U2225/U2250.
+- Fixed the Core i7 Quad Mobile 720QM/820QM/920XM detection.
+
+Version 1.18
+10/10/2009
+- Updated the CPU data for new AMD Opteron Six-Core, Phenom II X4, Athlon II X4,
+  Athlon II X3, Athlon II X2, Turion II X2 Ultra, Turion II X2, Turion X2 Ultra,
+  Athlon II X2 Mobile, Turion Neo X2, Athlon Neo X2, and Sempron models,
+  and new Intel Xeon Quad-Core, Core i7 Quad, Core i5 Quad, Core i7 Mobile,
+  Pentium Dual-Core, Celeron Dual-Core, and Atom models.
+- Corrected the AMD Opteron Six-Core recognition and improved support for
+  Opteron Dual-Core models.
+- Fixed the mobile AMD Athlon XP-M 2800+/3000+ (socket 754) detection.
+- Fixed a display format bug in Verbose mode on 486 and early Pentium CPUs.
+
+Version 1.17
+07/07/2009
+- Updated the CPU data for new AMD Opteron Six-Core, Opteron Quad-Core,
+  Phenom II X4/X3, Phenom II X2, Athlon II X2, and Sempron models,
+  new Intel Xeon 5500 series, Core i7 Quad, Core 2 Duo, Pentium Dual-Core,
+  Atom, and Celeron models, and new VIA Nano models.
+- Added logic to distinguish Dual-Core from Triple-Core from Quad-Core CPU
+  models, which share the same CPU-ID signature.
+- Added display of Enhanced Intel SpeedStep or AMD Cool'n'Quiet support.
+- Combined the CPU Features display of Instruction set extensions like MMX,
+  3DNow!, and SSE/SSE2/SSE3 into a single and separate display line.
+- Added indication of SSSE3, SSE4.1, SSE4.2, SSE4A (AMD), and SSE5 (AMD)
+  instruction set extension support.
+- Added display of the number of L1 and L2 caches for multi-core CPUs.
+- Updated the L3 cache data for Intel CPUs.
+- Fixed a bug where a mobile AMD Athlon XP was detected as an AMD Sempron CPU.
+- Fixed the too high speed reading on the Intel Core i7 and AMD Phenom CPUs
+  when the TSC is not used (instruction timing method).
+- Expanded the Debug display to show all levels of CPUID Functions 4 and 11
+  (0Bh) for Intel CPUs.
+
+Version 1.16
+02/02/2009
+- Updated the CPU data for new AMD Opteron Quad-Core, Phenom II X4, Phenom X3/X4,
+  Athlon X2, Turion X2 Ultra, and Sempron models,
+  and new Intel Xeon Quad/Six-core, Core i7 Quad, Core 2 Quad , Core 2 Duo,
+  Atom Dual-Core, Pentium Dual-Core , and Celeron models.
+- Improved L1/L2/L3 cache size detection on Intel CPUs.
+- Added support for the DMP Vortex86SX/DX/MX CPUs.
+- Fixed a bug in the detection of several Athlon MP, Duron, and Sempron socket A
+  models. Note: This bug did not affect CPU model detection in Short mode.
+
+Version 1.15
+07/07/2008
+- Expanded the CPU detection logic to include the Extended Model and Extended
+  Family bits in the CPU-ID Signature. This change became necessary now most
+  modern CPUs use these bits and to distinguish them from previous models
+  with the same Base Family/Model signature.
+- Added an Extended Family digit to the CPU Signature display. Together with the
+  Ext. Model digit and the 4-digit base Type/Family/Model/Stepping indication,
+  this now makes the CPU Signature a 6-digit display.
+- Updated the CPU data for new AMD Opteron Single/Dual/Quad-core, Phenom X3/X4,
+  Athlon 64 FX, Athlon 64 X2, Athlon 64 (Mobile), Turion 64 X2, Sempron (Mobile),
+  and Intel Xeon Dual-Core, Xeon Quad-Core, Core 2 Duo (Mobile), Core 2 Quad,
+  Pentium Dual-Core (Mobile), Celeron Dual-Core, Celeron M, Core 2 Solo,
+  Core Duo, Core Solo, Atom, and VIA C7 models.
+- Fixed the AMD Sempron detection on Rev. F models.
+- Corrected the Hyper-Threading display on AMD Dual/Multi-core CPUs.
+- Added logic to distinguish AMD Opteron CPUs from Athlon 64 (FX) models with
+  the same CPU-ID signature.
+- Added CPU core revision indication for all AMD K8 and K10 models.
+- Added a 'Virtualization Technology' display to the CPU Features list.
+  Indicates if a CPU supports the Virtual Machine extensions.
+- Removed the 'AMD MMX extensions' and 'AMD 3DNow! extensions' display from the
+  CPU Features list to make room for more interesting instruction set extensions. 
+- Fixed the multiplier detection on AMD family 10h and 0Fh Rev. F (AM2) models.
+- Cleaned up the Debug display by only showing IDT levels on IDT/VIA CPUs.
+
+Version 1.14
+08/08/2007
+- Fixed the Intel Celeron M 410/420/430 detection (Yonah core).
+- Fixed the Xeon Dual-Core 3040-3070 detection (Conroe core).
+- Updated the CPU data for new AMD Athlon 64 (X2), Athlon 64 FX, Sempron,
+  Turion 64 X2, and Intel Xeon Dual-Core, Xeon Quad-Core, Core 2 Duo (Mobile),
+  Core 2 Quad, Celeron M, Core Solo, and Core Duo models.
+- Added support for the Intel Celeron Processor 400 Sequence.
+- Added an Extended model digit to the CPU Signature display.
+- Added an 'Execute Disable protection' display which indicates if the CPU
+  supports the Data Execution Prevention feature. Used by WinXP SP2 and Vista.
+- Added support for displaying the L3 cache size on AMD CPUs.
+- Added an /F switch to allow output of the CPU internal frequency only.
+  This option can be used in scripts, to allow decision making based on speed.
+- Fixed the too high speed reading on the Intel Core and Celeron M 400 series
+  CPUs when the TSC is not used (instruction timing method).
+
+Version 1.13
+02/02/2007
+- Updated the CPU data for new Intel Xeon Dual-Core, Core Duo, Pentium D,
+  Pentium 4, Celeron D, Pentium M, and Celeron M models.
+- Added support for the Intel Core 2 Duo and Core 2 Quad.
+- Added logic to distinguish an Intel Xeon (Dual-Core) from a Core 2 Duo,
+  Pentium D, or Pentium 4 model with the same CPUID signature.
+- Improved support for old UMC 486 CPUs and fixed the too high CPU speed
+  indication on these CPUs.
+- Added a batch-file for easy use of the program.
+
+Version 1.12
+07/07/2006
+- Updated the CPU data for new AMD Athlon 64, Athlon 64 X2, Sempron, and
+  Intel Pentium M, Celeron D, Pentium 4, Pentium D, Xeon, and VIA C3 models.
+- Added support for the Intel Core Solo/Duo and Transmeta Efficeon.
+- Enabled SSE3 display for any CPU that supports SSE2.
+- Corrected the Hyper-Threading display on Dual-Core CPUs.
+- Improved support for old Cyrix/TI CPUs like the TI486DX4.
+- Expanded the Debug display with results from various CPU tests in case
+  CPUID is not supported.
+
+Version 1.11
+07/07/2005
+- Updated the CPU data for new AMD Opteron, Athlon 64 (FX), Sempron, Turion,
+  Intel Pentium M, Pentium 4, and Celeron D models.
+- Added support for the Dual-Core AMD Opteron, Athlon 64 X2,
+  and Intel Pentium D CPUs.
+- Fixed a bug in the Hyper-Threading display.
+- Added Hyper-Threading and SSE3 display for the Athlon 64.
+- Added 64-bit support display for AMD Opteron, Athlon 64 (FX), Sempron,
+  Turion, and Intel Celeron D, Pentium 4, and Pentium D CPUs.
+
+Version 1.10
+10/10/2004
+- Long overdue CHKCPU revision ;-)
+- Updated the CPU data for new AMD Opteron, Athlon 64 (FX), Athlon XP, Duron,
+  Sempron, Intel Celeron, PentiumIII, Pentium M, Pentium 4, Celeron D, Xeon,
+  and VIA C3 models.
+- Added detection of the AMD Multi Processor platform. This allows correct
+  differentiation between Athlon MP, Athlon XP, and Sempron models.
+- Added Clock multiplier support for the AMD Opteron, Athlon 64 (FX), Intel 
+  Pentium M, Celeron M, and VIA C3 Nehemiah core.
+- Fixed the incorrect CPU features display on newer Pentium 4 models.
+- Added CPU features display for SSE2, SSE3, and Hyper-Threading.
+- Moved the Integrated L2 cache size display in Verbose mode to the bottom
+  of the display, just below the L1 cache size.
+- Added Integrated L2 cache display for the VIA C3.
+- Added an Integrated L3 cache display for the Pentium 4.
+- Changed the Debug mode display to only show CPUID levels relevant for the
+  detected CPU.
+
+Version 1.9
+10/10/2002
+- Updated the CPU data for new AMD Athlon, Duron, Intel Celeron, PentiumIII,
+  Pentium 4, Celeron 4, and VIA C3 models.
+- Fixed the incorrect multiplier indication on newer Pentium 4 and Athlon CPUs.
+- Added a CPU-ID Name string display. If the CPU supports it, this function
+  displays the CPU Name or Brand string as stored in the CPU.
+
+Version 1.8
+07/07/2001
+- Updated the CPU data for new AMD K6-III+, Athlon, Duron, Intel Celeron,
+  PentiumIII, and VIA models.
+- Added support for the Pentium 4 and for Transmeta CPUs.
+- Corrected the VIA Cyrix III detection (Samuel core).
+- Added Clock multiplier support for the AMD Athlon, Duron, and VIA Cyrix III.
+- Added a /C command-line switch for troubleshooting CHKCPU problems.
+- Fixed a bug that caused floppy or sound problems or crashed Windows on PCs
+  which use a specific Intel I/O chip and a Celeron/PentiumII/III CPU.
+  This bug affected the Compaq Armada laptop series and several Dell laptop
+  and desktop models.
+
+Version 1.7
+08/08/2000
+- Updated the CPU data for new AMD K6-2+/III+, Athlon-E, Intel Celeron and
+  PentiumIII-E models, and added support for the AMD Duron and CyrixIII (Joshua).
+- Added a separate Clock multiplier display.
+- If the Clock multiplier value is know, CHKCPU will display the Bus clock
+  speed as well.
+- Rewritten the Internal speed detection routine to improve the accuracy of
+  the speed indication under Windows NT/2000.
+- Added code to prevent Windows from switching tasks during speed measurement.
+  This should prevent the occasional freak CPU speed readings under Windows.
+- Added detection for L1 cache WB/WT mode on the Cyrix 6x86/M2 series.
+  Previous versions of CHKCPU indicated the L1 cache mode of these CPUs
+  always as Write-Back.
+- Fixed the too high CPU speed indication on the Cyrix 486 and 6x86, and the
+  too low indication on the Cyrix 5x86.
+- Fixed a bug that crashed the program on a Cyrix 486.
+
+Version 1.6
+03/03/2000
+- Updated the CPU data for new AMD K6-2, AMD Athlon, and Intel Celeron models,
+  and added support for the Intel PentiumIII-E (Coppermine).
+- Fixed the 45% too low speed reading on the AMD Athlon when the TSC is not
+  used. (instruction timing method).
+- Increased the accuracy of the CPU speed measurement for fast CPUs, like the
+  AMD K6-2/III, Athlon, and Intel Celeron/PentiumII/III(-E).
+- Rewritten the basic CPU detection algorithm for better detection of NexGen,
+  Cyrix, and IDT CPUs. This algorithm works also in Virtual and Protected mode.
+- Added support for 386 and (non-Cyrix) 486 CPUs which do not know the CPUID
+  instruction. CHKCPU will no longer abort with an error on these CPUs.
+- Fixed a bug that crashed CHKCPU in Real mode on a Nx586, and fixed
+  the L1 cache mode detection on this CPU.
+- Changed the logic for the command-line switches so that in case of an
+  unrecognized option, the display defaults to the Short mode. In addition,
+  the command-line switches will also work if the space between CHKCPU and
+  the command-line switch, or between the switches, is omitted.
+- The speed reading in Short mode is now rounded off and displayed in
+  whole MHz.
+
+Version 1.5
+09/09/99
+- Updated the CPU data for new AMD K6-2, Intel Celeron, PentiumIII, and
+  IDT Winchip steppings, and added the AMD Athlon (K7).
+- Fixed a bug where an IDT CPU was displayed as an "IDT Rise -Unknown model-".
+- Added support for Command line switches. You can get a list with CHKCPU /?
+- An Intel Celeron CPU is now indicated as such. CHKCPU v1.5 is able to
+  differentiate between a PentiumII and a Celeron with the same signature.
+- Moved the integrated L2 cache size display to the Verbose mode, because it
+  is no longer required for visual differentiation between a PentiumII and
+  a Celeron.
+- Added display of various CPU features. (Verbose mode only)
+- Added display of the L1 cache size. (Verbose mode only)
+
+Version 1.4
+04/04/99
+- Updated the CPU data with the new AMD K6-2 (CXT-core), K6-III,
+  Intel PentiumII/Celeron, and PentiumIII steppings.
+- Added support for the Rise mP6 CPU.
+- Added display of the amount of integrated L2 cache on the PentiumPro/II/III,
+  AMD K6-III, and Cyrix M3 CPUs. For the Intel PentiumII an additional
+  'Celeron or Celeron-A type' indication is added when appropriate.
+- Rewritten the program so that it runs in (16-bit) Protected mode whenever a
+  DOS Protected Mode Interface (DPMI) host is present. (Windows, OS/2, etc.)
+  This improves the speed display accuracy in the DOS-box for all CPUs and in
+  addition, under Windows 3.x/95/98 on the Pentium class CPUs, the internal
+  Time Stamp Counter can now be used, just as in Real mode.
+- Added display of the Current CPU mode: Real, Virtual, or Protected.
+
+Version 1.3
+12/12/98
+- Updated the CPU data. The new AMD K6-2, IDT C6-2, and Intel PentiumII/
+  Celeron/Xeon steppings are now supported.
+- Added a new Internal speed detection routine for all CPUs that support the
+  Pentium Time Stamp Counter. This results in a more accurate speed display,
+  especially on non-Intel CPUs (only in Real mode).
+- Made the program better usable under Windows by adding checks for
+  protected mode before using 'restricted' instructions.
+  This avoids triggering a General Protection Fault.
+- Fixed a bug where the program was aborted by Windows if run on a 386
+  or (non-Cyrix) 486 CPU without CPUID support.
+
+Version 1.2
+04/04/98
+- Updated the CPU data. The new Pentium II 333 (Deschutes) is now supported.
+- Fixed the Intel Pentium Pro detection. CHKCPU v1.1 indicated these CPUs as
+  a "Cyrix -Unknown model-".
+
+Version 1.1
+02/02/98 First update.
+- Updated the CPU data.
+- Added CPU multiplication factor indication for the Cx486DX4 and AMD K5.
+- Expanded the internal CPU speed display with a decimal.
+- Updated the internal cache mode detection for early Cyrix/TI CPUs.
+- Fixed the Intel Pentium 63/83 ODP (P24T) internal cache mode detection.
+  CHKCPU v1.0 indicated the internal cache mode of the P24T always as WB.
+  This is not correct as the P24T can also operate in WT mode.
+  For this CPU, a routine has been added to detect the difference.
+
+Version 1.0
+12/12/97 First release.
+------------------------------------------------------------------------------
+

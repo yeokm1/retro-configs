@@ -1,0 +1,16 @@
+CPU Identification utility v1.27                 (c) 1997-2022 Jan Steunebrink
+------------------------------------------------------------------------------
+This file describes the use of the REPORT.BAT file.
+
+If the CHKCPU.EXE program gives an Unkown or incorrect indication, REPORT.BAT
+can be used to make a detailed report of the output of CHKCPU.EXE.
+REPORT.BAT will generate a MYCPU.TXT file that contains this report.
+
+To use REPORT.BAT, place it in the same folder as CHKCPU.exe and run REPORT.BAT.
+Each time you run REPORT.BAT, a CPU report will be added to MYCPU.TXT,
+without erasing any previous reports.
+
+If you like to send the report to the author of CHKCPU, please send it by
+e-mail to:  J.Steunebrink@net.hcc.nl
+Thanks for your cooperation! Your report will be used to improve CHKCPU.
+Regards, Jan Steunebrink.

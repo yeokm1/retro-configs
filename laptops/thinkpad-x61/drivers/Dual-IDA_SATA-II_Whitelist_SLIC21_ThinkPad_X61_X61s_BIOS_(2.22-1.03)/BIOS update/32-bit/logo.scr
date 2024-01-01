@@ -1,0 +1,10 @@
+# Select compression algorithm.  Choices are NONE, LZSS, and LZARI
+# (Catenate reports a fatal error if the decompression code selected in
+# MAKE.MAK doesn't match this value.)
+#
+COMPRESS  LZINT			# Use LZINT when compressing modules
+
+#
+# Load IBM preboot notification text
+#
+LOGO LOGO.BMP -F:10             # Logo file

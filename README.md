@@ -107,6 +107,12 @@ This is a new 8088-based subnotebook released in 2023. I have set it up to run D
 
 Here it is shown running CGA Compatibility tester.
 
+## 7. [Thinkpad x61]() (2007)
+
+The Thinkpad X61 is a laptop released in 2007 by IBM. The machine is configured to multi-boot to DOS 6.22, Windows 10 32-bit and Xubuntu.
+
+<img src="laptops/thinkpad-x61/photos/x61-front.jpg" width="500">
+
 # Virtual Machines
 
 Not exactly retro PCs but I just wanted to store the settings I use for my virtual playgrounds. This is typically for me to do quick and dirty testing without powering up my actual retro-PCs.
@@ -203,6 +209,7 @@ The NEC Versa 40EC laptop is only configured for DOS 6.22.
 19. [RTC_micro8088](https://github.com/wilco2009/RTC_micro8088)
 20. [Freddy V ch375v022](https://www.vogonsdrivers.com/getfile.php?fileid=1991&menustate=0)
 21. [3C509B-nestor driver for 8088](https://github.com/hackerb9/3C509B-nestor)
+22. [DOS Ethernet drivers taken from T400 website](https://support.lenovo.com/mn/en/downloads/ds001865)
 
 # Common software sources
 
@@ -218,5 +225,6 @@ The NEC Versa 40EC laptop is only configured for DOS 6.22.
 10. [Mount VHD images easily on Windows](https://www.howtogeek.com/51174/mount-and-unmount-a-vhd-file-in-windows-explorer-via-a-right-click/)
 11. [MS-DOS 6.22 install disks](https://winworldpc.com/product/ms-dos/622)
 12. [Windows for Workgroups 3.11 install disks](https://winworldpc.com/product/windows-3/wfw-311)
+13. [CPU Identification Utility - CHKCPU](http://www.steunebrink.info/chkcpu.htm)
 
 
