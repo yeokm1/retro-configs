@@ -72,6 +72,8 @@ Sound Blaster and OPL3 support is provided by the [SBEMU](https://github.com/cra
 
 A strange quirk that I found of this current driver with respect to using [Dr Sbaitso TTS](https://en.wikipedia.org/wiki/Dr._Sbaitso) is that the TTS will hang if this is the first app that is launched. Some other app needs to use the virtual Sound Blaster hardware first then we quit that and launch the TTS then the TTS will work.
 
+This is based on build [25 Dec 2023](https://github.com/crazii/SBEMU/releases/tag/UserBuild_2023.12.25_19-41).
+
 ## Sources
 
 1. [X61 Hardware Maintenance Manual](https://thinkpads.com/support/hmm/hmm_pdf/42x3550_04.pdf)
