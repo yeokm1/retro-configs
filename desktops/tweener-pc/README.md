@@ -105,7 +105,7 @@ The latest Win 9x Nvidia driver 81.98 does not support this Geforce2 GTS Pro mod
 
 #### Windows Sound Drivers
 
-One can opt to not to install any sound drivers as Win 98 SE already supports the the AWE64 gold by default.
+One can opt to not to install any sound drivers as Win 98 SE already supports the AWE64 gold by default.
 
 However, if you need the utilities like `AWE Control` and Midi player, you have to install the AWE64 Gold CD which will come with updated drivers.
 
