@@ -30,9 +30,9 @@ Old computers usually very cluttered due to the less integrated nature of the co
 <img src="photos/expansion-cards.jpg" width="500">
 Lots of necessary expansion cards.
 
-<img src="photos/vga-card.jpg" width="500">
+<img src="photos/8-bit-vga-card.jpg" width="500">
 
-Cirrus Logic CL-GD5426 1MB VLB card
+8-bit VGA card
 
 <img src="photos/eide-card.jpg" width="500">
 
