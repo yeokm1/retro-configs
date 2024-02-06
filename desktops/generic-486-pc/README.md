@@ -27,12 +27,9 @@ Ignore the I5 label!
 
 Old computers usually very cluttered due to the less integrated nature of the components.
 
-<img src="photos/expansion-cards.jpg" width="500">
-Lots of necessary expansion cards.
+<img src="photos/svga-vlb-card.jpg" width="500">
 
-<img src="photos/8-bit-vga-card.jpg" width="500">
-
-8-bit VGA card
+Cirrus Logic GD5428-based VLB card
 
 <img src="photos/eide-card.jpg" width="500">
 
