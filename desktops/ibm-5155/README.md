@@ -36,11 +36,9 @@ Motherboards from early IBM PCs are bare with most of the external functionality
 
 ### Expansion cards
 
-<img src="photos/5155-gremlin-vga-output-only.jpg" width="500">
+<img src="photos/5155-gg-hdmi-board.jpg" width="500">
 
-This [Graphics Gremlin](https://github.com/schlae/graphics-gremlin) open-source FPGA clone of the IBM CGA Graphics card.
-
-The one I inserted into the system does not have the external composite and RGBI connector populated so as to use an [off-the-shelf Keystone 9200-1 VGA backplate](https://www.mouser.sg/ProductDetail/534-9200-1).
+This is [my modified version](https://github.com/yeokm1/graphics-gremlin-hdmi) of the [Graphics Gremlin ISA CGA/MDA graphics card](https://github.com/schlae/graphics-gremlin) to include a HDMI port. 
 
 <img src="photos/5155-lan.jpg" width="500">
 
