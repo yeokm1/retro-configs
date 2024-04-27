@@ -1,5 +1,5 @@
 
-Universal PnP Sound Card Driver for DOS v0.80a (c) JazeFox 2019-22 (UNISOUND)
+Universal PnP Sound Card Driver for DOS v0.81b (c) JazeFox 2019-24 (UNISOUND)
 =============================================================================
 
 Index of this document:
@@ -156,6 +156,8 @@ Options:
    /VPnn  Set PC Speaker-in Volume level to 'nn' (00-99) (Creative)
    /VTnn  Set Treble level to 'nn' (00-99) (Compatible cards)
    /VBnn  Set Bass level to 'nn' (00-99) (Compatible cards)	
+   /VRnn  Set FM Reverb amount (00-99) (SB AWE only)
+   /VUnn  Set FM Chorus amount (00-99) (SB AWE only)
    /Xxxx  eXtened cards settings (see section 5 for details)
    /NOPNP Detect & init some Non-PnP cards (See end of section 3)
    /H /?  Help screen
@@ -174,7 +176,7 @@ them working if you configure them well. GUS + SB are a very good combo!).
 If you only have 1 PnP card (sound card or not), use UNISOUND as is.
 
 Help note: It is possible to free some resources on some cards (not all)
-setting a value to zero 0 (except DMA. To disable a DMA, ser it to 4).
+setting a value to zero 0 (except DMA. To disable a DMA, set it to 4).
 Example: I have a separate MPU card and I want to free the MPU IRQ of
 my ADI PnP card. Solution: Set U0 in the BLASTER variable before running
 UNISOUND and that IRQ will not be used by the card. Use with caution! Do not
@@ -221,7 +223,7 @@ Configuration with the BLASTER environment variable:
 In addition to the regular BLASTER parameters, this tool also accepts new
 custom ones (optional). All of them are explained here (example values):
 
-A220 I5 D1 H1 P330 E620 W530 J200 C168 Rxxx M310 F388 U9 Q0 K0
+A220 I5 D1 H1 P330 E620 W530 J200 C168 Y10 Rxxx M310 F388 U9 Q0 K0
 
   A: SB compatible base address (220 by default)
   I: SB compatible IRQ number (5 by default)
@@ -239,10 +241,12 @@ A220 I5 D1 H1 P330 E620 W530 J200 C168 Rxxx M310 F388 U9 Q0 K0
      take into account that some cards have only 1 possible value 
      (usually 170), so you can try and test. C0 will force disable it.
      IRQs for this port are calculated automatically (10, 11, 15) based
-     on the address, so it is not needed to specify them. Anyway as this 
-     tool is launched after config.sys, if you want CD-ROM support you'll 
-     have to load CD driver (like vide-cdd.sys) with device driver loaders
-     like DEVLOAD after Unisound IDE port activation.
+     on the address, so it is not needed to specify them, but if you want
+     to set a custom IDE IRQ value, please use "Y" value (see below).
+     Anyway as this tool is launched after config.sys, if you want CD-ROM 
+     support you'll have to load CD driver (like vide-cdd.sys) with device 
+     driver loaders like DEVLOAD after Unisound IDE port activation.
+  Y: IDE IRQ (Only if "C" value is set too). Optional.
   R: Address for cards that require a CONTROL register to configure internal
      stuff of the card. You should not use this parameter, every card has 
      its own value as default internally in the tool. Caution! Use this ONLY
@@ -281,7 +285,7 @@ For other non-PnP cards (only a few selected models), use UNISOUND /NOPNP
 
 
 
-3- Supported cards in the current version (v0.80a):
+3- Supported cards in the current version (v0.81b):
 =============================================================================
 
 Supported PnP Cards
@@ -298,6 +302,11 @@ Creative:
 On all Creative cards, DSP version is displayed at init time.
 On AWE cards, total memory detected is displayed at init time.
 Check section 6.1 for a complete list of successfully tested Creative models
+
+Control of FM Reverb (/VRnn) and Chorus (/VUnn) effects amount is supported,
+only for SB AWE32/64 cards (Values 00 to 99). Note: This works on AWE cards
+with integrated CQM and with discrete Yamaha OPL/CQM chips, if they're routed
+through the EMU8K chip. Only a few exceptions are not routed, like CT3930.
 
 
 ESS AudioDrive:
@@ -350,7 +359,7 @@ Crystal (Cirrus Logic)
 -----------------------------------------------------------------------------
 - CS4232 / CS4235 / CS4236/B / CS4237/B chip based cards 
 - CX4236/B / CX4237/B chip based cards 
-- Special support for Orpheus and Turtle Beach Malibu cards (CS4237B)
+- Special support for Orpheus 1 and Turtle Beach Malibu cards (CS4237B)
 
 
 C-Media / AD-CHIPS:
@@ -364,7 +373,11 @@ AD SoundPort (Analog Devices):
 - AD1816/A, AD1815, AD18max10 (like Terratec and Aztech branded cards)
 - AD1812 
 
-Note that AD ISA cards' WSS mode is NOT compatible with DOS software.
+*Note1: Some Terratec cards (Like Base-1) based on AD1816 with ATMEL EEPROMS
+        with some chipset combos, in very rare cases will need to use /FS
+        option to be detected correcly.
+        
+*Note2: AD ISA cards' WSS mode is NOT compatible with DOS software.
 
 
 Advanced Gravis / AMD Interwave / Compaq/STB Ultrasound :
@@ -462,7 +475,8 @@ No IWINIT needed. Only ULTRASND env variable and this tool.
 If you want Classic GUS Wavetable support (optional), you only have to 
 add the ULTRADIR env variable pointing to a directory with 2 items: 
 the ULTRASND.INI file  and the MIDI directory with the instrument 
-patches inside.
+patches inside. (you would need to find original instrument patches on
+the net or on the original installation disks).
 
 Note that this is a limited use of the GUS, and if you want the MPU emu, 
 SB emu... you will need the official drivers. But I added this card to 
@@ -552,7 +566,7 @@ initialization process can leave card in a status that is incompatible with
 furter PnP interactions in some machines (this is a known behaviour and 
 happens also with original drivers and other PnP tools), so if you try to
 run UNISOUND again after 1st initialization, it will probably hang. This
-include any interaction (/R , etc..), so run UNISOUND only one time with
+includes any interaction (/R , etc..), so run UNISOUND only one time with
 these cards, just in case.
 
 
@@ -571,8 +585,9 @@ these cards, just in case.
        when paired with other ISA sound card(s). Those net cards  have a bad
        hardware PnP implementation that deactivates LDs (logical devices) just
        when scanning for PnP cards without configuring them. Use this switch
-       when initializing tour sound card to try to reactivate network. It's
+       when initializing your sound card to try to reactivate network. It's
        recommended to use UNISOUND before loading net packet driver.
+
 
 
 5.1.1- General eXtended setting for 3D sound for compatible cards 
@@ -685,7 +700,7 @@ be disabled by default when initialized by UNISOUND.
 Like Orpheus option for switching FM/OPL between internal and external:
 
 /XOFi  Switch to internal CrystalFM (default)
-/XOFe  Switch to external Yamaha OPL3 
+/XOFe  Switch to external Yamaha OPL3 (If external chip is available)
 
 
 
@@ -1169,3 +1184,23 @@ v0.80a
   NOTE: As it's experimental, please plug only one Non-PnP sound card in the
   system to avoid problems and false positives. Support for more Non-PnP 
   cards is not planned in any way in the near future
+
+v0.81b
+-----------------------------------------------------------------------------
+
+- Fixed wavetable sound not working on Opti 931 cards with onboard wavetable.
+- Fixed detection of Terratec Base-1 and other AD1816 based cards with ATMEL
+  EEPROM chips. Now these cards will be detected correctly. Anyway there are
+  about 1% of these cards in combination with some mobo chipsets that would 
+  need to add the option /FS to be detected properly.
+- Improved AWE RAM detection for late EMU8K chips, like AWE64 cards. Now the
+  correct amount should be shown.
+- Added option to use a custom IRQ for the IDE port, with new BLASTER optional
+  parameter "Y". Use of "C" is still required. If "Y" is not used, default
+  stadard IRQ will be used, like in previous versions. Example: C168 Y11
+- Changed behaviour of /NOPNP detection for ESS and Mozart chips, should
+  improve compatibility with some systems with Non-PnP ESS onboard sound.
+- Added Control of FM Reverb (/VRnn) and Chorus (/VUnn) effects amount, only
+  for SB AWE32/64 cards (Values 00 to 99). Note: This works on AWE cards with
+  integrated CQM and with discrete Yamaha OPL / CQM chips, if they're routed
+  through the EMU8K chip. Only a few exceptions are not routed, like CT3930.
