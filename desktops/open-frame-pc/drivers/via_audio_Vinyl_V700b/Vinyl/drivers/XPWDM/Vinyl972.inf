@@ -1,0 +1,1031 @@
+; Copyright (c) 1998-2004 VIA Technologies, Inc.
+[Version]
+CatalogFile=vinyl97.cat
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%VIA%
+DriverVer =06/27/2007,6.14.01.4200
+
+[ControlFlags]
+ExcludeFromSelect= *
+
+[SourceDisksNames]
+222="Vinyl AC'97 Codec Combo WDM Driver Disk",,,
+
+[SourceDisksFiles]
+vinyl97.sys=222
+;vinyl97.inf=222
+
+[Manufacturer]
+%VIAMfgName%=VIAAudio
+
+;;---------------------------------------------------------------;
+;;
+;; D E V I C E  C A L L O U T  S E C T I O N
+;;
+[VIAAudio]
+;; VLINK Family
+;[VLK_DM9]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_30591849
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_16121849
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_16171849
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_17011849
+;[VLK_DN0]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C12105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C13105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C14105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C15105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C16105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C17105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C18105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C19105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C1A105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C1B105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C1C105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C1D105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C1E105B
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0C1F105B
+;[VLK_DN1]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120018D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120118D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120218D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120318D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120418D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120518D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120618D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120718D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120818D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120918D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120A18D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120B18D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120C18D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120D18D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120E18D0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_120F18D0
+;[VLK_DS0]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_5348144D
+;[VLK_DT0]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_7143109F
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_3185109F
+;[VLK_MA]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_2033161F
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_2037161f
+;[VLK_MB]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_8110104D
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_8143104D
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0713152D
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_003E1025
+;[VLK_MD]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_83551071
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_85561071
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_83751071
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_83991071
+;[VLK_ME]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0F101019
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_B7261019
+;[VLK_MH]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_040814FF
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_040314FF
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_041114FF
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_041214FF
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_041314FF
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_041814FF
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_041914FF
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_A00214FF
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_A00714FF
+;[VLK_MI]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_00011170
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_00021170
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_00081170
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_000817FF
+;[VLK_MJ]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_200A1558
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_05701558
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_06621558
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_54061558
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_80011558
+;[VLK_ML]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_81231584
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_10321734
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_E00E1631
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_C0181631
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_81321584
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_81341584
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_10931734
+;[VLK_MM]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0F101019
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_B7261019
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_B3201019
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0F751019
+;[VLK_MN]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_023017C4
+;[VLK_MO]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_8000105B
+;[VLK_MP]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_200D17C0
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_00461025
+;[VLK_OA]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_80521043
+;[VLK_OB]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90211509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90201509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_901F1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90011509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90221509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90231509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90241509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90251509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90261509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90271509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90281509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90371509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90121509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90061509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90071509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90481509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_905E1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90531509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_904C1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_904D1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_90561509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_905F1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92071509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92091509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_920A1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92041509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92021509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92081509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92031509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92051509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_920B1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_920C1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_920E1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92121509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92131509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92141509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92151509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92161509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92171509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92181509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92191509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_921A1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_921B1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_921C1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_921D1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_921E1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_921F1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92201509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92211509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92221509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92231509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92241509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92251509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92261509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92271509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92281509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92291509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92301509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92311509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92321509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92331509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92341509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92351509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92361509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92371509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92381509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92391509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_923A1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_923B1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_923C1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_923D1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_923E1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_923F1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92401509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92411509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92451509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92461509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92471509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92481509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92491509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_924A1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_924B1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_924F1509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92501509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92511509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92521509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92531509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92541509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92551509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92561509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92571509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92581509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_92591509
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_925A1509
+;[VLK_OC]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_536011D4
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_534011D4
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_534811D4
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_59341013
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0079110A
+;[VLK_OD]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_80521043
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_10131043
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_806A1043
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_80721043
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_11C210CF
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_80951043
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_B02D144D
+;[VLK_OE]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_00181025
+;[VLK_OG]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_536011D4
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_534011D4
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_534811D4
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_59341013
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0079110A
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_A013147A
+;[VLK_OH]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0079110A
+;[VLK_OI]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_525C1462
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_25901462
+;[VLK_OJ]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_536011D4
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_534011D4
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_534811D4
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_59341013
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_0079110A
+;[VLK_OV]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_B0031106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_B0041106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_B0051106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_A0031106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_C0011106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_AA011106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_BB011106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_CC011106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_B0061106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_C0071106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_C0061106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_B0071106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_B0081106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_A0041106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_A0051106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_A0061106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_AA021106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_A0071106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_AA031106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_A0081106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_A0091106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_C0091106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_C00A1106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_AA041106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_AA051106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_CC021106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_CC031106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_C0051106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_CC041106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_AA061106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_AA071106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_AA081106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_AA0A1106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_AA0B1106
+;[VLK_DU0]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_52031915
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_8086&DEV_266E&SUBSYS_70331462
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_45521106
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_41701106
+
+;[VLK_DU1]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_000218EE
+
+;;OTHER Family
+;[OTHER_ML]
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_8086&DEV_266E&SUBSYS_84041584
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_8086&DEV_266E&SUBSYS_906A1584
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_8086&DEV_266E&SUBSYS_90521584
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_8086&DEV_266E&SUBSYS_041414FF
+%*WDM_VIAudio.DeviceDesc%=WDM_VIAudio, PCI\VEN_1106&DEV_3059&SUBSYS_302E103C
+
+[WDM_VIAudio]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=VIAAudio.CopyList
+DelReg=WDM_VIAudio.DelReg
+AddReg=WDM_VIAudio.AddReg, WDM_VIAGUID.AddReg, WDM_Config.AddReg, VIAUDIO_OEM.AddReg
+
+[WDM_VIAudio.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_VIAudio.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_VIAudio.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_VIAudio.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,WDM_VIAudio.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,WDM_VIAudio.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+
+[WDM_VIAudio.Interface.Wave]
+AddReg=WDM_VIA.Interface.Wave.AddReg
+
+[WDM_VIA.Interface.Wave.AddReg]
+HKR,,FriendlyName,,%WDM_VIA.Wave.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[WDM_VIAudio.Interface.Topology]
+AddReg=WDM_VIA.Interface.Topo.AddReg
+
+[WDM_VIA.Interface.Topo.AddReg]
+HKR,,FriendlyName,,%WDM_VIA.Topology.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[WDM.Interface.UART]
+AddReg=WDM.Interface.UART.AddReg
+
+[WDM.Interface.UART.AddReg]
+HKR,,FriendlyName,,%WDM.UART.szPname%
+HKR,,CLSID,,%Proxy.CLSID%
+
+[WDM_VIAudio.DelReg]
+HKLM,Enum\Root\*PNPB002
+HKLM,Enum\Root\*PNPB006
+HKLM,Enum\Root\*PNPB02F
+
+[WDM_VIAudio.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,vinyl97.SYS
+HKR,,NTMPDriver,,"vinyl97.sys,sbemul.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%*WDMVIAAudio.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%WDM_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%*WDMVIAAudio.DeviceDesc%
+
+[WDM_VIAGUID.AddReg]
+;; VIA Audio friendly names
+HKLM,%MediaCategories%\%VIAGUID.Phone%,Name,,%VIAPin.Phone%
+HKLM,%MediaCategories%\%VIAGUID.Phone%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.Mic1%,Name,,%VIAPin.Mic1%
+HKLM,%MediaCategories%\%VIAGUID.Mic1%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.Mic2%,Name,,%VIAPin.Mic2%
+HKLM,%MediaCategories%\%VIAGUID.Mic2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.Video%,Name,,%VIAPin.Video%
+HKLM,%MediaCategories%\%VIAGUID.Video%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MonoOut%,Name,,%VIAPin.MonoOut%
+HKLM,%MediaCategories%\%VIAGUID.MonoOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.PcBeep%,Name,,%VIAPin.PcBeep%
+HKLM,%MediaCategories%\%VIAGUID.PcBeep%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.LineIn%,Name,,%VIAPin.LineIn%
+HKLM,%MediaCategories%\%VIAGUID.LineIn%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.CD%,Name,,%VIAPin.CD%
+HKLM,%MediaCategories%\%VIAGUID.CD%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.AUX%,Name,,%VIAPin.AUX%
+HKLM,%MediaCategories%\%VIAGUID.AUX%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MicMux%,Name,,%VIANode.MicMux%
+HKLM,%MediaCategories%\%VIAGUID.MicMux%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.WaveInMux%,Name,,%VIANode.WaveInMux%
+HKLM,%MediaCategories%\%VIAGUID.WaveInMux%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MonoOutMux%,Name,,%VIANode.MonoOutMux%
+HKLM,%MediaCategories%\%VIAGUID.MonoOutMux%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MonoOutMixDown%,Name,,%VIANode.MonoOutMixDown%
+HKLM,%MediaCategories%\%VIAGUID.MonoOutMixDown%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.LineOutMainMix%,Name,,%VIANode.LineOutMainMix%
+HKLM,%MediaCategories%\%VIAGUID.LineOutMainMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.LineOutMiscMix%,Name,,%VIANode.LineOutMiscMix%
+HKLM,%MediaCategories%\%VIAGUID.LineOutMiscMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MicIn20DB_Gain%,Name,,%VIANode.MicIn20DB_Gain%
+HKLM,%MediaCategories%\%VIAGUID.MicIn20DB_Gain%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MonoOutVol%,Name,,%VIANode.MonoOutVol%
+HKLM,%MediaCategories%\%VIAGUID.MonoOutVol%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MonoOutMute%,Name,,%VIANode.MonoOutMute%
+HKLM,%MediaCategories%\%VIAGUID.MonoOutMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.WaveOut%,Name,,%VIAPin.WaveOut%
+HKLM,%MediaCategories%\%VIAGUID.WaveOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.3DCenterCtrl%,Name,,%VIANode.3DCenter%
+HKLM,%MediaCategories%\%VIAGUID.3DCenterCtrl%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.3DDepthCtrl%,Name,,%VIANode.3DDepth%
+HKLM,%MediaCategories%\%VIAGUID.3DDepthCtrl%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.3DOnOffCtrl%,Name,,%VIANode.3DOnOff%
+HKLM,%MediaCategories%\%VIAGUID.3DOnOffCtrl%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.HPVolume%,Name,,%VIANode.HPVolume%
+HKLM,%MediaCategories%\%VIAGUID.HPVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.HPMute%,Name,,%VIANode.HPMute%
+HKLM,%MediaCategories%\%VIAGUID.HPMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.3DCenterCtrlPin%,Name,,%VIAPin.3DCenter%
+HKLM,%MediaCategories%\%VIAGUID.3DCenterCtrlPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.3DDepthCtrlPin%,Name,,%VIAPin.3DDepth%
+HKLM,%MediaCategories%\%VIAGUID.3DDepthCtrlPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.Stereo_OutPin%,Name,,%VIAPin.Stereo_Out%
+HKLM,%MediaCategories%\%VIAGUID.Stereo_OutPin%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%VIAGUID.Mic_Select%,Name,,%VIANode.MicSelect%
+HKLM,%MediaCategories%\%VIAGUID.Mic_Select%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%VIAGUID.MultiChMainMix%,Name,,%VIANode.MultiChMainMix%
+HKLM,%MediaCategories%\%VIAGUID.MultiChMainMix%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%VIAGUID.FrontVolume%,Name,,%VIANode.FrontVolume%
+HKLM,%MediaCategories%\%VIAGUID.FrontVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.FrontMute%,Name,,%VIANode.FrontMute%
+HKLM,%MediaCategories%\%VIAGUID.FrontMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.SurroundVolume%,Name,,%VIANode.SurroundVolume%
+HKLM,%MediaCategories%\%VIAGUID.SurroundVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.SurroundMute%,Name,,%VIANode.SurroundMute%
+HKLM,%MediaCategories%\%VIAGUID.SurroundMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.CenterVolume%,Name,,%VIANode.CenterVolume%
+HKLM,%MediaCategories%\%VIAGUID.CenterVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.CenterMute%,Name,,%VIANode.CenterMute%
+HKLM,%MediaCategories%\%VIAGUID.CenterMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.LFEVolume%,Name,,%VIANode.LFEVolume%
+HKLM,%MediaCategories%\%VIAGUID.LFEVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.LFEMute%,Name,,%VIANode.LFEMute%
+HKLM,%MediaCategories%\%VIAGUID.LFEMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.BackSurroundVolume%,Name,,%VIANode.BackSurroundVolume%
+HKLM,%MediaCategories%\%VIAGUID.BackSurroundVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.BackSurroundMute%,Name,,%VIANode.BackSurroundMute%
+HKLM,%MediaCategories%\%VIAGUID.BackSurroundMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.SPDIFEnable%,Name,,%VIANode.SPDIFEnable%
+HKLM,%MediaCategories%\%VIAGUID.SPDIFEnable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.SpOutSrcLine%,Name,,%VIAPin.SpOutSrcLine%
+HKLM,%MediaCategories%\%VIAGUID.SpOutSrcLine%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.SpOutMute%,Name,,%VIANode.SpOutMute%
+HKLM,%MediaCategories%\%VIAGUID.SpOutMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.Smart51Enable%,Name,,%VIANode.Smart51Enable%
+HKLM,%MediaCategories%\%VIAGUID.Smart51Enable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.Magic51Enable%,Name,,%VIANode.Magic51Enable%
+HKLM,%MediaCategories%\%VIAGUID.Magic51Enable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.DownMixSurround%,Name,,%VIANode.DownMixSurround%
+HKLM,%MediaCategories%\%VIAGUID.DownMixSurround%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.DownMixCenterLFE%,Name,,%VIANode.DownMixCenterLFE%
+HKLM,%MediaCategories%\%VIAGUID.DownMixCenterLFE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.SwitchCenterLFE%,Name,,%VIANode.SwitchCenterLFE%
+HKLM,%MediaCategories%\%VIAGUID.SwitchCenterLFE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.AnalogIn2SpdifOut%,Name,,%VIANode.AnalogIn2SpdifOut%
+HKLM,%MediaCategories%\%VIAGUID.AnalogIn2SpdifOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MicMix%,Name,,%VIANode.MicMix%
+HKLM,%MediaCategories%\%VIAGUID.MicMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.SwitchBackSurround%,Name,,%VIANode.SwitchBackSurround%
+HKLM,%MediaCategories%\%VIAGUID.SwitchBackSurround%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.SwitchPinsBackToAux%,Name,,%VIANode.SwitchPinsBackToAux%
+HKLM,%MediaCategories%\%VIAGUID.SwitchPinsBackToAux%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.SPDIFINMontior%,Name,,%VIANode.SPDIFINMontior%
+HKLM,%MediaCategories%\%VIAGUID.SPDIFINMontior%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%VIAGUID.VirtMic1Mute%,Name,,%VIANode.VirtMic1Mute%
+HKLM,%MediaCategories%\%VIAGUID.VirtMic1Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.VirtMic2Mute%,Name,,%VIANode.VirtMic2Mute%
+HKLM,%MediaCategories%\%VIAGUID.VirtMic2Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.VirtMic3Mute%,Name,,%VIANode.VirtMic3Mute%
+HKLM,%MediaCategories%\%VIAGUID.VirtMic3Mute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.VirtMic4Mute%,Name,,%VIANode.VirtMic4Mute%
+HKLM,%MediaCategories%\%VIAGUID.VirtMic4Mute%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%VIAGUID.StereoMic1A2Enable%,Name,,%VIANode.StereoMic1A2Enable%
+HKLM,%MediaCategories%\%VIAGUID.StereoMic1A2Enable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.StereoMic3A4Enable%,Name,,%VIANode.StereoMic3A4Enable%
+HKLM,%MediaCategories%\%VIAGUID.StereoMic3A4Enable%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MicMainMix%,Name,,%VIANode.MicMainMix%
+HKLM,%MediaCategories%\%VIAGUID.MicMainMix%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%VIAGUID.VirtSpdifInMute%,Name,,%VIANode.VirtSpdifInMute%
+HKLM,%MediaCategories%\%VIAGUID.VirtSpdifInMute%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%VIAGUID.MicAGCEnable%,Name,,%VIANode.MicAGCEnable%
+HKLM,%MediaCategories%\%VIAGUID.MicAGCEnable%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%VIAGUID.SwitchMicAsLineIn%,Name,,%VIANode.SwitchMicAsLineIn%
+HKLM,%MediaCategories%\%VIAGUID.SwitchMicAsLineIn%,Display,1,00,00,00,00
+
+
+
+;; Pins
+HKLM,%MediaCategories%\%VIAGUID.Front%,Name,,%VIAPin.Front%
+HKLM,%MediaCategories%\%VIAGUID.Front%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.Surround%,Name,,%VIAPin.Surround%
+HKLM,%MediaCategories%\%VIAGUID.Surround%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.Center%,Name,,%VIAPin.Center%
+HKLM,%MediaCategories%\%VIAGUID.Center%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.LFE%,Name,,%VIAPin.LFE%
+HKLM,%MediaCategories%\%VIAGUID.LFE%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.BackSurround%,Name,,%VIAPin.BackSurround%
+HKLM,%MediaCategories%\%VIAGUID.BackSurround%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MultiChOut%,Name,,%VIAPin.MultiChOut%
+HKLM,%MediaCategories%\%VIAGUID.MultiChOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.MasterOut%,Name,,%VIAPin.MasterOut%
+HKLM,%MediaCategories%\%VIAGUID.MasterOut%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.SPDIFIn%,Name,,%VIAPin.SPDIFIn%
+HKLM,%MediaCategories%\%VIAGUID.SPDIFIn%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%VIAGUID.VirtMic1%,Name,,%VIAPin.VirtMic1%
+HKLM,%MediaCategories%\%VIAGUID.VirtMic1%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.VirtMic2%,Name,,%VIAPin.VirtMic2%
+HKLM,%MediaCategories%\%VIAGUID.VirtMic2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.VirtMic3%,Name,,%VIAPin.VirtMic3%
+HKLM,%MediaCategories%\%VIAGUID.VirtMic3%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.VirtMic4%,Name,,%VIAPin.VirtMic4%
+HKLM,%MediaCategories%\%VIAGUID.VirtMic4%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%VIAGUID.VirtMic%,Name,,%VIAPin.VirtMic%
+HKLM,%MediaCategories%\%VIAGUID.VirtMic%,Display,1,00,00,00,00
+
+[WDM_Config.AddReg]
+;; The below registry is for setting the default value in the mixer control at
+;; driver startup.
+;; The procedure to change the default setting:
+;; (1). Executing "Volune control" application to adjust the volume level.
+;; (2). Restarting Windows.
+;; (3). Executing "REGEDIT.EXE" and searching the registry key listed below,
+;;      then update the value of the registry key to the following.
+;;
+;; Note:
+;; (1). The default setting of volume level for Wave and SW Synth can NOT
+;;      be set in the WDM Audio Miniport driver and this INF.
+;; (2). Any change in this INF file, you MUST have a new WHQL submission
+;;      for getting digital signature.
+;;
+;;---------------------------------+-----------+-----------|
+;; Registry key                    |DWORD type | value     |
+;;---------------------------------+-----------+-----------|
+HKR,Settings,VA_WaveOutVolumeL,      0x00010001, 61955
+HKR,Settings,VA_WaveOutVolumeR,      0x00010001, 61955
+HKR,Settings,VA_WaveOutMute,         0x00010001, 0
+HKR,Settings,VA_PCSpeakerVolume,     0x00010001, 4294570499
+HKR,Settings,VA_PCSpeakerMute,       0x00010001, 0
+HKR,Settings,VA_PhoneVolume,         0x00010001, 389635
+HKR,Settings,VA_PhoneMute,           0x00010001, 1
+HKR,Settings,VA_MicVolume,           0x00010001, 389635
+HKR,Settings,VA_MicVolumeR,          0x00010001, 389635
+HKR,Settings,VA_MicMute,             0x00010001, 1
+HKR,Settings,VA_MicGain,             0x00010001, 0
+HKR,Settings,VA_LineInVolumeL,       0x00010001, 389635
+HKR,Settings,VA_LineInVolumeR,       0x00010001, 389635
+HKR,Settings,VA_LineInMute,          0x00010001, 1
+HKR,Settings,VA_CDPlayerVolumeL,     0x00010001, 0
+HKR,Settings,VA_CDPlayerVolumeR,     0x00010001, 0
+HKR,Settings,VA_CDPlayerMute,        0x00010001, 0
+HKR,Settings,VA_VideoVolumeL,        0x00010001, 389635
+HKR,Settings,VA_VideoVolumeR,        0x00010001, 389635
+HKR,Settings,VA_VideoMute,           0x00010001, 1
+HKR,Settings,VA_AUXVolumeL,          0x00010001, 389635
+HKR,Settings,VA_AUXVolumeR,          0x00010001, 389635
+HKR,Settings,VA_AUXMute,             0x00010001, 1
+HKR,Settings,VA_3DDepthVolume,       0x00010001, 0x80000000
+HKR,Settings,VA_3DDepthEnhance,      0x00010001, 0
+HKR,Settings,VA_MasterVolumeL,       0x00010001, 0
+HKR,Settings,VA_MasterVolumeR,       0x00010001, 0
+HKR,Settings,VA_MasterMute,          0x00010001, 0
+HKR,Settings,VA_FrontVolumeL,        0x00010001, 4294570499
+HKR,Settings,VA_FrontVolumeR,        0x00010001, 4294570499
+HKR,Settings,VA_FrontMute,           0x00010001, 0
+HKR,Settings,VA_SurroundVolumeL,     0x00010001, 4294570499
+HKR,Settings,VA_SurroundVolumeR,     0x00010001, 4294570499
+HKR,Settings,VA_SurroundMute,        0x00010001, 0
+HKR,Settings,VA_CenterVolumeL,       0x00010001, 4294570499
+HKR,Settings,VA_CenterVolumeR,       0x00010001, 4294570499
+HKR,Settings,VA_CenterMute,          0x00010001, 0
+HKR,Settings,VA_LFEVolumeL,          0x00010001, 4294570499
+HKR,Settings,VA_LFEVolumeR,          0x00010001, 4294570499
+HKR,Settings,VA_LFEMute,             0x00010001, 0
+HKR,Settings,VA_BackSurroundVolumeL, 0x00010001, 4294570499
+HKR,Settings,VA_BackSurroundVolumeR, 0x00010001, 4294570499
+HKR,Settings,VA_BackSurroundMute,    0x00010001, 0
+HKR,Settings,VA_RecSelect,           0x00010001, 1
+HKR,Settings,VA_RecMasterMute,       0x00010001, 0
+HKR,Settings,VA_RecStereoMixVolumeL, 0x00010001, 0x00107203
+HKR,Settings,VA_RecStereoMixVolumeR, 0x00010001, 0x00107203
+HKR,Settings,VA_RecMicVolume,        0x00010001, 0x00107203
+HKR,Settings,VA_RecMicVolumeR,       0x00010001, 0x00107203
+HKR,Settings,VA_RecLineInVolumeL,    0x00010001, 0x00107203
+HKR,Settings,VA_RecLineInVolumeR,    0x00010001, 0x00107203
+HKR,Settings,VA_RecCDPlayerVolumeL,  0x00010001, 0x00107203
+HKR,Settings,VA_RecCDPlayerVolumeR,  0x00010001, 0x00107203
+HKR,Settings,VA_RecVideoVolumeL,     0x00010001, 0x00107203
+HKR,Settings,VA_RecVideoVolumeR,     0x00010001, 0x00107203
+HKR,Settings,VA_RecAUXVolumeL,       0x00010001, 0x00107203
+HKR,Settings,VA_RecAUXVolumeR,       0x00010001, 0x00107203
+HKR,Settings,VA_MonoOutSelect,       0x00010001, 1
+HKR,Settings,VA_MonoOutVolume1,      0x00010001, 4294570499
+HKR,Settings,VA_MonoOutVolume2,      0x00010001, 4294570499
+HKR,Settings,VA_MonoOutMute,         0x00010001, 1
+HKR,Settings,VA_HeadphoneVolumeL,    0x00010001, 4294570499
+HKR,Settings,VA_HeadphoneVolumeR,    0x00010001, 4294570499
+HKR,Settings,VA_HeadphoneMute,       0x00010001, 0
+HKR,Settings,VA_MaxMicVol,           0x00010001, 786432
+;HKR,Settings,VA_MaxMicVol,          0x00010001, 0xFFF40000
+;HKR,Settings,VA_MaxRecVol,          0x00010001, 0x00168000
+HKR,Settings,VA_MaxMasterVol,        0x00010001, 0
+HKR,Settings,VA_MaxFrontVol,         0x00010001, 0
+HKR,Settings,VA_MaxSurroundVol,      0x00010001, 0
+HKR,Settings,VA_MaxCenterVol,        0x00010001, 0
+HKR,Settings,VA_MaxLFEVol,           0x00010001, 0
+HKR,Settings,VA_MaxBackSurroundVol,  0x00010001, 0
+;HKR,Settings,VA_MaxMonoVol1,        0x00010001, 0
+;HKR,Settings,VA_MaxMonoVol2,        0x00010001, 0
+;HKR,Settings,VA_MaxHPOutVol,        0x00010001, 0
+HKR,Settings,VA_MicSelect,           0x00010001, 0
+HKR,Settings,VA_SPDIFOutEnable,      0x00010001, 0
+HKR,Settings,VA_Smart51Enable,       0x00010001, 0
+HKR,Settings,VA_Magic51Enable,       0x00010001, 0
+HKR,Settings,VA_DownMixSurround,     0x00010001, 0
+HKR,Settings,VA_DownMixCenterLFE,    0x00010001, 0
+HKR,Settings,VA_DAOutput,            0x00010001, 1
+HKR,Settings,VA_SwitchCenterLFE,     0x00010001, 0
+HKR,Settings,VA_HeadphoneHide,       0x00010001, 4294570499
+HKR,Settings,VA_AnalogIn2SpdifOut,   0x00010001, 0
+HKR,Settings,VA_AutoDisableAI2SpO,   0x00010001, 1
+HKR,Settings,VA_MicMix,              0x00010001, 0
+HKR,Settings,VA_SwitchBackSurround,  0x00010001, 0
+HKR,Settings,VA_SwitchPinsBackAuxIn, 0x00010001, 1
+HKR,Settings,VA_SetDynamicSetting,   0x00010001, 1
+HKR,Settings,VA_SetOemDataSetting,   0x00010001, 1
+HKR,Settings,VA_Smart51PlusSetting,  0x00010001, 0
+HKR,Settings,VA_Smart51PlusFMic,     0x00010001, 1
+HKR,Settings,VA_Smart51PlusBMic,     0x00010001, 0
+HKR,Settings,VA_HPAmpSenseDisable,   0x00010001, 1
+HKR,Settings,VA_51CH15dBBoostEnable, 0x00010001, 0
+HKR,Settings,VA_FrontPanelSupport,   0x00010001, 0
+HKR,Settings,VA_SurroundPanelSupport,0x00010001, 0
+HKR,Settings,VA_SensauraGeneration,  0x00010001, 0
+HKR,Settings,VA_8ch_Out_Block_AC3,   0x00010001, 0
+HKR,Settings,VA_SPDIFInMonitor,      0x00010001, 0
+HKR,Settings,VA_ViaRvbParamEnable,   0x00010001, 0
+HKR,Settings,VA_ViaRvbParamVolShift, 0x00010001, 0
+HKR,Settings,VA_ViaRvbParamDelay,    0x00010001, 5913
+HKR,Settings,VA_ViaRvbParamGain,     0x00010001, 22936
+HKR,Settings,VA_ViaRvbParamDamp,     0x00010001, 11468
+HKR,Settings,VA_ViaRvbParamDry,      0x00010001, 15000
+HKR,Settings,VA_ViaRvbParamWet,      0x00010001, 15000
+HKR,Settings,VA_ViaRvbParamRoomSize, 0x00010001, 27851
+HKR,Settings,VA_VT1618MicSelConfig,  0x00010001, 0x00000011
+HKR,Settings,VA_UAJLineOutJack,      0x00010001, 0x00000000
+HKR,Settings,VA_UAJLineInJack,       0x00010001, 0x00000002 
+HKR,Settings,VA_UAJMicInJack,        0x00010001, 0x00000003
+HKR,Settings,VA_FrntChnlSlotMap,     0x00010001, 0x00000003
+HKR,Settings,VA_SurroundChnlSlotMap, 0x00010001, 0x00000007
+HKR,Settings,VA_CntrLFEChnlSlotMap,  0x00010001, 0x00000006
+HKR,Settings,VA_SurrBackChnlSlotMap, 0x00010001, 0x0000000A
+HKR,Settings,VA_SetSWMic20dbVolOnce, 0x00010001, 0
+HKR,Settings,VA_bp_jack_no,          0x00010001, 0x00000003
+HKR,Settings,VA_bp_jack_function,    0x00010001, 0x00000129
+HKR,Settings,VA_bp_jack_color,       0x00010001, 0x00000123
+HKR,Settings,VA_bp_jack_detection,   0x00010001, 0x00000000
+HKR,Settings,VA_bp_jack_gpio,        0x00010001, 0x00000000
+HKR,Settings,VA_fp_jack_no,          0x00010001, 0x00000000
+HKR,Settings,VA_fp_jack_function,    0x00010001, 0x00000000
+HKR,Settings,VA_fp_jack_color,       0x00010001, 0x00000000
+HKR,Settings,VA_fp_jack_detection,   0x00010001, 0x00000000
+HKR,Settings,VA_fp_jack_gpio,        0x00010001, 0x00000000
+HKR,Settings,VA_sk_jack_no,          0x00010001, 0x00000000
+HKR,Settings,VA_sk_jack_function,    0x00010001, 0x00000000
+HKR,Settings,VA_sk_jack_color,       0x00010001, 0x00000000
+HKR,Settings,VA_sk_jack_detection,   0x00010001, 0x00000000
+HKR,Settings,VA_sk_jack_gpio,        0x00010001, 0x00000000
+HKR,Settings,VA_Mic1Mute,            0x00010001, 0
+HKR,Settings,VA_Mic2Mute,            0x00010001, 0
+HKR,Settings,VA_Mic3Mute,            0x00010001, 0
+HKR,Settings,VA_Mic4Mute,            0x00010001, 0
+HKR,Settings,VA_StereoMic1A2Enable,  0x00010001, 0
+HKR,Settings,VA_StereoMic3A4Enable,  0x00010001, 0
+HKR,Settings,VA_SpdifInMute,         0x00010001, 0
+HKR,Settings,VA_Pseudo8ChOut,        0x00010001, 0
+HKR,Settings,VA_Pseudo8ChSpkrTst,    0x00010001, 0x00000000
+HKR,Settings,VA_MicAGCEnable,        0x00010001, 0
+HKR,Settings,VA_ViaAGCCtrlRiskyVol,  0x00010001, 0x00020000
+HKR,Settings,VA_ViaAGCCtrlMinVol,    0x00010001, 0x00120000
+HKR,Settings,VA_ViaAGCCtrlWatermark, 0x00010001, 0x00200000
+HKR,Settings,VA_ViaLowThrOfRecVal,   0x00010001, 0x0404
+HKR,Settings,VA_ViaAGCCtrlSPLTimeMS, 0x00010001, 1200
+
+HKR,Settings,VA_BassManageEnabled,   0x00010001, 0
+HKR,Settings,VA_BassManageFLSpkr,    0x00010001, 1
+HKR,Settings,VA_BassManageFRSpkr,    0x00010001, 1
+HKR,Settings,VA_BassManageSLSpkr,    0x00010001, 1
+HKR,Settings,VA_BassManageSRSpkr,    0x00010001, 1
+HKR,Settings,VA_BassManageCSpkr,     0x00010001, 1
+HKR,Settings,VA_BassManageBSLSpkr,   0x00010001, 1
+HKR,Settings,VA_BassManageBSRSpkr,   0x00010001, 1
+HKR,Settings,VA_BassManageLFESpkr,   0x00010001, 1
+HKR,Settings,VA_VarLPFCutoffFreq,    0x00010001, 1
+
+HKR,Settings,VA_SwitchMicAsLineIn,   0x00010001, 0
+HKR,Settings,VA_SWRecMICShiftBits,   0x00010001, 3
+
+HKR,Settings,VA_ViaSoundDCOffset,    0x00010001, 0x150
+
+HKR,Settings,VA_ViaVrefOutCtrl1,     0x00010001, 0
+HKR,Settings,VA_ViaVrefOutCtrl2,     0x00010001, 0
+HKR,Settings,VA_ViaVrefOutCtrl3,     0x00010001, 0
+
+[WDM_C2.AddReg]
+HKR,Settings,VA_PCSpeakerVolume,     0x00010001, 0xfff9f203
+HKR,Settings,VA_CDPlayerVolumeL,     0x00010001, 0
+HKR,Settings,VA_CDPlayerVolumeR,     0x00010001, 0
+HKR,Settings,VA_MasterVolumeL,       0x00010001, 0
+HKR,Settings,VA_MasterVolumeR,       0x00010001, 0
+;HKR,Settings,VA_SurroundVolumeL,    0x00010001, 0xfff9f203
+;HKR,Settings,VA_SurroundVolumeR,    0x00010001, 0xfff9f203
+;HKR,Settings,VA_CenterVolume,       0x00010001, 0xfff9f203
+;HKR,Settings,VA_LFEVolume,          0x00010001, 0xfff9f203
+HKR,Settings,VA_MonoOutVolume1,      0x00010001, 0xfff9f203
+HKR,Settings,VA_MonoOutVolume2,      0x00010001, 0xfff9f203
+HKR,Settings,VA_HeadphoneVolumeL,    0x00010001, 0xfff9f203
+HKR,Settings,VA_HeadphoneVolumeR,    0x00010001, 0xfff9f203
+HKR,Settings,VA_MaxMicVol,           0x00010001, 0x000c0000
+
+[VIAUDIO_OEM.AddReg]
+;; For the topology configuration, the input line of mixer can be disabled
+;; by outcommenting some of the lines below.
+;HKR,Settings,DisablePCSpeaker,1,1
+;HKR,Settings,DisablePhone,1,1
+;HKR,Settings,DisableVideo,1,1
+;HKR,Settings,DisableAUX,1,1
+;HKR,Settings,DisableLineIn,1,1
+;HKR,Settings,DisableCDPlayer,1,1
+;HKR,Settings,DisableMic,1,1
+;HKR,Settings,DisableMicGain,1,1
+;HKR,Settings,Disable3DDepth,1,1
+HKR,Settings,DisableMonoOut,1,1
+HKR,Settings,DisableHeadphone,1,1
+;HKR,Settings,DisableVolHPhone,1,1
+;HKR,Settings,DisableRecMuteAll,1,1
+HKR,Settings,DisableMicSelect,1,1
+;HKR,Settings,DisableSurround,1,1
+;HKR,Settings,DisableCenterLFE,1,1
+;HKR,Settings,DisableSPDIFOUT,1,1
+HKR,Settings,DisableEnSpdifMuteAnalog,1,1
+HKR,Settings,DisableSpOutSrcLine,1,1
+;HKR,Settings,DisableDOLBYAC3,1,1
+;HKR,Settings,DisableSmart51,1,1
+;HKR,Settings,DisableMagic51,1,1
+;HKR,Settings,DisableDownMixSurround,1,1
+;HKR,Settings,DisableDownMixCenterLFE,1,1
+;HKR,Settings,DisableSwitchCenterLFE,1,1
+HKR,Settings,DisableHeadphoneHide,1,1
+;HKR,Settings,DisableAnalog2SpdifOut,1,1
+;HKR,Settings,DisableJackDetect,1,1
+;HKR,Settings,DisableSmart51Plus,1,1
+HKR,Settings,DisableSensaura,1,1
+HKR,Settings,DisableHPAmp,1,1
+HKR,Settings,DisableHPAmpA,1,1
+HKR,Settings,DisableMicMix,1,1
+HKR,Settings,DisableVoiceCancel,1,1
+HKR,Settings,DisableEAPDInvert,1,1
+;HKR,Settings,DisableUAJ,1,1
+;HKR,Settings,DisableBackSurround,1,1
+;HKR,Settings,DisableSPDIFIn,1,1
+HKR,Settings,DisableSPDIFInMonitor,1,1
+;HKR,Settings,DisableEQ,1,1
+;HKR,Settings,DisableGraphicData,1,1
+;HKR,Settings,DisableVIAReverb,1,1
+;HKR,Settings,DisableVT1618MicSelect,1,1
+HKR,Settings,DisableStereoMicCtrl,1,1
+;HKR,Settings,DisableSWGetPeakMeter,1,1 
+HKR,Settings,DisableAutoPeakMeterGetting,1,1 
+HKR,Settings,DisableSPDIFOutPullDown,1,1
+;HKR,Settings,DisableMultiChnlsVolumeMute,1,1
+;HKR,Settings,DisableAnalogOutPullDown,1,1
+;HKR,Settings,DisableSlot69VolumesExchanged,1,1
+;HKR,Settings,DisableSPDIFInTimer,1,1
+;HKR,Settings,DisableSoftwareMic20dB,1,1
+HKR,Settings,DisableSPDIFOutAlwaysSupport,1,1
+HKR,Settings,DisableVrefOutPowerDown,1,1
+;HKR,Settings,DisablePlayAC3StreamOn8ch,1,1
+HKR,Settings,DisableMicAGCCtrl,1,1
+;HKR,Settings,DisableGPIOToPhone,1,1
+;HKR,Settings,DisableBassManagement,1,1
+HKR,Settings,DisableRecMuteOnAnalogToSPDIF,1,1
+HKR,Settings,Disable2Point1SpkrsPlusAnalogIn,1,1
+;HKR,Settings,DisableSoftwareRecMicGain,1,1
+HKR,Settings,DisableSwitchMicAsLineIn,1,1
+HKR,Settings,DisableVirtualSubwoofer,1,1
+HKR,Settings,DisableBassOutGain6dB,1,1
+HKR,Settings,DisableLFERegardas3thFront,1,1
+HKR,Settings,DisableMuteExtAmpByGPIO0,1,1
+HKR,Settings,DisableFixedPlaybackRateAt48KBased,1,1
+HKR,Settings,DisableIdentifyVT1616B,1,1
+;HKR,Settings,DisableSoundDCOffset,1,1
+HKR,Settings,DisableFixedRecStereoVolume,1,1
+
+
+[DestinationDirs]
+DefaultDestDir        = 10,system32\drivers
+VIAAudio.CopyList     = 10,system32\drivers ; %SystemRoot%\system32\drivers
+
+[VIAAudio.CopyList]
+vinyl97.sys
+
+[WDM_VIAudio.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=VIAAudio.CopyList
+DelReg=WDM_VIAudio.DelReg
+AddReg=WDM_VIAudio.AddReg, WDM_VIAGUID.AddReg, WDM_Config.AddReg, WDM_C2.AddReg, VIAUDIO_OEM.AddReg
+
+[WDM_VIAudio.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_VIAudio.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_VIAudio.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_VIAudio.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,WDM_VIAudio.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+
+[WDM_VIAudio.NT.Services]
+AddService = VIAudio,    0x00000002, VIAudio_Service_Inst
+
+[VIAudio_Service_Inst]
+DisplayName    = %viaudio.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\vinyl97.sys
+
+
+;;---------------------------------------------------------------;
+;;
+;; S T R I N G S
+;;
+
+[Strings]
+VIA = "VIA Technologies, Inc."
+VIAMfgName="VIA Technologies, Inc."
+*WDM_VIAudio.DeviceDesc="Vinyl AC'97 Codec Combo Driver (WDM)"
+*WDMVIAAudio.DeviceDesc="Vinyl AC'97 Codec Combo Driver (WDM)"
+WDM_VIA.Wave.szPname="Vinyl AC'97 Audio (WAVE)"
+WDM_VIA.Topology.szPname="Vinyl AC'97 Audio (Topology)"
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+WDM_MIDI="WDM-based Device"
+VIAGUID.Phone             ="{B0AA96E2-2255-11D2-B544-00201860A4D7}"
+VIAGUID.Mic1              ="{B0AA96E3-2255-11D2-B544-00201860A4D7}"
+VIAGUID.Mic2              ="{B0AA96E4-2255-11D2-B544-00201860A4D7}"
+VIAGUID.Video             ="{B0AA96E5-2255-11D2-B544-00201860A4D7}"
+VIAGUID.MonoOut           ="{B0AA96E6-2255-11D2-B544-00201860A4D7}"
+VIAGUID.PcBeep            ="{B0AA96E7-2255-11D2-B544-00201860A4D7}"
+VIAGUID.LineIn            ="{B0AA96E8-2255-11D2-B544-00201860A4D7}"
+VIAGUID.CD                ="{B0AA96E9-2255-11D2-B544-00201860A4D7}"
+VIAGUID.AUX               ="{B0AA96EA-2255-11D2-B544-00201860A4D7}"
+VIAGUID.MicMux            ="{B0AA96EB-2255-11D2-B544-00201860A4D7}"
+VIAGUID.WaveInMux         ="{B0AA96EC-2255-11D2-B544-00201860A4D7}"
+VIAGUID.MonoOutMux        ="{B0AA96ED-2255-11D2-B544-00201860A4D7}"
+VIAGUID.MonoOutMixDown    ="{B0AA96EE-2255-11D2-B544-00201860A4D7}"
+VIAGUID.LineOutMainMix    ="{404126C0-2562-11D2-B544-C6DF79A0C118}"
+VIAGUID.LineOutMiscMix    ="{404126C1-2562-11D2-B544-C6DF79A0C118}"
+VIAGUID.MicIn20DB_Gain    ="{404126C2-2562-11D2-B544-C6DF79A0C118}"
+VIAGUID.MonoOutVol        ="{404126C3-2562-11D2-B544-C6DF79A0C118}"
+VIAGUID.MonoOutMute       ="{404126C4-2562-11D2-B544-C6DF79A0C118}"
+VIAGUID.WaveOut           ="{404126C5-2562-11D2-B544-C6DF79A0C118}"
+VIAGUID.3DCenterCtrl      ="{A7D1A4A1-D024-11D2-A292-D937B2272531}"
+VIAGUID.3DDepthCtrl       ="{A7D1A4A2-D024-11D2-A292-D937B2272531}"
+VIAGUID.3DOnOffCtrl       ="{A7D1A4A3-D024-11D2-A292-D937B2272531}"
+VIAGUID.3DCenterCtrlPin   ="{A7D1A4A4-D024-11D2-A292-D937B2272531}"
+VIAGUID.3DDepthCtrlPin    ="{A7D1A4A5-D024-11D2-A292-D937B2272531}"
+VIAGUID.Stereo_OutPin     ="{A7D1A4A6-D024-11D2-A292-D937B2272531}"
+VIAGUID.HPVolume          ="{A7D1A4A7-D024-11D2-A292-D937B2272531}"
+VIAGUID.HPMute            ="{A7D1A4A8-D024-11D2-A292-D937B2272531}"
+VIAGUID.Mic_Select        ="{A7D1A4A9-D024-11D2-A292-D937B2272531}"
+VIAGUID.SPDIFINMontior    ="{0C02540A-45B2-4420-AD72-6DB3D43E76D0}"
+
+VIAGUID.MultiChMainMix    ="{E2421D1E-2D4E-47bb-82A5-1D8E5019D405}"
+VIAGUID.FrontVolume       ="{691B0279-41B5-41b9-84A3-F084810568B5}"
+VIAGUID.FrontMute         ="{131F6C4C-A42E-42c3-83D6-B9B3E0FC3136}"
+VIAGUID.SurroundVolume    ="{48826139-2FD4-40cf-A2E9-6C27D44938A0}"
+VIAGUID.SurroundMute      ="{3A3452B0-4997-4fbf-91B9-6BEBD184FEEC}"
+VIAGUID.CenterVolume      ="{B9E15897-7123-485a-B088-C1F1F8FCEFD0}"
+VIAGUID.CenterMute        ="{6987C536-785F-4c30-A0BD-A0DB77E50CD0}"
+VIAGUID.LFEVolume         ="{9EAFA5A0-1150-4972-8A88-12041AA6FCA9}"
+VIAGUID.LFEMute           ="{7E94A5CF-EF83-497c-A89A-9F47C5D8E186}"
+VIAGUID.BackSurroundVolume ="{BE7B36B8-E1E0-47d0-8624-362786738C27}" 
+VIAGUID.BackSurroundMute   ="{1AF40FA3-9BAC-4df9-812E-9F78E84A6E97}"
+
+VIAGUID.VirtMic1Mute      ="{FEC60DDA-4DB2-4f8f-B9DD-FAF22B57871D}"
+VIAGUID.VirtMic2Mute      ="{2C9217BD-3EA1-49c8-A9FE-9C529CA6B71C}"
+VIAGUID.VirtMic3Mute      ="{727BFFA3-518E-4b30-BB38-0B60E494256A}"
+VIAGUID.VirtMic4Mute      ="{6ECF4063-2A63-4eb1-B82C-29613E74A9FA}"
+VIAGUID.StereoMic1A2Enable ="{922D41AE-BC13-428a-B04C-081D6BEB83F2}"
+VIAGUID.StereoMic3A4Enable ="{3EEDA97D-5169-4b1f-AC43-F6C47EA58BE6}"
+VIAGUID.MicMainMix        ="{C5B45CE4-8FC1-4ddd-BC86-041F1BDC44EA}"
+VIAGUID.VirtSpdifInMute   ="{795990E7-8AFD-464a-AF3E-5ACD99230D47}"
+VIAGUID.MicAGCEnable      ="{B19BE190-0813-44bd-AE5F-0019B336A3B9}"
+
+VIAGUID.SwitchMicAsLineIn ="{F995F382-1682-478a-B431-CE925B3AB9AC}"
+
+;; Pins (non-localizeable)
+VIAGUID.Front             ="{7C7D16A0-628C-4b87-876B-4B5BA210A99B}"
+VIAGUID.Surround          ="{EEC45423-61A7-470b-96E2-EAAA786E63EF}"
+VIAGUID.Center            ="{E55FD6F3-57AA-4a71-B284-A89D6B7E2974}"
+VIAGUID.LFE               ="{CCCE7F19-1E04-428b-8573-679ACD0CD989}"
+VIAGUID.BackSurround      ="{53309912-6E2B-4dd1-9D2F-B0AA167E2131}"
+VIAGUID.MultiChOut        ="{B9CE5C31-10F2-40ff-BC99-6FDC9D9E4C81}"
+VIAGUID.MasterOut         ="{E744C48C-E97F-471d-BD54-024A8FAF66BC}"
+VIAGUID.SPDIFEnable       ="{29F9B5E5-5D59-4f84-AC21-EAD28524269A}"
+VIAGUID.SpOutSrcLine      ="{0E404E03-8DA0-4133-B78F-BF2CB1E11834}"
+VIAGUID.SpOutMute         ="{E82B0F1F-A8A2-4109-8C0D-2D656432A0E9}"
+VIAGUID.Smart51Enable     ="{61F2F5ED-8430-4c67-AE5E-504B500E6F27}"
+VIAGUID.Magic51Enable     ="{D5261E9D-168E-45da-B749-E0BEDE62D092}"
+VIAGUID.DownMixSurround   ="{50142344-7968-47d2-BC42-AAED21F0543E}"
+VIAGUID.DownMixCenterLFE  ="{49E366F9-6764-44b3-A71A-C6D8FE90342B}"
+VIAGUID.SwitchCenterLFE   ="{340B3D7E-CBA5-43c9-B4B4-740ECB6FD47D}"
+VIAGUID.AnalogIn2SpdifOut ="{4D9DC6F8-829E-4fe7-BD92-325E6D0227B0}"
+VIAGUID.MicMix            ="{BC7EE598-5CB5-49d6-A2A7-F9DD6A36D71F}"
+VIAGUID.SwitchBackSurround ="{B1B890B0-655B-4cc9-890D-2DED7F6F4053}"
+VIAGUID.SwitchPinsBackToAux ="{A9C8BD9E-0049-4f24-BE4A-58736452A8D9}"
+VIAGUID.SPDIFIn           ="{6BBCC519-D63C-44e6-8574-D45AF3DE3183}"
+
+VIAGUID.VirtMic1          ="{5ECB45D7-8F77-4a84-83F5-48DEAFF12F4F}"
+VIAGUID.VirtMic2          ="{D2809D22-3051-4fe1-868F-76324A06308C}"
+VIAGUID.VirtMic3          ="{B5EAEE69-26F9-4379-90DC-DABDC7D24A33}"
+VIAGUID.VirtMic4          ="{52A41D62-5DEF-4126-BCDC-E1519ECA6864}"
+VIAGUID.VirtMic           ="{F828C0CB-9876-4f5c-83AD-030F517562BC}"
+
+;; VIA friendly names (localizeable)
+VIAPin.Phone            ="Phone"
+VIAPin.Mic1             ="Mic"
+VIAPin.Mic2             ="Mic2"
+VIAPin.Video            ="Video"
+VIAPin.MonoOut          ="MonoOut"
+VIAPin.PcBeep           ="PC Speaker"
+VIAPin.LineIn           ="Line-In"
+VIAPin.CD               ="CD Player"
+VIAPin.AUX              ="Aux"
+VIAPin.WaveOut          ="WaveOut"
+VIAPin.3DCenter         ="3D Center"
+VIAPin.3DDepth          ="3D Depth"
+VIAPin.Stereo_Out       ="Stereo Mixer"
+VIAPin.Front            ="Front Speaker"
+VIAPin.Surround         ="Rear Speaker"
+VIAPin.Center           ="Center"
+VIAPin.LFE              ="Subwoofer"
+VIAPin.BackSurround     ="Back Surround"
+VIAPin.MultiChOut       ="Multi Channel"
+VIAPin.MasterOut        ="Master Volume"
+VIAPin.SPDIFIn          ="S/PDIF In"
+VIAPin.SpOutSrcLine     ="S/PDIF OUT"
+VIAPin.VirtMic1         ="Mic1"
+VIAPin.VirtMic2         ="Mic2"
+VIAPin.VirtMic3         ="Mic3"
+VIAPin.VirtMic4         ="Mic4"
+VIAPin.VirtMic          ="Microphone Control"
+
+;; Nodes
+VIANode.MicMux            ="MicMux"
+VIANode.WaveInMux         ="WaveInMux"
+VIANode.MonoOutMux        ="Mono Out Select"
+VIANode.MonoOutMixDown    ="MonoOutMixDown"
+VIANode.LineOutMainMix    ="LineOutMainMix"
+VIANode.LineOutMiscMix    ="LineOutMiscMix"
+VIANode.MicIn20DB_Gain    ="20dB boost"
+VIANode.MonoOutVol        ="MonoOutVol"
+VIANode.MonoOutMute       ="MonoOutMute"
+VIANode.3DCenter          ="3D Center Node"
+VIANode.3DDepth           ="3D Depth Node"
+VIANode.3DOnOff           ="3D Stereo Enhancement"
+VIANode.HPVolume          ="Headphone Volume"
+VIANode.HPMute            ="Headphone Mute"
+VIANode.MicSelect         ="Front Mic Select"
+VIANode.MultiChMainMix    ="Multi Channel Mixer"
+VIANode.FrontVolume       ="Front Speaker Volume"
+VIANode.FrontMute         ="Front Speaker Mute"
+VIANode.SurroundVolume    ="Rear Speaker Volume"
+VIANode.SurroundMute      ="Rear Speaker Mute"
+VIANode.CenterVolume      ="Center Volume"
+VIANode.CenterMute        ="Center Mute"
+VIANode.LFEVolume         ="Subwoofer Volume"
+VIANode.LFEMute           ="Subwoofer Mute"
+VIANode.BackSurroundVolume ="Back Surround Volume"
+VIANode.BackSurroundMute  ="Back Surround Mute"
+VIANode.SPDIFEnable       ="S/PDIF Enable"
+VIANode.Smart51Enable     ="Smart5.1 Enable"
+VIANode.Magic51Enable     ="Magic5.1 Enable"
+VIANode.DownMixSurround   ="Mix Surround to Front"
+VIANode.DownMixCenterLFE  ="Mix Center/LFE to Front"
+VIANode.SwitchCenterLFE   ="Exchange Center/LFE"
+VIANode.AnalogIn2SpdifOut ="Analog In to S/PDIF Out"
+VIANode.MicMix            ="Mix Mic"
+VIANode.SwitchBackSurround ="Enable Back Surround, Disable AUX"
+VIANode.SwitchPinsBackToAux="Enable AUX, Disable Back Surround"
+VIANode.SPDIFINMontior    ="S/PDIF In Monitoring"
+VIANode.SpOutMute         ="S/PDIF Out Mute"
+VIANode.VirtMic1Mute      ="Mic1 Mute"
+VIANode.VirtMic2Mute      ="Mic2 Mute"
+VIANode.VirtMic3Mute      ="Mic3 Mute"
+VIANode.VirtMic4Mute      ="Mic4 Mute"
+VIANode.StereoMic1A2Enable ="Switch to Stereo Mic"
+VIANode.StereoMic3A4Enable ="Switch to Stereo Mic"
+VIANode.MicMainMix        ="Microphone Mixer"
+VIANode.VirtSpdifInMute   ="S/PDIF In Mute"
+VIANode.MicAGCEnable      ="Mic AGC Enable"
+VIANode.SwitchMicAsLineIn ="Switch Mic as Line-In"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+KSNAME_Wave="Wave"
+KSNAME_UART="UART"
+KSNAME_Topology="Topology"
+
+WDM.UART.szPname = "Vinyl MIDI External Port"
+viaudio.SvcDesc = "Vinyl AC'97 Audio Controller (WDM)"
+DiskDescription  = "Vinyl AC'97 Audio WDM Driver Disk"
+;wdmaud.SvcDesc = "Microsoft WDM Virtual Wave Driver (WDM)"

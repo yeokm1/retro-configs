@@ -36,6 +36,11 @@ The machine is configured for single-boot Windows 98SE with a bootup option to e
 <img src="desktops/tweener-pc/photos/tweener-disks.jpg" width="500">
 <img src="desktops/tweener-pc/photos/tweener-w98-desktop.jpg" width="500">
 
+## 3. [Open Frame PC](desktops/opens-frame-pc) (1999)
+
+This is an Open Frame PC I use as a testbench based on a Pentium 3. The machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE. 
+
+<img src="desktops/open-frame-pc/photos/ofpc-top.jpg" width="500">
 
 # Laptops
 
@@ -210,6 +215,8 @@ The NEC Versa 40EC laptop is only configured for DOS 6.22.
 20. [Freddy V ch375v022](https://www.vogonsdrivers.com/getfile.php?fileid=1991&menustate=0)
 21. [3C509B-nestor driver for 8088](https://github.com/hackerb9/3C509B-nestor)
 22. [DOS Ethernet drivers taken from T400 website](https://support.lenovo.com/mn/en/downloads/ds001865)
+23. [3C905 drivers](https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/3com/3c905/support.3com.com/infodeli/tools/nic/3c905.htm)
+24. [SC55 Soundfont](https://github.com/trevor0402/SC55Soundfont)
 
 # Common software sources
 

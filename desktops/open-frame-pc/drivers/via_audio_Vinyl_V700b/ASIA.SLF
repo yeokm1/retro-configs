@@ -1,0 +1,662 @@
+
+[Tranditional_Chinese]
+StartCopyDlgInstallID50="杆じン睲虫"
+StartCopyDlgInstallID51="叫杆じン玡浪跌砞﹚"
+StartCopyDlgInstallID711="杆祘Α局ΤЧ俱戈癟秨﹍杆じン璝璶浪跌┪跑砞﹚叫 [˙]狦眤骸種砞﹚挡狦叫 [˙] 秨﹍杆じン"
+StartCopyDlgInstallID701="ヘ玡砞﹚" 
+ 	
+StartCopyDlgUnInstallID50="秆埃杆じン睲虫"
+StartCopyDlgUnInstallID51="叫簿埃じン玡浪跌砞﹚" 
+StartCopyDlgUnInstallID711="杆祘Α局ΤЧ俱戈癟秨﹍簿埃じン璝璶浪跌┪跑砞﹚叫 [˙]狦眤骸種砞﹚挡狦叫 [˙] 秨﹍簿埃じン"
+StartCopyDlgUnInstallID701="ヘ玡砞﹚" 
+
+StartCopyDlgStatusInstallID50="杆篈"
+StartCopyDlgStatusInstallID51 ="戈癟盢陪ボ杆篈" 
+StartCopyDlgStatusInstallID711="戈癟穦禗眤琌Θ杆じン" 
+StartCopyDlgStatusInstallID701="ヘ玡挡狦" 
+				
+StartCopyDlgStatusUnInstallID50 ="簿埃篈"
+StartCopyDlgStatusUnInstallID51 ="戈癟盢陪ボ簿埃篈" 
+StartCopyDlgStatusUnInstallID711=" 戈癟穦禗眤琌Θ簿埃じン" 
+StartCopyDlgStatusUnInstallID701="ヘ玡挡狦" 
+
+WelcomeDlgID50="舧ㄏノ %P 杆弘艶"
+WelcomeDlgID710="杆弘艶穦眤筿福い杆 %P叫 [˙] 膥尿"
+
+LicenseDlgID50="甭舦"
+LicenseDlgID51="叫灿綷弄甭舦" 
+LicenseDlgID711="叫 PAGE DOWN 龄獽綷弄Ч俱ず甧"	
+LicenseDlgID502="и種"	
+LicenseDlgID503="иぃ種" 
+	
+FeatureDlgInstallID50="杆睲虫"	
+FeatureDlgInstallID51 ="杆祘Α盢穦杆┮匡じン"	
+FeatureDlgInstallID711="眤匡拒杆匡拒计贺┪┮Τじン"
+FeatureDlgUnInstallID50="簿埃睲虫"		
+FeatureDlgUnInstallID51="杆祘Α盢穦簿埃┮匡じン"		
+FeatureDlgUnInstallID711="眤匡拒簿埃计贺┪┮Τじン"狦眤匡拒簿埃┮Τ甅ン盢︽秆埃杆"	 
+
+FeatureDlgID1305="弧"		 
+FeatureDlgID1306="┮惠丁"
+FeatureDlgID1307="ノ丁"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="杆弘艶ЧΘ"
+SetupErrorDlgID711="弘艶ЧΘ %P 杆ぇ玡い耞"	
+SetupErrorDlgID712="╰参﹟ゼэ璝璶祔杆セ祘Α叫Ω磅︽杆祘 [ЧΘ] 挡杆弘艶" 
+
+FinishRebootDlgID50="杆弘艶ЧΘ"
+FinishRebootInstallDlgID711="杆弘艶Θ杆 %P眤ゲ斗穝币笆筿福ㄏノ祘Α" 
+FinishRebootUninstallDlgID711="杆弘艶Θ簿埃 %P眤ゲ斗穝币笆筿福ㄏノ祘Α"
+FinishRebootDlgID502="琌и稱瞷穝币笆筿福 " 
+FinishRebootDlgID503="и稱祔穝币笆筿福 " 
+FinishRebootDlgID712="叫眖合盒诀合盒礛 [ЧΘ] ЧΘ杆"
+
+FinishDlgID50="杆弘艶ЧΘ"
+
+FinishInstallDlgID711="杆弘艶Θ杆 %P叫 [ЧΘ] 挡杆弘艶"	
+FinishUninstallDlgID711="杆弘艶Θ簿埃 %P叫 [ЧΘ] 挡杆弘艶"
+
+
+AskPathDlgID50="匡拒ㄓ方竚"
+AskPathDlgID51="匡拒杆祘Α郎┮戈Ж竚"
+AskPathDlgID901="叫块杆祘Α郎┮戈Ж竚"
+AskPathDlgID31="聅凝" 
+
+MaintainDlgID50="舧"
+MaintainDlgID51="穝┪簿埃祘Α"
+MaintainDlgID710="舧ㄏノ %P 杆蝴臔祘Αセ祘Α琵眤эヘ玡杆兜ヘ叫つ匡匡兜"
+#MaintainDlgID301="穝(&U)"
+MaintainDlgID302="簿埃(&R)"
+MaintainDlgID701="叫匡拒璶穝じン┪穝糤璶杆じン" 
+MaintainDlgID702="叫匡拒璶簿埃じン"
+
+NextButton="˙(&N) >"
+CancelButton="(&C)" 
+BackButton ="< ˙(&B)"
+FinishButton="ЧΘ(&F)" 
+
+
+VMSDelComfirm="琌絋粄璶簿埃┮Τじン"
+VMSCancelingDescription="琌絋﹚璶いゎ杆弘艶" 
+VMSAbort="いゎ" 
+VMSErrorCodeMissDLL="╆簆セ硁砰甅ン框ア场だ蹲戈㎝郎叫穝更硁砰甅ン羛蹈狝叭ㄑ莱坝叫 [絋﹚] 挡杆弘艶 "
+VMSErrorCodeWithoutLicense="簿埃┪穝㏑郎叫叭ゲ甭舦絛瞅ㄏノセ硁砰甅ン 叫 [絋﹚] 挡杆弘艶"
+VMSErrorCodeErrorSCF="╆簆╰参砞﹚郎穕反叫羛蹈狝叭ㄑ莱坝秈︽穝叫 [絋﹚] 挡杆弘艶"
+VMSCaution="猔種"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF="礚猭ЧΘ矪瞶祘叫 [絋﹚] 膥尿"
+//please leave a space before this sentense.
+VMSErrorCodeMissBin="礚猭更叫 [絋﹚] 膥尿"
+
+VMSErrorCodenotSupportedhw="╆簆杆弘艶тぃ眤╰参いや穿祑砰叫浪琩祑砰刚Ω叫 [絋﹚] 挡杆弘艶"	
+VMSErrorCodeUnknowOS="ぃ穨╰参セ"
+VMSFinishErrorMsgofInstall="爹ㄤい兜じン礚猭抖杆╰参叫浪琩癘魁郎"
+VMSFinishErrorMsgofRemove ="爹ㄤい兜じン礚猭眖╰参抖簿埃叫浪琩癘魁郎"
+VMSInstallProgress="杆い..."
+VMSSpecifyPathAgain="тぃ杆祘Α郎叫﹚ㄓ方隔畖"
+VMSStop="氨ゎ"
+VMSUninstallProgress="簿埃い..."
+VMSWait="苯磞祑砰い叫祔ㄨ"
+
+TradeMark="VIA "
+GeneralID="キ杆竚恨瞶"
+MaintainDlgID301="杆/穝(&U)"
+AutoRebootWarning="叫猔種 [˙] 玡叫ミㄨ纗眤杆硁砰虫じ盢ぃ穦Ω硄眤τ笆盢╰参穝秨诀:"
+VMSErrorCodenotSupportedOS="╆簆杆弘艶тぃ才眤╰参硁砰叫 [絋﹚] 挡杆弘艶"
+
+[Simplified_Chinese]
+StartCopyDlgInstallID50="安装组件列表:"
+StartCopyDlgInstallID51="在安装组件之前检查设置。"
+StartCopyDlgInstallID711="安装程序具备足够的信息用于开始安装组件。如果您要检查或更改任何设置，请单击“上一步”。如果您对这些设置感到满意，请单击“下一步”开始安装组件。"
+StartCopyDlgInstallID701="当前设置:" 
+ 	
+StartCopyDlgUnInstallID50="卸载组件列表:"
+StartCopyDlgUnInstallID51="在删除组件之前检查设置。"  
+StartCopyDlgUnInstallID711="安装程序具备足够的信息用于开始删除组件。如果您要检查或更改任何设置，请单击“上一步”。如果您对这些设置感到满意，请单击“下一步”开始删除组件。"
+StartCopyDlgUnInstallID701="当前设置:" 
+
+StartCopyDlgStatusInstallID50=" 安装状态:"
+StartCopyDlgStatusInstallID51 =" 下面的信息显示安装状态。"  
+StartCopyDlgStatusInstallID711=" 下面的信息将告知您组件是否安装成功。"   
+StartCopyDlgStatusInstallID701=" 当前结果:"   
+				
+StartCopyDlgStatusUnInstallID50 =" 删除状态:"
+StartCopyDlgStatusUnInstallID51 =" 下面的信息显示删除状态。"  
+StartCopyDlgStatusUnInstallID711=" 下面的信息将告知您组件是否删除成功。"   
+StartCopyDlgStatusUnInstallID701=" 当前结果:" 
+
+WelcomeDlgID50="欢迎使用 %P 安装向导"
+WelcomeDlgID710="安装向导将在您的计算机上安装 %P。要继续，请单击“下一步”。"
+
+LicenseDlgID50="许可协议"
+LicenseDlgID51="请仔细阅读下面的许可协议。"           
+LicenseDlgID711="按 PAGE DOWN 键查看协议的其余部分。"
+LicenseDlgID502="同意"	
+LicenseDlgID503="不同意" 
+	
+FeatureDlgInstallID50="安装列表:"	
+FeatureDlgInstallID51 ="选择组件，安装程序将安装它们。"	
+FeatureDlgInstallID711="您可以选择安装多个组件或全部组件。"
+FeatureDlgUnInstallID50="删除列表:"		
+FeatureDlgUnInstallID51="选择组件，安装程序将删除它们。"		
+FeatureDlgUnInstallID711="您可以选择删除多个组件或全部组件。如果您选择删除全部功能，软件包将自行卸载。"	   
+
+FeatureDlgID1305="描述"		                             
+FeatureDlgID1306="所需空间:"
+FeatureDlgID1307="可用空间:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="安装向导执行完毕。"
+SetupErrorDlgID711="在安装完 %P 之前向导被中断。"	
+SetupErrorDlgID712="系统尚未修改。若要以后安装此程序，请重新执行安装过程。单击“完成”退出向导。" 
+
+FinishRebootDlgID50="安装向导执行完毕。"
+FinishRebootInstallDlgID711="安装向导成功安装了 %P。在使用此程序之前，必须重新启动计算机。"    
+FinishRebootUninstallDlgID711="安装向导成功删除了 %P。在使用此程序之前，必须重新启动计算机。"
+FinishRebootDlgID502="是，立即重新启动计算机。" 
+FinishRebootDlgID503="否，以后重新启动计算机。" 
+FinishRebootDlgID712="从驱动器中取出任何磁盘，然后单击“完成”结束安装程序。"
+
+FinishDlgID50="安装向导执行完毕" 
+
+FinishInstallDlgID711="安装向导成功安装了 %P。单击“完成”退出向导。"	
+FinishUninstallDlgID711="安装向导成功删除了 %P。单击“完成”退出向导。"
+
+
+AskPathDlgID50="选择源位置"
+AskPathDlgID51="选择安装程序文件所在的文件夹。"
+AskPathDlgID901="请输入安装程序所在的位置。"
+AskPathDlgID31="浏览" 
+
+MaintainDlgID50="欢迎"
+MaintainDlgID51="更新或删除程序。"
+MaintainDlgID710="欢迎使用 %P 安装维护程序。此程序使您可以修改当前安装。单击下面的一个选项。"
+#MaintainDlgID301="更新(&U)"
+MaintainDlgID302="删除(&R)"
+MaintainDlgID701="选择要更新的组件或者添加要安装的新组件"         
+MaintainDlgID702="选择要删除的组件"	
+
+NextButton="下一步(&N) >"
+CancelButton="取消(&C)" 
+BackButton ="< 上一步(&B)"
+FinishButton="完成(&F)"	                
+
+
+VMSDelComfirm="是否确实要删除所有组件?"
+VMSCancelingDescription="是否确实要中止安装向导?"   
+VMSAbort="中止"
+VMSErrorCodeMissDLL="对不起，此软件包的一些重要文件丢失。请与服务提供商联系以重新下载软件包。请按“确定”终止安装向导。"
+VMSErrorCodeWithoutLicense="许可文件被删除或改名，请确保此软件包的使用在许可范围之内。请按“确定”终止安装向导。"
+VMSErrorCodeErrorSCF="对不起，系统配置文件已损坏。请与服务提供商联系以更新该文件。请按“确定”终止安装向导。"
+VMSCaution="警告"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" 无法完成此过程。请按“确定”继续。"
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" 无法加载。请按“确定”继续。"
+
+VMSErrorCodenotSupportedhw="对不起，安装向导无法在系统中找到受支持的硬件。应检查硬件，然后重试。请按“确定”终止安装向导。"	
+VMSErrorCodeUnknowOS="未知的操作系统版本"
+VMSFinishErrorMsgofInstall="注意：有一个组件未能成功安装到系统中。请检查日志文件。"
+VMSFinishErrorMsgofRemove ="注意：有一个组件未能从系统中成功删除。请检查日志文件。"
+VMSInstallProgress="正在安装..."
+VMSSpecifyPathAgain="无法找到安装程序文件。请指定源路径。"
+VMSStop="停止"
+VMSUninstallProgress="正在删除..."
+VMSWait="正在扫描硬件。请稍候。"
+
+
+
+TradeMark="VIA "
+GeneralID="平台设备管理员"
+MaintainDlgID301="安装/更新(&U)"
+AutoRebootWarning="在按下一个按钮之前请立即保存你的任务。下面列出的组件将没有提示自动地重启系统："
+VMSErrorCodenotSupportedOS="对不起，安装向导找不到当前平台适合的组件。请按[确定]键终止安装向导。"
+
+[Japanese]
+StartCopyDlgInstallID50="僐儞億乕僱儞僩儕僗僩偺僀儞僗僩乕儖:"
+StartCopyDlgInstallID51="僐儞億乕僱儞僩傪僀儞僗僩乕儖偡傞慜偵丄愝掕傪嵞専摙偟偰偔偩偝偄丅"
+StartCopyDlgInstallID711="僙僢僩傾僢僾偵偼丄僐儞億乕僱儞僩傪僀儞僗僩乕儖偡傞偨傔偺廫暘側忣曬偑娷傑傟偰偄傑偡丅偳傟偐偺愝掕傪嵞専摙傑偨偼曄峏偟偨偄応崌丄[栠傞乶傪僋儕僢僋偟傑偡丅愝掕偵枮懌偟偨傜丄[師傊]傪僋儕僢僋偟偰僐儞億乕僱儞僩偺僀儞僗僩乕儖傪巒傔偰偔偩偝偄丅"
+StartCopyDlgInstallID701="尰嵼偺愝掕:" 
+ 	
+StartCopyDlgUnInstallID50="僐儞億乕僱儞僩儕僗僩偺傾儞僀儞僗僩乕儖:"
+StartCopyDlgUnInstallID51= "僐儞億乕僱儞僩傪庢傝奜偡慜偵愝掕傪嵞専摙偟偰偔偩偝偄丅"  
+StartCopyDlgUnInstallID711="僙僢僩傾僢僾偵偼丄僐儞億乕僱儞僩偺庢傝奜偟傪奐巒偡傞偨傔偺廫暘側忣曬偑娷傑傟偰偄傑偡丅偳傟偐偺愝掕傪嵞専摙傑偨偼曄峏偟偨偄応崌丄[栠傞乶傪僋儕僢僋偟傑偡丅愝掕偵枮懌偟偨傜丄[師傊]傪僋儕僢僋偟偰僐儞億乕僱儞僩偺庢傝奜偟傪巒傔偰偔偩偝偄丅"
+StartCopyDlgUnInstallID701="尰嵼偺愝掕:" 
+
+StartCopyDlgStatusInstallID50=" 僗僥乕僞僗偺僀儞僗僩乕儖:"
+StartCopyDlgStatusInstallID51 = " 忣曬偵廬偭偰丄僗僥乕僞僗偺僀儞僗僩乕儖傪昞帵偟傑偡丅"  
+StartCopyDlgStatusInstallID711=  " 師偺忣曬偼丄僐儞億乕僱儞僩偑惓忢偵僀儞僗僩乕儖偝傟偰偄傞偐偳偆偐傪帵偟傑偡丅"   
+StartCopyDlgStatusInstallID701=  " 尰嵼偺僗僥乕僞僗:"   
+				
+StartCopyDlgStatusUnInstallID50 =" 僗僥乕僞僗偺嶍彍:"
+StartCopyDlgStatusUnInstallID51  =  " 忣曬偵廬偭偰丄僗僥乕僞僗偺嶍彍傪昞帵偟傑偡丅"  
+StartCopyDlgStatusUnInstallID711=" 師偺忣曬偼丄僐儞億乕僱儞僩偑惓忢偵嶍彍偝傟偰偄傞偐偳偆偐傪帵偟傑偡丅"   
+StartCopyDlgStatusUnInstallID701 = " 尰嵼偺寢壥:" 
+
+WelcomeDlgID50="%P偺僀儞僗僩乕儖僂傿僓乕僪偵傛偆偙偦"
+WelcomeDlgID710="僀儞僗僩乕儖僂傿僓乕僪偼僐儞僺儏乕僞偵 %P 傪僀儞僗僩乕儖偟傑偡丅懕峴偡傞偵偼丄[師傊]傪僋儕僢僋偟傑偡丅"
+
+LicenseDlgID50="儔僀僙儞僗宊栺彂"
+LicenseDlgID51= "師偺儔僀僙儞僗宊栺彂傪傛偔偍撉傒偔偩偝偄丅"              
+LicenseDlgID711="PAGE DOWN僉乕傪墴偟偰宊栺彂偺巆傝傪偍撉傒偔偩偝偄丅"	
+LicenseDlgID502="摨堄偡傞"	
+LicenseDlgID503="摨堄偟側偄" 
+	
+FeatureDlgInstallID50="儕僗僩偺僀儞僗僩乕儖:"	
+FeatureDlgInstallID51 ="僐儞億乕僱儞僩傪曄峏偡傞偨傔偵丄僙僢僩傾僢僾偼偦傟傜偺僐儞億乕僱儞僩傪僀儞僗僩乕儖偟傑偡丅"	
+FeatureDlgInstallID711="僀儞僗僩乕儖偡傞暋悢偺傑偨偼偡傋偰偺僐儞億乕僱儞僩傪慖戰偱偒傑偡丅"
+FeatureDlgUnInstallID50="儕僗僩偺嶍彍:"		
+FeatureDlgUnInstallID51="僐儞億乕僱儞僩傪慖戰偡傞偨傔偵丄僙僢僩傾僢僾偼偦傟傜偺僐儞億乕僱儞僩傪嶍彍偟傑偡"			
+FeatureDlgUnInstallID711= "嶍彍偡傞暋悢偺傑偨偼偡傋偰偺僐儞億乕僱儞僩傪慖戰偱偒傑偡丅偡傋偰偺婡擻偺嶍彍傪慖戰偟偨応崌丄僷僢働乕僕偼偦傟帺恎傪傾儞僀儞僗僩乕儖偟傑偡丅"	   
+
+FeatureDlgID1305="婰弎"		                             
+FeatureDlgID1306="昁恵椞堟:"
+FeatureDlgID1307="嬻偒椞堟:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="僀儞僗僩乕儖僂傿僓乕僪偑姰椆偟傑偟偨丅"
+SetupErrorDlgID711="%P 偑姰慡偵僀儞僗僩乕儖偝傟傞慜偵丄僂傿僓乕僪偑拞抐偟傑偟偨丅"	
+SetupErrorDlgID712="僔僗僥儉偼傑偩廋惓偝傟偰偄傑偣傫丅屻偱偙偺僾儘僌儔儉傪僀儞僗僩乕儖偡傞偵偼丄僀儞僗僩乕儖傪嵞幚峴偟偰偔偩偝偄丅[廔椆]傪僋儕僢僋偟偰丄僂傿僓乕僪傪廔椆偟傑偡丅" 
+
+FinishRebootDlgID50="僀儞僗僩乕儖僂傿僓乕僪偑姰椆偟傑偟偨丅"
+FinishRebootInstallDlgID711="僀儞僗僩乕儖僂傿僓乕僪偼丄 %P 傪惓忢偵僀儞僗僩乕儖偟傑偟偨丅僾儘僌儔儉傪巊梡偡傞慜偵丄僐儞僺儏乕僞傪嵞婲摦偡傞昁梫偑偁傝傑偡丅"    
+FinishRebootUninstallDlgID711="僀儞僗僩乕儖僂傿僓乕僪偼丄 %P 傪惓忢偵嶍彍偟傑偟偨丅僾儘僌儔儉傪巊梡偡傞慜偵丄僐儞僺儏乕僞傪嵞婲摦偡傞昁梫偑偁傝傑偡丅"
+FinishRebootDlgID502="偼偄丄崱僐儞僺儏乕僞傪嵞婲摦偟傑偡丅" 
+FinishRebootDlgID503="偄偄偊丄屻偱僐儞僺儏乕僞傪嵞婲摦偟傑偡丅" 
+FinishRebootDlgID712="僪儔僀僽偐傜僨傿僗僋傪庢傝奜偟丄[廔椆]傪僋儕僢僋偟偰僙僢僩傾僢僾傪姰椆偟傑偡丅"
+
+FinishDlgID50="僀儞僗僩乕儖僂傿僓乕僪偑姰椆偟傑偟偨" 
+
+FinishInstallDlgID711="僀儞僗僩乕儖僂傿僓乕僪偼丄%P傪惓忢偵嶍彍偟傑偟偨丅[廔椆]傪僋儕僢僋偟偰僂傿僓乕僪傪廔椆偟傑偡丅"	
+FinishUninstallDlgID711="僀儞僗僩乕儖僂傿僓乕僪偼丄%P傪惓忢偵嶍彍偟傑偟偨丅[廔椆]傪僋儕僢僋偟偰僂傿僓乕僪傪廔椆偟傑偡丅"
+
+
+AskPathDlgID50="僜乕僗埵抲偺慖戰"
+AskPathDlgID51="僙僢僩傾僢僾僼傽僀儖偑攝抲偝傟偰偄傞応強傪慖戰偟傑偡丅"
+AskPathDlgID901="僙僢僩傾僢僾僼傽僀儖偑攝抲偝傟偰偄傞応強傪擖椡偟偰偔偩偝偄丅"
+AskPathDlgID31="嶲徠" 
+
+MaintainDlgID50="傛偆偙偦"
+MaintainDlgID51="僾儘僌儔儉偺峏怴傑偨偼嶍彍丅"
+MaintainDlgID710="%P偣偭偲偁傉儊儞僥僫儞僗僾儘僌儔儉偵傛偆偙偦丅偙偺僾儘僌儔儉偵傛傝丄尰嵼偺僀儞僗僩乕儖傪廋惓偱偒傑偡丅壓偺僆僾僔儑儞偺偳傟偐傪僋儕僢僋偟偰偔偩偝偄丅"
+#MaintainDlgID301="峏怴(&U)"
+MaintainDlgID302="嶍彍(&R)"
+MaintainDlgID701="峏怴偡傞僐儞億乕僱儞僩傪慖戰偡傞偐丄僀儞僗僩乕儖偡傞怴偟偄僐儞億乕僱儞僩傪捛壛偟偰偔偩偝偄"         
+MaintainDlgID702="嶍彍偡傞僐儞億乕僱儞僩傪慖戰偟偰偔偩偝偄"	
+
+NextButton="師傊(&N) >"
+CancelButton="僉儍儞僙儖(&C)" 
+BackButton ="< 栠傞(&B)"
+FinishButton="廔椆(&F)"	                
+
+
+VMSDelComfirm="偡傋偰偺僐儞億乕僱儞僩傪嶍彍偟傑偡偐?"
+VMSCancelingDescription="僀儞僗僩乕儖僂傿僓乕僪傪拞抐偟傑偡偐?"   
+VMSAbort="拞抐"
+VMSErrorCodeMissDLL="偙偺僷僢働乕僕偺廳梫側僼傽僀儖偺堦晹偑幐傢傟偰偄傑偡丅僷僢働乕僕傪嵞傃僟僂儞儘乕僪偟偰丄僒乕價僗僾儘僶僀僟偵楢棈偟偰偔偩偝偄丅OK傪墴偟偰丄僀儞僗僩乕儖僂傿僓乕僪傪廔椆偟偰偔偩偝偄丅"
+VMSErrorCodeWithoutLicense="儔僀僙儞僗僼傽僀儖偑嶍彍傑偨偼柤慜偑曄峏偝傟偰偄傑偡丅偙偺僜僼僩僂僃傾僷僢働乕僕偺巊梡偑儔僀僙儞僗偵傛偭偰僇僶乕偝傟偰偄傞偐丄妋擣偟偰偔偩偝偄丅OK傪墴偟偰丄僀儞僗僩乕儖僂傿僓乕僪傪廔椆偟偰偔偩偝偄丅"
+VMSErrorCodeErrorSCF="僔僗僥儉愝掕僼傽僀儖偑攋懝偟偰偄傑偡丅僒乕價僗僾儘僶僀僟偵楢棈偟偰丄峏怴偟偰偔偩偝偄丅OK傪墴偟偰丄僀儞僗僩乕儖僂傿僓乕僪傪廔椆偟偰偔偩偝偄丅"
+VMSCaution="偛巊梡忋偺拲堄"
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" 僾儘僙僗傪姰椆偱偒傑偣傫偱偟偨丅OK傪墴偟偰懕峴偟偰偔偩偝偄丅"
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" 儘乕僪偱偒傑偣傫偱偟偨丅OK傪墴偟偰懕峴偟偰偔偩偝偄丅
+
+VMSErrorCodenotSupportedhw="僀儞僗僩乕儖僂傿僓乕僪偼丄僔僗僥儉偵僒億乕僩偝傟偨僴乕僪僂僃傾傪専弌偱偒傑偣傫丅僴乕僪僂僃傾傪僠僃僢僋偟丄嵞幚峴偟偰偔偩偝偄丅僾儘僙僗傪姰椆偱偒傑偣傫偱偟偨丅OK傪墴偟偰僀儞僗僩乕儖僂傿僓乕僪傪廔椆偟偰偔偩偝偄丅"	
+VMSErrorCodeUnknowOS="晄柧側OS僶乕僕儑儞"
+VMSFinishErrorMsgofInstall="拲: 僐儞億乕僱儞僩偺1偮偑僔僗僥儉偵惓忢偵僀儞僗僩乕儖偝傟偰偄傑偣傫丅儘僌僼傽僀儖傪僠僃僢僋偟偰偔偩偝偄丅"
+VMSFinishErrorMsgofRemove ="拲: 僐儞億乕僱儞僩偺1偮偑僔僗僥儉偐傜惓忢偵嶍彍偝傟偰偄傑偣傫丅儘僌僼傽僀儖傪僠僃僢僋偟偰偔偩偝偄丅"
+VMSInstallProgress="僀儞僗僩乕儖偟偰偄傑偡 ..."
+VMSSpecifyPathAgain="僙僢僩傾僢僾僼傽僀儖偑尒偮偐傝傑偣傫丅僜乕僗僷僗傪巜掕偟偰偔偩偝偄丅"
+VMSStop="掆巭";			
+VMSUninstallProgress="嶍彍偟偰偄傑偡 ..."
+VMSWait="僴乕僪僂僃傾傪僗僉儍儞偟偰偄傑偡丅彮偟偍懸偪偔偩偝偄丅"
+
+TradeMark="VIA "
+GeneralID="僾儔僢僩僼僅乕儉f僶僀僗}僱乕僕儍"
+MaintainDlgID301="僀儞僗僩乕儖/峏怴(&U)"
+AutoRebootWarning="師偺儃僞儞傪墴偡慜偵丄崱偡偖僞僗僋傪曐懚偟偰偔偩偝偄丅埲壓偵昞帵偝傟傞僐儞億乕僱儞僩偼丄捠抦側偔僔僗僥儉傪帺摦揑偵嵞婲摦偝偣傑偡:"
+VMSErrorCodenotSupportedOS="僀儞僗僩乕儖僂傿僓乕僪偼尰嵼偺僾儔僢僩僼僅乕儉偵懳偡傞惓偟偄僐儞億乕僱儞僩傪専弌偡傞偙偲偑偱偒傑偣傫丅[OK] 傪僋儕僢僋偟偰僀儞僗僩乕儖僂傿僓乕僪傪廔椆偟偰偔偩偝偄丅"
+
+[Thai]
+StartCopyDlgInstallID50="翟吹验衣∫檬枨够眯⊥?"
+StartCopyDlgInstallID51="得迁释氦枰氛璧验т情¤凸翟吹验枨够眯⊥?
+StartCopyDlgInstallID711="∫玫源笛椐琳㈤土倥嗑章Ь通朽迷枇翟吹验枨够眯⊥轰撮 堕业橥А颐得迁释核米袜慌砧鹿峄脓よ曳砧笛椐淝?闼椁旁÷橥埂叛?(Back) 堕揖豌ā押よ曳砧笛椐崤榍闼椁旁《汛浠 (Next) 嗑阻袜迷枇翟吹验枨够眯⊥?
+StartCopyDlgInstallID701="よ曳砧笛椐谎è睾压:" 
+ 	
+StartCopyDlgUnInstallID50="隆嗯浴∫玫源笛椐靡隆颐疏枪幻小秃:"
+StartCopyDlgUnInstallID51="得迁释氦枰氛璧验т情¤凸ㄐ藕疏枪幻小秃"  
+StartCopyDlgUnInstallID711="∫玫源笛椐琳㈤土倥嗑章Ь通朽迷枇藕疏枪幻小秃浯?堕业橥А颐得迁释核米袜慌砧鹿峄脓よ曳砧笛椐淝殂碎づ浴麻凸∨押 (Back) 堕揖豌ā押よ曳砧笛椐崤榍闼椁旁《汛浠 (Next) 嗑阻袜迷枇藕疏枪幻小秃"
+StartCopyDlgUnInstallID701="よ曳砧笛椐谎è睾压:" 
+
+StartCopyDlgStatusInstallID50=" 识夜小颐翟吹验?"
+StartCopyDlgStatusInstallID51 =" ㈤土倥佃弯还臻ㄐ崾揣识夜小颐翟吹验?  
+StartCopyDlgStatusInstallID711=" ㈤土倥佃弯还臻ㄐ和°碎へ撤靡呵枰翟吹验枨够眯⊥亨拭绋柿嘿贸焖米弯凌"   
+StartCopyDlgStatusInstallID701=" 寂谎è睾压:"   
+				
+StartCopyDlgStatusUnInstallID50 =" 识夜小颐藕:"
+StartCopyDlgStatusUnInstallID51 =" ㈤土倥佃弯还臻ㄐ崾揣识夜小颐藕"  
+StartCopyDlgStatusUnInstallID711=" ㈤土倥佃弯还臻ㄐ和°碎へ撤靡呵枰藕疏枪幻小秃嗍苗ㄊ梁倜踌嗣淄淞?   
+StartCopyDlgStatusUnInstallID701 =" 寂谎è睾压:" 
+
+WelcomeDlgID50="⑼甸凸醚菏勹笛仟枨隆颐翟吹验铀醚?%P"
+WelcomeDlgID710="笛仟枨隆颐翟吹验Ж蟹印颐翟吹验?%P 脓愎ね辆郧嗟兔膦艇へ?艘〉橥А颐酚佃豌碎づ浴堆翠?(Next)"
+
+LicenseDlgID50="㈤偷∨о≌杪恰押愫凸丨业"
+LicenseDlgID51="饣么丸夜㈤偷∨о≌杪恰押愫凸丨业佃弯还臻吐枰朽驼麓"           
+LicenseDlgID711="〈回枇嗯阻凸斯橐脓 (PAGE DOWN) 嗑阻屯枰故枨狗砧嗨抛廷艇㈤偷∨?	
+LicenseDlgID502="嗨绻撮锹"	
+LicenseDlgID503="淞栲绥勾榍? 
+	
+FeatureDlgInstallID50="靡隆颐氛瑷械源笛椐:"	
+FeatureDlgInstallID51 ="嗔阻袜抛汀疏枪幻小秃浯獒砰?饣冕∶哩蟹印颐翟吹验?	
+FeatureDlgInstallID711="へ呈伊颐多抛汀拓弧贸焖乓峦妈咬嗣淄费椐肆捶砧ㄐ翟吹验т撮"
+FeatureDlgUnInstallID50="靡隆颐氛瑷信?"		
+FeatureDlgUnInstallID51="嗔阻袜抛汀疏枪幻小秃浯獒砰?饣冕∶哩蟹印颐藕"		
+FeatureDlgUnInstallID711="へ呈伊颐多抛汀拓弧贸焖乓峦妈咬嗣淄费椐肆捶砧ㄐ藕吩椐浯?堕亦抛汀藕へ呈梁训苑亍㈤?饣冕∶哩卸佟藕屯′花摇啶米柰?	   
+
+FeatureDlgID1305="靡屡朽驼麓"
+FeatureDlgID1306="咀楣氛枨枰Х砧甸艇∫?"
+FeatureDlgID1307="咀楣氛枨枰Х砧琳吐勹:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="笛仟枨碌源笛椐嗍苗ㄊ梁倜踌"
+SetupErrorDlgID711="笛仟枨露佟⒀川学饲小柰狗砧 %P ㄐ酚∫玫源笛椐浯猷拭绋柿嘿贸?	
+SetupErrorDlgID712="眯汉琳∫绵慌砧鹿峄脓 艘〉橥А颐翟吹验р幻帷昧拐槔衣伺学 闼猷辉吹亚锹翟吹验Б珠沽毅肆瑜旁∴拭绋试楣 (Finish) 嗑阻屯汀ㄒ〉亚锹翟吹验? 
+
+FinishRebootDlgID50="笛仟枨碌源笛椐嗍苗ㄊ梁倜踌"
+FinishRebootInstallDlgID711="笛仟枨路印颐翟吹验?%P 嗍苗ㄊ梁倜踌崤榍 ¤凸ㄐ悛殁幻帷昧 へ车橥Щ源崤朽辉脆っ阻艇ね辆郧嗟兔煦肆栲收隆柰?    
+FinishRebootUninstallDlgID711="笛仟枨碌源笛椐酚∫门?%P 嗍苗ㄊ梁倜踌崤榍 ¤凸ㄐ悛榇幻帷昧 へ车橥Щ源崤朽辉脆っ阻艇ね辆郧嗟兔煦肆栲收隆柰?
+FinishRebootDlgID502="悛?┭沟橥А颐辉瘁判嗷源啶米柰Г土驹青低渺闼凌低构臻嗯? 
+FinishRebootDlgID503="淞?┭龚谢源崤朽辉脆っ阻艇ね辆郧嗟兔煦肆枥衣伺学" 
+FinishRebootDlgID712="藕峒韫丛省煦存 屯〃摇浯渺?ㄒ」验工旁∴拭绋试楣 (Finish) 嗑阻通孩验沟凸∫玫源笛椐"
+
+FinishDlgID50="笛仟枨碌源笛椐嗍苗ㄊ梁倜踌" 
+
+FinishInstallDlgID711="笛仟枨碌源笛椐酚∫玫源笛椐 %P 嗍苗ㄊ梁倜踌崤榍 づ浴嗍苗ㄊ蚤?(Finish) 嗑阻屯汀ㄒ〉亚锹"	
+FinishUninstallDlgID711="笛仟枨碌源笛椐酚∫门?%P 嗍苗ㄊ梁倜踌崤榍 づ浴嗍苗ㄊ蚤?(Finish) 嗑阻屯汀ㄒ〉亚锹"
+
+
+AskPathDlgID50="嗯淄〉俞斯瑙⑼Ж卮嗝澡恋楣"
+AskPathDlgID51="嗯淄♀颗啻兔旆砧琳淇澎视嗣押翟吹验?
+AskPathDlgID901="饣么啖橐浠卵У俞斯瑙氛枇珍颗斓源笛椐"
+AskPathDlgID31="好仪" 
+
+MaintainDlgID50="略勾盏橥姑押"
+MaintainDlgID51="脱距捶嗣淄藕饣冕∶?
+MaintainDlgID710="略勾盏橥押寿桠幻帷昧促崤∫玫源笛椐 %P 饣冕∶凉臻ㄐ锹闼椁爻帷殇⑧慌砧鹿峄脓试瑙氛桎撮翟吹验т情崤榍 づ浴嗯淄　颐酚б耿橥愦㈤退怪瑙撮夜盆咬"
+#MaintainDlgID301="脱距捶(&U)"
+MaintainDlgID302="藕(&R)"
+MaintainDlgID701="嗯淄∈枨够眯⊥亨咀柰脱距捶嗣淄嗑澡潦枨够眯⊥恒肆栲咀柰翟吹验?         
+MaintainDlgID702="嗯淄∈枨够眯⊥悍砧甸艇∫门?	
+
+NextButton="堆翠?&N) >"
+CancelButton="隆嗯浴(&C)" 
+BackButton ="< 锻隆叛?&B)"
+FinishButton="嗍苗ㄊ蚤?&F)"	                
+
+
+VMSDelComfirm="へ翅硅悒嗣淄氰业橥А颐藕疏枪幻小秃费椐肆?"
+VMSCancelingDescription="へ翅硅悒嗣淄氰业橥А颐隆嗯浴∫梅缨夜⑼У亚锹翟吹验?"   
+VMSAbort="隆嗯浴"
+VMSErrorCodeMissDLL="⑼夥?琳淇澎视ぱ咬淇澎愎饣冕∶了衣浠 饣么匆枪焘伺粹幻帷昧烈闼凌嗑阻偷源佃汀押假殂碎好浴颐 饣么〈怠脓 (OK) 嗑阻突源笛仟枨碌源笛椐"
+VMSErrorCodeWithoutLicense="淇澎好猫劂和关点б苟佟藕嗣淄嗷耪杪躬阻豌肆?饣么促闼獒硅悒氰毅和关荡学∨枰扦猛氦咆痢颐悛椐夜康灬敲旃臻 饣谩〈怠脓 (OK) 嗑阻突源笛仟枨碌源笛椐"
+VMSErrorCodeErrorSCF="⑼夥?淇澎视嗣押∮斯搐枰⑼泻轰凌室烈枚悛椐夜浯?饣么翟吹柰假殂碎好浴颐嗑阻头印颐脱距捶 饣么〈怠脓 (OK) 嗑阻突源笛仟枨碌源笛椐"
+VMSCaution="㈤亭敲眯茄?
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" 淞枋伊颐洞余乖埂颐ü嗍苗ㄊ蚤埂眯呵埂颐浯?饣么〈怠脓 OK 嗑阻头拥柰"
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" 淞枋伊颐垛伺翠撮 饣么〈怠脓 (OK) 嗑阻头拥柰"
+
+VMSErrorCodenotSupportedhw="⑼夥?笛仟枨碌源笛椐艘我渺瘁敲焓寡菏关广姑泻孩艇へ充凌竞 へ长敲得迁释何颐齑崆渺¤凸崤榍ㄖУ源笛椐闼凌驼·醚椐 饣么〈怠脓 (OK) 嗑阻突源笛仟枨碌源笛椐"	
+VMSErrorCodeUnknowOS="淞璺靡亨峭渺韫⑼泻夯貉翟∫?
+VMSFinishErrorMsgofInstall="肆衣嗨地: 琳疏枪幻小秃斯骤Х砧淞枋伊颐兜源笛椐脓眯汉浯槭梁倜踌 饣么得迁释号缤や颗?
+VMSFinishErrorMsgofRemove ="肆衣嗨地: 琳疏枪幻小秃斯骤Х砧淞枋伊颐杜和汀ㄒ∶泻轰撮柿嘿贸?饣么得迁释号缤や颗?
+VMSInstallProgress="∮叛У源笛椐 ..."
+VMSSpecifyPathAgain="艘淇澎视嗣押翟吹验т凌竞 饣么眯贺疽镐宦学ㄘ捶砧琳淇澎嗝澡恋楣"
+VMSStop="寺卮";			
+VMSUninstallProgress="∮叛?..."
+VMSWait="∮叛帷刮颐齑崆渺 饣么猛恃·觅?
+
+TradeMark="VIA "
+GeneralID="饣冕∶哩汛∫猛鼗∶踌峋诺客渺?
+MaintainDlgID301="翟吹验?脱距捶(&U)"
+AutoRebootWarning="饣么ㄑ脆＄骇夜⑼Г爻费狗铡柰龚小椿罔恋柰浠 疏枪幻小秃撮夜盆咬ㄐ酚∫没源崤朽辉疵泻恒肆桠绰脱碘沽训遭绰淞栳ㄩо底凸:"
+VMSErrorCodenotSupportedOS="嗍章悒 笛仟枨碌源笛椐淞枋伊颐端沂枨够眯⊥悍砧嗨烈惺潦铀醚横九悼兔炝谎è睾压浯?饣么〈 OK 嗑阻突源笛仟枨碌源笛椐"
+
+[Korean]
+StartCopyDlgInstallID50="备己 夸家 汲摹 格废:"
+StartCopyDlgInstallID51="备己 夸家甫 汲摹窍扁 傈俊 汲沥阑 八配窍绞矫坷."
+StartCopyDlgInstallID711="备己 夸家甫 汲摹窍绰 单 鞘夸茄 葛电 沥焊啊 霖厚登菌嚼聪促."  "汲沥阑 八配窍芭唱 函版窍妨搁 [第肺]甫 穿福绞矫坷."  "汲沥阑 蜡瘤窍妨搁 [促澜]阑 喘矾 汲摹甫 矫累窍绞矫坷."
+StartCopyDlgInstallID701="泅犁 汲沥:" 
+ 	
+StartCopyDlgUnInstallID50="备己 夸家 力芭 格废:"
+StartCopyDlgUnInstallID51= "备己 夸家甫 力芭窍扁 傈俊 汲沥阑 八配窍绞矫坷."  
+StartCopyDlgUnInstallID711="备己 夸家甫 力芭窍绰 单 鞘夸茄 葛电 沥焊啊 霖厚登菌嚼聪促."  "汲沥阑 八配窍芭唱 函版窍妨搁 [第肺]甫 穿福绞矫坷."  "汲沥阑 蜡瘤窍妨搁 [促澜]阑 喘矾 力芭甫 矫累窍绞矫坷."
+StartCopyDlgUnInstallID701="泅犁 汲沥:" 
+
+StartCopyDlgStatusInstallID50=" 汲摹 惑怕:"
+StartCopyDlgStatusInstallID51 =" 促澜篮 汲摹 惑怕俊 包茄 沥焊甫 焊咯凛聪促."   
+StartCopyDlgStatusInstallID711=" 促澜狼 沥焊绰 备己 夸家啊 己傍利栏肺 汲摹登菌绰瘤 咯何甫 舅妨凛聪促."  
+StartCopyDlgStatusInstallID701=" 泅犁 搬苞:"   
+				
+StartCopyDlgStatusUnInstallID50 =" 力芭 惑怕:"
+StartCopyDlgStatusUnInstallID51  =" 促澜篮 力芭 惑怕俊 包茄 沥焊甫 焊咯凛聪促."  
+StartCopyDlgStatusUnInstallID711=" 促澜 沥焊绰 备己 夸家啊 己傍利栏肺 力芭登菌绰瘤 咯何甫 舅妨凛聪促."   
+StartCopyDlgStatusUnInstallID701 = " 泅犁 搬苞:" 
+
+WelcomeDlgID50=" %P侩 汲摹 付过荤涝聪促."
+WelcomeDlgID710="汲摹 付过荤啊 %P甫 哪腔磐俊 汲摹钦聪促.  拌加 柳青窍妨搁 [促澜]阑 穿福绞矫坷."
+
+LicenseDlgID50="荤侩鼻 拌距"
+LicenseDlgID51="促澜 荤侩鼻 拌距阑 磊技洒 佬绢林绞矫坷."           
+LicenseDlgID711="唱赣瘤 拌距 郴侩阑 焊妨搁 <Page Down> 虐甫 穿福绞矫坷."	
+LicenseDlgID502="悼狼窃"	
+LicenseDlgID503="悼狼 救窃" 
+	
+FeatureDlgInstallID50="汲摹 格废:"	
+FeatureDlgInstallID51 ="备己 夸家甫 急琶窍搁 急琶等 备己 夸家啊 汲摹邓聪促." 	
+FeatureDlgInstallID711="备己 夸家 老何 肚绰 傈眉甫 汲摹且 荐 乐嚼聪促."
+FeatureDlgUnInstallID50="力芭 格废:"		
+FeatureDlgUnInstallID51="备己 夸家甫 急琶窍搁 急琶等 备己 夸家啊 力芭邓聪促." 		
+FeatureDlgUnInstallID711="备己 夸家 老何 肚绰 傈眉甫 力芭且 荐 乐嚼聪促." [葛电 扁瓷 力芭]甫 急琶窍搁 菩虐瘤啊 磊脚阑 磊悼栏肺 力芭钦聪促."	   
+
+FeatureDlgID1305="汲疙"		                             
+FeatureDlgID1306="鞘夸茄 傍埃:"
+FeatureDlgID1307="荤侩 啊瓷茄 傍埃:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="汲摹 付过荤甫 肯丰沁嚼聪促."
+SetupErrorDlgID711="%P 汲摹甫 肯丰窍扁 傈俊 付过荤啊 吝窜登菌嚼聪促."	
+SetupErrorDlgID712="矫胶袍捞 荐沥登瘤 臼疽嚼聪促. 捞 橇肺弊伐阑 唱吝俊 汲摹窍妨搁 汲摹甫 促矫 角青窍绞矫坷.付过荤甫 场郴妨搁 [付魔]阑 穿福绞矫坷." 
+
+FinishRebootDlgID50="汲摹 付过荤甫 肯丰沁嚼聪促."
+FinishRebootInstallDlgID711="汲摹 付过荤啊 %P甫 己傍利栏肺 汲摹沁嚼聪促.  橇肺弊伐阑 荤侩窍妨搁 哪腔磐甫 促矫 矫累秦具 钦聪促."    
+FinishRebootUninstallDlgID711="汲摹 付过荤啊 %P甫 己傍利栏肺 力芭沁嚼聪促.  橇肺弊伐阑 荤侩窍妨搁 哪腔磐甫 促矫 矫累秦具 钦聪促."
+FinishRebootDlgID502="抗, 瘤陛 哪腔磐甫 促矫 矫累窍摆嚼聪促. " 
+FinishRebootDlgID503="酒聪坷, 唱吝俊 哪腔磐甫 促矫 矫累窍摆嚼聪促. " 
+FinishRebootDlgID712="靛扼捞宏俊 乐绰 叼胶农甫 葛滴 波辰 饶 [付魔]阑 喘矾 汲摹甫 付抹聪促."
+
+FinishDlgID50="汲摹 付过荤甫 肯丰沁嚼聪促."
+
+FinishInstallDlgID711="汲摹 付过荤啊 %P甫 己傍利栏肺 汲摹沁嚼聪促.  付过荤甫 场郴妨搁 [付魔]阑 穿福绞矫坷."	
+FinishUninstallDlgID711="汲摹 付过荤啊 %P甫 己傍利栏肺 力芭沁嚼聪促.  付过荤甫 场郴妨搁 [付魔]阑 穿福绞矫坷."
+
+
+AskPathDlgID50="盔夯 困摹 急琶"
+AskPathDlgID51="汲沥 颇老捞 困摹茄 弃歹甫 急琶窍绞矫坷."
+AskPathDlgID901="汲沥 颇老狼 困摹甫 涝仿窍绞矫坷."
+AskPathDlgID31="茫酒焊扁" 
+
+MaintainDlgID50="券康钦聪促."
+MaintainDlgID51="橇肺弊伐阑 诀单捞飘 肚绰 力芭窍绞矫坷."
+MaintainDlgID710="%P 汲沥 蜡瘤 包府 橇肺弊伐涝聪促. 泅犁 汲摹等 备己 夸家甫 荐沥且 荐 乐嚼聪促. 促澜 吝 窍唱甫 急琶窍绞矫坷."
+#MaintainDlgID301="诀单捞飘(&U)"
+MaintainDlgID302="力芭(&R)"
+MaintainDlgID701="诀单捞飘窍芭唱 眠啊肺 汲摹且 备己 夸家甫 急琶窍绞矫坷."         
+MaintainDlgID702="力芭且 备己 夸家甫 急琶窍绞矫坷."	
+
+NextButton="促澜(&N) >"
+CancelButton="秒家(&C)" 
+BackButton ="< 第肺(&B)"
+FinishButton="付魔(&F)"	                
+
+
+VMSDelComfirm="备己 夸家甫 葛滴 力芭窍矫摆嚼聪鳖?"
+VMSCancelingDescription="汲摹 付过荤甫 吝窜窍矫摆嚼聪鳖?"   
+VMSAbort="吝窜"
+VMSErrorCodeMissDLL="鞘夸茄 老何 吝夸 颇老捞 绝嚼聪促. 菩虐瘤甫 促矫 促款肺靛窍芭唱 辑厚胶 傍鞭磊俊霸 巩狼窍绞矫坷. 汲摹 付过荤甫 场郴妨搁 [犬牢]阑 穿福绞矫坷. "
+VMSErrorCodeWithoutLicense="荤侩鼻 颇老捞 力芭登菌芭唱 捞抚捞 官差菌嚼聪促. 捞 家橇飘傀绢 菩虐瘤俊 措茄 荤侩鼻捞 乐绰瘤 犬牢窍绞矫坷. 汲摹 付过荤甫 场郴妨搁 [犬牢]阑 穿福绞矫坷."
+VMSErrorCodeErrorSCF="矫胶袍 备己 颇老捞 颊惑登菌嚼聪促. 辑厚胶 傍鞭磊俊霸 巩狼窍咯 诀单捞飘窍绞矫坷. 汲摹 付过荤甫 场郴妨搁 [犬牢]阑 穿福绞矫坷."
+VMSCaution="林狼"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" 捞(啊) 苞沥阑 肯丰窍瘤 给沁嚼聪促. [犬牢]阑 喘矾 拌加 柳青窍绞矫坷."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" 阑(甫) 肺靛窍瘤 给沁嚼聪促. [犬牢]阑 喘矾 拌加 柳青窍绞矫坷."
+
+VMSErrorCodenotSupportedhw="汲摹 付过荤啊 瘤盔登绰 窍靛傀绢甫 茫瘤 给沁嚼聪促. 窍靛傀绢甫 犬牢茄 饶 促矫 矫档窍绞矫坷. 汲摹 付过荤甫 场郴妨搁 [犬牢]阑 穿福绞矫坷."	
+VMSErrorCodeUnknowOS="舅 荐 绝绰 OS 滚傈"
+VMSFinishErrorMsgofInstall="曼绊: 备己 夸家 吝 窍唱啊 力措肺 汲摹登瘤 臼疽嚼聪促. 肺弊 颇老阑 犬牢窍绞矫坷."
+VMSFinishErrorMsgofRemove ="曼绊: 备己 夸家 吝 窍唱啊 力措肺 力芭登瘤 臼疽嚼聪促. 肺弊 颇老阑 犬牢窍绞矫坷."
+VMSInstallProgress="汲摹 吝 ..."
+VMSSpecifyPathAgain="汲沥 颇老阑 茫阑 荐 绝嚼聪促. 盔夯 版肺甫 瘤沥窍绞矫坷."
+VMSStop="吝瘤";				
+VMSUninstallProgress="力芭 吝 ..."
+VMSWait="窍靛傀绢 胶牡 吝 ..." 泪矫 扁促妨 林绞矫坷."
+
+TradeMark="VIA "
+GeneralID="敲阀汽 厘摹 包府磊"
+MaintainDlgID301="汲摹/诀单捞飘(&U)"
+AutoRebootWarning="[促澜] 窜眠甫 穿福扁 傈俊 溜矫 累诀阑 历厘窍绞矫坷. 酒贰俊 凯芭等 备己 夸家啊 烹瘤 绝捞 矫胶袍阑 磊悼栏肺 犁矫悼钦聪促:"
+VMSErrorCodenotSupportedOS="了价钦聪促. 汲摹 付过荤啊 泅犁 敲阀汽俊 利钦茄 备己 夸家甫 茫阑 荐 绝嚼聪促. 汲摹 付过荤甫 场郴妨搁 [犬牢]阑 穿福绞矫坷."
+
+[Indonesia]
+
+StartCopyDlgInstallID50="Daftar Penginstalan Komponen:"
+StartCopyDlgInstallID51="Baca pengaturan dengan cermat sebelum menginstal komponen."
+StartCopyDlgInstallID711="Setup dilengkapi dengan informasi untuk menginstal komponen. Jika Anda ingin membaca atau mengubah pengaturan, klik Kembali.  Jika Anda puas dengan pengaturannya klik Berikut untuk mulai menginstal komponen."
+StartCopyDlgInstallID701="Pengaturan saat ini:" 
+ 	
+StartCopyDlgUnInstallID50="Daftar Untuk Menghapus Penginstalan Komponen:"
+StartCopyDlgUnInstallID51="Baca pengaturan dengan cermat sebelum menghapus komponen."   
+StartCopyDlgUnInstallID711="Setup dilengkapi dengan informasi untuk menghapus komponen.  Jika Anda ingin membaca atau mengubah pengaturan, klik Kembali.  Jika Anda puas dengan pengaturannya, klik Berikut untuk mulai menghapus komponen."
+StartCopyDlgUnInstallID701="Pengaturan saat ini:" 
+
+StartCopyDlgStatusInstallID50=" Status Penginstalan:"
+StartCopyDlgStatusInstallID51 = " Informasi berikut menampilkan status penginstalan."  
+StartCopyDlgStatusInstallID711=" Informasi berikut akan memberitahukan Anda apakah penginstalan komponen sudah berhasil dilakukan atau belum."     
+StartCopyDlgStatusInstallID701=" Hasil saat ini:"   
+				
+StartCopyDlgStatusUnInstallID50 =" Status Penghapusan:"
+StartCopyDlgStatusUnInstallID51  =" Informasi berikut menampilkan status penghapusan."  
+StartCopyDlgStatusUnInstallID711=" Informasi berikut akan memberitahukan Anda apakah komponen sudah berhasil dihapus atau belum."   
+StartCopyDlgStatusUnInstallID701 =" Hasil saat ini:"   
+
+WelcomeDlgID50="Selamat datang di Panduan Penginstalan untuk %P"
+WelcomeDlgID710="Panduan Penginstalan akan menginstal %P pada komputer Anda. Untuk melanjutkan, klik Berikut."
+
+LicenseDlgID50="Perjanjian Lisensi"
+LicenseDlgID51="Bacalah perjanjian lisensi berikut dengan cermat."           
+LicenseDlgID711="Tekan tombol PAGE DOWN untuk melihat isi perjanjian ini dengan lengkap."	
+LicenseDlgID502="Saya setuju"	
+LicenseDlgID503="Saya tidak setuju" 
+	
+FeatureDlgInstallID50="Daftar Instal:"	
+FeatureDlgInstallID51 ="Untuk memilih komponen yang akan diinstal oleh Setup."	
+FeatureDlgInstallID711="Anda dapat memilih beberapa atau semua komponen untuk diinstal."
+FeatureDlgUnInstallID50="Daftar Hapus:"		
+FeatureDlgUnInstallID51="Untuk memilih komponen yang akan dihapus oleh Setup."			
+FeatureDlgUnInstallID711="Anda dapat memilih beberapa atau semua komponen untuk dihapus. Jika Anda memilih semua fitur untuk dihapus, Package akan menghapus penginstalan secara otomatis."	   
+
+FeatureDlgID1305="Penjelasan"		                             
+FeatureDlgID1306="Memori Yang Diperlukan:"
+FeatureDlgID1307="Memori Yang Tersedia:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Panduan Penginstalan Selesai."
+SetupErrorDlgID711="Panduan ini terhenti sebelum %P dapat diinstal dengan lengkap."	
+SetupErrorDlgID712="Sistem belum dimodifikasi. Untuk menginstal program ini di lain waktu, jalankan kembali penginstalan.Klik Selesai untuk keluar dari panduan." 
+
+FinishRebootDlgID50="Panduan Penginstalan Selesai."
+FinishRebootInstallDlgID711="Panduan Penginstalan berhasil menginstal %P.  Sebelum Anda dapat menggunakan program hidupkan kembali komputer Anda."    
+FinishRebootUninstallDlgID711="Panduan Penginstalan berhasil menghapus %P.  Sebelum Anda dapat menggunakan program hidupkan kembali komputer Anda."    
+FinishRebootDlgID502="Ya, sekarang saya ingin menghidupkan kembali komputer saya. " 
+FinishRebootDlgID503="Tidak, saya akan menghidupkan kembali komputer saya nanti. " 
+FinishRebootDlgID712="Keluarkan disket dari drive, kemudian klik Selesai untuk menyelesaikan setup."
+
+FinishDlgID50="Panduan Penginstalan Selesai." 
+
+FinishInstallDlgID711="Panduan Penginstalan berhasil menginstal %P.  Klik Selesai untuk keluar dari panduan."	
+FinishUninstallDlgID711="Panduan Penginstalan berhasil menghapus %P.  Klik Selesai untuk keluar dari panduan."
+
+
+AskPathDlgID50="Pilih Lokasi Sumber"
+AskPathDlgID51="Pilih folder dengan file setup."
+AskPathDlgID901="Masukkan lokasi file setup."
+AskPathDlgID31="Buka" 
+
+MaintainDlgID50="Selamat Datang"
+MaintainDlgID51="Memperbarui atau menghapus program."
+MaintainDlgID710="Selamat datang di program %P Setup Maintenance. Program ini memungkinkan Anda mengubah penginstalan yang berlaku. Klik salah satu pilihan di bawah."
+#MaintainDlgID301="Perbarui(&U)"
+MaintainDlgID302="Hapus(&R)"
+MaintainDlgID701="Pilih komponen untuk memperbarui atau menambahkan komponen baru yang akan diinstal "         
+MaintainDlgID702="Pilih komponen yang akan dihapus"	
+
+NextButton="Berikut(&N) >"
+CancelButton="Batal(&C)" 
+BackButton ="< Kembali(&B)"
+FinishButton="Selesai(&F)"	                
+
+
+VMSDelComfirm="Anda yakin akan menghapus semua komponen ?"
+VMSCancelingDescription="Anda yakin akan membatalkan panduan penginstalan?"   
+VMSAbort="Batalkan"
+VMSErrorCodeMissDLL="Maaf, beberapa file penting dalam paket ini tidak tersedia. Silahkan download kembali paket untuk terhubung ke penyedia layanan. Tekan OK untuk menghentikan panduan penginstalan. "
+VMSErrorCodeWithoutLicense="File lisensi sudah dihapus atau berganti nama, pastikan penggunaan paket perangkat lunak ini sudah dilindungi oleh lisensi. Tekan OK untuk menghentikan panduan penginstalan."
+VMSErrorCodeErrorSCF="Maaf, file konfigurasi sistem rusak. Harap hubungi penyedia layanan untuk memperbaruinya. Tekan OK untuk menghentikan panduan penginstalan."
+VMSCaution="Hati-hati"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" gagal untuk menyelesaikan proses, Tekan OK untuk melanjutkan."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" gagal untuk dibuka. Tekan OK untuk melanjutkan."
+
+VMSErrorCodenotSupportedhw="Maaf, panduan penginstalan tidak dapat menemukan perangkat keras yang didukung dalam sistem Anda. Periksa perangkat keras Anda dan coba kembali. Tekan OK untuk menghentikan panduan penginstalan."	
+VMSErrorCodeUnknowOS="Versi Sistem Pengoperasian tidak dikenal"
+VMSFinishErrorMsgofInstall="CATATAN: Salah satu komponen belum berhasil diinstal dengan benar. Periksa file log."
+VMSFinishErrorMsgofRemove ="CATATAN: Salah satu komponen belum berhasil dihapus dengan benar dari sistem. Periksa file log."
+VMSInstallProgress="Menginstal ..."
+VMSSpecifyPathAgain="Tidak dapat menemukan file setup. Masukkan data path sumber dengan benar."
+VMSStop="Berhenti";			
+VMSUninstallProgress="Menghapus ..."
+VMSWait="Sedang mencari perangkat keras. Harap tunggu sebentar."
+
+TradeMark="VIA "
+GeneralID="Platform Device Manager"
+MaintainDlgID301="Menginstal/Memperbarui(&U)"
+AutoRebootWarning="Simpan segera pekerjaan Anda sebelum menekan tombol berikutnya. Komponen-komponen di bawah ini akan melakukan sistem reboot secara otomatis tanpa pemberitahuan:"
+VMSErrorCodenotSupportedOS="Maaf, panduan penginstal tidak dapat menemukan komponen yang sesuai untuk platform yang ada. Tekan OK untuk mengakhir panduan penginstal."

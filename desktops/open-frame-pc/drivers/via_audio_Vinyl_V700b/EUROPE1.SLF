@@ -1,0 +1,882 @@
+[German]
+
+StartCopyDlgInstallID50="Komponenten installieren:"
+StartCopyDlgInstallID51="Überprüfen Sie die Einstellungen, bevor Sie Komponenten installieren."
+StartCopyDlgInstallID711="Setup verfügt über ausreichend Informationen, um mit dem Installieren von Komponenten zu beginnen. Wenn Sie Einstellungen ändern oder überprüfen möchten, klicken Sie auf Zurück. Wenn Sie mit den Einstellungen einverstanden sind, klicken Sie auf Weiter, um die Installation zu starten."
+StartCopyDlgInstallID701="Aktuelle Einstellungen:" 
+ 	
+StartCopyDlgUnInstallID50="Komponenten deinstallieren:"
+StartCopyDlgUnInstallID51= "Überprüfen Sie die Einstellungen, bevor Sie Komponenten deinstallieren."  
+StartCopyDlgUnInstallID711="Setup verfügt über ausreichend Informationen, um mit der Deinstallation von Komponenten zu beginnen. Wenn Sie Einstellungen ändern oder überprüfen möchten, klicken Sie auf Zurück. Wenn Sie mit den Einstellungen einverstanden sind, klicken Sie auf Weiter, um die Deinstallation zu starten."
+StartCopyDlgUnInstallID701="Aktuelle Einstellungen:" 
+
+StartCopyDlgStatusInstallID50=" Status der Installation:"
+StartCopyDlgStatusInstallID51 =" Informationen über den Status der Installation."  
+StartCopyDlgStatusInstallID711=" Die folgenden Informationen zeigen an, ob die Komponenten erfolgreich installiert wurden."   
+StartCopyDlgStatusInstallID701=" Aktuelles Ergebnis:"   
+				
+StartCopyDlgStatusUnInstallID50 =" Status der Deinstallation:"
+StartCopyDlgStatusUnInstallID51  =" Informationen über den Status der Deinstallation."  
+StartCopyDlgStatusUnInstallID711=" Die folgenden Informationen zeigen an, ob die Komponenten erfolgreich entfernt wurden."   
+StartCopyDlgStatusUnInstallID701 =" Aktuelles Ergebnis:" 
+
+WelcomeDlgID50="Willkommen beim Installationsassistenten für %P"
+WelcomeDlgID710="Der Installationsassistent installiert %P auf Ihrem PC. Klicken Sie auf Weiter, um fortzufahren."
+
+LicenseDlgID50="Lizenzvereinbarung"
+LicenseDlgID51="Bitte lesen Sie die nachstehende Lizenzvereinbarung aufmerksam durch."           
+LicenseDlgID711="Betätigen Sie die BILD AB-Taste, um den gesamten Text zu lesen."	
+LicenseDlgID502="Ich stimme zu"	
+LicenseDlgID503="Ich stimme nicht zu" 
+	
+FeatureDlgInstallID50="Zu installierende Komponenten:"	
+FeatureDlgInstallID51 ="Wählen Sie die Komponenten, die der Installationsassistent installieren soll."
+FeatureDlgInstallID711="Sie können mehrere oder alle Komponenten für die Installation auswählen."
+FeatureDlgUnInstallID50="Zu entfernende Komponenten:"		
+FeatureDlgUnInstallID51="Wählen Sie die Komponenten, die entfernt werden sollen."		
+FeatureDlgUnInstallID711="Sie können mehrere oder alle Komponenten zum Entfernen auswählen. Wenn Sie alle Funktionen auswählen, wird die Software deinstalliert."	   
+
+FeatureDlgID1305="Beschreibung"		                             
+FeatureDlgID1306="Benötigter Speicherplatz:"
+FeatureDlgID1307="Verfügbarer Speicherplatz:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Installationsassistent abgeschlossen."
+SetupErrorDlgID711="Der Assistent wurde unterbrochen, bevor %P vollständig installiert werden konnte."	
+SetupErrorDlgID712="Ihr System wurde nicht modifiziert. Um das Programm zu einem späteren Zeitpunkt zu installieren, müssen Sie die Installation erneut ausführen. Klicken Sie auf Fertigstellen, um den Assistenten zu beenden." 
+
+FinishRebootDlgID50="Installationsassistent abgeschlossen."
+FinishRebootInstallDlgID711="Der Installationsassistent hat %P erfolgreich installiert. Bevor Sie das Programm verwenden können, müssen Sie Ihren Computer neu starten."    
+FinishRebootUninstallDlgID711="Der Installationsassistent hat %P erfolgreich entfernt. Bevor Sie das Programm verwenden können, müssen Sie Ihren Computer neu starten."
+FinishRebootDlgID502="Ja, ich möchte meinen Computer jetzt neu starten. " 
+FinishRebootDlgID503="Nein, ich werde meinen Computer später neu starten. " 
+FinishRebootDlgID712="Nehmen Sie gegebenenfalls die Datenträger aus den Laufwerken und klicken Sie auf Fertigstellen, um die Installation abzuschließen."
+
+FinishDlgID50="Installationsassistent abgeschlossen" 
+
+FinishInstallDlgID711="Der Installationsassistent hat %P erfolgreich installiert. Klicken Sie auf Fertigstellen, um den Installationsassistenten zu beenden."	
+FinishUninstallDlgID711="Der Installationsassistent hat %P erfolgreich entfernt. Klicken Sie auf Fertigstellen, um den Installationsassistenten zu beenden."
+
+
+AskPathDlgID50="Quellverzeichnis wählen"
+AskPathDlgID51="Wählen Sie das Quellverzeichnis, in dem sich die Installationsdateien befinden."
+AskPathDlgID901="Bitte geben Sie das Quellverzeichnis ein, in dem sich die Installationsdateien befinden."
+AskPathDlgID31="Durchsuchen" 
+
+MaintainDlgID50="Willkommen"
+MaintainDlgID51="Programm aktualisieren oder entfernen."
+MaintainDlgID710="Willkommen bei der %P Installationswartung. Die Installationswartung ermöglicht Ihnen das Anpassen der aktuellen Installation. Klicken Sie auf eine der folgenden Optionen."
+#MaintainDlgID301="Aktualisieren(&U)"
+MaintainDlgID302="Entfernen(&R)"
+MaintainDlgID701="Wählen Sie die zu aktualisierenden oder neu zu installierenden Komponenten aus"         
+MaintainDlgID702="Wählen Sie die zu entfernenden Komponenten aus"	
+
+NextButton="Weiter(&N) >"
+CancelButton="Abbrechen(&C)" 
+BackButton ="< Zurück(&B)"
+FinishButton="Fertigstellen(&F)"	                
+
+
+VMSDelComfirm="Möchten Sie wirklich alle Komponenten entfernen?"
+VMSCancelingDescription="Möchten Sie den Installationsassistenten wirklich beenden?"   
+VMSAbort="Abbrechen"
+VMSErrorCodeMissDLL="Leider fehlen wichtige Dateien der Software. Bitte kontaktieren Sie den Service Provider, um die Software erneut herunterzuladen. Bitte klicken Sie auf OK, um den Installationsassistenten zu beenden."
+VMSErrorCodeWithoutLicense="Die Lizenzdatei wurde verschoben oder umbenannt. Bitte stellen Sie sicher, dass die Nutzung dieser Software durch gültige Lizenzbestimmungen abgesichert wird. Bitte klicken Sie auf OK, um den Installationsassistenten zu beenden."
+VMSErrorCodeErrorSCF="Leider ist die Systemkonfigurationsdatei beschädigt. Bitte kontaktieren Sie den Service Provider, um eine aktualisierte Datei zu erhalten. Bitte klicken Sie auf OK, um den Installationsassistenten zu beenden."
+VMSCaution="Vorsicht"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" konnte nicht abgeschlossen werden. Bitte klicken Sie auf OK, um fortzufahren."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" konnte nicht geladen werden. Bitte klicken Sie auf OK, um fortzufahren."
+
+VMSErrorCodenotSupportedhw="Der Installationsassistent findet leider keine unterstützte Hardware in Ihrem System. Bitte überprüfen Sie Ihre Hardware und versuchen Sie es dann erneut. Klicken Sie auf OK, um den Installationsassistenten zu beenden."	
+VMSErrorCodeUnknowOS="Unbekannte Version des Betriebssystems"
+VMSFinishErrorMsgofInstall="HINWEIS: Die Installation einer Komponente ist fehlgeschlagen. Bitte lesen Sie die Protokolldatei."
+VMSFinishErrorMsgofRemove ="HINWEIS: Das Entfernen einer Komponente ist fehlgeschlagen. Bitte lesen Sie die Protokolldatei."
+VMSInstallProgress="Wird installiert ..."
+VMSSpecifyPathAgain="Kann die Installationsdateien nicht finden. Bitte geben Sie das Quellverzeichnis an."
+VMSStop="Stopp";			
+VMSUninstallProgress="Wird entfernt ..."
+VMSWait="Hardware wird erkannt. Bitte warten Sie einen Moment."
+
+TradeMark="VIA "
+GeneralID="Plattform-Geräte-Manager"
+MaintainDlgID301="Installieren/Update(&U)"
+AutoRebootWarning="Speichern Sie Ihre Aufgaben gleich vor dem Klicken auf die nächste Schaltfläche. Die nachfolgend aufgelisteten Komponent(en) führen ohne Vorankündigung einen automatischen Neustart aus:"
+VMSErrorCodenotSupportedOS="Der Installationsassistent kann leider keine passende Komponente für die aktuelle Plattform finden. Klicken Sie auf OK, um den Installationsassistenten zu terminieren."
+
+[French]
+StartCopyDlgInstallID50="Liste de composants à installer :"
+StartCopyDlgInstallID51="Vérifier les paramètres avant l'installation de composants."
+StartCopyDlgInstallID711="Le programme d'installation dispose de suffisamment d'informations pour commencer l'installation des composants. Si vous souhaitez vérifier ou modifier les paramètres, cliquez sur Précédent. Si les paramètres vous conviennent, cliquez sur Suivant pour commencer à installer les composants."
+StartCopyDlgInstallID701="Paramètre en cours :" 
+ 	
+StartCopyDlgUnInstallID50="Liste de composants à désinstaller :"
+StartCopyDlgUnInstallID51="Vérifier les paramètres avant la suppression des composants."  
+StartCopyDlgUnInstallID711="Le programme de désinstallation dispose de suffisamment d'informations pour commencer la désinstallation de composants. Si vous souhaitez vérifier ou modifier les paramètres, cliquez sur Précédent. Si les paramètres vous conviennent, cliquez sur Suivant pour commencer à désinstaller les composants."
+StartCopyDlgUnInstallID701="Paramètre en cours :" 
+
+StartCopyDlgStatusInstallID50=" Etat de l'installation :"
+StartCopyDlgStatusInstallID51 =" Les informations suivantes indiquent l'état de l'installation."  
+StartCopyDlgStatusInstallID711=" Les informations suivantes vous indiquent si les composants sélectionnés sont installés avec succès."   
+StartCopyDlgStatusInstallID701=" Résultat en cours :"   
+				
+StartCopyDlgStatusUnInstallID50 =" Etat de désinstallation :"
+StartCopyDlgStatusUnInstallID51 =" Les informations suivantes indiquent l'état de la désinstallation."  
+StartCopyDlgStatusUnInstallID711=" Les informations suivantes vous indiquent si les composants sélectionnés sont désinstallés avec succès."   
+StartCopyDlgStatusUnInstallID701=" Résultat en cours :"   
+
+WelcomeDlgID50="Bienvenue dans l'Assistant d'installation de %P"
+WelcomeDlgID710="Cet assistant va installer %P sur votre ordinateur. Pour continuer, cliquez sur Suivant."
+
+LicenseDlgID50="Accord de licence"
+LicenseDlgID51="Veuillez lire attentivement l'accord de licence suivant."           
+LicenseDlgID711="Apppuyez sur la touche de défilement de texte pour voir la suite de l'accord."	
+LicenseDlgID502="J'accepte"	
+LicenseDlgID503="Je refuse" 
+	
+FeatureDlgInstallID50="Liste d'installation :"	
+FeatureDlgInstallID51 ="Choisissez les composants à installer."	
+FeatureDlgInstallID711="Vous pouvez choisir d'installer certains composants ou tous les composants."
+FeatureDlgUnInstallID50="Liste de désinstallation :"		
+FeatureDlgUnInstallID51="Choisissez les composants à désinstaller."		
+FeatureDlgUnInstallID711="Vous pouvez choisir de désinstaller certains composants ou tous les composants. Si vous choisissez de désinstaller toutes les fonctionnalités, le programme se désinstallera lui-même."	   
+
+FeatureDlgID1305="Description"		                             
+FeatureDlgID1306="Espace requis :"
+FeatureDlgID1307="Espace disponible :"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Assistant d'installation terminé."
+SetupErrorDlgID711="L'assistant a été interrompu avant de pouvoir installer complètement %P."	
+SetupErrorDlgID712="Le système n'a pas été modifié. Pour installer ce programme ultérieurement, exécutez de nouveau le programme d'installation. Cliquez sur Terminer pour quitter l'assistant." 
+
+FinishRebootDlgID50="Assistant d'installation terminé."
+FinishRebootInstallDlgID711="L'Assistant d'installation a terminé l'installation de %P. Avant de pouvoir utiliser ce programme, vous devez redémarrer votre ordinateur."    
+FinishRebootUninstallDlgID711="L'Assistant d'installation a supprimé %P avec succès. Pour que les modifications soient prises en compte, vous devez redémarrer votre ordinateur."    
+FinishRebootDlgID502="Oui, je veux démarrer mon ordinateur maintenant. " 
+FinishRebootDlgID503="Non, je redémarrerai mon ordinateur ultérieurement. " 
+FinishRebootDlgID712="Retirez tous les disques des lecteurs, puis cliquez sur Terminer pour terminer l'installation."
+
+FinishDlgID50="Assistant d'installation terminé" 
+
+FinishInstallDlgID711="L'Assistant d'installation a terminé l'installation de %P. Cliquez sur Terminer pour quitter l'assistant."	
+FinishUninstallDlgID711="L'Assistant d'installation a supprimé %P de votre ordinateur. Cliquez sur Terminer pour quitter l'assistant."
+
+
+AskPathDlgID50="Choisir l'emplacement source"
+AskPathDlgID51="Sélectionnez le dossier où les fichiers d'installation se trouvent."
+AskPathDlgID901="Veuillez entrer l'emplacement où les fichiers d'installation se trouvent."
+AskPathDlgID31="Parcourir" 
+
+MaintainDlgID50="Bienvenue"
+MaintainDlgID51="Mettez à jour ou supprimez le programme."
+MaintainDlgID710="Bienvenue dans le programme de maintenance de %P. Ce programme vous permet de modifier l'installation actuelle. Cliquez sur une des options ci-dessous."
+3MaintainDlgID301="Mettre à jour(&U)"
+MaintainDlgID302="Supprimer(&R)"
+MaintainDlgID701="Sélectionnez les composants à mettre à jour ou à ajouter "         
+MaintainDlgID702="Sélectionnez les composants à supprimer"	
+
+NextButton="Suivant(&N) >"
+CancelButton="Annuler(&C)" 
+BackButton ="< Précédent(&B)"
+FinishButton="Terminer(&F)"	                
+
+
+VMSDelComfirm="Confirmez-vous la suppression de tous les composants ?"
+VMSCancelingDescription="Voulez-vous vraiment quitter l'Assistant d'installation ?"   
+VMSAbort="Abandonner"
+VMSErrorCodeMissDLL="Désolé, certains fichiers importants de ce package manquent. Veuillez le télécharger de nouveau le package et prenez contact avec votre fournisseur. Appuyez sur OK pour quitter l'Assistant d'installation. "
+VMSErrorCodeWithoutLicense="Le fichier de licence a été supprimé ou renommé. Vérifiez que l'utilisation de ce logiciel est couverte par la licence octroyée. Appuyez sur OK pour quitter l'Assistant d'installation."
+VMSErrorCodeErrorSCF="Désolé, le fichier de configuration système est corrompu. Prenez contact avec le fournisseur. Appuyez sur OK pour quitter l'Assistant d'installation."
+VMSCaution="Attention"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" n'est pas parvenu à terminer le processus. Appuyez sur OK pour continuer."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" n'est pas parvenu à se charger. Appuyez sur OK pour continuer."
+
+VMSErrorCodenotSupportedhw="Désolé, l'Assistant d'installation ne peut pas trouver le matériel pris en charge sur votre système. Vérifiez votre matériel, puis réessayez. Appuyez sur OK pour quitter l'Assistant d'installation."	
+VMSErrorCodeUnknowOS="Version de système d'exploitation inconnue"
+VMSFinishErrorMsgofInstall="REMARQUE : un des composants n'est pas installé correctement sur le système. Consultez le fichier journal."
+VMSFinishErrorMsgofRemove ="REMARQUE : un des composants n'a pas été supprimé correctement du système. Consultez le fichier journal."
+VMSInstallProgress="Installation en cours ..."
+VMSSpecifyPathAgain="Impossible de trouver les fichiers d'installation. Spécifiez le chemin de la source."
+VMSStop="Stop"		
+VMSUninstallProgress="Suppression en cours ..."
+VMSWait="Analyse du matériel en cours. Veuillez patienter."
+
+TradeMark="VIA "
+GeneralID="Gestionnaire de périphériques de plate-forme"
+MaintainDlgID301="Installez/Actualisez(&U)"
+AutoRebootWarning="Veuillez enregistrer vos tâches immédiatement avant d'appuyer sur le bouton suivant. Le(s) component(s) listé(s) ci-dessous va redémarrer automatiquement le système sans aucune notification:"
+VMSErrorCodenotSupportedOS="Désolé, l'assistant d'installation ne peut pas trouver le composant correct pour la plate-forme actuelle. Veuillez appuyer sur OK pour terminer l'assistant d'installation."
+
+[French(Canada)]
+StartCopyDlgInstallID50="La liste des composants d'installation :" 
+StartCopyDlgInstallID51="Revisez les parametres avant d'installer les composants." 
+StartCopyDlgInstallID711="L'installation a assez d'information pour commencer a installer les composants.  Si vous voulez passer en revue ou changer n'importe quels parametres cliquez sur Back (Arriere).  Si vous etes satisfait de parameters cliquez sur Next (Suivant) afin de commencer a installer les composants."
+StartCopyDlgInstallID701="Parametres actuels :" 
+ 	
+StartCopyDlgUnInstallID50="La Liste des Composants de desinstallation :"
+StartCopyDlgUnInstallID51="Revisez les parameters avant de supprimer les composants."
+StartCopyDlgUnInstallID711="L'installation a assez d'information pour commencer a supprimer les composants. Si vous voulez passer en revue ou changer n'importe quels parameters cliquez sur Back (Arriere).  Si vous etes satisfaits de parameters, cliquez sur Next (Suivant) afin de commencer a supprimer les composants." 
+StartCopyDlgUnInstallID701="Parameters actuels :" 
+
+StartCopyDlgStatusInstallID50="Etat d'installation:" 
+StartCopyDlgStatusInstallID51 ="L'information suivante pour montrer l'Etat d'installation ".
+StartCopyDlgStatusInstallID711="L'information suivante vous indiquera si les composants sont installes avec succes".
+StartCopyDlgStatusInstallID701="Resultat actuel :"
+				
+StartCopyDlgStatusUnInstallID50 ="Etat de desinstallation:" 
+StartCopyDlgStatusUnInstallID51  ="L'information suivante pour montrer le Etat de desinstallation. "
+StartCopyDlgStatusUnInstallID711="L'information suivante vous indiquera si les composants sont desinstalles avec succes ou non. "
+StartCopyDlgStatusUnInstallID701 ="Resultat Actuel :"
+
+WelcomeDlgID50="Bienvenu a l'Assistant d'installation  pour %P"
+WelcomeDlgID710="L'Assistant d'installation installera %P sur votre ordinateur. Pour continuer, cliquez sur le Next."
+
+LicenseDlgID50="Licence d'utilistion du logiciel"
+LicenseDlgID51="Lisez, svp la Licence d'utilistion du logiciel suivante soigneusement."
+LicenseDlgID711="Appuyez sur la  touche PAGE  DOWN pour voir le reste de la Licence."
+LicenseDlgID502="Je conviens " 
+LicenseDlgID503="Je ne conviens pas" 
+	
+FeatureDlgInstallID50="La Liste d'Installation :"
+FeatureDlgInstallID51 ="Choisissez les composants, le Setup les installera."
+FeatureDlgInstallID711="Vous pouvez choisir plusieurs ou tous les composants pour installer."
+FeatureDlgUnInstallID50=" La Liste pour supprimer :"
+FeatureDlgUnInstallID51="Choisissez les composants, le Setup les supprimera."
+FeatureDlgUnInstallID711="Vous pouvez choisir plusieurs composants ou tous les composants a supprimer.  Si vous choisissez  a supprimer toutes les entites le Progiciel se supprimera de lui-meme."
+
+FeatureDlgID1305="Description" 
+FeatureDlgID1306="L'espace  requis:"
+FeatureDlgID1307="L'espace disponible :" 
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B" 
+		
+SetupErrorDlgID50="L'Assistant a accompli l'installation." 
+SetupErrorDlgID711="L'Assistant avait ete interrompu avant que %P put etre completement installe."
+SetupErrorDlgID712="Le systeme n'a pas ete modifie. Pour installer ce programme plus tard,  executez  l'installation encore une fois. Cliquez sur Finish pour quitter l'Assistant." 
+
+FinishRebootDlgID50="L'Assistant d'Installation est accomplie."
+FinishRebootInstallDlgID711="L'Assistant d'installation a installe %P avec succes . Avant que vous puissiez utiliser le programme, vous devez remettre en marche votre ordinateur."
+FinishRebootUninstallDlgID711="L'Assistant d'installation a supprime %P avec succes. Avant que vous puissiez utiliser le programme, vous devez remettre en marche votre ordinateur."
+FinishRebootDlgID502="Oui, je veux  remettre en marche mon ordinateur maintenant" 
+FinishRebootDlgID503="Non, je remettrai en marche mon ordinateur plus tard"
+FinishRebootDlgID712="Enlevez tous les disques de leurs unites, et appuyez alors sur la touche Finish pour accomplir l'installation." 
+
+FinishDlgID50="L'Assistant a accompli l'installation." 
+
+FinishInstallDlgID711="L'Assistant d'installation a installe %P avec succes. Cliquez sur Finish pour quitter l'Assistant."
+FinishUninstallDlgID711="L'Assistant d'installation a supprime %P avec succes. Cliquez sur Finish pour quitter l'Assistant."
+
+
+AskPathDlgID50="Choisissez l'emplacement de la source"
+AskPathDlgID51="Choisissez le  dossier ou se trouvent les fichiers d'installation."
+AskPathDlgID901="Entrez svp l'emplacement ou se trouvent les fichiers d'installation."
+AskPathDlgID31="Naviguez"
+
+MaintainDlgID50="Bienvenu" 
+MaintainDlgID51="Mettez a jour ou supprimez le programme."
+MaintainDlgID710="Bienvenu au programme de la maintenance du Setup de %P. Ce programme vous laisse modifier l'installation courante. Cliquez sur l'une des options ci-dessous."
+#MaintainDlgID301="Update(&U)" 
+MaintainDlgID302="Remove(&R)"
+MaintainDlgID701="Choisissez les composants  pour la mise a jour ou ajoutez le nouveau composant a installer"
+MaintainDlgID702="Choisissez les composants  a supprimer" 
+
+NextButton="Next(&N) >" 
+CancelButton="Cancel(&C)" 
+BackButton ="< Back(&B)" 
+FinishButton="Finish(&F)"
+
+
+VMSDelComfirm="Etes vous sur de supprimer tous les composants?"
+VMSCancelingDescription="Etes vous sur d'abandonner l'Assistant d'installation?"
+VMSAbort="Abandonnez" 
+VMSErrorCodeMissDLL="Pardon, quelques fichiers importants de ce Progiciel nous manquent. Veuillez encore telecharger le Progiciel  pour entrer en contact avec le fournisseur de service. Appuyez sur la touche OK pour terminer l'Assistant d'installation "
+VMSErrorCodeWithoutLicense="Le fichier de permis a ete suuprime ou retitre, veuillez svp s'assurer que l'utilisation de ce progiciel est couverte par le permis.  Appuyez sur  la touche OK svp pour terminer l'Assistant d'installation." 
+VMSErrorCodeErrorSCF="Pardon, le fichier de configuration de systeme est endommage. Entrez en contact svp avec le fournisseur de service pour  mettre a jour le systeme. Appuyez sur  la touche  OK svp  pour terminer l'Assistant d'installation." 
+VMSCaution="Attention" 
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF="n'a pas complete le processus. Appuyez svp sur OK pour continuer." 
+//please leave a space before this sentense.
+VMSErrorCodeMissBin="failli de telecharger. Appuyez svp sur OK pour continuer." 
+
+VMSErrorCodenotSupportedhw="Pardon, l'assistant d'installation ne peut pas trouver le harware supporte dans votre systeme. Vous devrez verifier votre hardware et essayer encore une fois. Appuyez sur OK svp pour terminer  l'assistant d'installation."
+VMSErrorCodeUnknowOS="Systeme operationnel inconnu"
+VMSFinishErrorMsgofInstall="NOTE: l'un des composants n'a pas ete installe avec succes au systeme. Verfiez le fichier de registre "
+VMSFinishErrorMsgofRemove ="NOTE: l'un des composants n'a pas ete supprime avec succes du systeme. Verfiez le fichier de registre." 
+VMSInstallProgress="J'installe..."
+VMSSpecifyPathAgain="Impossible de trouver les fichier du setup. Specifiez svp le chemin de source."
+VMSStop="Arretez"
+VMSUninstallProgress="Je supprime..."
+VMSWait="Je fais l'analyse a balayage du hardware. Attendez svp, un moment."
+
+TradeMark="VIA "
+GeneralID="Le gestionnaire du dispositif de plate-forme" 
+MaintainDlgID301="Installez/Actualisez(&U)"
+AutoRebootWarning="S'il vous plaît  sauvegardez  vos tâches juste avant de presser le bouton prochain. Les composants énumérés ci-dessous relanceront le système automatiquement sans avis :"
+VMSErrorCodenotSupportedOS="Désolé, l'assistant d'installation ne peut pas trouver le composant approprié. pour la plate-forme actuelle. Appuyez s'il vous plaît BIEN pour terminer l'assistant d'installation."
+
+[Swedish]
+StartCopyDlgInstallID50="Installerar lista på komponenter:"
+StartCopyDlgInstallID51="Granska inställning innan installation av komponenter."
+StartCopyDlgInstallID711="Systemet har tillräcklig information för att påbörja installationen av komponenterna.  Om du vill granska eller ändra några inställningar, klicka på Bakåt  Om du är nöjd med inställningarna, klicka på Nästa för att påbörja installationen av komponenterna."
+StartCopyDlgInstallID701="Aktuell inställning:" 
+ 	
+StartCopyDlgUnInstallID50="Avinstallerar lista på komponenter:"
+StartCopyDlgUnInstallID51="Granska inställning innan komponenter tas bort."   
+StartCopyDlgUnInstallID711="Systemet har tillräcklig information för att påbörja borttagandet av komponenterna.  Om du vill granska eller ändra några inställningar, klicka på Bakåt  Om du är nöjd med inställningarna, klicka på Nästa för att påbörja påbörja borttagandet av komponenterna."
+StartCopyDlgUnInstallID701="Aktuell inställning:" 
+
+StartCopyDlgStatusInstallID50=" Installationsstatus:"
+StartCopyDlgStatusInstallID51 = "Följande information visar installtionsstatus."  
+StartCopyDlgStatusInstallID711=  "Följande information kommer att tala om för dig om komponenterna installerats korrekt."   
+StartCopyDlgStatusInstallID701=  "Aktuellt resultat:"   
+				
+StartCopyDlgStatusUnInstallID50 =" Borttagningsstatus:"
+StartCopyDlgStatusUnInstallID51  =  "Följande information visar borttagningsstatus."  
+StartCopyDlgStatusUnInstallID711="Följande information kommer att tala om för dig om komponenterna tagits bort korrekt."   
+StartCopyDlgStatusUnInstallID701 = "Aktuellt resultat:" 
+
+WelcomeDlgID50="Välkommen till installationsprogrammet för %P"
+WelcomeDlgID710="Installationsprogrammet kommer att installera %P på din dator.  För att fortsätta, klicka på Nästa."
+
+LicenseDlgID50="Licensavtal"
+LicenseDlgID51="Vänligen läs igenom följande licensavtal noga."               
+LicenseDlgID711="Vänligen tryck på PAGE DOWN tangenten för att se resten av avtalet."	
+LicenseDlgID502="Jag accepterar"	
+LicenseDlgID503="Jag accepterar ej"
+	
+FeatureDlgInstallID50=" Installationslista:"	
+FeatureDlgInstallID51 ="Välj komponenter, för att systemet skall installera dem."	
+FeatureDlgInstallID711="Du kan välja att installera flera eller alla komponenter."
+FeatureDlgUnInstallID50=" Ta bort lista:"		
+FeatureDlgUnInstallID51="Välj komponenter, för att systemet skall ta bort dem."			
+FeatureDlgUnInstallID711= "Du kan välja att ta bort flera eller alla komponenter." Om du väljer samtliga komponenter kommer paketet att avinstallera sig själv."	   
+
+FeatureDlgID1305="Beskrivning"		                             
+FeatureDlgID1306="Utrymme som krävs:"
+FeatureDlgID1307="Tillgängligt utrymme:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Installationen slutfördes."
+SetupErrorDlgID711="Installationen avbröts innan %P kunde installeras ordentligt."	
+SetupErrorDlgID712="Systemet har inte ändrats. För att installera detta program vid ett senare tillfälle, kör installationen igen . Klicka på Avsluta för att lämna installationen." 
+
+FinishRebootDlgID50="Installationen slutfördes."
+FinishRebootInstallDlgID711="Installationsprogrammet har korrekt installerat %P.  Innan du kan använda programmet måste du starta om datorn."    
+FinishRebootUninstallDlgID711="Installationsprogrammet har korrekt tagit bort %P.  Innan du kan använda programmet måste du starta om datorn."
+FinishRebootDlgID502="Ja, jag vill starta om datorn nu. " 
+FinishRebootDlgID503="Nej, jag vill starta om datorn senare. " 
+FinishRebootDlgID712="Ta bort alla disketter ur drivrutinerna och klicka på Avsluta för att slutföra installationen."
+
+FinishDlgID50="Installationen slutfördes"
+
+FinishInstallDlgID711="Installationsprogrammet har installerat %P.  Klicka på Avsluta för att lämna programmet."	
+FinishUninstallDlgID711="Installationsprogrammet har tagit bort %P.  Klicka på Avsluta för att lämna programmet."
+
+
+AskPathDlgID50="Välj placering"
+AskPathDlgID51="Välj mapp för installationsfilen."
+AskPathDlgID901="Välj plats för installationsfilen."
+AskPathDlgID31="Bläddra"
+
+MaintainDlgID50="Välkommen"
+MaintainDlgID51="Uppdatera eller ta bort programmet"
+MaintainDlgID710="Välkommen till installationen för %P Underhållsprogram. Detta program gör att du kan ändra nuvarande installation. Klicka på ett av alternativen nedan."
+#MaintainDlgID301="Uppdatera(&U)"
+MaintainDlgID302="Ta bort(&R)"
+MaintainDlgID701="Välj de komponenter du vill uppdatera eller lägg till nya komponenter för installation"
+MaintainDlgID702="Välj komponenter att ta bort"	
+
+NextButton="Nästa(&N) >"
+CancelButton="Avbryt(&C)" 
+BackButton ="< Backa(&B)"
+FinishButton="Avsluta(&F)"	                
+
+
+VMSDelComfirm="Är du säker på att du vill ta bort alla komponenter?"
+VMSCancelingDescription="Är du säker på att du vill avbryta installationen?"   
+VMSAbort="Avbryt"
+VMSErrorCodeMissDLL="Tyvärr, några viktiga filer i detta paket saknas. Vänligen ladda ner paketet igen för kontakt med serviceleverantören. Tryck på OK för att avsluta installationen. "
+VMSErrorCodeWithoutLicense="Licensfilen togs bort eller döptes om, vänligen se till att användningen av denna programvara täcks av en licens. Tryck på OK för att avsluta installationen."
+VMSErrorCodeErrorSCF="Tyvärr, systemkonfigurationsfilen är trasig. Vänligen kontakta serviceleverantören för att uppdatera den. Tryck på OK för att avsluta installationen."
+VMSCaution="Varning"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" misslyckades med att slutföra processen. Vänligen tryck på OK för att fortsätta."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" laddades inte. Vänligen tryck på OK för att fortsätta."
+
+VMSErrorCodenotSupportedhw="Tyvärr, installationsprogrammet kan inte hitta den tillhörande hårdvaran i ditt system. Du bör kontrollera din hårdvara och försöka igen. Tryck på OK för att avsluta installationen."	
+VMSErrorCodeUnknowOS="Okänd OS Version"
+VMSFinishErrorMsgofInstall="OBS: En av komponenterna installerades inte korrekt i systemet. Kontrollera loggfilen."
+VMSFinishErrorMsgofRemove ="OBS: En av komponenterna avlägsnades inte korrekt från systemet. Kontrollera loggfilen."
+VMSInstallProgress=" Installerar..."
+VMSSpecifyPathAgain="Kan inte hitta installationsfilerna. Vänligen ange källsökvägen."
+VMSStop="Stopp";			
+VMSUninstallProgress=" Tar bort..."
+VMSWait="Skannar hårdvaran. Vänligen vänta ett ögonblick."
+
+TradeMark="VIA "
+GeneralID="Plattform för enhetshanterare"
+MaintainDlgID301="Installera/Uppdatera(&U)"
+AutoRebootWarning="Vänligen spara dina uppgifter omedelbart innan du trycker på nästa knapp. De komponenter som listats nedan kommer att starta om systemet automatikst utan varsel:"
+VMSErrorCodenotSupportedOS="Beklagar, installationsguiden kan inte hitta rätt komponent för aktuell plattform. Vänligen tryck OK för att avsluta installationsguiden."
+
+[Spanish]
+
+StartCopyDlgInstallID50="Instalando lista de componentes:"
+StartCopyDlgInstallID51="Revise la configuración antes de instalar componentes."
+StartCopyDlgInstallID711="Configuración dispone de información suficiente para comenzar a instalar componentes.  Si desea revisar o cambiar algún parámetros, pulse el botón Atrás (Back).  Si está satisfecho con la configuración, haga clic en Siguiente (Next) para comenzar a instalar los componentes."
+StartCopyDlgInstallID701="Configuración actual:" 
+ 	
+StartCopyDlgUnInstallID50="Desinstalando lista de componentes:"
+StartCopyDlgUnInstallID51= "Revise la configuración antes de suprimir componentes."  
+StartCopyDlgUnInstallID711="Configuración dispone de información suficiente para comenzar a suprimir componentes.  Si desea revisar o cambiar algún parámetros, pulse el botón Atrás (Back).  Si está satisfecho con la configuración, haga clic en Siguiente (Next) para comenzar a suprimir los componentes."
+StartCopyDlgUnInstallID701="Configuración actual:" 
+
+StartCopyDlgStatusInstallID50=" Estado de la instalación:"
+StartCopyDlgStatusInstallID51 = " La información siguiente muestra el estado de la instalación."  
+StartCopyDlgStatusInstallID711=  " La información siguiente le indicará si se han instalado los componentes con éxito."   
+StartCopyDlgStatusInstallID701=  "Resultado actual:"   
+				
+StartCopyDlgStatusUnInstallID50 =" Estado de la supresión:"
+StartCopyDlgStatusUnInstallID51  =  " La información siguiente muestra el estado de la supresión."  
+StartCopyDlgStatusUnInstallID711=" La información siguiente le indicará si se han suprimido los componentes con éxito."   
+StartCopyDlgStatusUnInstallID701 = "Resultado actual:" 
+
+WelcomeDlgID50="Bienvenido al Asistente para la instalación de %P"
+WelcomeDlgID710="El Asistente para la instalación instalará %P en su equipo.  Para continuar, haga clic en Siguiente."
+
+LicenseDlgID50="Contrato de licencia"
+LicenseDlgID51="Lea detenidamente el contrato de licencia siguiente."               
+LicenseDlgID711="Pulse la tecla AV PÁG para ver el resto del contrato."	
+LicenseDlgID502="Acepto"	
+LicenseDlgID503="No acepto" 
+	
+FeatureDlgInstallID50="Lista de instalación:"	
+FeatureDlgInstallID51 ="Para elegir los componentes, Configuración los instalará."	
+FeatureDlgInstallID711="Puede seleccionar varios o todos los componentes para su instalación."
+FeatureDlgUnInstallID50="Lista de supresión:"		
+FeatureDlgUnInstallID51="Para elegir los componentes, Configuración los suprimirá."			
+FeatureDlgUnInstallID711= "Puede seleccionar varios o todos los componentes para su supresión." Si selecciona suprimir todas las funciones, el Paquete se desinstalará completamente."	   
+
+FeatureDlgID1305="Descripción"		                             
+FeatureDlgID1306="Espacio requerido:"
+FeatureDlgID1307="Espacio disponible:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Asistente para la instalación completado."
+SetupErrorDlgID711="Se interrumpió el asistente antes de que %P pudiera instalarse completamente."	
+SetupErrorDlgID712="El sistema no se ha modificado. Para instalar este programa más tarde, ejecute de nuevo la instalación. Haga clic en Terminar para salir del asistente." 
+
+FinishRebootDlgID50="Asistente para la instalación completado."
+FinishRebootInstallDlgID711="El asistente de instalación ha instalado %P con éxito. Antes de poder usar el programa, debe reiniciar su equipo."    
+FinishRebootUninstallDlgID711="El asistente de instalación ha suprimido %P con éxito. Antes de poder usar el programa, debe reiniciar su equipo."
+FinishRebootDlgID502="Sí, deseo reiniciar mi equipo ahora. " 
+FinishRebootDlgID503="No, I reiniciaré mi equipo más tarde. " 
+FinishRebootDlgID712="Retire los discos de las unidades y, a continuación, haga clic en Terminar para completar la configuración."
+
+FinishDlgID50="Asistente para la instalación completado"
+
+FinishInstallDlgID711="El Asistente para la instalación ha instalado %P con éxito. Haga clic en Terminar para salir del asistente."	
+FinishUninstallDlgID711="El Asistente para la instalación ha suprimido %P con éxito. Haga clic en Terminar para salir del asistente."
+
+
+AskPathDlgID50="Elija la Ubicación de la fuente"
+AskPathDlgID51="Seleccione la carpeta en la que están ubicados los archivos de configuración."
+AskPathDlgID901="Introduzca el lugar donde están ubicados los archivos de configuración."
+AskPathDlgID31="Examinar" 
+
+MaintainDlgID50="Bienvenido"
+MaintainDlgID51="Actualizar o quitar el programa."
+MaintainDlgID710="Bienvenido al programa de Mantenimiento de configuración de %P. Este programa le permite modificar la instalación actual. Haga clic en una de las opciones siguientes."
+#MaintainDlgID301="Actualizar(&U)"
+MaintainDlgID302="Suprimir(&R)"
+MaintainDlgID701="Seleccione los componentes que desea actualizar o agregue un nuevo componente para instalarlo "         
+MaintainDlgID702="Selecciones los componentes que desea suprimir"	
+
+NextButton="Siguiente(&N) >"
+CancelButton="Cancelar(&C)" 
+BackButton ="< Atrás(&B)"
+FinishButton="Terminar(&F)"	                
+
+
+VMSDelComfirm="¿Seguro que desea suprimir todos los componentes?"
+VMSCancelingDescription="¿Seguro que desea abortar el asistente para la instalación?"   
+VMSAbort="Abortar"
+VMSErrorCodeMissDLL="Faltan algunos archivos importantes de este paquete. Descargue de nuevo el paquete para ponerse en contacto el proveedor del servicio. Pulse Aceptar (OK) para terminar con el asistente de instalación. "
+VMSErrorCodeWithoutLicense="Se suprimió o renombró el archivo de licencia, asegúrese de que la utilización de este paquete de software queda cubierto por la licencia. Pulse Aceptar (OK) para terminar con el asistente de instalación."
+VMSErrorCodeErrorSCF="La configuración del sistema está rota. Póngase en contacto con el proveedor del servicio para actualizarlo. Pulse Aceptar (OK) para terminar con el asistente de instalación."
+VMSCaution="Precaución"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" no pudo completar el proceso. Pulse Aceptar (OK) para continuar."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" no pudo cargarse. Pulse Aceptar (OK) para continuar."
+
+VMSErrorCodenotSupportedhw="El asistente de instalación no puede encontrar el hardware admitido en su sistema. Debería comprobar su hardware y volver a intentarlo. Pulse Aceptar (OK) para terminar con el asistente de instalación."	
+VMSErrorCodeUnknowOS="Versión desconocida del sistema operativo"
+VMSFinishErrorMsgofInstall="NOTA: Uno de los componentes no está instalado con éxito en el sistema. Compruebe el archivo de registro."
+VMSFinishErrorMsgofRemove ="NOTA: Uno de los componentes no se ha suprimido con éxito del sistema. Compruebe el archivo de registro."
+VMSInstallProgress="Instalación ..."
+VMSSpecifyPathAgain="No pueden encontrarse los archivos de configuración. Especifique la ruta de acceso a la fuente."
+VMSStop="Detener";				
+VMSUninstallProgress="Suprimiendo ..."
+VMSWait="Explorando el hardware. Espere un segundo."
+
+TradeMark="VIA "
+GeneralID="Administrador de dispositivos de plataforma"
+MaintainDlgID301="Instalar/Actualizar(&U)"
+AutoRebootWarning="Guarde sus tareas inmediatamente antes de pulsar el botón Siguiente. El(los) componente(s) enumerados a continuación reiniciarán el sistema automáticamente sin notificación:"
+VMSErrorCodenotSupportedOS="El asistente para la instalación no puede encontrar el componente adecuado para la plataforma actual. Pulse Aceptar para finalizar el asistente para la instalación."
+
+[Catalan]
+StartCopyDlgInstallID50="Llista d'instal·lació de components:"
+StartCopyDlgInstallID51="Reviseu la configuració abans d'instal·lar els components."
+StartCopyDlgInstallID711="El programa d'instal·lació té prou informació per començar a instal·lar els components. Si voleu revisar o canviar cap opció, feu clic a Anterior. Si esteu d'acord amb la configuració, feu clic a Següent per començar a instal·lar els components."
+StartCopyDlgInstallID701="Configuració actual:" 
+ 	
+StartCopyDlgUnInstallID50="Llista de desinstal·lació de components:"
+StartCopyDlgUnInstallID51="Reviseu la configuració abans de desinstal·lar els components."  
+StartCopyDlgUnInstallID711="El programa d'instal·lació té prou informació per començar a desinstal·lar els components. Si voleu revisar o canviar cap opció, feu clic a Anterior. Si esteu d'acord amb la configuració, feu clic a Següent per començar a desinstal·lar els components."
+StartCopyDlgUnInstallID701="Configuració actual:" 
+
+StartCopyDlgStatusInstallID50=" Estat de la instal·lació:"
+StartCopyDlgStatusInstallID51 =" La informació següent mostra l'estat de la instal·lació."  
+StartCopyDlgStatusInstallID711=" La informació següent us indicarà si els components s'han instal·lat correctament."   
+StartCopyDlgStatusInstallID701=" Resultat actual:"   
+				
+StartCopyDlgStatusUnInstallID50 =" Estat de la desinstal·lació:"
+StartCopyDlgStatusUnInstallID51 =" La informació següent mostra l'estat de la desinstal·lació."  
+StartCopyDlgStatusUnInstallID711=" La informació següent us indicarà si els components s'han desinstal·lat correctament."   
+StartCopyDlgStatusUnInstallID701 =" Resultat actual:" 
+
+WelcomeDlgID50="Benvingut a l'auxiliar per a la instal·lació de %P"
+WelcomeDlgID710="L'auxiliar per a la instal·lació instal·larà %P al vostre ordinador. Per continuar, feu clic a Següent."
+
+LicenseDlgID50="Contracte de llicència"
+LicenseDlgID51="Si us plau, llegiu detingudament el següent contracte de llicència."           
+LicenseDlgID711="Premeu la tecla Av Pàg si voleu veure la resta del contracte."	
+LicenseDlgID502="Accepto"	
+LicenseDlgID503="No accepto" 
+	
+FeatureDlgInstallID50="Llista d'instal·lació:"	
+FeatureDlgInstallID51 ="El programa d'instal·lació instal·larà els components que hagueu seleccionat."	
+FeatureDlgInstallID711="Podeu decidir instal·lar alguns o tots els components disponibles."
+FeatureDlgUnInstallID50="Llista de desinstal·lació:"		
+FeatureDlgUnInstallID51="El programa d'instal·lació desinstal·larà els components que hagueu seleccionat."		
+FeatureDlgUnInstallID711="Podeu decidir desinstal·lar alguns o tots els components disponibles." Si seleccioneu tots els components, es desinstal·larà tot el paquet."	   
+
+FeatureDlgID1305="Descripció"		                             
+FeatureDlgID1306="Espai necessari:"
+FeatureDlgID1307="Espai disponible:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="L'auxiliar per a la instal·lació ha finalitzat."
+SetupErrorDlgID711="S'ha interromput l'auxiliar abans de poder instal·lar %P completament."	
+SetupErrorDlgID712="No s'ha realitzat cap modificació al sistema. Per instal·lar aquest programa en un altre moment, torneu a executar el programa d'instal·lació. Feu clic a Finalitza per sortir de l'auxiliar." 
+
+FinishRebootDlgID50="L'auxiliar per a la instal·lació ha finalitzat."
+FinishRebootInstallDlgID711="L'auxiliar per a la instal·lació ha instal·lat %P correctament. Abans de poder fer servir el programa, haureu de reiniciar l'ordinador."    
+FinishRebootUninstallDlgID711="L'auxiliar per a la instal·lació ha desinstal·lat %P correctament. Abans de poder fer servir el programa, haureu de reiniciar l'ordinador."
+FinishRebootDlgID502="Sí, vull reiniciar l'ordinador ara. " 
+FinishRebootDlgID503="No, reiniciaré l'ordinador més tard. " 
+FinishRebootDlgID712="Extraieu tots els discs de les disqueteres i feu clic a Finalitza per completar la instal·lació."
+
+FinishDlgID50="L'auxiliar per a la instal·lació ha finalitzat" 
+
+FinishInstallDlgID711="L'auxiliar per a la instal·lació ha instal·lat %P correctament. Feu clic a Finalitza per sortir de l'auxiliar."	
+FinishUninstallDlgID711="L'auxiliar per a la instal·lació ha desinstal·lat %P correctament. Feu clic a Finalitza per sortir de l'auxiliar."
+
+
+AskPathDlgID50="Seleccioneu la ubicació d'origen"
+AskPathDlgID51="Seleccioneu la carpeta on es troben els fitxers d'instal·lació."
+AskPathDlgID901="Introduïu la ubicació on es troben els fitxers d'instal·lació."
+AskPathDlgID31="Navega" 
+
+MaintainDlgID50="Benvingut"
+MaintainDlgID51="Actualitzeu o desinstal·leu el programa."
+MaintainDlgID710="Benvingut al programa per al manteniment de la instal·lació de %P. Aquest programa us permet modificar la instal·lació actual. Feu clic en una de les opcions següents."
+#MaintainDlgID301="Actualitza(&U)"
+MaintainDlgID302="Desinstal·la(&R)"
+MaintainDlgID701="Seleccioneu els components que vulgueu actualitzar o afegiu el component nou que vulgueu instal·lar "         
+MaintainDlgID702="Seleccioneu els components que vulgueu desinstal·lar"	
+
+NextButton="Següent(&N) >"
+CancelButton="Cancel·la(&C)" 
+BackButton ="< Anterior(&B)"
+FinishButton="Finalitza(&F)"	                
+
+
+VMSDelComfirm="Esteu segur que voleu desinstal·lar tots els components?"
+VMSCancelingDescription="Esteu segur que voleu aturar l'auxiliar per a la instal·lació?"   
+VMSAbort="Avorta"
+VMSErrorCodeMissDLL="No es troben alguns fitxers importants del paquet. Si us plau, poseu-vos en contacte amb el proveïdor del servei per tornar a baixar el paquet. Feu clic a D'acord per finalitzar l'auxiliar per a la instal·lació. "
+VMSErrorCodeWithoutLicense="S'ha suprimit el fitxer de la llicència, o ha canviat de nom. Comproveu que l'ús d'aquest software es correspon amb els termes de la seva llicència. Feu clic a D'acord per finalitzar l'auxiliar per a la instal·lació."
+VMSErrorCodeErrorSCF="El fitxer de configuració del sistema s'ha corromput. Poseu-vos en contacte amb el proveïdor del servei per actualitzar-lo. Feu clic a D'acord per finalitzar l'auxiliar per a la instal·lació."
+VMSCaution="Atenció"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" no ha pogut completar el procés. Premeu D'acord per continuar."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" no s'ha pogut carregar. Premeu D'acord per continuar."
+
+VMSErrorCodenotSupportedhw="L'auxiliar per a la instal·lació no ha pogut trobar el hardware compatible en el vostre sistema. Comproveu el vostre hardware i torneu a provar-ho. Feu clic a D'acord per finalitzar l'auxiliar per a la instal·lació."	
+VMSErrorCodeUnknowOS="Versió de SO desconeguda"
+VMSFinishErrorMsgofInstall="NOTA: Un dels components no s'ha pogut instal·lar correctament en el sistema. Reviseu el fitxer de registre."
+VMSFinishErrorMsgofRemove ="NOTA: Un dels components no s'ha pogut desinstal·lar correctament del sistema. Reviseu el fitxer de registre."
+VMSInstallProgress="S'està instal·lant..."
+VMSSpecifyPathAgain="No s'han pogut trobar els fitxers d'instal·lació. Indiqueu la ruta d'origen."
+VMSStop="Atura"
+VMSUninstallProgress="S'està desinstal·lant..."
+VMSWait="S'està analitzant el hardware. Si us plau, espereu un moment."
+
+TradeMark="VIA "
+GeneralID="Platform Device Manager"
+MaintainDlgID301="Install/Update(&U)"
+AutoRebootWarning="Please save your tasks immediately before press next button. The component(s) listed below will reboot system automatically without notification:"
+VMSErrorCodenotSupportedOS="Sorry, the install wizard can't find the proper component for the current platform. Please press OK to terminate the install wizard."
+
+[Greek]
+StartCopyDlgInstallID50="ÅãêáôÜóôáóç ëßóôáò åîáñôçìÜôùí:"
+StartCopyDlgInstallID51="Åðéóêüðçóç ñõèìßóåùí ðñéí ôçí åãêáôÜóôáóç ëßóôáò åîáñôçìÜôùí ."
+StartCopyDlgInstallID711="Ôï Setup äéáèÝôåé ôéò áðáñáßôçôåò ðëçñïöïñßåò ãéá íá îåêéíÞóåé ôçí åãêáôÜóôáóç ôùí åîáñôçìÜôùí.  Áí èÝëåôå íá êÜíåôå åðéóêüðçóç Þ íá áëëÜîåôå êÜðïéá ñýèìéóç ðéÝóôå Ðßóù (Back). Áí åßóôå éêáíïðïéçìÝíïé ìå ôéò ñõèìßóåéò, ðéÝóôå Åðüìåíï (Next) ãéá íá îåêéíÞóåé ôçí åãêáôÜóôáóç ôùí åîáñôçìÜôùí". 
+StartCopyDlgInstallID701="Ðáñïýóåò ñõèìßóåéò:" 
+ 	
+StartCopyDlgUnInstallID50=" ÁðåãêáôÜóôáóç ëßóôáò åîáñôçìÜôùí:"
+StartCopyDlgUnInstallID51=" Åðéóêüðçóç ñõèìßóåùí ðñéí ôçí áðåãêáôÜóôáóç åîáñôçìÜôùí."  
+StartCopyDlgUnInstallID711="Ôï Setup äéáèÝôåé ôéò áðáñáßôçôåò ðëçñïöïñßåò ãéá íá îåêéíÞóåé ôçí áðåãêáôÜóôáóç ôùí åîáñôçìÜôùí.  Áí èÝëåôå íá êÜíåôå åðéóêüðçóç Þ íá áëëÜîåôå êÜðïéá ñýèìéóç ðéÝóôå Ðßóù (Back). Áí åßóôå éêáíïðïéçìÝíïé ìå ôéò ñõèìßóåéò, ðéÝóôå Åðüìåíï (Next) ãéá íá îåêéíÞóåé ôçí áðåãêáôÜóôáóç ôùí åîáñôçìÜôùí"
+StartCopyDlgUnInstallID701="Ðáñïýóåò ñõèìßóåéò:" 
+
+StartCopyDlgStatusInstallID50=" ÊáôÜóôáóç åãêáôÜóôáóçò:"
+StartCopyDlgStatusInstallID51 =" Ðëçñïöïñßåò ðñïâïëÞò êáôÜóôáóçò åãêáôÜóôáóçò."  
+StartCopyDlgStatusInstallID711=" Ïé ðáñáêÜôù ðëçñïöïñßåò óáò äåß÷íïõí áí ç åãêáôÜóôáóç ôùí åîáñôçìÜôùí ðñáãìáôïðïéÞèçêå åðéôõ÷þò."   
+StartCopyDlgStatusInstallID701=" Ðáñüí áðïôÝëåóìá:"   
+				
+StartCopyDlgStatusUnInstallID50 ="ÊáôÜóôáóç áðåãêáôÜóôáóçò:"
+StartCopyDlgStatusUnInstallID51  =" Ðëçñïöïñßåò ðñïâïëÞò êáôÜóôáóçò áðåãêáôÜóôáóçò."  
+StartCopyDlgStatusUnInstallID711=" Ïé ðáñáêÜôù ðëçñïöïñßåò óáò äåß÷íïõí áí ç áðåãêáôÜóôáóç ôùí åîáñôçìÜôùí ðñáãìáôïðïéÞèçêå åðéôõ÷þò."   
+StartCopyDlgStatusUnInstallID701 =" Ðáñüí áðïôÝëåóìá:"   
+
+WelcomeDlgID50="Êáëþò ïñßóáôå óôïí Ïäçãü ÅãêáôÜóôáóçò ôïõ %P"
+WelcomeDlgID710="Ï Ïäçãüò åãêáôÜóôáóçò èá åãêáôáóôÞóåé óôïí õðïëïãéóôÞ óáò ôï %P . Ãéá íá óõíå÷ßóåôå ðéÝóôå Åðüìåíï(Next)."
+
+LicenseDlgID50="¢äåéá ÷ñÞóçò"
+LicenseDlgID51="Ðáñáêáëïýìå äéáâÜóôå ðñïóåêôéêÜ ôçí ðáñáêÜôù Üäåéá ÷ñÞóçò."           
+LicenseDlgID711="ÐéÝóôå ôï ðëÞêôñï PAGE DOWN ãéá íá äåßôå ôï õðüëïéðï ôïõ êåéìÝíïõ ôçò Üäåéáò ÷ñÞóçò."	
+LicenseDlgID502="Óõìöùíþ"	
+LicenseDlgID503="Äéáöùíþ" 
+	
+FeatureDlgInstallID50="Ëßóôá ÅãêáôÜóôáóçò:"	
+FeatureDlgInstallID51 ="ÅðéëÝîôå ôá åîáñôÞìáôá ðïõ èá åãêáôáóôÞóåé ôï Setup."	
+FeatureDlgInstallID711="Ìðïñåßôå íá åðéëÝîåôå üëá Þ êÜðïéá áðü ôá åîáñôÞìáôá ðïõ èá åãêáôáóôáèïýí."
+FeatureDlgUnInstallID50="Ëßóôá áðåãêáôÜóôáóçò:"	
+FeatureDlgUnInstallID51="ÅðéëÝîôå ôá åîáñôÞìáôá ðïõ èá áðåãêáôáóôÞóåé ôï Setup."	
+FeatureDlgUnInstallID711="Ìðïñåßôå íá åðéëÝîåôå üëá Þ êÜðïéá áðü ôá åîáñôÞìáôá ðïõ èá áðåãêáôáóôáèïýí."
+
+FeatureDlgID1305="ÐåñéãñáöÞ"		                             
+FeatureDlgID1306="Áðáéôïýìåíïò ÷þñïò:"
+FeatureDlgID1307="ÄéáèÝóéìïò ÷þñïò:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Ç ëåéôïõñãßá ôïõ Ïäçãïý ÅãêáôÜóôáóçò ïëïêëçñþèçêå."
+SetupErrorDlgID711="Ç ëåéôïõñãßá ôïõ Ïäçãïý ÅãêáôÜóôáóçò äéáêüðçêå ðñéí ïëïêëçñùèåß ç åãêáôÜóôáóç ôïõ  %P."	
+SetupErrorDlgID712="Ôï óýóôçìá äåí Ý÷åé ìåôáâëçèåß. Ãéá íá åãêáôáóôáèåß ôï ðñüãñáììá áõôü áñãüôåñá, ôñÝîôå îáíÜ ôçí åãêáôÜóôáóÞ ôïõ. ÐéÝóôå ÔÝëïò(Finish) ãéá íá âãåßôå áðü ôïí ïäçãü." 
+
+FinishRebootDlgID50="Ç ëåéôïõñãßá ôïõ Ïäçãïý ÅãêáôÜóôáóçò ïëïêëçñþèçêå."
+FinishRebootInstallDlgID711="Ï Ïäçãüò ÅãêáôÜóôáóçò åãêáôáóôÜèçêå åðéôõ÷þò P%. Ðñéí ÷ñçóéìïðïéÞóåôå ôï ðñüãñáììá èá ðñÝðåé íá åðáíåêêéíÞóåôå ôïí õðïëïãéóôÞ óáò."
+FinishRebootUninstallDlgID711="Ï Ïäçãüò ÁðåãêáôÜóôáóçò åãêáôáóôÜèçêå åðéôõ÷þò P%. Ðñéí ÷ñçóéìïðïéÞóåôå ôï ðñüãñáììá èá ðñÝðåé íá åðáíåêêéíÞóåôå ôïí õðïëïãéóôÞ óáò."
+FinishRebootDlgID502="Íáé, èÝëù íá ãßíåé åðáíåêêßíçóç ôïõ õðïëïãéóôÞ ôþñá. " 
+FinishRebootDlgID503="¼÷é, èá åðáíåêêéíÞóù ôïí õðïëïãéóôÞ áñãüôåñá. " 
+FinishRebootDlgID712="ÁöáéñÝóôå ôõ÷üí äßóêïõò áðü ôïõò ïäçãïýò ôïõò êáé ðéÝóôå ÔÝëïò(Finish) ãéá íá ïëïêëçñùèåß ç åãêáôÜóôáóç."
+
+FinishDlgID50=" Ç ëåéôïõñãßá ôïõ Ïäçãïý ÅãêáôÜóôáóçò ïëïêëçñþèçêå" 
+
+FinishInstallDlgID711=" Ï Ïäçãüò ÅãêáôÜóôáóçò åãêáôÝóôçóå ôï %P åðéôõ÷þò. ÐéÝóôå ÔÝëïò(Finish) ãéá íá âãåßôå áðü ôïí ïäçãü åãêáôÜóôáóçò."	
+FinishUninstallDlgID711=" Ï Ïäçãüò ÅãêáôÜóôáóçò åãêáôÝóôçóå ôï %P åðéôõ÷þò. ÐéÝóôå ÔÝëïò(Finish) ãéá íá âãåßôå áðü ôïí ïäçãü åãêáôÜóôáóçò."	
+
+
+AskPathDlgID50="ÅðéëÝîôå ÈÝóç ÐçãÞò"
+AskPathDlgID51="ÅðéëÝîôå öÜêåëï ãéá ôá áñ÷åßá åãêáôÜóôáóçò."
+AskPathDlgID901="Ðáñáêáëïýìå åéóÜãåôå ôç èÝóç üðïõ èá ôïðïèåôçèïýí ôá áñ÷åßá åãêáôÜóôáóçò."
+AskPathDlgID31="ÁíáæÞôçóç" 
+
+MaintainDlgID50="Êáëþò Ïñßóáôå"
+MaintainDlgID51="Áíáíåþóôå Þ áöáéñÝóôå ôï ðñüãñáììá."
+MaintainDlgID710="Êáëþò ïñßóáôå óôï ðñüãñáììá Setup Maintenance ôïõ %P. Ôï ðñüãñáììá óáò åðéôñÝðåé íá ôñïðïðïéÞóåôå ôçí ðáñïýóá åãêáôÜóôáóç. ÐéÝóôå ìéá áðü ôéò ðáñáêÜôù åðéëïãÝò."
+#MaintainDlgID301="ÁíáíÝùóç(&U)"
+MaintainDlgID302="Áöáßñåóç(&R)"
+MaintainDlgID701="ÅðéëÝîôå ôá åîáñôÞìáôá ðïõ èá áíáíåùèïýí Þ ðñïóèÝóôå íÝá åîáñôÞìáôá ðñïò åãêáôÜóôáóç."         
+MaintainDlgID702="ÅðéëÝîôå ôá åîáñôÞìáôá ðïõ èá åãêáôáóôáèïýí"	
+
+NextButton="Åðüìåíï(&N) >"
+CancelButton="Áêýñùóç(&C)" 
+BackButton ="< Ðßóù(&B)"
+FinishButton="ÔÝëïò(&F)"	                
+
+
+VMSDelComfirm="Åßóôå óßãïõñïé üôé èÝëåôå íá áöáéñÝóåôå üëá ôá åîáñôÞìáôá; "
+VMSCancelingDescription="Åßóôå óßãïõñïé ðùò èÝëåôå íá äéáêüøåôå ôïí ïäçãü åãêáôÜóôáóçò; "   
+VMSAbort="ÄéáêïðÞ"
+VMSErrorCodeMissDLL="Óõãíþìç, êÜðïéá óçìáíôéêÜ áñ÷åßá ôïõ ðáêÝôïõ áõôïý áðïõóéÜæïõí. Ðáñáêáëþ êáôåâÜóôå ôï ðáêÝôï îáíÜ êáé åðéêïéíùíÞóåôå ìå ôïí ðáñï÷Ýá ôå÷íéêÞò õðïóôÞñéîçò. Ðáñáêáëþ ðéÝóôå ÅíôÜîåé ãéá íá ôåñìáôéóôåß ï ïäçãüò åãêáôÜóôáóçò. "
+VMSErrorCodeWithoutLicense="Ôï áñ÷åßï Üäåéáò Ý÷åé áöáéñåèåß Þ ìåôïíïìáóôåß. Âåâáéùèåßôå üôé ç ÷ñÞóç áõôïý ôïõ ðáêÝôïõ ëïãéóìéêïý êáëýðôåôáé áðü ôçí Üäåéá. ÐéÝóôå ÅíôÜîåé ãéá íá ôåñìáôéóôåß ï ïäçãüò åãêáôÜóôáóçò."
+VMSErrorCodeErrorSCF="Óõãíþìç, ôï áñ÷åßï äéáìüñöùóçò ôïõ óõóôÞìáôïò åßíáé óðáóìÝíï. åðéêïéíùíÞóåôå ìå ôïí ðáñï÷Ýá ôå÷íéêÞò õðïóôÞñéîçò ãéá íá ôï áíáíåþóåôå. ÐéÝóôå ÅíôÜîåé ãéá íá ôåñìáôéóôåß ï ïäçãüò åãêáôÜóôáóçò."
+VMSCaution="Ðñïóï÷Þ"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" áðïôõ÷ßá ïëïêëÞñùóçò ôçò äéáäéêáóßáò. ÐéÝóôå ÅíôÜîåé ãéá íá óõíå÷ßóåôå."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" áðïôõ÷ßá äéáäéêáóßáò öüñôùóçò. ÐéÝóôå ÅíôÜîåé ãéá íá óõíå÷ßóåôå."
+
+VMSErrorCodenotSupportedhw="Óõãíþìç, ï ïäçãüò åãêáôÜóôáóçò äå ìðïñåß íá âñåé ôéò õðïóôçñéæüìåíåò óõóêåõÝò óôï óýóôçìÜ óáò. Èá ðñÝðåé íá åëÝãîåôå ôéò óõóêåõÝò óôï óýóôçìÜ óáò êáé íá îáíáðñïóðáèÞóåôå. ÐéÝóôå ÅíôÜîåé ãéá íá ôåñìáôéóôåß ï ïäçãüò åãêáôÜóôáóçò."
+VMSErrorCodeUnknowOS="¢ãíùóôç Ýêäïóç OS "
+VMSFinishErrorMsgofInstall="ÓÇÌÅÉÙÓÇ: ¸íá áðü ôá åîáñôÞìáôá äåí Ý÷åé åãêáôáóôáèåß åðéôõ÷þò óôï óýóôçìá. ÅëÝãîôå ôï áñ÷åßï åíåñãåéþí."
+VMSFinishErrorMsgofRemove ="ÓÇÌÅÉÙÓÇ: ¸íá áðü ôá åîáñôÞìáôá äåí Ý÷åé åãêáôáóôáèåß åðéôõ÷þò óôï óýóôçìá. ÅëÝãîôå ôï áñ÷åßï åíåñãåéþí."
+VMSInstallProgress="Ãßíåôáé åãêáôÜóôáóç..."
+VMSSpecifyPathAgain="Ôá áñ÷åßá åãêáôÜóôáóçò äå ìðïñïýí íá âñåèïýí. Ðáñáêáëïýìå ïñßóôå ôç äéáäñïìÞ èÝóçò."
+VMSStop="Ðáýóç";			
+VMSUninstallProgress="Ãßíåôáé áðåãêáôÜóôáóç ..."
+VMSWait="Ãßíåôáé Ýëåã÷ïò ôùí óõóêåõþí. Ðáñáêáëþ ðåñéìÝíåôå ëßãï."
+
+TradeMark="VIA "
+GeneralID="Äéá÷åéñéóôÞò Óõóêåõþí Ðëáôöüñìáò"
+MaintainDlgID301="ÅãêáôÜóôáóç/ÁíáíÝùóç(&U)"
+AutoRebootWarning="Áðïèçêåýóôå ôéò åñãáóßåò óáò ðñéí ðéÝóåôå ôï åðüìåíï ðëÞêôñï. Ôï(á) åîÜñôçìá(-ôÞìáôá) ðïõ ðáñáôßèåíôáé ðáñáêÜôù èá åðáíåêêéíÞóïõí ôï óýóôçìá áõôüìáôá ÷ùñßò ðñïåéäïðïßçóç:
+VMSErrorCodenotSupportedOS="Äõóôõ÷þò, ï ïäçãüò åãêáôÜóôáóçò äå ìðïñåß íá âñåé ôï êáôÜëëçëï åîÜñôçìá ãéá ôçí ôñÝ÷ïõóá ðëáôöüñìá. ÐéÝóôå ÏÊ ãéá íá ôåñìáôéóôåß ï ïäçãüò åãêáôÜóôáóçò."
+
+[Danish]
+
+StartCopyDlgInstallID50="Liste over installationskomponenter:"
+StartCopyDlgInstallID51="Gennemgå indstilling før installation af komponenter."
+StartCopyDlgInstallID711="Setup har nok oplysninger til at begynde installation.  Tryk på Tilbage, hvis du ønsker at kontrollere eller ændre nogle indstillinger.  Tryk på Næste for at begynde installation af komponenterne, hvis indstillingerne er ok."
+StartCopyDlgInstallID701="Nuværende indstilling:" 
+ 	
+StartCopyDlgUnInstallID50="Liste over af-installationskomponenter:"
+StartCopyDlgUnInstallID51="Gennemgå indstilling før fjernelse af komponenter."  
+StartCopyDlgUnInstallID711="Setup har nok oplysninger til at begynde fjernelse af komponenterne.  Tryk på Tilbage, hvis du ønsker at kontrollere eller ændre nogle indstillinger.  Tryk på Næste for at begynde af-installation af komponenterne, hvis indstillingerne er ok."
+StartCopyDlgUnInstallID701="Nuværende indstilling:" 
+
+StartCopyDlgStatusInstallID50="Installationsstatus:"
+StartCopyDlgStatusInstallID51 ="Følgende information viser installationsstatus.  
+StartCopyDlgStatusInstallID711="Følgende information vil fortælle om komponenterne er installeret korrekt eller ej."   
+StartCopyDlgStatusInstallID701="Nuværende resultat:"  
+				
+StartCopyDlgStatusUnInstallID50 ="Af-installationsstatus:"
+StartCopyDlgStatusUnInstallID51 ="Følgende information viser af-installationsstatus."  
+StartCopyDlgStatusUnInstallID711="Følgende information vil fortælle om komponenterne er fjernet korrekt eller ej."   
+StartCopyDlgStatusUnInstallID701="Nuværende resultat:" 
+
+WelcomeDlgID50="Velkommen til Installations-Wizard til %P"
+WelcomeDlgID710="Installations-Wizard vil installere %P på din computer.  Tryk på Næste for at fortsætte."
+
+LicenseDlgID50="Licensaftale"
+LicenseDlgID51="Læs venligst følgende licensaftale omhyggeligt."           
+LicenseDlgID711="Tryk på PAGE DOWN-tasten for at se resten af aftalen."	
+LicenseDlgID502="Jeg accepterer"	
+LicenseDlgID503="Jeg accepterer ikke"
+	
+FeatureDlgInstallID50="Installationsliste:"	
+FeatureDlgInstallID51 ="Vælg Setup, hvorefter komponenterne vil blive installeret."	
+FeatureDlgInstallID711="Du kan vælge at installere nogle eller alle komponenterne."
+FeatureDlgUnInstallID50="Af-installationsliste:"		
+FeatureDlgUnInstallID51="Vælg Setup, hvorefter komponenterne vil blive af-installeret."		
+FeatureDlgUnInstallID711="Du kan vælge at af-installere nogle eller alle komponenterne. Hvis Alt vælges, så vil alt blive af-installeret automatisk." 	   
+
+FeatureDlgID1305="Beskrivelse"		                             
+FeatureDlgID1306="Mellemrum kræves:"
+FeatureDlgID1307="Der er plads nok:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Installations-Wizard færdig."
+SetupErrorDlgID711="Wizard blev afbrudt før %P blev færdiginstalleret."	
+SetupErrorDlgID712="Systemet er ikke blevet ændret. Kør installation igen for at installere dette program på et senere tidspunkt.. Tryk Afslut for at forlade Wizard."  
+
+FinishRebootDlgID50="Installations-Wizard færdig."
+FinishRebootInstallDlgID711="Installations-Wizard har installeret %P med succes. Computeren skal genstartes, førend programmet kan anvendes."    
+FinishRebootUninstallDlgID711="Installations-Wizard har af-installeret %P med succes. Computeren skal genstartes, førend programmet kan anvendes."
+FinishRebootDlgID502="Ja, jeg ønsker at genstarte min computer nu. " 
+FinishRebootDlgID503="Nej, jeg vil genstarte min computer senere. " 
+FinishRebootDlgID712="Fjern disketter fra deres drev og tryk derefter på Afslut for at færdiggøre Setup."
+
+FinishDlgID50="Installations-Wizard færdig."
+
+FinishInstallDlgID711="Installations-Wizard har installeret %P med succes. Tryk på Afslut for at forlade Wizard."	
+FinishUninstallDlgID711="Installations-Wizard har af-installeret %P med succes. Tryk på Afslut for at forlade Wizard."
+
+
+AskPathDlgID50="Vælg placering"
+AskPathDlgID51="Vælg folder til setup-filerne."
+AskPathDlgID901="Vælg den folder, hvor setup-filerne er placeret."
+AskPathDlgID31="Browse"
+
+MaintainDlgID50="Velkommen"
+MaintainDlgID51="Opdatér eller fjern programmet."
+MaintainDlgID710="Velkommen til %P Setup-Vedligeholdelsesprogram. Dette program hjælper dig med at ændre den nuværende installation. Tryk på valgmulighederne nedenfor."
+#MaintainDlgID301="Opdatere(&U)"
+MaintainDlgID302="Fjerne(&R)"
+MaintainDlgID701="Vælg komponenter, der skal opdateres og tilføj nye komponenter, der skal installeres"
+MaintainDlgID702="Vælg de komponenter, der skal fjernes"	
+
+NextButton="Næste(&N) >"
+CancelButton="Afbryd(&C)"
+BackButton ="< Tilbage(&B)"
+FinishButton="Færdig(&F)"	                
+
+
+VMSDelComfirm="Er du sikker på at alle komponenter skal fjernes?"
+VMSCancelingDescription="Er du sikker på, at du vil afbryde Wizard?"   
+VMSAbort="Afbryd"
+VMSErrorCodeMissDLL="Desværre, der mangler nogle vigtige filer i denne programpakke. Download programpakken igen hos programleverandøren. Tryk på OK for at afslutte Installations-Wizard. "
+VMSErrorCodeWithoutLicense="Licensfilen blev fjernet eller omdøbt, vær sikker på at brug af denne software-pakke er dækket af licensen. Tryk på OK for at afslutte Installations-Wizard."
+VMSErrorCodeErrorSCF="Desværre, systemkonfigurationsfilen er ødelagt. Kontakt venligst programleverandøren for at få en opdatering. Tryk på OK for at afslutte Installations-Wizard."
+VMSCaution="Forsigtighed"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" færdiggørelse af processen mislykkedes. Tryk på OK for at fortsætte."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" load mislykkedes. Tryk på OK for at fortsætte."
+
+VMSErrorCodenotSupportedhw="Desværre, Installations-Wizard kan ikke finde understøttende hardware i dit system. Kontrollér dit hardware og forsøg igen. Tryk på OK for at afslutte Installations-Wizard."	
+VMSErrorCodeUnknowOS="Ukendt OS-version"
+VMSFinishErrorMsgofInstall="NOTAT: En af komponenterne er ikke installeret korrekt i systemet. Kontrollér log-filen."
+VMSFinishErrorMsgofRemove ="NOTAT: En af komponenterne er ikke af-installeret korrekt i systemet. Kontrollér log-filen."
+VMSInstallProgress="Installering...."
+VMSSpecifyPathAgain="Kan ikke finde setup-filerne. Angiv kilde-sti."
+VMSStop="Stop"
+VMSUninstallProgress="Fjern..."
+VMSWait="Scanner hardware. Vent venligst et øjeblik."
+
+TradeMark="VIA "
+GeneralID="Platform Device Manager"
+MaintainDlgID301="Installer/Opdater(&U)"
+AutoRebootWarning="Gem dine job umiddelbart før du trykker på den næste knap. Den/de komponent(er), som listes nedenfor, vil genstarte systemet automatisk uden varsel:"
+VMSErrorCodenotSupportedOS="Beklager, installationsguiden kan ikke finde den rigtige komponent for den aktuelle platform. Tryk OK for at afslutte installationsguiden."

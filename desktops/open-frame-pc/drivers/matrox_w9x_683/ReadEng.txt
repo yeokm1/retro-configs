@@ -1,0 +1,85 @@
+[English]
+PDREADME.TXT                MATROX GRAPHICS INC.              2002.05.28
+
+                 Matrox PowerDesk for Windows 98/Me 
+                             Revision 6.83.017
+
+
+Contents
+========
+
+- Description of this release
+- Installation
+- New features
+- More information
+- Notes, problems, and limitations
+
+
+Description of this release
+===========================
+
+Matrox PowerDesk software includes a display driver and display 
+utilities. With this software, you can take full advantage of your 
+Matrox graphics hardware and you can access additional Matrox 
+display-related features.
+
+
+Installation
+============
+
+To install Matrox PowerDesk, start the "Setup" program included 
+with it, then follow the on-screen instructions.
+
+The setup program will only install software if a Matrox graphics 
+card model supported by the setup program is installed in your 
+computer.
+
+
+New features
+============
+
+This software includes new features, especially for Matrox 
+hardware with DualHead support. These include:
+
+- The use of different DualHead features (Multi-Display, DVDMax, 
+  Zoom, and Clone) *without* restarting Windows
+
+- Easier-to-use interface for DualHead controls
+
+- Controls for dividing graphics resources (memory and bandwidth) 
+  between your main and secondary displays
+
+- More features accessible through user-defined hot keys (keyboard 
+  shortcuts)
+
+
+More information
+================
+
+For more information on Matrox PowerDesk, see the help file 
+included with it. For information specific to your Matrox graphics 
+card, see your Matrox or system manual.
+
+
+Notes, problems, and limitations
+================================
+
+- Installation in different language versions of Windows
+
+  If you install software in a language different from the 
+  language of your operating system (for example, English software 
+  on a Japanese system), you may have problems with text and 
+  dialog box controls being cut off. This is because of 
+  differences in system fonts.
+
+- OpenGL (3D) support
+
+  If you have a newer Matrox product or your Matrox software was 
+  provided by the manufacturer of your computer, full OpenGL 
+  support may be disabled with your Matrox display driver. For a 
+  Matrox display driver with full OpenGL support enabled, see the 
+  Matrox Web site (www.matrox.com/mga). (If your Matrox product 
+  was provided by the manufacturer of your computer, check the Web 
+  site of that manufacturer for a display driver. A display driver 
+  provided by the manufacturer of your computer is more likely to 
+  be tested with your computer model.)

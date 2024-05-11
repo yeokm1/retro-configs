@@ -1,0 +1,98 @@
+[Deutsch]
+PDREADME.TXT                MATROX GRAPHICS INC.              2002.05.28
+
+                Matrox PowerDesk für Windows 98/Me
+
+
+Hinweis: Diese Datei enthält eventuell neue Informationen, die bei 
+der Drucklegung der Dokumentation noch nicht in Ihre Sprache 
+übersetzt waren. Wir bitten hierfür um Ihr Verständnis.
+
+
+Inhalt
+======
+
+- Beschreibung dieser Release
+- Installation
+- [English...]New features[...English]
+- Weitere Informationen
+- Hinweise, Probleme und Beschränkungen
+
+
+Beschreibung dieser Release
+===========================
+
+Die Matrox PowerDesk Software enthält einen Bildschirmtreiber und 
+Programme für die Bildschirmanzeige. Mit dieser Software können 
+Sie die Matrox Grafikhardware voll ausnutzen und auf weitere 
+anzeigerelevante Matrox-Funktionen zugreifen.
+
+
+Installation
+============
+
+Starten Sie zur Installation von Matrox PowerDesk das 
+mitgelieferte Programm "Setup", und befolgen Sie anschließend die 
+Anweisungen auf dem Bildschirm.
+
+Das Setup-Programm installiert die Software nur, wenn in Ihrem 
+Computer eine Matrox Grafikkarte installiert ist, die das 
+Setup-Programm unterstützt.
+
+
+[English...]
+
+New features
+============
+
+This software includes new features, especially for Matrox 
+hardware with DualHead support. These include:
+
+- The use of different DualHead features (Multi-Display, DVDMax, 
+  Zoom, and Clone) *without* restarting Windows
+
+- Easier-to-use interface for DualHead controls
+
+- Controls for dividing graphics resources (memory and bandwidth) 
+  between your main and secondary displays
+
+- More features accessible through user-defined hot keys (keyboard 
+  shortcuts)
+
+[...English]
+
+
+Weitere Informationen
+=====================
+
+Weitere Informationen über Matrox PowerDesk finden Sie in der 
+mitgelieferten Hilfedatei. Spezielle Informationen zu Ihrer Matrox 
+Grafikkarte finden Sie im jeweiligen Handbuch zu Ihrer Matrox 
+Grafikkarte oder Ihrem System.
+
+
+Hinweise, Probleme und Beschränkungen
+=====================================
+
+- Installation verschiedener Sprachversionen von Windows
+
+  Wenn Sie die Software in einer anderen Sprache als der 
+  Betriebssystemsprache installieren (z.B. englische Software auf 
+  einem japanischen System), treten eventuell Probleme auf, bei 
+  denen Text- und Dialogfeldsteuerelemente abgeschnitten werden. 
+  Der Grund dafür sind Unterschiede in den System-Schriftarten.
+
+- OpenGL (3D) -Unterstützung
+
+  Falls Sie über ein neues Matrox-Produkt verfügen oder Ihre 
+  Matrox-Software vom Hersteller Ihres Computers bereitgestellt 
+  wurde, ist bei Ihrem Matrox-Anzeigetreiber möglicherweise die 
+  volle OpenGL-Unterstützung deaktiviert. Einen 
+  Matrox-Anzeigetreiber mit aktivierter voller 
+  OpenGL-Unterstützung finden Sie auf der Matrox-Website 
+  (www.matrox.com/mga). (Falls Ihr Matrox-Produkt vom Hersteller 
+  Ihres Computers bereitgestellt wurde, überprüfen Sie bitte die 
+  Website dieses Herstellers auf einen Anzeigetreiber. Ein 
+  Anzeigetreiber, der vom Hersteller Ihres Computers 
+  bereitgestellt wird, wurde wahrscheinlich mit Ihrem 
+  Computermodell getestet.)

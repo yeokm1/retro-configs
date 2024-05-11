@@ -1,0 +1,34 @@
+[CIF]
+DISPLAY=0:"VIA Vinyl Audio Codecs Driver"
+COMPONENT_VERSION="v7.00b"
+DESC=0:"Update definitions of VIA chipsets for loading proper system driver"
+DATE=1,,20070809;
+
+HWID=1:PCI\VEN_1106&DEV_3058;PCI\VEN_1106&DEV_3059;PCI\VEN_8086&DEV_2415;PCI\VEN_8086&DEV_2425;PCI\VEN_8086&DEV_2425;PCI\VEN_8086&DEV_24C5;PCI\VEN_8086&DEV_24D5;PCI\VEN_8086&DEV_266E;PCI\VEN_10DE&DEV_01B1;PCI\VEN_10DE&DEV_006A;PCI\VEN_10DE&DEV_008A;PCI\VEN_10DE&DEV_00DA;PCI\VEN_10DE&DEV_0059;PCI\VEN_1039&DEV_7012;PCI\VEN_1106&DEV_7059
+CID={261E8F8D-1676-487b-AC51-60DCEE253201}
+SIZE=30000
+CIFVERSION=1.2
+SHOW=1
+
+[EXEC.9x]
+INSTCMD=0x101,,2,VinylDrv9x.InstallAudio,0,\drivers\WDM\;0x102,,2,VinylDrv9x.InstallAudio,0,\drivers\WDM\;0x104,,2,VinylDrvME.InstallAudio,0,\drivers\WDM;
+UNINSTCMD=0x101,,2,VinylDrv9x.UnInstallAudio,0,\drivers\WDM\;0x102,,2,VinylDrv9x.UnInstallAudio,0,\drivers\WDM\;0x104,,2,VinylDrvME.UnInstallAudio,0,\drivers\WDM;
+REBOOT=0,1
+
+[EXEC.ntx86]
+INSTCMD=0x210,,2,VinylDrVista32.InstallAudio,4,\drivers\Vista32WDM;0x208,,2,VinylDrvNT5.InstallAudio,3,\drivers\XPWDM;0x204,,2,VinylDrvNT5.InstallAudio,2,\drivers\XPWDM;0x202,,2,VinylDrvNT5.InstallAudio,1,\drivers\WDM;
+UNINSTCMD=0x210,,2,VinylDrVista32.UnInstallAudio,4,\drivers\Vista32WDM;0x208,,5,VinylDrvNT5.UnInstallAudio,3,\drivers\XPWDM;0x204,,5,VinylDrvNT5.UnInstallAudio,2,\drivers\XPWDM;0x202,,2,VinylDrvNT5.UnInstallAudio,1,\drivers\WDM;
+REBOOT=0,1
+
+[EXEC.ntia64]
+INSTCMD=0x401,,2,VinylDrvX64.InstallAudio,1,\Drivers\AMD64;0x402,,2,VinylDrvX64.InstallAudio,2,\Drivers\AMD64;0x403,,2,VinylDrvX64.InstallAudio,3,\Drivers\AMD64;0x404,,2,VinylDrVista64.InstallAudio,4,\Drivers\Vista64WDM;
+UNINSTCMD=0x401,,2,VinylDrvX64.UnInstallAudio,1,\Drivers\AMD64;0x402,,2,VinylDrvX64.UnInstallAudio,2,\Drivers\AMD64;0x403,,2,VinylDrvX64.UnInstallAudio,3,\Drivers\AMD64;0x404,,2,VinylDrVista64.UnInstallAudio,4,\Drivers\Vista64WDM;
+REBOOT=0,1
+
+[EXEC.ntamd64]
+INSTCMD=0x401,,2,VinylDrvX64.InstallAudio,1,\Drivers\AMD64;0x402,,2,VinylDrvX64.InstallAudio,2,\Drivers\AMD64;0x403,,2,VinylDrvX64.InstallAudio,3,\Drivers\AMD64;0x404,,2,VinylDrVista64.InstallAudio,4,\Drivers\Vista64WDM;
+UNINSTCMD=0x401,,2,VinylDrvX64.UnInstallAudio,1,\Drivers\AMD64;0x402,,2,VinylDrvX64.UnInstallAudio,2,\Drivers\AMD64;0x403,,2,VinylDrvX64.UnInstallAudio,3,\Drivers\AMD64;0x404,,2,VinylDrVista64.UnInstallAudio,4,\Drivers\Vista64WDM;
+REBOOT=0,1
+
+[STRING]
+

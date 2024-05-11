@@ -1,0 +1,443 @@
+
+[Basque]
+StartCopyDlgInstallID50="Osagaien zerrenda instalatzen:"
+StartCopyDlgInstallID51="Setting berrikusi osagaien instalazioa hasi baino lehen."
+StartCopyDlgInstallID711="Setup-ek informazio nahikoa dauka osagaiak instalatzen hasteko. Berrikusi edo aldatu nahi baduzu setting bat, sakatu Back (Atzera).  Setting ondo balego, sakatu Next(Aurrera) osagaiak instalatzen hasteko."
+StartCopyDlgInstallID701="Setting :"
+ 	
+StartCopyDlgUnInstallID50="Osagaien zerrenda desinstalatzen:"
+StartCopyDlgUnInstallID51="Setting berrikusi osagaiak ezabatu baino lehen."
+StartCopyDlgUnInstallID711="Setup-ek informazio nahikoa dauka osagaiak ezabatzen hasteko. Berrikusi edo aldatu nahi baduzu setting bat, sakatu Back(Atzera). Setting ondo balego, sakatu Next(Aurrera) osagaiak ezabatzen hasteko."
+StartCopyDlgUnInstallID701="Setting :"
+
+StartCopyDlgStatusInstallID50=" Instalazioaren egoera:"
+StartCopyDlgStatusInstallID51 =" Hurrengo informazioa instalazioaren egoera erakusteko."
+StartCopyDlgStatusInstallID711=" Hurrengo informazioak erakutziko dizu osagaiak ondo instalatu diren ala ez."  
+StartCopyDlgStatusInstallID701=" Emaitza:"
+				
+StartCopyDlgStatusUnInstallID50 =" Ezabatzearen egoera:"
+StartCopyDlgStatusUnInstallID51 =" Hurrengo informazioa ezabatzearen egoera erakusteko."
+StartCopyDlgStatusUnInstallID711=" Hurrengo informazioak erakutziko dizu osagaiak ondo ezabatu diren ala ez."
+StartCopyDlgStatusUnInstallID701=" Emaitza:" 
+
+WelcomeDlgID50="Ongi etorria Install Wizard-era %P programa instalatzeko "
+WelcomeDlgID710="Install Wizard-ek %P programa instalatuko du zure ordenagailuan. Jarraitzeko, sakatu Next(Hurrengoa)."
+
+LicenseDlgID50="Akordio lizentzia"
+LicenseDlgID51="Mesedez irakurri arretaz hurrengo akordio lizentzia."
+LicenseDlgID711="Sakatu PAGE DOWN(BEHERA)  akordio lizentzia guztia ikusteko."
+LicenseDlgID502="Onartu"
+LicenseDlgID503="Ez onartu"
+	
+FeatureDlgInstallID50="Zerrenda instalatu:"
+FeatureDlgInstallID51 ="Osagaiak aukeratzeko, Setup-ek instalatuko ditu."
+FeatureDlgInstallID711="Aukera ditzakezu osagai bat edo guztiak instalatzeko."
+FeatureDlgUnInstallID50="Zerrenda ezabatu:"
+FeatureDlgUnInstallID51="Osagaiak aukeratzeko, Setup-ek ezabatuko ditu."
+FeatureDlgUnInstallID711="Aukera ditzakezu osagai bat edo guztiak ezabatzeko. Aukeratzen badituzu ezaugarri guztiak ezabatzeko, paketea desinstalatuko da berehala." 
+
+FeatureDlgID1305="Deskripzioa"
+FeatureDlgID1306="Beharrezko espazioa:"
+FeatureDlgID1307="Espazio erabilgarria:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Wizard instalazioa bukatuta."
+SetupErrorDlgID711="Wizard gelditu da %P programa osoa instalatu aurretik."
+SetupErrorDlgID712="Sistema ez da aldatu. Programa hau geroago instalatzeko, egin instalazioa berriz. sakatu Finish(Bukatu) irteteko."
+
+FinishRebootDlgID50="Wizard instalazioa bukatuta."
+FinishRebootInstallDlgID711="Install Wizard-ek ondo instalatu du %P programa. Programa hau erabili baino lehen, zure ordenagailua berriro abiarazi behar duzu."
+FinishRebootUninstallDlgID711="Install Wizard-ek ondo ezabatu du %P programa. Programa hau erabili baino lehen, zure ordenagailua berriro abiarazi behar duzu."
+FinishRebootDlgID502="Bai, Ordenagailua abiarazi nahi dut. "
+FinishRebootDlgID503="Ez, Geroago abiaraziko dut ordenagailua. "
+FinishRebootDlgID712="Kendu diskoak beraien unitateetatik, eta sakatu Finish(Bukatu) setup osatzeko."
+
+FinishDlgID50="Install Wizard Bukatuta"
+
+FinishInstallDlgID711="Install Wizard-ek ondo instalatu du %P programa.  Sakatu Finish(Bukatu) irteteko."
+FinishUninstallDlgID711="Install Wizard-ek ondo ezabatu du %P programa.  Sakatu Finish(Bukatu) irteteko."
+
+
+AskPathDlgID50="Bilatu Source karpetaren kokapena"
+AskPathDlgID51="Bilatu Setup artxiboak dauden karpeta."
+AskPathDlgID901="Sartu Setup artxiboak dauden karpetan."
+AskPathDlgID31="Bilatu"
+
+MaintainDlgID50="Ongi etorri"
+MaintainDlgID51="Eguneratu edo ezabatu programa."
+MaintainDlgID710="Ongi etorria %P Setup Maintenance programara. Programa honek uzten dizu modifikatzen oraingo instalazioa. Sakatu behean daudenetako opzio bat."
+#MaintainDlgID301="Eguneratu(&U)"
+MaintainDlgID302="Ezabatu(&R)"
+MaintainDlgID701="Aukeratu osagaiak eguneratzeko edo osagai berri bat gehitu instalatzeko "
+MaintainDlgID702="Aukeratu osagaiak ezabatzeko"
+
+NextButton="Hurrengoa(&N) >"
+CancelButton="Ezeztatu(&C)"
+BackButton ="< Atzera(&B)"
+FinishButton="Bukatu(&F)"
+
+
+VMSDelComfirm="Ziur zaude osagai guztiak ezabatu nahi dituzula?"
+VMSCancelingDescription="Ziur zaude eten nahi duzula Wizard instalazioa?"
+VMSAbort="Eten"
+VMSErrorCodeMissDLL="Barkatu, pakete honetan artxibo garrantzitsuak falta dira. Mesedez kargatu paketea berriro edo kontaktatu serbitzuaren hornitzailearekin. Sakatu OK bukatzeko wizard instalazioa. "
+VMSErrorCodeWithoutLicense="Baimenaren artxiboa ezabatu edo berrizendatu egin da, mesedez ikusi software honen erabilera lizentziarekin babestuta dagoen. Mesedez sakatu OK wizard instalazioa bukatzeko."
+VMSErrorCodeErrorSCF="Barkatu konfigurazio sistema apurtuta dago. Mesedez kontaktatu serbitzu hornitzailearekin eguneratzeko. Mesedez sakatu OK Wizard instalazioa bukatzeko."
+VMSCaution="Kontuz"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" ezin izan da prozesua bukatu. Mesedez sakatu OK jarraitzeko."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" ezin izan da kargatu. Mesedez sakatu OK jarraitzeko."
+
+VMSErrorCodenotSupportedhw="Barkatu, Install Wizard ezin du aurkitu hardware plataformaren babesa zure sisteman. Aztertu zure hardware plataforma eta saiatu berriz. Mesedez sakatu OK wizard instalazioa bukatzeko."
+VMSErrorCodeUnknowOS="Ezezagun OS bertsioa"
+VMSFinishErrorMsgofInstall="OHARRA: Osagaien bat ez da ondo instalatu sisteman. Komprobatu log artxiboa."
+VMSFinishErrorMsgofRemove ="OHARRA: Osagaien bat ez da ondo ezabatu sistematik. Komprobatu log artxiboa."
+VMSInstallProgress="Instalatzen ..."
+VMSSpecifyPathAgain="Ezin dira aurkitu setup artxiboak.Mesedez zehaztu sorburuaren bidea."
+VMSStop="Gelditu"	
+VMSUninstallProgress="Ezabatzen..."
+VMSWait="Hardware aztertzen. Mesedez itxaron momentu bat."
+
+TradeMark="VIA "
+GeneralID="Platform Device Manager"
+MaintainDlgID301="Install/Update(&U)"
+AutoRebootWarning="Please save your tasks immediately before press next button. The component(s) listed below will reboot system automatically without notification:"
+VMSErrorCodenotSupportedOS="Sorry, the install wizard can't find the proper component for the current platform. Please press OK to terminate the install wizard."
+
+[Serbian]
+StartCopyDlgInstallID50="Instaliraj listu komponenata:"
+StartCopyDlgInstallID51="Proverite seting pre nego ?to instalirate komponente."
+StartCopyDlgInstallID711="Setup ima dovoljno informacija da po?ne sa instaliranjem komponenata. Ako ?elite da proverite ili promenite seting kliknite Back. Ako ste zadovoljni sa setingom pritisnite Next i po?nite sa instaliranjem komponenata."
+StartCopyDlgInstallID701="Trenutni seting:"
+ 	
+StartCopyDlgUnInstallID50="Ukloni instaliranu listu komponenata."
+StartCopyDlgUnInstallID51="Proveri setting pre uklanjanja komponenata."	
+StartCopyDlgUnInstallID711="Setup ima dovoljno informacija za po?etak uklanjanja komponenata. Ako ?elite da proverite ili promenite neki od setinga pritisnite Back. Ako ste zadovoljni pritisnite Next da biste po?eli sa uklanjanjem komponenata."
+StartCopyDlgUnInstallID701="Trenutni seting:"
+
+StartCopyDlgStatusInstallID50="Status instaliranja."
+StartCopyDlgStatusInstallID51 ="Slede?e informacije ukazuju na status instaliranja. "
+StartCopyDlgStatusInstallID711="Slede?e informacije ?e Vam re?i da li su komponente uspe?no instalirane."
+StartCopyDlgStatusInstallID701="Trenutni rezultat."
+				
+StartCopyDlgStatusUnInstallID50 =" Otklanjenje statusa:"
+StartCopyDlgStatusUnInstallID51 =" Slede?e informacije pokazuju status o uklanjanju."  
+StartCopyDlgStatusUnInstallID711=" Slede?e informacije ?e Vam kazati da li su komponente uspe?no uklonjene."
+StartCopyDlgStatusUnInstallID701=" Trenutni  rezultat." 
+
+WelcomeDlgID50="Dobtro do?li na instaliranje Wizarda za %P."
+WelcomeDlgID710="Install Wizard ?e instalirati %P na Va?em kompijuteru. Pritisnite Next da bi nastavili."
+
+LicenseDlgID50="Uredba o licenci"
+LicenseDlgID51="Molimo Vas da pa?ljivo pro?itate slede?u uredbu o licenci."
+LicenseDlgID711="Pritisnite taster PAGE DOWN da vidite ostatak uredbe."
+LicenseDlgID502="Sla?em se "
+LicenseDlgID503="Ne sla?em se"
+	
+FeatureDlgInstallID50="Instaliraj listu:"	
+FeatureDlgInstallID51 ="Za odabiranje kompnenata koje Setup instalira."	
+FeatureDlgInstallID711="Mo?ete odabrati nekoliko ili sve komponente za instaliranje." 
+FeatureDlgUnInstallID50="Otkloni listu:"		
+FeatureDlgUnInstallID51="Za odabiranje komponenata koje ?e Setup otkloniti."		
+FeatureDlgUnInstallID711="Možete odabrati samo nekoliko komponenata ili sve komponente koje æete ukloniti. Ako odaberete otklanjanje svih, paket æe se deinstalirati."	   
+
+FeatureDlgID1305="Opis"		                             
+FeatureDlgID1306="Potreban prostor:"
+FeatureDlgID1307="Prostor na raspolaganju:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Instaliranje Wizarda zavr?eno."
+SetupErrorDlgID711="Wizard je bio prekinut pre nego ?to je %P mogao biti potpuno instaliran." 
+SetupErrorDlgID712="Sistem nije jo? uvek modifikofan. Da bi ste kasnije instalirali ovaj program, sprovedite ponovno instaliranje. pritisnite Finish da iza?ete iz wizarda."
+
+FinishRebootDlgID50="Instaliranje Wizarda zavr?eno."
+FinishRebootInstallDlgID711=" Install Wizard je uspe?no instalirao %P. Pre nego ?to mo?ete koristiti program morate ponovo startovati kompijuter."  
+FinishRebootUninstallDlgID711="Install Wizard je uspe?no uklonio  %P. Pre nego ?to mo?ete koristiti program morate ponovo startovati kompijuter."
+FinishRebootDlgID502="Da ?elim da sada ponovo startujem kompijuter."
+FinishRebootDlgID503="Ne, kasnije ?u ponovo startovati kompijuter." 
+FinishRebootDlgID712="Uklonite sve diskove iz drivera i protisnite Finish da bi ste zavr?ili instaliranje." 
+
+FinishDlgID50="Install Wizard zavr?en" 
+
+FinishInstallDlgID711="Install Wizard je uspje?no instalirao %P.  Pritisni Finish da iza?ete iz Wizarda."	
+FinishUninstallDlgID711="Install Wizard je uspe?no uklonio  %P.  Pritisni Finish da iza?ete iz Wizarda. "
+
+
+AskPathDlgID50="Odaberite mesto za lociranje."
+AskPathDlgID51="Odaberite folder gdje ?e setup folderi biti locirani."
+AskPathDlgID901="Unesite lokaciju gdje ?e setup folderi biti locirani."
+AskPathDlgID31="Tra?i"
+
+MaintainDlgID50="Dobro do?li"
+MaintainDlgID51="Update ili ukloni  program."
+MaintainDlgID710="Dobro do?li kod %P Setup Maintenance program. Ovaj program Vam omogu?ava da modifikujete  trenutnu instalaciju. Pritisnite jednu od opcija ispod."
+#MaintainDlgID301="Update(&U)"
+MaintainDlgID302="Otkloni(&R)"
+MaintainDlgID701="Odaberi komponente za update ili dodaj nove za instaliranje."         
+MaintainDlgID702="Odaberi komonete za uklanjanje "	
+
+NextButton="Next(&N) >"
+CancelButton="Cancel(&C)" 
+BackButton ="< Back(&B) "
+FinishButton="Finish(&F)"	                
+
+
+VMSDelComfirm="Da li ste sigurni da ?elite da uklonite sve komponente ?"
+VMSCancelingDescription="Da li ste sigurni da ?elite instalirati wizard ?"   
+VMSAbort="Prekini"
+VMSErrorCodeMissDLL="Na?alost neki va?ni delovi ovog paketa nedostaju. Molimo Vas poku?ajte ponovo ili kontaktiraje Va?eg provajdera. Pritisnite OK da zavr?ite instalaciju wizarda."
+VMSErrorCodeWithoutLicense="Licenca je ili preme?tena ili joj je ime promjenjeno. Molimo Vas budite  sigurni da je kori??enje ovog softwera pod licencom. Pritisnite OK da zavr?ite instalaciju wizarda."
+VMSErrorCodeErrorSCF="Kofiguracija sistema je na ?alost prekinuta. Molimo Vas da kontaktirate providera za update. Pritisnite OK da zavr?ite instalaciju wizarda."
+VMSCaution="Oprez"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF="proces nije zavr?en. Pritisnite OK da bi nastavili."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin="load nije uspeo. Pritisnite OK da bi nastavili."
+
+VMSErrorCodenotSupportedhw="Na?alost instaliranje wizarda nema podr?ku hardwera u Va?em sistemu. Proverite hardwer i poku?ajte ponovo. Pritisnite  OK da prekinete instalaciju wizarda."	
+VMSErrorCodeUnknowOS="Nepoznata OS verzija"
+VMSFinishErrorMsgofInstall="Bele?ka: Neka od komponenata nije uspje?no instalirana u sistemu. Provjeri log file."
+VMSFinishErrorMsgofRemove ="Bele?ka: Neka od komponenata nije uspe?no uklonjena iz sistema. Provjeri log file."
+VMSInstallProgress="Instalira ..."
+VMSSpecifyPathAgain="Ne mo?e da na?e  setup files. Molimo Vas odredite source path."
+VMSStop="Stop"
+VMSUninstallProgress="Uklanja ..."
+VMSWait="Skenira hardwer. Molimo Vas sa?ekajte."
+
+TradeMark="VIA "
+GeneralID="Platform Device Manager"
+MaintainDlgID301="Install/Update(&U)"
+AutoRebootWarning="Please save your tasks immediately before press next button. The component(s) listed below will reboot system automatically without notification:"
+VMSErrorCodenotSupportedOS="Sorry, the install wizard can't find the proper component for the current platform. Please press OK to terminate the install wizard."
+
+[Croatian]
+
+StartCopyDlgInstallID50="Instaliraj listu komponenata:"
+StartCopyDlgInstallID51="Provjerite seting pre nego ?to instalirate komponente."
+StartCopyDlgInstallID711="Setup ima dovoljno informacija da zapo?ne sa instaliranjem komponenata. Ako ?elite da provjerite ili promjenite seting pritisnite Back. Ako ste zadovoljni sa setingom pritisnite Next i po?nite sa instaliranjem komponenata."
+StartCopyDlgInstallID701="Trenutni seting:"
+ 	
+StartCopyDlgUnInstallID50="Ukloni instaliranu listu komponenata."
+StartCopyDlgUnInstallID51="Provjerite seting pre uklanjanja komponenata."	
+StartCopyDlgUnInstallID711="Setup ima dovoljno informacija za po?etak uklanjanja komponenata. Ako ?elite da provjerite ili promjenite neki od setinga pritisnite Back. Ako ste zadovoljni pritisnite Next da biste po?eli sa uklanjanjem komponenata."
+StartCopyDlgUnInstallID701="Trenutni seting:"
+
+StartCopyDlgStatusInstallID50=" Status instalacije"
+StartCopyDlgStatusInstallID51 =" Sljede?e informacije ukazuju na status instalacije. "
+StartCopyDlgStatusInstallID711="Sljede?e informacije ?e Vam re?i da li su komponente uspje?no instalirane."
+StartCopyDlgStatusInstallID701="Trenutni resultat."
+				
+StartCopyDlgStatusUnInstallID50 =" Otklanjanje statusa:"
+StartCopyDlgStatusUnInstallID51 =" Sljede?e informacije pokazuju status o uklanjanju."    
+StartCopyDlgStatusUnInstallID711=" Sljedje?e informacije ?e Vam kazati da li su komponente uspje?no uklonjenje."
+StartCopyDlgStatusUnInstallID701=" Trenutni  rezultat." 
+
+WelcomeDlgID50="Dobro do?li na instaliranje Wizarda za %P."
+WelcomeDlgID710="Install Wizard ?e instalirati %P na Va?em ra?unalu. Pritisnite Next da bi nastavili."
+
+LicenseDlgID50="Uredba o licenci"
+LicenseDlgID51="Molimo Vas da pa?ljivo pro?itate sljede?u uredbu o licenci."
+LicenseDlgID711="Pritisnite tipku PAGE DOWN da vidite ostatak uredbe."
+LicenseDlgID502="Sla?em se "
+LicenseDlgID503="Ne sla?em se"
+	
+FeatureDlgInstallID50="Instaliraj listu:"	
+FeatureDlgInstallID51 ="Za odabiranje komponenata koje Setup instalira."	
+FeatureDlgInstallID711="Mo?ete odabrati nekoliko ili sve komponente za instaliranje." 
+FeatureDlgUnInstallID50="Otkloni listu:"		
+FeatureDlgUnInstallID51="Za odabiranje komponenata koje ?e Setup otkloniti."		
+FeatureDlgUnInstallID711="Možete odabrati samo nekoliko komponenata ili sve komponente koje æete ukloniti. Ako odaberete otklanjanje svih, prijethodna instalacija paketa æe biti nevažeæa."	    
+
+FeatureDlgID1305="Opis"		                             
+FeatureDlgID1306="Potreban prostor:"
+FeatureDlgID1307="Prostor na raspolaganju:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Instalacija Wizarda zavr?ena."
+SetupErrorDlgID711="Wizard je bio prekinut prije nego je %P mogo biti potpuno instaliran." 
+SetupErrorDlgID712="Sistem nije jo? uvjek modifikofan. Da bi ste kasnije instalirali ovaj program, sprovedite ponovnu instalaciju. pritisnite Finish da iza?ete iz wizarda."
+
+FinishRebootDlgID50="Instalacija Wizarda zavr?ena."
+FinishRebootInstallDlgID711="Install Wizard je uspje?no instalirao %P. Prije nego ?to mo?ete koristiti program morate ponovno startovati ra?unalo."  
+FinishRebootUninstallDlgID711="Install Wizard je uspje?no uklonio  %P. Prije nego ?to mo?ete koristiti program morate ponovno startovati ra?unalo."
+FinishRebootDlgID502="Da, ?elim da sada ponovno startujem ra?unalo."
+FinishRebootDlgID503="Ne, kasnije ?u ponovo startovato ra?unalo." 
+FinishRebootDlgID712="Uklonite sve diskove iz drivera i pritisnite Finish da bi ste zavr?ili instalaciju." 
+
+FinishDlgID50="Install Wizard zavr?en." 
+
+FinishInstallDlgID711="Install Wizard je uspje?no instalirao %P.  Pritisnite Finish da iza?ete iz wizarda."	
+FinishUninstallDlgID711="Install Wizard je uspje?no uklonio  %P.  Pritisnite Finish da iza?ete iz wizarda."
+
+
+AskPathDlgID50="Odaberite mesto za lociranje."
+AskPathDlgID51="Odaberite folder gdje ?e setup folderi biti locirani."
+AskPathDlgID901="Unesite lokaciju gdje ?e setup folderi biti locirani."
+AskPathDlgID31="Tra?i"
+
+MaintainDlgID50="Dobro do?li"
+MaintainDlgID51="Update ili ukloni  program."
+MaintainDlgID710=" Dobro do?li kod %P Setup Maintenance program. Ovaj program Vam omogu?ava da modifikujete  trenutnu instalaciju. Pritisnite jednu od opcija ispod."
+#MaintainDlgID301="Update(&U)"
+MaintainDlgID302="Otkloni(&R)"
+MaintainDlgID701="Odaberi komponente za update ili dodaj nove za instaliranje."         
+MaintainDlgID702="Odaberi komonete za uklanjanje "	
+
+NextButton="Next(&N) >"
+CancelButton="Prekini(&C)" 
+BackButton ="< Back(&B)"
+FinishButton="Finish(&F)"	                
+
+
+VMSDelComfirm="Da li ste sigurni da ?elite da uklonite sve komponente ?"
+VMSCancelingDescription="Da li ste sigurni da ?elite instalirati wizard ?"   
+VMSAbort="Prekini"
+VMSErrorCodeMissDLL="Na ?alost neki va?ni delovi ovog paketa nedostaju. Molimo Vas poku?ajte ponovo ili kontaktiraje Va?eg provajdera. Pritisnite OK da zavr?ite instalaciju wizarda."
+VMSErrorCodeWithoutLicense="Licenca je ili premje?tena ili joj je ime promjenjeno. Molimo Vas budite  sigurni da je kori??enje ovog software pod licencom. Pritisnite OK da zavr?ite instalaciju wizarda."
+VMSErrorCodeErrorSCF="Kofiguracija sistema je na ?alost prekinuta. Molimo Vas da kontaktirate prodavca  u svezi s informacijama. Pritisnite OK da zavr?ite instalaciju wizarda."
+VMSCaution="Oprez"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" proces nije zavr?en. Pritisnite OK da bi nastavili."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" load nije uspeo. Pritisnite OK da bi nastavili."
+
+VMSErrorCodenotSupportedhw="Na ?alost instalacija wizarda nema podr?ku hardware u Va?em sistemu. Provjerite hardware I poku?ajte ponovo. Pritisnite  OK da prekinete instalaciju wizarda."	
+VMSErrorCodeUnknowOS="Nepoznata OS verzija"
+VMSFinishErrorMsgofInstall="Bele?ka: Jedna od komponenata nije uspje?no instalirana u sistemu. Provjeri log file."
+VMSFinishErrorMsgofRemove ="Bele?ka: Jedna  od komponenata nije uspe?no uklonjena iz sistema. Provjeri log file."
+VMSInstallProgress="Instalira ..."
+VMSSpecifyPathAgain="Ne mo?e da na?e  setup files. Molimo Vas odredite source path."
+VMSStop="Stop"
+VMSUninstallProgress="Uklanja ..."
+VMSWait="Skenira hardware. Molimo Vas sa?ekajte."
+
+TradeMark="VIA "
+GeneralID="Platform Device Manager"
+MaintainDlgID301="Install/Update(&U)"
+AutoRebootWarning="Please save your tasks immediately before press next button. The component(s) listed below will reboot system automatically without notification:"
+VMSErrorCodenotSupportedOS="Sorry, the install wizard can't find the proper component for the current platform. Please press OK to terminate the install wizard."
+
+[Solvenian]
+
+StartCopyDlgInstallID50="Seznam namešèenih komponent:"
+StartCopyDlgInstallID51="Pred namestitvijo komponent preverite nastavitve."
+StartCopyDlgInstallID711="Setup ima dovolj podatkov za namestitev komponent. Èe želite pregledati ali spremeniti katerokoli nastavitev, pritinite Back (nazaj). Èe ste zadovoljni z izbranimi nastavitvami, pritisnite Next za prièetek namestitve komponent."
+StartCopyDlgInstallID701="Trenutna nastavitev:" 
+ 	
+StartCopyDlgUnInstallID50="Odstrani Seznam Komponent:"
+StartCopyDlgUnInstallID51= " Pred ostranitvijo komponent preverite nastavitev."  
+StartCopyDlgUnInstallID711=" Setup ima dovolj podatkov za odstranitev komponent. Èe želite pregledati ali spremeniti katerokoli nastavitev, pritinite Back (nazaj). Èe ste zadovoljni z izbranimi nastavitvami, pritisnite Next za prièetek odstranitve komponent."
+StartCopyDlgUnInstallID701="Trenutna nastavitev:" 
+
+StartCopyDlgStatusInstallID50=" Namestitveni status."
+StartCopyDlgStatusInstallID51 = " Naslednji podatki za prikaz namestitvenega statusa."  
+StartCopyDlgStatusInstallID711=" Iz sledeèih podatkov lahko razberete ali so bile komponente uspešno namešèene."   
+StartCopyDlgStatusInstallID701="Trenutna nastavitev:"   
+				
+StartCopyDlgStatusUnInstallID50 =" Odstranitveni status:"
+StartCopyDlgStatusUnInstallID51  =" Naslednji podatki za prikaz odstranitvenega statusa."    
+StartCopyDlgStatusUnInstallID711=" Iz sledeèih podatkov lahko razberete ali so bile komponente uspešno odstranjene."   
+StartCopyDlgStatusUnInstallID701 ="Trenutni rezultat:"  
+
+WelcomeDlgID50="Dobrodošli v Install Wizard za %P"
+WelcomeDlgID710="Install Wizard bo v vaš raèunalnik namestil %P. Za nadaljevanje kliknite Next (naprej)."
+
+LicenseDlgID50="Licenèna pogodba"
+LicenseDlgID51="Prosimo, da pazljivo preberete naslednjo pogodbo."               
+LicenseDlgID711="Pritisnite gumb z napisom PAGE DOWN za dostop do celotnega dokumenta."	
+LicenseDlgID502="Sprejmem."	
+LicenseDlgID503="Ne sprejmem." 
+	
+FeatureDlgInstallID50="Namestitveni Seznam:"	
+FeatureDlgInstallID51 ="Izbor komponent, ki jih bo namestil Setup."	
+FeatureDlgInstallID711="Izberite nekaj ali vse komponente, ki jih želitete namestiti."
+FeatureDlgUnInstallID50="Odstranitveni Seznam:"		
+FeatureDlgUnInstallID51="Izbor komponent, ki jih bo odstranil Setup."		
+FeatureDlgUnInstallID711="Izberite nekaj ali vse komponente, ki jih želitete odstraniti. Èe ste za odstranitev izbrali vse komponente, bo Paket v celoti odstranjen."	    
+
+FeatureDlgID1305="Opis"		                             
+FeatureDlgID1306="Zahtevan Prostor:"
+FeatureDlgID1307="Razpoložljiv Prostor:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Uspešna namestitev Wizard-a."
+SetupErrorDlgID711="Wizard je bil prekinjen preden je bil %P popolnoma namešèen."	
+SetupErrorDlgID712="V sistemu ni sprememb. Za poznejšo namestitev programa, ponovno zaženite namestitev. Za izhod iz wizard-a kliknite Finish (Konèaj)." 
+
+FinishRebootDlgID50="Uspešna namestitev Wizard-a."
+FinishRebootInstallDlgID711=" Wizard namestitev je bila uspešno opravljena za %P. Pred uporabo programa, ponovno zaženite vaš raèunalnik."    
+FinishRebootUninstallDlgID711=" Wizard namestitev je uspešno odstranil %P. Pred uporabo programa, ponovno zaženite vaš raèunalnik."    
+FinishRebootDlgID502="Da, želim ponovno zagnati raèunalnik. " 
+FinishRebootDlgID503="Ne, raèunalnik bom ponovno zagnal kasneje. " 
+FinishRebootDlgID712="Odstranite diskete iz disketnega pogona in kliknite Finish (Konèaj) za popolni setup."
+
+FinishDlgID50="Uspešna Namestitev Wizard-a " 
+
+FinishInstallDlgID711=" Wizard namestitev je bila uspešno opravljena za %P. Za izhod iz wizard-akliknite Finish (Konèaj)."    
+FinishUninstallDlgID711=" Wizard namestitev je uspešno odstranill %P. Za izhod iz wizard-akliknite Finish (Konèaj)."    
+
+
+
+AskPathDlgID50=" Izbor Lokacije Vira" 
+AskPathDlgID51="Izberite mapo, kjer se nahajajo setup datoteke."
+AskPathDlgID901="Prosimo, vtipkajte lokacijo, kjer se nahajajo setup datoteke."
+AskPathDlgID31="Iskanje" 
+
+MaintainDlgID50="Dobrodošli"
+MaintainDlgID51="Ažuracija ali odstranitev programa."
+MaintainDlgID710="Dobrodošli v Programu za Vzdrževanje Setup-a %P. Ta program vam omogoèa spreminjanje dejanske namestitve. Kliknite eno izmed spodnjih opcij."
+#MaintainDlgID301="Ažuracija(&U)" 
+MaintainDlgID302="Odstranitev(&R)"
+MaintainDlgID701="Izbor komponent za ažuracijo ali dodajanje novih komponent za namestitev "         
+MaintainDlgID702="Izbor komponent za odstrantev"	
+
+NextButton="Naslednji(&N) >"
+CancelButton="Preklic(&C)" 
+BackButton ="< Nazaj(&B)"
+FinishButton="Konèaj(&F)"	                
+
+
+VMSDelComfirm="Ali ste preprièani, da želite odstraniti vse komponente?"
+VMSCancelingDescription="Ali ste preprièani, da želite prekiniti namestitev wizard-a?"   
+VMSAbort="Prekinitev "
+VMSErrorCodeMissDLL="Žal so se izgubile nekatere pomembne datoteke iz tega programskega paketa. Prosimo, da ponovno naložite paket in se obrnete na prodajalca. Za zakljuèek namestitve wizard-a pritisnite OK. "
+VMSErrorCodeWithoutLicense=" Licenèna datoteka je bila odstranjena ali preimenovana; prosimo, da se preprièate ali imate potrebno licenco za uporabo tega programskega paketa. Za zakljuèek namestitve wizard-a pritisnite OK."
+VMSErrorCodeErrorSCF="Žal je konfiguracijski sistem v okvari. Prosimo vas, da se za ažuracijo obrnete na prodajalca. Za nadaljevanje namestitve wizard-a pritisnite OK."
+VMSCaution="Pozor"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" postopek ni dokonèan. Za nadaljevanje pritisnite OK."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" Nalaganje ni bilo uspešno. Za nadaljevanje pritisnite OK."
+
+VMSErrorCodenotSupportedhw="Žal namestitveni wizard v vašem sistemu ne najde podporne strojne opreme. Preverite stanje vaše strojne opreme in znova poskusite. Za nadaljevanje namestitve wizarda pritisnite OK."	
+VMSErrorCodeUnknowOS="Neznana OS razlièica"
+VMSFinishErrorMsgofInstall="OPOZORILO: Ena od komponent ni uspešno namešèena v sistem. Preverite beležno datoteko."
+VMSFinishErrorMsgofRemove ="OPOZORILO: Ena od komponent ni bila uspešno odstranjena iz sistema. Preverite beležno datoteko."
+VMSInstallProgress="Namešèanje ..."
+VMSSpecifyPathAgain="Neznana lokacija setup datotek. Prosimo, opišite pot do vira datoteke."
+VMSStop="Stop";			
+VMSUninstallProgress="Odstranjevanje ..."
+VMSWait="Skeniranje strojne opreme. Prosimo, poèakajte."
+
+TradeMark="VIA "
+GeneralID="Platform Device Manager"
+MaintainDlgID301="Install/Update(&U)"
+AutoRebootWarning="Please save your tasks immediately before press next button. The component(s) listed below will reboot system automatically without notification:"
+VMSErrorCodenotSupportedOS="Sorry, the install wizard can't find the proper component for the current platform. Please press OK to terminate the install wizard."

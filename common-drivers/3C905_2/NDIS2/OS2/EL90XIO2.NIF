@@ -1,0 +1,58 @@
+[EL90X]
+Type = NDIS
+Title = "3Com Fast EtherLink/EtherLink XL Family OS/2"
+Version = 3.00
+Drivername = EL90X$
+Xports = NETBEUI, LANDD
+
+[FILE]
+Name = EL90X.OS2
+
+; Parameter start
+
+[MaxTransmits]
+tag = MAXTRANSMITS
+display = "Maximum Number of Queued Transmits"
+type = decimal
+range = 6 - 50
+default = 40
+optional = YES
+editable = YES
+help = "This parameter specifies the maximum number of transmit queue
+ entries for the network adapter driver.  For a server workstation or
+ gateway workstation, set this parameter to 40."
+
+[NetAddress]
+tag = NETADDRESS
+display = "Network Adapter Address"
+type = Hexstring
+Strlength = 12
+optional = YES
+editable = YES
+help = "This parameter overrides the network address of the network
+ adapter card.	The value of this parameter is a hexadecimal string of
+ 12 digits, as in 02608C123456.  The address must be unique among all
+ other network adapter addresses on the network.  The least significant
+ bit of the 1st byte must be zero, and the second significant bit should
+ be one."
+ 
+[Slot]
+tag = SLOT
+display = "PCI Slot Number"
+type = decimal
+range = 0 - 31
+optional = YES
+editable = YES
+help = "This parameter tells the driver to bind to an adapter in a
+ particular PCI Slot."
+
+[BusNo]
+tag = BUSNO
+display = "PCI Bus Number"
+type = decimal
+range = 0 - 4
+optional = YES
+editable = YES
+help = "This parameter tells the driver to bind to an adapter in a
+ particular PCI Bus."
+

@@ -1,0 +1,543 @@
+[Version]
+;CatalogFile = 
+Signature = $Chicago$
+Provider = Matrox Graphics Inc.
+ClassGuid = {4d36e968-e325-11ce-bfc1-08002be10318}
+Class = Display
+DriverVer=05/28/2002, 6.83.017.0
+
+[SourceDisksNames]
+1 = %Disk1%,,1
+
+[SourceDisksFiles]
+G550.vxd = 1
+G550DD.vxd = 1
+G550DD32.dll = 1
+G550.drv = 1
+G550SP.dll = 1
+g400icd.dll = 1
+vgartd.vxd = 1
+pduninst.exe = 1
+pdinst16.dll = 1
+pdinst32.dll = 1
+SuppEng.rtf = 1
+PDeskEng.cnt = 1
+PDeskEng.hlp = 1
+PDResEng.dll = 1
+pdmmdEng.hlp = 1
+pdmmdEng.cnt = 1
+ReadEng.txt = 1
+SuppFre.rtf = 1
+PDeskFre.cnt = 1
+PDeskFre.hlp = 1
+PDResFre.dll = 1
+pdmmdFre.hlp = 1
+pdmmdFre.cnt = 1
+ReadFre.txt = 1
+SuppGer.rtf = 1
+PDeskGer.cnt = 1
+PDeskGer.hlp = 1
+PDResGer.dll = 1
+pdmmdGer.hlp = 1
+pdmmdGer.cnt = 1
+ReadGer.txt = 1
+SuppIta.rtf = 1
+PDeskIta.cnt = 1
+PDeskIta.hlp = 1
+PDResIta.dll = 1
+pdmmdIta.hlp = 1
+pdmmdIta.cnt = 1
+ReadIta.txt = 1
+SuppSpa.rtf = 1
+PDeskSpa.cnt = 1
+PDeskSpa.hlp = 1
+PDResSpa.dll = 1
+pdmmdSpa.hlp = 1
+pdmmdSpa.cnt = 1
+ReadSpa.txt = 1
+pdesk.exe = 1
+pdtools.dll = 1
+pdpages.dll = 1
+pdkernel.dll = 1
+pdshell.dll = 1
+pdbkgnd.bmp = 1
+pdmonlst.mpl = 1
+pdeskcmd.exe = 1
+pdmmd.exe = 1
+pdmmd.dll = 1
+pdmmdres.dll = 1
+
+[DestinationDirs]
+DefaultDestDir = 11
+Files.PDesk = 11, PDesk
+
+[Manufacturer]
+%Matrox% = Mfg.Matrox
+
+[Mfg.Matrox]
+;---------------
+;G550 - English
+;---------------
+%Str00%%ENG%=IN00.ENG,PCI\VEN_102B&DEV_2527&SUBSYS_0F83102B
+%Str00%%ENG%=IN00.ENG,PCI\VEN_102B&DEV_2527&SUBSYS_0F84102B
+%Str00%%ENG%=IN00.ENG,PCI\VEN_102B&DEV_2527&SUBSYS_1E41102B
+%Str01%%ENG%=IN00.ENG,PCI\VEN_102B&DEV_2527&SUBSYS_00121705
+%Str01%%ENG%=IN00.ENG,PCI\VEN_102B&DEV_2527&SUBSYS_00111705
+;---------------
+;G550 - Français
+;---------------
+%Str00%%FRE%=IN00.FRE,PCI\VEN_102B&DEV_2527&SUBSYS_0F83102B
+%Str00%%FRE%=IN00.FRE,PCI\VEN_102B&DEV_2527&SUBSYS_0F84102B
+%Str00%%FRE%=IN00.FRE,PCI\VEN_102B&DEV_2527&SUBSYS_1E41102B
+%Str01%%FRE%=IN00.FRE,PCI\VEN_102B&DEV_2527&SUBSYS_00121705
+%Str01%%FRE%=IN00.FRE,PCI\VEN_102B&DEV_2527&SUBSYS_00111705
+;---------------
+;G550 - Italiano
+;---------------
+%Str00%%ITA%=IN00.ITA,PCI\VEN_102B&DEV_2527&SUBSYS_0F83102B
+%Str00%%ITA%=IN00.ITA,PCI\VEN_102B&DEV_2527&SUBSYS_0F84102B
+%Str00%%ITA%=IN00.ITA,PCI\VEN_102B&DEV_2527&SUBSYS_1E41102B
+%Str01%%ITA%=IN00.ITA,PCI\VEN_102B&DEV_2527&SUBSYS_00121705
+%Str01%%ITA%=IN00.ITA,PCI\VEN_102B&DEV_2527&SUBSYS_00111705
+;---------------
+;G550 - Deutsch
+;---------------
+%Str00%%GER%=IN00.GER,PCI\VEN_102B&DEV_2527&SUBSYS_0F83102B
+%Str00%%GER%=IN00.GER,PCI\VEN_102B&DEV_2527&SUBSYS_0F84102B
+%Str00%%GER%=IN00.GER,PCI\VEN_102B&DEV_2527&SUBSYS_1E41102B
+%Str01%%GER%=IN00.GER,PCI\VEN_102B&DEV_2527&SUBSYS_00121705
+%Str01%%GER%=IN00.GER,PCI\VEN_102B&DEV_2527&SUBSYS_00111705
+;---------------
+;G550 - Espanol
+;---------------
+%Str00%%SPA%=IN00.SPA,PCI\VEN_102B&DEV_2527&SUBSYS_0F83102B
+%Str00%%SPA%=IN00.SPA,PCI\VEN_102B&DEV_2527&SUBSYS_0F84102B
+%Str00%%SPA%=IN00.SPA,PCI\VEN_102B&DEV_2527&SUBSYS_1E41102B
+%Str01%%SPA%=IN00.SPA,PCI\VEN_102B&DEV_2527&SUBSYS_00121705
+%Str01%%SPA%=IN00.SPA,PCI\VEN_102B&DEV_2527&SUBSYS_00111705
+
+;==============================
+;G550 Section(s) 
+;==============================
+[IN00.ENG]
+AddReg = AddReg.MGABG, AddReg.G550, AddReg.Icd.G400, AddReg.PackageVer, AddReg.PDesk, AddReg.Settings.ENG, AddReg.Modes, AddReg.VidParms, AddReg.AGP, AddReg.Languages, AddReg.Web, AddReg.Web.Eng
+DelReg = DelReg.DriverSettings, DelReg.Icd.G550, DelReg.PDesk
+CopyFiles = Files.G550, Files.Icd.G400, Files.AGP, Files.UninstExe, Files.UninstDll, Files.PDesk
+DriverVer=07/26/2001, 6.83.017.0
+
+[IN00.FRE]
+AddReg = AddReg.MGABG, AddReg.G550, AddReg.Icd.G400, AddReg.PackageVer, AddReg.PDesk, AddReg.Settings.FRE, AddReg.Modes, AddReg.VidParms, AddReg.AGP, AddReg.Languages, AddReg.Web, AddReg.Web.Fre
+DelReg = DelReg.DriverSettings, DelReg.Icd.G550, DelReg.PDesk
+CopyFiles = Files.G550, Files.Icd.G400, Files.AGP, Files.UninstExe, Files.UninstDll, Files.PDesk
+DriverVer=07/26/2001, 6.83.017.0
+
+[IN00.ITA]
+AddReg = AddReg.MGABG, AddReg.G550, AddReg.Icd.G400, AddReg.PackageVer, AddReg.PDesk, AddReg.Settings.ITA, AddReg.Modes, AddReg.VidParms, AddReg.AGP, AddReg.Languages, AddReg.Web, AddReg.Web.Ita
+DelReg = DelReg.DriverSettings, DelReg.Icd.G550, DelReg.PDesk
+CopyFiles = Files.G550, Files.Icd.G400, Files.AGP, Files.UninstExe, Files.UninstDll, Files.PDesk
+DriverVer=07/26/2001, 6.83.017.0
+
+[IN00.GER]
+AddReg = AddReg.MGABG, AddReg.G550, AddReg.Icd.G400, AddReg.PackageVer, AddReg.PDesk, AddReg.Settings.GER, AddReg.Modes, AddReg.VidParms, AddReg.AGP, AddReg.Languages, AddReg.Web, AddReg.Web.Ger
+DelReg = DelReg.DriverSettings, DelReg.Icd.G550, DelReg.PDesk
+CopyFiles = Files.G550, Files.Icd.G400, Files.AGP, Files.UninstExe, Files.UninstDll, Files.PDesk
+DriverVer=07/26/2001, 6.83.017.0
+
+[IN00.SPA]
+AddReg = AddReg.MGABG, AddReg.G550, AddReg.Icd.G400, AddReg.PackageVer, AddReg.PDesk, AddReg.Settings.SPA, AddReg.Modes, AddReg.VidParms, AddReg.AGP, AddReg.Languages, AddReg.Web, AddReg.Web.Spa
+DelReg = DelReg.DriverSettings, DelReg.Icd.G550, DelReg.PDesk
+CopyFiles = Files.G550, Files.Icd.G400, Files.AGP, Files.UninstExe, Files.UninstDll, Files.PDesk
+DriverVer=07/26/2001, 6.83.017.0
+
+[AddReg.MGABG]
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,PDEnable,0x00000001,01,00,00,00
+
+[DelReg.DriverSettings]
+HKR,,DevLoader
+HKR,,Ver
+HKR,CURRENT,
+HKR,DEFAULT,
+HKR,MODES,
+HKR,ENUM\Device1,pnpid
+
+[AddReg.G550]
+HKR,DEFAULT,drv,,G550.drv
+HKR,DEFAULT,drv2,,G550.drv
+HKR,DEFAULT,minivdd,,G550.vxd
+HKR,DEFAULT,minivdd2,,G550.vxd
+HKR,DEFAULT,Mode,,"16,800,600"
+HKR,,DevLoader,,*vdd
+HKR,Settings\Monitor,DisableGTF,,1
+HKR,DEFAULT,DDC,,1
+HKR,DEFAULT,RefreshRate,,-1
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+
+[DelReg.Icd.G550]
+HKLM,Software\Microsoft\Windows\CurrentVersion\OpenGLDrivers,G400ICD
+
+[Files.G550]
+G550.vxd,,
+G550DD.vxd,,
+G550DD32.dll,,
+G550DD32.dll,,
+G550.drv,,
+G550SP.dll,,
+
+[AddReg.Icd.G400]
+HKLM,Software\Microsoft\Windows\CurrentVersion\OpenGLDrivers,G400ICD,,G400Icd.dll
+
+[Files.Icd.G400]
+g400icd.dll,,
+
+[AddReg.PackageVer]
+HKR,Settings,PackageVer,,"6.83.017"
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,PDeskVer,,"6.82.016"
+
+[AddReg.PDesk]
+HKCR,CLSID\{F8E7DB61-9CA0-11d1-AD83-00A024D24BF3},,,"Matrox Powerdesk Kernel"
+HKCR,CLSID\{F8E7DB61-9CA0-11d1-AD83-00A024D24BF3}\InProcServer32,,,%11%\"PDesk\PDKernel.dll"
+HKCR,CLSID\{F8E7DB61-9CA0-11d1-AD83-00A024D24BF3}\InProcServer32,ThreadingModel,,Apartment
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,"Matrox Powerdesk",,%11%\"PDesk\PDesk.exe /Autolaunch"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Graphics Uninstaller,UninstallString,,%11%\PDesk\PDUninst.exe
+HKLM,Software\Matrox\PowerDesk\Version6\WindowControl\AppWindowPosition\Exclude,VideoRenderer,0x00010001,1
+HKLM,Software\Matrox\PowerDesk\Version6\WindowControl,SysHookAllowed,0x00000001,0
+HKLM,Software\Matrox\PowerDesk\Version6\MultiDesktop\Exclude,SysFader,0x00000001,01
+HKR,,Ver,,4.0
+
+[DelReg.PDesk]
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,InstalledLanguages
+
+[AddReg.Settings.ENG]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Graphics Uninstaller,DisplayName,,"Matrox Graphics Software (remove only)"
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,SelectedLanguage,,"ENG"
+
+[AddReg.Modes]
+HKR,"MODES\8\640,480",,,
+HKR,"MODES\8\800,600",,,
+HKR,"MODES\8\848,480",,,
+HKR,"MODES\8\856,480",,,
+HKR,"MODES\8\864,480",,,
+HKR,"MODES\8\1024,512",,,
+HKR,"MODES\8\1024,768",,,
+HKR,"MODES\8\1072,600",,,
+HKR,"MODES\8\1152,864",,,
+HKR,"MODES\8\1280,720",,,
+HKR,"MODES\8\1280,768",,,
+HKR,"MODES\8\1280,800",,,
+HKR,"MODES\8\1280,960",,,
+HKR,"MODES\8\1280,1024",,,
+HKR,"MODES\8\1360,768",,,
+HKR,"MODES\8\1376,768",,,
+HKR,"MODES\8\1600,1024",,,
+HKR,"MODES\8\1600,1200",,,
+HKR,"MODES\8\1600,1280",,,
+HKR,"MODES\8\1792,1344",,,
+HKR,"MODES\8\1800,1440",,,
+HKR,"MODES\8\1856,1392",,,
+HKR,"MODES\8\1920,1034",,,
+HKR,"MODES\8\1920,1080",,,
+HKR,"MODES\8\1920,1200",,,
+HKR,"MODES\8\1920,1440",,,
+HKR,"MODES\8\2048,1536",,,
+HKR,"MODES\16\640,480",,,
+HKR,"MODES\16\800,600",,,
+HKR,"MODES\16\848,480",,,
+HKR,"MODES\16\856,480",,,
+HKR,"MODES\16\864,480",,,
+HKR,"MODES\16\1024,512",,,
+HKR,"MODES\16\1024,768",,,
+HKR,"MODES\16\1072,600",,,
+HKR,"MODES\16\1152,864",,,
+HKR,"MODES\16\1280,720",,,
+HKR,"MODES\16\1280,768",,,
+HKR,"MODES\16\1280,800",,,
+HKR,"MODES\16\1280,960",,,
+HKR,"MODES\16\1280,1024",,,
+HKR,"MODES\16\1360,768",,,
+HKR,"MODES\16\1376,768",,,
+HKR,"MODES\16\1600,1024",,,
+HKR,"MODES\16\1600,1200",,,
+HKR,"MODES\16\1600,1280",,,
+HKR,"MODES\16\1792,1344",,,
+HKR,"MODES\16\1800,1440",,,
+HKR,"MODES\16\1856,1392",,,
+HKR,"MODES\16\1920,1034",,,
+HKR,"MODES\16\1920,1080",,,
+HKR,"MODES\16\1920,1200",,,
+HKR,"MODES\16\1920,1440",,,
+HKR,"MODES\16\2048,1536",,,
+HKR,"MODES\24\640,480",,,
+HKR,"MODES\24\800,600",,,
+HKR,"MODES\24\848,480",,,
+HKR,"MODES\24\856,480",,,
+HKR,"MODES\24\864,480",,,
+HKR,"MODES\24\1024,512",,,
+HKR,"MODES\24\1024,768",,,
+HKR,"MODES\24\1072,600",,,
+HKR,"MODES\24\1152,864",,,
+HKR,"MODES\24\1280,720",,,
+HKR,"MODES\24\1280,768",,,
+HKR,"MODES\24\1280,800",,,
+HKR,"MODES\24\1280,960",,,
+HKR,"MODES\24\1280,1024",,,
+HKR,"MODES\24\1360,768",,,
+HKR,"MODES\24\1376,768",,,
+HKR,"MODES\24\1600,1024",,,
+HKR,"MODES\24\1600,1200",,,
+HKR,"MODES\24\1600,1280",,,
+HKR,"MODES\24\1792,1344",,,
+HKR,"MODES\24\1800,1440",,,
+HKR,"MODES\24\1856,1392",,,
+HKR,"MODES\24\1920,1034",,,
+HKR,"MODES\24\1920,1080",,,
+HKR,"MODES\24\1920,1200",,,
+HKR,"MODES\24\1920,1440",,,
+HKR,"MODES\24\2048,1536",,,
+HKR,"MODES\32\640,480",,,
+HKR,"MODES\32\800,600",,,
+HKR,"MODES\32\848,480",,,
+HKR,"MODES\32\856,480",,,
+HKR,"MODES\32\864,480",,,
+HKR,"MODES\32\1024,512",,,
+HKR,"MODES\32\1024,768",,,
+HKR,"MODES\32\1072,600",,,
+HKR,"MODES\32\1152,864",,,
+HKR,"MODES\32\1280,720",,,
+HKR,"MODES\32\1280,768",,,
+HKR,"MODES\32\1280,800",,,
+HKR,"MODES\32\1280,960",,,
+HKR,"MODES\32\1280,1024",,,
+HKR,"MODES\32\1360,768",,,
+HKR,"MODES\32\1376,768",,,
+HKR,"MODES\32\1600,1024",,,
+HKR,"MODES\32\1600,1200",,,
+HKR,"MODES\32\1600,1280",,,
+HKR,"MODES\32\1792,1344",,,
+HKR,"MODES\32\1800,1440",,,
+HKR,"MODES\32\1856,1392",,,
+HKR,"MODES\32\1920,1034",,,
+HKR,"MODES\32\1920,1080",,,
+HKR,"MODES\32\1920,1200",,,
+HKR,"MODES\32\1920,1440",,,
+HKR,"MODES\32\2048,1536",,,
+
+[AddReg.VidParms]
+HKR,"Settings\VideoParameters","320,200",0x00000001,\
+55,00,24,00,C5,3E,00,00,20,00,20,00,40,00,03,00,03,00,10,00,00,00,00,00,\
+4a,00,1f,00,0a,32,00,00,08,00,20,00,30,00,03,00,03,00,10,00,00,00,00,00
+HKR,"Settings\VideoParameters","320,240",0x00000001,\
+55,00,2b,00,4d,44,00,00,08,00,20,00,30,00,03,00,03,00,10,00,00,00,00,00,\
+3f,00,20,00,0a,32,00,00,08,00,20,00,30,00,03,00,03,00,10,00,00,00,00,00
+HKR,"Settings\VideoParameters","320,400",0x00000001,\
+55,00,26,00,9e,3e,00,00,10,00,28,00,30,00,06,00,06,00,20,00,00,00,00,00,\
+47,00,20,00,32,32,00,00,08,00,20,00,30,00,06,00,06,00,20,00,00,00,00,00
+HKR,"Settings\VideoParameters","400,300",0x00000001,\
+4b,00,2f,00,a8,61,00,00,10,00,28,00,50,00,03,00,03,00,10,00,00,00,00,00
+HKR,"Settings\VideoParameters","512,384",0x00000001,\
+55,00,22,00,da,55,00,00,10,00,40,00,30,00,01,00,03,00,10,00,00,00,00,00,\
+4e,00,20,00,c0,4e,00,00,10,00,40,00,30,00,01,00,03,00,10,00,00,00,00,00
+HKR,"Settings\VideoParameters","640,400",0x00000001,\
+55,00,26,00,ee,7a,00,00,20,00,40,00,60,00,01,00,03,00,29,00,00,00,00,00,\
+4b,00,20,00,57,62,00,00,10,00,60,00,30,00,01,00,03,00,10,00,00,00,00,00
+HKR,"Settings\VideoParameters","640,480",0x00000001,\
+3c,00,20,00,57,62,00,00,10,00,60,00,30,00,0a,00,02,00,21,00,00,00,00,00,\
+48,00,25,00,0c,7b,00,00,18,00,28,00,80,00,09,00,03,00,1c,00,00,00,00,00,\
+4b,00,26,00,0c,7b,00,00,10,00,40,00,78,00,01,00,03,00,10,00,00,00,00,00,\
+55,00,2b,00,a0,8c,00,00,38,00,38,00,50,00,01,00,03,00,19,00,00,00,00,00
+HKR,"Settings\VideoParameters","800,600",0x00000001,\
+38,00,23,00,a0,8c,00,00,18,00,48,00,80,00,01,00,02,00,16,00,0c,00,00,00,\
+3c,00,26,00,40,9c,00,00,28,00,80,00,58,00,01,00,04,00,17,00,0c,00,00,00,\
+48,00,30,00,50,c3,00,00,38,00,78,00,40,00,25,00,06,00,17,00,0c,00,00,00,\
+4b,00,2f,00,5c,c1,00,00,10,00,50,00,a0,00,01,00,03,00,15,00,0c,00,00,00,\
+55,00,36,00,ba,db,00,00,20,00,40,00,98,00,01,00,03,00,1b,00,0c,00,00,00
+HKR,"Settings\VideoParameters","848,480",0x00000001,\
+3c,00,1f,00,d6,83,00,00,10,00,70,00,70,00,06,00,08,00,17,00,00,00,00,00
+HKR,"Settings\VideoParameters","856,480",0x00000001,\
+3c,00,1e,00,0c,7b,00,00,20,00,40,00,60,00,04,00,08,00,08,00,00,00,00,00
+HKR,"Settings\VideoParameters","864,480",0x00000001,\
+3c,00,1e,00,f6,7c,00,00,18,00,50,00,68,00,01,00,03,00,0d,00,08,00,00,00
+HKR,"Settings\VideoParameters","1024,512",0x00000001,\
+3c,00,20,00,61,a1,00,00,20,00,68,00,88,00,01,00,03,00,0f,00,08,00,00,00
+HKR,"Settings\VideoParameters","1024,768",0x00000001,\
+3c,00,30,00,e8,fd,00,00,18,00,88,00,a0,00,03,00,06,00,1d,00,00,00,00,00,\
+46,00,38,00,f8,24,01,00,18,00,88,00,90,00,03,00,06,00,1d,00,00,00,00,00,\
+4b,00,3c,00,9e,33,01,00,10,00,60,00,b0,00,01,00,03,00,1c,00,0c,00,00,00,\
+55,00,45,00,24,71,01,00,30,00,60,00,d0,00,01,00,03,00,24,00,0c,00,00,00,\
+2b,00,23,00,64,af,00,00,08,00,b0,00,38,00,00,00,04,00,14,00,0d,00,00,00
+HKR,"Settings\VideoParameters","1072,600",0x00000001,\
+3c,00,25,00,b6,c8,00,00,30,00,68,00,98,00,01,00,03,00,12,00,08,00,00,00
+HKR,"Settings\VideoParameters","1152,864",0x00000001,\
+3c,00,36,00,80,38,01,00,20,00,60,00,c0,00,01,00,03,00,20,00,00,00,00,00,\
+46,00,3c,00,24,71,01,00,20,00,60,00,c8,00,01,00,03,00,2c,00,00,00,00,00,\
+4b,00,44,00,e0,a5,01,00,40,00,80,00,00,01,01,00,03,00,20,00,0c,00,00,00,\
+55,00,4d,00,9c,da,01,00,40,00,80,00,e0,00,01,00,03,00,2b,00,00,00,00,00
+HKR,"Settings\VideoParameters","1280,720",0x00000001,\
+3c,00,2d,00,d4,2a,01,00,30,00,b0,00,c0,00,04,00,08,00,12,00,00,00,00,00
+HKR,"Settings\VideoParameters","1280,768",0x00000001,\
+38,00,2d,00,76,29,01,00,30,00,70,00,f8,00,01,00,03,00,1e,00,00,00,00,00
+HKR,"Settings\VideoParameters","1280,800",0x00000001,\
+3c,00,32,00,2b,46,01,00,48,00,80,00,c8,00,01,00,03,00,18,00,08,00,00,00
+HKR,"Settings\VideoParameters","1280,960",0x00000001,\
+3c,00,3c,00,e0,a5,01,00,60,00,70,00,38,01,01,00,03,00,24,00,00,00,00,00,\
+55,00,56,00,10,44,02,00,40,00,a0,00,e0,00,01,00,03,00,2f,00,00,00,00,00
+HKR,"Settings\VideoParameters","1280,1024",0x00000001,\
+3c,00,40,00,e0,a5,01,00,30,00,70,00,f8,00,01,00,03,00,26,00,0c,00,00,00,\
+4b,00,50,00,58,0f,02,00,10,00,90,00,f8,00,01,00,03,00,26,00,0c,00,00,00,\
+55,00,5b,00,3c,67,02,00,40,00,a0,00,e0,00,01,00,03,00,2c,00,0c,00,00,00
+HKR,"Settings\VideoParameters","1360,768",0x00000001,\
+3c,00,30,00,67,20,01,00,3a,00,1a,00,40,00,0a,00,06,00,20,00,00,00,00,00
+HKR,"Settings\VideoParameters","1376,768",0x00000001,\
+3c,00,30,00,f4,50,01,00,48,00,90,00,d8,00,01,00,03,00,17,00,08,00,00,00
+HKR,"Settings\VideoParameters","1600,1024",0x00000001,\
+3c,00,53,00,58,0f,02,00,20,00,a0,00,30,01,03,00,03,00,28,00,00,00,00,00,\
+4c,00,53,00,cf,99,02,00,20,00,a0,00,30,01,03,00,03,00,28,00,00,00,00,00
+HKR,"Settings\VideoParameters","1600,1200",0x00000001,\
+3c,00,4b,00,d0,78,02,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+41,00,51,00,8c,ad,02,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+46,00,58,00,48,e2,02,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+4b,00,5e,00,04,17,03,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+55,00,6a,00,7c,80,03,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00
+HKR,"Settings\VideoParameters","1600,1280",0x00000001,\
+3c,00,4f,00,ad,a3,02,00,78,00,a8,00,20,01,01,00,03,00,29,00,08,00,00,00
+HKR,"Settings\VideoParameters","1792,1344",0x00000001,\
+3c,00,54,00,ce,1f,03,00,80,00,c8,00,48,01,01,00,03,00,2e,00,08,00,00,00,\
+4b,00,6a,00,88,fb,03,00,60,00,d8,00,60,01,01,00,03,00,45,00,08,00,00,00
+HKR,"Settings\VideoParameters","1800,1440",0x00000001,\
+3c,00,59,00,56,3d,03,00,60,00,c0,00,30,01,01,00,03,00,2e,00,00,00,00,00,\
+46,00,69,00,90,d0,03,00,60,00,c0,00,30,01,01,00,03,00,2e,00,00,00,00,00
+HKR,"Settings\VideoParameters","1856,1392",0x00000001,\
+3c,00,56,00,8a,54,03,00,60,00,e0,00,60,01,01,00,03,00,2b,00,08,00,00,00,\
+4b,00,71,00,00,65,04,00,80,00,e0,00,60,01,01,00,03,00,68,00,08,00,00,00
+HKR,"Settings\VideoParameters","1920,1034",0x00000001,\
+1e,00,44,00,0a,22,01,00,2c,00,58,00,94,00,05,00,05,00,23,00,01,00,00,00
+HKR,"Settings\VideoParameters","1920,1080",0x00000001,\
+3c,00,44,00,60,70,02,00,20,00,90,00,10,01,03,00,03,00,27,00,00,00,00,00,\
+48,00,5b,00,d7,4b,03,00,30,00,d8,00,78,01,03,00,03,00,56,00,00,00,00,00
+HKR,"Settings\VideoParameters","1920,1200",0x00000001,\
+3c,00,4b,00,08,f5,02,00,40,00,00,01,58,01,03,00,03,00,2c,00,00,00,00,00,\
+41,00,51,00,1e,34,03,00,40,00,00,01,58,01,03,00,03,00,2c,00,00,00,00,00,\
+4c,00,5F,00,e8,be,03,00,40,00,00,01,58,01,03,00,03,00,2c,00,00,00,00,00
+HKR,"Settings\VideoParameters","1920,1440",0x00000001,\
+3c,00,5a,00,10,92,03,00,80,00,d0,00,58,01,01,00,03,00,38,00,08,00,00,00,\
+4b,00,71,00,28,88,04,00,90,00,e0,00,60,01,01,00,03,00,38,00,08,00,00,00
+HKR,"Settings\VideoParameters","2048,1536",0x00000001,\
+3c,00,5f,00,c8,12,04,00,98,00,e0,00,78,01,01,00,03,00,31,00,00,00,00,00
+
+[AddReg.AGP]
+HKLM,System\CurrentControlSet\Services\VXD\VGARTD,StaticVxd,,vgartd.vxd
+
+[Files.AGP]
+vgartd.vxd,,
+
+[Files.UninstExe]
+pduninst.exe,,,0x00000004
+
+[Files.UninstDll]
+pdinst16.dll,,,0x00000004
+pdinst32.dll,,,0x00000004
+
+[AddReg.Languages]
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,InstalledLanguages,,"ENG,FRE,GER,SPA,ITA"
+
+[Files.PDesk]
+SuppEng.rtf,,
+PDeskEng.cnt,,
+PDeskEng.hlp,,
+PDResEng.dll,,
+pdmmdEng.hlp,,
+pdmmdEng.cnt,,
+SuppFre.rtf,,
+PDeskFre.cnt,,
+PDeskFre.hlp,,
+PDResFre.dll,,
+pdmmdFre.hlp,,
+pdmmdFre.cnt,,
+SuppGer.rtf,,
+PDeskGer.cnt,,
+PDeskGer.hlp,,
+PDResGer.dll,,
+pdmmdGer.hlp,,
+pdmmdGer.cnt,,
+SuppIta.rtf,,
+PDeskIta.cnt,,
+PDeskIta.hlp,,
+PDResIta.dll,,
+pdmmdIta.hlp,,
+pdmmdIta.cnt,,
+SuppSpa.rtf,,
+PDeskSpa.cnt,,
+PDeskSpa.hlp,,
+PDResSpa.dll,,
+pdmmdSpa.hlp,,
+pdmmdSpa.cnt,,
+pdesk.exe,,
+pdtools.dll,,
+pdpages.dll,,
+pdkernel.dll,,
+pdshell.dll,,
+pdbkgnd.bmp,,
+pdmonlst.mpl,,
+pdeskcmd.exe,,
+pduninst.exe,,
+pdmmd.exe,,
+pdmmd.dll,,
+pdmmdres.dll,,
+ReadEng.txt,,
+ReadFre.txt,,
+ReadGer.txt,,
+ReadIta.txt,,
+ReadSpa.txt,,
+pdinst16.dll,,
+pdinst32.dll,,
+
+[AddReg.Web]
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,WebPath,,"http://www.matrox.com/mga/home.htm"
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,ShowSupport,0x00000001,01,00,00,00
+
+[AddReg.Web.Eng]
+HKLM,Software\Matrox\PowerDesk\Version6,RegisterWebPath,,"http://www.matrox.com/mga/registration/home.cfm"
+
+[AddReg.Settings.FRE]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Graphics Uninstaller,DisplayName,,"Matrox - Logiciel graphique (désinstaller uniquement)"
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,SelectedLanguage,,"FRE"
+
+[AddReg.Web.Fre]
+HKLM,Software\Matrox\PowerDesk\Version6,RegisterWebPath,,"http://www.matrox.com/mga/francais/registration/home.cfm"
+
+[AddReg.Settings.ITA]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Graphics Uninstaller,DisplayName,,"Matrox - Software scheda grafica (solo rimozione)"
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,SelectedLanguage,,"ITA"
+
+[AddReg.Web.Ita]
+HKLM,Software\Matrox\PowerDesk\Version6,RegisterWebPath,,"http://www.matrox.com/mga/italiano/registration/home.cfm"
+
+[AddReg.Settings.GER]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Graphics Uninstaller,DisplayName,,"Matrox Grafik Software (nur entfernen)"
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,SelectedLanguage,,"GER"
+
+[AddReg.Web.Ger]
+HKLM,Software\Matrox\PowerDesk\Version6,RegisterWebPath,,"http://www.matrox.com/mga/deutsch/registration/home.cfm"
+
+[AddReg.Settings.SPA]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Graphics Uninstaller,DisplayName,,"Matrox - Software de visualización (sólo eliminar)"
+HKLM,Software\Matrox\PowerDesk\Version6\CurrentSettings,SelectedLanguage,,"SPA"
+
+[AddReg.Web.Spa]
+HKLM,Software\Matrox\PowerDesk\Version6,RegisterWebPath,,"http://www.matrox.com/mga/spanish/registration/home.cfm"
+
+;---------------
+; G550 shared
+;---------------
+;---------------
+; Global Shared
+;---------------
+[Strings]
+Disk1 = "Matrox Graphics Installation Disk 1"
+Matrox = "Matrox Graphics Inc."
+ENG = " - English"
+FRE = " - Français"
+ITA = " - Italiano"
+GER = " - Deutsch"
+SPA = " - Espanol"
+Str00 = "Matrox Millennium G550"
+Str01 = "Digital First Millennium G550"

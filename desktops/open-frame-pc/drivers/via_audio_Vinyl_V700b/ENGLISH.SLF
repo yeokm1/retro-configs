@@ -1,0 +1,109 @@
+[English(United States)]
+StartCopyDlgInstallID50="Installing Components List:"
+StartCopyDlgInstallID51= "Review setting before installing components."
+StartCopyDlgInstallID711="Setup has enough information to start installing the components.  If you want to review or change any settings, click Back.  If you are satisfied with the settings, click Next to begin installing components."
+StartCopyDlgInstallID701="Current setting:" 
+ 	
+StartCopyDlgUnInstallID50="Uninstalling Components List:"
+StartCopyDlgUnInstallID51="Review setting before removing components."  
+StartCopyDlgUnInstallID711="Setup has enough information to start removing the components.  If you want to review or change any settings, click Back.  If you are satisfied with the settings, click Next to begin removing components."
+StartCopyDlgUnInstallID701="Current setting:" 
+
+StartCopyDlgStatusInstallID50=" Installing Status:"
+StartCopyDlgStatusInstallID51 =" Following information to show installing status."  
+StartCopyDlgStatusInstallID711=" The following information will tell you whether or not the components is installed successfully ."   
+StartCopyDlgStatusInstallID701=" Current result:"   
+				
+StartCopyDlgStatusUnInstallID50 =" Removing Status:"
+StartCopyDlgStatusUnInstallID51  =" Following information to show removing status."  
+StartCopyDlgStatusUnInstallID711=" The following information will tell you whether or not the components is removed successfully ."   
+StartCopyDlgStatusUnInstallID701 =" Current Result:" 
+
+WelcomeDlgID50="Welcome to the Install Wizard for %P"
+WelcomeDlgID710="The Install Wizard will install %P on your computer.  To continue, click Next."
+
+LicenseDlgID50="License Agreement"
+LicenseDlgID51="Please read the following license agreement carefully."           
+LicenseDlgID711="Press the PAGE DOWN key to see the rest of the agreement."	
+LicenseDlgID502="I Agree"	
+LicenseDlgID503="I Don't Agree" 
+	
+FeatureDlgInstallID50="Install List:"	
+FeatureDlgInstallID51 ="To choose the components, the Setup will install them."	
+FeatureDlgInstallID711="You can select several or all components to install."
+FeatureDlgUnInstallID50="Remove List:"		
+FeatureDlgUnInstallID51="To choose the components, the Setup will remove them."		
+FeatureDlgUnInstallID711="You can select several components or all components to remove. If you select all features to remove ,Package will uninstall itself."	   
+
+FeatureDlgID1305="Description"		                             
+FeatureDlgID1306="Space Required:"
+FeatureDlgID1307="Space Available:"
+
+//B means bytes.
+FeatureDlgID716="B"
+FeatureDlgID717="B"
+		
+SetupErrorDlgID50="Install Wizard Completed."
+SetupErrorDlgID711="The wizard was interrupted before %P could be completely installed."	
+SetupErrorDlgID712="The system has not been modified. To install this program at a later time, run the installation again.Click Finish to exit the wizard." 
+
+FinishRebootDlgID50="Install Wizard Completed."
+FinishRebootInstallDlgID711="The Install Wizard has successfully installed %P.  Before you can use the program, you must restart your computer."    
+FinishRebootUninstallDlgID711="The Install Wizard has successfully removed %P.  Before you can use the program, you must restart your computer."
+FinishRebootDlgID502="Yes, I want to restart my computer now. " 
+FinishRebootDlgID503="No, I will restart my computer later. " 
+FinishRebootDlgID712="Remove any disks from their drives, and then click Finish to complete setup."
+
+FinishDlgID50="Install Wizard Completed" 
+
+FinishInstallDlgID711="The Install Wizard has successfully installed %P.  Click Finish to exit the wizard."	
+FinishUninstallDlgID711="The Install Wizard has successfully removed %P.  Click Finish to exit the wizard."
+
+
+AskPathDlgID50="Choose Source Location"
+AskPathDlgID51="Select folder where the setup files locate at."
+AskPathDlgID901="Please enter the location where the setup files locate at."
+AskPathDlgID31=	"Browse" 
+
+MaintainDlgID50="Welcome"
+MaintainDlgID51="Update or remove the program."
+MaintainDlgID710="Welcome to the %P Setup Maintenance program. This program lets you modify the current installation. Click one of the options below."
+#MaintainDlgID301="&Update"
+MaintainDlgID302="&Remove"
+MaintainDlgID701="Select components to update or add new component to install "         
+MaintainDlgID702="Select components to remove"	
+
+NextButton="&Next >"
+CancelButton="&Cancel" 
+BackButton ="< &Back"
+FinishButton="&Finish"	                
+
+
+VMSDelComfirm="Are you sure to remove all components ?"
+VMSCancelingDescription="Are you sure to abort the install wizard ?"   
+VMSAbort="Abort"
+VMSErrorCodeMissDLL="Sorry, some importand files of this package are missed. Please download the package again to contact with the service provider. Please press OK to teminate the install wizard. "
+VMSErrorCodeWithoutLicense="The license file was removed or renamed,please make sure that the usage of this software package is covered by license. Please press OK to terminate the install wizard."
+VMSErrorCodeErrorSCF="Sorry the system configuration file is broken. Please contact with the service provider to update it. Please press OK to terminate the install wizard."
+VMSCaution="Caution"
+
+//please leave a space before this sentense.
+VMSErrorCodeCIF=" is failed to complete the process. Please press OK to continue."
+//please leave a space before this sentense.
+VMSErrorCodeMissBin=" is failed to load. Please press OK to continue."
+
+VMSErrorCodenotSupportedhw="Sorry, the install wizard can't find the supported hardware in your system. You should check your hardware and try again. Please press OK to terminate the install wizard."	
+VMSErrorCodeUnknowOS="Unknow OS Version"
+VMSFinishErrorMsgofInstall="NOTE: One of components aren't installed succssfully to system. Check the log file."
+VMSFinishErrorMsgofRemove ="NOTE: One of components aren't removed succssfully from system. Check the log file."
+VMSInstallProgress="Installing ..."
+VMSSpecifyPathAgain="Can't find the setup files. Please specify the source path."
+VMSStop="Stop";			
+VMSUninstallProgress="Removing ..."
+VMSWait="Scaning the hardware. Please wait a second."
+
+TradeMark="VIA "
+GeneralID="Platform Device Manager"
+MaintainDlgID301="Install/Update(&U)"
+AutoRebootWarning="Please save your tasks immediately before press next button. The component(s) listed below will reboot system automatically without notification:"
+VMSErrorCodenotSupportedOS="Sorry, the install wizard can't find the proper component for the current platform. Please press OK to terminate the install wizard."

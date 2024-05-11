@@ -1,0 +1,96 @@
+[Français]
+PDREADME.TXT                MATROX GRAPHICS INC.              2002.05.28
+
+                Matrox PowerDesk pour Windows 98/Me
+
+Remarque: Ce fichier peut contenir certaines informations de 
+dernière minute non traduites dans votre langue. Veuillez nous en 
+excuser.
+
+
+Table des matières
+==================
+
+- Description de cette version
+- Installation
+- [English...]New features[...English]
+- Information supplémentaire
+- Remarques, problèmes, et limitations
+
+
+Description de cette version
+============================
+
+Le logiciel Matrox PowerDesk inclut un pilote d'affichage et des 
+utilitaires d'affichage. Avec ce logiciel, vous pouvez profiter 
+pleinement de votre matériel graphique Matrox et vous pouvez 
+accéder à des fonctions supplémentaires d'affichage Matrox.
+
+
+Installation
+============
+
+Pour installer Matrox PowerDesk, démarrez le programme 
+"Setup" (installation) fourni, puis suivez les instructions qui 
+s'affichent à l'écran.
+
+Le programme n'installera le logiciel que si un modèle de carte 
+graphique Matrox pris en charge par le programme est installé sur 
+votre ordinateur.
+
+
+[English...]
+
+New features
+============
+
+This software includes new features, especially for Matrox 
+hardware with DualHead support. These include:
+
+- The use of different DualHead features (Multi-Display, DVDMax, 
+  Zoom, and Clone) *without* restarting Windows
+
+- Easier-to-use interface for DualHead controls
+
+- Controls for dividing graphics resources (memory and bandwidth) 
+  between your main and secondary displays
+
+- More features accessible through user-defined hot keys (keyboard 
+  shortcuts)
+
+[...English]
+
+
+Information supplémentaire
+==========================
+
+Pour plus d'informations sur Matrox PowerDesk, consultez le 
+fichier d'aide fourni. Pour obtenir des informations spécifiques à 
+votre carte graphique Matrox, consultez votre manuel Matrox ou 
+celui de votre système.
+
+
+Remarques, problèmes, et limitations
+====================================
+
+- Installation dans des versions de Windows en langues différentes
+
+  Si vous installez un logiciel dans une langue différente de la 
+  langue de votre système d'exploitation (par exemple, un logiciel 
+  anglais sur un système japonais), il se peut que vous ayez du 
+  texte et des contrôles de boîte de dialogue coupés. Ceci 
+  provient des différences dans les polices système.
+
+- Prise en charge OpenGL (3D)
+
+  Si vous disposez d'un produit Matrox plus récent ou si votre 
+  logiciel Matrox a été fourni par le fabricant de votre 
+  ordinateur, la prise en charge complète de OpenGL peut être 
+  désactivée avec votre pilote d'affichage Matrox. Consultez le 
+  site web de Matrox (www.matrox.com/mga) pour obtenir un pilote 
+  d'affichage permettant la prise en charge complète de OpenGL. 
+  (Si votre produit Matrox a été fourni par le fabricant de votre 
+  ordinateur, consultez son site web pour obtenir un pilote 
+  d'affichage. Un pilote d'affichage fourni par le fabricant de 
+  votre ordinateur a plus de chances d'avoir été essayé sur votre 
+  modèle).

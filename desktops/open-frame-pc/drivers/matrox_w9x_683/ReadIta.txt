@@ -1,0 +1,95 @@
+[Italiano]
+PDREADME.TXT                MATROX GRAPHICS INC.              2002.05.28
+
+                Matrox PowerDesk per Windows 98/Me
+
+
+Nota: Questo file può contenere alcune informazioni aggiornate non 
+tradotte nella lingua dell'utente. Ci scusiamo per l'inconveniente.
+
+
+Sommario
+========
+
+- Descrizione della versione
+- Installazione
+- [English...]New features[...English]
+- Ulteriori informazioni
+- Note, problemi e limitazioni
+
+
+Descrizione della versione
+==========================
+
+Il software Matrox PowerDesk include un driver dello schermo e 
+alcune utilità. L'utilizzo di questo software consente di trarre 
+pieno vantaggio dall'hardware della scheda grafica Matrox e di 
+accedere alle caratteristiche di visualizzazione aggiuntive.
+
+
+Installazione
+=============
+
+Per installare Matrox PowerDesk, avviare il programma di 
+"Setup" (installazione) incluso, quindi seguire le istruzioni che 
+appaiono sullo schermo.
+
+Tale programma installerà il software solo se nel computer è 
+presente un modello supportato di scheda grafica Matrox.
+
+
+[English...]
+
+New features
+============
+
+This software includes new features, especially for Matrox 
+hardware with DualHead support. These include:
+
+- The use of different DualHead features (Multi-Display, DVDMax, 
+  Zoom, and Clone) *without* restarting Windows
+
+- Easier-to-use interface for DualHead controls
+
+- Controls for dividing graphics resources (memory and bandwidth) 
+  between your main and secondary displays
+
+- More features accessible through user-defined hot keys (keyboard 
+  shortcuts)
+
+[...English]
+
+
+Ulteriori informazioni
+======================
+
+Per ulteriori informazioni relative a Matrox PowerDesk, consultare 
+il file della Guida incluso con il prodotto. Per informazioni 
+specifiche sulla scheda grafica Matrox, consultare il manuale 
+della Matrox o il manuale del sistema.
+
+
+Note, problemi e limitazioni
+============================
+
+- Installazione in versioni in lingue diverse di Windows
+
+  Se si installa il software in una lingua diversa da quella del 
+  sistema operativo, (per esempio software in inglese in un 
+  sistema in giapponese), si possono verificare problemi con il 
+  testo e i controlli della finestra di dialogo, che possono 
+  risultare troncati. Ciò avviene a causa di differenze fra i font 
+  di sistema.
+
+- Supporto OpenGL (3D)
+
+  Se si dispone di un prodotto Matrox più recente o se il software 
+  Matrox è stato fornito dal produttore del computer, è possibile 
+  che con il driver dello schermo Matrox il supporto completo 
+  OpenGL sia disattivato. Per un driver dello schermo Matrox con 
+  il supporto completo OpenGL attivato, vedere il sito Web Matrox 
+  (www.matrox.com/mga). (Se il prodotto Matrox di cui si dispone è 
+  stato fornito dal produttore del computer, visitare il sito Web 
+  di tale produttore per ottenere il driver dello schermo. In tal 
+  modo, si ottiene un driver molto probabilmente testato con il 
+  modello di computer di cui si dispone.)

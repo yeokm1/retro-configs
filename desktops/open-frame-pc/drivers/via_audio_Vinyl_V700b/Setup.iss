@@ -1,0 +1,2 @@
+[setup]
+BOOTOPTION = 0
