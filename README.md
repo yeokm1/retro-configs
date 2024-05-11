@@ -36,7 +36,7 @@ The machine is configured for single-boot Windows 98SE with a bootup option to e
 <img src="desktops/tweener-pc/photos/tweener-disks.jpg" width="500">
 <img src="desktops/tweener-pc/photos/tweener-w98-desktop.jpg" width="500">
 
-## 3. [Open Frame PC](desktops/opens-frame-pc) (1999)
+## 3. [Open Frame PC](desktops/open-frame-pc) (1999)
 
 This is an Open Frame PC I use as a testbench based on a Pentium 3. The machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE. 
 
