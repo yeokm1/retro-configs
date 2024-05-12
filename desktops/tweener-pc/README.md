@@ -16,10 +16,6 @@ With all trays open.
 
 CD-In and Wake-on-LAN cables are used.
 
-<img src="photos/tweener-post.jpg" width="500">
-
-A very retro BIOS POST screen from yesteryears.
-
 Video of bootup sequence: https://www.youtube.com/watch?v=SrTD2QFwS8w
 
 <img src="photos/tweener-gotek-external.jpg" width="500">
@@ -34,17 +30,16 @@ A piezo is added virtual motor sounds. Jumpers are placed on JC and S1 to select
 
 <img src="photos/tweener-cpu.jpg" width="300">
 
-* Intel Pentium III 667Mhz 133Mhz FSB 
+* Intel Pentium III 1300Mhz 133Mhz FSB 
 * * Socket 370 (FC-PGA)
-* * 1300 Mhz actual but BIOS cannot recognise this CPU hence I cannot set a multiplier higher than 5.0x therefore the original speed cannot be reached.
+* * **500 Mhz actual** as BIOS does not recognise multiplier higher than 5.0x and bus speed capped at 100Mhz for Voodoo compatibility.
 * Asus CUV4X motherboard
 * * VIA VT82C694Z chipset
 * * 2x USB 1 
 * * 1x ECP/EPP Parallel port
 * * 1x external RS232 port
 * * UltraDMA/66 IDE controller
-* 3x512MB PC133 SDRAM
-* * Software limited to 512MB RAM
+* 512MB PC133 SDRAM
 * 32GB Sandisk Compactflash card
 * Sony AW-G170A DVD-RW IDE
 * ZIP-750 IDE
@@ -55,7 +50,11 @@ A piezo is added virtual motor sounds. Jumpers are placed on JC and S1 to select
 
 <img src="photos/tweener-gfx-front.jpg" width="500">
 
-Galaxy Nvidia Geforce 5500 256MB
+ATI Rage 128 Ultra AGP. The drivers for this particular board needs 4.13.01.8006 (Beta) as the official ATI drivers do not seem to support it.
+
+<img src="photos/tweener-voodoo-graphics-front.jpg" width="500">
+
+Diamond 3Dfx Voodoo 1 Graphics
 
 <img src="photos/tweener-network-card.jpg" width="500">
 
@@ -87,21 +86,7 @@ The machine is configured for single-boot Windows 98SE with a bootup option to e
 
 <img src="photos/tweener-w98-desktop.jpg" width="500">
 
-Only the Nvidia, 3Com and SCSI drivers are needed. Win 98SE already has the latest AWE64 drivers.
-
-#### RAM limit
-
-The Windows 98 installer will not start if the PC has more than 1GB of RAM.
-
-To overcome this, I inserted only one stick of RAM and installed the operating system to completion.
-
-<img src="photos/tweener-limit-ram.png" width="600">
-
-After completion, I used `msconfig` to limit the recognised RAM to 512MB for better stability. Then inserted in the other 2 sticks.
-
-#### Windows Nvidia driver
-
-The latest Win 9x Nvidia driver 81.98 does not support this Geforce2 GTS Pro model so I used a slightly older version 71.84.
+Only the ATI, 3Com drivers are needed. Win 98SE already has the latest AWE64 drivers.
 
 #### Windows Sound Drivers
 
@@ -162,9 +147,10 @@ I flashed the latest stable BIOS Version 1009 dated
 2001/08/09. 
 
 ## Sources
-1. [3C905 drivers](https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/3com/3c905/support.3com.com/infodeli/tools/nic/3c905.htm)
-2. [AWE64 Gold CD](https://www.philscomputerlab.com/drivers-for-awe64-gold.html)
-3. [Nvidia Forceware drivers for Win 9x](https://www.philscomputerlab.com/nvidia-9x-graphics-drivers.html/)
-4. [LSI 53C1010 x86 drivers](ftp://ftp.tyan.com/SCSI/LSI1010/111700/LSI1010.exe)
-5. [LSI 53C1010 x64 drivers](http://www.edugeek.net/forums/windows-7/96515-windows-7-x64-drivers-lsi-20160-scsi-adaptor.html)
-6. [BIOS sources](https://www.asus.com/supportonly/CUV4X/HelpDesk_BIOS/)
+1. [AWE64 Gold CD](https://www.philscomputerlab.com/drivers-for-awe64-gold.html)
+2. [LSI 53C1010 x86 drivers](ftp://ftp.tyan.com/SCSI/LSI1010/111700/LSI1010.exe)
+3. [LSI 53C1010 x64 drivers](http://www.edugeek.net/forums/windows-7/96515-windows-7-x64-drivers-lsi-20160-scsi-adaptor.html)
+4. [BIOS sources](https://www.asus.com/supportonly/CUV4X/HelpDesk_BIOS/)
+5. [ATI Rage 128 beta drivers](https://soggi.org/drivers/ati.htm)
+6. [Voodoo Graphics Iceman drivers](https://www.philscomputerlab.com/drivers-for-voodoo.html)
+7. [3dfx MiniGL drivers](http://falconfly.3dfx.pl/minigl.htm)

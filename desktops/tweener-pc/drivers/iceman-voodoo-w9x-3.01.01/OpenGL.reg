@@ -1,0 +1,5 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\OpenGLdrivers]
+"3dfx"="3dfxogl.dll"
+

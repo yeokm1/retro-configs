@@ -1,0 +1,190 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; .dat file for the display driver component dll
+;
+; Abstract:
+; The Key value will overwrite the dll code and will be returned by the component dll.
+; Therefore, the key value should not be defined if the value is expected from the dll code.
+; The dat file (if used) should have the same prefix name of the dll file.
+; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[Component]
+;Default
+Name=Rage 128 Display Driver
+;Arabic
+Name_ara=Rage 128 Display Driver
+;Traditional Chinese
+Name_cht=Åã¥Ü¾¹ÅX°Êµ{¦¡
+;Simplified Chinese
+Name_chs=ÏÔÊ¾Çı¶¯³ÌĞò
+;Czech
+Name_csy=Ovladaè obrazovky
+;Danish
+Name_dan=Skærmstyreprogram
+;Dutch
+Name_nld=Beeldschermstuurprogramma
+;English
+Name_enu=Rage 128 Display Driver
+;Finnish
+Name_fin=Näytönohjain
+;French
+Name_fra=Pilote d'affichage
+;German
+Name_deu=Bildschirmtreiber
+;Greek
+Name_ell=Ïäçãüò Ïèüíçò
+;Hebrew
+Name_heb=îğäì äú÷ï úöåâä
+;Hungarian
+Name_hun=Megjelenítésvezérlõ
+;Italian
+Name_ita=Driver di visualizzazione
+;Japanese
+Name_jpn=ƒfƒBƒXƒvƒŒƒC ƒhƒ‰ƒCƒo
+;Korean
+Name_kor=µğ½ºÇÃ·¹ÀÌ µå¶óÀÌ¹ö
+;Norwegian
+Name_nor=Skjermdriver
+;Polish
+Name_plk=Sterownik ekranu
+;Portuguese
+Name_ptg=Driver de Exibição
+;Russian
+Name_rus=Äğàéâåğû ìîíèòîğà
+;Spanish
+Name_esp=Controlador de pantalla
+;Swedish
+Name_sve=Drivrutin för bildskärm
+;Thai
+Name_tha=ä´ÃàÇÍÃì¨ÍáÊ´§¼Å
+;Turkish
+Name_trk=Ekran Sürücüsü
+
+;Default
+Description=Install Display Driver
+;Arabic
+Description_ara=Install Display Driver
+;Traditional Chinese
+Description_cht=¦w¸ËÅã¥Ü¾¹ÅX°Êµ{¦¡
+;Simplified Chinese
+Description_chs=°²×°ÏÔÊ¾Çı¶¯³ÌĞò
+;Czech
+Description_csy=Instalovat Ovladaè obrazovky
+;Danish
+Description_dan=Installér skærmdrivere
+;Dutch
+Description_nld=Beeldschermstuurprogramma installeren
+;English
+Description_enu=Install Display Driver
+;Finnish
+Description_fin=Asenna näytönohjain
+;French
+Description_fra=Installer les pilotes d'affichage
+;German
+Description_deu=Videotreiber installieren
+;Greek
+Description_ell=ÅãêáôÜóôáóç ãéá ôï Ïäçãüò Ïèüíçò
+;Hebrew
+Description_heb=äú÷ï îğäì äú÷ï úöåâä
+;Hungarian
+Description_hun=Megjelenítésvezérlõ telepítése
+;Italian
+Description_ita=Installa il driver di visualizzazione
+;Japanese
+Description_jpn=ƒfƒBƒXƒvƒŒƒC ƒhƒ‰ƒCƒo‚ğƒCƒ“ƒXƒg[ƒ‹‚·‚é
+;Korean
+Description_kor=µğ½ºÇÃ·¹ÀÌ µå¶óÀÌ¹ö ¼³Ä¡
+;Norwegian
+Description_nor=Installerer skjermdriver
+;Polish
+Description_plk=Instaluj Sterownik ekranu
+;Portuguese
+Description_ptg=Instalar Driver de Exibição
+;Russian
+Description_rus=Èíñòàëëèğîâàòü Äğàéâåğû ìîíèòîğà
+;Spanish
+Description_esp=Instalar controlador de pantalla
+;Swedish
+Description_sve=Installerar drivrutin för bildskärm
+;Thai
+Description_tha=µÔ´µÑé§ä´ÃàÇÍÃì¨ÍáÊ´§¼Å
+;Turkish
+Description_trk=Ekran Sürücüsünü Yükle
+
+; cds defines the path of the Component Detection Service
+CDS=..\bin
+
+;
+; Req_ASIC=<Device id 1>,<Device id 2>, ...
+; Gives the PCI device ID to check for requirement. 
+; If the ATI ASIC is found, then MeetsRequirement from the dll will return 1.
+; If the last 2 digits are 00, it means the last 2 digits are "don't care"
+; For example, R128 family - 5200; Rage PRO family - 4700
+;              Rage PRO (GB) - 4742
+Req_ASIC=5446,5044,5046,5050,5452
+
+;
+; !Req_ASIC=<Device id 1>,<Device id 2>, ...
+; Gives the PCI device ID to check for requirement. 
+; If the ATI ASIC is found, then MeetsRequirement from the dll will return 0.
+; If the last 2 digits are 00, it means the last 2 digits are "don't care"
+; For example, R128 family - 5200; Rage PRO family - 4700
+;              Rage PRO (GB) - 4742
+;!Req_ASIC=4700
+
+;
+; Req_Capture=<Vendor id Device id 1>,<Vendor id Device id 2>, ...
+; Gives the PCI vendor and device ID to check for requirement. 
+; If the Capture ASIC is found, then MeetsRequirement from the dll will return 1.
+; If the last 2 digits are 00, it means the last 2 digits are "don't care"
+; For example, BT878 - 109e0878 (where 109e is the vendor id, 878 is the device id)
+;Req_Capture=109e0878
+
+;
+; !Req_Capture=<Vendor id Device id 1>,<Vendor id Device id 2>, ...
+; Gives the PCI vendor and device ID to check for requirement. 
+; If the Capture ASIC is found, then MeetsRequirement from the dll will return 0.
+; If the last 2 digits are 00, it means the last 2 digits are "don't care"
+; For example, BT878 - 109e0878 (where 109e is the vendor id, 878 is the device id)
+;!Req_Capture=109e0878
+
+;
+; Req_Tuner=1,NTSC,PAL,SECAM,SCART,0
+; Check if the Tuner attached has the standard required, the MeetsRequirement will return 1
+;
+;Req_Tuner=PAL,SECAM
+
+; 0=no, 1=yes
+;MeetsRequirement=0
+
+; in KB         
+Size=15000
+
+; 0, 1, 2 ... where 0 is the highest order
+Order=9
+
+; 0=no, 1=yes
+;Reboot=0
+
+; OS can be 1, WIN_95, WIN_95_OSR2_USB, WIN_98, WIN_NT351, WIN_NT4, WIN_NT5, WIN_98_GOLD
+; WIN_98_SE, WIN_ME
+OS=WIN_9X
+
+; 0=no, 1=yes
+;Visible=0                  
+
+; 0=no, 1=yes
+;WaitMessage=0               
+
+; <Comp#1>,<Comp#2>
+ReqComp=DirectX
+
+; For display driver, we have to launch silent child install.
+InstallCommandLine=setup.exe,/K
+
+;Component Version
+Ver=Centralized Build
+
+;Requires Uninstall before installing this component
+;UninstallComp=ATI Display Driver,ATI Video Player
