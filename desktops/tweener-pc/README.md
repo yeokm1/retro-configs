@@ -34,7 +34,7 @@ A piezo is added virtual motor sounds. Jumpers are placed on JC and S1 to select
 * * Socket 370 (FC-PGA)
 * * **500 Mhz actual** as BIOS does not recognise multiplier higher than 5.0x and bus speed capped at 100Mhz for Voodoo compatibility.
 * Asus CUV4X motherboard
-* * VIA VT82C694Z chipset
+* * VIA ProSavage chipset
 * * 2x USB 1 
 * * 1x ECP/EPP Parallel port
 * * 1x external RS232 port
