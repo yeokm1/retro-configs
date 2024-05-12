@@ -217,6 +217,7 @@ The NEC Versa 40EC laptop is only configured for DOS 6.22.
 22. [DOS Ethernet drivers taken from T400 website](https://support.lenovo.com/mn/en/downloads/ds001865)
 23. [3C905 drivers](https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/3com/3c905/support.3com.com/infodeli/tools/nic/3c905.htm)
 24. [SC55 Soundfont](https://github.com/trevor0402/SC55Soundfont)
+25. [Via 4in1 drivers](https://theretroweb.com/chipsets/670)
 
 # Common software sources
 
