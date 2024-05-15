@@ -27,7 +27,7 @@ With Windows 98SE
 * * 1x ECP/EPP Parallel port
 * * 1x external RS232 port
 * * UltraDMA/100 IDE controller
-* 2x256B PC133 SDRAM
+* 2x256MB PC133 SDRAM
 * Goldenfir 64GB SATA SSD with Startech IDE-SATA converter
 
 The VIA chipset used in this motherboard has a known incompatibility with SB Live PCI cards. Some trial and error may need to be done to find the best PCI slot to use avoid this problem. More details of this issue can be found [here](https://www.vogons.org/viewtopic.php?p=1081307#p1081307)
