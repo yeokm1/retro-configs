@@ -23,12 +23,17 @@ With Windows 98SE
 * * Socket 370 (FC-PGA)
 * Transcend TS-AVE3/B motherboard
 * * VIA VT82C694X (Apollo Pro 133A) chipset
-* * 2x USB 1
+* * USB 1 ports
 * * 1x ECP/EPP Parallel port
-* * 1x external RS232 port
+* * 2x external RS232 port
+* * PS/2 keyboard and mouse ports
 * * UltraDMA/100 IDE controller
 * 2x256MB PC133 SDRAM
-* Goldenfir 64GB SATA SSD with Startech IDE-SATA converter
+* Disk storage
+* * Goldenfir 64GB SATA SSD 
+* * Icydock 2.5” SSD Dock Trayless Hot-Swap SATA
+* * Startech IDE-SATA converter
+
 
 The VIA chipset used in this motherboard has a known incompatibility with SB Live PCI cards. Some trial and error may need to be done to find the best PCI slot to use avoid this problem. More details of this issue can be found [here](https://www.vogons.org/viewtopic.php?p=1081307#p1081307)
 
@@ -40,11 +45,11 @@ Matrox G550 AGP graphics card
 
 <img src="photos/ofpc-lan.jpg" width="500">
 
-3Com 3C905 PCI 10/100 Mbps
+3Com 3C905 PCI 100 Mbps network card
 
 <img src="photos/ofpc-sblive.jpg" width="500">
 
-Creative Sound Blaster Live
+Creative Sound Blaster Live 5.1
 
 ## BIOS Configuration
 
@@ -89,7 +94,3 @@ Do not install Vinyl AC97 WDM driver. That will override Creative VxD driver use
 
 1. [VIADOS drivers](https://sites.google.com/site/cocktailcabinet/downloads)
 2. [Matrox drivers](https://www.philscomputerlab.com/drivers-for-matrox.html)
-
-
-
-
