@@ -25,7 +25,7 @@ With Windows 98SE
 * * VIA VT82C694X (Apollo Pro 133A) chipset
 * * USB 1 ports
 * * 1x ECP/EPP Parallel port
-* * 2x external RS232 port
+* * 2x RS232 ports
 * * PS/2 keyboard and mouse ports
 * * UltraDMA/100 IDE controller
 * 2x256MB PC133 SDRAM
