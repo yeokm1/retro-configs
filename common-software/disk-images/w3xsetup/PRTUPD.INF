@@ -1,0 +1,428 @@
+; Printer data section description.
+;
+; UpdateName        == .ini type profile,
+;                      .ini config sect,
+;                      default,
+;                      .ini sect flag,
+;                      multiple config flag
+;
+; Where:
+;
+; UpdateName        == Name of printer description section within this file.
+;                      In WIN.INI, when [device] is the section name,
+;                      UpdateName is the keyname.  This is where setup
+;                      looks to map a "printer=4" keyname from WIN.INI.
+;
+; .ini type profile == This is the profile string setup uses to find the
+;                      printer description index from the printer 
+;                      configuration information section in the
+;                      Win 3.0 WIN.INI.  (When the ".ini config sect"
+;                      is the section name, this is the keyname in WIN.INI).
+;
+; .ini config sect  == This is the name of the Win 3.0 win.ini printer 
+;                      configuration section for the printer (minus the port
+;                      config info).
+;
+; default           == This is the default profile used to obtain a printer 
+;                      description string from this file if we are unable to
+;                      get a description profile from the Win 3.0 win.ini.
+;                      This is for the "unconfigured printer case".
+;
+; .ini sect flag    == This tells setup whether or not to use port 
+;                      configuration info to create the Win 3.0 win.ini
+;                      printer configuration section name.  For example:
+;                      The HPPCL section name look like [HPPCL,port], while
+;                      the EPSON configuration section always looks like 
+;                      [epson9drv], lacking any port information. Set this 
+;                      flag to 1 if the win.ini config section does NOT use 
+;                      port information to create the section name. Leave the 
+;                      field NULL if port information should be used.
+;
+; multiple config flag == This flag is set 1 if only a single printer can be 
+;                         configured for the driver. Leave the flag NULL if
+;                         the driver can setup multiple configuration 
+;                         sections.
+;
+;For single model drivers, the paper orientation is used
+;to force setup to use the given modelname string.
+[Printer.Data]
+"Canon BJ-10e"             = "Orientation",  "Canon Bubble-Jet BJ-10e", 1,1,1
+"Canon Bubble-Jet"         = "Orientation",  "Canon Bubble-Jet BJ-130e",1,1,1
+"C-Itoh 8510"              = "Orientation",  "C-Itoh 8510",             1,1,1
+"AT&T 470/475"             = "Orientation",  "AT&T 470/475",            1,1,1
+"HP DeskJet Family"        = "prtindex",     "DESKJET,",                0
+"Epson 9 pin"              = "Printer",      "EPSON9drv",               00,1,1
+"Epson 24 pin"             = "Printer",      "EPSON24drv",              0,1,1
+"Fujitsu Dot Matrix"       = "Printer Type", "Fujitsu Dot Matrix",      "9 Pins",1,1
+"PCL / HP LaserJet"        = "prtindex",     "HPPCL,",                  0
+"HP LaserJet III"          = "prtindex",     "HPPCL5A,",                0
+"IBM Laser Printer 4019"   = "Orient",       "IBM4019",                 1,0,1
+"IBM5204 drv"              = "Orient",       "IBM5204 drv",             0,1,1
+"IBM Color Printer"        = "Orientation",  "IBM Color Printer",       1,1,1
+"IBM Graphics"             = "Orientation",  "IBM Graphics",            1,1,1
+"AT&T 473/478"             = "Orientation",  "AT&T 473/478",            1,1,1
+"Okidata 92/93-IBM"        = "Orientation",  "Okidata 92/93-IBM",       1,1,1
+"Canon LBP-8II"            = "Orientation",  "Canon LBP-8II",           1,1,1
+"Canon LBP-8III/LBP-4"     = "Orient",       "LBPIIIdrv",               1,1,1
+"NEC Pinwriter"            = "Pinwriter",    "NEC Pinwriter",           0,1,1
+"Okidata 24 pin"           = "Printer",      "Okidata 24 pin drv",      0,1,1
+"Okidata 9 Pin"            = "Printer",      "Okidata 9 pin drv",       0,1,1
+"Okidata 9 Pin IBM"        = "Printer",      "Okidata 9 pin IBM drv",   0,1,1
+"HP PaintJet Series"       = "Printer",      "HP PaintJet Series,",     1
+"IBM Proprinters"          = "Printer",      "PROPRINTERdrv",           0,1,1
+"IBM Proprinter 24"        = "Printer",      "Proprinter 24 drv",       0,1,1
+"PostScript Printer"       = "device",       "PostScript,",             2
+"IBM Quietwriter III"      = "Orient",       "Quietwriter III",         0,1,1
+"HP ThinkJet (2225 C-D)"   = "Orientation",  "HP ThinkJet (2225 C-D)",  1,1,1
+"TI 850/855"               = "Orientation",  "TI 850/855",              1,1,1
+"Toshiba P351"             = "Orientation",  "Toshiba P351",            1,1,1
+"Toshiba P1351"            = "Orientation",  "Toshiba P1351",           1,1,1
+"HP Plotter"               = "foo",          "HPPLOT,",                 1
+"AT&T 435"                 = "foo",          "HPPLOT,",                 1
+"Generic / Text Only"      = "foo",          "Generic / Text Only"      1,1,1
+
+[HP Plotter]
+1 = "HP ColorPro [HP Plotter]"
+
+[AT&T 435]
+1 = "AT&T 435"
+
+[AT&T 470/475]
+1 = "AT&T 470/475"
+2 = "AT&T 470/475"
+
+[Canon BJ-10e]
+1 = "Canon Bubble-Jet BJ-10e"
+2 = "Canon Bubble-Jet BJ-10e"
+
+[Canon Bubble-Jet]
+1 = "Canon Bubble-Jet BJ-130e"
+2 = "Canon Bubble-Jet BJ-130e"
+
+[C-Itoh 8510]
+1 = "C-Itoh 8510"
+2 = "C-Itoh 8510"
+
+; Modelname/memory same as for HP / PCL
+[HP DeskJet Family]
+0 = "HP DeskJet"      ;
+1 = "HP DeskJet"      ; 128 KB
+2 = "HP DeskJet"      ; 384 KB
+3 = "HP DeskJet Plus" ;
+4 = "HP DeskJet Plus" ; 128 KB
+5 = "HP DeskJet Plus" ; 256 KB
+6 = "HP DeskJet Plus" ; 384 KB
+7 = "HP DeskJet Plus" ; 512 KB
+
+[Epson 9 pin]
+00 = "Epson FX-80"
+01 = "Epson FX-100"
+02 = "Epson FX-80+"
+03 = "Epson FX-100+"
+04 = "Epson FX-85"
+05 = "Epson FX-185"
+06 = "Epson FX-86e"
+07 = "Epson FX-850"
+08 = "Epson JX-80"
+09 = "Epson EX-800"
+10 = "Epson LX-80"
+11 = "Epson LX-86"
+12 = "Epson LX-800"
+13 = "Epson DFX-5000"
+14 = "Epson T-750"
+15 = "Epson T-1000"
+16 = "Epson MX-80"
+17 = "Epson MX-100"
+18 = "Epson RX-80"
+19 = "Epson RX-100"
+
+; Last printer on list is identified in Win 3.0 driver as "Other"
+[Epson 24 pin]
+0 = "Epson LQ-500"
+1 = "Epson LQ-800"
+2 = "Epson LQ-850"
+3 = "Epson LQ-1500"
+4 = "Epson LQ-2500"
+5 = "Epson SQ-2500"
+6 = "Epson L-750"
+7 = "Epson LQ-500"
+
+; Win 3.0 FUJIMTRX driver includes 9 and 24 pin models in one driver.
+[Fujitsu Dot Matrix]
+"9 Pins"  = "Fujitsu DX 2100"
+"24 Pins" = "Fujitsu DL 2400"
+
+; shipping HP / PCL driver lists printer name plus installed memory
+; as a single number in prtindex.  Second column is memory for prtindex.
+[PCL / HP LaserJet]
+0  = "HP LaserJet Series II"        ; 512 KB
+1  = "HP LaserJet Series II"        ; 1.5 MB
+2  = "HP LaserJet Series II"        ; 2.5 MB
+3  = "HP LaserJet Series II"        ; 4.5 MB
+4  = "HP LaserJet IID"              ; 640 KB
+5  = "HP LaserJet IID"              ; 1.6 MB
+6  = "HP LaserJet IID"              ; 2.6 MB
+7  = "HP LaserJet IID"              ; 4.6 MB
+8  = "HP LaserJet IIP"              ; 512 KB
+9  = "HP LaserJet IIP"              ; 1.5 MB
+10 = "HP LaserJet IIP"              ; 2.5 MB
+11 = "HP LaserJet IIP"              ; 3.5 MB
+12 = "HP LaserJet IIP"              ; 4.5 MB
+13 = "HP LaserJet Plus"             ; 512 KB
+14 = "HP LaserJet Plus"             ; 2 MB
+15 = "HP LaserJet 500+"             ; 512 KB
+16 = "HP LaserJet 500+"             ; 2 MB
+17 = "HP LaserJet 2000"             ; 1.5 MB
+18 = "HP LaserJet 2000"             ; 2.5 MB
+19 = "HP LaserJet 2000"             ; 3.5 MB
+20 = "HP LaserJet 2000"             ; 4.5 MB
+21 = "HP LaserJet 2000"             ; 5.5 MB
+22 = "HP LaserJet"                  ; 
+23 = "Agfa Compugraphic Genics"     ; 
+24 = "Apricot Laser"                ; 512 KB
+25 = "Apricot Laser"                ; 1 MB
+26 = "Apricot Laser"                ; 1.5 MB
+27 = "Apricot Laser"                ; 3.5 MB
+28 = "Epson EPL-6000"               ; 512 KB
+29 = "Epson EPL-6000"               ; 2.5 MB
+30 = "Epson EPL-6000"               ; 4.5 MB
+31 = "Epson GQ-3500"                ; 640 KB
+32 = "Epson GQ-3500"                ; 1.5 MB
+33 = "Epson GQ-3500"                ; 2 MB
+34 = "Kyocera F-Series (USA)"       ; 512 KB
+35 = "Kyocera F-Series (USA)"       ; 1 MB
+36 = "Kyocera F-Series (USA)"       ; 1.5 MB
+37 = "Kyocera F-Series (USA)"       ; 2 MB
+38 = "Kyocera F-Series (USA)"       ; 2.5 MB
+39 = "Kyocera F-Series (USA)"       ; 3 MB
+40 = "Kyocera F-Series (USA)"       ; 3.5 MB
+41 = "Kyocera F-Series (USA)"       ; 4 MB
+42 = "Kyocera F-Series (USA)"       ; 4.5 MB
+43 = "Kyocera F-Series (USA)"       ; 5 MB
+44 = "NEC Silentwriter LC 860 Plus" ; 512 KB
+45 = "NEC Silentwriter LC 860 Plus" ; 1.3 MB
+46 = "NEC Silentwriter LC 860 Plus" ; 3 MB
+47 = "NEC Silentwriter LC 860 Plus" ; 512 KB
+48 = "NEC Silentwriter LC 860 Plus" ; 1.3 MB
+49 = "NEC Silentwriter LC 860 Plus" ; 3 MB
+50 = "Okidata LaserLine 6"          ; 
+51 = "Olivetti PG 108"              ; 512 KB
+52 = "Olivetti PG 108"              ; 1.5 MB
+53 = "Olivetti PG 108"              ; 2.5 MB
+54 = "Olivetti PG 108"              ; 4.5 MB
+55 = "Olivetti PG 208 M2"           ; 512 KB
+56 = "Olivetti PG 208 M2"           ; 1.5 MB
+57 = "Olivetti PG 208 M2"           ; 2.5 MB
+58 = "Olivetti PG 208 M2"           ; 4.5 MB
+59 = "Olivetti PG 308 HS"           ; 
+60 = "Olivetti ETV 5000"            ; 
+61 = "QuadLaser I"                  ; 
+62 = "Tandy LP-1000"                ; 
+63 = "Tegra Genesis"                ; 
+64 = "Toshiba PageLaser12"          ; 512 KB
+65 = "Toshiba PageLaser12"          ; 2 MB
+66 = "Wang LDP8"                    ; 512 KB
+67 = "Wang LDP8"                    ; 1.5 MB
+68 = "Wang LDP8"                    ; 2.5 MB
+69 = "Wang LDP8"                    ; 4.5 MB
+
+; Modelname/memory same as for HP / PCL
+[HP LaserJet III]
+0 = "HP LaserJet III"   ; 1 MB
+1 = "HP LaserJet III"   ; 2 MB
+2 = "HP LaserJet III"   ; 3 MB
+3 = "HP LaserJet III"   ; 4 MB
+4 = "HP LaserJet III"   ; 5 MB
+5 = "HP LaserJet IIID"  ; 1 MB
+6 = "HP LaserJet IIID"  ; 2 MB
+7 = "HP LaserJet IIID"  ; 3 MB
+8 = "HP LaserJet IIID"  ; 4 MB
+9 = "HP LaserJet IIID"  ; 5 MB
+
+[IBM Laser Printer 4019]
+0 = "IBM Laser Printer 4019"
+1 = "IBM Laser Printer 4019"
+
+[IBM5204 drv]
+0 = "IBM QuickWriter 5204"
+1 = "IBM QuickWriter 5204"
+
+[IBM Color Printer]
+1 = "IBM Color Printer"
+2 = "IBM Color Printer"
+
+[AT&T 473/478]
+1 = "AT&T 473/478"
+2 = "AT&T 473/478"
+
+[IBM Graphics]
+1 = "IBM Graphics"
+2 = "IBM Graphics"
+
+[Okidata 92/93-IBM]
+1 = "Okidata ML 92-IBM"
+2 = "Okidata ML 92-IBM"
+
+[Canon LBP-8II]
+1 = "Canon LBP-8 II"
+2 = "Canon LBP-8 II"
+
+[Canon LBP-8III/LBP-4]
+1 = "Canon LBP-8 III"
+2 = "Canon LBP-8 III"
+
+[NEC Pinwriter]
+0 = "NEC Pinwriter CP6"
+1 = "NEC Pinwriter CP7"
+2 = "NEC Pinwriter P2200"
+3 = "NEC Pinwriter P5200"
+4 = "NEC Pinwriter P5300"
+5 = "NEC Pinwriter P5XL"
+6 = "NEC Pinwriter P6"
+7 = "NEC Pinwriter P7"
+
+[Okidata 24 pin]
+0 = "Okidata ML 393"
+1 = "Okidata ML 393C"
+2 = "Okidata ML 390"
+
+[Okidata 9 Pin]
+0 = "Okidata ML 192"
+1 = "Okidata ML 193"
+2 = "Okidata ML 320"
+3 = "Okidata ML 321"
+
+[Okidata 9 Pin IBM]
+0 = "Okidata ML 192-IBM"
+1 = "Okidata ML 193-IBM"
+2 = "Okidata ML 320-IBM"
+3 = "Okidata ML 321-IBM"
+
+[HP PaintJet Series]
+1 = "HP PaintJet"
+2 = "HP PaintJet XL"
+
+[IBM Proprinters]
+0 = "IBM Proprinter"
+1 = "IBM Proprinter II"
+2 = "IBM Proprinter XL"
+3 = "IBM Proprinter XL II"
+4 = "IBM Proprinter III"
+
+[IBM Proprinter 24]
+0 = "IBM Proprinter X24"
+1 = "IBM Proprinter XL24"
+2 = "IBM Proprinter X24e"
+3 = "IBM Proprinter XL24e"
+
+; Apple LaserWriter Plus triple listed (#2, #3 & #30) in Win 3.0 driver
+[PostScript Printer]
+1  = "Apple LaserWriter"
+2  = "Apple LaserWriter Plus"
+3  = "Apple LaserWriter Plus"
+4  = "Apple LaserWriter II NT"
+5  = "Apple LaserWriter II NTX"
+6  = "AST TurboLaser/PS"
+7  = "Dataproducts LZR-2665"
+8  = "IBM Personal Pageprinter"
+9  = "IBM Personal Page Printer II-30"
+10 = "IBM Personal Page Printer II-31"
+11 = "Linotronic 200/230"
+12 = "Linotronic 330"
+13 = "Linotronic 530"
+14 = "QMS ColorScript 100"
+15 = "NEC Silentwriter LC890"
+16 = "QMS-PS 800"
+17 = "QMS-PS 800 Plus"
+18 = "QMS-PS 810"
+19 = "PostScript Printer"
+20 = "PostScript Printer"
+21 = "Varityper VT-600"
+22 = "Wang LCS15"
+23 = "Wang LCS15 FontPlus"
+24 = "Olivetti PG 308 HS Postscript"
+25 = "Agfa Compugraphic 400PS"
+26 = "Digital LN03R ScriptPrinter"
+27 = "Digital PrintServer 40"
+28 = "NEC Colormate PS/40"
+29 = "NEC Silentwriter LC890XL"
+30 = "Apple LaserWriter Plus"
+31 = "Agfa 9000 Series PS"
+32 = "Olivetti PG 303"
+
+[IBM Quietwriter III]
+0 = "IBM QuietWriter III"
+1 = "IBM QuietWriter III"
+
+[HP ThinkJet (2225 C-D)]
+1 = "HP ThinkJet (2225 C-D)"
+2 = "HP ThinkJet (2225 C-D)"
+
+[TI 850/855]
+1 = "TI 850/855"
+2 = "TI 850/855"
+
+[Toshiba P351]
+1 = "Toshiba P351"
+2 = "Toshiba P351"
+
+[Toshiba P1351]
+1 = "Toshiba P1351"
+2 = "Toshiba P1351"
+
+[Generic / Text Only]
+1 = "Generic / Text Only"
+
+;
+; This section facilitates the translation of printer description
+; strings pulled from .WPD files into "true printer names". We do
+; this so that these printers will be properly upgraded since the
+; WPD printer names may not match the printer names listed in
+; control.inf.
+;
+; "WPD description prefix",    "True printer name"
+;
+; The code will attempt to match the WPD desciption aginst the N chars
+; of each of the first fields below. If a match is found, the code
+; utilizes the description in field 2 and the printer name.
+;
+[WPD_NickNames]
+"Agfa-Compugraphic 9400P",     "Agfa-Compugraphic 9400P"
+"Apple LaserWriter II NTX",    "Apple LaserWriter II NTX"
+"Apple LaserWriter II NT",     "Apple LaserWriter II NT"
+"Apple LaserWriter Plus",      "Apple LaserWriter Plus"
+"Apple LaserWriter",           "Apple LaserWriter"
+"AST TurboLaser/PS",           "AST TurboLaser/PS"
+"Dataproducts LZR-2665",       "Dataproducts LZR-2665"
+"EPSON EPL-7500",              "EPSON EPL-7500"
+"HP LaserJet IID PostScript",  "HP LaserJet IID PostScript"
+"HP LaserJet IIP PostScript",  "HP LaserJet IIP PostScript"
+"HP LaserJet III PostScript",  "HP LaserJet III PostScript"
+"HP LaserJet IIID PostScript", "HP LaserJet IIID PostScript"
+"HP LaserJet IIIP PostScript", "HP LaserJet IIIP PostScript"
+"IBM 4019 v52.1 (17 Fonts)",   "IBM LaserPrinter 4019 PS17"
+"IBM 4019 v52.1 (39 Fonts)",   "IBM LaserPrinter 4019 PS39"
+"IBM 4216-020",                "IBM 4216-020"
+"IBM 4216-030",                "IBM 4216-030"
+"Linotronic 100",              "Linotronic 100"
+"Linotronic 300",              "Linotronic 300"
+"Linotronic 500",              "Linotronic 500"
+"NEC Colormate PS/40",         "NEC Colormate PS/40"
+"NEC Colormate PS/80",         "NEC Colormate PS/80"
+"NEC Silentwriter LC890XL",    "NEC Silentwriter LC890XL"
+"NEC Silentwriter LC890",      "NEC Silentwriter LC890"
+"NEC Silentwriter2 90",        "NEC Silentwriter2 90"
+"NEC Silentwriter2 290",       "NEC Silentwriter2 290"
+"NEC Silentwriter2 990",       "NEC Silentwriter2 990"
+"Oki OL840/PS",                "Oki OL840/PS"
+"QMS ColorScript 100",         "QMS ColorScript 100"
+"QMS-PS 800 Plus",             "QMS-PS 800 Plus"
+"QMS-PS 800",                  "QMS-PS 800"
+"QMS-PS 810",                  "QMS-PS 810"
+"QMS-PS 820",                  "QMS-PS 820"
+"QMS-PS 2200",                 "QMS-PS 2200"
+"TI microLaser PS17",          "TI microLaser PS17"
+"TI microLaser PS35",          "TI microLaser PS35"
+"TI OmniLaser 2108",           "TI OmniLaser 2108"
+"TI Omnilaser 2115",           "TI Omnilaser 2115"
+"Unisys AP9415",               "Unisys AP9415"

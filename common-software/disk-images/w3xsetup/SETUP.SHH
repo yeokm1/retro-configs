@@ -1,0 +1,246 @@
+[sysinfo]
+;
+; Use this section to specify whether you want Setup to display the
+; System Configuration screen. Specify "yes" to display the screen and "no"
+; if you don't want the screen displayed. (The default value is "no".)
+;
+; You may want to display and review the System Configuration screen so
+; that you can confirm the configuration settings before continuing with
+; Setup.
+
+showsysinfo=yes
+
+
+
+[configuration]
+;
+; Use this section to specify the various devices on your system. You can
+; find the values for each variable in the SETUP.INF file. If you omit an
+; entry, Windows uses the detected or default device.
+;
+; If you are updating Windows, some of these entries will be ignored and
+; Windows will use the devices that are already installed. If you want to
+; force the update and override the installed device, precede the value
+; with an exclamation point (!), for example, display = !vga. Only the
+; Machine, Display, Mouse devices require an exclamation point
+; for overriding the installed device during an upgrade.
+
+; Machine profile string from [machine] section of SETUP.INF
+
+machine = ibm_compatible
+
+; Display profile string from [display] section of SETUP.INF
+
+display = vga
+
+; Mouse profile string from [pointing.device] section of SETUP.INF
+
+mouse = ps2mouse
+
+; Network profile string from [network] section of WINNET.INF
+; followed by version profile string from the appropriate 
+; [xxxxxxx.versions] section which identifies the network version.
+; The following example will setup Windows using 
+; "Microsoft Workgroup (version 3.11)"
+;
+
+network = wfwnet/00026000
+
+; Keyboard profile string from [keyboard.types] section of SETUP.INF
+
+keyboard = t4s0enha
+
+; Language profile string from [language] section of SETUP.INF
+
+language = enu
+
+; Keyboard Layout profile string from [keyboard.tables] section of SETUP.INF
+
+kblayout = nodll
+
+
+
+[windir]
+;
+; Use this section to specify where to put Windows files. If a previous
+; version of Windows is already set up in the specified directory, Setup
+; will update it. If you do not specify a directory, or if the specified
+; directory is not valid, Setup displays a dialog box asking you to specify
+; the directory in which you want to set up Windows.
+
+c:\windows
+
+
+
+[userinfo]
+;
+; Use this section to specify the user and company name. The first line
+; specifies the user's name. This line is required. The second specifies
+; the company name, and is optional. Both names can be up to 30 characters
+; long and must be enclosed in double quotation marks (" ") if they include
+; blank spaces. The third line specifies the product number.
+;
+; If you do not specify a user name, a dialog box appears during Setup asking
+; for the user's name.
+;
+; If you are setting up Windows across a network, the [userinfo] section
+; will be ignored.
+;
+"John Q. Public"           ; User Name    (30 chars MAX) (required)
+"Microsoft Corporation"    ; Company Name (30 chars MAX) (optional)
+xx-xxx-xxxx-xxxx           ; Product No.  (16 chars MAX) (optional) 
+
+[network]
+; Use this section to specify Microsoft Workgroup  network options
+; and network adapters. This section will only be processed if
+; the Network entry in the [configuration] section is a version of
+; wfwnet (Microsoft Workgroup).
+; Network = wfwnet/00026000
+
+; MultiNet profile string from the [multinet] section of WINNET.INF
+;
+MultiNet=
+
+; UserName (20 chars MAX)
+;
+; If you do not specify a user name, either the current user name setting
+; from SYSTEM.INI is used, or a default value is used.
+;
+UserName =
+
+; Workgroup (15 chars MAX)
+;
+; If you do not specify a workgroup, either the current workgroup setting
+; from SYSTEM.INI is used, or a default value is used.
+;
+WorkGroup =
+
+; Computer Name (15 chars MAX)
+;
+; If you do not specify a computer name, either the current computername
+; setting from SYSTEM.INI is used, or a default value is used.
+;
+ComputerName =
+
+; ShowNames tells setup whether or not to display the user names
+; to the user. Select "yes" to show the names to the user, or "no"
+; if you do not want to display the names. The default value is "no".
+;
+ShowNames = yes
+
+; MakeProtocol determines whether this file contains a default protocol.ini.
+; If MakeProtocol is "yes", then the .SHH file will be copied as
+; PROTOCOL.INI and the non-protocol.ini sections will be deleted. The
+; section below called [protocol.ini] contains the names of the sections
+; to delete to make a complete protocol.ini.
+;
+;   MakeProtocol = no   ; don't create a protocol.ini
+;   MakeProtocol = yes  ; strip the .shh file copy to a new protocol.ini
+;
+; If the value is "no" but no previous protocol.ini exists, setup will
+; prompt the user for a netcard and install default protocols.
+
+MakeProtocol = no
+
+[protocol.ini]
+; Sections to be deleted from the .shh file in order to make protocol.ini
+sysinfo=
+configuration=
+windir=
+userinfo=
+network=
+protocol.ini=
+dontinstall=
+options=
+printers=
+endinstall=
+
+
+[dontinstall]
+;
+; Use this section to specify components that you do not want to set up
+; on your system. By default, all components will be installed. If you do
+; not want to set up a particular component, include it in this section.
+
+accessories                ; Do NOT install accessories
+readmes                    ; Do NOT install readme files
+games                      ; Do NOT install games
+screensavers               ; Do NOT install screen savers
+bitmaps                    ; Do NOT install bitmaps
+
+
+[options]
+;
+; Use this section to specify whether you want to set up applications 
+; during Setup, and/or start the Windows Tutorial at the end of Setup. 
+; If you don't want any of these options, you can omit this section.
+;
+; If you choose to set up applications, you can either set them up
+; interactively during Setup (you choose which applications you want to set
+; up,) or you can specify that you want Setup to automatically set up all
+; applications found on your hard disk.
+;
+; If you specify both "setupapps" and "autosetupapps", all applications on 
+; your hard disk will be set up.
+;
+setupapps                  ; Setup applications already on hard disk
+autosetupapps              ; Set up all applications on hard disk
+tutorial                   ; Start Windows Tutorial at the end of Setup
+
+[printers]
+;
+; Use this section to specify any printers you want to set up. You specify a
+; printer description and a port. Values for the printer description
+; variable are listed in the [io.device] section of the CONTROL.INF file.
+; Values for the port variable are listed in the [ports] section of the
+; WIN.INI file.
+;
+; The printer description must be enclosed in double quotation marks (" ")
+; if it contains blank spaces. The port value must appear exactly as it does
+; in the WIN.INI file. If you do not want to set up a printer, omit this
+; section.
+;
+"HP LaserJet III",LPT1:
+
+[endinstall]
+;
+; Use this section to specify whether you want Setup to make modifications
+; to the CONFIG.SYS and AUTOEXEC.BAT files and whether you want Setup to
+; exit to DOS or restart your system when it has finished installing Windows.
+;
+; The "configfiles" entry specifies whether Setup should modify the
+; CONFIG.SYS and AUTOEXEC.BAT with the necessary changes, or whether Setup
+; should save the proposed changes in separate files called CONFIG.WIN and
+; AUTOEXEC.WIN in your WINDOWS directory. If you choose the latter, you must
+; make the changes yourself. 
+;
+; You can specify one of the following entries.
+;
+; configfiles = modify              ;writes modifications back to source.
+; configfiles = save                ;saves changes to alternate (*.win) files.
+;
+; If  you do not specify a "configfiles" entry, the CONFIG.SYS and
+; AUTOEXEC.BAT files will be modified by Setup.
+;
+; The "endopt" entry specifies what happens at the end of Setup. You can
+; specify one of the following entries.
+;
+;     endopt = exit        ; Setup exits to DOS
+;     endopt = reboot      ; Setup reboots your computer
+;
+;     NOTE: 'endopt = restart' is not valid for Microsoft Workgroup.
+;            If you specify restart, the exit option will be taken instead.
+;
+; If you do not specify an "endopt" entry, a dialog box appears at the end
+; of Setup asking the user to choose from the two options.
+;
+; If you are using the network option for setting up Windows (Setup /n), the
+; reboot option is not valid. Setup will exit to DOS instead of rebooting
+; your system.
+;
+; If you exit to DOS, you must still reboot your computer before starting
+; Windows for Workgroups for the first time so that the correct network
+; device drivers will be loaded.
+;
+configfiles = save
+endopt      = exit

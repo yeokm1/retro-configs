@@ -1,0 +1,1533 @@
+;; Windows for Workgroups 3.11
+;; NETWORK.INF
+;; Copyright (c) Microsoft Corporation, 1991-1993
+
+[data]
+type=network
+version="3.11.060"
+autoexec_anchor="net start"
+config_anchor=""
+transport_hook=ms$ndishlp
+defNDIS2_transport=ms$netbeui
+defNDIS3_transport=ms$netbeui
+defNDIS3_transport2=ms$netbeui,ms$nwlinknb
+defODI_transport=ms$nwlinknb
+defNW_transport=ms$netbeui,ms$nwlinknb
+defNWipxmono_card=ms$nwsupnb
+defODI_arcnet_trans=ms$nwsupnbt
+
+[common]
+
+; Protman Install and Protocol Sections
+[protman_install]
+netdir=8:protman.dos,8:protman.exe
+
+[protman]
+drivername=PROTMAN$
+param=PRIORITY,,static,MS$NDISHLP
+
+; NDIS3 manager
+[ndis3]
+device386=7:ndis.386
+
+; NDIS2 to NDIS3 mapper
+[ndis2macsup]
+device386=7:ndis2sup.386
+
+; ODI to NDIS3 mapper
+[odimacsup]
+device386=7:msodisup.386
+netdir=8:odihlp.exe
+load=odihlp,@netdir\odihlp.exe,ipxodi,startnet
+
+; trans exclusive to each other
+[trans_specific]
+transport=ms$nwlink,ms$nwlinknb
+
+; NCD-detected values
+[ncd_card_specific]
+243=TRANSCEIVER
+301=IOCHRDY
+
+; NCD-detected values
+[ncd_trans_specific]
+101=MediaType
+
+[trans_update]
+transport=dis_pkt.gup
+
+[netcard]
+;   key = description, MSID, type, media, mode, install, protini, style
+ms$elnk16="3Com EtherLink 16",246,ndis,ethernet,0x07,ms$elnk16,ms$elnk16_nif
+ms$elnkii="3Com EtherLink II or IITP (8 or 16-bit)",243,ndis,ethernet,0x07,ms$elnkii,ms$elnkii_nif
+ms$elnk3="3Com EtherLink III",247,ndis,ethernet,0x07,ms$elnk3,ms$elnk3_nif
+ms$elnkmc="3Com EtherLink/MC",104,ndis,ethernet,0x07,ms$elnkmc,ms$elnkmc_nif
+ms$elnkpl="3Com EtherLink Plus",241,ndis,ethernet,0x05,ms$elnkpl,ms$elnkpl_nif,0x8000
+ms$toklnk="3Com TokenLink",244,ndis,tokenring,0x01,ms$toklnk,ms$toklnk_nif,0x8000
+ms$am2100="Advanced Micro Devices AM2100/AM1500T",561,ndis,ethernet,0x07,ms$AM2100,ms$am2100_nif,0x2000
+ms$am210xt="Amplicard AC 210/XT",321,ndis,ethernet,0x07,ms$ne1000,ms$ne1000_nif
+ms$am210at="Amplicard AC 210/AT",322,ndis,ethernet,0x07,ms$ne2000,ms$ne2000_nif
+ms$arcclone="ARCNET Compatible",804,ndis,arcnet,0x05,ms$SMCARC,ms$genarc_nif
+ms$ae1="Artisoft AE-1",311,ndis,ethernet,0x07,ms$ne1000,ms$ae1_nif
+ms$ae2="Artisoft AE-2 or AE-3",312,ndis,ethernet,0x07,ms$ne2000,ms$ae2_nif
+ms$ae2mca="Artisoft AE-2 (MCA) or AE-3 (MCA)",121,ndis,ethernet,0x07,ms$ne2000,ms$ae2mca_nif
+;ms$ae3="Artisoft AE-3",313,ndis,ethernet,0x07,ms$ne2000,ms$ae2_nif
+ms$cbl20="Cabletron E2000 Series DNI",511,ndis,ethernet,0x05,ms$cbl20xx,ms$cbl20xx_nif
+ms$cbl21="Cabletron E2100 Series DNI",512,ndis,ethernet,0x05,ms$cbl21xx,ms$cbl21xx_nif
+ms$cbl30="Cabletron E3000 Series DNI",132,ndis,ethernet,0x01,ms$cbl30xx,ms$cbl30xx_nif
+ms$cbl31="Cabletron E3100 Series DNI",133,ndis,ethernet,0x01,ms$cbl31xx,ms$cbl31xx_nif
+ms$cblt20="Cabletron T2015 Token Ring DNI",513,ndis,tokenring,0x01,ms$cblt20,ms$cblt20_nif
+ms$cblt30="Cabletron T3015 Token Ring DNI",134,ndis,tokenring,0x01,ms$cblt30,ms$cblt30_nif
+ms$cpq32="Compaq NE3200",4,ndis,ethernet,0x07,ms$ne3200,ms$ne3200_nif
+ms$dca10="DCA 10 Mb",261,ndis,ethernet,0x01,ms$DCA10,ms$DCA10_nif,0x8000
+ms$dca10fo="DCA 10 Mb Fiber Optic",262,ndis,ethernet,0x01,ms$DCA10,ms$DCA10_nif,0x8000
+ms$dca10mc="DCA 10 Mb MCA",120,ndis,ethernet,0x01,ms$DCA10,ms$DCA10mc_nif,0x8000
+ms$dca10tp="DCA 10 Mb Twisted Pair",263,ndis,ethernet,0x01,ms$DCA10,ms$DCA10_nif,0x8000
+ms$decgen="DEC Ethernet (All Types)",801,ndis,ethernet,0x07,ms$DEPCA,ms$decgen_nif
+ms$depca="DEC DEPCA",231,ndis,ethernet,0x07,ms$DEPCA,ms$depca_nif
+ms$ee101="DEC EE101 (Built-In)",238,ndis,ethernet,0x07,ms$DEPCA,ms$de100_nif
+ms$ewlc="DEC (DE100) EtherWorks LC",232,ndis,ethernet,0x07,ms$DEPCA,ms$de100_nif
+ms$ewlctp="DEC (DE101) EtherWorks LC/TP",234,ndis,ethernet,0x07,ms$DEPCA,ms$de100_nif
+ms$ewlctpb="DEC (DE102) EtherWorks LC/TP_BNC",237,ndis,ethernet,0x07,ms$DEPCA,ms$de100_nif
+ms$ewmc="DEC (DE210) EtherWorks MC",113,ndis,ethernet,0x05,ms$DEPCA,ms$de210_nif
+ms$ewmctp="DEC (DE211) EtherWorks MC/TP",114,ndis,ethernet,0x05,ms$DEPCA,ms$de210_nif
+ms$ewmctpb="DEC (DE212) EtherWorks MC/TP_BNC",115,ndis,ethernet,0x05,ms$DEPCA,ms$de210_nif
+ms$ewtrb="DEC (DE200) EtherWorks Turbo",233,ndis,ethernet,0x07,ms$DEPCA,ms$de200_nif
+ms$ewtrbtp="DEC (DE201) EtherWorks Turbo/TP",235,ndis,ethernet,0x07,ms$DEPCA,ms$de200_nif
+ms$ewtbtpb="DEC (DE202) EtherWorks Turbo/TP_BNC",236,ndis,ethernet,0x07,ms$DEPCA,ms$de200_nif
+ms$decpc="DECpc 433 WS (Built-In)",239,ndis,ethernet,0x07,ms$DEPCA,ms$decpc_nif
+ms$spdlk16="Everex SpeedLink /PC16 (EV2027)",331,ndis,ethernet,0x01,ms$spdlk16,ms$spdlk16_nif,0x8000
+ms$hp27246="HP Ethertwist MCA Adapter (HP27246)",0,ndis,ethernet,0x01,ms$HPLAN,ms$hplan_nif
+ms$hp27248="HP Ethertwist EISA LAN Adapter/32 (HP27248 or HP27248A)",008,ndis,ethernet,0x07,ms$HPLANE,ms$hplane_nif
+ms$hp27250="HP PC LAN Adapter/8 TL (HP27250)",343,ndis,ethernet,0x07,ms$HPLANB,ms$hplanb_nif
+ms$hp27245="HP PC LAN Adapter/8 TP (HP27245)",341,ndis,ethernet,0x07,ms$HPLANB,ms$hplanb_nif
+ms$hp27247A="HP PC LAN Adapter/16 TP (HP27247A)",342,ndis,ethernet,0x07,ms$HPLANB,ms$hplanb_nif
+ms$hp27252="HP PC LAN Adapter/16 TL Plus (HP27252)",345,ndis,ethernet,0x07,ms$HPLANP,ms$hplanp_nif
+ms$hp27247B="HP PC LAN Adapter/16 TP Plus (HP27247B)",344,ndis,ethernet,0x07,ms$HPLANP,ms$hplanp_nif
+ms$ibmnet2="IBM PC Network Adapter II",205,ndis,broadband,0x01,ms$IBMNET,ms$ibmnet_nif
+ms$ibmnt2a="IBM PC Network Adapter II/A",117,ndis,broadband,0x01,ms$IBMNETA,ms$ibmneta_nif
+ms$ibmnet="IBM PC Network Baseband Adapter",206,ndis,baseband,0x01,ms$IBMNET,ms$ibmnet_nif
+ms$ibmneta="IBM PC Network Baseband Adapter/A",105,ndis,baseband,0x01,ms$IBMNETA,ms$ibmneta_nif
+ms$genibmtok="IBM Token Ring (All Types)",807,ndis,tokenring,0x07,ms$IBMTOK,ms$genibmtok_nif
+ms$ibmtr1="IBM Token Ring",201,ndis,tokenring,0x07,ms$IBMTOK,ms$ibmtr1_nif
+ms$ibmtra="IBM Token Ring (MCA)",106,ndis,tokenring,0x07,ms$IBMTOK,ms$ibmtra_nif
+ms$ibmtr2="IBM Token Ring II",202,ndis,tokenring,0x07,ms$IBMTOK,ms$ibmtr2_nif
+ms$ibmtr2s="IBM Token Ring II/Short",203,ndis,tokenring,0x07,ms$IBMTOK,ms$ibmtr2_nif
+ms$ibmtr4="IBM Token Ring 4/16Mbs",204,ndis,tokenring,0x07,ms$IBMTOK,ms$ibmtr4_nif
+ms$ibmtr4a="IBM Token Ring 4/16Mbs (MCA)",107,ndis,tokenring,0x07,ms$IBMTOK,ms$ibmtr4a_nif
+ms$ee16="Intel EtherExpress 16 or 16TP",301,ndis,ethernet,0x07,ms$ee16,ms$ee16_nif
+ms$ee16a="Intel EtherExpress 16 (MCA)",306,ndis,ethernet,0x07,ms$ee16,ms$ee16a_nif
+ms$ee32="Intel EtherExpress/32",6,ndis,ethernet,0x07,ms$ne3200,ms$ne3200_nif
+ms$inteisa="Intel TokenExpress EISA 16/4",302,ndis,tokenring,0x05,ms$oli164,ms$oli164_nif
+ms$intisa="Intel TokenExpress 16/4",303,ndis,tokenring,0x05,ms$oli164,ms$oli164_nif
+ms$intmc="Intel TokenExpress MCA 16/4",304,ndis,tokenring,0x05,ms$oli164,ms$oli164_nif
+ms$exos="Exos 105",631,ndis,ethernet,0x07,ms$AM2100,ms$am2100_nif,0x2000
+ms$mdgxt="Madge Networks Smart 16/4 XT RingNode",471,ndis_sngl,tokenring,0x05,ms$MADGE,ms$MADGE_nif
+ms$mdgat="Madge Networks Smart 16/4 AT RingNode",472,ndis_sngl,tokenring,0x05,ms$MADGE,ms$MADGE_nif
+ms$mdgeisa="Madge Networks Smart 16/4 EISA RingNode",007,ndis_sngl,tokenring,0x05,ms$MADGE,ms$MADGE_nif
+ms$mdgmc="Madge Networks Smart 16/4 MC RingNode",122,ndis_sngl,tokenring,0x05,ms$MADGE,ms$MADGE_nif
+ms$ntat3="National Semiconductor AT/LANTIC EtherNODE 16-AT3",352,ndis,ethernet,0x07,ms$ne2000,ms$ne2clone_nif
+ms$ntethnd="National Semiconductor Ethernode *16AT",351,ndis,ethernet,0x07,ms$ne2000,ms$ne2clone_nif
+ms$ncrstar="NCR StarCard (8-bit)",361,ndis,starlan,0x01,ms$ncrstar,ms$ncrstar_nif
+ms$ncrtr4="NCR Token-Ring 4 Mbs ISA",362,ndis,tokenring,0x01,ms$ncrtr,ms$ncrtr4_nif,0x8000
+ms$ncrtr6="NCR Token-Ring 16/4 Mbs ISA",365,ndis,tokenring,0x01,ms$ncrtr,ms$ncrtr6_nif,0x8000
+ms$ncrtrmc="NCR Token-Ring 16/4 Mbs MCA",135,ndis,tokenring,0x01,ms$ncrtr,ms$ncrtrmc_nif,0x8000
+ms$ncrwl="NCR WaveLan AT Adapter",363,ndis,ethernet,0x01,ms$NCRWAVE,ms$ncrwl_nif
+ms$ncrwlmc="NCR WaveLan MC Adapter",364,ndis,ethernet,0x01,ms$NCRWAVE,ms$ncrwlmc_nif
+ms$ne1clone="NE1000 Compatible",213,ndis,ethernet,0x07,ms$ne1000,ms$ne1clone_nif
+ms$ne2clone="NE2000 Compatible",214,ndis,ethernet,0x07,ms$ne2000,ms$ne2clone_nif
+ms$ne1000="Novell/Anthem NE1000",211,ndis,ethernet,0x07,ms$ne1000,ms$ne1000_nif
+ms$ne2000="Novell/Anthem NE2000",212,ndis,ethernet,0x07,ms$ne2000,ms$ne2000_nif
+ms$ne1500="Novell/Anthem NE1500T",215,ndis,ethernet,0x07,ms$AM1500,ms$am2100_nif,0x2000
+ms$ne2100="Novell/Anthem NE2100",216,ndis,ethernet,0x07,ms$AM2100,ms$am2100_nif,0x2000
+ms$ne2="Novell/Anthem NE/2",103,ndis,ethernet,0x07,ms$ne2000,ms$ne2_nif
+ms$ne3200="Novell/Anthem NE3200",1,ndis,ethernet,0x07,ms$ne3200,ms$ne3200_nif
+ms$oli164="Olicom 16/4 Token-Ring Adapter",401,ndis,tokenring,0x05,ms$oli164,ms$oli164_nif
+ms$pro1340="Proteon ISA Token Ring (1340)",493,ndis,tokenring,0x01,ms$pro4,ms$pro4xt_nif,0x0002
+ms$pro1342="Proteon ISA Token Ring (1342)",494,ndis,tokenring,0x01,ms$pro4,ms$pro4xt_nif,0x0002
+ms$pro1346="Proteon ISA Token Ring (1346)",495,ndis,tokenring,0x01,ms$pro4at,ms$pro4at_nif,0x0002
+ms$pro1347="Proteon ISA Token Ring (1347)",496,ndis,tokenring,0x01,ms$pro4at,ms$pro4at_nif,0x0002
+ms$pro1840="Proteon MCA Token Ring (1840)",131,ndis,tokenring,0x01,ms$pro4,ms$pro4mc_nif,0x0002
+ms$ndi89xr="Proteon ProNET-4/16 p1892",136,ndis,tokenring,0x01,ms$ndi89xr,ms$ndi89xr_nif
+ms$pro1390="Proteon Token Ring (P1390)",491,ndis,tokenring,0x05,ms$p1390,ms$p139_nif
+ms$pro1392="Proteon Token Ring (P1392)",492,ndis,tokenring,0x05,ms$p1392,ms$p139_nif
+ms$pdiarc8="Pure Data PDI508+ (ArcNet)",486,ndis,arcnet,0x01,ms$SMCARC,ms$pdi508_nif
+ms$pdiarc16="Pure Data PDI516+ (ArcNet)",487,ndis,arcnet,0x01,ms$SMCARC,ms$pdi516_nif
+ms$pditok32="Pure Data PDI9025-32 (Token Ring)",484,ndis,tokenring,0x05,ms$oli164,ms$oli164_nif
+ms$pdutok="Pure Data PDuC9025 (Token Ring)",485,ndis,tokenring,0x05,ms$oli164,ms$oli164_nif
+ms$pdiwav="Pure Data PDI90211 (Wireless)",481,ndis,ethernet,0x01,ms$NCRWAVE,ms$ncrwl_nif
+ms$pduwav="Pure Data PDuC90211 (Wireless)",482,ndis,ethernet,0x01,ms$NCRWAVE,ms$ncrwl_nif
+ms$es3210="Racal-DATACOM ES3210",005,ndis,ethernet,0x01,ms$es3210,ms$es3210_nif
+ms$ni52108="Racal NI5210/8",272,ndis,ethernet,0x01,ms$NI5210,ms$ni5210_nif
+ms$ni52106="Racal NI5210/16",273,ndis,ethernet,0x01,ms$NI5210,ms$ni5210_nif
+ms$ni6510="Racal NI6510",275,ndis,ethernet,0x05,ms$ni65,ms$ni65_nif
+ms$rad="RadiSys EXM-10",541,ndis,ethernet,0x05,ms$SMCMAC,ms$rad_nif
+ms$smcpc="SMC ARCNETPC",221,ndis,arcnet,0x01,ms$SMCARC,ms$smcpc_nif
+ms$smc100="SMC ARCNET PC100,PC200",222,ndis,arcnet,0x01,ms$SMCARC,ms$smcpc_nif
+ms$smc110="SMC ARCNET PC110,PC210,PC250",223,ndis,arcnet,0x05,ms$SMCARC,ms$smcpc_nif
+ms$smcps="SMC ARCNET PS110,PS210",196,ndis,arcnet,0x05,ms$SMCARC,ms$smcps_nif
+ms$smc130="SMC ARCNET PC130/E",224,ndis,arcnet,0x05,ms$SMCARC,ms$smc130_nif
+ms$smc220="SMC ARCNET PC120,PC220,PC260",225,ndis,arcnet,0x05,ms$SMCARC,ms$smc220_nif
+ms$smc270="SMC ARCNET PC270/E",226,ndis,arcnet,0x05,ms$SMCARC,ms$smc130_nif
+ms$smc600="SMC ARCNET PC600W,PC650W",229,ndis,arcnet,0x05,ms$SMCARC,ms$smc600_nif
+ms$smc3k="SMC 3000 Series",551,ndis,ethernet,0x05,ms$smc3k,ms$smc3k_nif,0x8000
+ms$smcgen="SMC EtherCard (All Types except 8013/A)",803,ndis,ethernet,0x07,ms$SMCMAC,ms$smcgen_nif
+ms$w8003e="SMC EtherCard PLUS (WD/8003E)",293,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80XX_nif
+ms$w13epa="SMC EtherCard PLUS/A (MCA,BNC/AUX) (WD 8013EP/A)",108,ndis,ethernet,0x07,ms$SMCMAC,ms$WD8013EP_nif
+ms$w13ewa="SMC EtherCard PLUS/A (MCA,TP/AUX) (WD 8013EW/A)",109,ndis,ethernet,0x07,ms$SMCMAC,ms$WD8013EP_nif
+ms$w8003wa="SMC EtherCard PLUS 10T/A (MCA) (WD 8003W/A)",112,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80XXa_nif
+ms$w13ebt="SMC EtherCard PLUS 16 With Boot ROM Socket (WD/8013EBT)",298,ndis,ethernet,0x05,ms$SMCMAC,ms$w8013ebt_nif
+ms$w8003ea="SMC EtherCard PLUS/A (MCA) (WD 8003E/A or 8003ET/A)",110,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80XXa_nif
+ms$w8003wt="SMC EtherCard PLUS TP (WD/8003WT)",296,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80XX_nif
+ms$w8003eb="SMC EtherCard PLUS With Boot ROM Socket (WD/8003EB)",295,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80SS_nif
+ms$w03ebt="SMC EtherCard PLUS With Boot ROM Socket (WD/8003EBT)",294,ndis,ethernet,0x05,ms$SMCMAC,ms$WD80XX_nif
+ms$w03ep="SMC EtherCard PLUS Elite (WD/8003EP)",451,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80SS_nif
+ms$w03w="SMC EtherCard PLUS 10T (WD/8003W)",452,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80SS_nif
+ms$w13ep="SMC EtherCard PLUS Elite 16 (WD/8013EP)",453,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80SS_nif
+ms$w13w="SMC EtherCard PLUS Elite 16T (WD/8013W)",454,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80SS_nif
+ms$w13ew="SMC EtherCard PLUS Elite 16 Combo (WD/8013EW or 8013EWC)",455,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80SS_nif
+ms$w8003s="SMC StarCard PLUS (WD/8003S)",291,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80XX_nif
+ms$w03sta="SMC StarCard PLUS/A (MCA) (WD 8003ST/A)",111,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80XXa_nif
+ms$w8003sh="SMC StarCard PLUS With On Board Hub (WD/8003SH)",292,ndis,ethernet,0x07,ms$SMCMAC,ms$WD80XX_nif
+ms$gentcc="Thomas Conrad (All Arcnet Types)",806,ndis,arcnet,0x05,ms$TC6X4X,ms$gentcc_nif
+ms$tc6042e="Thomas Conrad TC6042",252,ndis,arcnet,0x05,ms$TC6X4X,ms$TC6X42_nif
+ms$tc6045e="Thomas Conrad TC6045",251,ndis,arcnet,0x05,ms$TC6X4X,ms$TC6X45_nif
+ms$tc6142e="Thomas Conrad TC6142",253,ndis,arcnet,0x05,ms$TC6X4X,ms$TC6X42_nif
+ms$tc6145e="Thomas Conrad TC6145",254,ndis,arcnet,0x05,ms$TC6X4X,ms$TC6X45_nif
+ms$tc6242e="Thomas Conrad TC6242",255,ndis,arcnet,0x05,ms$TC6X4X,ms$TC6X42_nif
+ms$tc6245e="Thomas Conrad TC6245",256,ndis,arcnet,0x05,ms$TC6X4X,ms$TC6245_nif
+ms$NCC16="Tulip NCC-16",611,ndis,ethernet,0x01,ms$NCC16,ms$NCC16_nif
+ms$genub="UB NIU (All Types)",808,ndis,ethernet,0x05,ms$UBNEI,ms$genub_nif
+ms$nicps="UB NIC/ps",102,ndis,ethernet,0x01,ms$nicps,ms$nicps_nif
+ms$niupc="UB NIUpc",284,ndis,ethernet,0x05,ms$UBNEI,ms$niupc_nif
+ms$niupc70="UB NIUpc/3270",285,ndis,ethernet,0x05,ms$UBNEI,ms$niupc70_nif
+ms$niupctp="UB NIUpc/EOTP",288,ndis,ethernet,0x05,ms$UBNEI,ms$niupctp_nif
+ms$niups="UB NIUps or NIUps/EOTP",101,ndis,ethernet,0x05,ms$UBNEI,ms$niups_nif
+ms$pcniu="UB pcNIU",281,ndis,ethernet,0x05,ms$UBNEI,ms$pcniu_nif
+ms$niuex8="UB pcNIU/ex 128K",282,ndis,ethernet,0x05,ms$UBNEI,ms$pcniuex_nif
+ms$niuex2="UB pcNIU/ex 512K",283,ndis,ethernet,0x05,ms$UBNEI,ms$pcniuex_nif
+ms$xirc1="Xircom Pocket Ethernet I",532,ndis,ethernet,0x05,ms$xirc1,ms$xirc_nif
+ms$xirc="Xircom Pocket Ethernet II",531,ndis,ethernet,0x05,ms$xirc,ms$xirc_nif
+ms$znote="Zenith Data Systems Z-Note",521,ndis,ethernet,0x05,ms$znote,ms$znote_nif,0x2000
+ms$zstation="Zenith Data Systems NE2000 Compatible",522,ndis,ethernet,0x07,ms$ne2000,ms$zstat_nif
+ms$odimac="IPXODI Support Driver (Ethernet)",,ndis,ethernet,0x04,ms$odimac,ms$odimac_nif
+ms$odimactr="IPXODI Support Driver (Token Ring)",,ndis,tokenring,0x04,ms$odimac,ms$odimac_nif
+ms$odimacarc="IPXODI Support Driver (ArcNet)",,ndis,arcnet,0x04,ms$odimac,ms$odimac_nif
+ms$nwsupnb="IPX Support Driver (Monolithic) with NetBIOS transport",,mono,,0x02,ms$nwsupnb,ms$nwsup_nif,0x1004
+ms$genndis2="Generic NDIS2 Driver",,ndis,ethernet,0x01,ms$genndis2,ms$genndis2_nif,0x8000
+asymac="Remote Access Service",901,ndis,serial,0x02,asymac,asyncmac_nif,0x000C
+
+[transport]
+;   key=description,MSID, type, transport, mode, install, protini, winnet type, style
+ms$ndishlp="NDIS2 Mapper",0,nonetbios,,0x01,0,implicit,ms$ndishlp,ms$ndishlp_xif
+ms$netbeui="Microsoft NetBEUI",3,ndis,netbeui,0x03,0,lanabase,ms$netbeui,ms$netbeui_xif,,0x0010
+ms$nwlink="IPX/SPX Compatible Transport",104,nonetbios,nwlink,0x02,0,lanabase,ms$nwlink,ms$nwlink_xif,,0x0004
+ms$nwlinknb="IPX/SPX Compatible Transport with NetBIOS",104,ndis,nwlink,0x02,0,lanabase,ms$nwlinknb,ms$nwlink_xif,,0x1004
+ms$nwsupnbt="ODI ArcNet Support transport with NetBIOS",,ndis,,0x02,0,lanabase,ms$nwsupnb,ms$nwsup_nif,,0x100C
+ms$ipx="Novell IPX",101,nonetbios,ipx,0x01,0,implicit,ms$ipx,ms$ipx_xif,,0x8000
+ms$ipx_tr="Novell IPX (Token Ring)",102,nonetbios,ipx,0x01,0,implicit,ms$ipx_tr,ms$ipx_tr_xif,,0x8000
+ban$vines="Banyan VINES Protocol",4000,nonetbios,,0x01,0,implicit,ban$vines,ban$vines_xif,0x400
+nfs-ndis="PC-NFS Protocol",0,ndis,,0x01,0,lanabase,ms$pcnfs,ms$pcnfs_xif,0x700
+asybeui="RAS Transport",002,ndis,asybeui,0x01,0,lanabase,ms$asybeui,ms$asybeui_xif,,0x8000
+
+;
+; Netcard Install and Protocol Sections
+;
+
+; 3Com EtherLink MC
+
+[ms$elnkmc]
+ndis2=8:elnkmc.dos
+ndis3=7:elnkmc.386
+mlid=*:3c523.com
+
+[ms$elnkmc_nif]
+drivername=ELNKMC$
+slot=SLOTNUMBER,"Adapter Slot Number",int,"1,8,1",1,0x32
+
+; Common IBM token ring install
+;
+; Cards that use this section:
+;   ibmtra, ibmtr416a 
+;   ibmtr1, ibmtr2, ibmtr2s, ibmtr416
+
+[ms$IBMTOK]
+ndis2=8:ibmtok.dos
+ndis3=7:ibmtok.386
+mlid=*:token.com
+
+; IBM Token Ring (ISA)
+
+[ms$genibmtok_nif]
+drivername=IBMTOK$
+param=iobase,"Base I/O Port",enum,"Primary,1,Alternate,2",1,0x20
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x22
+param=maxtransmits,"Maximum Transmits",int,"6,50,1",6,0x02
+param=earlyrelease,"Early Release Option",keyonly,,,0x02
+param=primary,"Primary Adapter",keyonly,,,0x02
+param=alternate,"Alternate Adapter",keyonly,,,0x02
+param=productid,"Product ID",chars,36,"0110F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",0x02
+param=ram,"Physical RAM Location",hex,"0xA000,0xF000,0x200",0xD800,0x02
+param=recvbufs,"Receive Buffers",int,"2,60,1",2,0x02
+param=recvbufsize,"Receive Buffer Size",int,"256,17952,8",256,0x02
+param=xmitbufs,"Transmit Buffers",int,"1,2,1",1,0x02
+param=xmitbufsize,"Transmit Buffer Size",int,"256,17952,8",256,0x02
+param=maxpacketsize,"Maximum Packet Size",int,"256,17952,8",256,0x22
+
+[ms$ibmtr1_nif]
+drivername=IBMTOK$
+param=iobase,"Base I/O Port",enum,"Primary,1,Alternate,2",1,0x20
+param=maxtransmits,"Maximum Transmits",int,"6,50,1",6,0x02
+param=primary,"Primary Adapter",keyonly,,,0x02
+param=alternate,"Alternate Adapter",keyonly,,,0x02
+param=productid,"Product ID",chars,36,"0110F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",0x02
+param=ram,"Physical RAM Location",hex,"0xA000,0xF000,0x800",0xD800,0x02
+param=recvbufs,"Receive Buffers",int,"2,60,1",2,0x02
+param=recvbufsize,"Receive Buffer Size",int,"256,2040,8",256,0x02
+param=xmitbufs,"Transmit Buffers",int,"1,2,1",1,0x02
+param=xmitbufsize,"Transmit Buffer Size",int,"256,2040,8",2040,0x02
+param=maxpacketsize,"Maximum Packet Size",int,"256,17952,8",256,0x22
+
+; IBM Token Ring II
+
+[ms$ibmtr2_nif]
+drivername=IBMTOK$
+param=iobase,"Base I/O Port",enum,"Primary,1,Alternate,2",1,0x20
+param=maxtransmits,"Maximum Transmits",int,"6,50,1",6,0x02
+param=primary,"Primary Adapter",keyonly,,,0x02
+param=alternate,"Alternate Adapter",keyonly,,,0x02
+param=productid,"Product ID",chars,36,"0110F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",0x02
+param=ram,"Physical RAM Location",hex,"0xA000,0xF000,0x200",0xD800, 0x02
+param=recvbufs,"Receive Buffers",int,"2,60,1",2,0x02
+param=recvbufsize,"Receive Buffer Size",int,"256,2040,8",256,0x02
+param=xmitbufs,"Transmit Buffers",int,"1,2,1",1,0x02
+param=xmitbufsize,"Transmit Buffer Size",int,"256,2040,8",2040,0x02
+param=maxpacketsize,"Maximum Packet Size",int,"256,17952,8",256,0x22
+
+; IBM TokenRing 4/16 
+
+[ms$ibmtr4_nif]
+drivername=IBMTOK$
+param=iobase,"Base I/O Port",enum,"Primary,1,Alternate,2",1,0x20
+param=earlyrelease,"Early Release Option",keyonly,,,0x02
+param=maxtransmits,"Maximum Transmits",int,"6,50,1",6,0x02
+param=primary,"Primary Adapter",keyonly,,,0x02
+param=alternate,"Alternate Adapter",keyonly,,,0x02
+param=productid,"Product ID",chars,36,"0110F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",0x02
+param=recvbufs,"Receive Buffers",int,"2,60,1",2,0x02
+param=recvbufsize,"Receive Buffer Size",int,"256,17952,8",256,0x02
+param=xmitbufs,"Transmit Buffers",int,"1,2,1",1,0x02
+param=xmitbufsize,"Transmit Buffer Size",int,"256,17952,8",256,0x02
+param=maxpacketsize,"Maximum Packet Size",int,"256,17952,8",256,0x22
+
+; IBM TokenRing 4/16 (MCA)
+
+[ms$ibmtr4a_nif]
+drivername=IBMTOK$
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x22
+param=earlyrelease,"Early Release Option",keyonly,,,0x02
+param=maxtransmits,"Maximum Transmits",int,"6,50,1",6,0x02
+param=primary,"Primary Adapter",keyonly,,,0x02
+param=alternate,"Alternate Adapter",keyonly,,,0x02
+param=productid,"Product ID",chars,36,"0110F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",0x02
+param=recvbufs,"Receive Buffers",int,"2,60,1",2,0x02
+param=recvbufsize,"Receive Buffer Size",int,"256,17952,8",256,0x02
+param=xmitbufs,"Transmit Buffers",int,"1,2,1",1,0x02
+param=xmitbufsize,"Transmit Buffer Size",int,"256,17952,8",256,0x02
+param=maxpacketsize,"Maximum Packet Size",int,"256,17952,8",256,0x22
+
+; IBM TokenRing (MCA)
+
+[ms$ibmtra_nif]
+drivername=IBMTOK$
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x22
+param=maxtransmits,"Maximum Transmit",int,"6,50,1",6,0x02
+param=primary,"Primary Adapter",keyonly,,,0x02
+param=alternate,"Alternate Adapter",keyonly,,,0x02
+param=productid,"Product ID",chars,36,"0110F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",0x02
+param=recvbufs,"Receive Buffers",int,"2,60,1",2,0x02
+param=recvbufsize,"Receive Buffer Size",int,"256,2040,8",256,0x02
+param=xmitbufs,"Transmit Buffers",int,"1,2,1",1,0x02
+param=xmitbufsize,"Transmit Buffer Size",int,"256,2040,8",2040,0x02
+param=maxpacketsize,"Maximum Packet Size",int,"256,17952,8",256,0x22
+
+; SMC 3000 Series
+
+[ms$smc3k]
+ndis2=$:smc3000.dos
+mlid=*:e16odiw.com
+
+[ms$smc3k_nif]
+drivername=SMC_ETH$
+irq=INTERRUPT,,text,"3,4,5,7,9,10",3,0x08
+io=PORT_NUM,,hex,"0x200,0x3e0,0x20",0x300,0x08
+mca=MICRO_CHANNEL,"Bus Type (0=ISA, 1=MCA)",int,"0,1,1",0
+param=XT_TYPE,"8 Bit Mode","0,1,1",0,0x02
+
+; Generic install for SMC EtherCard PLUS series cards
+;
+;   WD8003EBT, WD8003SH, WD8003E, WD8003S, WD8003WT
+;   WD8003EB, WD8003EP, WD8003W, WD8013EP, WD8013W, WD8013EW
+;   WD8003ET/A, WD8003W/A, WD8003E/A, WD8003ST/A
+
+[ms$SMCMAC]
+ndis2=8:smcmac.dos
+ndis3=7:smc8000w.386
+mlid=*:smc8000.com
+
+[ms$smcgen_nif]
+drivername=SMCMAC$
+irq=irq,,int,"2,15,1",3,0x38
+io=iobase,,hex,"0x200,0x3e0,0x20",0x280,0x38
+mem=ramaddress,,hex,"0xC000,0xEE00,0x200",0xD000,0x38
+slot=slotnumber,"Adapter Slot Number",int,"1,8,1",1,0x22
+param=maxrequests,"Maximum Requests",int,"6,64,1",8,0x02
+param=maxtransmits,"Maximum Transmits",int,"6,64,1",12,0x02
+param=receivebuffers,"Receive Buffers",int,"6,96,1",12,0x02
+param=receivebufsize,"Receive Buffer Size",int,"256,1536,1",256,0x02
+param=receivechains,"Receive Chain Entries",int,"6,96,1",12,0x02
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,32,1",16,0x22
+
+; This is the common _nif for the SCM 80xx series cards that are jumper set
+;
+;   WD8003EBT, WD8003SH, WD8003E, WD8003S, WD8003WT
+
+[ms$WD80XX_nif]
+drivername=SMCMAC$
+irq=irq,,int,"2,7,1",3,0x38
+io=iobase,,hex,"0x200,0x3e0,0x20",0x280,0x38
+mem=ramaddress,,hex,"0xC000,0xEE00,0x200",0xD000,0x3C
+param=maxrequests,"Maximum Requests",int,"6,64,1",8,0x02
+param=maxtransmits,"Maximum Transmits",int,"6,64,1",12,0x02
+param=receivebuffers,"Receive Buffers",int,"6,96,1",12,0x02
+param=receivebufsize,"Receive Buffer Size",int,"256,1536,1",256,0x02
+param=receivechains,"Receive Chain Entries",int,"6,96,1",12,0x02
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,32,1",16,0x22
+
+; This is the common _nif for the WD 80xx series cards that ARE
+; soft-settable
+;
+; Cards that use this section:
+;   WD8003EB, WD8003EP, WD8003W, WD8013EP, WD8013W, WD8013EW
+
+[ms$WD80SS_nif]
+drivername=SMCMAC$
+irq=irq,,int,"2,15,1",3,0x28
+io=iobase,,hex,"0x200,0x3e0,0x20",0x280,0x28
+mem=ramaddress,,hex,"0xC000,0xEE00,0x200",0xD000,0x28
+param=maxrequests,"Maximum Requests",int,"6,64,1",8,0x02
+param=maxtransmits,"Maximum Transmits",int,"6,64,1",12,0x02
+param=receivebuffers,"Receive Buffers",int,"6,96,1",12,0x02
+param=receivebufsize,"Receive Buffer Size",int,"256,1536,1",256,0x02
+param=receivechains,"Receive Chain Entries",int,"6,96,1",12,0x02
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,32,1",16,0x22
+
+; This is the common _nif for the WD 80xx/A series cards
+;
+; Cards that use this section:
+;
+;   WD8003ET/A, WD8003W/A, WD8003E/A, WD8003ST/A
+
+[ms$WD80XXa_nif]
+drivername=SMCMAC$
+irq=irq,,int,"2,15,1",3,0x28
+io=iobase,,hex,"0x200,0x3e0,0x20",0x280,0x28
+mem=ramaddress,,hex,"0xC000,0xEE00,0x200",0xD000,0x28
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x30
+param=maxrequests,"Maximum Requests",int,"6,64,1",8,0x02
+param=maxtransmits,"Maximum Transmits",int,"6,64,1",12,0x02
+param=receivebuffers,"Receive Buffers",int,"6,96,1",12,0x02
+param=receivebufsize,"Receive Buffer Size",int,"256,1536,1",256,0x02
+param=receivechains,"Receive Chain Entries",int,"6,96,1",12,0x02
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,32,1",16,0x22
+
+
+; This is the common _nif for the WD 8013EP/A and 8013EW/A card
+;
+; Cards that use this section:
+;
+;   WD8013EP/A, WD8013EW/A
+
+[ms$WD8013EP_nif]
+drivername=SMCMAC$
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x32
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,32,1",16,0x22
+
+[ms$rad_nif]
+drivername=SMCMAC$
+irq=irq,,int,"2,3,4,7",7,0x38
+io=iobase,,hex,"0x200,0x3e0,0x20",0x240,0x38
+mem=ramaddress,,hex,"0xD000,0xDE00,0x200",0xDE00,0x38
+param=maxrequests,"Maximum Requests",int,"6,64,1",8,0x02
+param=maxtransmits,"Maximum Transmits",int,"6,64,1",12,0x02
+param=receivebuffers,"Receive Buffers",int,"6,96,1",12,0x02
+param=receivebufsize,"Receive Buffer Size",int,"256,1536,1",256,0x02
+param=receivechains,"Receive Chain Entries",int,"6,96,1",12,0x02
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,32,1",16,0x22
+
+; Novell/Anthem NE1000
+
+[ms$ne1000]
+ndis2=8:ne1000.dos
+ndis3=7:ne1000.386
+mlid=*:ne1000.com
+
+[ms$ne1000_nif]
+drivername=MS1000$
+irq=INTERRUPT,,int,"2,5,1",3,0x38
+io=IOBASE,,hex,"0x300,0x360,0x20",0x300,0x38
+
+[ms$ae1_nif]
+drivername=MS1000$
+irq=INTERRUPT,,text,"2,3,4,5,6,7,10,15",15,0x38
+io=IOBASE,,hex,"0x300,0x360,0x20",0x300,0x38
+
+[ms$ne1clone_nif]
+drivername=MS1000$
+irq=INTERRUPT,,int,"2,9,1",3,0x38
+io=IOBASE,,hex,"0x200,0x3E0,0x10",0x300,0x38
+
+; Novell/Anthem NE2000 and Clones
+
+[ms$ne2000]
+ndis2=8:ne2000.dos
+ndis3=7:ne2000.386
+mlid=*:ne2000.com
+
+[ms$ne2000_nif]
+drivername=MS2000$
+irq=INTERRUPT,,int,"2,5,1",3,0x18
+io=IOBASE,,hex,"0x300,0x360,0x20",0x300,0x18
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x32
+
+[ms$ae2_nif]
+drivername=MS2000$
+irq=INTERRUPT,,text,"2,3,4,5,6,7,10,15",3,0x18
+io=IOBASE,,hex,"0x300,0x360,0x20",0x300,0x18
+
+[ms$ne2_nif]
+drivername=MS2000$
+
+[ms$ae2mca_nif]
+drivername=MS2000$
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x32
+
+[ms$zstat_nif]
+drivername=MS2000$
+irq=INTERRUPT,,text,"3,9,10,11,12,15",3,0x18
+io=IOBASE,,hex,"0x300,0x360,0x20",0x300,0x18
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x32
+
+[ms$ne2clone_nif]
+drivername=MS2000$
+irq=INTERRUPT,,int,"2,15,1",3,0x18
+io=IOBASE,,hex,"0x200,0x3E0,0x10",0x300,0x18
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x32
+
+; DEC EtherWorks Common Install
+
+[ms$DEPCA]
+ndis2=8:depca.dos
+ndis3=7:declan.386
+ndis3sect=lance
+mlid=*:depca.com
+
+[ms$decgen_nif]
+drivername=DEPCA$
+irq=Interrupt,,text,"2,3,4,5,7,9,10,11,15",5,0x38
+io=IOAddress,,text,"0x200,0x300",0x300,0x38
+mem=RamAddress,,hex,"0xC000,0xE800,0x800",0xD000,0x38
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x22
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,256,1",8,0x30
+param=MaxTransmits,"Maximum Transmits",int,"0,256,1",16
+param=AdapterName,"Ethernet Adapter Name",text,"DEPCA,DE100,DE200,DE210","DE200",0x32
+
+; DEC DEPCA
+
+[ms$depca_nif]
+drivername=DEPCA$
+irq=Interrupt,,text,"2,3,4,5,7",3,0x38
+io=IOAddress,,text,"0x200,0x300",0x300,0x38
+mem=RamAddress,,hex,"0xC000,0xE800,0x800",0xD000,0x38
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,256,1",8,0x30
+param=MaxTransmits,"Maximum Transmits",int,"0,256,1",16
+param=AdapterName,"Ethernet Adapter Name",static,"DEPCA",,0x30
+
+; DEC EtherWorks LC  (DE10x Cards)
+
+[ms$de100_nif]
+drivername=DEPCA$
+irq=Interrupt,,text,"2,3,4,5,7",5,0x38
+io=IOAddress,,text,"0x200,0x300",0x300,0x38
+mem=RamAddress,,hex,"0xC000,0xE800,0x800",0xD000,0x38
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,256,1",8,0x30
+param=MaxTransmits,"Maximum Transmits",int,"0,256,1",16
+param=AdapterName,"Ethernet Adapter Name",static,"DE100",,0x30
+
+; DEC EtherWorks Turbo (DE20x Cards)
+
+[ms$de200_nif]
+drivername=DEPCA$
+irq=Interrupt,,text,"5,9,10,11,15",5,0x38
+io=IOAddress,,text,"0x200,0x300",0x300,0x38
+mem=RamAddress,,hex,"0xC000,0xE800,0x800",0xD000,0x38
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,256,1",8,0x30
+param=MaxTransmits,"Maximum Transmits",int,"0,256,1",16
+param=AdapterName,"Ethernet Adapter Name",static,"DE200",,0x30
+
+; DEC EtherWorks MCA Cards (DE21x Cards)
+
+[ms$de210_nif]
+drivername=DEPCA$
+io=IOAddress,,text,"0x200,0x300",0x300,0x08
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,256,1",8
+param=MaxTransmits,"Maximum Transmits",int,"0,256,1",16
+param=AdapterName,"Ethernet Adapter Name",static,"DE210"
+
+; DECpc 433 Built-In Networking Card
+
+[ms$decpc_nif]
+drivername=DEPCA$
+irq=Interrupt,,text,"5",5,0x38
+io=IOAddress,,text,"0x200",0x200,0x38
+mem=RamAddress,,hex,"0xC000,0xE800,0x800",0xD000,0x38
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,256,1",8,0x30
+param=MaxTransmits,"Maximum Transmits",int,"0,256,1",16
+param=AdapterName,"Ethernet Adapter Name",static,"DE100",,0x30
+
+; 3Com EtherLink Plus
+
+[ms$elnkpl]
+ndis2=$:elnkpl.dos
+mlid=*:3c505.com
+
+[ms$elnkpl_nif]
+drivername=ELNKPL$
+irq=INTERRUPT,,text,"3,4,5,6,7,9,10,11,12,14,15",3,0x08
+io=IOADDRESS,,hex,"0x200,0x3f0,0x10",0x300,0x08
+dma=DMACHANNEL,"DMA Channel",text,"1,3,5,6,7","1",0x08
+
+; 3Com EtherLink II
+
+[ms$elnkii]
+ndis2=8:elnkii.dos
+ndis3=7:elnkii.386
+mlid=*:3c503.com
+
+[ms$elnkii_nif] 
+drivername=ELNKII$
+irq=INTERRUPT,,int,"2,5,1",3,0x38
+io=IOADDRESS,,text,"0x250,0x280,0x2A0,0x2E0,0x300,0x310,0x330,0x350",0x300,0x38
+dma=DMACHANNEL,"DMA Channel",int,"1,3,1",1,0x02
+param=MAXTRANSMITS,"Maximum Transmits",int,"8,50,1",12
+param=DATATRANSFER,"Data Transfer Mode",text,"block_dma,demand_dma,single_dma,pio_word,pio_byte",pio_word,0x02
+; NOTE: do not change the order of external and onboard.
+; ncd_card_specific relies on this ordering.
+param=TRANSCEIVER,"Transceiver Location",text,"external,onboard","onboard",0x3C
+param=XMITBUFS,"Transmit Buffers",int,"1,2,1",2,0x02
+
+; 3Com EtherLink III
+
+[ms$elnk3]
+ndis2=8:elnk3.dos
+ndis3=7:elnk3.386
+mlid=*:3c509.com
+
+[ms$elnk3_nif]
+DRIVERNAME=ELNK3$
+io=IOADDRESS,,hex,"0x200,0x3F0,0x10",0x300,0x32
+slot=SLOT,"Adapter Slot Number",int,"1,8,1",1,0x32
+param=MAXTRANSMITS,"Maximum Transmits",int,"2,50,1",6,0x32
+
+; 3Com TokenLink
+
+[ms$toklnk]
+ndis2=$:tlnk.dos
+
+[ms$toklnk_nif]
+drivername=TLNK$
+irq=INTERRUPT,,text,"2,3,4,5,9,10,11,12,14",5,0x08
+io=IOADDRESS,,text,"0x300,0x310,0x330,0x350","0x300",0x08
+dma=DMACHANNEL,"DMA Channel (0=None)",text,"0,1,3,5,6,7",0,0x08
+param=MAXTRANSMITS,"Maximum Transmits",int,"8,40,1",8,0x02
+param=PRODUCTID,"Product ID",chars,36,"0110F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",0x02
+param=SPEED,"CPU Bus Speed",text,"6,8,10",6,0x02
+
+; Thomas-Conrad TC6X4X Adapters
+
+[ms$TC6X4X]
+ndis2=8:tccarc.dos
+mlid=*:tccarc.com
+
+[ms$gentcc_nif]
+drivername=TCCARC$
+irq=INTERRUPT,,text,"2,3,4,5,7,10,11,12,13,14,15",3,0x08
+mem=MEMORYBASE,,hex,"0xC000,0xDC00,0x400",0xD000,0x08
+
+[ms$TC6X42_nif]
+drivername=TCCARC$
+irq=INTERRUPT,,text,"2,3,4,5,7",3,0x08
+mem=MEMORYBASE,,hex,"0xC000,0xDC00,0x400",0xD000,0x08
+
+[ms$TC6X45_nif]
+drivername=TCCARC$
+irq=INTERRUPT,,text,"2,3,4,5,6,7,10,11,12,14,15",3,0x08
+mem=MEMORYBASE,,hex,"0xC000,0xDC00,0x400",0xD000,0x08
+
+[ms$TC6245_nif]
+drivername=TCCARC$
+irq=INTERRUPT,,text,"2,3,4,5,6,7,10,11,13,14,15",3,0x08
+mem=MEMORYBASE,,hex,"0xC000,0xDC00,0x400",0xD000,0x08
+
+; Common DCA 10 Mb install
+
+[ms$DCA10]
+ndis2=$:mac586.sys
+
+; DCA 10 Mb ISA
+
+[ms$DCA10_nif]
+drivername=MAC586$
+irq=INTERRUPT,,text,"2,3,4,5,7",3,0x08
+io=IOADDRESS,,text,"0x300,0x310,0x330,0x350","0x300",0x08
+mem=RAM,,text,"0xA000,0xA400,0xA800,0xAC00,0xC000,0xC400,0xCC00,0xD000,0xD400,0xD800,0xDC00","0xD800",0x08
+
+; DCA 10 Mb MCA
+
+[ms$DCA10mc_nif]
+drivername=MAC586$
+slot=SLOT,"Adapter Slot Number",int,"1,8,1",1,0x02
+
+;R-I 6510
+
+[ms$ni65]
+ndis2=8:ni6510.dos
+mlid=*:ni6510.com
+
+[ms$ni65_nif]
+drivername=NI6510$
+io=IOBASE,,hex,"0x300,0x360,0x20",0x360,0x08
+param=MAXMULTICASTS,"Maximum Multicast Addresses",int,"1,16,1",10
+param=MAXRECEIVES,"Maximum Receives",int,"1,8,1",4
+param=MAXTRANSMITS,"Maximum Transmits",int,"1,50,1",6
+
+;Cabletron E2000
+
+[ms$cbl20xx]
+ndis2=8:e20nd.dos
+mlid=*:e20odi.com
+
+[ms$cbl20xx_nif]
+drivername=E20ND$
+irq=INTERRUPT,,text,"3,4,5,6,7,9,10,11,12,14,15",3,0x08
+io=IOADDRESS,,text,"0x220,0x280,0x300,0x380",0x380,0x08
+
+;Cabletron E2100
+
+[ms$cbl21xx]
+ndis2=8:e21nd.dos
+mlid=*:e21odi.com
+
+[ms$cbl21xx_nif]
+drivername=E21ND$
+irq=INTERRUPT,,text,"3,4,5,6,7,9,10,11,12,14,15",3,0x08
+io=IOADDRESS,,text,"0x220,0x280,0x300,0x380",0x380,0x08
+mem=SHAREDRAM,,hex,"0xA000,0xEE00,0x200",0xD000,0x08
+param=MEDIA,"Primary or Secondary Media",text,"PRI,SEC",PRI,0x08
+
+; Western Digital 8013EBT
+
+[ms$w8013ebt_nif]
+drivername=SMCMAC$
+irq=irq,,text,"2,3,4,5,7,10,11,15",3,0x08
+io=iobase,,text,"0x200,0x220,0x240,0x260,0x280,0x2A0,0x2C0,0x300,0x340,0x380","0x280",0x08
+mem=ramaddress,,hex,"0xC000,0xEE00,0x200",0xD000,0x08
+param=maxrequests,"Maximum Requests",int,"6,64,1",8,0x02
+param=maxtransmits,"Maximum Transmits",int,"6,64,1",12,0x02
+param=receivebuffers,"Receive Buffers",int,"6,96,1",12,0x02
+param=receivebufsize,"Receive Buffer Size",int,"256,1536,1",256,0x02
+param=receivechains,"Receive Chain Entries",int,"6,96,1",12,0x02
+
+; Intel EtherExpress 16
+
+[ms$ee16]
+ndis2=8:exp16.dos
+ndis3=7:ee16.386
+mlid=*:exp16odi.com
+
+[ms$ee16_nif]
+drivername=EXP16$
+irq=IRQ,,text,"3,4,5,9,10,11",3,0x3C
+io=IOADDRESS,,text,"0x200,0x210,0x220,0x230,0x240,0x250,0x260,0x270,0x300,0x310,0x320,0x330,0x340,0x350,0x360,0x370","0x310",0x3C
+; NOTE: do not change the order or Early, Late, Never.
+; ncd_card_specific relies on this ordering.
+param=IOCHRDY,"I/O Channel Ready",text,"Early,Late,Never",Late,0x3C
+param=TRANSCEIVER,"Transceiver Type",text,"'Thick Net (AUI/DIX)','Thin Net (BNC/COAX)','Twisted-Pair (TPE)'","Thin Net (BNC/COAX)",0x3C
+
+[ms$ee16a_nif]
+drivername=EXP16$
+irq=IRQ,,text,"3,4,5,9,10,11",3,0x0C
+io=IOADDRESS,,text,"0x200,0x210,0x220,0x230,0x240,0x250,0x260,0x270,0x300,0x310,0x320,0x330,0x340,0x350,0x360,0x370","0x310",0x0C
+; NOTE: do not change the order or Early, Late, Never.
+; ncd_card_specific relies on this ordering.
+param=IOCHRDY,"I/O Channel Ready",text,"Early,Late,Never",Late,0x0C
+param=TRANSCEIVER,"Transceiver Type",text,"'Thick Net (AUI/DIX)','Thin Net (BNC/COAX)','Twisted-Pair (TPE)'","Thin Net (BNC/COAX)",0x0C
+slot=SLOTNUMBER,"Adapter Slot Number",int,"1,8,1",1,0x32
+
+; Olicom 16/4 Token-Ring Adapter ISA
+
+[ms$oli164]
+ndis2=8:olitok.dos
+mlid=*:octok16.com
+
+[ms$oli164_nif]
+drivername=OLITOK$
+param=adapter,"Adapter",int,"0,3,1",0,0x02
+param=maxtransmits,"Maximum Transmits",int,"2,6,1",6
+param=maxrequests,"Maximum General Requests",int,"1,10,1",6
+param=recbufsize,"Receive Buffer Size",int,"256,5000,1",512
+param=recbufcount,"Receive Buffers",int,"4,10,1",10
+param=earlyrelease,"Early Token Release",text,"yes,no",yes
+param=rpl,"RPL",keyonly,,,0x02
+
+; 3Com EtherLink 16
+
+[ms$elnk16]
+ndis2=8:elnk16.dos
+ndis3=7:elnk16.386
+mlid=*:3c507.com
+
+[ms$elnk16_nif]
+drivername=ELNK16$
+io=iobase,,hex,"0x200,0x3F0,0x10",0x300,0x28
+
+; SMC ARCNET Adapters
+
+[ms$SMCARC]
+ndis2=8:smc_arc.dos
+mlid=*:smcarcws.com
+
+[ms$smcpc_nif]
+drivername=SMC_ARC$
+irq=interrupt,,text,"2,3,4,5,7","2",0x08
+io=iobase,,hex,"0x200,0x3F0,0x10",0x2E0,0x08
+mem=memorybase,,hex,"0xC000,0xE000,0x1000",0xD000,0x08
+mca=micro_channel,"Bus Type (0=ISA, 1=MCA)",int,"0,1,1",0
+
+[ms$smcps_nif]
+drivername=SMC_ARC$
+irq=interrupt,,text,"2,3,4,5,7,10","2",0x08
+io=iobase,,text,"0x2E0,0x300,0x350,0x1988,0x2010,0x5678,0x5900,0x8088,0x8910,0x9C80,0xADB8,0xB4E8,0xBAD8,0xD0D0,0xE8D0,0xF8E8",0x2E0,0x08
+mem=memorybase,,hex,"0xC000,0xDE00,0x200",0xD000,0x08
+mca=micro_channel,"Bus Type (0=ISA, 1=MCA)",int,"0,1,1",1
+
+[ms$smc130_nif]
+drivername=SMC_ARC$
+irq=interrupt,,text,"2,3,4,5,7","2",0x08
+io=iobase,,text,"0x260,0x290,0x2E0,0x2F0,0x300,0x350,0x380,0x3E0","0x2E0",0x08
+mem=memorybase,,text,"0xC000,0xC400,0xCC00,0xD000,0xD400,0xD800,0xDC00,0xE000",0xD000,0x08
+mca=micro_channel,"Bus Type (0=ISA, 1=MCA)",int,"0,1,1",0
+
+[ms$smc220_nif]
+drivername=SMC_ARC$
+irq=interrupt,,text,"2,3,4,5,7","2",0x08
+io=iobase,,hex,"0x200,0x3F0,0x10",0x2E0,0x08
+mem=memorybase,,hex,"0xC000,0xEC00,0x400",0xD000,0x08
+mca=micro_channel,"Bus Type (0=ISA, 1=MCA)",int,"0,1,1",0
+
+[ms$smc600_nif]
+drivername=SMC_ARC$
+irq=interrupt,,text,"2,3,4,5,7,9,10","2",0x08
+io=iobase,,text,"0x260,0x290,0x2E0,0x2F0,0x300,0x350,0x380,0x3E0","0x2E0",0x08
+mem=memorybase,,text,"0xC000,0xC400,0xCC00,0xD000,0xD400,0xD800,0xDC00,0xE000",0xD000,0x08
+mca=micro_channel,"Bus Type (0=ISA, 1=MCA)",int,"0,1,1",0
+
+[ms$genarc_nif]
+drivername=SMC_ARC$
+irq=interrupt,,int,"2,15,1","2",0x08
+io=iobase,,hex,"0x200,0x3F0,0x10",0x2E0,0x08
+mem=memorybase,,hex,"0xC000,0xEC00,0x400",0xD000,0x08
+mca=micro_channel,"Bus Type (0=ISA, 1=MCA)",int,"0,1,1",0
+
+[ms$pdi508_nif]
+drivername=SMC_ARC$
+irq=interrupt,,int,"2,7,1","2",0x08
+io=iobase,,text,"0x2A0,0x2E0,0x2F0,0x300",0x2E0,0x08
+mem=memorybase,,text,"0xA000,0xC000,0xC400,0xCC00,0xD000,0xDC00,0xE000",0xD000,0x08
+
+[ms$pdi516_nif]
+drivername=SMC_ARC$
+irq=interrupt,,text,"2,3,4,5,6,7,10","2",0x08
+io=iobase,,text,"0x220,0x240,0x250,0x2A0,0x2E0,0x2F0,0x300",0x2E0,0x08
+mem=memorybase,,text,"0xC000,0xC400,0xCC00,0xD000,0xD400,0xDC00",0xD000,0x08
+
+; Everex SpeedLink /PC16 (EV2027)
+
+[ms$spdlk16]
+ndis2=$:evx16.dos
+
+[ms$spdlk16_nif]
+drivername=EVX16$
+irq=INTERRUPT,,text,"3,4,5,7,9,11,12,15",9,0x08
+io=IOADDRESS,,text,"0x320,0x330,0x340,0x350,0x360,0x380,0x390,0x3A0","0x360",0x08
+
+; HP HPLANB Common Install (EtherNet Cards)
+
+[ms$HPLANB]
+ndis2=8:hplanb.dos
+ndis3=7:hpisa.386
+mlid=*:hpisaodi.com
+
+; HP PC LAN Adapters (Jumper Set: HP27245, HP27247A, HP27250)
+
+[ms$hplanb_nif]
+drivername=HPLANB$
+irq=interrupt,,text,"3,4,5,7,9,10,11",3,0x38
+io=ioaddress,,text,"0x200,0x240,0x280,0x2C0,0x300,0x320,0x340","0x300",0x38
+param=maxhwtrans,"Maximum Hardware Transmit Packets",int,"2,20,1",8,0x30
+param=maxswtrans,"Maximum Software Transmit Packets",int,"1,20,1",2,0x03
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,200,1",5,0x30
+param=maxicnest,"Max Nesting of Indication Completes",int,"1,4,1,",2,0x30
+
+; HP PC LAN Plus Adapters (HP27247B, HP27252)
+;
+; NB: INTERRUPT, IOADDRESS Override HPLANSET settings.
+
+[ms$HPLANP]
+ndis2=8:hplanp.dos
+ndis3=7:hpisa.386
+mlid=*:hpisaodi.com
+
+[ms$hplanp_nif]
+drivername=HPLANP$
+irq=interrupt,,text,"3,4,5,7,9,10,11,12,15",3,0x30
+io=ioaddress,,hex,"0x100,0x3A0,0x20",0x300,0x30
+param=MemoryMappedBaseAddress,"Base Memory Address (Force Mem Mapped)",hex,"0xC8000,0xEC000,0x4000",0xC8000,0x23
+param=maxhwtrans,"Maximum Hardware Transmit Packets",int,"2,20,1",8,0x30
+param=maxswtrans,"Maximum Software Transmit Packets",int,"1,20,1",2,0x30
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,200,1",5,0x30
+param=maxicnest,"Max Nesting of Indication Completes",int,"1,4,1,",2,0x30
+param=aui,"Use AUI Instead of Twisted Pair", text, "yes,no", no,0x30
+
+; NCR Token-Ring
+
+[ms$ncrtr]
+ndis2=$:strn.dos
+
+[ms$ncrtr4_nif]
+drivername=STRN$
+param=TYPE,"Adapter Type",static,"TRISA4"
+irq=INTERRUPT,,int,"2,7,1",2,0x08
+io=PORT_ADDRESS,,text,"0x0A20,0x1A20",0x0A20,0x08
+mem=SHARED_RAM,,text,"0xCA00,0xCC00,0xD000,0xD200,0xD400,0xD600",0xD000,0x08
+param=PRODUCT_ID,"Product ID",chars,36,"0910F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",0x02
+param=MAX_FRAME_SIZE,"Maximum Frame Size",int,"64,4472,1",2034
+param=MAX_RECEIVES,"Maximum Receives",int,"2,50,1",3,0x02
+param=RCV_BUF_SIZE,"Receive Buffer Size",int,"256,4472,1",2048,0x02
+param=MAX_TRANSMITS,"Maximum Transmits",int,"2,50,1",6,0x02
+param=MAX_REQUESTS,"Maximum Requests",int,"2,10,1",6,0x02
+
+[ms$ncrtr6_nif]
+drivername=STRN$
+irq=INTERRUPT,,text,"2,3,7,9,10,11,12,14,15",2,0x08
+io=PORT_ADDRESS,,hex,"0x0A20,0x3A20,0x1000",0x0A20,0x08
+dma=DMA_LEVEL,"DMA Channel",text,"3,5,6,7","5",0x08
+param=TYPE,"Adapter Type",static,"TRISA16"
+param=BUS_MODE,"Bus Mode",static,"DIO"
+param=RING_SPEED,"Token Ring Speed (0=Use Card Settings)",text,"0,4,16",16
+param=PRODUCT_ID,"Product ID",chars,36,"0910F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",0x02
+param=MAX_FRAME_SIZE,"Maximum Frame Size",int,"64,17800,1",2034
+param=MAX_RECEIVES,"Maximum Receives",int,"2,50,1",3,0x02
+param=RCV_BUF_SIZE,"Receive Buffer Size",int,"256,17800,1",2048,0x02
+param=MAX_TRANSMITS,"Maximum Transmits",int,"2,50,1",6,0x02
+param=MAX_REQUESTS,"Maximum Requests",int,"2,10,1",6,0x02
+
+[ms$ncrtrmc_nif]
+drivername=STRN$
+param=TYPE,"Adapter Type",static,"TRMC16"
+param=PRODUCT_ID,"Product ID",chars,36,"0910F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",0x02
+param=MAX_FRAME_SIZE,"Maximum Frame Size",int,"64,17800,1",2034
+param=MAX_RECEIVES,"Maximum Receives",int,"2,50,1",3,0x02
+param=RCV_BUF_SIZE,"Receive Buffer Size",int,"256,17800,1",2048,0x02
+param=MAX_TRANSMITS,"Maximum Transmits",int,"2,50,1",6,0x02
+param=MAX_REQUESTS,"Maximum Requests",int,"2,10,1",6,0x02
+
+[ms$p1390]
+ndis2=8:ndis39xr.dos
+netdir=8:prorapm.dwn
+mlid=*:osh990r.com
+
+[ms$p1392]
+ndis2=8:ndis39xr.dos
+netdir=8:prorapm.dwn
+mlid=*:osh392r.com
+
+[ms$p139_nif]
+drivername=NDI39XR$
+irq=INTLEVEL,,text,"3,4,5,6,7,9,10,11,12",5,0x38
+io=IOBASE,,hex,"0xA20,0xFE20,0x400",0xA20,0x38
+dma=DMACHANNEL,"DMA Channel",text,"5,6,7,0",5,0x38
+param=LINKSPEED,"Token Ring Speed",text,"4,16",16,0x38
+param=MEDIA,"Cabling Type",text,"STP,UTP","STP",0x38
+param=DMACLOCK,"DMA Clock Speed",text,"4,8,BUS",8,0x32
+param=SAEN,"Enable SAEN",text,"ON,OFF",ON,0x32
+param=MAXTRANSMITS,"Maximum Transmits",int,"3,50,1",40,0x32
+slot=SLOTNUMBER,"Adapter Slot Number",int,"1,8,1",1,0x22
+
+[ms$pro4]
+ndis2=8:PRO4.DOS
+
+[ms$pro4at]
+ndis2=8:PRO4AT.DOS
+
+[ms$pro4xt_nif]
+drivername=PRO4$
+irq=Interrupt,,int,"2,7,1",2,0x08
+io=IOBASE,,hex,"0x100,0xFFF0,0x10",0xA20,0x08
+mem=MEMBASE,,hex,"0xA000,0xFE00,0x200",0xE000,0x08
+
+[ms$pro4at_nif]
+drivername=PRO4$
+irq=Interrupt,,text,"3,4,5,6,7,9,10,11,12",12,0x08
+io=IOBASE,,hex,"0x100,0xFFF0,0x10",0xA20,0x08
+dma=DMACHANNEL,"DMA Channel",text,"5,6,7",5
+
+[ms$pro4mc_nif]
+drivername=PRO4$
+irq=Interrupt,,text,"3,4,5,7,10,11",3,0x08
+io=IOBASE,,text,"0xA20,0x1A20,0x2A20,0x3A20,0x4A20,0x5A20,0xB20,0x1B20,0x2B20,0x3B20,0x4B20,0x5B20,0x820,0x1820,0x920,0x1920",0xA20,0x08
+
+; Zenith Data Systems Z-Note
+
+[ms$znote]
+ndis2=8:I82593.DOS
+;driver filename is mlmdodi.com
+mlid=*:mlm.com
+
+[ms$znote_nif]
+drivername=I82593$$
+irq=INTERRUPT,,static,"15",0x08
+io=IOADDRESS,,static,"0x300",0x08
+param=DMACHAN0,"First DMA Channel",static,"6"
+param=DMACHAN1,"Second DMA Channel",static,"7"
+param=INBUFFER(K),"Receive Buffer",static,"8"
+param=OUTBUFFERS(K),"Send Buffer",static,"3"
+
+;Xircom Pocket Ethernet I
+
+[ms$xirc1]
+ndis2=8:PENDIS.DOS
+mlid=*:pemlid.com
+
+;Xircom Pocket Ethernet II
+
+[ms$xirc]
+ndis2=8:PE2NDIS.DOS
+devicesys=pe2ndis.exe
+mlid=*:pe2odi.com
+
+[ms$xirc_nif]
+DRIVERNAME=XIRCOM$
+
+[ms$AM2100]
+ndis2=8:am2100.dos
+ndis3=7:am1500t.386
+mlid=*:ne2100.com
+
+[ms$AM1500]
+ndis2=8:am2100.dos
+ndis3=7:am1500t.386
+mlid=*:ne1500t.com
+
+[ms$am2100_nif]
+DRIVERNAME=AM2100$
+irq=INTERRUPT,,text,"3,4,5,9,10,11,15",9,0x38
+io=IOADDRESS,,hex,"0x300,0x370,0x10",0x300,0x38
+dma=DMACHANNEL,"DMA Channel",text,"3,5,6,7","5",0x38
+
+; Tulip NCC-16 Driver
+
+[MS$NCC16]
+ndis2=8:NCC16.dos
+
+[MS$NCC16_NIF]
+drivername=NCC16$
+
+; Novell/Anthem NE3200 and Clones
+
+[ms$ne3200]
+ndis2=8:ne3200.dos
+ndis3=7:ne3200.386
+mlid=*:ne3200.com
+
+[ms$ne3200_nif]
+drivername=NE3200$
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x22
+
+; Madge Networks Token-Ring Driver
+
+[ms$MADGE]
+ndis2=8:smartnd.dos
+mlid=*:madgeodi.com
+
+[ms$MADGE_nif]
+drivername=smartnd$
+param=IOADDRESS,"Base I/O Port",hex,"0x0A20,0x3A20,0x1000",0x0A20,0x02
+param=IRQNUMBER,"Interrupt",int,"1,15,1",3,0x02
+param=DMACHANNEL,"DMA Channel",int,"1,8,1",1,0x02
+param=RXBUFFERSIZE,"Receive Buffer Size",int,"1550,60000,1",1550,0x02
+param=TXBUFFERSIZE,"Transmit Buffer Size",int,"1550,60000,1",1550,0x02
+param=MAXFRAMESIZE,"Maximum Frame Size",int,"1550,4484,1",1550,0x02
+param=MAXTRANSMITS,"Maximum Transmits",int,"0,100,1",4,0x02
+param=WATCHDOG,"Watchdog Timer Active",text,"yes,no",no,0x02
+param=COPYALLDATA,"Copy Data to Card Before Transmit",text,"yes,no",yes,0x02
+param=AUTOOPEN,"Open Adapter at Bind Time",text,"yes,no",yes,0x02
+param=OPENOPTIONS,"Open Options Bitmask",hex,"0x0,0xFFFF,0x1",0x0,0x02
+
+; NCR WaveLan AT/MCA/Compatible Adapter Driver
+
+; NCR WaveLan Common Install
+
+[ms$NCRWAVE]
+ndis2=8:dncrwl02.dos
+
+; NCR WaveLan AT
+
+[ms$ncrwl_nif]
+drivername=NCRWVE$
+io=IOBASE,,text,"0x300,0x390,0x3C0,0x3E0",0x300
+param=ACR,"Accelerated Contention Resolution",text,"2,6","6"
+
+; NCR WaveLan MC Adapter
+
+[ms$ncrwlmc_nif]
+drivername=NCRWVE$
+param=ACR,"Accelerated Contention Resolution",text,"2,6","6"
+
+; HP Ethertwist EISA (HP27248, HP27248A)
+
+[ms$HPLANE]
+ndis2=8:hplane.dos
+ndis3=7:hpeisa.386
+mlid=*:hp32odi.com
+
+[ms$hplane_nif]
+drivername=HPLANE$
+param=adapterslot,"Adapter Slot Number for NDIS2 driver",int,"1,8,1",1,0x12
+param=slotnumber,"Adapter Slot Number for NDIS3 driver",int,"1,8,1",1,0x22
+param=maxhwtrans,"Maximum Hardware Transmit Packets",int,"2,20,1",8
+param=maxswtrans,"Maximum Software Transmit Packets",int,"1,20,1",2
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,200,1",5,0x32
+param=maxicnest,"Max Nesting of Indication Completes",int,"1,4,1,",2
+
+; HP Ethertwist MCA (HP27246)
+
+[ms$HPLAN]
+ndis2=8:hplan.dos
+
+[ms$hplan_nif]
+drivername=HPLAN$
+irq=interrupt,,text,"2,3,4,5,7",7,0x08
+io=ioaddress,,text,"0x200,0x240,0x280,0x2C0,0x300,0x320,0x340","0x300",0x08
+param=maxhwtrans,"Maximum Hardware Transmit Packets",int,"2,20,1",8
+param=maxswtrans,"Maximum Software Transmit Packets",int,"1,20,1",2
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,200,1",5
+
+; NCR StarCard (8-bit) Driver
+
+[ms$ncrstar]
+ndis2=8:slan.dos
+
+[ms$ncrstar_nif]
+drivername=STARLAN$
+irq=INTERRUPT,,text,"3,4,5,7,9","3"
+io=PORT_ADDRESS,,hex,"0x380,0x390,0x08",0x380
+param=FUNC_ADDRESS,"Type of NETBIOS Functional Address",text,"NEW,OLD",NEW
+param=LAN_ID_ROM,"Address in ROM of Address",text,"0x180,0x300","0x300"
+param=DMA_CHANNEL0,"DMA Channel for Receive",text,"1,3","3"
+param=DMA_CHANNEL1,"DMA Channel for Transmit',text,"1,3","1"
+param=NUM_GENREQ,"Number of General Requests",int,"10,500,1",10
+param=NUM_RCVS,"Number of Receives",int,"3,20,1",5
+param=NUM_XMT_BUFS,"Number of Transmit Buffers",int,"2,8,1",3
+param=RCV_BUF_SIZE,"Size of Receive Buffer",int,"1600,10000,1",4500
+param=NODE_ADDRESS,"Node Address",chars,12,"000000000000"
+param=EXTERNAL_ROM,"Location of External ROM",text,"0xD0000,0xD8000","0xD0000"
+
+; IBM PC Network Adapter II Driver
+
+; IBM PC Baseband Common Install
+
+[ms$IBMNET]
+ndis2=8:ibmnet.dos
+
+[ms$IBMNETA]
+ndis2=8:ibmneta.dos
+
+; IBM PC Network Baseband Adapters (ISA)
+
+[ms$ibmnet_nif]
+drivername=IBMNET$
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,1000,1",10,0x02
+param=maxrequest,"Maximum Requests",int,"1,400,1",6,0x02
+param=maxtransmits,"Maximum Transmits",int"1,142,1",6,0x02
+param=receivebuffers,"Receive Buffers",int,"1,400,1",6,0x02
+param=receivebufsize,"Receive Buffer Size",int,"128,2034,1",256,0x02
+
+; IBM PC Network Baseband Adapters (MCA)
+
+[ms$ibmneta_nif]
+drivername=IBMNETA$
+param=maxmulticast,"Maximum Multicast Addresses",int,"1,1000,1",10,0x02
+param=maxrequest,"Maximum Requests",int,"1,400,1",6,0x02
+param=maxtransmits,"Maximum Transmits",int"1,142,1",6,0x02
+param=receivebuffers,"Receive Buffers",int,"1,400,1",6,0x02
+param=receivebufsize,"Receive Buffer Size",int,"128,2034,1",256,0x02
+
+; Cabletron Ethernet Drivers
+
+;Cabletron 3000
+
+[ms$cbl30xx]
+ndis2=8:e30nd.dos
+
+[ms$cbl30xx_nif]
+drivername=E30ND$
+
+;Cabletron 3100
+
+[ms$cbl31xx]
+ndis2=8:e31nd.dos
+
+[ms$cbl31xx_nif]
+drivername=E31ND$
+
+; Cabletron Token-Ring Drivers
+
+;Cabletron 2000
+
+[ms$cblt20]
+ndis2=8:t20nd.dos
+
+[ms$cblt20_nif]
+drivername=T20ND$
+io=IOADDRESS,,text,"0XA20,0X0A80,0X1A20,0X1A80",0XA20
+irq=INTERRUPT,,text,"3,4,5,6,7,9,10,11,12,14,15",3
+dma=DMACHANNEL,"DMA Channel",text,"5,6,7","5"
+param=BANDWIDTH,"0-16Mbps, 1-4Mbps",text,"0,1","0"
+param=MEDIA,"PRI - Shielded TP, SEC - Unshielded TP",text,"PRI,SEC","PRI"
+param=TIMING,"DEF - Default Timing, ALT - IBM PS/2 Model 30" ,text,"DEF,ALT","DEF"
+param=RECEIVEBUFSIZE,"Receive Buffer Size",int,"256,5000,1",4096
+param=RECEIVEBUFFERS,"Receive Buffers",int,"4,10,1",6
+param=MAXREQUESTS,"Maximum General Requests",int,"1,10,1",6
+param=MAXMULTICAST,"MAXIMUM MULTICAST",int,"6,12,1",10
+param=MAXTRANSMITS,"Maximum Transmits",int,"2,6,1",6
+param=RECEIVECHAINS,"Receive Chains",int,"4,10,1",6
+
+;Cabletron 3000
+
+[ms$cblt30]
+ndis2=8:T30nd.dos
+
+[ms$cblt30_nif]
+drivername=T30ND$
+
+; Racal Drivers
+
+; Racal-Interlan 5210
+
+[ms$NI5210]
+ndis2=8:ni5210.dos
+
+; R-I 5210 8Kb and 16 Kb
+
+[ms$ni5210_nif]
+drivername=NI5210$
+io=IOBASE,,hex,"0x200,0x3F8,0x08",0x300
+mem=BASEMEM,,hex,"0xC0000,0xFC000,0x4000",0xD0000,0x01
+irq=IRQ,,int,"2,7,1",2
+param=MAXMULTICASTS,"Maximum Multicast Addresses",int,"1,16,1",10
+param=MAXRECEIVES,"Maximum Receives",int,"1,6,1",3,0x02
+param=MAXTRANSMITS,"Maximum Transmits",int,"1,50,1",6,0x02
+
+; Proteon ProNET-4/16 p1892 Driver
+
+[MS$NDI89XR]
+ndis2=8:ndis89xr.dos
+netdir=8:prorapm.dwn
+
+[MS$NDI89XR_NIF]
+drivername=NDI89XR$
+param=maxtransmits,"Maximum number of buffers",int,"3,50,1",40,0x02
+
+; RACAL-DATACOM ES3210
+
+[ms$es3210]
+ndis2=8:es3210.dos
+
+[ms$es3210_nif]
+drivername=ES3210$
+param=MAXMULTICASTS,"Number of Multicast Addresses",int,"1,16,1",10,0x02
+param=MAXRECEIVES,"Number of Receive Queues",int,"1,8,1",3,0x02
+param=MAXTRANSMITS,"Number of TransmitChain Commands",int,"1,50,1",6,0x02
+slot=SlotNumber,"Which slot you want to use",int,"0,15,1",1,0x02
+
+; Common UBNEI install section
+
+[ms$UBNEI]
+ndis2=8:ubnei.dos
+mlid=*:ubodi.com
+
+; Ungermann-Bass NIUps
+
+[ms$niups_nif]
+drivername=UBNEI$
+param=AdapterType,"Adapter Type",static,"NIUps",,
+param=MaxRequests,"Maximum General Requests",int,"1,10,1",6
+param=MaxTransmits,"Maximum Transmits",int,"1,400,1",6
+param=ReceiveBufSize,"Receive Buffer Size",int,"256,1514,1",600
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,255,1",16
+param=ReceiveMethod,"Receive Method",text,"ReceiveLookahead,'ReceiveChain,AdapterBuffered','ReceiveChain,HostBuffered'","ReceiveLookahead"
+param=ReceiveBuffers,"Receive Buffers",int,"16,512,1",64
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x02
+
+[ms$genub_nif]
+drivername=UBNEI$
+param=AdapterType,"Adapter Type",text,"PCNIU,PCNIUex,NIUpc,NIUpc/EOTP,NIUps","NIUpc"
+mem=MemoryWindow,,hex,"0x80000,0xF8000,0x8000",0xC8000,0x01
+io=IO_Port,,hex,"0x350,0x368,0x08",0x368
+irq=IRQ_Level,,text,"2,3,4,5,7,12",3
+param=MaxRequests,"Maximum General Requests",int,"1,10,1",6
+param=MaxTransmits,"Maximum Transmits",int,"1,400,1",6
+param=ReceiveBufSize,"Receive Buffer Size",int,"256,1514,1",600
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,255,1",16
+param=ReceiveMethod,"Receive Method",text,"ReceiveLookahead,'ReceiveChain,AdapterBuffered','ReceiveChain,HostBuffered'","ReceiveLookahead"
+param=ReceiveBuffers,"Receive Buffers",int,"16,512,1",64
+
+; Ungermann-Bass PCNIU
+
+[ms$pcniu_nif]
+drivername=UBNEI$
+param=AdapterType,"Adapter Type",static,PCNIU,,
+mem=MemoryWindow,,hex,"0x80000,0xF0000,0x10000",0xD0000,0x01
+io=IO_Port,,hex,"0x360,0x368,0x08",0x368
+irq=IRQ_Level,,text,"2,5","2"
+param=MaxRequests,"Maximum General Requests",int,"1,10,1",6
+param=MaxTransmits,"Maximum Transmits",int,"1,400,1",6
+param=ReceiveBufSize,"Receive Buffer Size",int,"256,1514,1",600
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,255,1",16
+param=ReceiveMethod,"Receive Method",text,"ReceiveLookahead,'ReceiveChain,AdapterBuffered','ReceiveChain,HostBuffered'","ReceiveLookahead"
+param=ReceiveBuffers,"Receive Buffers",int,"16,512,1",64
+
+; Ungermann-Bass PCNIU/ex
+
+[ms$pcniuex_nif]
+drivername=UBNEI$
+param=AdapterType,"Adapter Type",static,PCNIUex,,
+mem=MemoryWindow,,hex,"0x80000,0xF8000,0x8000",0xD0000,0x01
+io=IO_Port,,hex,"0x360,0x368,0x08",0x360
+irq=IRQ_Level,,int,"2,5,1",2
+param=MaxRequests,"Maximum General Requests",int,"1,10,1",6
+param=MaxTransmits,"Maximum Transmits",int,"1,400,1",6
+param=ReceiveBufSize,"Receive Buffer Size",int,"256,1514,1",600
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,255,1",16
+param=ReceiveMethod,"Receive Method",text,"ReceiveLookahead,'ReceiveChain,AdapterBuffered','ReceiveChain,HostBuffered'","ReceiveLookahead"
+param=ReceiveBuffers,"Receive Buffers",int,"16,512,1",64
+
+; Ungermann-Bass NICps
+
+[ms$nicps]
+ndis2=8:ubneps.dos
+
+[ms$nicps_nif]
+drivername=UBNEPS$
+slot=SlotNumber,"Adapter Slot Number",int,"1,8,1",1,0x02
+param=MaxRequests,"Maximum General Requests",int,"1,10,1",6
+param=MaxTransmits,"Maximum Transmits",int,"1,400,1",6
+param=MaxMulticasts,"Maximum Multicast Addresses",int,"1,255,1",16
+param=ReceiveBufSize,"Receive Buffer Size",int,"256,1514,1",600
+param=ReceiveMethod,"Receive Method",text,"ReceiveLookahead,'ReceiveChain,AdapterBuffered','ReceiveChain,HostBuffered'","ReceiveLookahead"
+param=ReceiveBuffers,"Receive Buffers",int,"16,512,1",64
+
+; UB NIUpc
+
+[ms$niupc_nif]
+drivername=UBNEI$
+param=AdapterType,"Adapter Type",static,"NIUpc",,
+mem=MemoryWindow,,hex,"0x98000,0xF8000,0x10000","0xC8000",0x01
+io=IO_Port,,hex,"0x350,0x368,0x08",0x368
+irq=IRQ_Level,,int,"2,5,1",3
+param=MaxRequests,"Maximum General Requests",int,"1,10,1",6
+param=MaxTransmits,"Maximum Transmits",int,"1,400,1",6
+param=ReceiveBufSize,"Receive Buffer Size",int,"256,1514,1",600
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,255,1",16
+param=ReceiveMethod,"Receive Method",text,"ReceiveLookahead,'ReceiveChain,AdapterBuffered','ReceiveChain,HostBuffered'","ReceiveLookahead"
+param=ReceiveBuffers,"Receive Buffers",int,"16,512,1",64
+
+; Ungermann-Bass NIUpc3270
+
+[ms$niupc70_nif]
+drivername=UBNEI$
+param=AdapterType,"Adapter Type",static,"NIUpc",,
+mem=MemoryWindow,,hex,"0x88000,0xF8000,0x10000","0xD8000",0x01
+io=IO_Port,,hex,"0x350,0x368,0x08",0x368
+irq=IRQ_Level,,int,"2,5,1",3
+param=MaxRequests,"Maximum General Requests",int,"1,10,1",6
+param=MaxTransmits,"Maximum Transmits",int,"1,400,1",6
+param=ReceiveBufSize,"Receive Buffer Size",int,"256,1514,1",600
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,255,1",16
+param=ReceiveMethod,"Receive Method",text,"ReceiveLookahead,'ReceiveChain,AdapterBuffered','ReceiveChain,HostBuffered'","ReceiveLookahead"
+param=ReceiveBuffers,"Receive Buffers",int,"16,512,1",64
+
+; Ungermann-Bass NIUpc/EOTP
+
+[ms$niupctp_nif]
+drivername=UBNEI$
+param=AdapterType,"Adapter Type",static,"NIUpc/EOTP",,
+mem=MemoryWindow,,hex,"0xA0000,0xE8000,0x8000",0xD8000,0x01
+io=IO_Port,,hex,"0x350,0x368,0x08",0x368
+irq=IRQ_Level,,text,"2,3,4,5,7,12",3
+param=MaxRequests,"Maximum General Requests",int,"1,10,1",6
+param=MaxTransmits,"Maximum Transmits",int,"1,400,1",6
+param=ReceiveBufSize,"Receive Buffer Size",int,"256,1514,1",600
+param=MaxMulticast,"Maximum Multicast Addresses",int,"1,255,1",16
+param=ReceiveMethod,"Receive Method",text,"ReceiveLookahead,'ReceiveChain,AdapterBuffered','ReceiveChain,HostBuffered'","ReceiveLookahead"
+param=ReceiveBuffers,"Receive Buffers",int,"16,512,1",64
+
+;ODIMAC stub
+
+[ms$odimac]
+mlid=x:xxxx
+
+[ms$odimac_nif]
+
+; Generic NDIS2 
+
+[ms$genndis2]
+ndis2=*:genndis2.dos
+
+[ms$genndis2_nif]
+Drivername=GENNDIS2$
+
+[ms$nwsupnb]
+ndis3=8:nwsup.386
+ndis3=7:nwnblink.386
+sysdir=*:vipx.386
+secondnet=vipx.386,vipx.386
+system.ini=Network,DirectHost,No,replace
+
+[ms$nwsup_nif]
+
+[asymac]
+ndis3=8:rasmac.386
+windir=8:rasmon.exe
+windir=8:rasphone.exe
+windir=8:rasphone.hlp
+sysdir=8:rasapi16.dll
+sysdir=8:rascauth.dll
+sysdir=8:rasconf.dll
+sysdir=8:rasexe.exe
+sysdir=8:rasfile.dll
+sysdir=8:rasman.dll
+sysdir=8:rasmxs.dll
+sysdir=8:rassauth.dll
+sysdir=8:rasser.dll
+sysdir=8:rassrv.dll
+sysdir=8:modem.inf
+sysdir=8:pad.inf
+sysdir=8:switch.inf
+;; Cleanup from RAS 1.0
+devicesys=asymac.dos
+tsr=asybeui.exe
+tsr=vcommiod.exe
+tsr=wantsr.exe
+
+[asyncmac_nif]
+nwsdll=rasconf.dll
+
+; Transport Install and Protocol Sections
+
+
+[ms$ndishlp]
+ndis2=8:ndishlp.sys
+
+[ms$ndishlp_xif]
+drivername=ndishlp$
+
+[ms$netbeui]
+ndis2=x:*netbeui
+ndis3=7:netbeui.386
+
+[ms$netbeui_xif]
+drivername=netbeui$
+param=SESSIONS,"Maximum Sessions (real-mode)",int,"3,117,1",10
+param=NCBS,"NCBS (real-mode)",int,"7,255,1",12
+
+[ms$ipx]
+;Standard IPX
+ndis2=$:msipx.sys
+netdir=$:msipx.com
+secondnet=vipx.386
+load=msipx,@netdir\msipx,mscdex
+load=netx,@netdir\netx,route,msipx
+
+[ms$ipx_xif]
+DriverName=IPX$
+; NOTE: do not change the order of Ethernet_II, Novell/Ethernet.
+; ncd_trans_specific relies on this ordering.
+param=MediaType,"Adapter Media Type",text,"Novell/Ethernet,'Ethernet_II (DIX)',","Novell/Ethernet"
+
+[ms$ipx_tr]
+;TokenRing IPX
+install=ms$ipx
+netdir=$:route.com
+load=route,@netdir\route,msipx
+
+[ms$ipx_tr_xif]
+DriverName=IPX$
+param=MediaType,"Adapter Media Type",static,"Token Ring",,
+
+[ms$asybeui]
+ndis2=$:asybeui.exe
+
+[ms$asybeui_xif]
+DriverName=netbeui$
+
+[ban$vines]
+tsr=netbind
+tsr="net start"
+tsr="ban","ban /nc"
+tsr="ndisban","ndisban",ban
+tsr="redirall","redirall",ndisban
+netstart="net start","@netdir\net start",redirall
+load="arswait","arswait","net start"
+load="login","z:login",arswait
+
+[ban$vines_xif]
+DriverName=NDISBAN$
+
+[ms$pcnfs]
+tsr=netbind
+ndis2=*:nfs-ndis.sys
+ndis2=*:pcnfs.sys,"/F30 /C^"
+ndis2=*:sockdrv.sys
+
+[ms$pcnfs_xif]
+DriverName=NFSLINK$
+
+[ms$nwlink]
+ndis3=7:nwlink.386
+secondnet=vipx.386
+
+[ms$nwlinknb]
+ndis3=7:nwlink.386
+ndis3=7:nwnblink.386
+secondnet=vipx.386
+ndis3sect=nwlink
+
+[ms$nwlink_xif]
+param=MAX_SOCKETS,"Maximum Sockets",int,"1,128,1",1,0x22
+param=MAX_CONNECTIONS,"Maximum Connections",int,"1,128,1",1,0x22
+param=SOURCE_ROUTING,"Source Routing Cache Size",int,"16,128,1",16,0x022
+param=EVEN_PACKETS,"Force Even Length IPX Packets",enum,"Yes,1,No,0",0,0x022
+param=FRAME,"Frame Type",text,"ETHERNET_802.2,ETHERNET_802.3,ETHERNET_II,TOKEN-RING",,0x22
+

@@ -1,0 +1,519 @@
+;; Windows for Workgroups 3.11
+;; WINNET.INF
+;; NETWORK.INF
+;; Copyright (c) Microsoft Corporation, 1991-1993
+
+[data]
+type=network
+version="3.11.060"
+
+[translate]
+; Files that are copied as different names from the name on
+; the source disk
+; sourcefile = destfile
+
+[oemdisks]
+
+[MultiNet]
+;key = description, net_type, exclusive,protocol id,install_section, style
+; style
+nonet   ="No Additional Network Installed",0,0,0,mn$nonet
+;note: the next line is here for compatibility reason
+netware ="Novell NetWare (Workstation Shell 3.X)",0x0300,0,0,mn$netware3,0x0022
+netware3="Novell NetWare (Workstation Shell 3.X)",0x0300,0,0,mn$netware3,0x0020
+netware4="Novell NetWare (Workstation Shell 4.0 and above)",0x0300,0,0,mn$netware4,0x0020
+vines411="Banyan VINES (version 4.11(5))",0x0400,0,0,mn$vines411,0x0010
+vines500="Banyan VINES (version 5.00(5))",0x0400,0,0,mn$vines500,0x0010
+vines552="Banyan VINES (version 5.52(5))",0x0400,0,0,mn$vines552,0x0010
+pcnfs="SunSelect PC-NFS (version 5.0)",0x0700,0,0,mn$pcnfs,0x0010
+bwnfs="BW-NFS Network File System (version 3.0c)",0x1000,0,0,mn$bwnfs
+
+
+[mn$nonet]
+nonet
+
+[mn$netware3]
+install=mn$netware
+lastdrive=P
+
+[mn$netware4]
+install=mn$netware
+lastdrive=Z
+system.ini=network,PreferredRedir,FULL
+system.ini=386Enh,OverlappedIO,off
+system.ini=386Enh,TimerCriticalSection=10000,minval
+system.ini=386Enh,ReflectDOSInt2A,TRUE
+system.ini=386Enh,UniqueDOSPSP,TRUE
+system.ini=386Enh,PSPIncrement,5,minval
+
+[mn$netware]
+system.ini=NetWare,NWShareHandles,FALSE,noclobber
+system.ini=NetWare,RestoreDrives,TRUE
+sysdir=*:vnetware.386,*:netware.drv,*:netware.hlp
+sysdir=*:vipx.386
+sysdir=*:nwpopup.exe
+secondnet.drv=netware.drv,netware.drv
+secondnet=vnetware.386,vnetware.386
+system.ini=386Enh,OverlappedIO,off
+winparm=windows,load,nwpopup.exe,append
+
+
+[mn$vines]
+system.ini=386Enh,TimerCriticalSection,5000,minval
+system.ini=386Enh,UniqueDOSPSP,TRUE
+system.ini=386Enh,PSPIncrement,5,minval
+system.ini="Network Drivers",Dynamic,Yes,replace
+lastdrive=Y
+
+[mn$vines411]
+install=mn$vines
+secondnet.drv=vines.drv,z:vines.drv
+secondnet=vvinesd.386,z:vvinesd.386
+
+[mn$vines500]
+install=mn$vines
+secondnet.drv=vines.drv,z:vines.drv
+secondnet=vvinesd.386,z:vvinesd.386
+
+[mn$vines552]
+install=mn$vines
+secondnet.drv=vines.drv,vines.drv
+secondnet=vvinesd.386,vvinesd.386
+
+[mn$pcnfs]
+secondnet.drv=pcnfs.drv,pcnfs.drv
+secondnet=pcnfs.386,pcnfs.386
+sysdir=*:pcnfs.drv,*:pcnfs.386
+
+[mn$bwnfs]
+sysdir=*:bwnet.drv,*:bwdosnet.386,*:bwredir.386
+secondnet.drv=bwnet.drv,bwnet.drv
+secondnet=bwdosnet.386,bwdosnet.386
+secondnet=bwredir.386,bwredir.386
+system.ini=386Enh,TimerCriticalSection,1000,minval
+system.ini=386Enh,UniqueDOSPSP,TRUE
+system.ini=386Enh,PSPIncrement,5,minval
+
+;****************************************************************************
+[network.upgrade]
+; key = primary netowrk,    secondary,  warning
+;   warning 1 = may work if netbeui protocol
+;   warning 2 = won't work unless upgrade to wfw+netbeui desired
+;   warning 3 = may require additional software (real mode redir)
+;   warning 4 = may require additional hardware (netcard)
+0     = wfwnet/00025100,    nonet,      0   ; upgrade with netcard
+0.upg = nonet,              nonet,      0   ; upgrade no netcard
+0.oem = wfwnet/00025100,    nonet,      0   ; oem upgrade
+1     = wfwnet/00025100,    nonet,      0   ; wfwnet
+2     = wfwnet/00025100,    nonet,      0   ; wfwclient
+3.40  = wfwnet/00025100,    nonet,      0   ; pathworks 4.0
+3.41  = wfwnet/00025100,    nonet,      0   ; pathworks 4.1
+4     = wfwnet/00025100,    nonet,      1   ; 3Open
+5     = wfwnet/00025100,    nonet,      2   ; 3share
+6     = wfwnet/00025100,    nonet,      2   ; lantastic
+7.552 = wfwnet/00025100,    vines552,   0   ; banyan 552
+7.500 = wfwnet/00025100,    vines500,   0   ; banyan 500
+7.411 = wfwnet/00025100,    vines411,   0   ; banyan 411
+8     = wfwnet/00025100,    nonet,      1   ; dlr
+9     = wfwnet/00025100,    nonet,      2   ; pclp
+10    = wfwnet/00025100,    nonet,      1   ; lanman
+11    = wfwnet/00025100,    nonet,      1   ; msnet
+12.3  = wfwnet/00025100,    netware3,   0   ; novell 3.x
+12.4  = wfwnet/00025100,    netware4,   0   ; novell 4.0
+13    = wfwnet/00025100,    nonet,      2   ; 10net
+15    = wfwnet/00025100,    pcnfs,      0   ; pcnfs 5.0
+16    = wfwnet/00025100,    bwnfs,      0   ; bwnfs 3.0
+
+[network.drv.detect]
+wfwnet.drv=wfwnet/00025100,1
+msnet.drv=msnet,11
+pcsa.drv=pathworks/00040100,3.41
+lanman.drv=lanman/01020000,10
+lanman21.drv=lanman/01021000,10
+vines.drv=banyan/00055200,7.552
+lansrv.drv=dlr/01020000,8
+wtnet.drv=10net/00042000,13
+netware.drv=novell/00032600,12.3
+pcnfs.drv=pcnfs/00050000,15
+bwnet.drv=bwnfs/00030000,16
+lantnet.drv=lantastic/00050000,6
+
+;****************************************************************************
+
+[network]
+;Key      =
+;1          Driver,
+;2          Description,
+;3          HelpFile,
+;4          OptFile,
+;5          WininiSectName
+;6          SysiniSectName
+;7          VDD
+nonet     = ,"No Network Installed",,,,nonet_stuff
+3open     = ,"3Com 3+Open"
+3share    = ,"3Com 3+Share"
+lantastic = ,"Artisoft LANtastic"
+banyan    = ,"Banyan VINES"
+dlr       = ,"IBM OS/2 LAN Server"
+pclp      = ,"IBM PC LAN Program"
+lanman    = ,"Microsoft LAN Manager"
+msnet     = ,"100% MS-Net Compatible",,,,msnet_stuff
+novell    = ,"Novell NetWare"
+pathworks = ,"DEC PATHWORKS"
+10net     = ,"TCS 10Net"
+wfwclient = ,"Microsoft Workgroup Connection"
+wfwnet    = ,"Microsoft Windows Network"
+pcnfs     = ,"SunSelect PC-NFS"
+bwnfs     = ,"BW-NFS Network File System"
+
+
+;****************************************************************************
+
+[network.versions]
+; vnumber=descr,file,newstd,newoem,updstd,updoem,update,wnnc_nettype,style
+; 0       1     2    3      4      5      6      7      8            9
+
+; style
+; 0x0001 = Unsupported net
+; 0x0010 = Supports NDIS2 Drivers
+; 0x0020 = Supports ODI Drivers
+; 0x8000 = Multinet capable winnet driver (wfwnet)
+
+[3open.versions]
+00000000="all versions",,unsupported_net,,,,1,0x0100,0x0002
+
+[3share.versions]
+00000000="all versions",,unsupported_net,,,,1,0x0100,0x0002
+
+[lantastic.versions]
+xx000000="versions below 3.0",,unsupported_net,,,,,,0x0001
+xx030000="versions 3.X",,lant3,,,,6,0x0A00
+xx040000="versions 4.X",,lant4,,,,6,0x0A00
+xx040001="versions 4.X (MS-Net Compatible)",,lant4ms,,,,6,0x0100
+xx050000="versions 5.X",,lant5,,,,6,0x0A00
+
+[banyan.versions]
+xx000000="version 4.1 or below",,unsupported_net,,,,,,0x0001
+xx041100="version 4.11(5)",z:vines.drv,bandef,ban411,,,7.411,0x0400
+xx050000="version 5.00(5)",z:vines.drv,bandef,ban500,,,7.500,0x0400
+xx055200="version 5.52(5)",,ban552,,,,7.552,0x0400
+
+[pathworks.versions]
+xx000000="versions below 4.0",,unsupported_net,,,,,,0x0001
+xx040000="version 4.0",,dec4,,,,3.40,0x0D00
+xx040100="version 4.1 or higher",,dec41,,,,3.41,0x0D00
+
+[dlr.versions]
+;; MSNET possible for higher versions
+xx000000="versions below 1.2",,unsupported_net,,,,,,0x0001
+00012000="without /API option",,dlr12,,,,8,0x0100
+01012000="version 1.2 or 1.3",,dlr12,,,,8,0x0100
+01013000="version 1.3 CSD 5015/5050",,dlr13csd,,,,8,0x0200
+01020000="version 2.0",,dlr20,,,,8
+
+[pclp.versions]
+00000000="all versions",,unsupported_net,,,,1,0x0100,0x0002
+
+[lanman.versions]
+00000000="all versions",,unsupported_net,,,,1,0x0200,0x0002
+
+[novell.versions]
+00000000="shell versions below 3.01",,unsupported_net,,,,,,0x0001
+00032600="Workstation Shell 3.X",,novell3X,,,,12.3,0x0300
+00040000="Workstation Shell 4.0 and above",,novell4,,,,12.4,0x0300
+
+[10net.versions]
+xx000000="versions below 4.1",,unsupported_net,,,,,,0x0001
+00041000="version 4.1X",,10net41,,,,13,0x0500
+01041000="version 4.1X with DCA 1M card",,10net41a,,,,13,0x0500
+xx042000="version 4.2 and above",wtnet.drv,10net42def,10net42,,,13,0x0500
+xx050000="version 5.0",wtnet.drv,10net42def,10net50,,,13,0x0500
+
+[wfwclient.versions]
+00025000="version 1.0",,unsupported_net,,,,1,,0x0002
+
+[wfwnet.versions]
+00025000="version 3.1",,unsupported_net,,,,1,,0x0002
+00025100="version 3.11",,wfwnet311,,,,1,0x200,0xC030
+10025100="version 3.11 Basic",,wfwnet311b,,,,1,0x100,0x0050
+
+
+[pcnfs.versions]
+00050000="version 5.0",,pcnfs,,,,0,0x0700
+
+[bwnfs.versions]
+00030000="version 3.0",,bwnfs,,,,0,0x1000
+
+
+;****************************************************************************
+;[network_specific]
+;driver  = disk:filename
+;vxd     = {disk:filename}
+;sysdir  = {disk:filename}
+;windir  = {disk:filename}
+;system.ini = section,entry-keyname,value
+;win.ini = section,entry-keyname,value
+
+[unsupported_net]
+install=nonet_stuff
+
+[nonet_stuff]
+install=dosnet
+install=vnetbios
+
+[msnet_stuff]
+install=msnet
+system.ini=386Enh,TimerCriticalSection,10000,minval
+system.ini=386Enh,UniqueDOSPSP,TRUE
+system.ini=386Enh,PSPIncrement,5,minval
+
+[msnet]
+driver=8:msnet.drv
+install=dosnet
+install=vnetbios
+
+[banvines]
+system.ini=386Enh,TimerCriticalSection,5000,minval
+system.ini=386Enh,UniqueDOSPSP,TRUE
+system.ini=386Enh,PSPIncrement,5,minval
+install=netdde_appsx
+
+[ban411]
+system.ini=boot,network.drv,z:vines.drv
+system.ini=386Enh,network,"*dosnet,*vnetbios,z:vvinesd.386"
+install=banvines
+
+[ban500]
+system.ini=boot,network.drv,z:vines.drv
+system.ini=386Enh,network,"*dosnet,*vnetbios,z:vvinesd.386"
+install=banvines
+
+[ban552]
+system.ini=boot,network.drv,vines.drv
+system.ini=386Enh,network,"*dosnet,*vnetbios,vvinesd.386"
+install=banvines
+
+[bandef]
+install=msnet
+system.ini=386Enh,TimerCriticalSection,5000,minval
+system.ini=386Enh,UniqueDOSPSP,TRUE
+system.ini=386Enh,PSPIncrement,5,minval
+
+[novell3X]
+install=vnetbios
+driver=*:netware.drv
+vxd=*:vnetware.386,*:vipx.386
+sysdir=*:netware.hlp
+sysdir=*:nwpopup.exe
+win.ini=windows,load,nwpopup.exe,append
+system.ini=386Enh,OverlappedIO,off
+install=netdde_appsx
+
+
+[novell4]
+install=novell3X
+system.ini=386Enh,TimerCriticalSection=10000,minval
+system.ini=386Enh,ReflectDOSInt2A,TRUE
+system.ini=386Enh,UniqueDOSPSP,TRUE
+system.ini=386Enh,PSPIncrement,5,minval
+
+[wfwnet311b]
+install=msnet_stuff
+install=wfwnet_dos
+install=wfwnet_clean
+install=netdde_appsx
+system.ini=network,PreferredRedir,BASIC
+
+[wfwnet311]
+install=wfwnet_dos
+install=wfwnet_clean
+install=wfwnet_apps
+install=netdde_apps
+driver=7:wfwnet.drv
+install=vnetbios
+vxd=x:*vwc
+vxd=8:vnetsup.386
+vxd=7:vredir.386
+vxd=7:vserver.386
+sysdir=7:pmspl.dll
+sysdir=7:netapi.dll
+sysdir=8:lmscript.exe
+sysdir=8:lmscript.pif
+sysdir=7:wfwaudit.dll
+sysdir=7:wfwnetcp.cpx
+windir=7:wfwnet.hlp
+system.ini=386Enh,InDOSPolling,FALSE
+system.ini=network,LogonDisconnected,yes,noclobber
+system.ini=network,EnableSharing,no,noclobber
+
+[wfwnet_clean]
+; delete the old vnb.386, nbipx, vmsipx, ipx32 driver
+transport=vnb.386       
+netmisc=nbipx.386
+netmisc=vmsipx.386
+netmisc=ipx32.386
+; nwlink, vnwlink, nwnblink now in transport line
+netmisc=nwnblink.386
+netmisc=vnwlink.386
+netmisc=nwlink.386
+load="net logon"
+
+[wfwnet_apps]
+windir=8:logonoff.exe
+windir=7:netwatch.exe, 8:netwatch.hlp
+windir=7:winpopup.exe, 8:winpopup.hlp
+windir=7:winmeter.exe
+system.ini=groups,group_net,Network
+system.ini=group_net,"Log On/Off",logonoff.exe
+system.ini=group_net,"Net Watcher",netwatch.exe
+system.ini=group_net,"WinPopup",winpopup.exe
+system.ini=group_net,"WinMeter",winmeter.exe
+
+[wfwnet_dos]
+install=delete_drivers
+netdir=8:net.exe,8:net.msg,8:neth.msg
+system.ini=386Enh,netheapsize,20,minval
+netstart="net start","@netdir\net start"
+lastdrive=Z
+
+[delete_drivers]
+tsr=tokreui
+tsr=netbios
+devicesys=protman.dos
+devicesys=protman.sys
+devicesys=workgrp.sys
+
+
+[lant3]
+install=msnet
+system.ini=386Enh,INDOSPolling,TRUE
+system.ini=386Enh,EMMExclude,D800-DFFF
+system.ini=386Enh,NetHeapSize,76,minval
+system.ini=386Enh,NetAsynchTimeout,50,minval
+system.ini=386Enh,NetAsynchFallback,true
+win.ini=Ports,LPT1.DOS,
+win.ini=Ports,LPT2.DOS,
+win.ini=Ports,LPT3.DOS,
+install=netdde_appsx
+
+[lant4cmn]
+system.ini=386Enh,EMMExclude,D800-DFFF
+system.ini=386Enh,PerVMFiles,0
+system.ini=386Enh,NetHeapSize,64,minval
+system.ini=386Enh,NetAsynchTimeout,50,minval
+system.ini=386Enh,NetAsynchFallback,true
+install=netdde_appsx
+
+[lant4ms]
+driver=8:msnet.drv
+install=vnetbios
+vxd=*:lantasti.386
+install=lant4cmn
+
+[lant4]
+driver=*:lantnet.drv
+install=vnetbios
+vxd=*:lantasti.386
+install=lant4cmn
+
+[lant5]
+driver=*:lantnet.drv
+install=vnetbios
+vxd=*:lantasti.386
+system.ini=386Enh,NetAsynchFallback,true
+system.ini=386Enh,NetAsynchTimeout,50,minval
+system.ini=386Enh,NetHeapSize,64,minval
+system.ini=386Enh,PerVMFiles,0
+system.ini=LANtastic,Network_IRQ,15,noclobber
+lastdrive=Z
+install=netdde_appsx
+
+[dec4]
+driver=*:pcsa.drv
+install=dosnet
+vxd=*:decnet.386,*:decnb.386
+system.ini=386Enh,TimerCriticalSection,10000,minval
+
+[dec41]
+install=dec4
+
+[dlr12]
+install=msnet
+
+[dlr13csd]
+driver=*:lanman.drv
+install=dosnet
+install=vnetbios
+sysdir=*:netapi20.dll,*:pmspl20.dll
+
+[dlr20]
+driver=*:lansrv.drv
+install=dosnet
+install=vnetbios
+
+[10net41]
+install=msnet
+system.ini=386Enh,TimerCriticalSection,10000,minval
+
+[10net41a]
+install=msnet
+system.ini=386Enh,TimerCriticalSection,10000,minval
+system.ini=386Enh,UniqueDOSPSP,TRUE
+system.ini=386Enh,PSPIncrement,5,minval
+system.ini=386Enh,INDOSPolling,TRUE
+
+[10net42]
+driver=*:wtnet.drv
+install=dosnet
+install=vnetbios
+system.ini=386Enh,TimerCriticalSection,10000,minval
+windir=*:10net.ini
+
+[10net42def]
+install=msnet
+system.ini=386Enh,TimerCriticalSection,2000,minval
+
+[10net50]
+driver=*:wtnet.drv
+install=dosnet
+install=vnetbios
+system.ini=386Enh,TimerCriticalSection,2000,minval
+windir=*:10net.ini
+
+[pcnfs]
+driver=*:pcnfs.drv
+vxd=*:pcnfs.386
+install=netdde_appsx
+
+[bwnfs]
+driver=*:bwnet.drv
+vxd=*:bwdosnet.386,*:bwredir.386
+system.ini=386Enh,TimerCriticalSection,1000,minval
+system.ini=386Enh,UniqueDOSPSP,TRUE
+system.ini=386Enh,PSPIncrement,5,minval
+install=netdde_appsx
+
+[vnetbios]
+vxd=x:*vnetbios
+
+[dosnet]
+vxd=x:*dosnet
+
+[netdde_appsx]
+windir=8:netddex.exe
+win.ini=windows,load,netddex.exe,append
+install=netdde_apps
+
+[netdde_apps]
+install=netdde
+windir=7:winchat.exe,8:winchat.hlp
+system.ini=groups,group_net,Network
+system.ini=group_net,"Chat",winchat.exe
+
+[netdde]
+windir=7:netdde.exe
+windir=8:nddenb.dll
+system.ini=DDEShares,CHAT$,"winchat,chat,,31,,0,,0,0,0"
+system.ini=DDEShares,SCHAT$,"winchat,chat,,31,,0,,0,0,0"
+system.ini=DDEShares,CLPBK$,"clipsrv,system,,31,,0,,0,0,0"
+system.ini=DDEShares,HEARTS$,"mshearts,hearts,,15,,0,,0,0,0"

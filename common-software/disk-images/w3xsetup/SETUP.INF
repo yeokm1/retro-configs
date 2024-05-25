@@ -1,0 +1,1475 @@
+;; Windows for Workgroups 3.11
+;; SETUP.INF
+;; Copyright (c) Microsoft Corporation, 1991-1993
+
+[setup]
+    help = setup.hlp
+
+;   Place any programs here that should be run at the end of setup.
+;   These apps will be run in order of their appearance here.
+[run]
+
+[dialog]
+    caption   = "Windows Setup"
+    exit      = "Exit Windows Setup"
+    title     = "Installing Windows for Workgroups 3.11"
+    options   = "In addition to installing Windows, you can:"
+    printwait = "Please wait while Setup configures your printer(s)..."
+;copywait="Welcome to Microsoft Windows for Workgroups 3.11!\n\n   - If you're new to Windows, see 'A Guided Tour of\n     Microsoft Windows' in the User's Guide."
+;copywait5="Make sure you register your copy of Microsoft Windows for\nWorkgroups 3.11. When you register, Microsoft will:\n\n   - Notify you of product updates and new product releases.\n\n   - Send you a FREE Windows newsletter."
+
+[data]
+; Disk space required
+; <type of setup>= <Full install space>, <Min install space>
+
+    upd2x386full = 19000000,14000000 ; 19.0 Mb, 14.0 Mb     2.x -> WFW 3.11
+    upd30386full = 14500000,10500000 ; 14.5 Mb, 10.5 Mb     3.0 -> WFW 3.11
+    upd31386full = 10500000, 7500000 ; 10.5 Mb,  7.5 Mb     3.1 -> WFW 3.11
+    updWW386full =  6000000, 3500000 ;  6.0 Mb,  3.5 Mb     WFW 3.1  -> WFW 3.11
+    updW1386full =  3000000, 2000000 ;  3.0 Mb,  2.0 Mb     WFW 3.11 -> WFW 3.11
+    new386full   = 19000000,14000000 ; 19.0 Mb, 14.0 Mb
+
+    netadmin     = 29000000          ; 29.0 Mb
+    netadminupd  = 29000000          ; 29.0 Mb
+    upd2x386net  = 1300000           ;  1.3 Mb
+    upd30386net  = 1300000           ;  1.3 Mb
+    upd31386net  = 1300000           ;  1.3 Mb
+    new386net    = 1300000,1300000   ;  1.3 Mb,  1.3 Mb
+
+; Defaults used in setting up and names of a few files
+    startup   = WIN.COM
+    defdir    = C:\WINDOWS
+    defdevdir = C:\NET
+    shortname = Windows
+    welcome   = "Microsoft Windows for Workgroups 3.11"
+    deflang   = enu
+    defxlat   = 437
+    defkeydll = usadll
+    register  = "regedit /s /u setup.reg"
+    tutor     = "wintutor.exe "
+    winsetup  = "winsetup.exe"
+    NetSetup  = FALSE
+    MouseDrv  = TRUE
+    partial   = FALSE
+    Version   = "3.11.050"
+    dosmemK   = 410
+
+    ; MS-DOS Driver Versions
+    ; These are the version numbers of the drivers that we are shipping
+    ; with Microsoft Windows.
+    himem.sys.hi     = 0x0310
+    himem.sys.lo     = 0x0300
+    smartdrv.exe     = 0x0500
+    ramdrive.sys     = 0x18F5
+    emm386.exe       = 0x0430
+
+; This is data needed by the MS-DOS half of setup so that it can copy the
+; proper kernel and start Windows for the GUI portion of setup.
+;
+; ** MS-DOS documentation says that first byte of command line for 4a call
+; ** should be space. ==> in execcmd RHS leave first space as it is now
+[winexec]
+    execstd   = "dosx.exe "
+    execcmd   = " krnl386.exe /b /q:"
+    exechimem = "xmsmmgr.exe"
+    himemcmd  = ""
+    Krnl386   = 1:krnl386.exe
+    dosx      = 2:dosx.exe
+
+; Names of the disks Setup can prompt for.
+[disks]
+    1 =. ,"Microsoft Windows for Workgroups 3.11 Disk 1",disk1
+    2 =. ,"Microsoft Windows for Workgroups 3.11 Disk 2",disk2
+    3 =. ,"Microsoft Windows for Workgroups 3.11 Disk 3",disk3
+    4 =. ,"Microsoft Windows for Workgroups 3.11 Disk 4",disk4
+    5 =. ,"Microsoft Windows for Workgroups 3.11 Disk 5",disk5
+    6 =. ,"Microsoft Windows for Workgroups 3.11 Disk 6",disk6
+    7 =. ,"Microsoft Windows for Workgroups 3.11 Disk 7",disk7
+    8 =. ,"Microsoft Windows for Workgroups 3.11 Disk 8",disk8
+
+[windows]
+    1:setup.hlp
+    1:setup.txt
+    2:win.src,    Net
+    2:system.src, Net
+    1:winsetup.exe
+    1:winhelp.exe
+    1:control.hlp
+
+[windows.system]
+    1:gdi.exe
+    1:user.exe
+    1:win.cnf
+    2:lzexpand.dll
+    2:ver.dll
+    2:shell.dll
+    1:wfwsetup.dll
+    1:commdlg.dll
+    2:commctrl.dll
+    1:ncdw.dll
+    2:sconfig.dll
+
+[windows.system.386]
+    2:cpwin386.cpl
+
+[386max]
+    2:386max.vxd
+    2:windows.lod
+
+[bluemax]
+    2:bluemax.vxd
+    2:windows.lod
+
+[shell]
+    progman.exe,  "Program Manager"
+
+; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+: !!! The description strings should not be changed.
+; !!! Changing description strings can result in old drivers not being
+; !!! upgraded since Setup uses the description string to determine what
+; !!! driver is installed and whether a new, upgraded driver is provided
+; !!! with this version of Windows.
+; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;
+
+[display]
+;profile = driver,         Description of driver,                           resolution,286gr,logo code,       VDD,            386grabber,   ega.sys,   logo data,    optional work section
+;
+8514     = 2:8514.drv,     "8514/a",                                        "100,120,120", , 2:vgalogo.lgo,   2:vdd8514.386,  2:vgadib.3gr,,           2:vgalogo.rle, 8514
+8514s    = 2:8514.drv,     "8514/a (small fonts)",                          "100,96,96",   , 2:vgalogo.lgo,   2:vdd8514.386,  2:vgadib.3gr,,           2:vgalogo.rle, 8514s
+vga      = 2:vga.drv,      "VGA",                                           "100,96,96",   , 2:vgalogo.lgo,   x:*vddvga,      2:vga.3gr,,              2:vgalogo.rle
+vga30    = 2:vga.drv,      "VGA (version 3.0)",                             "100,96,96",   , 2:vgalogo.lgo,   2:vddvga30.386, 2:vga30.3gr,,            2:vgalogo.rle
+svga     = 2:supervga.drv, "Super VGA (800x600, 16 colors)",                "100,96,96",   , 2:vgalogo.lgo,   x:*vddvga,      2:vga.3gr,,              2:vgalogo.rle
+8vga480  = 1:svga256.drv,  "Super VGA (640x480, 256 colors) ",              "100,96,96",   , 2:vgalogo.lgo,   2:vddsvga.386,  2:vgadib.3gr,,           2:vgalogo.rle, svga640
+8vga600l = 1:svga256.drv,  "Super VGA (800x600, 256 colors, large fonts)",  "100,120,120", , 2:vgalogo.lgo,   2:vddsvga.386,  2:vgadib.3gr,,           2:vgalogo.rle, svga800l
+8vga600s = 1:svga256.drv,  "Super VGA (800x600, 256 colors, small fonts)",  "100,96,96",   , 2:vgalogo.lgo,   2:vddsvga.386,  2:vgadib.3gr,,           2:vgalogo.rle, svga800s
+8vga768l = 1:svga256.drv,  "Super VGA (1024x768, 256 colors, large fonts)", "100,120,120", , 2:vgalogo.lgo,   2:vddsvga.386,  2:vgadib.3gr,,           2:vgalogo.rle, svga768l
+8vga768s = 1:svga256.drv,  "Super VGA (1024x768, 256 colors, small fonts)", "100,96,96",   , 2:vgalogo.lgo,   2:vddsvga.386,  2:vgadib.3gr,,           2:vgalogo.rle, svga768s
+v7vga    = 2:v7vga.drv,    "Video 7 (512K, 640x480 256 colors)",            "100,96,96",   , 2:vgalogo.lgo,   2:v7vdd.386,    2:v7vga.3gr,,            2:vgalogo.rle, v7b
+v7c      = 2:v7vga.drv,    "Video 7 (512K, 720x512 256 colors)",            "100,96,96",   , 2:vgalogo.lgo,   2:v7vdd.386,    2:v7vga.3gr,,            2:vgalogo.rle, v7c
+v7d      = 2:v7vga.drv,    "Video 7 (1Mb,  800x600 256 colors)",            "100,96,96",   , 2:vgalogo.lgo,   2:v7vdd.386,    2:v7vga.3gr,,            2:vgalogo.rle, v7d
+v7e      = 2:v7vga.drv,    "Video 7 (1Mb, 1024x768 256 colors, large fonts)","100,120,120",, 2:vgalogo.lgo,   2:v7vdd.386,    2:v7vga.3gr,,            2:vgalogo.rle, v7e
+v7f      = 2:v7vga.drv,    "Video 7 (1Mb, 1024x768 256 colors, small fonts)","100,96,96",  , 2:vgalogo.lgo,   2:v7vdd.386,    2:v7vga.3gr,,            2:vgalogo.rle, v7f
+xga16    = 2:vga.drv,      "XGA (640x480, 16 colors)",                      "100,96,96",   , 2:vgalogo.lgo,   2:vddvga30.386, 2:vga30.3gr,,            2:vgalogo.rle
+xgasm    = 2:xga.drv,      "XGA (small fonts)",                             "100,96,96",   , 2:vgalogo.lgo,   2:vddxga.386,   2:v7vga.3gr,,            2:vgalogo.rle, xgasm
+xgalg    = 2:xga.drv,      "XGA (large fonts)",                             "100,120,120", , 2:vgalogo.lgo,   2:vddxga.386,   2:v7vga.3gr,,            2:vgalogo.rle, xgalg
+xgalo    = 2:xga.drv,      "XGA (640x480, 256 colors)",                     "100,96,96",   , 2:vgalogo.lgo,   2:vddxga.386,   2:v7vga.3gr,,            2:vgalogo.rle, xgalo
+
+[display.old]
+; This section contains the names of all the videos that
+; setup can detect. If the entry is not in the [display]
+; section above, setup presents a warning to the user.
+8514     = "8514/a"
+cga      = "CGA"
+egahibw  = "EGA Black and White (286 only)"
+egahires = "EGA"
+egamono  = "EGA Monochrome (286 only)"
+hercules = "Hercules Monochrome"
+hpmulti  = "HP CGA Display"
+mcga     = "IBM MCGA (286 only)"
+olibw    = "Olivetti/AT&T Monochrome or PVC Display"
+plasma   = "Compaq Portable Plasma"
+tiga1    = "TIGA"
+v7vga    = "Video 7"
+vga      = "VGA"
+vgamono  = "VGA with Monochrome display"
+xga16    = "XGA"
+
+
+;
+; Optional sections listed in field 9 of the display secton are intrpreted as follows:
+;
+; File, Destination, .ini file, Section, LHS, RHS
+;
+; Where:    x:File      = Optional; file to be copied, may be left null.
+;           Destination = 0: for windows root or 0:system for system subdir
+;                          where file is to be copied.
+;           .ini file   = Optional; .ini file to be modified or created.
+;                          Must be included if following parameters specified.
+;           Section     = Section of .ini file to be modified.
+;           OldLine     = Optional; old line to be removed from the .ini file.
+;                          Only one occurence of the specified string is removed.
+;           NewLine     = New text line to be written to the .ini file.
+;
+;[v7vga]
+;x:v7vga.vxd, 0:system, system.ini, 386enh, "v7device=", "display=v7vdd.386"
+
+[vgamono]
+,,system.ini,386enh,"vgamono=","vgamono=TRUE"
+
+[8514]
+,,system.ini,8514.DRV,"dpi=","dpi=120"
+
+[8514s]
+,,system.ini,8514.DRV,"dpi=","dpi=96"
+
+[v7b]
+,,system.ini,v7vga.drv,"WidthXHeight=","WidthXHeight=640x480"
+,,system.ini,v7vga.drv,"FontSize=","FontSize=small"
+
+[v7c]
+,,system.ini,v7vga.drv,"WidthXHeight=","WidthXHeight=720x512"
+,,system.ini,v7vga.drv,"FontSize=","FontSize=small"
+
+[v7d]
+,,system.ini,v7vga.drv,"WidthXHeight=","WidthXHeight=800x600"
+,,system.ini,v7vga.drv,"FontSize=","FontSize=small"
+
+[v7e]
+,,system.ini,v7vga.drv,"WidthXHeight=","WidthXHeight=1024x768"
+,,system.ini,v7vga.drv,"FontSize=","FontSize=large"
+
+[v7f]
+,,system.ini,v7vga.drv,"WidthXHeight=","WidthXHeight=1024x768"
+,,system.ini,v7vga.drv,"FontSize=","FontSize=small"
+
+[xgasm]
+,,system.ini,XGA_Display,"XGA_Resolution=",
+,,system.ini,XGA_Display,"XGA_Resources=","XGA_Resources=1"
+
+[xgalg]
+,,system.ini,XGA_Display,"XGA_Resolution=",
+,,system.ini,XGA_Display,"XGA_Resources=","XGA_Resources=2"
+
+[xgalo]
+,,system.ini,XGA_Display,"XGA_Resolution=","XGA_Resolution=1"
+,,system.ini,XGA_Display,"XGA_Resources=","XGA_Resources=1"
+
+[svga640] 
+,,system.ini,svga256.drv,"resolution=","resolution=1"
+,,system.ini,svga256.drv,"svgamode="
+,,system.ini,svga256.drv,"dpi="
+,,system.ini,386enh,"SysVMIn2ndBank=","SysVMIn2ndBank=FALSE"
+
+[svga800s]
+,,system.ini,svga256.drv,"resolution=","resolution=2"
+,,system.ini,svga256.drv,"svgamode="
+,,system.ini,svga256.drv,"dpi=","dpi=96"
+,,system.ini,386enh,"SysVMIn2ndBank=","SysVMIn2ndBank=FALSE"
+
+[svga800l]
+,,system.ini,svga256.drv,"resolution=","resolution=2"
+,,system.ini,svga256.drv,"svgamode="
+,,system.ini,svga256.drv,"dpi=","dpi=120"
+,,system.ini,386enh,"SysVMIn2ndBank=","SysVMIn2ndBank=FALSE"
+
+[svga768s] 
+,,system.ini,svga256.drv,"resolution=","resolution=3"
+,,system.ini,svga256.drv,"svgamode="
+,,system.ini,svga256.drv,"dpi=","dpi=96"
+,,system.ini,386enh,"SysVMIn2ndBank=","SysVMIn2ndBank=FALSE"
+
+[svga768l] 
+,,system.ini,svga256.drv,"resolution=","resolution=3"
+,,system.ini,svga256.drv,"svgamode="
+,,system.ini,svga256.drv,"dpi=","dpi=120"
+,,system.ini,386enh,"SysVMIn2ndBank=","SysVMIn2ndBank=FALSE"
+
+
+; copy these fonts depending on the 386 grabber being used
+[VGA.3gr]
+2:CGA40WOA.FON,2:CGA40850.FON
+2:CGA80WOA.FON,2:CGA80850.FON
+2:EGA40WOA.FON,2:EGA40850.FON
+2:EGA80WOA.FON,2:EGA80850.FON
+
+[VGA30.3gr]
+2:CGA40WOA.FON,2:CGA40850.FON
+2:CGA80WOA.FON,2:CGA80850.FON
+2:EGA40WOA.FON,2:EGA40850.FON
+2:EGA80WOA.FON,2:EGA80850.FON
+
+[V7VGA.3gr]
+2:CGA40WOA.FON,2:CGA40850.FON
+2:CGA80WOA.FON,2:CGA80850.FON
+2:EGA40WOA.FON,2:EGA40850.FON
+2:EGA80WOA.FON,2:EGA80850.FON
+
+[vgadib.3gr]
+2:CGA40WOA.FON,2:CGA40850.FON
+2:CGA80WOA.FON,2:CGA80850.FON
+2:EGA40WOA.FON,2:EGA40850.FON
+2:EGA80WOA.FON,2:EGA80850.FON
+
+
+[keyboard.drivers]
+kbd   = 2:keyboard.drv
+kbdhp = 2:kbdhp.drv
+
+[keyboard.types]
+t3s0alat  = "All AT type keyboards (84 - 86 keys)"             ,nodll
+t1s2at&t  = "AT&T '301' keyboard"                              ,nodll
+t1s4at&t  = "AT&T '302' keyboard"                              ,nodll
+t4s0enha  = "Enhanced 101 or 102 key US and Non US keyboards"  ,nodll
+t3s0hp1   = "Hewlett-Packard Vectra keyboard (DIN)"            ,nodll
+t4s40oliv = "Olivetti 101/102 A keyboard"                      ,nodll
+t1s0oliv  = "Olivetti 83 key keyboard"                         ,nodll
+t3s10oliv = "Olivetti 86 Key keyboard"                         ,nodll
+t2s1oliv  = "Olivetti M24 102 key keyboard"                    ,usadll
+t1s42oliv = "PC-XT 83 key keyboard"                            ,nodll
+t1s0pcxt  = "PC/XT - Type keyboard (84 keys)"                  ,nodll
+
+[keyboard.tables]
+beldll = 2:kbdbe.dll , "Belgian"
+bradll = 2:kbdbr.dll , "Brazilian"
+bridll = 2:kbduk.dll , "British"
+cafdll = 2:kbdfc.dll , "Canadian Multilingual"
+dandll = 2:kbdda.dll , "Danish"
+dutdll = 2:kbdne.dll , "Dutch"
+findll = 2:kbdfi.dll , "Finnish"
+fredll = 2:kbdfr.dll , "French"
+candll = 2:kbdca.dll , "French Canadian"
+gerdll = 2:kbdgr.dll , "German"
+icedll = 2:kbdic.dll , "Icelandic"
+itadll = 2:kbdit.dll , "Italian"
+latdll = 2:kbdla.dll , "Latin American"
+nordll = 2:kbdno.dll , "Norwegian"
+pordll = 2:kbdpo.dll , "Portuguese"
+spadll = 2:kbdsp.dll , "Spanish"
+swedll = 2:kbdsw.dll , "Swedish"
+swfdll = 2:kbdsf.dll , "Swiss French"
+swgdll = 2:kbdsg.dll , "Swiss German"
+nodll  =             , "US"
+usadll = 2:kbdus.dll , "US"
+usddll = 2:kbddv.dll , "US-Dvorak"
+usxdll = 2:kbdusx.dll, "US-International"
+
+[codepages]
+;       Xlat Table     OEM Font      WOA Font     Description
+863 = 2:xlat863.bin, 2:vga863.fon, 1:dosapp.fon, "Canadian-French (863)"
+861 = 2:xlat861.bin, 2:vga861.fon, 2:app850.fon, "Icelandic (861)"
+865 = 2:xlat865.bin, 2:vga865.fon, 2:app850.fon, "Nordic (865)"
+850 = 2:xlat850.bin, 2:vga850.fon, 2:app850.fon, "Multi-Lingual (850)"
+860 = 2:xlat860.bin, 2:vga860.fon, 1:dosapp.fon, "Portuguese (860)"
+437 =              ,             , 1:dosapp.fon, "English (437)"
+
+[pointing.device]
+;
+; Note: the VMD field may contain multiple VXD's in the form "x:*vmd,2:1vmd.386".
+;       Please note, however, that if multiple VXD's are specified in the VMD field
+;       they must be surrounded by double quotes (").
+;
+;profile =  mouse driver,   Mouse description,                 VMD,     Optional work section
+;
+lmouse   = 2:lmouse.drv,  "Logitech",                          2:lvmd.386, lmouse
+ps2mouse = 2:mouse.drv,   "Microsoft, or IBM PS/2",            x:*vmd
+genius1  = 2:mscmouse.drv,"Genius serial mouse on COM1"      , 2:mscvmd.386
+genius2  = 2:msc3bc2.drv, "Genius serial mouse on COM2"      , 2:mscvmd.386
+msmouse2 = 2:mscmouse.drv,"Mouse Systems serial or bus mouse", 2:mscvmd.386
+msmouse1 = 2:msc3bc2.drv, "Mouse Systems serial mouse on COM2",2:mscvmd.386
+nomouse  = 2:nomouse.drv, "No mouse or other pointing device", x:*vmd
+
+[lmouse]
+2:lmouse.com,0:,,,,
+
+[dos.mouse.drivers]
+;mouse.sys   = !:mouse.SYS,     "MS Dos Mouse driver .SYS ver 7.XX"
+;mouse.com   = !:mouse.com,     "MS Dos Mouse driver .COM ver 7.XX"
+
+[dos.drivers]
+MSCDEX.EXE  = 6:MSCDEX.EXE,    "CD ROM Extensions"
+
+[sysfonts]
+2:vgasys.fon,"VGA (640x480) resolution System Font", "100,96,96"
+2:8514sys.fon,"8514/a (1024x768) resolution System Font", "100,120,120"
+
+[fixedfonts]
+2:vgafix.fon,"VGA (640x480) resolution Fixed System Font", "100,96,96"
+2:8514fix.fon,"8514/a (1024x768) resolution Fixed System Font",  "100,120,120"
+
+[oemfonts]
+2:vgaoem.fon,"VGA (640x480) resolution Terminal Font (USA/Europe)", "100,96,96",1
+2:8514oem.fon,"8514/a (1024x768) resolution Terminal Font (USA/Europe)", "100,120,120",1
+
+;   The win.copy section is a list of files or sections to copy to the WINDOWS
+;   directoy.
+;
+;   FORMAT      from,to
+;
+;   IE
+;       1:foo.txt,  0:        copy foo.txt from disk 1 to the windows directory
+;       #386,       0:system  copy all files in the 386 SECTION to the
+;
+;
+[win.copy.net.win386]
+; copy this section for network setup on 386 machines
+   #net,       0:
+
+[win.copy.win386]
+; copy this section for full setup on 386 machines
+   #net,       0:
+   #win.shell, 0:
+   #pwin386,   0:system
+   #mapi,      0:system
+   #win.other, 0:system
+
+[net]
+   6:CONTROL.SRC,    "Windows User Files"
+   6:WINVER
+   6:WININIT.EXE,    "Setup System-Initialization Utility"
+
+[win.devices]
+; These devices will be copied on all machines
+   6:HIMEM.SYS,      "XMS Memory Manager"
+   6:SMARTDRV.EXE,   "Disk Caching Program"
+   6:RAMDRIVE.SYS,   "RAM Drive Program"
+   6:IFSHLP.SYS,     "File System Manager"
+
+[win.devices.win386]
+; These devices will be copied on 386 machines only
+   6:HIMEM.SYS,      "XMS Memory Manager"
+   4:EMM386.EXE,     "LIM Expanded Memory Manager"
+   6:SMARTDRV.EXE,   "Disk Caching Program"
+   6:RAMDRIVE.SYS,   "RAM Drive Program"
+   6:IFSHLP.SYS,     "File System Manager"
+
+[win.other]
+   6:WIN87EM.DLL,    "Windows System Component"
+   6:SYSEDIT.EXE
+   6:NDDEAPI.DLL
+   4:OLECLI.DLL
+   6:OLESVR.DLL
+   6:WSWAP.EXE
+   4:MIDIMAP.DRV
+   6:MIDIMAP.CFG,,noclobber
+   6:SND.CPL,,novermsg
+   4:MMSYSTEM.DLL
+   6:MMTASK.TSK
+   5:TIMER.DRV
+   6:MCISEQ.DRV
+   6:MCIWAVE.DRV
+   6:TOOLHELP.DLL
+   3:MAIN.CPL
+   5:DRIVERS.CPL
+   6:SETUP.REG
+   5:CONTROL.INF
+   6:APPS.INF
+   5:DDEML.DLL
+   4:NETWORK.INF
+   6:WINNET.INF
+   6:LM21DRV.UPD
+   4:UNIDRV.DLL
+   5:UNIDRV.HLP
+
+[mapi]
+   4:AB.DLL,    "Windows Mail System Component"
+   5:DEMILAYR.DLL
+   2:FRAMEWRK.DLL
+   5:MAILMGR.DLL
+   4:MAILSPL.EXE
+   4:MAPI.DLL
+   4:CMC.DLL
+   3:MSSFS.DLL
+   5:PABNSP.DLL
+   6:SENDFILE.DLL
+   3:STORE.DLL
+   3:VFORMS.DLL
+
+[win.shell]
+   4:PROGMAN.EXE,    "Program Manager"
+   6:TASKMAN.EXE,    "Task Manager"
+   3:WINFILE.EXE,    "File Manager"
+   4:CLIPBRD.EXE,    "ClipBook Viewer"
+   6:CLIPSRV.EXE,    "ClipBook Server"
+   6:CONTROL.EXE,    "Control Panel"
+   5:PIFEDIT.EXE,    "PIF Editor"
+   5:REGEDIT.EXE,    "Registration database"
+   4:PRINTMAN.EXE,   "Print Manager"
+   3:MSD.EXE,        "Microsoft Diagnostics"
+   6:msd.ini
+   3:WRITE.EXE,      "Write Word Processor"
+   5:WRITE.HLP,      "Write Word Processor Help"
+   4:moricons.dll,   "Icons"
+
+[pwin386]
+   5:WINOA386.MOD,   "386 Enhanced Mode files"
+   6:WIN386.PS2
+   2:WIN386.EXE
+   5:VTDAPI.386
+   5:VFAT.386
+   6:VCACHE.386
+   4:IFSMGR.386
+   6:VSHARE.386
+   6:VCOMM.386
+   6:SERIAL.386
+   6:LPT.386
+   6:VPMTD.386
+   6:IOS.386
+   6:VXDLDR.386
+   4:RMM.D32
+
+[DelFiles]
+;Statically initialize the list of files that will be DELETED during the
+;  3.0 to 3.1 up-grade process. Add or remove items from this list at will,
+;  (Wildcards accepted in list)
+; The first files in the list are deleted from Windows System dir(local setup).
+; Nb : Note that DelFiles section always is processed before RenFiles section.
+   tmsr?.fon
+   helv?.fon
+   swapfile.exe
+   kernel.exe
+   midi.cpl
+   _default.pif
+   ; old network setup .cpl's
+   wrkgrp.cpl
+   wfwsetup.cpl
+   netsetup.cpl
+   ; ras 1.0 stuff
+   rasconf.cpl
+   ; the following files are being renamed after beta2
+   ipx32.386
+   vmsipx.386
+   nbipx.386
+   ; Beta2 Dragon components
+   apix.386
+   ; Various names for old Windows SETUP.EXE
+   SETUP.EXE
+   INSTALL.EXE
+   ASETTA.EXE
+   CONFIG.EXE
+   INSTALAR.EXE
+   KURMA.EXE
+   WINSETUP.EXE
+; All files in the list AFTER this point will be deleted from Windows dir.
+; WARNING: The "..\" is needed, the code depends on it!!!
+   ..\setup.inf
+   shell.dll
+   olecli.dll
+   olesvr.dll
+   commdlg.dll
+   ver.dll
+   toolhelp.dll
+   *.pcl
+   3270.txt
+   networks.txt
+   printers.txt
+   readme.txt
+   sysini?.txt
+   winini?.txt
+   ; ras 1.0 stuff
+   rasadmin.exe
+   rasphone.exe
+   rasphone.hlp
+   rasphone.pif
+   rasadmin.hlp
+   rasadmin.ico
+   rasphone.msg
+   rasdial.exe
+   rashelp.msg
+   rasload.bat
+   rashelp.exe
+   rasconf.hlp
+   rasphone.ico
+   modems.inf
+   comdev.ini
+   ; Various names for old Windows SETUP.EXE
+   SETUP.EXE
+   INSTALL.EXE
+   ASETTA.EXE
+   CONFIG.EXE
+   INSTALAR.EXE
+   KURMA.EXE
+   WINSETUP.EXE
+
+[RenFiles]
+; Similar section but for file renaming to create .bak if needed
+   ADLIB.DRV,MSADLIB.DRV
+   MSCDEX.EXE,MSCDEX.OLD
+
+
+; The win.apps, win.games, win.scrs, win.bmps, and win.readme sections are
+; all formatted as described below.
+;
+; X:FileName,      Description,     FileSize,   Profile String
+;
+; Where profile string is used by setup.exe to "lookup" the item in the
+; appropiate progman groups section to determine if and how the item is
+; to be added to a Program manager group via DDE. The profile string is
+; also used to "lookup" and needed dependent files in the [win.dependents]
+; section.
+;
+[win.apps]
+   5:CALC.EXE,     "Calculator"                ,  43072, calc
+   4:CARDFILE.EXE, "Cardfile"                  ,  93184, cardfile
+   6:CLOCK.EXE,    "Clock"                     ,  16416, clock
+   5:NOTEPAD.EXE,  "Notepad"                   ,  32736, notepad
+   3:PBRUSH.EXE,   "Paintbrush"                , 190142, pbrush
+   3:TERMINAL.EXE, "Terminal"                  , 148160, terminal
+   6:CALC.HLP,     "Calculator Help"           ,  18076
+   6:CARDFILE.HLP, "Cardfile Help"             ,  24810
+   6:NOTEPAD.HLP,  "Notepad Help"              ,  13894
+   5:PBRUSH.HLP,   "Paintbrush Help"           ,  40269
+   5:RECORDER.EXE, "Recorder"                  ,  49566, recorder
+   6:RECORDER.HLP, "Recorder Help"             ,  18200
+   5:TERMINAL.HLP, "Terminal Help"             ,  36279
+   3:PACKAGER.EXE, "Object Packager"           ,  76480, packager
+   6:PACKAGER.HLP, "Object Packager Help"      ,  21156
+   6:CHARMAP.EXE,  "Character Map"             ,  22016, charmap
+   6:CHARMAP.HLP,  "Character Map Help"        ,  10797
+   3:MPLAYER.EXE,  "Media Player"              ,  33312, mplayer, novermsg
+   4:MPLAYER.HLP,  "Media Player Help"         ,  12896
+   5:SOUNDREC.EXE, "Sound Recorder"            ,  51305, soundrec
+   6:SOUNDREC.HLP, "Sound Recorder Help"       ,  17686
+   5:PIFEDIT.HLP,  "PIF Editor Help"           ,  33270
+   4:PRINTMAN.HLP, "Print Manager Help"        ,  58649
+   5:PROGMAN.HLP,  "Program Manager Help"      ,  30911
+   5:CLIPBRD.HLP,  "Clipbook Viewer Help"      ,  28571
+   6:REGEDIT.HLP,  "Registration Help"         ,  22681
+   6:REGEDITV.HLP, "Registration Advanced Help",  15731
+   4:WINFILE.HLP,  "File Manager Help"         ,  80448
+   4:WINTUTOR.EXE, "Windows Tutorial"          , 181772, wintutor
+   5:WINHELP.HLP,  "Help Utility Help"         ,  26960
+   4:GLOSSARY.HLP, "Glossary Help"             ,  55457
+   6:EXPAND.EXE,   "File Expansion Utility"    ,  16378
+   6:RASSTART.EXE, "Remote Access"             ,  13312, rasmac
+   3:MSMAIL.EXE,   "Mail"                      , 614368, msmail
+   4:MSMAIL.HLP,   "Mail Help"                 ,  76521
+   2:SCHDPLUS.EXE, "Schedule+"                 , 746704, schdplus
+   4:SCHDPLUS.HLP, "Schedule+ Help"            , 104115
+   6:FAXMGR.EXE,   "Microsoft At Work Fax"     ,  1019872, msfax
+   5:MSFAX.HLP,    "Microsoft At Work Fax Help",  47718
+   diskspace=4143890
+
+[win.dependents]
+pbrush   = 6:PBRUSH.DLL
+recorder = 6:RECORDER.DLL
+wintutor = 4:WINTUTOR.DAT
+hearts   = #hearts
+msmail   = #msmail
+schdplus = #sched
+msfax    = #faxsys, 0:system, #msfax
+
+[hearts]
+   4:CARDS.DLL,,nodelete
+
+[msmail]
+   4:SCHEDMSG.DLL, "Mail Drivers"
+   4:WGPOMGR.DLL
+   4:IMPEXP.DLL
+   4:FAXVIEW.EXE,  "FAX Viewer", nodelete
+
+[sched]
+   5:MSREMIND.EXE, "Schedule+ Drivers"
+   3:MSSCHED.DLL
+   6:TRNSCHED.DLL
+   
+[faxsys]
+   6:FAXNSP.DLL,    "Fax Drivers"
+   6:FAX.CPL
+   5:FAXSTUB.DLL
+   6:EFAXDRV.DRV
+
+[msfax]
+   6:AWCLASS1.DLL,    "Fax Drivers"
+   6:AWCLASS2.DLL
+   6:DLLSCHED.DLL
+   6:AWCAS.DLL
+   4:EFAXPUMP.DLL
+   6:EFAXRUN.DLL
+   5:AWFXPROT.DLL
+   6:FAXCODEC.DLL
+   6:AWFAXIO.DLL
+   6:FAXCOVER.DLL,
+   4:FAXOPT.DLL,,nodelete
+   6:IFKERNEL.DLL
+   2:KEYVIEW.EXE,
+   6:LINEARIZ.DLL
+   6:NETFAX.DLL
+   6:SIGVIEW.EXE,
+   6:AWT30.DLL
+   6:TRNOFF.DLL
+   3:MSMAIL.EXE,    "Mail Drivers for Fax", nodelete
+   4:SCHEDMSG.DLL,,nodelete
+   4:WGPOMGR.DLL,,nodelete
+   4:IMPEXP.DLL,,nodelete
+   4:FAXVIEW.EXE,   "FAX Viewer", nodelete
+
+[win.games]
+   4:SOL.EXE,      "Solitaire"        , 180688, sol
+   6:WINMINE.EXE,  "Minesweeper"      ,  27776, winmine
+   6:SOL.HLP,      "Solitaire Help"   ,  13753
+   6:WINMINE.HLP,  "Minesweeper Help" ,  12754
+   4:MSHEARTS.EXE, "Hearts"           , 261168, hearts
+   6:MSHEARTS.HLP, "Hearts Help"      ,  13048
+   diskspace=509187
+
+[win.scrs]
+   6:SCRNSAVE.SCR, "Default Screen Saver"     ,   5328
+   6:SSMARQUE.SCR, "Marquee Screen Saver"     ,  16896
+   6:SSSTARS.SCR,  "Stars Screen Saver"       ,  17536
+   6:ssflywin.scr, "Flying Windows Screen Saver",  16160
+   diskspace=55920
+
+[win.bmps]
+   6:ARCADE.BMP,   "Arcade Wallpaper"         ,    630
+   3:ARGYLE.BMP,   "Argyle Wallpaper"         ,    630
+   6:CASTLE.BMP,   "Castle Wallpaper"         ,    778
+   6:EGYPT.BMP,    "Egypt Wallpaper"          ,    630
+   6:HONEY.BMP,    "Honey Wallpaper"          ,    854
+   6:RIVETS.BMP,   "Rivets Wallpaper"         ,    630
+   6:REDBRICK.BMP, "Red Brick Wallpaper"      ,    630
+   6:SQUARES.BMP,  "Squares Wallpaper"        ,    630
+   6:THATCH.BMP,   "Thatch Wallpaper"         ,    598
+   6:WINLOGO.BMP,  "Windows Logo Wallpaper"   ,  38518
+   6:ZIGZAG.BMP,   "Zigzag Wallpaper"         ,    630
+   6:ding.wav,     "Ding Sound"               ,  11598
+   6:chimes.wav,   "Chimes Sound"             ,  15920
+   6:canyon.mid,   "Canyon MIDI Song"         ,  33883
+   6:ringin.wav,   "Incoming Call Ring"       ,  10026
+   6:ringout.wav,  "Outgoing Call Ring"       ,   5212
+   diskspace=121797
+
+[win.readme]
+   3:readme.wri,   "General Readme"           ,  95744, readme
+   3:networks.wri, "Networks Readme"          ,  69120
+   3:winini.wri,   "Win.ini Readme"           ,  22272
+   3:sysini.wri,   "System.ini Readme"        ,  64128
+   3:printers.wri, "Printers Readme"          ,  47232
+   6:mail.wri,     "Mail Readme"              ,  39552
+   diskspace=338048
+
+; The [*.groups] sections maps a group section to the group name used in
+; Program Manager.
+;
+; Section Name = Progman group name, Min/Max switch. ( 1 = Max, nothing = Min).
+;
+; This section is used for upgrading from 3.X to 3.1.
+[new.groups]
+group7=Main,1
+group2=Accessories
+group8=Network
+group6=Games
+group1=StartUp
+
+; This section is for new install.
+[progman.groups]
+group3=Main,1
+group4=Accessories
+group8=Network
+group5=Games
+group1=StartUp
+
+; Progman DDE control section. This section controls the progman DDE and defines which
+; .exe's will be added to which groups. The [progman.groups] sections lists section
+; names that each describe the contents of that group.
+;
+; Description string,  .EXE name, Icon extraction .EXE, Icon extraction index, profile
+;
+; If the profile field is left NULL, the item will always be added to the group. Otherwise
+; the item will only be added if it was installed via the partial install dlg.
+;
+;
+; NOTE: If EXE name is NULL item will be deleted from the group if it exists there.
+;
+
+[group3]
+"File Manager",     WINFILE.EXE
+"Control Panel",    CONTROL.EXE
+"Print Manager",    PRINTMAN.EXE
+"ClipBook Viewer",  CLIPBRD.EXE
+"MS-DOS Prompt",    DOSPRMPT.PIF, PROGMAN.EXE, 9
+"Windows Setup",    WINSETUP.EXE
+"PIF Editor",       PIFEDIT.EXE
+"Read Me"
+"Read Me",          README.WRI,,,                              readme
+"Clipboard"
+"Clipboard Viewer"
+"DOS Prompt"
+"Tutorial"
+
+[group4]
+"Write",            WRITE.EXE
+"Paintbrush",       PBRUSH.EXE,,,                              pbrush
+"Terminal",         TERMINAL.EXE,,,                            terminal
+"Notepad",          NOTEPAD.EXE,,,                             notepad
+"Recorder",         RECORDER.EXE,,,                            recorder
+"Cardfile",         CARDFILE.EXE,,,                            cardfile
+"Calculator",       CALC.EXE,,,                                calc
+"Clock",            CLOCK.EXE,,,                               clock
+"Object Packager",  PACKAGER.EXE,,,                            packager
+"Character Map",    CHARMAP.EXE,,,                             charmap
+"Media Player",     MPLAYER.EXE,,,                             mplayer
+"Sound Recorder",   SOUNDREC.EXE,,,                            soundrec
+"PIF Editor"
+; Remove old network icons
+"Chat"
+"WinMeter"
+"Net Watcher"
+"WinPopup"
+"Virtual Disk Status"
+"Fast Mail"
+"Password List Editor"
+"Message Popup Utility"
+
+[group5]
+"Solitaire",        SOL.EXE,,,                                 sol
+"Minesweeper",      WINMINE.EXE,,,                             winmine
+"Hearts",           MSHEARTS.EXE,,,                            hearts
+; Remove old icons
+"FreeCell"
+
+[group1]
+"Dr. Watson"
+
+[group2]
+"Object Packager",  PACKAGER.EXE,,,                            packager
+"Character Map",    CHARMAP.EXE,,,                             charmap
+"Media Player",     MPLAYER.EXE,,,                             mplayer
+"Sound Recorder",   SOUNDREC.EXE,,,                            soundrec
+"PIF Editor"
+"Write",            WRITE.EXE
+; Remove old network icons
+"Chat"
+"WinMeter"
+"Net Watcher"
+"WinPopup"
+"Virtual Disk Status"
+"Fast Mail"
+"Password List Editor"
+"Message Popup Utility"
+
+[group6]
+"Solitaire",        SOL.EXE,,,                                 sol
+"Minesweeper",      WINMINE.EXE,,,                             winmine
+"Hearts",           MSHEARTS.EXE,,,                            hearts
+; Remove old icons
+"FreeCell"
+
+[group7]
+"Clipboard"
+"Clipboard Viewer"
+"ClipBook Viewer",  CLIPBRD.EXE
+"Windows Setup",    WINSETUP.EXE
+"PIF Editor",       PIFEDIT.EXE
+"Read Me"
+"DOS Prompt"
+"MS-DOS Prompt",    DOSPRMPT.PIF, PROGMAN.EXE, 9
+"Read Me",          README.WRI,,,                              readme
+"Tutorial"
+
+[group8]
+"Network Setup",   "WINSETUP.EXE /Z",,,
+"Mail",             MSMAIL.EXE,,,                              msmail
+"Mail",             MSMAIL.EXE,,,                              msfax
+"Schedule+",        SCHDPLUS.EXE,,,                            schdplus
+"Remote Access",    RASSTART.EXE,,,                            rasmac
+; Remove old network icons
+"Message Popup Utility"
+
+[fonts]
+   5:SSERIFE.FON, "MS Sans Serif 8,10,12,14,18,24 (VGA res)", "100,96,96"
+   5:SSERIFF.FON, "MS Sans Serif 8,10,12,14,18,24 (8514/a res)", "100,120,120"
+
+   6:COURE.FON, "Courier 10,12,15 (VGA res)", "100,96,96"
+   6:COURF.FON, "Courier 10,12,15 (8514/a res)", "100,120,120"
+
+   5:SERIFE.FON, "MS Serif 8,10,12,14,18,24 (VGA res)", "100,96,96"
+   5:SERIFF.FON, "MS Serif 8,10,12,14,18,24 (8514/a res)", "100,120,120"
+
+   5:SYMBOLE.FON, "Symbol 8,10,12,14,18,24 (VGA res)", "100,96,96"
+   5:SYMBOLF.FON, "Symbol 8,10,12,14,18,24 (8514/a res)", "100,120,120"
+
+   6:SMALLE.FON, "small fonts (VGA res)", "100,96,96"
+   6:SMALLF.FON, "small fonts (8514/a res)", "100,120,120"
+
+   6:ROMAN.FON, "Roman (Plotter)",   "CONTINUOUSSCALING"
+   6:SCRIPT.FON, "Script (Plotter)", "CONTINUOUSSCALING"
+   6:MODERN.FON, "Modern (Plotter)", "CONTINUOUSSCALING"
+
+[ttfonts]
+;
+;Font Header file, Description string,       Font file,     FontFamily/Flags
+;
+; Flags:  0000 = Normal weighted font.
+;         0100 = Bolded font.
+;         1000 = Italic font.
+; NOTE: Flags not currently used.
+;
+; NOTE: The first letter of each word in the font desctiption string needs
+;       to be capitalized.
+;
+5:ARIAL.FOT,   "Arial (TrueType)",                       5:arial.ttf,   ""
+5:ARIALBD.FOT, "Arial Bold (TrueType)",                  5:arialbd.ttf,  "Arial0100"
+5:ARIALBI.FOT, "Arial Bold Italic (TrueType)",           5:arialbi.ttf, "Arial1100"
+5:ARIALI.FOT,  "Arial Italic (TrueType)",                5:ariali.ttf,  "Arial1000"
+5:COUR.FOT,    "Courier New (TrueType)",                 5:cour.ttf,    ""
+5:COURBD.FOT,  "Courier New Bold (TrueType)",            5:courbd.ttf,  "Courier0100"
+5:COURBI.FOT,  "Courier New Bold Italic (TrueType)",     5:courbi.ttf,  "Courier1100"
+5:COURI.FOT,   "Courier New Italic (TrueType)",          5:couri.ttf,   "Courier1000"
+5:TIMES.FOT,   "Times New Roman (TrueType)",             5:times.ttf,   ""
+5:TIMESBD.FOT, "Times New Roman Bold (TrueType)",        5:timesbd.ttf, "Times New Roman0100"
+5:TIMESBI.FOT, "Times New Roman Bold Italic (TrueType)", 5:timesbi.ttf, "Times New Roman1100"
+5:TIMESI.FOT,  "Times New Roman Italic (TrueType)",      5:timesi.ttf,  "Times New Roman1000"
+5:SYMBOL.FOT,  "Symbol (TrueType)",                      5:symbol.ttf,  ""
+5:WINGDING.FOT,"WingDings (TrueType)",                   5:wingding.ttf,""
+
+; If any of these drivers are found in the config.sys file, Setup removes them.
+[compatibility]
+icache.sys
+ibmcache.sys
+cache.sys
+cache.exe
+mcache.sys
+fast512.sys
+
+; Known TSRs and drivers which may result in a hang or crash
+; during execution of Setup or Windows.
+;
+; filename = description string
+[incompTSR1]
+ep.exe      = "Norton Desktop/Windows Erase Protect TSR"
+qmaps.sys   = "QMAPS Memory Manager"
+qcache.exe  = "386 Max Disk Cache Utility"
+cache.exe   = "Disk Cache Utility"
+flash.exe   = "Flash Disk Cache Utility"
+hyper386.exe= "Hyper Disk Cache Utility"
+hyperdkx.exe= "Hyper Disk Cache Utility"
+hyper286.exe= "Hyper Disk Cache Utility"
+hyperdke.exe= "Hyper Disk Cache Utility"
+hyperdkc.exe= "Hyper Disk Cache Utility"
+ncache.exe  = "Norton Disk Cache Utility"
+ncache2.exe  = "Norton Utilities NCache"
+speeddrv.exe  = "Norton Speed Drive"
+pc-kwik.exe = "PC-Kwik Disk Cache Utility"
+pc-cache.com= "PC Tools Disk Cache Utility"
+superpck.exe= "Super PC-Kwik Disk Cache Utility"
+vdisk.sys   = "IBM RAM Disk Utility"
+allemm4.sys="All Charge 386"
+anarkey.com="Anarkey"
+vsafe.sys = "Central Point Anti-Virus"
+vsafe.com = "Central Point Anti-Virus TSR"
+vdefend.sys="PC Tools VDefend"
+vdefend.com="PC Tools VDefend"
+kbflow.exe="KBFlow TSR by Artisoft"
+s-ice.exe="SoftIce"
+desktop.exe="PC Tools Desktop TSR"
+sk2.exe="Sidekick Version 2.0"
+sk.com="Sidekick Version 1.0"
+skplus.exe="Sidekick Plus"
+print.exe="MS-DOS PRINT Utility"
+pyro.exe="Pyro! Screen Saver"
+xgaaidos.sys="8514 emulation driver "
+asplogin.exe="ASP Integrity Toolkit"
+lsallow.exe="Lansight Network Utilities TSR"
+lansel.exe="Lansight Network Utilities TSR"
+vaccine.exe="Vaccine Antivirus Program"
+newspace.exe="Newspace Disk Compression Utility"
+newres.exe="Newspace Disk Compression Utility"
+tscsi.sys="Trantor T100  SCSI driver"
+pcpanel.exe="Lasertools Printer Control Panel"
+hpemm386.sys = "HP Expanded Memory Manager"
+hpemm486.sys = "HP Expanded Memory Manager"
+ramtype.sys  = "Ramtype Utility"
+iemm.sys     = "Memory Manager"
+ilim386.sys  = "Intel Expanded Memory Emulator"
+cmdedit.com  = "Command Line Editor"
+hpmm.sys     = "HP Memory Manager"
+ced.exe      = "PCED Command Line Editor"
+ced.com      = "CED Command Line Editor"
+umbpro.sys   = "UMB Pro Memory Manager"
+rm386.sys    = "NetRoom Memory Manager"
+eimpcs.sys   = "IBM PC Support"
+ecyddx.sys   = "IBM PC Support"
+
+; Known TSRs and device drivers which can(!) potentially cause problems
+; if running during Setup or Windows
+;
+; filename = description string
+[incompTSR2]
+ndosedit.com  = "Command Line Editor"
+doscue.com="DOSCUE Command Line Editor"
+datamon.exe="PC Tools Datamon"
+subst.exe="MS-DOS SUBST Utility"
+join.exe="MS-DOS JOIN Utility"
+viralert.sys="Data Physician Plus TSR"
+graphics.com="MS-DOS GRAPHICS Utility"
+le.com="Le Menu Menuing Package"
+assign.com="MS-DOS ASSIGN Utility"
+append.com="MS-DOS APPEND Utility"
+diskmon.exe="Norton Disk Monitoring TSR"
+dubldisk.sys="Double Disk Data Compression Utility"
+pa.exe = "Printer Assist"
+speedfxr.com = "Speedfxr"
+pcsxmaem.sys = "pcsxmaem Utility"
+xmaem.sys    = "xmaem Utility"
+cubitr.exe   = "Cubit"
+
+[block_devices]
+tscsi.sys
+tcscsi.sys
+atdosxl.sys
+dmdrvr.bin
+drdrive.sys
+
+[Installable.Drivers]
+; key         = filename,       type(s),     description, VxD(s), Default Params
+msadlib       = 5:msadlib.drv,  "MIDI",      "Ad Lib", 5:vadlibd.386,
+lapc1         = 6:mpu401.drv,   "MIDI",      "Roland LAPC1",,
+midimapper    = 4:midimap.drv,  "MidiMapper", "MIDI Mapper",,
+mpu401        = 6:mpu401.drv,   "MIDI",      "Roland MPU-401",,
+sequencer     = 6:mciseq.drv,   "Sequencer", "[MCI] MIDI Sequencer",,
+soundblaster  = 5:sndblst.drv,  "Wave,MIDI", "Creative Labs Sound Blaster 1.0", 5:vsbd.386,, msadlib
+soundblaster2 = 5:sndblst2.drv, "Wave,MIDI", "Creative Labs Sound Blaster 1.5", 5:vsbd.386,, msadlib
+timer         = 5:timer.drv,    "Timer",     "Timer", 5:vtdapi.386,
+thunder       = 5:sndblst2.drv, "Wave", "Media Vision Thunder Board", 5:vsbd.386,, msadlib
+wave          = 6:mciwave.drv,  "WaveAudio", "[MCI] Sound",, "4"
+cdaudio       = 6:mcicda.drv,   "CDAudio",   "[MCI] CD Audio",,
+
+; This section translates Windows 3.0 OEMSETUP.INF entries to their 3.1
+; equivalents. The disk names should be the first entries in the list.
+
+[translate]
+WinDiskName=26,"Microsoft Windows 3.0 Disk"
+WinDiskName=14,"Windows Disk #"
+*vddvga=2:vddvga30.386
+vgalogo.lgo=2:vgalogo.lgo
+vgalogo.rle=2:vgalogo.rle
+rgdi.lgo=2:vgalogo.lgo
+rgdi.rle=2:vgalogo.rle
+vga.gr3=2:vga30.3gr
+v7vga.gr3=2:v7vga.3gr
+cga40woa.fon=2:cga40woa.fon
+cga40850.fon=2:cga40850.fon
+cga80woa.fon=2:cga80woa.fon
+cga80850.fon=2:cga80850.fon
+ega40woa.fon=2:ega40woa.fon
+ega40850.fon=2:ega40850.fon
+ega80woa.fon=2:ega80woa.fon
+ega80850.fon=2:ega80850.fon
+vgasys.fon=2:vgasys.fon
+vgafix.fon=2:vgafix.fon
+vgaoem.fon=2:vgaoem.fon
+8514sys.fon=2:8514sys.fon
+8514fix.fon=2:8514fix.fon
+8514oem.fon=2:8514oem.fon
+helve.fon=5:sserife.fon
+helvf.fon=5:sseriff.fon
+coure.fon=6:coure.fon
+courf.fon=6:courf.fon
+tmsre.fon=5:serife.fon
+tmsrf.fon=5:seriff.fon
+symbole.fon=5:symbole.fon
+symbolf.fon=5:symbolf.fon
+roman.fon=6:roman.fon
+script.fon=6:script.fon
+modern.fon=6:modern.fon
+kbdbe.dll=2:kbdbe.dll
+kbduk.dll=2:kbduk.dll
+kbdda.dll=2:kbdda.dll
+kbdne.dll=2:kbdne.dll
+kbdfi.dll=2:kbdfi.dll
+kbdfr.dll=2:kbdfr.dll
+kbdca.dll=2:kbdca.dll
+kbdgr.dll=2:kbdgr.dll
+kbdic.dll=2:kbdic.dll
+kbdit.dll=2:kbdit.dll
+kbdla.dll=2:kbdla.dll
+kbdno.dll=2:kbdno.dll
+kbdpo.dll=2:kbdpo.dll
+kbdsp.dll=2:kbdsp.dll
+kbdsw.dll=2:kbdsw.dll
+kbdsf.dll=2:kbdsf.dll
+kbdsg.dll=2:kbdsg.dll
+kbdus.dll=2:kbdus.dll
+kbddv.dll=2:kbddv.dll
+kbdusx.dll=2:kbdusx.dll
+xlat863.bin=2:xlat863.bin
+xlat861.bin=2:xlat861.bin
+xlat865.bin=2:xlat865.bin
+xlat850.bin=2:xlat850.bin
+xlat860.bin=2:xlat860.bin
+vga863.fon=2:vga863.fon
+vga861.fon=2:vga861.fon
+vga865.fon=2:vga865.fon
+vga850.fon=2:vga850.fon
+vga860.fon=2:vga860.fon
+win.cnf=1:win.cnf
+
+; Used to update files that already exist on the disk
+;
+[Update.Files]
+0:system,5:sndblst.drv
+0:system,5:sndblst2.drv
+0:system,6:mpu401.drv
+0:system,5:msadlib.drv
+0:system,5:vtdapi.386
+0:system,5:vsbd.386
+0:system,5:vadlibd.386
+0:system,6:mcicda.drv
+0:system,6:cpqgr3.exe
+0:system,6:cpqvga.gr3
+0:system,6:pscript.drv
+
+; Used to update dependents of files in the [Update.Files] section.
+;
+[Update.Dependents]
+msadlib.drv = 5:vadlibd.386
+sndblst.drv = 5:vsbd.386
+sndblst2.drv = 5:vsbd.386
+
+; This section is processed by both the DOS and WINDOWS portions of setup
+; for temporarily renaming profile strings during setup. THE RENAME
+; OPERATION WILL ONLY TAKE PLACE IF THE ORIGINAL PROFILE STRING EXISTS AND HAS
+; A RIGHT HAND SIDE STRING.
+;
+; .ini file,  section name, temporary profile name, Original profile name.
+;
+[ini.upd.patches]
+  system.ini, Boot,    "olddrivers"    ,"drivers"
+  win.ini   , Desktop, "oldwallpaper"  ,"wallpaper"
+  system.ini, Boot,    "oldtaskman"    ,"taskman.exe"
+  system.ini, Boot,    "wfwshell"      ,"shell"
+
+[setupdisplay]
+mach32.drv=2:vga.drv
+cirrus.drv=1:svga256.drv
+wd.drv=1:svga256.drv
+framebuf.drv=1:svga256.drv
+tseng.drv=1:svga256.drv
+linear8.drv=2:vga.drv
+cpqavga.drv=2:vga.drv
+ht256sf.drv=2:vga.drv
+orchidf.drv=2:vga.drv
+s3.drv=2:vga.drv
+s3?.drv=2:vga.drv
+s3??.drv=2:vga.drv
+s3???.drv=2:vga.drv
+s3????.drv=2:vga.drv
+s3?????.drv=2:vga.drv
+s3??????.drv=2:vga.drv
+viper_??.drv=2:vga.drv
+mach-??.drv=2:vga.drv
+m32-??.drv=2:vga.drv
+
+[setupdisplay.fon]
+fonts.fon=2:vgasys.fon
+fixedfon.fon=2:vgafix.fon
+oemfonts.fon=2:vgaoem.fon
+
+; Used by the windows half to shrink the memory needed to hold this pig.
+;
+[blowaway]
+   this line needed
+
+[ini.upd.31]
+;
+; WARNING: This section only works on win.ini or system.ini !!
+;
+; .ini file,  section,  old line to be replaced,  new line,  rename operater.
+;
+; If the "old line to be replaced" field is empty, setup will assume that
+; the new line is to be added. The rename operater tells setup to retain the RHS
+; of the profile. This is used as a renaming mechanism during upgrades.
+; Nb : Simple string substitution is implemented :
+;     ?P means any valid MS-DOS path
+;
+  system.ini, Boot,                               ,   "taskman.exe="
+  system.ini, mci,     "waveaudio="               ,   "WaveAudio=mciwave.drv"
+  system.ini, mci,     "sequencer="               ,   "Sequencer=mciseq.drv"
+  system.ini, mci,     "cdaudio="                 ,   "CDAudio=mcicda.drv"
+  system.ini, drivers,                            ,   "timer=timer.drv"
+  system.ini, drivers,         "midimapper="      ,   "midimapper=midimap.drv"
+  system.ini, drivers, "midi=adlib.drv"           ,   "midi=msadlib.drv"          ,rename
+  system.ini, drivers, "midi1=adlib.drv"          ,   "midi1=msadlib.drv"         ,rename
+  system.ini, drivers, "midi2=adlib.drv"          ,   "midi2=msadlib.drv"         ,rename
+  system.ini, drivers, "midi3=adlib.drv"          ,   "midi3=msadlib.drv"         ,rename
+  system.ini, drivers, "midi4=adlib.drv"          ,   "midi4=msadlib.drv"         ,rename
+  system.ini, 386Enh,       "keyboard=?Pbpvkd.386",
+  system.ini, 386Enh,          "keyboard="        ,   "keyboard=*vkd"             ,noclobber
+  system.ini, 386Enh,       "device=vpicda.386"   ,   "device=*vpicd"
+  system.ini, 386Enh,       "device=vpicd.386"    ,   "device=*vpicd"
+  system.ini, 386Enh,                             ,   "device=ifsmgr.386"
+  system.ini, 386Enh,                             ,   "device=vcache.386"
+  system.ini, vcache,       "minfilecache="       ,   "minfilecache=512", noclobber
+  system.ini, 386Enh,       "device=?Pvshare.386" ,   "device=vshare.386"
+  system.ini, 386Enh,          "device=*vhd"      ,   "device=*BLOCKDEV", rename
+  system.ini, 386Enh,          "device=apix.386"
+  system.ini, 386Enh,          "device=*vpd"      ,
+  system.ini, 386Enh,          "device=vpd.386"   ,   
+  system.ini, 386Enh,          "device=vdmad.386" ,   "device=*vdmad"
+  system.ini, 386Enh,          "device=vdmadx.386",   "device=*vdmad"
+  system.ini, 386Enh,          "device=vcd.386"   ,   "device=*vcd", rename
+  system.ini, 386Enh,       "device=vndis2d.386"  ,   
+  system.ini, 386Enh,                             ,   "device=*pagefile"
+  system.ini, 386Enh,       "device=?Pvtdapi.386" ,   "device=vtdapi.386"
+  system.ini, 386Enh,                             ,   "device=vcomm.386"
+  system.ini, 386Enh,       "device=ns8250.386"   ,   "device=serial.386"
+  system.ini, 386Enh,                             ,   "device=serial.386"
+  system.ini, 386Enh,       "device=comlpt.386"   ,   "device=lpt.386"
+  system.ini, 386Enh,                             ,   "device=lpt.386"
+  system.ini, 386Enh,                             ,   "device=vpmtd.386"
+  system.ini, NonWindowsApp,"localtsrs="          ,   "localtsrs=dosedit,ced"  ,noclobber
+  system.ini, 386Enh,       "COM3Irq="            ,   "COM3Irq=4", noclobber
+  system.ini, 386Enh,       "COM3Base="           ,   "COM3Base=03E8", noclobber
+  system.ini, 386Enh,       "COM4Irq="            ,   "COM4Irq=3", noclobber
+  system.ini, 386Enh,       "COM4Base="           ,   "COM4Base=02E8", noclobber
+  win.ini   , Sounds,  "SystemDefault="           ,   "SystemDefault=ding.wav, Default Beep"      ,noclobber
+  win.ini   , Sounds,  "SystemExclamation="       ,   "SystemExclamation=ding.wav, Exclamation"  ,noclobber
+  win.ini   , Sounds,  "SystemStart="             ,   "SystemStart=chimes.wav, Windows Start"       ,noclobber
+  win.ini   , Sounds,  "SystemExit="              ,   "SystemExit=chimes.wav, Windows Exit"       ,noclobber
+  win.ini   , Sounds,  "SystemHand="              ,   "SystemHand=ding.wav, Critical Stop"       ,noclobber
+  win.ini   , Sounds,  "SystemQuestion="          ,   "SystemQuestion=ding.wav, Question"        ,noclobber
+  win.ini   , Sounds,  "SystemAsterisk="          ,   "SystemAsterisk=ding.wav, Asterisk"        ,noclobber
+  win.ini   , "mci extensions",                   ,   "wav=waveaudio"
+  win.ini   , "mci extensions",                   ,   "mid=sequencer"
+  win.ini   , "mci extensions",                   ,   "rmi=sequencer"
+  win.ini   , FontSubstitutes,                    ,   "Helv=MS Sans Serif"
+  win.ini   , FontSubstitutes,                    ,   "Tms Rmn=MS Serif"
+  win.ini   , FontSubstitutes, "Courier=Courier New" ,
+  win.ini   , FontSubstitutes,                    ,   "Times=Times New Roman"
+  win.ini   , FontSubstitutes,                    ,   "Helvetica=Arial"
+  ;
+  ; Remove these Win 3.0 font entries from win.ini because they have either
+  ; been replaced or removed for Win 3.1
+  ;
+  win.ini, Fonts, "Helv 8,10,12,14,18,24 (CGA res)="
+  win.ini, Fonts, "Helv 8,10,12,14,18,24 (EGA res)="
+  win.ini, Fonts, "Helv 8,10,12,14,18,24 (60 dpi)="
+  win.ini, Fonts, "Helv 8,10,12,14,18,24 (120 dpi)="
+  win.ini, Fonts, "Helv 8,10,12,14,18,24 (VGA res)="
+  win.ini, Fonts, "Helv 8,10,12,14,18,24 (8514/a res)="
+  win.ini, Fonts, "Tms Rmn 8,10,12,14,18,24 (CGA res)="
+  win.ini, Fonts, "Tms Rmn 8,10,12,14,18,24 (EGA res)="
+  win.ini, Fonts, "Tms Rmn 8,10,12,14,18,24 (60 dpi)="
+  win.ini, Fonts, "Tms Rmn 8,10,12,14,18,24 (120 dpi)="
+  win.ini, Fonts, "Tms Rmn 8,10,12,14,18,24 (VGA res)="
+  win.ini, Fonts, "Tms Rmn 8,10,12,14,18,24 (8514/a res)="
+  ;
+  ; Remove these font entries if they exist because these .ini entries
+  ; are obsolete. We use "TrueType" rather than "Scalable"
+  ;
+  win.ini, Fonts, "Arial (Scalable)="
+  win.ini, Fonts, "Arial Bold (Scalable)="
+  win.ini, Fonts, "Arial Bold Italic (Scalable)="
+  win.ini, Fonts, "Arial Italic (Scalable)="
+  win.ini, Fonts, "Courier (Scalable)="
+  win.ini, Fonts, "Courier Bold (Scalable)="
+  win.ini, Fonts, "Courier Italic (Scalable)="
+  win.ini, Fonts, "Courier Bold Italic (Scalable)="
+  win.ini, Fonts, "Courier (TrueType)"
+  win.ini, Fonts, "Courier Bold (TrueType)"
+  win.ini, Fonts, "Courier Bold Italic (TrueType)"
+  win.ini, Fonts, "Courier Italic (TrueType)"
+  win.ini, Fonts, "Times New Roman (Scalable)="
+  win.ini, Fonts, "Times New Roman Bold (Scalable)="
+  win.ini, Fonts, "Times New Roman Bold Italic (Scalable)="
+  win.ini, Fonts, "Times New Roman Italic (Scalable)="
+  win.ini, Fonts, "Symbol PS (Scalable)="
+  win.ini, Fonts, "Symbol (Scalable)="
+  ;
+  ; Remove these font entries if they exist because these .ini entries
+  ; are obsolete. We use "Plotter" rather than "All res" Also, 8 point was
+  ; added to the EGA res courier so we remove the old "Courier 10,12,15" font.
+  ;
+  win.ini, Fonts, "Roman (All res)="
+  win.ini, Fonts, "Script (All res)="
+  win.ini, Fonts, "Modern (All res)="
+  win.ini, Fonts, "Courier 10,12,15 (EGA res)="
+  ;
+  ; The following lines will cause the MS-DOS half of setup to effectivly
+  ; rename the [Fonts] section in win.ini. Setup does this by adding the
+  ; [wt4gpi8s56bz] string to the [Fonts] section and then deleting the
+  ; [Fonts] section string. Later, in the windows half of setup, it will
+  ; rename [wt4gpi8s56bz] back to [Fonts]. Do not change these names!
+  ;
+  win.ini, Fonts,              , "[wt4gpi8s56bz]"
+  win.ini, Fonts,   "[Fonts]"  ,
+
+  ; The following line makes USER skip persistent net connections
+  ; USER immediately deletes the entry so it is a onetime thing.
+  win.ini, windows,, "SetupWin=1"
+
+  ; The following lines fix problems with APPS
+  win.ini, Compatibility,"NOTSHELL=", "NOTSHELL=0x0001"
+  win.ini, Compatibility,"WPWINFIL=", "WPWINFIL=0x0006"
+  win.ini, Compatibility,"CCMAIL=", "CCMAIL=0x0008"
+  win.ini, Compatibility,"AMIPRO=", "AMIPRO=0x0010"
+  win.ini, Compatibility,"REM=", "REM=0x8022"
+  win.ini, Compatibility,"PIXIE=", "PIXIE=0x0040"
+  win.ini, Compatibility,"CP=", "CP=0x0040"
+  win.ini, Compatibility,"JW=", "JW=0x42080"
+  win.ini, Compatibility,"TME=", "TME=0x0100"
+  win.ini, Compatibility,"VB=", "VB=0x0200"
+  win.ini, Compatibility,"WIN2WRS=", "WIN2WRS=0x1210"
+  win.ini, Compatibility,"PACKRAT=", "PACKRAT=0x0800"
+  win.ini, Compatibility,"VISION=", "VISION=0x0040"
+  win.ini, Compatibility,"MCOURIER=", "MCOURIER=0x0800"
+  win.ini, Compatibility,"_BNOTES=", "_BNOTES=0x24000"
+  win.ini, Compatibility,"MILESV3=", "MILESV3=0x1000"
+  win.ini, Compatibility,"PM4=", "PM4=0x2000"
+  win.ini, Compatibility,"DESIGNER=", "DESIGNER=0x2000"
+  win.ini, Compatibility,"PLANNER=", "PLANNER=0x2000"
+  win.ini, Compatibility,"DRAW=", "DRAW=0x2000"
+  win.ini, Compatibility,"WINSIM=", "WINSIM=0x2000"
+  win.ini, Compatibility,"CHARISMA=", "CHARISMA=0x2000"
+  win.ini, Compatibility,"PR2=", "PR2=0x2000"
+  win.ini, Compatibility,"PLUS=", "PLUS=0x1000"
+  win.ini, Compatibility,"ED=", "ED=0x00010000"
+  win.ini, Compatibility,"PP=",
+  win.ini, Compatibility,"APORIA=", "APORIA=0x0100"
+  win.ini, Compatibility,"EXCEL=", "EXCEL=0x1000"
+  win.ini, Compatibility,"GUIDE=", "GUIDE=0x1000"
+  win.ini, Compatibility,"NETSET2=", "NETSET2=0x0100"
+  win.ini, Compatibility,"W4GL=", "W4GL=0x4000"
+  win.ini, Compatibility,"W4GLR=","W4GLR=0x4000"
+  win.ini, Compatibility,"TURBOTAX=","TURBOTAX=0x00080000"
+  win.ini   , Sounds,  "RingIn="                  ,   "RingIn=ringin.wav,Chat Incoming Ring"     ,noclobber
+  win.ini   , Sounds,  "RingOut="                 ,   "RingOut=ringout.wav,Chat Outgoing Ring"   ,noclobber
+  win.ini   , Network, "DefaultDialogs="
+
+  ; defaults to put up net warning messages
+  win.ini, windows, "NetMessage=", "NetMessage=Yes"
+  win.ini, windows, "NetWarn=",    "NetWarn=1"
+
+  ; remove beta2 lines
+  win.ini, PrinterPorts,          "Microsoft Mail Local Fax="
+  win.ini, devices,               "Microsoft Mail Local Fax="
+
+[system]
+; The various SYSTEM.DRV, SOUND.DRV, COMM.DRV
+;
+; These   are the   drivers   which may vary from system to system,
+; but are selected only   by the [machine] menu -- they do not have
+; special menus   for their selection.
+system   =    2:system.drv
+sound    =    2:mmsound.drv
+comm     =    2:comm.drv
+hpsystem =    2:hpsystem.drv
+
+[machine]
+; This section defines default machine selections.  The   system
+; description from each   entry will appear in the initial machine
+; selection menu of Setup.
+;
+; An * means that setup will use the device specified here and override
+; the detected device, this applies to keyboards, mice, and displays.
+;
+; Each entry contains a   descriptive line for the system-selection menu,
+; followed by the filenames of the drivers in fixed order.
+;
+;      Field      1         2           3        4         5          6         7          8         9             10     11
+; prof_str      = Desc Str, System drv, kbd drv, kbd type, mouse drv, disp drv, sound drv, comm drv, himem switch, ebios, cookies
+;
+ibm_compatible  = "MS-DOS System",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios,
+ast_386_486     = "AST Premium 386/25 and 386/33 (CUPID)",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios,ast_cookz
+at_and_t        = "AT&T PC",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios,
+everex_386_25   = "Everex Step 386/25 (or Compatible)",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios,everex_cookz
+hewlett_packard = "Hewlett-Packard: all machines",hpsystem,kbdhp,t4s0enha,nomouse,vga,sound,comm,,hpebios,
+ibm_ps2_70p     = "IBM PS/2 Model P70",system,kbd,t4s0enha,nomouse,!vga,sound,comm,,ebios,
+ibm_ps2_l40sx   = "IBM PS/2 Model L40sx",system,kbd,!t4s0enha,nomouse,vga,sound,comm,,ebios,ibml40_cookz
+ncr_386sx       = "NCR: all 80386 and 80486 based machines",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios,ncr386sx_cookz
+nec_pm_sx+      = "NEC PowerMate SX Plus",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios,nec_pm_cookz
+nec_prospeed    = "NEC ProSpeed 386",system,kbd,t4s0enha,nomouse,!vga,sound,comm,,ebios,
+toshiba_1600    = "Toshiba 1600",system,kbd,t4s0enha,nomouse,vga,sound,comm,"TOSHIBA",ebios,
+toshiba_5200    = "Toshiba 5200",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios,t5200_cookz
+zenith_386      = "Zenith Data Systems: all 386/486 based machines",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios,zen386_cookz
+att_nsx_20      = "AT&T NSX 20 : Safari notebook",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios
+apm             = "MS-DOS System with APM",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios,apm_cookz
+apm_sl          = "Intel 386SL Based System with APM",system,kbd,t4s0enha,nomouse,vga,sound,comm,,ebios,apm_sl_cookz
+
+;
+; Cookies as specified in machine section
+;
+; ini file, section, cookie, needed file
+;
+; specialdriver,,,file will add an installable driver to [boot]drivers=
+;
+
+[apm_cookz]
+specialdriver,,,2:power.drv
+system.ini,386enh,"device=vpowerd.386",2:vpowerd.386
+,,,2:power.hlp
+
+[apm_sl_cookz]
+specialdriver,,,2:power.drv
+system.ini,386enh,"device=vpowerd.386",2:vpowerd.386
+,,,2:power.hlp
+system.ini,power.drv,"OptionsDLL=sl.dll",2:sl.dll
+,,,2:sl.hlp
+
+[ast_cookz]
+system.ini,386enh,"emmexclude=E000-EFFF",
+
+[everex_cookz]
+system.ini,386enh,"8042ReadCmd=A2,1,F",
+system.ini,386enh,"8042ReadCmd=A3,1,F",
+system.ini,386enh,"8042WriteCmd=B3,8,F",
+
+[ibml40_cookz]
+system.ini,386enh,"emmexclude=E000-EFFF",
+system.ini,386enh,"DMAbuffersize=64"
+
+
+[ncr386sx_cookz]
+system.ini,386enh,"emmexclude=E000-EFFF",
+system.ini,386enh,"emmexclude=C600-C7FF",
+
+[nec_pm_cookz]
+system.ini,386enh,"VirtualHDirq=NO",
+
+[t5200_cookz]
+system.ini,386enh,"emmexclude=C000-C7FF",
+
+[zen386_cookz]
+system.ini,386enh,"emmexclude=E000-EFFF",
+
+[special_adapter]
+eitherlink  = DMAbuffersize,32          ; Needed if EitherLink MC is detected.
+
+[ebios]
+ebios       = x:*ebios               ; Required for most 386 machines.
+hpebios     = 2:hpebios.386,x:*ebios ; Required for HP 386 machines.
+
+;
+; Language DLL must be installed for non US installation.
+;
+; profile = language DLL, DLL description, language ID (ilanguage)
+;
+[language]
+dan = 2:langsca.dll, "Danish"                              ,1030
+nld = 2:langdut.dll, "Dutch"                               ,1043
+enu =                     , "English (American)"           ,1033
+eng = 2:langeng.dll, "English (International)"             ,2057
+fin = 2:langsca.dll, "Finnish"                             ,1035
+fra = 2:langfrn.dll, "French"                              ,1036
+frc = 2:langeng.dll, "French Canadian"                     ,3084
+deu = 2:langger.dll, "German"                              ,1031
+isl = 2:langsca.dll, "Icelandic"                           ,1039
+ita = 2:langeng.dll, "Italian"                             ,1040
+nor = 2:langsca.dll, "Norwegian"                           ,1044
+ptg = 2:langeng.dll, "Portuguese"                          ,2070
+esp = 2:langspa.dll, "Spanish"                             ,1034
+esn = 2:langeng.dll, "Spanish (Modern)"                    ,3082
+sve = 2:langsca.dll, "Swedish"                             ,1053
+
+; files included on disk but not referenced in anywhere in setup.inf
+[keepers]
+    1:setup.exe     ; dossetup program
+    1:setup.inf     ; setup information file
+    1:xmsmmgr.exe   ; xms manager
+    1:setup.shh     ; automatic setup template file
+    6:prtupd.inf    ; Printer driver update file
+    8:admincfg.exe  ; Network Admin Utility 
+    8:pss.inf       ; PSS Support Protocol File
+
+; List of 3rd party drivers that replace *wdctrl
+; Setup will not add *wdctrl if one of these is present
+[*wdctrl]
+    cpqwdctl.386    ; compaq wd controller
+    ultraisa.386    ; ultra store wd controller
+    fdscsi.386      ; future domain scsi
+    hc_win.386      ; quantum hardcard
+    cam_win.386     ; quantum passport scsi
+    scsi_win.386    ; quantum passport scsi
+
+; List of 3rd party drivers that replace *int13
+; Setup will not add *int13 if one of these is present
+[*int13]
+    cpqint13.386    ; used with compaq cpqwdctl.386
+    qtmint13.386    ; used with quantum hc_win.386, cam_win.386, and scsi_win.386
+    int13.386       ; used with future domain
+
+; List of 3rd party drivers that replace *vpd
+; Setup will not add *vpd if one of these is present
+[*vpd]
+    wpsljvpd.386
