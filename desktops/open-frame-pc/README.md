@@ -31,7 +31,7 @@ With Windows 98SE
 * 2x256MB PC133 SDRAM
 * Storage
 * * Goldenfir 64GB SATA SSD 
-* * Icydock 2.5" SSD Dock Trayless Hot-Swap SATA
+* * Icydock 2.5" Dock Trayless Hot-Swap SATA
 * * Startech IDE-SATA converter
 
 
