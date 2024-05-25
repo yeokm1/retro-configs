@@ -29,7 +29,7 @@ With Windows 98SE
 * * PS/2 keyboard and mouse ports
 * * UltraDMA/100 IDE controller
 * 2x256MB PC133 SDRAM
-* Disk storage
+* Storage
 * * Goldenfir 64GB SATA SSD 
 * * Icydock 2.5" SSD Dock Trayless Hot-Swap SATA
 * * Startech IDE-SATA converter
