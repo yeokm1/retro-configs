@@ -1,7 +1,7 @@
 
 # Open Frame PC
 
-This is an Open Frame PC I use as a testbench based on a Pentium 3.
+This is an Open Frame PC I use as a testbench based on a Pentium 3. Writeup: https://yeokhengmeng.com/2024/05/setting-up-pentium-3-testbench/
 
 <img src="photos/ofpc-top.jpg" width="500">
 
