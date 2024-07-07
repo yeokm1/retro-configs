@@ -36,7 +36,7 @@ The machine is configured for single-boot Windows 98SE with a bootup option to e
 <img src="desktops/tweener-pc/photos/tweener-disks.jpg" width="500">
 <img src="desktops/tweener-pc/photos/tweener-w98-desktop.jpg" width="500">
 
-## 3. [Open Frame PC](desktops/open-frame-pc) (1999)
+## 4. [Open Frame PC](desktops/open-frame-pc) (1999)
 
 This is an Open Frame PC I use as a testbench based on a Pentium 3. The machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE. 
 
@@ -44,23 +44,7 @@ This is an Open Frame PC I use as a testbench based on a Pentium 3. The machine 
 
 # Laptops
 
-## 1. [Thinkpad 390E](laptops/thinkpad-390e) (1999)
-
-The Pentium II machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
-
-<img src="laptops/thinkpad-390e/photos/390e-full.jpg" width="500">
-
-In the BIOS
-
-<img src="laptops/thinkpad-390e/photos/390e-wfw311.jpg" width="500">
-
-In WFW 3.11
-
-<img src="laptops/thinkpad-390e/photos/390e-win98se.jpg" width="500">
-
-In Win 98SE
-
-## 2. [Thinkpad T42](laptops/thinkpad-t42) (2004)
+## 1. [Thinkpad T42](laptops/thinkpad-t42) (2004)
 
 The Pentium M machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
 
@@ -72,7 +56,7 @@ In Win 98SE
 
 In WFW 3.11
 
-## 3. [Dell Latitude LM M166ST](laptops/latitude-lm) (1996)
+## 2. [Dell Latitude LM M166ST](laptops/latitude-lm) (1996)
 
 A barebones Pentium MMX laptop configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
 
@@ -84,7 +68,7 @@ In Windows for Workgroups 3.11
 
 In Windows 98SE
 
-## 4. [Toshiba Satellite 315CDT](laptops/satellite-315cdt) (1996)
+## 3. [Toshiba Satellite 315CDT](laptops/satellite-315cdt) (1996)
 
 The Toshiba laptop is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE. This machine's interesting feature is that it comes with an original Yamaha OPL3 for FM synthesis which is uncommon for a laptop.
 
@@ -96,7 +80,7 @@ In Win 98SE
 
 In WFW 3.11
 
-## 5. [Hand386](laptops/hand386) (2023)
+## 4. [Hand386](laptops/hand386) (2023)
 
 This is a new 386-based palmtop released in 2023. It runs on DOS 6.22 and Windows for Workgroups (WFW) 3.11.
 
@@ -104,7 +88,7 @@ This is a new 386-based palmtop released in 2023. It runs on DOS 6.22 and Window
 
 Here the system is running Descent on lowest quality setting.
 
-## 6. [Book8088v2](laptops/book8088) (2023)
+## 5. [Book8088v2](laptops/book8088) (2023)
 
 This is a new 8088-based subnotebook released in 2023. I have set it up to run DOS 6.22, Win 1.03 and Win 2.03.
 
@@ -112,7 +96,7 @@ This is a new 8088-based subnotebook released in 2023. I have set it up to run D
 
 Here it is shown running CGA Compatibility tester.
 
-## 7. [Thinkpad X61](laptops/thinkpad-x61) (2007)
+## 6. [Thinkpad X61](laptops/thinkpad-x61) (2007)
 
 The Thinkpad X61 is a laptop released in 2007 by IBM. The machine is configured to multi-boot to DOS 6.22, Windows 10 32-bit and Xubuntu.
 
@@ -189,6 +173,22 @@ This PC failed before I could take a photo of it in a running state.
 The NEC Versa 40EC laptop is only configured for DOS 6.22.
 
 <img src="deprecated/versa-v40/photos/versa-front.jpg" width="400">
+
+## 6. [Thinkpad 390E](deprecated/thinkpad-390e) (1999)
+
+The Pentium II machine is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
+
+<img src="deprecated/thinkpad-390e/photos/390e-full.jpg" width="500">
+
+In the BIOS
+
+<img src="deprecated/thinkpad-390e/photos/390e-wfw311.jpg" width="500">
+
+In WFW 3.11
+
+<img src="deprecated/thinkpad-390e/photos/390e-win98se.jpg" width="500">
+
+In Win 98SE
 
 
 # Common drivers sources
