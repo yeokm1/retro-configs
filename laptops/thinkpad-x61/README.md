@@ -1,4 +1,4 @@
-# Thinkpad T42
+# Thinkpad X61
 
 The Thinkpad X61 is a laptop released in 2007 by IBM. 
 
