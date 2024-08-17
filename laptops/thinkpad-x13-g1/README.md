@@ -20,7 +20,7 @@ These are the specifications specific to the Thinkpad I have:
 
 * Intel Core i5-10310U 1.7Ghz (6M Cache, up to 4.40 GHz)
 * Intel UHD Graphics
-* 8GB RAM (soldered in)
+* 16GB RAM (soldered in)
 * High Definition (HD) Audio with Realtek ALC3287 codec
 * 13.3" IPS display with 1920x1080 resolution
 * uSD card slot
