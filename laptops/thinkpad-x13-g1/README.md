@@ -119,7 +119,7 @@ I did a short study of the performance and memory usage of the 3 adapters. I use
 
 <img src="photos/x13g1-speedtest.jpg" width="500">
 
-I did a point-to-point connection between the DOS machine and my Framework with a 2.5GbE Ethernet Expansion Card with RTL8156 chipset.
+I did a point-to-point connection between the DOS machine and my Framework running Kubuntu with a 2.5GbE Ethernet Expansion Card of RTL8156 chipset.
 
 ```bash
 # Linux command to create empty 64MiB file
