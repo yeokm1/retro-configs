@@ -75,6 +75,12 @@ The `config.sys` and `autoexec.bat` configuration has been customised by me to l
 
 The first option that is not legible is `Basic DOS Mode` to not load memory, sound and network drivers for a relatively clean start. The other options load a combination of different sound and network drivers.
 
+## Audio configuration
+
+<img src="photos/x13g1-with-sbemu.jpg" width="500">
+
+Sound Blaster and OPL3 support is provided by the [SBEMU](https://github.com/crazii/SBEMU) driver which can utilise modern sound hardware.
+
 ## Network Configuration
 
 <img src="photos/x13g1-intel-driver-cannot.jpg" width="500">
