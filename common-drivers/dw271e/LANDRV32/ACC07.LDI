@@ -1,0 +1,479 @@
+;
+;       Novell NetWare Server Driver Description File for ACC07.LAN
+;
+
+VER: 2.17
+SYN: 1.00
+
+DR ACC07
+{
+        DES:    $ACC07_1
+        HELP:   $ACC07_2
+        PAR:    2.00
+        PROD:   'PCI.1011.0002.0000.0000.2?',
+                'PCI.1011.0009.0000.0000.*',
+                'PCI.1011.0009.1113.1207.*',
+                'PCI.1011.0019.1113.1207.*'
+
+;@# SPROD: 'Accton~EN1203 PCI Series Ethernet driver',
+;@#		   'Accton~EN1207 PCI Series Ethernet driver'
+
+;@# CLIENT: ACCO7.LAN, ACC07.COM
+;@# ALIAS:  ACCO7.LAN	
+
+        FILE:   ACC07.LAN
+        TIME:   15
+
+        PR SLOT REQ
+        {
+          VAL: 1-65535
+        }
+
+        FRAME FrameSelect
+        {
+                CH:  'Ethernet_802.3'
+                CH:  'Ethernet_802.2'
+                CH:  'Ethernet_SNAP'
+                CH:  'Ethernet_II'
+                DEF:    1,2,3,4
+        }
+
+        LIST Attachment OPTIONAL
+        {
+                DES:    $ACC07_3
+                HELP:   $ACC07_4
+                CD:     $ACC07_5
+                CH:     $ACC07_6
+                CD:     $ACC07_7
+                CH:     $ACC07_8
+                CD:     $ACC07_9
+                CH:     $ACC07_10
+                CD:     $ACC07_11
+                CH:     $ACC07_12
+                DEF:    4
+                OUT:    '%s'
+        }
+
+        PROMPT NODE
+        {
+        }
+
+        LIST Line_Speed OPTIONAL
+        {
+                DES:    $ACC07_13
+                HELP:   $ACC07_14
+                CD:     $ACC07_15
+                CH:     $ACC07_16
+                CD:     $ACC07_17
+                CH:     $ACC07_18
+                DEF:    2
+                OUT:    'LINE_SPEED=%s'
+        }
+
+        PROMPT TURBO
+        {
+                DES:  $ACC07_19
+                HELP: $ACC07_20
+                TYPE: STRING
+                VAL:  $ACC07_25
+                OUT:  '%s'
+        }
+
+        PROMPT MIN_CPU
+        {
+                DES:  $ACC07_21
+                HELP: $ACC07_22
+                TYPE: STRING
+                VAL:  $ACC07_26
+                OUT:  '%s'
+        }
+
+        PROMPT CAPTURE_EFFECT_DISABLE
+        {
+                DES:  $ACC07_23
+                HELP: $ACC07_24
+                TYPE: STRING
+                VAL:  $ACC07_27
+                OUT:  '%s'
+        }
+
+}
+
+
+DLANG:  4
+;English
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+
+LANG:  1
+;CHINESE
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+
+
+LANG:   6
+;French
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+
+LANG:   7
+;German
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+
+LANG:   8
+;Italian
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+
+LANG:  9
+;JAPANESE
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+
+LANG:  10
+;KOREAN
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+
+LANG:  12
+;PORTUGESE
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+
+LANG:  13
+;RUSSIAN
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+LANG:   14
+;Spanish
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+
+LANG:  16
+;RUSSIAN
+        $ACC07_1    = "Accton EN1203, EN1207 PCI Series Ethernet driver"
+        $ACC07_2    = "This driver supports PCI bus type"
+        $ACC07_3    = "Media Attachment"
+        $ACC07_4    = "Choose the connector/media type you would like to use."
+        $ACC07_5    = "Twisted Pair (RJ45)"
+        $ACC07_6    = "TP"
+        $ACC07_7    = "Thick wire (BNC)"
+        $ACC07_8    = "BNC"
+        $ACC07_9    = "Twisted pair - Full Duplex"
+        $ACC07_10   = "TP_FULL_DUPLEX"
+        $ACC07_11   = "Autodetect"
+        $ACC07_12   = "AUTODETECT"
+        $ACC07_13   = "Line Speed"
+        $ACC07_14   = "Select the speed you would like the interface to work in."
+        $ACC07_15   = "10"
+        $ACC07_16   = "10"
+        $ACC07_17   = "100"
+        $ACC07_18   = "100"
+        $ACC07_19   = "Turbo mode"
+        $ACC07_20   = "TURBO mode will enhance performance on some
+                        PCI platforms."
+        $ACC07_21   = "Minimize CPU utilization"
+        $ACC07_22   = "If multiple network adapters are used in your server,
+                        this parameter should be added."
+        $ACC07_23   = "Disable Capture Effect"
+        $ACC07_24   = "Disable the function that solve Ethernet Capture Effect
+                       problem."
+        $ACC07_25   = "TURBO"
+        $ACC07_26   = "MIN_CPU"
+        $ACC07_27   = "CAPTURE_EFFECT_DISABLE"
+
+
+
+
+

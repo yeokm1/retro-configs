@@ -1,0 +1,139 @@
+;DrIvEr DeScRiPtIoN
+VER: 1.00
+SYN: 1.00
+DR PEI100X
+{
+    DES:  $PEI100X_1
+    HELP: $PEI100X_2
+    PAR: 2.00
+    FILE: PEI100X.LAN
+    PROD: 'PCI.1000.0702.1318.0000.01'
+
+
+;@# Sprod: 'PEI G-NIC Gigabit Ethernet Adapter'
+
+;@# Client: PEI100X
+;@# Alias: PEI100X
+
+    PR SLOT REQ
+    {
+        DES:       $PEI100X_3
+        HELP:      $PEI100X_4
+        TYPE:      DECIMAL
+        VALUES:    1-65535
+    }
+
+    PR NODE
+    {
+    }
+
+    FR FrameSelect
+    {
+        DES:       $PEI100X_5
+        HELP:      $PEI100X_6
+
+        CD:        $PEI100X_7
+        CH:         'Ethernet_802.2'
+
+        CD:        $PEI100X_8
+        CH:         'Ethernet_802.3'
+
+        CD:        $PEI100X_9
+        CH:         'Ethernet_SNAP'
+
+        CD:        $PEI100X_10
+        CH:         'Ethernet_II'
+
+        DEF:        1
+    }
+}
+DLANG: 4
+ ;English
+ $PEI100X_1 = "PEI G-NIC Gigabit Ethernet Adapter"
+ $PEI100X_2 = "This driver (PEI100X.LAN) supports the G-NIC Gigabit Ethernet network device."
+ $PEI100X_3 = "Slot Number"
+ $PEI100X_4 = "Select PCI slot number for the adapter. \n"
+ $PEI100X_5 = "Frame Types"
+ $PEI100X_6 = "This driver defaults to the 802.2 frame
+             type. You can optionally remove this frame type
+             and/or add the 802.3, 802.2 SNAP, and/or
+             Ethernet II frame types."
+
+ $PEI100X_7 = "Ethernet_802.2"
+ $PEI100X_8 = "Ethernet_802.3"
+ $PEI100X_9 = "Ethernet_SNAP"
+ $PEI100X_10 = "Ethernet_II"
+
+ LANG:   6
+ ;French
+ $PEI100X_1 = "PEI G-NIC Gigabit Ethernet Adapter"
+ $PEI100X_2 = "This driver (PEI100X.LAN) supports the G-NIC Gigabit Ethernet network device."
+ $PEI100X_3 = "Slot Number"
+ $PEI100X_4 = "Select PCI slot number for the adapter. \n"
+ $PEI100X_5 = "Frame Types"
+ $PEI100X_6 = "This driver defaults to the 802.2 frame
+             type. You can optionally remove this frame type
+             and/or add the 802.3, 802.2 SNAP, and/or
+             Ethernet II frame types."
+
+ $PEI100X_7 = "Ethernet_802.2"
+ $PEI100X_8 = "Ethernet_802.3"
+ $PEI100X_9 = "Ethernet_SNAP"
+ $PEI100X_10 = "Ethernet_II"
+
+
+ LANG:   7
+ ;German
+ $PEI100X_1 = "PEI G-NIC Gigabit Ethernet Adapter"
+ $PEI100X_2 = "This driver (PEI100X.LAN) supports the G-NIC Gigabit Ethernet network device."
+ $PEI100X_3 = "Slot Number"
+ $PEI100X_4 = "Select PCI slot number for the adapter. \n"
+ $PEI100X_5 = "Frame Types"
+ $PEI100X_6 = "This driver defaults to the 802.2 frame
+             type. You can optionally remove this frame type
+             and/or add the 802.3, 802.2 SNAP, and/or
+             Ethernet II frame types."
+
+ $PEI100X_7 = "Ethernet_802.2"
+ $PEI100X_8 = "Ethernet_802.3"
+ $PEI100X_9 = "Ethernet_SNAP"
+ $PEI100X_10 = "Ethernet_II"
+
+
+ LANG:   8
+ ;Italian
+ $PEI100X_1 = "PEI G-NIC Gigabit Ethernet Adapter"
+ $PEI100X_2 = "This driver (PEI100X.LAN) supports the G-NIC Gigabit Ethernet network device."
+ $PEI100X_3 = "Slot Number"
+ $PEI100X_4 = "Select PCI slot number for the adapter. \n"
+ $PEI100X_5 = "Frame Types"
+ $PEI100X_6 = "This driver defaults to the 802.2 frame
+             type. You can optionally remove this frame type
+             and/or add the 802.3, 802.2 SNAP, and/or
+             Ethernet II frame types."
+
+ $PEI100X_7 = "Ethernet_802.2"
+ $PEI100X_8 = "Ethernet_802.3"
+ $PEI100X_9 = "Ethernet_SNAP"
+ $PEI100X_10 = "Ethernet_II"
+
+
+ LANG:   14
+ ;Spanish
+ $PEI100X_1 = "PEI G-NIC Gigabit Ethernet Adapter"
+ $PEI100X_2 = "This driver (PEI100X.LAN) supports the G-NIC Gigabit Ethernet network device."
+ $PEI100X_3 = "Slot Number"
+ $PEI100X_4 = "Select PCI slot number for the adapter. \n"
+ $PEI100X_5 = "Frame Types"
+ $PEI100X_6 = "This driver defaults to the 802.2 frame
+             type. You can optionally remove this frame type
+             and/or add the 802.3, 802.2 SNAP, and/or
+             Ethernet II frame types."
+
+ $PEI100X_7 = "Ethernet_802.2"
+ $PEI100X_8 = "Ethernet_802.3"
+ $PEI100X_9 = "Ethernet_SNAP"
+ $PEI100X_10 = "Ethernet_II"
+
+;DrIvEr DeScRiPtIoN EnD
+

@@ -1,0 +1,487 @@
+; CNTR2000.LDI
+;
+; Novell CNTR2000 Network Interface Cards.
+;
+; VeRsIoN=1.09 Novell LAN Installation Information File for CNTR2000.
+; CoPyRiGhT=(c)Copyright 1996, 1997, 1998, by Novell, Inc.  All rights reserved.
+
+Version:       1.09
+SyntaxVersion: 1.00
+
+Driver NOVELL_CNTR2000
+{
+     Description:              $CNTR2000_1
+     Help:                     $CNTR2000_2
+
+     File:               CNTR2000.LAN
+     PAR: 3.00
+     PROD:     'EISA.NVL.160.1', 'MCA.E000', 'MCA.E001'
+;@#  Sprod: 'Novell ~ ISA NTR2000 or compatible',
+;@#         'IBM ~ MCA TokenRing Adapter',
+;@#         'Novell ~ MCA TokenRing Adapter'
+;@# CLIENT:  CNTR2000
+;@# ALIAS: NTR2000.LAN
+
+     Timeout:       60
+
+	LIST Adapter_Bus_Type OPTIONAL
+	{
+		Description:	$CNTR2000_12
+		Help:		$CNTR2000_13
+
+		CDescription:	$CNTR2000_14
+		Choice:		''
+		CDescription:	$CNTR2000_15
+		Choice:		'ISA'
+
+		Default:	1
+		OutputFormat:	'%s'
+	}
+
+     PROMPT PORT1
+	IF ((BUS == ISA) OR (BUS == EISA)) REQ
+	ELSE HID
+
+     {
+          Description:   $CNTR2000_3
+          Help:          $CNTR2000_4
+          Type:          HEX(3)
+          Values:        A20, A24
+          Default:       A20
+          ReservedLength:     4
+     }
+
+     PROMPT SLOT
+	IF ((BUS == ISA) OR (BUS == EISA)) HID
+	ELSE REQ
+
+     {
+          Description:   $CNTR2000_5
+          Help:          $CNTR2000_6
+          Type:          DECIMAL(8)
+          Values:        1-65535
+     }
+
+     PROMPT NODE
+     {
+     }
+
+     PROMPT TBZ OPTIONAL
+     {
+          Values:        638-17954
+	  Type:		 DECIMAL(5)
+          Default:       4222
+     }
+
+     FRAME FrameSelect
+     {
+          Help:           $CNTR2000_7
+
+          CDescription:  $CNTR2000_8
+          Choice:        'Token-Ring'
+          CDescription:  $CNTR2000_9
+          Choice:        'Token-Ring_SNAP'
+          Default:        1
+          OctetBitOrder: MSB
+
+     }
+
+}
+
+
+Driver MICRODYNE_CNTR2000
+{
+     Description:              $CNTR2000_10
+     Help:                     $CNTR2000_11
+
+     File:               CNTR2000.LAN
+     PAR: 3.00
+     PROD:     'EISA.NVL.160.1'
+;@#  Sprod: 'Microdyne ~ ISA NTR2000 or compatible'
+;@# CLIENT:  CNTR2000
+;@# ALIAS: NTR2000.LAN
+     Timeout:       60
+
+	LIST Adapter_Bus_Type OPTIONAL
+	{
+		Description:	$CNTR2000_12
+		Help:		$CNTR2000_13
+
+		CDescription:	$CNTR2000_14
+		Choice:		''
+		CDescription:	$CNTR2000_15
+		Choice:		'ISA'
+
+		Default:	1
+		OutputFormat:	'%s'
+	}
+
+     PROMPT PORT1
+	IF ((BUS == ISA) OR (BUS == EISA)) REQ
+	ELSE HID
+
+     {
+          Description:   $CNTR2000_3
+          Help:          $CNTR2000_4
+          Type:          HEX(3)
+          Values:        A20, A24
+          Default:       A20
+          ReservedLength:     4
+     }
+
+     PROMPT SLOT
+	IF ((BUS == ISA) OR (BUS == EISA)) HID
+	ELSE REQ
+
+     {
+          Description:   $CNTR2000_5
+          Help:          $CNTR2000_6
+          Type:          DECIMAL(8)
+          Values:        1-65535
+     }
+
+     PROMPT NODE
+     {
+     }
+
+     PROMPT TBZ OPTIONAL
+     {
+          Values:        638-17954
+	  Type:		 DECIMAL(5)
+          Default:       4222
+     }
+
+     FRAME FrameSelect
+     {
+          Help:           $CNTR2000_7
+
+          CDescription:  $CNTR2000_8
+          Choice:        'Token-Ring'
+          CDescription:  $CNTR2000_9
+          Choice:        'Token-Ring_SNAP'
+          Default:        1
+          OctetBitOrder: MSB
+
+     }
+
+}
+
+
+DLANG:    4
+;English
+     $CNTR2000_1 = "Novell Token-Ring"
+     $CNTR2000_2 = "This server driver (CNTR2000.LAN) supports the Novell NTR2000
+LAN adapter.  You can install a maximum of two token ring network boards
+in an ISA or EISA server."
+     $CNTR2000_3 = "Port"
+     $CNTR2000_4 = "The port address for the primary LAN adapter is A20 hex; the
+port address for an alternate LAN adapter is A24 hex.  Note that all information
+for this LAN adapter can be read from the adapter once the port is given, except
+for an alternate LAN adapter's RAM address on an ISA bus."
+     $CNTR2000_5 = "Slot"
+     $CNTR2000_6 = "The slot number for the MCA adapter provides access to the
+PC's slot configuration information.  The driver uses this information to set
+up the card."
+     $CNTR2000_7 = "The driver defaults to the Token-Ring (802.2) frame type.
+Depending on the frame type your protocol requires, you can either change to
+Token-Ring 802.2 SNAP or choose both frame types and load the driver
+re-entrantly. Do not change the MSB/LSB parameter unless you are familiar with
+the effects of such a change."
+     $CNTR2000_8 = "TOKEN-RING"
+     $CNTR2000_9 = "TOKEN-RING_SNAP"
+     $CNTR2000_10 = "Microdyne Token-Ring"
+     $CNTR2000_11 = "This server driver (CNTR2000.LAN) supports the Microdyne
+NTR2000 LAN adapter.  You can install a maximum of two token ring network
+boards in an ISA or EISA server."
+
+	$CNTR2000_12 = "Is the card an ISA Card?"
+	$CNTR2000_13 = "A value of 'Yes' is necessary to support legacy ISA cards.
+Plug and Play ISA is not considered legacy ISA."
+
+	$CNTR2000_14 = "No"
+	$CNTR2000_15 = "Yes"
+
+LANG: 6
+;French
+     $CNTR2000_1 = "Novell Token-Ring"
+     $CNTR2000_2 = "Ce pilote de serveur CNTR2000.LAN)
+\nsupporte l'adaptateur LAN NTR2000 de
+ Novell. Vous pouvez installer un maximum
+ de deux cartes rÇseau token ring sur un
+ serveur ISA ou EISA."
+     $CNTR2000_3 = "Port"
+     $CNTR2000_4 = "L'adresse du port de l'adaptateur LAN
+ primaire est A20 hex ; l'adresse du port
+ d'un adaptateur LAN alternatif est A24
+ hex. Notez que toutes les informations
+ \nsur cet adaptateur LAN peuvent àtre lues
+ depuis l'adaptateur une fois que le port
+ est donnÇ, sauf pour l'adresse RAM d'un
+ adaptateur LAN alternatif sur un bus ISA."
+     $CNTR2000_5 = "Connecteur"
+     $CNTR2000_6 = "Le numÇro du connecteur de l'adaptateur
+ MCA fournit un accäs aux informations de
+ configuration de connecteur du PC. Le
+ pilote utilise ces informations pour
+ configurer la carte."
+     $CNTR2000_7 = "Le pilote utilise par dÇfaut le type de
+ trame Token-Ring (802.2). En fonction du
+ type de trame dont votre protocole a
+ besoin, vous pouvez  passer Ö Token-Ring
+ 802.2 SNAP ou choisir les deux types de
+ trame et charger le pilote par la suite.
+ Ne changez pas les paramätres MSB/LSB
+ \nsans en connaåtre les rÇpercussions."
+     $CNTR2000_8 = "TOKEN-RING"
+     $CNTR2000_9 = "TOKEN-RING_SNAP"
+     $CNTR2000_10 = "Microdyne Token-Ring"
+     $CNTR2000_11 = "Ce pilote de serveur (CNTR2000.LAN)
+ supporte l'adaptateur LAN Microdyne
+ NTR2000. Vous pouvez installer un maximum
+ de deux cartes rÇseau token ring sur un
+ serveur ISA ou EISA."
+
+	$CNTR2000_12 = "Cette carte est-elle une carte ISA ?"
+	$CNTR2000_13 = "Choisissez 'Oui' pour prendre en charge
+ les cartes Legacy ISA. Les cartes Plug
+  and Play ISA ne sont pas considÇrÇes
+  comme Legacy ISA."
+
+	$CNTR2000_14 = "Non"
+	$CNTR2000_15 = "Oui"
+
+LANG: 7
+;German
+     $CNTR2000_1 = "Novell Token-Ring"
+     $CNTR2000_2 = "Dieser Servertreiber (CNTR2000.LAN) unterstÅtzt den Novell
+NTR2000-LAN-Adapter.  Sie kînnen bis zu zwei Token-Ring-Netzwerkkarten
+in einen ISA- oder EISA-Server installieren."
+     $CNTR2000_3 = "Anschlu·"
+     $CNTR2000_4 = "Die Anschlu·adresse fÅr den primhex; die Anschlu·adresse
+fÅr einen alternativen LAN-Adapter ist A24 hex. Beachten Sie, da·
+alle Informationen fÅr diesen LAN-Adapter vom Adapter gelesen werden
+kînnen, wenn der Anschlu· angegeben ist, au·er fÅr die RAM-Adresse
+eines alternativen LAN-Adapters auf einem ISA-Bus."
+     $CNTR2000_5 = "Steckplatz"
+     $CNTR2000_6 = "Die Steckplatznummer fÅr den MCA-Adapter bieten Zugriff auf
+die Steckplatzkonfigurationsinformationen des PCs. Der Treiber
+verwendet diese Informationen fÅr die Einrichtung der Karte."
+     $CNTR2000_7 = "Der Treiber wird standardmÑ·ig auf Rahmentyp Token-Ring (802.2)
+eingestellt. Je nach dem von Ihrem Protokoll erforderten Rahmentyp kînnen
+Sie entweder auf Token-Ring 802.2 SNAP umwechseln oder beide Rahmentypen
+auswÑhlen und den Treiber beim Wiedereintritt laden. éndern Sie
+den MSB/LSB-Parameter nur, wenn Sie mit den Auswirkungen einer
+solchen énderung vertraut sind."
+     $CNTR2000_8 = "TOKEN-RING"
+     $CNTR2000_9 = "TOKEN-RING_SNAP"
+     $CNTR2000_10 = "Microdyne Token-Ring"
+     $CNTR2000_11 = "Dieser Servertreiber (CNTR2000.LAN) unterstÅtzt den Microdyne
+NTR2000 LAN-Adapter.  Sie kînnen bis zu zwei Token-Ring-Netzwerkkarten
+in einen ISA- oder EISA-Server installieren."
+
+	$CNTR2000_12 = "Ist die Karte eine ISA-Karte?"
+	$CNTR2000_13 = "Die Auswahl 'Ja' ist fÅr die UnterstÅtzung der Legacy-ISA-Karten erforderlich.
+Plug Play-ISA ist keine Legacy-ISA."
+
+	$CNTR2000_14 = "Nein"
+	$CNTR2000_15 = "Ja"
+
+LANG: 8
+;Italian
+     $CNTR2000_1 = "Novell Token-Ring"
+     $CNTR2000_2 = "Questo driver di server CNTR2000.LAN supporta l'adattatore
+LAN Novell NTR2000. E' consentito installare un massimo di due schede
+di rete token ring per server ISA o EISA."
+     $CNTR2000_3 = "Porta"
+     $CNTR2000_4 = "L'indirizzo di porta dell'adattatore LAN primario ä
+A20 esa. L'indirizzo di porta dell'adattatore LAN
+alternativo ä A24 esa. Notare che, una volta specificata
+la porta, ä possibile leggere tutte le informazioni di
+questo adattatore LAN dall'adattatore stesso, ad esclusione
+dell'indirizzo RAM dell'adattatore LAN alternativo su un bus
+ISA."
+     $CNTR2000_5 = "Slot"
+     $CNTR2000_6 = "Il numero di slot per l'adattatore MCA permette di accedere
+alle informazioni di configurazione dello slot del PC. Il
+driver usa tali informazioni per configurare la scheda."
+     $CNTR2000_7 = "Il driver usa come default il tipo di frame Token-Ring (802.2).
+A seconda del tipo di frame richiesto dal protocollo in uso,
+ä possibile passare a Token-Ring 802.2 SNAP o scegliere entrambi i
+tipi di frame e caricare il driver in modo rientrante. Non cambiare il
+parametro MSB/LSB a meno che non si conoscano le
+conseguenze di tale modifica."
+     $CNTR2000_8 = "TOKEN-RING"
+     $CNTR2000_9 = "TOKEN-RING_SNAP"
+     $CNTR2000_10 = "Microdyne Token-Ring"
+     $CNTR2000_11 = "Il driver di server CNTR2000.LAN supporta l'adattatore
+LAN Microdyne NTR2000. E' possibile installare al massimo due schede
+di rete token ring per server ISA o EISA."
+
+	$CNTR2000_12 = "E' una scheda ISA?"
+	$CNTR2000_13 = "Per poter supportare le schede ISA precedenti occorre usare il valore 'Sç'.
+Le schede ISA Plug and Play non appartengono a questa categoria."
+
+	$CNTR2000_14 = "No"
+	$CNTR2000_15 = "Sç"
+
+LANG: 12
+;Portuguese
+     $CNTR2000_1 = "Novell Token-Ring"
+     $CNTR2000_2 = "Este driver do servidor (CNTR2000.LAN) suporta o adaptador NTR2000
+LAN da Novell. Vocà pode instalar um m†ximo de duas placas de rede token ring
+em um servidor ISA ou EISA."
+     $CNTR2000_3 = "Porta"
+     $CNTR2000_4 = "O endereáo da porta para o adaptador LAN prim†rio Ç A20 hex; o
+endereáo da porta para um adaptador LAN alternativo Ç A24 hex. Observe que toda a informaá∆o
+para este adaptador LAN pode ser lida a partir do adaptador depois que a porta Ç determinada, exceto
+para um endereáo RAM do adaptador LAN em um barramento ISA."
+     $CNTR2000_5 = "Slot"
+     $CNTR2000_6 = "O n£mero do slot para o adaptador MCA permite acesso Ö
+informaá∆o de configuraá∆o de slot do PC. O driver usa esta informaá∆o para configurar
+a placa."
+     $CNTR2000_7 = "O driver usa como default o tipo de frame Token-Ring (802.2).
+Dependendo do tipo de frame que o seu protocolo requer, Ç
+poss°vel mudar para SNAP Token-Ring 802.2 ou escolher ambos
+os tipos de frame e carregar o driver repetidamente. N∆o mude o
+parÉmetro MSB/LSB, a menos que esteja familiarizado com os
+efeitos dessa mudanáa."
+     $CNTR2000_8 = "TOKEN-RING"
+     $CNTR2000_9 = "TOKEN-RING_SNAP"
+     $CNTR2000_10 = "Microdyne Token-Ring"
+     $CNTR2000_11 = "Este driver do servidor (CNTR2000.LAN) suporta o adaptador
+Microdyne NTR2000 LAN. Vocà pode instalar um m†ximo de duas placas de rede token ring
+em um servidor ISA ou EISA."
+
+	$CNTR2000_12 = "A placa Ç do tipo ISA?"
+	$CNTR2000_13 = "Um valor 'Sim' Ç necess†rio para suportar as placas Legacy ISA.
+As placas ISA Plug and Play n∆o s∆o consideradas como Legacy ISA."
+
+	$CNTR2000_14 = "N∆o"
+	$CNTR2000_15 = "Sim"
+
+LANG: 14
+;Spanish
+     $CNTR2000_1 = "Novell Token-Ring"
+     $CNTR2000_2 = "Este controlador (CNTR2000.LAN) ofrece soporte al adaptador LAN NTR2000
+de Novell. Se pueden instalar hasta dos tarjetas de red Token-Ring en un
+servidor ISA o EISA."
+     $CNTR2000_3 = "Puerto"
+     $CNTR2000_4 = "La direcci¢n del puerto del adaptador LAN primario es un
+hexadecimal A20; la direcci¢n del puerto de un adaptador
+alternativo LAN es un hexadecimal A24 hex. Tenga presente
+que toda la informaci¢n de este adaptador LAN puede leerse
+desde el mismo adaptador una vez que se determine el puerto,
+exceptuando la direcci¢n RAM de un adaptador LAN alternativo
+de un bus ISA."
+     $CNTR2000_5 = "Ranura"
+     $CNTR2000_6 = "El n£mero de ranura del adaptador MCA suministra acceso a la
+informaci¢n de configuraci¢n de ranuras del PC. El controlador
+utiliza dicha informaci¢n para configurar la tarjeta."
+     $CNTR2000_7 = "El controlador usa por defecto el tipo de trama Token-Ring
+(802.2). Seg£n el tipo de trama requerido por su controlador,
+Ud. podr† cambiar sea Token-Ring 802.2 SNAP o podr† elegir
+ambos tipos de trama y cargar el controlador repetidamente. No
+modifique el par†metro MSB/LSB a menos que este familiarizado
+con las consecuencias de tal acci¢n."
+     $CNTR2000_8 = "TOKEN-RING"
+     $CNTR2000_9 = "TOKEN-RING_SNAP"
+     $CNTR2000_10 = "Microdyne Token-Ring"
+     $CNTR2000_11 = "Este controlador (CNTR2000.LAN) ofrece soporte al adaptador
+Microdyne NTR2000 de LAN.  Pueden intalarse hasta un m†ximo
+de dos tarjetas de red Token-Ring en un servidor ISA o EISA."
+
+	$CNTR2000_12 = "®Es Çsta una tarjeta ISA?"
+	$CNTR2000_13 = "Para dar soporte a tarjetas ISA legadas indique 'S°'.
+Las tarjetas ISA de 'plug and play' no se consideran como ISA legadas."
+
+	$CNTR2000_14 = "No"
+	$CNTR2000_15 = "S°"
+
+LANG: 1
+;Chinese-Simplified
+     $CNTR2000_1 = "Novell Token-Ring"
+     $CNTR2000_2 = "This server driver (CNTR2000.LAN) supports the Novell NTR2000
+LAN adapter.  You can install a maximum of two token ring network boards
+in an ISA or EISA server."
+     $CNTR2000_3 = "∂Àø⁄"
+     $CNTR2000_4 = "The port address for the primary LAN adapter is A20 hex; the
+port address for an alternate LAN adapter is A24 hex.  Note that all information
+for this LAN adapter can be read from the adapter once the port is given, except
+for an alternate LAN adapter's RAM address on an ISA bus."
+     $CNTR2000_5 = "≤Â≤€"
+     $CNTR2000_6 = "The slot number for the MCA adapter provides access to the
+PC's slot configuration information.  The driver uses this information to set
+up the card."
+     $CNTR2000_7 = "The driver defaults to the Token-Ring (802.2) frame type.
+Depending on the frame type your protocol requires, you can either change to
+Token-Ring 802.2 SNAP or choose both frame types and load the driver
+re-entrantly. Do not change the MSB/LSB parameter unless you are familiar with
+the effects of such a change."
+     $CNTR2000_8 = "TOKEN-RING"
+     $CNTR2000_9 = "TOKEN-RING_SNAP"
+     $CNTR2000_10 = "Microdyne Token-Ring"
+     $CNTR2000_11 = "This server driver (CNTR2000.LAN) supports the Microdyne
+NTR2000 LAN adapter.  You can install a maximum of two token ring network
+boards in an ISA or EISA server."
+
+	$CNTR2000_12 = "’‚ «“ª∏ˆ ISA ø®¬£ø"
+	$CNTR2000_13 = "“™÷ß≥÷¥´Õ≥µƒ ISA Õ¯ø®£¨÷µ±ÿ–ÎŒ™°∞ «°±°£
+°∞º¥≤Âº¥”√°±µƒ ISA Õ¯ø®≤ª±ª»œŒ™ «¥´Õ≥Õ¯ø®°£"
+
+	$CNTR2000_14 = "∑Ò"
+	$CNTR2000_15 = " «"
+
+LANG: 16
+;Chinese-Traditional
+     $CNTR2000_1 = "Novell Token-Ring"
+     $CNTR2000_2 = "•ª¶¯™Aæπ≈X∞ µ{¶° (CNTR2000.LAN) §‰¥© Novell NTR2000 LAN §∂≠±•d°C¶b§@≥° ISA ©Œ EISA ¶¯™Aæπ§W±z•i¶w∏À¶‹¶h 2 §˘∞O∏π¿Ù∫Ù∏Ù•d°C"
+     $CNTR2000_3 = "∞"
+     $CNTR2000_4 = "•D≠n LAN §∂≠±•d™∫∞¶Ïß}¨O A20 hex°C¥¿¥´™∫ LAN §∂≠±•d™∫∞¶Ïß}¨O A24 hex°C™`∑N°A∞£§F ISA ∂◊¨y±∆§W™∫¥¿¥´ LAN §∂≠±•d™∫RAM ¶Ïß}•H•~°A√ˆ©Û•ª LAN §∂≠±•d™∫•˛≥°∏Í∞T©Û´¸©w∞´·≥£•i±q§∂≠±•d§W≈™®˙°C"
+     $CNTR2000_5 = "¥°º—"
+     $CNTR2000_6 = "MCA §∂≠±•d™∫¥°º—∏πΩX¥£®—¶s®˙∏” PC ¥°º—≤’∫A∏Í∞T™∫≥~Æ|°C≈X∞ µ{¶°®œ•Œ¶π∏Í∞T®”≥]©w§∂≠±•d°C"
+     $CNTR2000_7 = "≈X∞ µ{¶°™∫πw≥]Æÿ¨[√˛´¨¨∞ Token-Ring (802.2)°Cµ¯±z®Û©wª›≠n™∫Æÿ¨[√˛´¨¶”©w°A±z•ißÔ≈‹¨∞ Token-Ring 802.2 SNAP°A©Œ¶PÆ…øÔæ‹®‚∫ÿ√˛´¨®√∏¸§J≈X∞ µ{¶°°C∞£´D±z≤M∑°ßÔ≈‹ MSB/LSB ∞—º∆™∫ºv≈T°Aß_´h§£≠n∞µ¶πßÔ≈‹°C"
+     $CNTR2000_8 = "∞O∏π¿Ù"
+     $CNTR2000_9 = "TOKEN-RING_SNAP"
+     $CNTR2000_10 = "Microdyne Token-Ring"
+     $CNTR2000_11 = "•ª¶¯™Aæπ≈X∞ µ{¶° (CNTR2000.LAN) §‰¥©  Microdyne NTR2000 LAN §∂≠±•d°C¶b§@≥° ISA ©Œ EISA ¶¯™Aæπ§W±z•i¶w∏À¶‹¶h 2 §˘∞O∏π¿Ù∫Ù∏Ù•d°C"
+
+	$CNTR2000_12 = "¶π∫Ù∏Ù•d¨Oß_¨∞ ISA ∫Ù∏Ù•d°H"
+	$CNTR2000_13 = "•≤∂∑≠n¶≥°u¨O°v™∫≠»•H§‰¥© legacy  ISA ™∫∫Ù∏Ù•d°C¿H¥°ßY•Œ™∫∫Ù∏Ù•d®√´D legacy ISA°C"
+
+	$CNTR2000_14 = "ß_"
+	$CNTR2000_15 = "¨O"
+
+LANG: 9
+;Japanese
+     $CNTR2000_1 = "Novell Token-Ring"
+     $CNTR2000_2 = "This server driver (CNTR2000.LAN) supports the Novell NTR2000
+LAN adapter.  You can install a maximum of two token ring network boards
+in an ISA or EISA server."
+     $CNTR2000_3 = "Port"
+     $CNTR2000_4 = "The port address for the primary LAN adapter is A20 hex; the
+port address for an alternate LAN adapter is A24 hex.  Note that all information
+for this LAN adapter can be read from the adapter once the port is given, except
+for an alternate LAN adapter's RAM address on an ISA bus."
+     $CNTR2000_5 = "Slot"
+     $CNTR2000_6 = "The slot number for the MCA adapter provides access to the
+PC's slot configuration information.  The driver uses this information to set
+up the card."
+     $CNTR2000_7 = "The driver defaults to the Token-Ring (802.2) frame type.
+Depending on the frame type your protocol requires, you can either change to
+Token-Ring 802.2 SNAP or choose both frame types and load the driver
+re-entrantly. Do not change the MSB/LSB parameter unless you are familiar with
+the effects of such a change."
+     $CNTR2000_8 = "TOKEN-RING"
+     $CNTR2000_9 = "TOKEN-RING_SNAP"
+     $CNTR2000_10 = "Microdyne Token-Ring"
+     $CNTR2000_11 = "This server driver (CNTR2000.LAN) supports the Microdyne
+NTR2000 LAN adapter.  You can install a maximum of two token ring network
+boards in an ISA or EISA server."
+
+	$CNTR2000_12 = "Is the card an ISA Card?"
+	$CNTR2000_13 = "A value of 'Yes' is necessary to support legacy ISA cards.
+Plug and Play ISA is not considered legacy ISA."
+
+	$CNTR2000_14 = "No"
+	$CNTR2000_15 = "Yes"
+

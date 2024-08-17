@@ -1,0 +1,176 @@
+; CNE2_32.LDI
+;
+; Novell NE2_32 Network Interface Cards.
+;
+; VeRsIoN=1.05 Novell LAN Installation Information File for CNE2_32.
+; CoPyRiGhT=(c)Copyright 1996, 1997, 1998, by Novell, Inc.  All rights reserved.
+
+VER: 1.05
+SYN: 1.00
+
+DR NOVELL_CNE2_32
+{
+     DES: $CNE2_32_1
+     HELP:     $CNE2_32_2
+     PAR: 2.00
+     PROD:     MCA.7151
+     FILE:     'CNE2_32.LAN'
+;@#  Sprod: 'Novell ~ NE2_32 or compatible'
+;@# CLIENT: CNE2_32, NE2_32
+;@# ALIAS: NE2_32.LAN
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1, 4
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+DR EAGLE_CNE2_32
+{
+     DES: $CNE2_32_3
+     HELP:     $CNE2_32_4
+     PAR: 2.00
+     PROD:     MCA.7151
+     FILE:     'CNE2_32.LAN'
+;@#  Sprod: 'EAGLE ~ NE2_32 or compatible'
+;@# CLIENT: CNE2_32, NE2_32
+;@# ALIAS: NE2_32.LAN
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 1, 2
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+
+DLANG:    4
+;English
+     $CNE2_32_1 =  "Novell Ethernet NE/2-32"
+     $CNE2_32_2 = "This driver (CNE2_32.LAN) supports a NE2-32 network board
+installed in MCA servers.  You can install up to four boards in a server."
+     $CNE2_32_3 =  "EAGLE NE/2-32"
+     $CNE2_32_4 = "This driver (CNE2_32.LAN) supports a EAGLE NE2-32 network board
+installed in MCA servers.  You can install up to four boards in a server."
+
+
+LANG: 6
+;French
+     $CNE2_32_1 =  "Ethernet NE/2-32 de Novell"
+     $CNE2_32_2 = "Ce pilote (CNE2_32.LAN) prend en charge
+ \nla carte rÇseau NE2-32 installÇe sur les
+ serveurs MCA. Vous pouvez installer
+ jusqu'Ö quatre cartes sur un serveur."
+     $CNE2_32_3 =  "EAGLE NE/2-32"
+     $CNE2_32_4 = "Ce pilote (CNE2_32.LAN) prend en charge
+ \nla carte rÇseau EAGLE NE2-32 installÇe
+ \nsur les serveurs MCA. Vous pouvez
+ installer jusqu'Ö quatre cartes sur un
+ serveur."
+
+
+LANG: 7
+;German
+     $CNE2_32_1 =  "Novell Ethernet NE/2-32"
+     $CNE2_32_2 = "Dieser Treiber (CNE2_32.LAN) unterstÅtzt eine NE2-32-Netzwerkkarte,
+die in MCA-Servern installiert ist. Sie kînnen bis zu vier Karten in einem Server installieren."
+     $CNE2_32_3 =  "EAGLE NE/2-32"
+     $CNE2_32_4 = "Dieser Treiber (CNE2_32.LAN) unterstÅtzt eine EAGLE NE2-32-Netzwerkkarte,
+die in MCA-Servern installiert ist. Sie kînnen bis zu vier Karten in einem Server installieren."
+
+
+LANG: 8
+;Italian
+     $CNE2_32_1 =  "Novell Ethernet NE/2-32"
+     $CNE2_32_2 = "Questo driver CNE2_32.LAN supporta la scheda di rete NE2-32
+installata sui server MCA. Si possono installare fino a quattro schede in un server."
+     $CNE2_32_3 =  "EAGLE NE/2-32"
+     $CNE2_32_4 = "Questo driver CNE2_32.LAN supporta la scheda di rete EAGLE NE2-32
+installata sui server MCA. Si possono installare fino a quattro schede in un server."
+
+
+LANG: 12
+;Portuguese
+     $CNE2_32_1 =  "Novell Ethernet NE/2-32"
+     $CNE2_32_2 = "Este driver (CNE2_32.LAN) suporta a placa de rede NE2-32
+instalada em servidores MCA. Vocà pode instalar atÇ quatro placas em um servidor."
+     $CNE2_32_3 =  "EAGLE NE/2-32"
+     $CNE2_32_4 = "Este driver (CNE2_32.LAN) suporta a placa de rede EAGLE NE2-32
+instalada em servidores MCA. Vocà pode instalar atÇ quatro placas em um servidor."
+
+
+LANG: 14
+;Spanish
+     $CNE2_32_1 =  "Novell Ethernet NE/2-32"
+     $CNE2_32_2 = "El controlador (CNE2_32.LAN) da soporte a la tarjeta de red NE2-32
+instalada en servidores MCA.  Puede instalar hasta cuatro tarjetas por servidor."
+     $CNE2_32_3 =  "EAGLE NE/2-32"
+     $CNE2_32_4 = "El controlador (CNE2_32.LAN) da soporte a la tarjeta de red EAGLE NE2-32
+instalada en servidores MCA.  Puede instalar hasta cuatro tarjetas por servidor."
+
+
+LANG: 1
+;Chinese-Simplified
+     $CNE2_32_1 =  "Novell Ethernet NE/2-32"
+     $CNE2_32_2 = "¥À«˝∂Ø≥Ã–Ú (CNE2_32.LAN) ÷ß≥÷∞≤◊∞‘⁄ MCA ∑˛ŒÒ∆˜÷–µƒ NE2-32 Õ¯¬Á∞Â°£ø…‘⁄“ª∏ˆ∑˛ŒÒ∆˜÷–∞≤◊∞∂‡¥ÔÀƒ∏ˆ∞Â°£"
+     $CNE2_32_3 =  "EAGLE NE/2-32"
+     $CNE2_32_4 = "¥À«˝∂Ø≥Ã–Ú (CNE2_32.LAN) ÷ß≥÷∞≤◊∞‘⁄ MCA ∑˛ŒÒ∆˜÷–µƒ EAGLE NE2-32 Õ¯¬Á∞Â°£ø…‘⁄“ª∏ˆ∑˛ŒÒ∆˜÷–∞≤◊∞∂‡¥ÔÀƒ∏ˆ∞Â°£"
+
+
+LANG: 16
+;Chinese-Traditional
+     $CNE2_32_1 =  "Novell Ethernet NE/2-32"
+     $CNE2_32_2 = "•ª≈X∞ µ{¶° (CNE2_32.LAN) §‰¥©¶w∏À¶b MCA ¶¯™Aæπ§W™∫ NE2-32 ∫Ù∏Ù•d°C¶b§@≥°¶¯™Aæπ§W±z•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+     $CNE2_32_3 =  "EAGLE NE/2-32"
+     $CNE2_32_4 = "•ª≈X∞ µ{¶° (CNE2_32.LAN) §‰¥©¶w∏À¶b MCA ¶¯™Aæπ§W™∫ EAGLE NE2-32 ∫Ù∏Ù•d°C¶b§@≥°¶¯™Aæπ§W±z•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+
+
+LANG: 9
+;Japanese
+     $CNE2_32_1 =  "Novell Ethernet NE/2-32"
+     $CNE2_32_2 = "This driver (CNE2_32.LAN) supports a NE2-32 network board
+installed in MCA servers.  You can install up to four boards in a server."
+     $CNE2_32_3 =  "EAGLE NE/2-32"
+     $CNE2_32_4 = "This driver (CNE2_32.LAN) supports a EAGLE NE2-32 network board
+installed in MCA servers.  You can install up to four boards in a server."
+
+

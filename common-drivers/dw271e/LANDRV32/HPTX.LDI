@@ -1,0 +1,497 @@
+
+;DrIvEr DeScRiPtIoN
+;VeRsIoN=1.30
+;CoPyRiGhT=(c)Copyright 1997-1998 by Hewlett-Packard Company.  All Rights Reserved.
+VER: 1.30
+SyntaxVersion: 1.00
+;- Internal Version 1.30
+
+;- File: HPTX.LDI
+;- HP 10/100TX PCI Ethernet Adapter Installation Information File
+
+   Driver HPTX
+   {
+      Description: $HPTX_1
+      Help: $HPTX_2
+      PAR: 2.00
+
+      Prod: 'PCI.8086.1229.103C.1200.*'
+      Prod: 'PCI.8086.1229.103C.10C0.*'
+      Prod: 'PCI.8086.1229.103C.10C3.*'
+      Prod: 'PCI.8086.1229.103C.*.*'
+      Prod: 'PCI.8086.1229.0000.0000.01'
+
+      ;@# Sprod:  'HP~HP NetServer 10/100TX PCI Ethernet Adapter',
+      ;@#         'HP~HP NetServer 10/100TX PCI Ethernet Adapter',
+      ;@#         'HP~HP NetServer 10/100TX PCI Ethernet Adapter',
+      ;@#         'HP~HP NetServer 10/100TX PCI Ethernet Adapter',
+      ;@#         'HP~HP NetServer 10/100TX PCI Ethernet Adapter'
+      ;@# Client: HPTXODI.COM, HPTX.LAN
+      ;@# Alias:  HPTX.LAN
+
+      File: HPTX.LAN
+
+      PROMPT    SLOT     OPTIONAL
+
+      {
+         Help:           $HPTX_3
+         Type:           DECIMAL (5)
+         Values:         1 - 65535
+         Default:        UNDEFINED
+      }
+
+      PROMPT     SPEED    OPTIONAL
+
+      {
+         Description:    "Speed"
+         Type:           DECIMAL (3)
+         Help:           $HPTX_4
+         Values:         0, 10, 100
+         Default:        0
+         Out:            'SPEED=%s'
+      }
+
+      PROMPT   FORCEDUPLEX   OPTIONAL
+
+      {
+         Description:    "Force Duplex"
+         Help:           $HPTX_5
+         Type:           DECIMAL (1)
+         Values:         0, 1, 2
+         Default:        0
+         Out:            'FORCEDUPLEX=%s'
+      }
+
+      PROMPT    IOMAPMODE    OPTIONAL
+
+      {
+         Description:    "IO Map Mode"
+         Help:           $HPTX_6
+         Type:           DECIMAL (1)
+         Values:         0, 1
+         Default:        0
+         Out:            'IOMAPMODE=%s'
+      }
+
+
+      FRAME   FrameSelect
+
+      {
+         Help:             $HPTX_7
+
+         CDescription:     $HPTX_8
+         Choice:           'Ethernet_802.3'
+
+         CDescription:     $HPTX_9
+         Choice:           'Ethernet_802.2'
+
+         CDescription:     $HPTX_10
+         Choice:           'Ethernet_SNAP'
+
+         CDescription:     $HPTX_11
+         Choice:           'Ethernet_II'
+
+         Default:          1,2,3,4
+
+      }
+
+   }
+
+DLANG: 4
+;English
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "This driver supports HP 10/100TX PCI Ethernet Adapters"
+
+       $HPTX_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $HPTX_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $HPTX_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $HPTX_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $HPTX_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default to select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11  = "HPTX E_II"
+
+LANG: 6
+;French
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "Ce pilote prend en charge les cartes r‚seau
+                                       HP 10/100TX PCI Ethernet Adapters"
+
+       $HPTX_3 = "Num‚ro d'emplacement de la carte.
+                          Pour les cartes PCI, il s'agit de l'emplacement
+                          du dispositif."
+
+       $HPTX_4 = "Annulation de d‚bit de ligne pour la carte.
+                          D‚sactive l'auton‚gotiation. Doit ˆtre forc‚e
+                          si le mode duplex est pr‚cis‚. Les options valides
+                          sont 0 (auto), 10 et 100."
+
+       $HPTX_5 = "Force le mode de fonctionnement duplex int‚gral.
+                          Le paramŠtre SPEED doit ˆtre pr‚cis‚ et valide
+                          pour ce mot-cl‚. Les options valides sont 0 (auto),
+                          1 (semi) et 2 (duplex)."
+
+       $HPTX_6 = "Force la carte … utiliser le mode de mappage E/S.
+                          Le mode par d‚faut est mappage m‚moire.
+                          Les options valides sont 0 (d‚faut) et 1."
+
+       $HPTX_7 = "Le pilote adopte par d‚faut le format de trame 802.2.
+                          Vous pouvez utiliser cette valeur par d‚faut ou
+                          s‚lectionner des 3 autres options
+                          => 802.3, Ethernet II et Ethernet SNAP."
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11  = "HPTX E_II"
+
+LANG: 7
+;German
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "Dieser Treiber untersttzt die folgenden
+                                       HP 10/100TX PCI Ethernet Adapters"
+
+       $HPTX_3 = "Steckplatznummer fr den Adapter.
+                          Bei PCI-Adaptern bezeichnet dies die Ger„teposition."
+
+       $HPTX_4 = "Die fr den Adapter vorrangige Leitungsgeschwindigkeit.
+                          Deaktiviert die automatische Absprache.
+                          Muá bei Angabe der Betriebsart Vollduplex
+                          festgelegt werden. Zul„ssige Optionen sind
+                          0 (Automatisch), 10 und 100."
+
+       $HPTX_5 = "Legen Sie die Betriebsart Vollduplex fest.
+                          SPEED muá fr dieses Schlsselwort festgelegt
+                          und zul„ssig sein. Zul„ssige Optionen sind
+                          0 (Automatisch), 1 (HALBDUPLEX), 2 (DUPLEX)."
+
+       $HPTX_6 = "Legen Sie fest, daá der Treiber die der E/A zugeordnete
+                          Betriebsart verwendet. Die Standardbetriebsart ist
+                          speicherbezogen. Zul„ssige Optionen sind
+                          0 (STANDARD) und 1."
+
+       $HPTX_7 = "Standardm„áig wird fr den Treiber das Rahmenformat 802.2
+                          eingestellt. Sie k”nnen diese Standardeinstellung
+                          bentzen oder von den anderen drei Optionen w„hlen
+                          => 802.3, Ethernet II oder Ethernet SNAP."
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11  = "HPTX E_II"
+
+LANG: 8
+;Italian
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "Questo driver supporta i seguenti adattatori
+                                       HP 10/100TX PCI Ethernet Adapters"
+
+       $HPTX_3 = "Numero slot per l'adattatore.
+                          Per gli adattatori PCI, si riferisce alla posizione
+                          del dispositivo."
+
+       $HPTX_4 = "Superamento della velocit… di linea per l'adattatore.
+                          Disabilita l'autonegoziazione. Deve essere forzata
+                          se viene specificata la modalit… duplex.
+                          Opzioni valide sono 0 (Auto), 10 o 100."
+
+       $HPTX_5 = "Forzare la modalit… di funzionamento a Full duplex.
+                          La VELOCITA' deve essere specificata e valida per
+                          la parola chiave. Opzioni valide sono
+                          0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $HPTX_6 = "Forzare il driver ad usare la modalit… mappata di I/O.
+                          La modalit… predefinita Š mappata in memoria.
+                          Opzioni valide sono 0 (DEFAULT) o 1."
+
+       $HPTX_7 = "Il driver Š impostato per default al formato frame 802.2.
+                          Utilizzare il valore predefinito oppure scegliere
+                          dalle altre 3 opzioni => 802.3, Ethernet II e
+                          Ethernet SNAP."
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11  = "HPTX E_II"
+
+LANG: 14
+;Spanish
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "Este controlador admite los siguientes adaptadores
+                                       HP 10/100TX PCI Ethernet Adapters"
+
+       $HPTX_3 = "N£mero de ranura para el adaptador.
+                          Para adaptadores PCI, se refiere a la ubicaci¢n
+                          del dispositivo."
+
+       $HPTX_4 = "Alteraci¢n de velocidad de l¡nea para el adaptador.
+                          Anula la negociaci¢n autom tica. Debe forzarse si
+                          se especifica el modo d£plex.
+                          Las opciones v lidas son 0 (autom tico), 10 o 100."
+
+       $HPTX_5 = "Fuerza el modo de operaci¢n a d£plex completo.
+                          Debe especificarse un valor para SPEED que sea
+                          v lido para esta palabra clave. Las opciones v lidas
+                          son 0 (autom tico), 1 (medio), 2 (completo)."
+
+       $HPTX_6 = "Fuerza el controlador a utilizar el modo asignado de E/S.
+                          El modo predeterminado es asignado de acuerdo
+                          con la memoria. Las opciones v lidas son
+                          0 (PREDETERMINADO) o 1"
+
+       $HPTX_7 = "El controlador tiene el valor predeterminado de formato
+                          de trama 802.2. Puede utilizar este valor
+                          predeterminado o seleccionar de las otras 3
+                          opciones => 802.3, Ethernet II y Ethernet SNAP."
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11  = "HPTX E_II"
+
+LANG: 9
+;Japanese
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "‚±‚ÌLANƒhƒ‰ƒCƒo‚ÍAˆÈ‰º‚Ì
+                         HP 10/100TX PCI Ethernet Adapters\n"
+
+       $HPTX_3 = "ƒAƒ_ƒvƒ^‚ÌƒXƒƒbƒg”Ô†B
+                         PCI ƒAƒ_ƒvƒ^‚Å‚ÍAƒfƒoƒCƒXEƒƒP[ƒVƒ‡ƒ“‚ðŽ¦‚µ‚Ü‚·B"
+
+       $HPTX_4 = "ƒAƒ_ƒvƒ^‚Ì’ÊM‘¬“xŽæÁBŽ©“®”FŽ¯‚ð–³Œø‚É‚µ‚Ü‚·B
+                          ƒfƒ…ƒvƒŒƒbƒNƒXƒ‚[ƒhŽw’èŽž‚ÍA•K‚¸Žw’è‚µ‚Ä‚­‚¾‚³‚¢B
+                          —LŒø‚È’l‚Í 0(Ž©“®), 10 ‚Ü‚½‚Í 100 ‚Å‚·B"
+
+       $HPTX_5 = "‹­§“I‚É‘S“ñdƒ‚[ƒh‚ðÝ’è‚µ‚Ü‚·B
+                          [Speed]‚ð•K‚¸Žw’è‚µ‚ÄA‚±‚ÌƒL[ƒ[ƒh‚ð—LŒø‚É‚µ‚Ä‚­‚¾‚³‚¢B
+                          —LŒø‚È’l‚Í 0(Ž©“®”FŽ¯), 1(”¼“ñd), 2(‘S“ñd) ‚Å‚·B"
+
+       $HPTX_6 = "ƒhƒ‰ƒCƒo‚ðI/Oƒ}ƒbƒvEƒ‚[ƒh‚ÅŽg—p‚µ‚Ü‚·B
+                          ƒfƒtƒHƒ‹ƒg‚ÍAƒƒ‚ƒŠ[ƒ}ƒbƒvEƒ‚[ƒh‚Å‚·B
+                          —LŒø‚È’l‚Í 0(ƒfƒtƒHƒ‹ƒg) ‚Ü‚½‚Í 1 ‚Å‚·B"
+
+       $HPTX_7 = "ƒfƒtƒHƒ‹ƒg‚ÌƒtƒŒ[ƒ€EƒtƒH[ƒ}ƒbƒg‚ÍA802.2‚Å‚·B
+                            ‚±‚Ì‘¼‚ÉƒIƒvƒVƒ‡ƒ“‚Æ‚µ‚ÄA802.3AEthernet II‚¨‚æ‚ÑEthernet SNAP
+                            ‚ÌƒtƒŒ[ƒ€EƒtƒH[ƒ}ƒbƒg‚ªŽg—p‚Å‚«‚Ü‚·B"
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11 = "HPTX E_II"
+
+LANG:   12
+;Portugese
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "This driver supports HP 10/100TX PCI Ethernet Adapters"
+
+       $HPTX_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $HPTX_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $HPTX_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $HPTX_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $HPTX_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default to select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11  = "HPTX E_II"
+
+LANG:   10
+;Korean
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "This driver supports HP 10/100TX PCI Ethernet Adapters"
+
+       $HPTX_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $HPTX_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $HPTX_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $HPTX_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $HPTX_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default to select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11  = "HPTX E_II"
+
+LANG:   1
+;Chinese (simplified)
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "This driver supports HP 10/100TX PCI Ethernet Adapters"
+
+       $HPTX_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $HPTX_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $HPTX_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $HPTX_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $HPTX_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default to select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11  = "HPTX E_II"
+
+LANG:   16
+;Chinese (traditional)
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "This driver supports HP 10/100TX PCI Ethernet Adapters"
+
+       $HPTX_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $HPTX_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $HPTX_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $HPTX_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $HPTX_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default to select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11  = "HPTX E_II"
+
+LANG:   13
+;Russian
+
+       $HPTX_1 = "HP 10/100TX PCI Ethernet Adapter"
+
+       $HPTX_2 = "This driver supports HP 10/100TX PCI Ethernet Adapters"
+
+       $HPTX_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $HPTX_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $HPTX_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $HPTX_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $HPTX_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default to select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $HPTX_8 = "HPTX 802.3"
+
+       $HPTX_9 = "HPTX 802.2"
+
+       $HPTX_10 = "HPTX SNAP"
+
+       $HPTX_11  = "HPTX E_II"
+
+;DrIvEr DeScRiPtIoN EnD

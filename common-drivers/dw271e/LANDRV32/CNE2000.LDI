@@ -1,0 +1,863 @@
+; CNE2000.LDI
+;
+; Novell NE2000 Network Interface Cards.
+;
+; VeRsIoN=1.07 Novell LAN Installation Information File for CNE2000.
+; CoPyRiGhT=(c)Copyright 1996, 1997, 1998, by Novell, Inc.  All rights reserved.
+
+
+VER: 1.07
+SYN: 1.00
+
+DR NOVELL_CNE2000
+{
+     DES:   $CNE2000_1
+     HELP:   $CNE2000_2
+     PAR: 1.00
+     FILE:     CNE2000.LAN
+     PROD:     'EISA.ISA.871.2', 'EISA.NVL.150.1'
+;@#  Sprod: 'Novell ~ NE2000 or NE2000 Plus',
+;@#         'Novell/Anthem ~ NE2000 or compatible'
+;@# CLIENT: CNE2000
+;@# ALIAS: NE2000.LAN
+
+	LIST Adapter_Bus_Type OPTIONAL
+	{
+		Description:	$CNE2000_15
+		Help:		$CNE2000_16
+
+		CDescription:	$CNE2000_17
+		Choice:		''
+		CDescription:	$CNE2000_18
+		Choice:		'ISA'
+
+		Default:	1
+		OutputFormat:	'%s'
+	}
+
+
+     PR SLOT
+	IF ((BUS == ISA) OR (BUS == EISA)) HID
+	ELSE REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR INT
+	IF ((BUS == ISA) OR (BUS == EISA)) REQ
+	ELSE HID
+     {
+          VAL: 2, 3, 4, 5, A, B, C, F
+        TYP:  HEX(1)
+          DEF: 3
+        }
+
+     PR PORT
+	IF ((BUS == ISA) OR (BUS == EISA)) REQ
+	ELSE HID
+     {
+          VAL: 300, 320, 340, 360, 240, 280, 2C0
+          DEF: 300
+          RES: 20
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,4
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+     PR MEM
+	IF ((BUS == ISA) OR (BUS == EISA)) OPT
+	ELSE HID
+     {
+          VAL: D0000,D4000,D8000,DC000,C0000,C4000,C8000,CC000,E00000,E20000,E40000,E60000,E80000,EA0000,EC0000,EE0000,F00000,F20000,F40000,F60000,F80000,FA0000,FC0000,FE0000
+          DEF: UNDEFINED
+          RES: 400
+     }
+
+
+}
+
+DR EAGLE_CNE2000
+{
+     DES:   $CNE2000_3
+     HELP:   $CNE2000_4
+     PAR: 1.00
+     FILE:     CNE2000.LAN
+     PROD:     'EISA.ISA.871.2', 'EISA.NVL.150.1'
+;@#  Sprod: 'EAGLE ~ NE2000',
+;@#         'EAGLE ~ NE2000 or compatible'
+;@# CLIENT: CNE2000
+;@# ALIAS: NE2000.LAN
+
+	LIST Adapter_Bus_Type OPTIONAL
+	{
+		Description:	$CNE2000_15
+		Help:		$CNE2000_16
+
+		CDescription:	$CNE2000_17
+		Choice:		''
+		CDescription:	$CNE2000_18
+		Choice:		'ISA'
+
+		Default:	1
+		OutputFormat:	'%s'
+	}
+
+     PR SLOT
+	IF ((BUS == ISA) OR (BUS == EISA)) HID
+	ELSE REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR INT
+	IF ((BUS == ISA) OR (BUS == EISA)) REQ
+	ELSE HID
+     {
+          VAL: 2, 3, 4, 5, A, B, C, F
+        TYP:  HEX(1)
+          DEF: 3
+        }
+
+     PR PORT
+	IF ((BUS == ISA) OR (BUS == EISA)) REQ
+	ELSE HID
+     {
+          VAL: 300, 320, 340, 360, 240, 280, 2C0
+          DEF: 300
+          RES: 20
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 1,2
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+     PR MEM
+	IF ((BUS == ISA) OR (BUS == EISA)) OPT
+	ELSE HID
+
+     {
+          VAL: D0000,D4000,D8000,DC000,C0000,C4000,C8000,CC000,E00000,E20000,E40000,E60000,E80000,EA0000,EC0000,EE0000,F00000,F20000,F40000,F60000,F80000,FA0000,FC0000,FE0000
+          DEF: UNDEFINED
+          RES: 400
+     }
+
+
+}
+
+DR MICRODYNE_CNE2000
+{
+     DES:   $CNE2000_5
+     HELP:   $CNE2000_6
+     PAR: 1.00
+     FILE:     CNE2000.LAN
+     PROD:    'EISA.ISA.871.2', 'EISA.NVL.150.1'
+;@#  Sprod: 'Microdyne ~ NE2000 or NE2000 Plus',
+;@#         'Microdyne ~ NE2000 or compatible'
+;@# CLIENT: CNE2000
+;@# ALIAS: NE2000.LAN
+
+	LIST Adapter_Bus_Type OPTIONAL
+	{
+		Description:	$CNE2000_15
+		Help:		$CNE2000_16
+
+		CDescription:	$CNE2000_17
+		Choice:		''
+		CDescription:	$CNE2000_18
+		Choice:		'ISA'
+
+		Default:	1
+		OutputFormat:	'%s'
+	}
+
+     PR SLOT
+	IF ((BUS == ISA) OR (BUS == EISA)) HID
+	ELSE REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR INT
+	IF ((BUS == ISA) OR (BUS == EISA)) REQ
+	ELSE HID
+     {
+          VAL: 2, 3, 4, 5, A, B, C, F
+        TYP:  HEX(1)
+          DEF: 3
+        }
+
+     PR PORT
+	IF ((BUS == ISA) OR (BUS == EISA)) REQ
+	ELSE HID
+     {
+          VAL: 300, 320, 340, 360, 240, 280, 2C0
+          DEF: 300
+          RES: 20
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 1,2
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+     PR MEM
+	IF ((BUS == ISA) OR (BUS == EISA)) OPT
+	ELSE HID
+
+     {
+          VAL: D0000,D4000,D8000,DC000,C0000,C4000,C8000,CC000,E00000,E20000,E40000,E60000,E80000,EA0000,EC0000,EE0000,F00000,F20000,F40000,F60000,F80000,FA0000,FC0000,FE0000
+          DEF: UNDEFINED
+          RES: 400
+     }
+
+}
+
+DR NATIONAL_CNE2000
+
+{
+     DES:   $CNE2000_7
+     HELP:   $CNE2000_8
+     PAR: 1.00
+     FILE:     CNE2000.LAN
+     PROD:     'EISA.ISA.871.2', 'EISA.NVL.150.1'
+;@#  Sprod: 'National ~ NE2000 or NE2000 Plus',
+;@#         'National ~ NE2000 or compatible'
+;@# CLIENT: CNE2000
+;@# ALIAS: NE2000.LAN
+
+	LIST Adapter_Bus_Type OPTIONAL
+	{
+		Description:	$CNE2000_15
+		Help:		$CNE2000_16
+
+		CDescription:	$CNE2000_17
+		Choice:		''
+		CDescription:	$CNE2000_18
+		Choice:		'ISA'
+
+		Default:	1
+		OutputFormat:	'%s'
+	}
+
+     PR SLOT
+	IF ((BUS == ISA) OR (BUS == EISA)) HID
+	ELSE REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR INT
+	IF ((BUS == ISA) OR (BUS == EISA)) REQ
+	ELSE HID
+     {
+          VAL: 2, 3, 4, 5, A, B, C, F
+        TYP:  HEX(1)
+          DEF: 3
+        }
+
+     PR PORT
+	IF ((BUS == ISA) OR (BUS == EISA)) REQ
+	ELSE HID
+     {
+          VAL: 300, 320, 340, 360, 240, 280, 2C0
+          DEF: 300
+          RES: 20
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 1,2
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+     PR MEM
+	IF ((BUS == ISA) OR (BUS == EISA)) OPT
+	ELSE HID
+
+     {
+          VAL: D0000,D4000,D8000,DC000,C0000,C4000,C8000,CC000,E00000,E20000,E40000,E60000,E80000,EA0000,EC0000,EE0000,F00000,F20000,F40000,F60000,F80000,FA0000,FC0000,FE0000
+          DEF: UNDEFINED
+          RES: 400
+     }
+
+}
+
+DR IBM_CNE4100
+{
+     DES:   $CNE2000_9
+     HELP:   $CNE2000_10
+     PAR: 2.00
+     FILE:     CNE2000.LAN
+     PROD:     'PCMCIA.008f.2A07'
+;@#  Sprod: 'IBM ~ Ethernet Credit Card Adapter II'
+;@# CLIENT: CNE2000
+;@# ALIAS: NE2000.LAN
+
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,4
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+DR NOVELL_CNE4100
+{
+     DES:   $CNE2000_11
+     HELP:   $CNE2000_12
+     PAR: 2.00
+     FILE:     CNE2000.LAN
+     PROD:     'PCMCIA.00A4.0002'
+;@#  Sprod: 'Novell ~ NE4100'
+;@# CLIENT: CNE2000
+;@# ALIAS: NE2000.LAN
+
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,4
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+DR NATIONAL_CNE4100
+
+{
+     DES:   $CNE2000_13
+     HELP:   $CNE2000_14
+     PAR: 2.00
+     FILE:     CNE2000.LAN
+     PROD:     'PCMCIA.00A4.0002'
+;@#  Sprod: 'National ~ NE4100 Info Mover'
+;@# CLIENT: CNE2000
+;@# ALIAS: NE2000.LAN
+
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 1,2
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+
+DLANG:    4
+;English
+     $CNE2000_1 = "Novell Ethernet NE2000"
+     $CNE2000_2 = "This driver (CNE2000.LAN) supports NE2000 or NE2000T network
+boards installed in 16-bit expansion slots in ISA servers. It also supports
+the NE4100 PCMCIA Ethernet Adapter.  You can install up to four boards, as
+long as their settings do not conflict."
+     $CNE2000_3 = "EAGLE NE2000"
+     $CNE2000_4 = "This driver (CNE2000.LAN) supports EAGLE NE2000, NE2000PLUS,
+NE2000PLUS T, NE2000PLUS 3 network boards installed in 16-bit expansion slots
+in ISA servers. You can install up to four boards, as long as their settings
+do not conflict."
+     $CNE2000_5 = "MICRODYNE NE2000"
+     $CNE2000_6 = "This driver (CNE2000.LAN) supports MICRODYNE NE2000,
+NE2000PLUS, NE2000PLUS T, NE2000PLUS 3 network boards installed in 16-bit
+expansion slots in ISA servers. You can install up to four boards, as long as
+their settings do not conflict."
+     $CNE2000_7 = "National Semiconductor NE2000 InfoMover"
+     $CNE2000_8 = "This driver (CNE2000.LAN) supports National Semiconductor
+NE2000 or NE2000T network boards installed in 16-bit expansion slots in ISA
+servers. It also supports the NE4100 PCMCIA Ethernet Adapter.  You can
+install up to four boards, as long as their settings do not conflict."
+     $CNE2000_9 = "IBM Ethernet Credit Card Adapter II"
+     $CNE2000_10 = "This driver (CNE2000.LAN) supports IBM Ethernet Credit
+Card Adapter II (PCMCIA device).  You can install up to four boards, as
+long as their settings do not conflict."
+     $CNE2000_11 = "Novell Ethernet NE4100"
+     $CNE2000_12 = "This driver (CNE2000.LAN) supports the NE4100 PCMCIA
+Ethernet Adapter.  You can install up to four boards, as long as their
+settings do not conflict."
+     $CNE2000_13 = "National Semiconductor NE4100 InfoMover"
+     $CNE2000_14 = "This driver (CNE2000.LAN) supports National Semiconductor
+NE4100 PCMCIA Ethernet Adapter.It also supports the NE4100 PCMCIA Ethernet
+Adapter.  You can install up to four boards, as long as their settings do
+not conflict."
+
+     $CNE2000_15 = "Is the card an ISA Card?"
+     $CNE2000_16 = "A value of 'Yes' is necessary to support legacy ISA cards.
+Plug and Play ISA is not considered legacy ISA."
+
+     $CNE2000_17 = "No"
+     $CNE2000_18 = "Yes"
+
+LANG: 6
+;French
+     $CNE2000_1 = "Ethernet NE2000 de Novell"
+     $CNE2000_2 = "Ce pilote (CNE2000.LAN) prend en charge
+ les cartes rÇseau NE2000 ou NE2000T
+installÇes sur des connecteurs d'expension 
+de 16 octets sur des serveurs ISA.
+\nIl prend aussi en charge l'adaptateur
+ Ethernet NE4100 PCMCIA. Vous pouvez
+\ninstaller jusqu'Ö quatre cartes tant que
+ leurs configurations n'entrent pas en
+ conflit."
+     $CNE2000_3 = "EAGLE NE2000"
+     $CNE2000_4 = "Ce pilote (CNE2000.LAN) supporte les
+ cartes rÇseau EAGLE NE2000, NE2000PLUS,
+ NE2000PLUS T, NE2000PLUS 3 installÇes
+\ndans des connecteurs d'extension 16 bits
+ sur des serveurs ISA. Vous pouvez
+ installer  jusqu'Ö quatre cartes, tant
+\nque leurs dÇfinitions n'entrent pas en
+ conflit."
+     $CNE2000_5 = "MICRODYNE NE2000"
+     $CNE2000_6 = "Ce pilote (CNE2000.LAN) supporte les
+ cartes rÇseau MICRODYNE NE2000,
+ NE2000PLUS, NE2000PLUS T, NE2000PLUS 3
+installÇes dans des connecteurs
+ d'extension 16 bits sur des serveurs ISA.
+ Vous pouvez installer jusqu'Ö quatre
+ cartes, tant que leurs dÇfinitions
+ n'entrent pas en conflit."
+     $CNE2000_7 = "National Semiconductor NE2000 InfoMover"
+     $CNE2000_8 = "Ce pilote (CNE2000.LAN) prend en charge
+ les semi-conducteurs nationaux NE2000 ou
+ NE2000T installÇes dans des connecteurs
+  16 octets sur des serveurs ISA. Il prend
+ aussi en charge l'adaptateur Ethernet
+ NE4100 PCMCIA. Vous pouvez installer
+ jusqu'Ö quatre cartes tant que leurs
+ configurations n'entrent pas en conflit."
+     $CNE2000_9 = "Adaptateur de carte de crÇdit Ethernet II IBM"
+     $CNE2000_10 = "Ce pilote (CNE2000.LAN) prend en charge
+ l'adaptateur de carte de crÇdit Ethernet
+ II IBM (pÇriphÇrique PCMCIA). Vous pouvez
+ installer jusqu'Ö  quatre cartes tant que
+ leurs configurations n'entrent pas en
+ conflit."
+     $CNE2000_11 = "Ethernet NE4100 de Novell"
+     $CNE2000_12 = "Ce pilote (CNE2000.LAN) prend en charge
+ l'adaptateur Ethernet NE4100 PCMCIA. Vous
+ pouvez installer jusqu'Ö quatre cartes
+ tant que leurs configurations n'entrent
+ pas en conflit."
+     $CNE2000_13 = "National Semiconductor NE4100 InfoMover"
+     $CNE2000_14 = "Ce pilote (CNE2000.LAN) prend en charge
+ l'adaptateur Ethernet National
+ Semiconductor NE4100 PCMCIA. Il prend
+ aussi en charge l'adaptateur Ethernet
+ NE4100 PCMCIA. Vous pouvez installer
+ jusqu'Ö quatre cartes tant que leurs
+ configurations n'entrent pas en conflit."
+
+     $CNE2000_15 = "Cette carte est-elle une carte ISA ?"
+     $CNE2000_16 = "Choisissez 'Oui' pour prendre en charge
+ les cartes Legacy ISA. Les cartes Plug
+ \nand Play ISA ne sont pas considÇrÇes
+ \ncomme cartes Legacy ISA."
+
+     $CNE2000_17 = "Non"
+     $CNE2000_18 = "Oui"
+
+LANG: 7
+;German
+     $CNE2000_1 = "Novell Ethernet NE2000"
+     $CNE2000_2 = "Dieser Treiber (CNE2000.LAN) unterstÅtzt NE2000 oder NE2000T Netzwerkkarten,
+die in 16-Bit-ErweiterungssteckplÑtzen in ISA-Servern installiert sind. Er unterstÅtzt auch
+den NE4100 PCMCIA Ethernet-Adapter. Sie kînnen bis zu vier Karten installieren, solange
+ihre Einstellungen nicht miteinander in Konflikt stehen."
+     $CNE2000_3 = "EAGLE NE2000"
+     $CNE2000_4 = "Dieser Treiber (CNE2000.LAN) unterstÅtzt in 16-bit-
+ErweiterungssteckplÑtze auf ISA-Servern installierte 
+EAGLE NE2000-, NE2000PLUS-, NE2000PLUS T-, NE2000PLUS 
+3-Netzwerkkarten. Sie kînnen bis zu vier Karten installieren,
+solange ihre Einstellungen nicht miteinander in Konflikt stehen."
+     $CNE2000_5 = "MICRODYNE NE2000"
+     $CNE2000_6 = "Dieser Treiber (CNE2000.LAN) unterstÅtzt in 16-bit-
+ErweiterungssteckplÑtze auf ISA-Servern installierte MICRODYNE
+NE2000-, NE2000PLUS-, NE2000PLUS T-, NE2000PLUS 3-Netzwerkkarten.
+Sie kînnen bis zu vier Karten installieren, solange ihre Einstellungen
+nicht miteinander in Konflikt stehen."
+     $CNE2000_7 = "National Semiconductor NE2000 InfoMover"
+     $CNE2000_8 = "Dieser Treiber (CNE2000.LAN) unterstÅtzt National Semiconductor
+NE2000 oder NE2000T-Netzwerkkarten, die in 16-Bit-ErweiterungssteckplÑtzen in ISA-
+Servern installiert sind. Er unterstÅtzt auch den NE4100 PCMCIA Ethernet-Adapter. Sie kînnen
+bis zu vier Karten installieren, solange ihre Einstellungen nicht miteinander in Konflikt stehen."
+     $CNE2000_9 = "IBM Ethernet-Kreditkarten-Adapter II"
+     $CNE2000_10 = "Dieser Treiber (CNE2000.LAN) unterstÅtzt den IBM Ethernet-Kredit-
+karten-Adapter II (PCMCIA-GerÑt). Sie kînnen bis zu vier Karten
+installieren, solange ihre Einstellungen nicht miteinander
+in Konflikt stehen."
+     $CNE2000_11 = "Novell Ethernet NE4100"
+     $CNE2000_12 = "Dieser Treiber (CNE2000.LAN) unterstÅtzt den NE4100 PCMCIA
+Ethernet-Adapter. Sie kînnen bis zu vier Karten installieren,
+solange ihre Einstellungen nicht miteinander in Konflikt stehen."
+     $CNE2000_13 = "National Semiconductor NE4100 InfoMover"
+     $CNE2000_14 = "Dieser Treiber (CNE2000.LAN) unterstÅtzt National Semiconductor
+NE4100 PCMCIA Ethernet-Adapter. Er unterstÅtzt auch
+den NE4100 PCMCIA Ethernet-Adapter. Sie kînnen bis zu vier 
+Karten installieren, solange ihre Einstellungen nicht 
+miteinander in Konflikt stehen."
+
+     $CNE2000_15 = "Ist die Karte eine ISA-Karte?"
+     $CNE2000_16 = "Die Auswahl 'Ja' ist fÅr die UnterstÅtzung der Legacy-ISA-Karten erforderlich.
+Plug Play-ISA ist keine Legacy-ISA."
+
+     $CNE2000_17 = "Nein"
+     $CNE2000_18 = "Ja"
+
+LANG: 8
+;Italian
+     $CNE2000_1 = "Novell Ethernet NE2000"
+     $CNE2000_2 = "Questo driver CNE2000.LAN supporta schede di rete NE2000 o NE2000T
+installate in slot di espansione da 16 bit nei server ISA. Supporta anche l'adattatore Ethernet
+NE4100 PCMCIA. Si possono installare fino a quattro schede,
+a condizione che le loro impostazioni non siano in conflitto."
+     $CNE2000_3 = "EAGLE NE2000"
+     $CNE2000_4 = "Questo driver CNE2000.LAN supporta le schede di rete
+EAGLE NE2000, NE2000PLUS, NE2000PLUS T, NE2000PLUS 3 installate
+in slot di espansione da 16 bit in server ISA. E' possibile installare
+fino a quattro schede, a condizione che le loro impostazioni
+non siano in conflitto."
+     $CNE2000_5 = "MICRODYNE NE2000"
+     $CNE2000_6 = "Il driver CNE2000.LAN supporta le schede di rete
+MICRODYNE NE2000, NE2000PLUS, NE2000PLUS T, NE2000PLUS 3
+installate in slot di espansione da 16 bit in server ISA.
+E' possibile installare fino a quattro schede, a condizione che
+le loro impostazioni non siano in conflitto."
+     $CNE2000_7 = "National Semiconductor NE2000 InfoMover"
+     $CNE2000_8 = "Questo driver CNE2000.LAN supporta schede di rete National Semiconductor
+NE2000 o NE2000T installate in slot di espansione da 16 bit nei server ISA.
+Supporta anche l'adattatore Ethernet NE4100 PCMCIA. Si possono installare
+fino a quattro schede, a condizione che le loro impostazioni non siano in
+conflitto."
+     $CNE2000_9 = "IBM Ethernet Credit Card Adapter II"
+     $CNE2000_10 = "Questo driver CNE2000.LAN supporta IBM Ethernet Credit Card Adapter II
+(dispositivo PCMCIA). Si possono installare fino a quattro schede,
+a condizione che le loro impostazioni non siano in conflitto."
+     $CNE2000_11 = "Novell Ethernet NE4100"
+     $CNE2000_12 = "Questo driver CNE2000.LAN supporta l'adattatore Ethernet
+NE4100 PCMCIA. Si possono installare fino a quattro schede,
+a condizione che le loro impostazioni non siano in conflitto."
+     $CNE2000_13 = "National Semiconductor NE4100 InfoMover"
+     $CNE2000_14 = "Questo driver CNE2000.LAN supporta l'adattatore Ethernet
+NE4100 PCMCIA di National Semiconductor. Supporta anche l'adattatore Ethernet
+
+NE4100 PCMCIA. Si possono installare fino a quattro schede,
+a condizione che le loro impostazioni
+non siano in conflitto."
+
+     $CNE2000_15 = "E' una scheda ISA?"
+     $CNE2000_16 = "Per poter supportare le schede ISA precedenti occorre usare il valore 'Sç'.
+Le schede ISA Plug and Play non appartengono a questa categoria."
+
+     $CNE2000_17 = "No"
+     $CNE2000_18 = "Sç"
+
+LANG: 12
+;Portuguese
+     $CNE2000_1 = "Novell Ethernet NE2000"
+     $CNE2000_2 = "Este driver (CNE2000.LAN) suporta as placas de rede NE2000 ou NE2000T
+ instaladas em slots de expans∆o de 16 bits em servidores ISA. TambÇm suporta
+ o adaptador Ethernet PCMCIA NE4100. Vocà pode instalar atÇ quatro placas, desde
+que suas configuraá‰es n∆o estejam em conflito."
+     $CNE2000_3 = "EAGLE NE2000"
+     $CNE2000_4 = "Este driver (CNE2000.LAN) suporta placas de rede EAGLE NE2000, NE2000PLUS,
+NE2000PLUS T, NE2000PLUS 3 instaladas em slots de expans∆o de 16 bits
+em servidores ISA. Vocà pode instalar atÇ quatro placas, desde que as configuraá‰es
+n∆o entrem em conflito."
+     $CNE2000_5 = "MICRODYNE NE2000"
+     $CNE2000_6 = "Este driver (CNE2000.LAN) suporta placas de rede MICRODYNE NE2000,
+NE2000PLUS, NE2000PLUS T, NE2000PLUS 3 instaladas em slots de expans∆o de 16 bits
+em servidores ISA. Vocà pode instalar atÇ quatro placas, desde que
+as configuraá‰es n∆o entrem em conflito."
+     $CNE2000_7 = "National Semiconductor NE2000 InfoMover"
+     $CNE2000_8 = "Este driver (CNE2000.LAN) suporta as placas de rede National Semiconductor
+NE2000 ou NE2000T instaladas em slots de expans∆o de 16 bits em servidores ISA.
+ TambÇm suporta o Adaptador Ethernet PCMCIA NE4100. Vocà pode
+instalar atÇ quatro placas, desde que suas configuraá‰es n∆o estejam em conflito."
+     $CNE2000_9 = "IBM Ethernet Credit Card Adapter II"
+     $CNE2000_10 = "Este driver (CNE2000.LAN) suporta o Adaptador IBM Ethernet Credit
+Card Adapter II (dispositivo PCMCIA). Vocà pode instalar atÇ quatro placas, desde
+que suas configuraá‰es n∆o estejam em conflito."
+     $CNE2000_11 = "Novell Ethernet NE4100"
+     $CNE2000_12 = "Este driver (CNE2000.LAN) suporta o Adaptador Ethernet PCMCIA NE4100
+. Vocà pode instalar atÇ quatro placas, desde que suas
+configuraá‰es n∆o estejam em conflito."
+     $CNE2000_13 = "National Semiconductor NE4100 InfoMover"
+     $CNE2000_14 = "Este driver (CNE2000.LAN) suporta o Adaptador Ethernet PCMCIA National Semiconductor
+NE4100.TambÇm suporta o Adaptador Ethernet PCMCIA NE4100
+. Vocà pode instalar atÇ quatro placas, desde que suas configuraá‰es n∆o
+estejam em conflito."
+
+     $CNE2000_15 = "A placa Ç do tipo ISA?"
+     $CNE2000_16 = "Um valor 'Sim' Ç necess†rio para suportar as placas Legacy ISA.
+As placas ISA Plug and Play n∆o s∆o consideradas como Legacy ISA."
+
+     $CNE2000_17 = "N∆o"
+     $CNE2000_18 = "Sim"
+
+LANG: 14
+;Spanish
+     $CNE2000_1 = "Novell Ethernet NE2000"
+     $CNE2000_2 = "El controlador (CNE2000.LAN) da soporte a tarjetas de redes
+NE2000 o NE2000T instaladas en ranuras de expansi¢n de 16 bits en servidores ISA.
+TambiÇn da soporte al Adaptador PCMCIA Ethernet de NE4100.  Puede instalar
+hasta cuatro tarjetas siempre y cuando sus configuraciones no produzcan conflicto."
+     $CNE2000_3 = "EAGLE NE2000"
+     $CNE2000_4 = "Este controlador (CNE2000.LAN) ofrece soporte a las tarjetas de red
+EAGLE NE2000, NE2000PLUS, NE2000PLUS T, NE2000PLUS 3 instaladas en las
+ranuras de expansi¢n de 16 bits de los servidores ISA. Se pueden 
+instalar hasta cuatro tarjetas siempre y cuando sus configuraciones no
+produzcan conflictos."
+     $CNE2000_5 = "MICRODYNE NE2000"
+     $CNE2000_6 = "Este controlador (CNE2000.LAN) ofrece soporte a las tarjetas de
+red MICRODYNE NE2000, NE2000PLUS, NE2000PLUS T, NE2000PLUS 3
+instaladas en las ranuras de expansi¢n de 16 bits de los servidores
+ISA. Se pueden instalar hasta cuatro tarjetas siempre y cuando sus
+definiciones no produzcan conflictos
+."
+     $CNE2000_7 = "National Semiconductor NE2000 InfoMover"
+     $CNE2000_8 = "El controlador (CNE2000.LAN) da soporte a tarjetas de redes
+NE2000 o NE2000T de National Semiconductor instaladas en ranuras de expansi¢n
+de 16 bits en servidores ISA. TambiÇn da soporte al Adaptador PCMCIA Ethernet
+de NE4100.  Puede instalar hasta cuatro tarjetas siempre y cuando sus configuraciones no produzcan conflicto."
+     $CNE2000_9 = "Adaptador de la tarjeta de crÇdito IBM Ethernet II"
+     $CNE2000_10 = "El controlador (CNE2000.LAN) da soporte al adaptador II de tarjeta
+Ethernet de IBM (Dispositivo PCMCIA).  Puede instalar hasta cuatro tarjetas
+siempre y cuando sus configuraciones no produzcan conflicto."
+     $CNE2000_11 = "Novell Ethernet NE4100"
+     $CNE2000_12 = "El controlador (CNE2000.LAN) da soporte al adaptador Ethernet
+NE4100 de PCMCIA. Puede instalar hasta cuatro tarjetas
+siempre y cuando sus configuraciones no produzcan conflicto."
+     $CNE2000_13 = "National Semiconductor NE2000 InfoMover"
+     $CNE2000_14 = "El controlador (CNE2000.LAN) da soporte a tarjetas Ethernet PCMCIA de
+redes NE4100 de National Semiconductor. TambiÇn da soporte al Adaptador PCMCIA Ethernet
+de NE4100.  Puede instalar hasta cuatro tarjetas siempre y cuando sus configuraciones no produzcan conflicto."
+
+     $CNE2000_15 = "®Es Çsta una tarjeta ISA?"
+     $CNE2000_16 = "Para dar soporte a tarjetas ISA legadas indique 'S°'.
+Las tarjetas ISA de 'plug and play' no se consideran como ISA legadas."
+
+     $CNE2000_17 = "No"
+     $CNE2000_18 = "S°"
+
+LANG: 1
+;Chinese-Simplified
+     $CNE2000_1 = "Novell Ethernet NE2000"
+     $CNE2000_2 = "This driver (CNE2000.LAN) supports NE2000 or NE2000T network
+boards installed in 16-bit expansion slots in ISA servers. It also supports
+the NE4100 PCMCIA Ethernet Adapter.  You can install up to four boards, as
+long as their settings do not conflict."
+     $CNE2000_3 = "EAGLE NE2000"
+     $CNE2000_4 = "This driver (CNE2000.LAN) supports EAGLE NE2000, NE2000PLUS,
+NE2000PLUS T, NE2000PLUS 3 network boards installed in 16-bit expansion slots
+in ISA servers. You can install up to four boards, as long as their settings
+do not conflict."
+     $CNE2000_5 = "MICRODYNE NE2000"
+     $CNE2000_6 = "This driver (CNE2000.LAN) supports MICRODYNE NE2000,
+NE2000PLUS, NE2000PLUS T, NE2000PLUS 3 network boards installed in 16-bit
+expansion slots in ISA servers. You can install up to four boards, as long as
+their settings do not conflict."
+     $CNE2000_7 = "National Semiconductor NE2000 InfoMover"
+     $CNE2000_8 = "This driver (CNE2000.LAN) supports National Semiconductor
+NE2000 or NE2000T network boards installed in 16-bit expansion slots in ISA
+servers. It also supports the NE4100 PCMCIA Ethernet Adapter.  You can
+install up to four boards, as long as their settings do not conflict."
+     $CNE2000_9 = "IBM Ethernet –≈”√ø®  ≈‰∆˜ II"
+     $CNE2000_10 = "This driver (CNE2000.LAN) supports IBM Ethernet Credit
+Card Adapter II (PCMCIA device).  You can install up to four boards, as
+long as their settings do not conflict."
+     $CNE2000_11 = "Novell Ethernet NE4100"
+     $CNE2000_12 = "This driver (CNE2000.LAN) supports the NE4100 PCMCIA
+Ethernet Adapter.  You can install up to four boards, as long as their
+settings do not conflict."
+     $CNE2000_13 = "National Semiconductor NE4100 InfoMover"
+     $CNE2000_14 = "This driver (CNE2000.LAN) supports National Semiconductor
+NE4100 PCMCIA Ethernet Adapter.It also supports the NE4100 PCMCIA Ethernet
+Adapter.  You can install up to four boards, as long as their settings do
+not conflict."
+
+     $CNE2000_15 = "’‚ «“ª∏ˆ ISA ø®¬£ø"
+     $CNE2000_16 = "“™÷ß≥÷¥´Õ≥µƒ ISA Õ¯ø®£¨÷µ±ÿ–ÎŒ™°∞ «°±°£
+°∞º¥≤Âº¥”√°±µƒ ISA Õ¯ø®≤ª±ª»œŒ™ «¥´Õ≥Õ¯ø®°£"
+
+     $CNE2000_17 = "∑Ò"
+     $CNE2000_18 = " «"
+
+LANG: 16
+;Chinese-Traditional
+     $CNE2000_1 = "Novell Ethernet NE2000"
+     $CNE2000_2 = "•ª≈X∞ µ{¶° (CNE2000.LAN) §‰¥©¶w∏À¶b ISA ¶¯™Aæπ 16 ¶Ï§∏¬X•Rº—§W™∫ NE2000 ©Œ NE2000T ∫Ù∏Ù•d°C¶PÆ…§]§‰¥© NE4100 PCMCIA Ethernet ∫Ù∏Ù•d°C¶b≥]©w§£¨€§¨Ωƒ¨™∫±°™p§U°A±z•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+     $CNE2000_3 = "EAGLE NE2000"
+     $CNE2000_4 = "•ª≈X∞ µ{¶° (CNE2000.LAN) §‰¥©¶w∏À¶b ISA ¶¯™Aæπ 16 ¶Ï§∏¬X•Rº—§W™∫ EAGLE NE2000°BNE2000PLUS°BNE2000PLUS T ©Œ NE2000PLUS 3 ∫Ù∏Ù•d°C¶b≥]©w§£¨€§¨Ωƒ¨™∫±°™p§U°A±z•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+     $CNE2000_5 = "MICRODYNE NE2000"
+     $CNE2000_6 = "•ª≈X∞ µ{¶° (CNE2000.LAN) §‰¥©¶w∏À¶b ISA ¶¯™Aæπ 16 ¶Ï§∏¬X•Rº—§W™∫ MICRODYNE NE2000°BNE2000PLUS°BNE2000PLUS T ©Œ NE2000PLUS 3 ∫Ù∏Ù•d°C¶b≥]©w§£¨€§¨Ωƒ¨™∫±°™p§U°A±z•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+     $CNE2000_7 = "National Semiconductor NE2000 InfoMover"
+     $CNE2000_8 = "•ª≈X∞ µ{¶° (CNE2000.LAN) §‰¥©¶w∏À¶b ISA ¶¯™Aæπ 16 ¶Ï§∏¬X•Rº—§W™∫ National Semiconductor NE2000 ©Œ NE2000T ∫Ù∏Ù•d°C¶PÆ…§]§‰¥© NE4100 PCMCIA Ethernet ∫Ù∏Ù•d°C¶b≥]©w§£¨€§¨Ωƒ¨™∫±°™p§U°A±z•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+     $CNE2000_9 = "IBM Ethernet Credit Card Adapter II"
+     $CNE2000_10 = "•ª≈X∞ µ{¶° (CNE2000.LAN) §‰¥© IBM Ethernet Credit Card Adapter II (PCMCIA device)°C¶b≥]©w§£¨€§¨Ωƒ¨™∫±°™p§U°A±z•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+     $CNE2000_11 = "Novell Ethernet NE4100"
+     $CNE2000_12 = "•ª≈X∞ µ{¶° (CNE2000.LAN) §‰¥© NE4100 PCMCIA Ethernet ∫Ù∏Ù•d°C¶b≥]©w§£¨€§¨Ωƒ¨™∫±°™p§U°A±z•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+     $CNE2000_13 = "National Semiconductor NE4100 InfoMover"
+     $CNE2000_14 = "•ª≈X∞ µ{¶° (CNE2000.LAN) §‰¥© National Semiconductor NE4100 PCMCIA Ethernet  ∫Ù∏Ù•d°C¶PÆ…§]§‰¥© NE4100 PCMCIA Ethernet ∫Ù∏Ù•d°C¶b≥]©w§£¨€§¨Ωƒ¨™∫±°™p§U°A±z•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+
+     $CNE2000_15 = "¶π∫Ù∏Ù•d¨Oß_¨∞ ISA ∫Ù∏Ù•d°H"
+     $CNE2000_16 = "•≤∂∑≠n¶≥°u¨O°v™∫≠»•H§‰¥© legacy  ISA ™∫∫Ù∏Ù•d°C¿H¥°ßY•Œ™∫∫Ù∏Ù•d®√´D legacy ISA°C"
+
+     $CNE2000_17 = "ß_"
+     $CNE2000_18 = "¨O"
+
+LANG: 9
+;Japanese
+     $CNE2000_1 = "Novell Ethernet NE2000"
+     $CNE2000_2 = "This driver (CNE2000.LAN) supports NE2000 or NE2000T network
+boards installed in 16-bit expansion slots in ISA servers. It also supports
+the NE4100 PCMCIA Ethernet Adapter.  You can install up to four boards, as
+long as their settings do not conflict."
+     $CNE2000_3 = "EAGLE NE2000"
+     $CNE2000_4 = "This driver (CNE2000.LAN) supports EAGLE NE2000, NE2000PLUS,
+NE2000PLUS T, NE2000PLUS 3 network boards installed in 16-bit expansion slots
+in ISA servers. You can install up to four boards, as long as their settings
+do not conflict."
+     $CNE2000_5 = "MICRODYNE NE2000"
+     $CNE2000_6 = "This driver (CNE2000.LAN) supports MICRODYNE NE2000,
+NE2000PLUS, NE2000PLUS T, NE2000PLUS 3 network boards installed in 16-bit
+expansion slots in ISA servers. You can install up to four boards, as long as
+their settings do not conflict."
+     $CNE2000_7 = "National Semiconductor NE2000 InfoMover"
+     $CNE2000_8 = "This driver (CNE2000.LAN) supports National Semiconductor
+NE2000 or NE2000T network boards installed in 16-bit expansion slots in ISA
+servers. It also supports the NE4100 PCMCIA Ethernet Adapter.  You can
+install up to four boards, as long as their settings do not conflict."
+     $CNE2000_9 = "IBM Ethernet Credit Card Adapter II"
+     $CNE2000_10 = "This driver (CNE2000.LAN) supports IBM Ethernet Credit
+Card Adapter II (PCMCIA device).  You can install up to four boards, as
+long as their settings do not conflict."
+     $CNE2000_11 = "Novell Ethernet NE4100"
+     $CNE2000_12 = "This driver (CNE2000.LAN) supports the NE4100 PCMCIA
+Ethernet Adapter.  You can install up to four boards, as long as their
+settings do not conflict."
+     $CNE2000_13 = "National Semiconductor NE4100 InfoMover"
+     $CNE2000_14 = "This driver (CNE2000.LAN) supports National Semiconductor
+NE4100 PCMCIA Ethernet Adapter.It also supports the NE4100 PCMCIA Ethernet
+Adapter.  You can install up to four boards, as long as their settings do
+not conflict."
+
+     $CNE2000_15 = "Is the card an ISA Card?"
+     $CNE2000_16 = "A value of 'Yes' is necessary to support legacy ISA cards.
+Plug and Play ISA is not considered legacy ISA."
+
+     $CNE2000_17 = "No"
+     $CNE2000_18 = "Yes"
+

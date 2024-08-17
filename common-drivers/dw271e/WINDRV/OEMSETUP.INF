@@ -1,0 +1,22 @@
+; OEMSETUP.INF
+;
+; Novell Odinsup
+;
+; VeRsIoN=1.00 Novell WFW INF file: Novell ODI to NDIS Support.
+; CoPyRiGhT=(c) Copyright 1996, by Novell, Inc. All rights reserved.
+
+[netcard]
+ms$odinsup="Novell ODI to NDIS Support",0,ndis,ethernet,0x07,ms$odinsup,ms$odinsup_nif
+
+;
+; Netcard Install and Protocol Sections
+;
+
+; Novell support for NDIS protocols using odinsup.386
+
+[ms$odinsup]
+ndis3=7:odinsup.386
+
+[ms$odinsup_nif]
+drivername=MSODINSUP$
+

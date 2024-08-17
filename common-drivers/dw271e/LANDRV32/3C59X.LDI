@@ -1,0 +1,356 @@
+
+VER:    2.00
+SYN:    1.00
+
+;3Com 3C59X Fast EtherLink v4.?  server driver information file
+;which support PCI and EISA bus 
+
+DR 3C59X_1
+{
+   DES:         $3C59X_1
+   HELP:        $3C59X_2 
+
+   PAR: 2.00
+   FILE: 3C59X.LAN
+   PROD: 'PCI.10B7.5950.0000.0000.00',
+         'PCI.10B7.5951.0000.0000.00',
+         'PCI.10B7.5900.0000.0000.00',
+         'EISA.TCM.597.0',
+         'EISA.TCM.592.0'
+
+    ;@# Sprod:  '3Com~ Fast EtherLink 10/100 PCI Adapter(3C595)',
+    ;@#         '3Com~ Fast EtherLink 10/100 PCI Adapter(3C595)',
+    ;@#         '3Com~ Fast EtherLink Adapter',
+    ;@#         '3Com~ Fast EtherLink 10/100 EISA Adapter(3C597)',
+    ;@#         '3Com~ Fast EtherLink EISA Adapter(3C592)'
+    ;@# Client: 3c59x
+    ;@# Alias: 3c59x
+
+
+   PR   SLOT REQ    
+   {
+	DES:    $3C59X_3
+	HELP:   $3C59X_4
+
+   }
+ 
+   LIST   MASTER REQ    
+   {
+	DES:    $3C59X_11
+	HELP:   $3C59X_12
+	CDES:   "YES"
+	CHOICE: 'YES'
+	CDES:   "NO"
+	CHOICE: 'NO'
+	DEFAULT: 2
+        OutputFormat: 'MASTER=%s'
+
+   }
+
+   LIST   RXEARLY REQ    
+   {
+	DES:    $3C59X_13
+	HELP:   $3C59X_14
+	CDES:   "YES"
+	CHOICE: 'YES'
+	CDES:   "NO"
+	CHOICE: 'NO'
+	DEFAULT: 2
+        OutputFormat: 'RXEARLY=%s'
+   }
+
+
+   PR   NODE
+   {
+   }
+
+   FR   FrameSelect
+   {
+	DES:    $3C59X_5
+	HELP:   $3C59X_6
+
+	CD:     $3C59X_7
+	CH:     'Ethernet_802.3'
+
+	CD:     $3C59X_8
+	CH:     'Ethernet_802.2'
+
+	CD:     $3C59X_9
+	CH:     'Ethernet_SNAP'
+
+	CD:     $3C59X_10
+	CH:     'Ethernet_II'
+
+	DEF:    1, 2
+   }
+}
+
+
+DLANG:  4
+;English
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   1
+;Chinese (Simplified)
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+
+LANG:   6
+;French
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   7
+;German
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   8
+;Italian
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   9
+;Japanese
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+
+LANG:   10
+;Korean
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+
+LANG:   12
+;Portuguese (Brazil)
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   13
+;Russian
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+
+LANG:   14
+;Spanish
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   16
+;Chinese (Traditional)
+	$3C59X_1 = "3Com Fast EtherLink Driver v4.2 "
+	$3C59X_2 = "You can use this driver in an PCI or an EISA file server."
+	$3C59X_3 = "Slot Number"
+	$3C59X_4 = "Select the slot number"
+	$3C59X_5 = "Frame Types"
+	$3C59X_6 = "The default frame types are the 802.2 and 802.3.
+		 It is strongly recommended that at least 802.2 be
+		 selected. For existing networks, select BOTH 802.2
+		 and 802.3."
+	$3C59X_7 = "802.3"
+	$3C59X_8 = "802.2"
+	$3C59X_9 = "802.2 SNAP"
+	$3C59X_10 = "Ethernet II"
+        $3C59X_11 = "Bus Master Control"
+        $3C59X_12 = "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell 
+                     NetWare Server, set this parameter to YES."
+        $3C59X_13=  "Parallel Tasking Control"
+        $3C59X_14=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+

@@ -1,0 +1,384 @@
+; File EPRO.LDI
+; VeRsIoN=1.05 Intel EtherExpress(TM) PRO/10+ ISA Installation Information File
+; CoPyRiGhT=(c)Copyright 1997,1998 by Intel Corporation, All rights reserved.
+
+VER: 1.05
+SYN: 1.00
+
+DR EPRO
+   {
+      DES:     $EPRO_1
+      HELP:    $EPRO_2
+      FILE:    EPRO.LAN
+      PAR:     1.00
+;@# Sprod: 'Intel~ EtherExpress(TM) PRO/10+ ISA Adapter'
+;@# CLIENT:  EPROODI.LAN, EPRO.LAN
+;@# ALIAS: EPRO.LAN
+
+
+      PR PORT REQ
+      {
+         HELP:   $EPRO_3
+         VAL:    200,210,220,230,240,250,260,280,290,2A0,2B0,2C0,2D0,
+                 2E0,2F0,300,310,320,330,340,350,360,370,380,390
+         DEF:    300
+         RES:    16
+      }
+
+      FR FrameSelect
+      {
+         HELP:   $EPRO_4
+         CD:     $EPRO_5
+         CH:     'Ethernet_802.2'
+         CD:     $EPRO_6
+         CH:     'Ethernet_802.3'
+         CD:     $EPRO_7
+         CH:     'Ethernet_SNAP'
+         CD:     $EPRO_8
+         CH:     'Ethernet_II'
+         DEF:    1,2
+       }
+   }
+
+   DR EPROPnP
+   {
+      DES:    $EPRO_PNP_1
+      HELP:   $EPRO_2
+      FILE:   EPRO.LAN
+      PROD:   'PNPISA.INCLUDE.INT.103.*'
+      PAR:    2.00
+;@# SPROD:    'Intel~EtherExpress(TM) PRO/10+ ISA'
+;@# CLIENT:  EPROODI.COM, EPRO.LAN
+;@# ALIAS: EPRO.LAN
+
+      PR SLOT REQ
+      {
+         HELP:             $EPRO_PNP_3
+      	 VAL:			1 - 65535
+      }
+
+      FR FrameSelect
+      {
+         HELP:  $EPRO_4
+         CD:    $EPRO_5
+         CH:    'Ethernet_802.2'
+         CD:    $EPRO_6
+         CH:    'Ethernet_802.3'
+         CD:    $EPRO_7
+         CH:    'Ethernet_SNAP'
+         CD:    $EPRO_8
+         CH:    'Ethernet_II'
+         DEF:   1,2
+       }
+   }
+
+
+DLANG:    4
+;English-American
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+LANG:    1
+;Chinese
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+LANG:    6
+;French
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+LANG:    7
+;German
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+LANG:    8
+;Italian
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+LANG:    9
+;Japanese
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+LANG:    10
+;Korean
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+LANG:    12
+;Portuguese-Brazil
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+LANG:    13
+;Russian
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+LANG:    14
+;Spanish-Latin American
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+LANG:    16
+;Chinese-Traditional
+    $EPRO_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter"
+    $EPRO_PNP_1 = "Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled"
+    $EPRO_2 = "Use this driver with an Intel EtherExpress(TM) PRO/10
+                         LAN Adapter in an ISA (AT bus), or EISA file server.\n\n"
+    $EPRO_3 = "Select the port value (I/O address) that
+                            matches the I/O address setting of the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.  
+                            To view or change the I/O address of the 
+                            adapter, run SOFTSET2.  Make sure the I/O 
+                            address used by the Intel EtherExpress(TM) 
+                            PRO/10 LAN Adapter is not used by any other 
+                            device in the system."
+    $EPRO_PNP_3 = "This is the slot value that indicates the
+                            Intel EtherExpress(TM) PRO/10 LAN Adapter.
+                            This value should be filled in by the Novell
+                            installation utility when it scans for Plug
+                            and Play adapters."
+    $EPRO_4 = "Select the frame types required by your
+                             network.  The driver supports the 802.2,
+                             802.3, Ethernet SNAP, and Ethernet II frame
+                             types.  The default frame types are 802.2 and 802.3."
+    $EPRO_5 = "802.2"
+    $EPRO_6 = "802.3"
+    $EPRO_7 = "802.2 SNAP"
+    $EPRO_8 = "Ethernet II"
+
+

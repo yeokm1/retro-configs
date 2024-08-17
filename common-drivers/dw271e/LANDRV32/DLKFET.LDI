@@ -1,0 +1,439 @@
+;
+;       Novell NetWare Server Driver Description File for DLKFET.LAN
+;
+
+VER: 2.31.1
+SYN: 1.00
+
+DR DLKFET
+{
+        DES:    $DLKFET_1
+        HELP:   $DLKFET_2
+        PAR:    2.00
+        PROD:   'PCI.1106.3043.*.*.*'
+        FILE:   DLKFET.LAN
+        TIME:   15
+
+        ;@#  Sprod:  'D-Link~ DFE-530TX PCI Fast Ethernet Adapter driver'
+        ;@# Client: dlkfet.com
+        ;@# Alias: dlkfet.lan
+        PROMPT SLOT OPTIONAL
+        {
+                DES:    $DLKFET_3
+                HELP:   $DLKFET_4
+
+                TYPE:   DECIMAL
+                VAL:    1-65535
+                DEF:    UNDEFINED
+                OUT:    'SLOT=%s'
+        }
+
+        FRAME FrameSelect
+        {
+                CD:     $DLKFET_5
+                CH:     $DLKFET_6
+                CD:     $DLKFET_7
+                CH:     $DLKFET_8
+                CD:     $DLKFET_9
+                CH:     $DLKFET_10
+                CD:     $DLKFET_11
+                CH:     $DLKFET_12
+                DEF:    1,2,3,4
+        }
+
+        LIST Attachment OPTIONAL
+        {
+                DES:    $DLKFET_13
+                HELP:   $DLKFET_14
+
+                CD:     $DLKFET_17
+                CH:     $DLKFET_18
+                CD:     $DLKFET_19
+                CH:     $DLKFET_20
+                CD:     $DLKFET_21
+                CH:     $DLKFET_22
+                CD:     $DLKFET_23
+                CH:     $DLKFET_24
+                CD:     $DLKFET_25
+                CH:     $DLKFET_26
+                OUT:    '%s'
+                DEF:    1
+        }
+
+        PROMPT NODE OPTIONAL
+        {
+                DES:    $DLKFET_27
+                TYPE:   HEX
+                VAL:    1-FFFFFFFFFFFE
+                DEF:    UNDEFINED
+                OUT:    'NODE=%s'
+        }
+
+}
+
+
+DLANG:  4
+;English
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+
+LANG:  1
+;Chinese (Simplified)
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+
+
+LANG:  6
+;French
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+
+LANG:  7
+;German
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+
+LANG:  8
+;Italian
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+
+LANG:  9
+;Japanese
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+
+LANG:  10
+;Korean
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+
+LANG:  12
+;Portuguese (Brazil)
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+
+LANG:  13
+;Russian
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+
+
+LANG:  14
+;Spanish
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+
+LANG:  16
+;Chinese (Traditional)
+        $DLKFET_1 = "D-Link DFE-530TX PCI Fast Ethernet Adapter driver"
+        $DLKFET_2 = "This driver supports PCI bus devices"
+        $DLKFET_3 = "Slot"
+        $DLKFET_4 = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed."
+        $DLKFET_5 = "802.3"
+        $DLKFET_6 = "ethernet_802.3"
+        $DLKFET_7 = "802.2"
+        $DLKFET_8 = "ethernet_802.2"
+        $DLKFET_9 = "SNAP"
+        $DLKFET_10 = "ethernet_snap"
+        $DLKFET_11 = "ethernet II"
+        $DLKFET_12 = "ethernet_II"
+        $DLKFET_13 = "Media and Line Speed"
+        $DLKFET_14 = "Choose the connection/media type you would
+                       like to use, or NONE for preprogramed card's
+                       default."
+        $DLKFET_15 = "Auto Sense"
+        $DLKFET_16 = ""
+        $DLKFET_17 = "Auto-Sense media type"
+        $DLKFET_18 = "Autosense"
+        $DLKFET_19 = "Twisted Pair 10MBPS"
+        $DLKFET_20 = "10BASET"
+        $DLKFET_21 = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_22 = "10BASETFD"
+        $DLKFET_23 = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_24 = "100BASETXFD"
+        $DLKFET_25 = "Fast Ethernet 100MBPS"
+        $DLKFET_26 = "100BASETX"
+        $DLKFET_27 = "Node Address"
+

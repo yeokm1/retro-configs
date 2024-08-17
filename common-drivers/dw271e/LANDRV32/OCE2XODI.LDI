@@ -1,0 +1,525 @@
+VER:    1.00
+SYN:    1.00
+
+; Olicom 217x Ethernet server driver information file.
+
+DRV OC217X
+{
+ PROD:  'PNPISA.INCLUDE.OLC.94A.5'
+;@# Sprod: 'Olicom~ Ethernet ISA/IV Adapter (OC-217x)'
+ DES:   $OCE2XODI_DES0
+ HELP:  $OCE2XODI_DRVHLP0
+ PAR:   2.00
+ FILE:  OCE2XODI.LAN
+; OF:    ETHERTSM.NLM,MSM.NLM,NBI.NLM
+
+;@#  CLIENT: oce2xodi
+;@#  ALIAS: oce2xodi
+
+ PR SLOT OPT
+  {
+  HELP: $OCE2XODI_SLOTHLP
+  }
+
+ FR FRMTYPE
+  {
+  HELP: $OCE2XODI_FRMHLP
+  CD:   $OCE2XODI_1
+  CH:   'Ethernet_802.3'
+  CD:   $OCE2XODI_2
+  CH:   'Ethernet_802.2'
+  CD:   $OCE2XODI_3
+  CH:   'Ethernet_SNAP'
+  CD:   $OCE2XODI_4
+  CH:   'Ethernet_II'
+  DEF:  1, 2
+  }
+
+ PR NODE
+  {
+  HELP: $OCE2XODI_NODEHLP
+  }
+}
+
+; Olicom GoCard Ethernet server driver information file.
+
+DRV OCGOCARD2220
+{
+ PROD:  'PCMCIA.0121.0101'
+;@# Sprod: 'Olicom~ GoCard Ethernet PC Card (OC-2220)'
+ DES:   $OCE2XODI_DES2220
+ HELP:  $OCE2XODI_DRVHLP1
+ PAR:   2.00
+ FILE:  OCE2XODI.LAN
+; OF:    ETHERTSM.NLM,MSM.NLM,NBI.NLM
+
+;@#  CLIENT: oce2xodi
+;@#  ALIAS: oce2xodi
+
+ PR SLOT OPT
+  {
+  HELP: $OCE2XODI_SLOTHLP
+  }
+
+ FR FRMTYPE
+  {
+  HELP: $OCE2XODI_FRMHLP
+  CD:   $OCE2XODI_1
+  CH:   'Ethernet_802.3'
+  CD:   $OCE2XODI_2
+  CH:   'Ethernet_802.2'
+  CD:   $OCE2XODI_3
+  CH:   'Ethernet_SNAP'
+  CD:   $OCE2XODI_4
+  CH:   'Ethernet_II'
+  DEF:  1, 2
+  }
+
+ PR NODE
+  {
+  HELP: $OCE2XODI_NODEHLP
+  }
+}
+
+DRV OCGOCARD2232
+{
+ PROD:  'PCMCIA.0121.3122',
+        'PCMCIA.0121.3222'
+;@# Sprod: 'Olicom~ GoCard ET/Modem 288 PC Card (OC-2231)',
+;@#        'Olicom~ GoCard Eth/Modem 336 PC Card (OC-2232)'
+ DES:   $OCE2XODI_DES2232
+ HELP:  $OCE2XODI_DRVHLP1
+ PAR:   2.00
+ FILE:  OCE2XODI.LAN
+; OF:    ETHERTSM.NLM,MSM.NLM,NBI.NLM
+
+;@#  CLIENT: oce2xodi
+;@#  ALIAS: oce2xodi
+
+ PR SLOT OPT
+  {
+  HELP: $OCE2XODI_SLOTHLP
+  }
+
+ FR FRMTYPE
+  {
+  HELP: $OCE2XODI_FRMHLP
+  CD:   $OCE2XODI_1
+  CH:   'Ethernet_802.3'
+  CD:   $OCE2XODI_2
+  CH:   'Ethernet_802.2'
+  CD:   $OCE2XODI_3
+  CH:   'Ethernet_SNAP'
+  CD:   $OCE2XODI_4
+  CH:   'Ethernet_II'
+  DEF:  1, 2
+  }
+
+ PR NODE
+  {
+  HELP: $OCE2XODI_NODEHLP
+  }
+}
+
+
+DLANG:  4
+;English
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom GoCard Ethernet 
+		 PC Cards in systems with an PCCard Slot."
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+LANG:   1
+;Chinese (Simplified)
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet GoCard 
+		 PC Cards in systems with an PCCard Slot."
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+
+
+
+LANG:   6
+;French
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet GoCard 
+		 PC Cards in systems with an PCCard Slot."
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+
+
+LANG:   7
+;German
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet GoCard 
+		 PC Cards in systems with an PCCard Slot."
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+
+LANG:   8
+;Italian
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet GoCard 
+		 PC Cards in systems with an PCCard Slot."
+
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+LANG:   9
+;Japanese
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet GoCard 
+		 PC Cards in systems with an PCCard Slot."
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+
+LANG:   10
+;Korean
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet GoCard 
+		 PC Cards in systems with an PCCard Slot."
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+
+LANG:   12
+;Portuguese (Brazil)
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet GoCard 
+		 PC Cards in systems with an PCCard Slot."
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+
+LANG:   13
+;Russian
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet GoCard 
+		 PC Cards in systems with an PCCard Slot."
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+
+
+
+LANG:   14
+;Spanish
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet GoCard 
+		 PC Cards in systems with an PCCard Slot."
+
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+LANG:   16
+;Chinese (Traditional)
+	$OCE2XODI_1 = "802.3"
+	$OCE2XODI_2 = "802.2"
+	$OCE2XODI_3 = "802.2 SNAP"
+	$OCE2XODI_4 = "Ethernet II"
+
+ $OCE2XODI_DES0 =        "Olicom Ethernet ISA/IV Adapter (OC-217x)"
+
+ $OCE2XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA/IV 
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE2XODI_DES2220 =     "Olicom GoCard Ethernet PC Card (OC-2220)"
+
+ $OCE2XODI_DES2232 =     "Olicom GoCard Eth/Modem PC Card (OC-2231/32)"
+
+ $OCE2XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet GoCard 
+		 PC Cards in systems with an PCCard Slot."
+
+ $OCE2XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE2XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE2XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+
+

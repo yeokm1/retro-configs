@@ -1,0 +1,1910 @@
+; VeRsIoN=1.21 Novell LAN Installation Information File for SKFPNW.LAN
+; CoPyRiGhT=(C)Copyright 1989-1998 SysKonnect. All rights reserved
+;DrIvEr DeScRiPtIoN
+
+
+VER:	1.21
+SYN:	1.00
+
+DR SKFPNW OPT
+{
+	DES:	"SysKonnect FDDI PCI Adapters"
+	HELP:	"This driver (SKFPNW.LAN) supports the
+		following SysKonnect FDDI PCI adapters:\n
+		SK-5521 (SK-NET FDDI-UP)\n
+		SK-5522 (SK-NET FDDI-UP DAS)\n
+		SK-5541 (SK-NET FDDI-FP)\n
+		SK-5543 (SK-NET FDDI-LP)\n
+		SK-5544 (SK-NET FDDI-LP DAS)"
+	PAR:	2.00
+	PROD:	'PCI.1148.4000.0000.0000.*',
+		'PCI.1148.4000.1148.5521.*',
+		'PCI.1148.4000.1148.5522.*',
+		'PCI.1148.4000.1148.5541.*',
+		'PCI.1148.4000.1148.5543.*',
+		'PCI.1148.4000.1148.5544.*'
+	;@# SPROD:	'SysKonnect~FDDI PCI Adapter',
+	;@#	'SysKonnect~FDDI PCI Adapter SK-5521 (SK-NET FDDI-UP)',
+	;@#	'SysKonnect~FDDI PCI Adapter SK-5522 (SK-NET FDDI-UP DAS)',
+	;@#	'SysKonnect~FDDI PCI Adapter SK-5541 (SK-NET FDDI-FP)',
+	;@#	'SysKonnect~FDDI PCI Adapter SK-5543 (SK-NET FDDI-LP)',
+	;@#	'SysKonnect~FDDI PCI Adapter SK-5544 (SK-NET FDDI-LP DAS)'
+	;@# CLIENT: SKFPNW.LAN
+	;@# ALIAS: SKFPNW.LAN
+	FILE:	SKFPNW.LAN
+	TIME:	45
+
+	PR SLOT REQ
+	{
+	}
+
+	FR FrameSelect
+	{
+		CH:	'FDDI_802.2'
+		CH:	'FDDI_SNAP'
+		DEF:	1,2
+	}
+
+	PR NODE
+	{
+	}
+
+	; *****************************************************
+	;
+	; Custom Keywords
+	;
+	; *****************************************************
+
+	;
+	; Driver Parameters
+	;
+	PR PciFix OPT
+	{
+		DES:	"Fix PCI problems on different platforms"
+
+		HELP:	"As there might arise problems on different PCI
+			machines, the parameter PciFix is provided.  Currently
+			the driver only supports the value '0' (no fix)."
+
+		TYP:	HEX
+
+ 		VAL:	0
+
+		DEF:	0
+
+		OUT:	'PCIFIX=%s'
+	}
+
+	LI No_Multicast OPT
+	{
+		DES:	"Send Multicast Packets as Broadcast"
+
+		HELP:	"If the keyword NO_MULTICAST is used, all multicast
+			addresses will be converted to broadcast addresses
+			during transmission."
+
+		CD:	'NO'
+		CH:	''
+
+		CD:	'YES'
+		CH:	'NO_MULTICAST'
+
+		DEF:	1
+
+		OUT:	'%s'	
+	}
+
+	;
+	; SMT Parameters
+	;
+	PR PmfPasswd OPT
+	{
+		DES:	"Password for PMF Requests"
+
+		HELP:	"This keyword defines the password that all remote PMF
+			(Parameter Management Frame) requests must provide to
+			change FDDI attributes within the adapter.
+			The value for PMFPASSWD is 8 ASCII characters long and
+			not case sensitive since lower case letters will be
+			converted to upper case. Password protection can be
+			disabled by setting this keyword to all zeros
+			(default), or by not specifying a PMFPASSWD."
+
+		TYP:	STR (8)
+
+		OUT:	'PMFPASSWD=%s'	
+	}
+
+	PR UserData OPT
+	{
+		DES:    "SMT User Data"
+
+		HELP:	"This keyword provides local write access to the User
+			Data attribute, registered as fddiSMT 17 in the SMT
+			Standard. The User Data must be an ASCII string for
+			compliance with the FDDI SMT Standard."
+
+		TYP:	STR (32)
+
+		OUT:	'USERDATA="%s"'
+	}
+
+	LI LerCutOffA OPT
+	{
+		DES:	"SMT LER Cutoff attribute Port A"
+
+		HELP:	"This keyword provides local write access to the
+			LER Cutoff attribute, registered as fddiPORT 58 in
+			the SMT Standard. This attribute indentifies the
+			excessive Link Error Rate that removes Port A/B (or
+			Port S). This keyword is specified as absolute value
+			of the base 10 logarithm of the LER Cufoff value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERCUTOFFA/LERCUTOFFB
+			(1E-7) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	4
+
+		OUT:	'LERCUTOFFA=%s'
+	}
+
+	LI LerCutOffB OPT
+	{
+		DES:	"SMT LER Cutoff attribute Port B"
+
+		HELP:	"This keyword provides local write access to the
+			LER Cutoff attribute, registered as fddiPORT 58 in
+			the SMT Standard. This attribute indentifies the
+			excessive Link Error Rate that removes Port A/B (or
+			Port S). This keyword is specified as absolute value
+			of the base 10 logarithm of the LER Cufoff value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERCUTOFFA/LERCUTOFFB
+			(1E-7) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	4
+
+		OUT:	'LERCUTOFFB=%s'
+	}
+
+	LI LerAlarmA OPT
+	{
+		DES:	"SMT LER Alarm attribute Port A"
+
+		HELP:	"This keyword provides local write access to the LER
+			Alarm attribute, registered as fddiPORT 59 in the SMT
+			Standard. This attribute identifies the excessive
+			Link Error Rate that siganls an alarm at Port A/B (or
+			Port S). This keyword is specified as absolute value
+			of the base 10 logarithm of the LER Alarm value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERALARMA/LERALARMB
+			(1E-8) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	5
+
+		OUT:	'LERALARMA=%s'
+	}
+	
+	LI LerAlarmB OPT
+	{
+		DES:	"SMT LER Alarm attribute Port B"
+
+		HELP:	"This keyword provides local write access to the LER
+			Alarm attribute, registered as fddiPORT 59 in the SMT
+			Standard. This attribute identifies the excessive
+			Link Error Rate that siganls an alarm at Port A/B
+			(or Port S). This keyword is specified as absolute
+			value of the base 10 logarithm of the LER Alarm value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERALARMA/LERALARMB
+			(1E-8) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	5
+
+		OUT:	'LERALARMB=%s'
+	}
+
+	PR TMin OPT
+	{
+		DES:	"SMT T-Min attribute"
+
+		HELP:	"This keyword provides local write access to the 2's
+			complement T-Min attribute, registered as fddiMAC 55
+			in the SMT Standard. The value for TMIN is specified
+			in milliseconds. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken. If
+			no value is specified, the default value for TMIN
+			(5 ms) will be used."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	5
+
+		OUT:	'TMIN=%s'
+	    }
+
+	PR TMax OPT
+	{
+		DES:	"SMT T-Max attribute"
+
+		HELP:	"This keyword provides local write access to the 2's
+			complement T-Max attribute, registered as fddiMAC 53
+			in the SMT Standard. The value for TMAX is specified
+			in milliseconds. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken. If
+			no value is specified, the default value for TMAX
+			(165 ms) will be used."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	165
+
+		OUT:	'TMAX=%s'
+	}
+
+	PR TReq OPT
+	{
+		DES:	"SMT T-Req attribute"
+
+		HELP:	"This keyword provides local write access to the 2's
+			complement T-Req attribute, registered as fddiMAC 51
+			in the SMT Standard. The value for TREQ is specified
+			in milliseconds. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken. If
+			no value is specified, the default value for TREQ
+			(165 ms) will be used."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	165
+
+		OUT:	'TREQ=%s'
+	}
+
+	PR TVX OPT
+	{
+		DES:	"SMT TVX attribute"
+
+		HELP:	"This keyword provides local write access to the TVX
+			attribute, registered as fddiMAC 54 in the SMT
+			Standard. This attribute provides local control of
+			the recovery time from transient ring errors.
+			The value for TVX is specified in microseconds.
+			The valid range reaches from 2500 us to 10000 us.
+			If a value is specified which lies outside the limits,
+			the upper/lower limit will be taken. If no value is
+			specified, the default value for TVX (2700 us) will
+			be used."
+
+		TYP:	DEC
+
+ 		VAL:	2500 - 10000
+
+		DEF:	2700
+
+		OUT:	'TVX=%s'
+	}
+
+	;
+	; SBA Parameters
+	;
+	LI SbaCommand OPT
+	{
+		DES:	"SBA Command"
+
+		HELP:	"This keyword is an SBA local action to start or stop
+			the SBA application. The default value is 'STOP'.
+			Note: There should be only one active SBA application
+			in the same ring."
+
+		CD:	'STOP'
+		CH:	'STOP'
+		CD:	'START'
+		CH:	'START'
+
+		DEF:	1
+
+		OUT:	'SBACOMMAND=%s'
+	}
+
+	PR SbaAvailable OPT
+	{
+		DES:	"SbaAvailable attribute"
+
+		HELP:	"This keyword defines the maximum synchronous
+			bandwidth in percent available for the primary path.
+			The valid range reaches from 0 - 100 percent. The
+			default value is 50 percent (6.25 Mbytes/s).
+			If a value is specified which lies outside the limits,
+			the upper/lower limit will be taken. This value
+			remains zero until the SBA application is enabled and
+			active."
+
+		TYP:	DEC
+
+		VAL:	0 - 100
+
+		DEF:	50
+
+		OUT:	'SBAAVAILABLE=%s'
+	}
+
+	;
+	; ESS Parameters
+	;
+	PR SbaPayLoad OPT
+	{
+		DES:	"SbaPayLoad attribute"
+
+		HELP:	"This keyword defines the requested synchronous
+			bandwidth for manual static allocations. The valid
+			range reaches from 0 to 1562 bytes per 125
+			microseconds. For example, if the required bandwidth
+			is 1 Mbit/s (125,000 bytes/s), the value of the payload
+			is 125,000 * 125E-6 = 15.625, rounded up to 16. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. The default value is
+			zero - no synchronous bandwidth is used. The user is
+			required to define the amount of bandwidth to be able
+			to send synchronous frames. If the keyword SbaPayLoad
+			is not specified, the keywords SbaOverHead, MaxTNeg,
+			MinSegmentSize and SbaCategory have no effect."
+
+		TYP:	DEC
+
+		VAL:	0 - 1562
+
+		DEF:	0
+
+		OUT:	'SBAPAYLOAD=%s'
+	}
+
+	PR SbaOverHead OPT
+	{
+		DES:	"SbaOverHead attribute"
+
+		HELP:	"This keyword defines the requested overhead for
+			static allocations. The valid range reaches from
+			50 to 5000 bytes. If a value is specified which lies
+			outside the limits, the upper/lower limit will be
+			taken. The default value is 50 bytes. This keyword
+			has only an effect, if the keyword SbaPayLoad is
+			specified."
+
+		TYP:	DEC
+
+		VAL:	50 - 5000
+
+		DEF:	50
+
+		OUT:	'SBAOVERHEAD=%s'
+	}
+
+	PR MaxTNeg OPT
+	{
+		DES:	"MaxTNeg attribute"
+
+		HELP:	"This keyword defines the maximum token rotation delay
+			acceptable to the application(s) using synchronous
+			bandwidth. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken.
+			The default value is 25 ms. This keyword has only an
+			effect, if the keyword SbaPayLoad is specified."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	25
+
+		OUT:	'MAXTNEG=%s'
+	}
+
+	PR MinSegmentSize OPT
+	{
+		DES:	"MinSegmentSize attribute"
+
+		HELP:	"This keyword defines the minimum synchronous
+			segmentation size. This value corresponds to the
+			amount of bytes to be transmitted on a per token
+			opportunity. The valid range reaches from 1 to 4478
+			bytes. If a value is specified which lies outside the
+			limits, the upper/lower limit will be taken. This
+			keyword has only an effect, if the keyword SbaPayLoad
+			is specified."
+
+		TYP:	DEC
+
+		VAL:	1 - 4478
+
+		OUT:	'MINSEGMENTSIZE=%s'
+	}
+
+	PR SbaCategory OPT
+	{
+		DES:	"SbaCategory attribute"
+
+		HELP:	"This keyword defines the session ID of the
+			SBA_Category for the static allocation. The valid
+			range reaches from 0 to 65535. If a value is specified
+			which lies outside the limits, the upper/lower limit
+			will be taken. This parameter has only an effect, if
+			the keyword SbaPayLoad is specified."
+
+		TYP:	DEC
+
+		VAL:	0 - 65535
+
+		OUT:	'SBACATEGORY=%s'
+	}
+
+	LI SynchTxMode OPT
+	{
+		DES:	"SynchTxMode attribute"
+
+		HELP:	"This keyword defines the synchronous transmission
+			mode. The default value is 'SPLIT', where only
+			packets identified as synchronous packets shall be
+			transmitted by the synchronous queue. The other value
+			is 'ALL', where all LLC packets received from upper
+			layers are transmitted via the synchronous queue.
+			This keyword has only an effect, if the end station
+			support was able to get the required synchronous
+			bandwidth from the SBA."
+
+		CD:	'SPLIT'
+		CH:	'SPLIT'
+		CD:	'ALL'
+		CH:	'ALL'
+
+		DEF:	1
+
+		OUT:	'SYNCHTXMODE=%s'
+	}
+}
+
+DR SKFPNW114858 OPT
+{
+	DES:	"SysKonnect FDDI PCI 64 Adapters"
+	HELP:	"This driver (SKFPNW.LAN) supports the
+		following SysKonnect FDDI PCI adapters:\n
+		SK-5821 (SK-NET FDDI-UP64)\n
+		SK-5822 (SK-NET FDDI-UP64 DAS)\n
+		SK-5841 (SK-NET FDDI-FP64)\n
+		SK-5843 (SK-NET FDDI-LP64)\n
+		SK-5844 (SK-NET FDDI-LP64 DAS)"
+	PAR:	2.00
+	PROD:	'PCI.1148.4000.1148.5821.*',
+		'PCI.1148.4000.1148.5822.*',
+		'PCI.1148.4000.1148.5841.*',
+		'PCI.1148.4000.1148.5843.*',
+		'PCI.1148.4000.1148.5844.*'
+	;@# SPROD:	'SysKonnect~FDDI PCI Adapter SK-5821 (SK-NET FDDI-UP64)',
+	;@#	'SysKonnect~FDDI PCI Adapter SK-5822 (SK-NET FDDI-UP64 DAS)',
+	;@#	'SysKonnect~FDDI PCI Adapter SK-5841 (SK-NET FDDI-FP64)',
+	;@#	'SysKonnect~FDDI PCI Adapter SK-5843 (SK-NET FDDI-LP64)',
+	;@#	'SysKonnect~FDDI PCI Adapter SK-5844 (SK-NET FDDI-LP64 DAS)'
+	;@# CLIENT: SKFPNW.LAN
+	;@# ALIAS: SKFPNW.LAN
+	FILE:	SKFPNW.LAN
+	TIME:	45
+
+	PR SLOT REQ
+	{
+	}
+
+	FR FrameSelect
+	{
+		CH:	'FDDI_802.2'
+		CH:	'FDDI_SNAP'
+		DEF:	1,2
+	}
+
+	PR NODE
+	{
+	}
+
+	; *****************************************************
+	;
+	; Custom Keywords
+	;
+	; *****************************************************
+
+	;
+	; Driver Parameters
+	;
+	PR PciFix OPT
+	{
+		DES:	"Fix PCI problems on different platforms"
+
+		HELP:	"As there might arise problems on different PCI
+			machines, the parameter PciFix is provided.  Currently
+			the driver only supports the value '0' (no fix)."
+
+		TYP:	HEX
+
+ 		VAL:	0
+
+		DEF:	0
+
+		OUT:	'PCIFIX=%s'
+	}
+
+	LI No_Multicast OPT
+	{
+		DES:	"Send Multicast Packets as Broadcast"
+
+		HELP:	"If the keyword NO_MULTICAST is used, all multicast
+			addresses will be converted to broadcast addresses
+			during transmission."
+
+		CD:	'NO'
+		CH:	''
+
+		CD:	'YES'
+		CH:	'NO_MULTICAST'
+
+		DEF:	1
+
+		OUT:	'%s'	
+	}
+
+	;
+	; SMT Parameters
+	;
+	PR PmfPasswd OPT
+	{
+		DES:	"Password for PMF Requests"
+
+		HELP:	"This keyword defines the password that all remote PMF
+			(Parameter Management Frame) requests must provide to
+			change FDDI attributes within the adapter.
+			The value for PMFPASSWD is 8 ASCII characters long and
+			not case sensitive since lower case letters will be
+			converted to upper case. Password protection can be
+			disabled by setting this keyword to all zeros
+			(default), or by not specifying a PMFPASSWD."
+
+		TYP:	STR (8)
+
+		OUT:	'PMFPASSWD=%s'	
+	}
+
+	PR UserData OPT
+	{
+		DES:    "SMT User Data"
+
+		HELP:	"This keyword provides local write access to the User
+			Data attribute, registered as fddiSMT 17 in the SMT
+			Standard. The User Data must be an ASCII string for
+			compliance with the FDDI SMT Standard."
+
+		TYP:	STR (32)
+
+		OUT:	'USERDATA="%s"'
+	}
+
+	LI LerCutOffA OPT
+	{
+		DES:	"SMT LER Cutoff attribute Port A"
+
+		HELP:	"This keyword provides local write access to the
+			LER Cutoff attribute, registered as fddiPORT 58 in
+			the SMT Standard. This attribute indentifies the
+			excessive Link Error Rate that removes Port A/B (or
+			Port S). This keyword is specified as absolute value
+			of the base 10 logarithm of the LER Cufoff value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERCUTOFFA/LERCUTOFFB
+			(1E-7) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	4
+
+		OUT:	'LERCUTOFFA=%s'
+	}
+
+	LI LerCutOffB OPT
+	{
+		DES:	"SMT LER Cutoff attribute Port B"
+
+		HELP:	"This keyword provides local write access to the
+			LER Cutoff attribute, registered as fddiPORT 58 in
+			the SMT Standard. This attribute indentifies the
+			excessive Link Error Rate that removes Port A/B (or
+			Port S). This keyword is specified as absolute value
+			of the base 10 logarithm of the LER Cufoff value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERCUTOFFA/LERCUTOFFB
+			(1E-7) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	4
+
+		OUT:	'LERCUTOFFB=%s'
+	}
+
+	LI LerAlarmA OPT
+	{
+		DES:	"SMT LER Alarm attribute Port A"
+
+		HELP:	"This keyword provides local write access to the LER
+			Alarm attribute, registered as fddiPORT 59 in the SMT
+			Standard. This attribute identifies the excessive
+			Link Error Rate that siganls an alarm at Port A/B (or
+			Port S). This keyword is specified as absolute value
+			of the base 10 logarithm of the LER Alarm value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERALARMA/LERALARMB
+			(1E-8) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	5
+
+		OUT:	'LERALARMA=%s'
+	}
+	
+	LI LerAlarmB OPT
+	{
+		DES:	"SMT LER Alarm attribute Port B"
+
+		HELP:	"This keyword provides local write access to the LER
+			Alarm attribute, registered as fddiPORT 59 in the SMT
+			Standard. This attribute identifies the excessive
+			Link Error Rate that siganls an alarm at Port A/B
+			(or Port S). This keyword is specified as absolute
+			value of the base 10 logarithm of the LER Alarm value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERALARMA/LERALARMB
+			(1E-8) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	5
+
+		OUT:	'LERALARMB=%s'
+	}
+
+	PR TMin OPT
+	{
+		DES:	"SMT T-Min attribute"
+
+		HELP:	"This keyword provides local write access to the 2's
+			complement T-Min attribute, registered as fddiMAC 55
+			in the SMT Standard. The value for TMIN is specified
+			in milliseconds. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken. If
+			no value is specified, the default value for TMIN
+			(5 ms) will be used."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	5
+
+		OUT:	'TMIN=%s'
+	    }
+
+	PR TMax OPT
+	{
+		DES:	"SMT T-Max attribute"
+
+		HELP:	"This keyword provides local write access to the 2's
+			complement T-Max attribute, registered as fddiMAC 53
+			in the SMT Standard. The value for TMAX is specified
+			in milliseconds. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken. If
+			no value is specified, the default value for TMAX
+			(165 ms) will be used."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	165
+
+		OUT:	'TMAX=%s'
+	}
+
+	PR TReq OPT
+	{
+		DES:	"SMT T-Req attribute"
+
+		HELP:	"This keyword provides local write access to the 2's
+			complement T-Req attribute, registered as fddiMAC 51
+			in the SMT Standard. The value for TREQ is specified
+			in milliseconds. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken. If
+			no value is specified, the default value for TREQ
+			(165 ms) will be used."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	165
+
+		OUT:	'TREQ=%s'
+	}
+
+	PR TVX OPT
+	{
+		DES:	"SMT TVX attribute"
+
+		HELP:	"This keyword provides local write access to the TVX
+			attribute, registered as fddiMAC 54 in the SMT
+			Standard. This attribute provides local control of
+			the recovery time from transient ring errors.
+			The value for TVX is specified in microseconds.
+			The valid range reaches from 2500 us to 10000 us.
+			If a value is specified which lies outside the limits,
+			the upper/lower limit will be taken. If no value is
+			specified, the default value for TVX (2700 us) will
+			be used."
+
+		TYP:	DEC
+
+ 		VAL:	2500 - 10000
+
+		DEF:	2700
+
+		OUT:	'TVX=%s'
+	}
+
+	;
+	; SBA Parameters
+	;
+	LI SbaCommand OPT
+	{
+		DES:	"SBA Command"
+
+		HELP:	"This keyword is an SBA local action to start or stop
+			the SBA application. The default value is 'STOP'.
+			Note: There should be only one active SBA application
+			in the same ring."
+
+		CD:	'STOP'
+		CH:	'STOP'
+		CD:	'START'
+		CH:	'START'
+
+		DEF:	1
+
+		OUT:	'SBACOMMAND=%s'
+	}
+
+	PR SbaAvailable OPT
+	{
+		DES:	"SbaAvailable attribute"
+
+		HELP:	"This keyword defines the maximum synchronous
+			bandwidth in percent available for the primary path.
+			The valid range reaches from 0 - 100 percent. The
+			default value is 50 percent (6.25 Mbytes/s).
+			If a value is specified which lies outside the limits,
+			the upper/lower limit will be taken. This value
+			remains zero until the SBA application is enabled and
+			active."
+
+		TYP:	DEC
+
+		VAL:	0 - 100
+
+		DEF:	50
+
+		OUT:	'SBAAVAILABLE=%s'
+	}
+
+	;
+	; ESS Parameters
+	;
+	PR SbaPayLoad OPT
+	{
+		DES:	"SbaPayLoad attribute"
+
+		HELP:	"This keyword defines the requested synchronous
+			bandwidth for manual static allocations. The valid
+			range reaches from 0 to 1562 bytes per 125
+			microseconds. For example, if the required bandwidth
+			is 1 Mbit/s (125,000 bytes/s), the value of the payload
+			is 125,000 * 125E-6 = 15.625, rounded up to 16. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. The default value is
+			zero - no synchronous bandwidth is used. The user is
+			required to define the amount of bandwidth to be able
+			to send synchronous frames. If the keyword SbaPayLoad
+			is not specified, the keywords SbaOverHead, MaxTNeg,
+			MinSegmentSize and SbaCategory have no effect."
+
+		TYP:	DEC
+
+		VAL:	0 - 1562
+
+		DEF:	0
+
+		OUT:	'SBAPAYLOAD=%s'
+	}
+
+	PR SbaOverHead OPT
+	{
+		DES:	"SbaOverHead attribute"
+
+		HELP:	"This keyword defines the requested overhead for
+			static allocations. The valid range reaches from
+			50 to 5000 bytes. If a value is specified which lies
+			outside the limits, the upper/lower limit will be
+			taken. The default value is 50 bytes. This keyword
+			has only an effect, if the keyword SbaPayLoad is
+			specified."
+
+		TYP:	DEC
+
+		VAL:	50 - 5000
+
+		DEF:	50
+
+		OUT:	'SBAOVERHEAD=%s'
+	}
+
+	PR MaxTNeg OPT
+	{
+		DES:	"MaxTNeg attribute"
+
+		HELP:	"This keyword defines the maximum token rotation delay
+			acceptable to the application(s) using synchronous
+			bandwidth. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken.
+			The default value is 25 ms. This keyword has only an
+			effect, if the keyword SbaPayLoad is specified."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	25
+
+		OUT:	'MAXTNEG=%s'
+	}
+
+	PR MinSegmentSize OPT
+	{
+		DES:	"MinSegmentSize attribute"
+
+		HELP:	"This keyword defines the minimum synchronous
+			segmentation size. This value corresponds to the
+			amount of bytes to be transmitted on a per token
+			opportunity. The valid range reaches from 1 to 4478
+			bytes. If a value is specified which lies outside the
+			limits, the upper/lower limit will be taken. This
+			keyword has only an effect, if the keyword SbaPayLoad
+			is specified."
+
+		TYP:	DEC
+
+		VAL:	1 - 4478
+
+		OUT:	'MINSEGMENTSIZE=%s'
+	}
+
+	PR SbaCategory OPT
+	{
+		DES:	"SbaCategory attribute"
+
+		HELP:	"This keyword defines the session ID of the
+			SBA_Category for the static allocation. The valid
+			range reaches from 0 to 65535. If a value is specified
+			which lies outside the limits, the upper/lower limit
+			will be taken. This parameter has only an effect, if
+			the keyword SbaPayLoad is specified."
+
+		TYP:	DEC
+
+		VAL:	0 - 65535
+
+		OUT:	'SBACATEGORY=%s'
+	}
+
+	LI SynchTxMode OPT
+	{
+		DES:	"SynchTxMode attribute"
+
+		HELP:	"This keyword defines the synchronous transmission
+			mode. The default value is 'SPLIT', where only
+			packets identified as synchronous packets shall be
+			transmitted by the synchronous queue. The other value
+			is 'ALL', where all LLC packets received from upper
+			layers are transmitted via the synchronous queue.
+			This keyword has only an effect, if the end station
+			support was able to get the required synchronous
+			bandwidth from the SBA."
+
+		CD:	'SPLIT'
+		CH:	'SPLIT'
+		CD:	'ALL'
+		CH:	'ALL'
+
+		DEF:	1
+
+		OUT:	'SYNCHTXMODE=%s'
+	}
+}
+
+DR SKFPNW0E11 OPT
+{
+	DES: 	"Compaq Netelligent 100 FDDI PCI"
+	HELP:	"This driver (SKFPNW.LAN) supports the
+		following adapters:\n
+		Compaq Netelligent 100 FDDI PCI SAS UTP\n
+		Compaq Netelligent 100 FDDI PCI DAS UTP\n
+		Compaq Netelligent 100 FDDI PCI SAS Fiber MIC\n
+		Compaq Netelligent 100 FDDI PCI SAS Fiber SC\n
+		Compaq Netelligent 100 FDDI PCI DAS Fiber SC"
+	PAR:	2.00
+	PROD:	'PCI.1148.4000.0E11.B03E.*',
+		'PCI.1148.4000.0E11.B03D.*',
+		'PCI.1148.4000.0E11.B03F.*',
+		'PCI.1148.4000.0E11.B03C.*',
+		'PCI.1148.4000.0E11.B03B.*'
+	;@# SPROD:	'Compaq~Netelligent 100 FDDI PCI SAS UTP',
+	;@#	'Compaq~Netelligent 100 FDDI PCI DAS UTP',
+	;@#	'Compaq~Netelligent 100 FDDI PCI SAS Fiber MIC',
+	;@#	'Compaq~Netelligent 100 FDDI PCI SAS Fiber SC',
+	;@#	'Compaq~Netelligent 100 FDDI PCI DAS Fiber SC'
+	;@# CLIENT: SKFPNW.LAN
+	;@# ALIAS: SKFPNW.LAN
+FILE:	SKFPNW.LAN
+	TIME:	45
+
+	PR SLOT REQ
+	{
+	}
+
+	FR FrameSelect
+	{
+		CH:	'FDDI_802.2'
+		CH:	'FDDI_SNAP'
+		DEF:	1,2
+	}
+
+	PR NODE
+	{
+	}
+
+	; *****************************************************
+	;
+	; Custom Keywords
+	;
+	; *****************************************************
+
+	;
+	; Driver Parameters
+	;
+	PR PciFix OPT
+	{
+		DES:	"Fix PCI problems on different platforms"
+
+		HELP:	"As there might arise problems on different PCI
+			machines, the parameter PciFix is provided.  Currently
+			the driver only supports the value '0' (no fix)."
+
+		TYP:	HEX
+
+ 		VAL:	0
+
+		DEF:	0
+
+		OUT:	'PCIFIX=%s'
+	}
+
+	LI No_Multicast OPT
+	{
+		DES:	"Send Multicast Packets as Broadcast"
+
+		HELP:	"If the keyword NO_MULTICAST is used, all multicast
+			addresses will be converted to broadcast addresses
+			during transmission."
+
+		CD:	'NO'
+		CH:	''
+
+		CD:	'YES'
+		CH:	'NO_MULTICAST'
+
+		DEF:	1
+
+		OUT:	'%s'	
+	}
+
+	;
+	; SMT Parameters
+	;
+	PR PmfPasswd OPT
+	{
+		DES:	"Password for PMF Requests"
+
+		HELP:	"This keyword defines the password that all remote PMF
+			(Parameter Management Frame) requests must provide to
+			change FDDI attributes within the adapter.
+			The value for PMFPASSWD is 8 ASCII characters long and
+			not case sensitive since lower case letters will be
+			converted to upper case. Password protection can be
+			disabled by setting this keyword to all zeros
+			(default), or by not specifying a PMFPASSWD."
+
+		TYP:	STR (8)
+
+		OUT:	'PMFPASSWD=%s'	
+	}
+
+	PR UserData OPT
+	{
+		DES:    "SMT User Data"
+
+		HELP:	"This keyword provides local write access to the User
+			Data attribute, registered as fddiSMT 17 in the SMT
+			Standard. The User Data must be an ASCII string for
+			compliance with the FDDI SMT Standard."
+
+		TYP:	STR (32)
+
+		OUT:	'USERDATA="%s"'
+	}
+
+	LI LerCutOffA OPT
+	{
+		DES:	"SMT LER Cutoff attribute Port A"
+
+		HELP:	"This keyword provides local write access to the
+			LER Cutoff attribute, registered as fddiPORT 58 in
+			the SMT Standard. This attribute indentifies the
+			excessive Link Error Rate that removes Port A/B (or
+			Port S). This keyword is specified as absolute value
+			of the base 10 logarithm of the LER Cufoff value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERCUTOFFA/LERCUTOFFB
+			(1E-7) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	4
+
+		OUT:	'LERCUTOFFA=%s'
+	}
+
+	LI LerCutOffB OPT
+	{
+		DES:	"SMT LER Cutoff attribute Port B"
+
+		HELP:	"This keyword provides local write access to the
+			LER Cutoff attribute, registered as fddiPORT 58 in
+			the SMT Standard. This attribute indentifies the
+			excessive Link Error Rate that removes Port A/B (or
+			Port S). This keyword is specified as absolute value
+			of the base 10 logarithm of the LER Cufoff value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERCUTOFFA/LERCUTOFFB
+			(1E-7) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	4
+
+		OUT:	'LERCUTOFFB=%s'
+	}
+
+	LI LerAlarmA OPT
+	{
+		DES:	"SMT LER Alarm attribute Port A"
+
+		HELP:	"This keyword provides local write access to the LER
+			Alarm attribute, registered as fddiPORT 59 in the SMT
+			Standard. This attribute identifies the excessive
+			Link Error Rate that siganls an alarm at Port A/B (or
+			Port S). This keyword is specified as absolute value
+			of the base 10 logarithm of the LER Alarm value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERALARMA/LERALARMB
+			(1E-8) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	5
+
+		OUT:	'LERALARMA=%s'
+	}
+	
+	LI LerAlarmB OPT
+	{
+		DES:	"SMT LER Alarm attribute Port B"
+
+		HELP:	"This keyword provides local write access to the LER
+			Alarm attribute, registered as fddiPORT 59 in the SMT
+			Standard. This attribute identifies the excessive
+			Link Error Rate that siganls an alarm at Port A/B
+			(or Port S). This keyword is specified as absolute
+			value of the base 10 logarithm of the LER Alarm value.
+			The valid range reaches from 1E-4 to 1E-15. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. If no value is
+			specified, the default value for LERALARMA/LERALARMB
+			(1E-8) will be used."
+
+		CD:	'1E-4'
+		CH:	4
+
+		CD:	'1E-5'
+		CH:	5
+
+		CD:	'1E-6'
+		CH:	6
+
+		CD:	'1E-7'
+		CH:	7
+
+		CD:	'1E-8'
+		CH:	8
+
+		CD:	'1E-9'
+		CH:	9
+
+		CD:	'1E-10'
+		CH:	10
+
+		CD:	'1E-11'
+		CH:	11
+
+		CD:	'1E-12'
+		CH:	12
+
+		CD:	'1E-13'
+		CH:	13
+
+		CD:	'1E-14'
+		CH:	14
+
+		CD:	'1E-15'
+		CH:	15
+
+		DEF:	5
+
+		OUT:	'LERALARMB=%s'
+	}
+
+	PR TMin OPT
+	{
+		DES:	"SMT T-Min attribute"
+
+		HELP:	"This keyword provides local write access to the 2's
+			complement T-Min attribute, registered as fddiMAC 55
+			in the SMT Standard. The value for TMIN is specified
+			in milliseconds. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken. If
+			no value is specified, the default value for TMIN
+			(5 ms) will be used."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	5
+
+		OUT:	'TMIN=%s'
+	    }
+
+	PR TMax OPT
+	{
+		DES:	"SMT T-Max attribute"
+
+		HELP:	"This keyword provides local write access to the 2's
+			complement T-Max attribute, registered as fddiMAC 53
+			in the SMT Standard. The value for TMAX is specified
+			in milliseconds. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken. If
+			no value is specified, the default value for TMAX
+			(165 ms) will be used."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	165
+
+		OUT:	'TMAX=%s'
+	}
+
+	PR TReq OPT
+	{
+		DES:	"SMT T-Req attribute"
+
+		HELP:	"This keyword provides local write access to the 2's
+			complement T-Req attribute, registered as fddiMAC 51
+			in the SMT Standard. The value for TREQ is specified
+			in milliseconds. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken. If
+			no value is specified, the default value for TREQ
+			(165 ms) will be used."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	165
+
+		OUT:	'TREQ=%s'
+	}
+
+	PR TVX OPT
+	{
+		DES:	"SMT TVX attribute"
+
+		HELP:	"This keyword provides local write access to the TVX
+			attribute, registered as fddiMAC 54 in the SMT
+			Standard. This attribute provides local control of
+			the recovery time from transient ring errors.
+			The value for TVX is specified in microseconds.
+			The valid range reaches from 2500 us to 10000 us.
+			If a value is specified which lies outside the limits,
+			the upper/lower limit will be taken. If no value is
+			specified, the default value for TVX (2700 us) will
+			be used."
+
+		TYP:	DEC
+
+ 		VAL:	2500 - 10000
+
+		DEF:	2700
+
+		OUT:	'TVX=%s'
+	}
+
+	;
+	; SBA Parameters
+	;
+	LI SbaCommand OPT
+	{
+		DES:	"SBA Command"
+
+		HELP:	"This keyword is an SBA local action to start or stop
+			the SBA application. The default value is 'STOP'.
+			Note: There should be only one active SBA application
+			in the same ring."
+
+		CD:	'STOP'
+		CH:	'STOP'
+		CD:	'START'
+		CH:	'START'
+
+		DEF:	1
+
+		OUT:	'SBACOMMAND=%s'
+	}
+
+	PR SbaAvailable OPT
+	{
+		DES:	"SbaAvailable attribute"
+
+		HELP:	"This keyword defines the maximum synchronous
+			bandwidth in percent available for the primary path.
+			The valid range reaches from 0 - 100 percent. The
+			default value is 50 percent (6.25 Mbytes/s).
+			If a value is specified which lies outside the limits,
+			the upper/lower limit will be taken. This value
+			remains zero until the SBA application is enabled and
+			active."
+
+		TYP:	DEC
+
+		VAL:	0 - 100
+
+		DEF:	50
+
+		OUT:	'SBAAVAILABLE=%s'
+	}
+
+	;
+	; ESS Parameters
+	;
+	PR SbaPayLoad OPT
+	{
+		DES:	"SbaPayLoad attribute"
+
+		HELP:	"This keyword defines the requested synchronous
+			bandwidth for manual static allocations. The valid
+			range reaches from 0 to 1562 bytes per 125
+			microseconds. For example, if the required bandwidth
+			is 1 Mbit/s (125,000 bytes/s), the value of the payload
+			is 125,000 * 125E-6 = 15.625, rounded up to 16. If a
+			value is specified which lies outside the limits, the
+			upper/lower limit will be taken. The default value is
+			zero - no synchronous bandwidth is used. The user is
+			required to define the amount of bandwidth to be able
+			to send synchronous frames. If the keyword SbaPayLoad
+			is not specified, the keywords SbaOverHead, MaxTNeg,
+			MinSegmentSize and SbaCategory have no effect."
+
+		TYP:	DEC
+
+		VAL:	0 - 1562
+
+		DEF:	0
+
+		OUT:	'SBAPAYLOAD=%s'
+	}
+
+	PR SbaOverHead OPT
+	{
+		DES:	"SbaOverHead attribute"
+
+		HELP:	"This keyword defines the requested overhead for
+			static allocations. The valid range reaches from
+			50 to 5000 bytes. If a value is specified which lies
+			outside the limits, the upper/lower limit will be
+			taken. The default value is 50 bytes. This keyword
+			has only an effect, if the keyword SbaPayLoad is
+			specified."
+
+		TYP:	DEC
+
+		VAL:	50 - 5000
+
+		DEF:	50
+
+		OUT:	'SBAOVERHEAD=%s'
+	}
+
+	PR MaxTNeg OPT
+	{
+		DES:	"MaxTNeg attribute"
+
+		HELP:	"This keyword defines the maximum token rotation delay
+			acceptable to the application(s) using synchronous
+			bandwidth. The valid range reaches from 5 ms to
+			165 ms. If a value is specified which lies outside
+			the limits, the upper/lower limit will be taken.
+			The default value is 25 ms. This keyword has only an
+			effect, if the keyword SbaPayLoad is specified."
+
+		TYP:	DEC
+
+		VAL:	5 - 165
+
+		DEF:	25
+
+		OUT:	'MAXTNEG=%s'
+	}
+
+	PR MinSegmentSize OPT
+	{
+		DES:	"MinSegmentSize attribute"
+
+		HELP:	"This keyword defines the minimum synchronous
+			segmentation size. This value corresponds to the
+			amount of bytes to be transmitted on a per token
+			opportunity. The valid range reaches from 1 to 4478
+			bytes. If a value is specified which lies outside the
+			limits, the upper/lower limit will be taken. This
+			keyword has only an effect, if the keyword SbaPayLoad
+			is specified."
+
+		TYP:	DEC
+
+		VAL:	1 - 4478
+
+		OUT:	'MINSEGMENTSIZE=%s'
+	}
+
+	PR SbaCategory OPT
+	{
+		DES:	"SbaCategory attribute"
+
+		HELP:	"This keyword defines the session ID of the
+			SBA_Category for the static allocation. The valid
+			range reaches from 0 to 65535. If a value is specified
+			which lies outside the limits, the upper/lower limit
+			will be taken. This parameter has only an effect, if
+			the keyword SbaPayLoad is specified."
+
+		TYP:	DEC
+
+		VAL:	0 - 65535
+
+		OUT:	'SBACATEGORY=%s'
+	}
+
+	LI SynchTxMode OPT
+	{
+		DES:	"SynchTxMode attribute"
+
+		HELP:	"This keyword defines the synchronous transmission
+			mode. The default value is 'SPLIT', where only
+			packets identified as synchronous packets shall be
+			transmitted by the synchronous queue. The other value
+			is 'ALL', where all LLC packets received from upper
+			layers are transmitted via the synchronous queue.
+			This keyword has only an effect, if the end station
+			support was able to get the required synchronous
+			bandwidth from the SBA."
+
+		CD:	'SPLIT'
+		CH:	'SPLIT'
+		CD:	'ALL'
+		CH:	'ALL'
+
+		DEF:	1
+
+		OUT:	'SYNCHTXMODE=%s'
+	}
+}
+
+DLANG: 4
+	$YES =		"Yes"
+	$NO =		"No"
+
+LANG: 1
+	$YES =		"Yes"
+	$NO =		"No"
+
+LANG: 6
+	$YES =		"Yes"
+	$NO =		"No"
+
+LANG: 7
+	$YES =		"Yes"
+	$NO =		"No"
+
+LANG: 8
+	$YES =		"Yes"
+	$NO =		"No"
+
+LANG: 9
+	$YES =		"Yes"
+	$NO =		"No"
+
+LANG: 10
+	$YES =		"Yes"
+	$NO =		"No"
+
+LANG: 12
+	$YES =		"Yes"
+	$NO =		"No"
+
+LANG: 13
+	$YES =		"Yes"
+	$NO =		"No"
+
+LANG: 14
+	$YES =		"Yes"
+	$NO =		"No"
+
+LANG: 16
+	$YES =		"Yes"
+	$NO =		"No"
+
+;DrIvEr DeScRiPtIoN EnD
+

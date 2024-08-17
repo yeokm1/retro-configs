@@ -1,0 +1,226 @@
+;DrIvEr DeScRiPtIoN
+
+Ver:    1.00
+Syn:    1.00
+
+Driver  ACCTON_ACC6X
+{
+    Description: $ACC6X_1
+    Help:   $ACC6X_2
+    PAR: 1.00
+    FILE: ACC6X.LAN
+    Prod: 'PNPISA.ACC.166.?',
+	  'EISA.ACC.166.?'
+
+;@# SPROD: 'Accton~EN166x PnP-ISA Adapter',
+;@#		   'Accton~EN165x ISA Adapter'
+
+;@# CLIENT: ACC6X.LAN, ACC6X.COM
+;@# ALIAS:  ACC6X.LAN	
+
+    LIST  PnP_Mode REQ
+    {
+        Desc:   "PnP Feature Supported ?"
+        Help:   "If this machine supports the PnP feature, you should
+                override the default with YES."
+
+        CDesc:  "YES"
+        Choice: '1'
+
+        CDesc:  "NO"
+        Choice: Undefine
+
+        Def:    2
+    }
+
+    Prompt SLOT
+    If (PnP_Mode == '1') Require
+    Else Optional
+    {
+	VAL: 1-65535
+	Help: $ACC6X_SlotHelp
+    }
+
+    Prompt PORT
+    If (PnP_Mode != '1') Require
+    Else Hidden
+    {
+        ReservedLength: 20
+    }
+
+    Prompt NODE
+    {
+    }
+
+    Frame FrameSelect
+    {
+	Help:   "The driver defaults to load all 4 frame types.
+		 You can optionally remove them."
+
+	Choice: 'Ethernet_802.2'
+	Choice: 'Ethernet_802.3'
+	Choice: 'Ethernet_SNAP'
+	Choice: 'Ethernet_II'
+	Def:    1,2,3,4
+    }
+
+    Prompt RETRIES
+    {
+	Values:     0-255
+	Default:    5
+    }
+}
+
+
+DLANG:    4
+;English
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+LANG:     1
+;CHINESE
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+
+LANG:     6
+;French
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+LANG:     7
+;German
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+LANG:     8
+;Italian
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+LANG:     9
+;JAPANESE
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+
+LANG:     10
+;KOREAN
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+
+LANG:     12
+;PORTUGESE
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+
+LANG:     13
+;RUSSIAN
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+
+LANG:     14
+;Spanish
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+
+LANG:     16
+;CHINESE
+     $ACC6X_1 = "Accton EN166x PnP-ISA Adapter"
+     $ACC6X_2 = "This driver (ACC6X.LAN) supports Accton EN166x PnP-ISA
+ethernet network cards installed in 16-bit expansion slots in server.
+You can install up to four boards, as long as their settings do not conflict."
+     $ACC6X_3 = "Accton EN165x ISA Adapter"
+     $ACC6X_4 = "This driver (ACC6X.LAN) supports the EN165x ISA Ethernet
+Adapter. You can install up to four boards, as long as their settings do not
+conflict."
+     $ACC6X_SlotHelp = "Select the number for the (PnP)ISA expansion slot 
+in which the Ethernet network adapter is installed."
+
+
+
+;DrIvEr DeScRiPtIoN EnD

@@ -1,0 +1,36 @@
+InS_StArT
+SMCPWR.COM
+1.0
+^Standard Microsystems Corporation 8432/8434/9332 Family PCI,SMCPWR.COM,0E0
+?This driver supports Digital Semiconductor 2104x/2114x 10/100 mbps Ethernet Controller based Network adapters on PCI machines.
+$O0E0(NODE ADDRESS)Optional Node Address
+0
+FFFFFFFFFFFF
+*O0E0(FRAME)Media Frame Type(s)
+?NOTE: Ethernet_802.2 is now the default frame type for ODI Drivers.
+@Ethernet_802.2
+Ethernet_802.3
+Ethernet_II
+Ethernet_SNAP
+!O0E0()Connection Type
+?NOTE: Connection type will be autodetected on driver's load
+TP
+TP_NO_LINK_TEST
+TP_FULL_DUPLEX
+AUI
+BNC
+T4
+@AUTOSENSE 
+!O0E0(Line_Speed)Line Speed
+?NOTE: The default Line speed will be selected on driver's load according to the chip found in board (Ethernet or Fast-Ethernet).
+10
+100
+!O0E0()Power Saving Mode
+?NOTE: Select the SNOOZE mode if you wish the chip to work in Power-Saving mode.
+SNOOZE
+InS_EnD
+
+
+
+
+ 

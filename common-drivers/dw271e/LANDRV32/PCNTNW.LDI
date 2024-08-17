@@ -1,0 +1,792 @@
+; PCNTNW.LDI
+;
+; PCnetISA, PCnetISA+, PCnetISA_II, PCnetPCI, PCnetPCI_II, PCnetFAST, PCnetFAST+ 
+; Network Interface Cards.
+;
+; VeRsIoN=4.01 Novell LAN Installation Information File for AMD PCNTNW.
+; CoPyRiGhT=(c)Copyright 1997, 1998, by AMD, Inc.  All rights reserved.
+
+VER: 4.02
+SYN: 1.00
+
+
+DR PCnetFAST
+{
+     DES: $PCNTNW_5
+     HELP: $PCNTNW_6
+     PAR: 2.00  
+     FILE: PCNTNW.LAN
+     PROD: 'PCI.1022.2000.*.*.*'
+;@# Sprod: 'AMD PCnet-FAST, PCnet-FAST+ Ethernet card'
+
+;@# CLIENT: PCNTNW.COM, PCNTNW.LAN, CPCNTNW.LAN, CNEAMD.LAN
+;@# ALIAS:  PCNTNW.LAN, CPCNTNW.LAN, CNEAMD.LAN
+
+     PR PCI REQ
+     {
+    TYP: STR
+    VAL: 'PCI'
+    DEF: 'PCI'
+    OUT: '%s'
+     }
+     
+     LI PermaNet OPT
+     {
+        DES: "Enable PermaNet Server function?"
+        Help: "PermaNet Server provides the failover function"
+        CD:     "No"
+        CH:     ''
+        CD:     "Yes"
+        CH:     ''
+        DEF: 1
+;                DEF: UND
+     }
+     
+     PR PRIMARY_SLOT if (PermaNet == 2) REQ ELS HID
+     {
+        DES: "Please Enter the Primary Adapter Slot Number"
+        Help: "Slot Number is a number between 1 - 65535 "
+    TYP: DEC
+    VAL: 1-65535
+        OUT: 'PRIMARY=%s'
+     }
+     
+     PR SECONDARY_SLOT if (PermaNet == 2) REQ ELS HID
+     {
+        DES: "Please Enter the Secondary Adapter Slot Number"
+        Help: "Slot Number is a number between 1 - 65535 "
+    TYP: DEC
+    VAL: 1-65535
+        OUT: 'SECONDARY=%s'
+     }
+
+     PR SLOT if (PermaNet == 2) HID ELS REQ
+     {
+    TYP: DEC
+    VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+    CH: 'Ethernet_802.2'
+    CH: 'Ethernet_SNAP'
+    CH: 'Ethernet_II'
+    CH: 'Ethernet_802.3'
+
+    DEF: 1,2,3,4
+     }
+
+     PR RETRIES
+     {
+    TYP: DEC
+    VAL: 0-255
+    DEF: 5
+     }
+     
+
+     LI LineSpeedMode OPT 
+     {
+        DES: $PCNTNW_22
+        Help: $PCNTNW_23
+
+        CD:     $PCNTNW_24
+        CH:     'AUTO'
+        CD:     $PCNTNW_25
+        CH:     '100F'
+        CD:     $PCNTNW_26
+        CH:     '100H'
+        CD:     $PCNTNW_27
+        CH:     '10F'
+        CD:     $PCNTNW_28
+        CH:     '10H'
+        DEF: 1        
+;                DEF: UND
+        OUT: 'LINESPEED=%s'
+     }
+     
+     LI MPMODE OPT
+     {
+        DES: $PCNTNW_20
+        Help: $PCNTNW_18
+
+        CD:     $PCNTNW_15
+        CH:     'OFF'
+        CD:     $PCNTNW_16
+        CH:     'ON'
+        DEF: 1
+;                DEF: UND
+        OUT: 'MPMODE=%s'
+     }
+
+}
+
+DR PCnetPCI
+{
+     DES: $PCNTNW_3
+     HELP: $PCNTNW_4
+     PAR: 2.00
+     FILE: PCNTNW.LAN
+     PROD: 'PCI.1022.2000.*.*.*'
+;@# Sprod: 'AMD PCnet-PCI, PCnet-PCI II Ethernet card'
+
+;@# CLIENT: PCNTNW.COM, PCNTNW.LAN, CPCNTNW.LAN, CNEAMD.LAN
+;@# ALIAS:  PCNTNW.LAN, CPCNTNW.LAN, CNEAMD.LAN
+
+     PR PCI REQ
+     {
+    TYP: STR
+    VAL: 'PCI'
+    DEF: 'PCI'
+    OUT: '%s'
+     }
+
+     LI PermaNet OPT
+     {
+        DES: "Enable PermaNet Server function?"
+        Help: " PermaNet Server provides the failover function "
+        CD:     "No"
+        CH:     ''
+        CD:     "Yes"
+        CH:     ''
+        DEF: 1
+;                DEF: UND
+     }
+     
+     PR PRIMARY_SLOT if (PermaNet == 2) REQ ELS HID
+     {
+        DES: "Please Enter the Primary Adapter Slot Number"
+        Help: "Slot Number is a number between 1 - 65535 "
+    TYP: DEC
+    VAL: 1-65535
+        OUT: 'PRIMARY=%s'
+     }
+     
+     PR SECONDARY_SLOT if (PermaNet == 2) REQ ELS HID
+     {
+        DES: "Please Enter the Secondary Adapter Slot Number"
+        Help: "Slot Number is a number between 1 - 65535 "
+    TYP: DEC
+    VAL: 1-65535
+        OUT: 'SECONDARY=%s'
+     }
+
+     PR SLOT if (PermaNet == 2) HID ELS REQ
+     {
+    TYP: DEC
+    VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+    CH: 'Ethernet_802.2'
+    CH: 'Ethernet_SNAP'
+    CH: 'Ethernet_II'
+    CH: 'Ethernet_802.3'
+
+    DEF: 1,2,3,4
+     }
+
+     PR RETRIES
+     {
+    TYP: DEC
+    VAL: 0-255
+    DEF: 5
+     }
+
+     LI Adapter_Duplex OPT
+     {
+        DES: $PCNTNW_14
+        Help: $PCNTNW_10
+
+        CD:     $PCNTNW_11
+        CH:     'OFF'
+        CD:     $PCNTNW_12
+        CH:     'UTP'
+        CD:     $PCNTNW_13
+        CH:     'AUI'
+        DEF: 1
+;                DEF: UND
+        OUT: 'FDUP=%s'
+     }
+     
+     LI MPMODE OPT
+     {
+        DES: $PCNTNW_19
+        Help: $PCNTNW_18
+
+        CD:     $PCNTNW_15
+        CH:     'OFF'
+        CD:     $PCNTNW_16
+        CH:     'ON'
+        DEF: 1
+;                DEF: UND
+        OUT: 'MPMODE=%s'
+     }
+}
+
+     
+
+DR PCnetPNP
+{
+     DES: $PCNTNW_7
+     HELP: $PCNTNW_8
+     PAR: 2.00   
+     FILE: PCNTNW.LAN
+     PROD: 'PNPISA.ADV.55A.A'
+;@# Sprod: 'AMD PCnet-ISA+ and PCnet-ISA II Plug and Play Ethernet card'
+
+;@# CLIENT: PCNTNW.COM, PCNTNW.LAN, CPCNTNW.LAN, CNEAMD.LAN
+;@# ALIAS:  PCNTNW.LAN, CPCNTNW.LAN, CNEAMD.LAN
+
+
+     PR SLOT REQ
+     {
+    TYP: DEC
+    VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+    CH: 'Ethernet_802.2'
+    CH: 'Ethernet_SNAP'
+    CH: 'Ethernet_II'
+    CH: 'Ethernet_802.3'
+
+    DEF: 1,2,3,4
+     }
+
+     PR RETRIES
+     {
+    TYP: DEC
+    VAL: 0-255
+    DEF: 5
+     }
+     
+     LI Adapter_Duplex OPT
+     {
+        DES: PCNTNW_21
+        Help: $PCNTNW_10
+
+        CD:     $PCNTNW_11
+        CH:     'OFF'
+        CD:     $PCNTNW_12
+        CH:     'UTP'
+        CD:     $PCNTNW_13
+        CH:     'AUI'
+        DEF: 1
+;                DEF: UND
+        OUT: 'FDUP=%s'
+     }
+     
+     LI MPMODE OPT
+     {
+        DES: $PCNTNW_17
+        Help: $PCNTNW_18
+
+        CD:     $PCNTNW_15
+        CH:     'OFF'
+        CD:     $PCNTNW_16
+        CH:     'ON'
+        DEF: 1
+;                DEF: UND
+        OUT: 'MPMODE=%s'
+     }
+
+}
+
+DR PCnetISA
+{
+     DES: $PCNTNW_1
+     HELP: $PCNTNW_2
+     PAR: 1.00  
+     FILE: PCNTNW.LAN
+     PROD: EISA.NVL.090.1
+;@# Sprod: 'AMD PCnet-ISA Ethernet card'
+
+;@# CLIENT: PCNTNW.COM, PCNTNW.LAN, CPCNTNW.LAN, CNEAMD.LAN
+;@# ALIAS:  PCNTNW.LAN, CPCNTNW.LAN, CNEAMD.LAN
+
+
+     PR PCnetISA REQ
+     {
+        DES: $PCNTNW_8
+        Help:   $PCNTNW_18
+    TYP: STR
+    DEF: 'ISA'
+    VAL: 'ISA'
+    OUT: '%s'
+     }
+
+     PR INT     REQ
+     {
+        TYP: HEX(3)
+    VAL: 3, 4, 5, 9, A, B, C, F
+    DEF: 3
+        OUT: 'INT=%s'
+     }
+
+     PR PORT REQ
+     {
+        TYP: HEX(3)
+    VAL: 300, 320, 340, 360, 200,220,240,260,280,2A0,2C0,2E0
+    DEF: 300
+    RES: 20
+        OUT: 'PORT=%s'
+     }
+
+     PR DMA     REQ
+     {
+        TYP: HEX(3)
+    VAL: 3, 5, 6, 7
+    DEF: 5
+        OUT: 'DMA=%s'
+     }
+
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+    CH: 'Ethernet_802.2'
+    CH: 'Ethernet_SNAP'
+    CH: 'Ethernet_II'
+    CH: 'Ethernet_802.3'
+    DEF: 1,2,3,4
+     }
+
+     PR RETRIES
+     {
+    TYP: DEC
+    VAL: 0-255
+    DEF: 5
+     }
+
+}
+
+
+DLANG:    4
+;English
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+
+LANG: 1
+;CHINESE
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+
+
+LANG: 6
+;FRENCH
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+
+LANG: 7
+;GERMAN
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+
+LANG: 8
+;ITALIAN
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+
+LANG: 9
+;JAPANESE
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+
+
+LANG: 10
+;KOREAN
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+
+
+LANG: 12
+;PORTUGUESE-BRAZIL
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+
+LANG: 13
+;RUSSIAN
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+
+
+LANG: 14
+;SPANISH
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+
+
+LANG: 16
+;CHINESE
+     $PCNTNW_1 = "AMD Ethernet PCnet-ISA"
+     $PCNTNW_2 = "This driver (PCNTNW.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $PCNTNW_3 = "AMD Ethernet PCnet-PCI, PCnet-PCI_II"
+     $PCNTNW_4 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_5 = "AMD Ethernet PCnet-FAST, PCnet-FAST+"
+     $PCNTNW_6 = "This driver (PCNTNW.LAN) supports the network board 
+installed in an PCI system."
+     $PCNTNW_7 = "AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)"
+     $PCNTNW_8 = "Install PCnet-ISA legacy (Jumper) Card ?"
+     $PCNTNW_9 = "Please input correct INT, PORT and DMA value in the following fileds"
+
+     $PCNTNW_10 = "Full-Duplex can be enable for UTP(RJ-45) or AUT port"
+     $PCNTNW_11 = "OFF"
+     $PCNTNW_12 = "Twist-Pair (RJ-45) Port"
+     $PCNTNW_13 = "AUI Port"
+     $PCNTNW_14 = "Activate Full Duplex mode for PCnet-PCI II ?"
+     $PCNTNW_15 = "Off"
+     $PCNTNW_16 = "On"
+     $PCNTNW_17 = "Activate Magic Packet mode for PCnet-ISA II?"
+     $PCNTNW_18 = "A value of 'On' will enable it"
+     $PCNTNW_19 = "Activate Magic Packet mode for PCnet-PCI II?"
+     $PCNTNW_20 = "Activate Magic Packet mode?"
+     $PCNTNW_21 = "Activate Full Duplex mode for PCnet-ISA II ?"
+     $PCNTNW_22 = "Manual Select 10/100 Mb, Full/Half Duplex mode?"
+     $PCNTNW_23 = "You may manually select the 10/100 Mb and Full/Half Duplex mode, or
+AUTO selection"
+     $PCNTNW_24 = "Auto Select"
+     $PCNTNW_25 = "100Mb, Full-Duplex"
+     $PCNTNW_26 = "100Mb, Half-Duplex"
+     $PCNTNW_27 = "10Mb, Full-Duplex"
+     $PCNTNW_28 = "10Mb, Half-Duplex"
+

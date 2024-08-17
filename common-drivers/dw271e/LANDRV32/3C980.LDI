@@ -1,0 +1,1853 @@
+
+VER:    1.00
+SYN:    1.00
+
+;3Com 3C980 Fast EtherLink XL Server - driver information file
+
+
+DR 3C980_1
+{
+   DES:         $3C980_1
+   HELP:        $3C980_2 
+
+   PAR: 1.00
+   FILE: 3C980.LAN
+   PROD: 'PCI.10B7.9800.10B7.9800.00'
+   ;@#  Sprod:  '3Com~ Fast EtherLink XL Server Adapter(3c980)'
+   ;@#  Client: 3c980
+   ;@#  Alias: 3c980
+   PR   SLOT OPTIONAL
+   {
+	DES:    $3C980_3
+	HELP:   $3C980_4
+	DEF:UNDEFINED
+   }
+
+    LIST VLANMODE OPTIONAL
+    {
+    DESC:         $DESC_VLANMODE
+    HELP:         $HELP_VLANMODE
+    ;TYPE:         DEC(1)
+
+	CDescription: $VLM1
+	Choice: UNDEFINED
+
+	CDescription: $VLM2
+	Choice: 1
+
+	DEF: 2
+
+    OUT:          ''
+    }
+
+     PROMPT VSLOT
+     IF (VLANMODE==1 AND SLOT==UNDEFINED) OPTIONAL
+     ELSE HIDDEN
+   {
+    DES:         $DESC_VSLOT
+    HELP:         $HELP_VSLOT
+    VALUES:       1-16
+    TYPE:         DEC(2) 
+    OUT:          'VSlot=%s'
+    DEF: UNDEFINED
+    }
+
+
+     LIST VLAN 
+     IF (VLANMODE == 1) REQUIRED
+     ELSE HIDDEN 
+   {
+    DES:         $DESC_VLAN
+    HELP:         $HELP_VLAN
+
+   CDescription: "1"
+   Choice:      '1'
+
+   CDescription: "2"
+   Choice:      '2'
+
+   CDescription: "3"
+   Choice:      '3'
+
+   CDescription: "4"
+   Choice:      '4'
+
+   CDescription: "5"
+   Choice:      '5'
+
+   CDescription: "6"
+   Choice:      '6'
+
+   CDescription: "7"
+   Choice:      '7'
+
+   CDescription: "8"
+   Choice:      '8'
+
+   CDescription: "9"
+   Choice:      '9'
+
+   CDescription: "10"
+   Choice:      '10'
+
+   CDescription: "11"
+   Choice:      '11'
+
+   CDescription: "12"
+   Choice:      '12'
+
+   CDescription: "13"
+   Choice:      '13'
+
+   CDescription: "14"
+   Choice:      '14'
+
+   CDescription: "15"
+   Choice:      '15'
+
+   CDescription: "16"
+   Choice:      '16'
+
+;    VALUES:       1-16
+;    TYPE:         DEC(2) 
+;    DEFAULT:      1
+
+     DEFAULT: 1
+     OUT:        'VLAN=%s'
+;;    DEF: UNDEFINED
+    }
+
+
+
+ 
+   
+   PR   NODE 
+   IF (SLOT == UNDEFINED) HIDDEN
+   ELSE OPTIONAL
+   {
+   }
+
+   FR   FrameSelect
+	{
+	DES:    $3C980_5
+	HELP:   $3C980_6
+
+	CD:     $3C980_8
+	CH:     'Ethernet_802.2'
+
+	CD:     $3C980_7
+	CH:     'Ethernet_802.3'
+
+	CD:     $3C980_9
+	CH:     'Ethernet_SNAP'
+
+	CD:     $3C980_10
+	CH:     'Ethernet_II'
+
+	DEF:    1
+   }
+
+
+
+   LIST VERBOSE_LEVEL 
+   IF (SLOT == UNDEFINED) HIDDEN
+   ELSE OPTIONAL
+   {
+   DES:         $DESC_VERBOSE_LEVEL
+   HELP:         $HELP_VERBOSE_LEVEL
+
+   CDescription: $VL1
+   Choice:      '1'
+
+   CDescription: $VL2
+   Choice:      '0'
+
+   CDescription: $VL3
+   Choice:      '2'
+
+   CDescription: $VL4
+   Choice:      '4'
+
+   CDescription: $VL5
+   Choice:      '3'
+
+   CDescription: $VL6
+   Choice:      '5'
+
+   CDescription: $VL7
+   Choice:      '6'
+
+   CDescription: $VL8
+   Choice:      '7'
+
+   DEF: 8       
+   OUT:          'Verbose_Level=%s'
+   }
+
+
+
+    LIST SHD 
+   IF (SLOT == UNDEFINED) HIDDEN
+   ELSE OPTIONAL
+    {
+    DESC:         $DESC_SHD
+    HELP:         $HELP_SHD
+    ;TYPE:       DEC(1)
+
+	CDescription: $SHD1
+	Choice: UNDEFINED
+
+	CDescription: $SHD2
+	Choice: 1   
+
+	DEF: 2
+
+    OUT:          ''
+    }
+
+
+
+
+   LIST CHECK_LEVEL  
+   IF (SHD == 1) REQUIRED
+     ELSE HIDDEN 
+
+  {
+   DES:          $DESC_CHECK_LEVEL
+   HELP:         $HELP_CHECK_LEVEL
+
+   CD: $CL1
+   CH: UNDEFINED
+
+   CDescription: $CL2
+   Choice:      '0'
+
+   CDescription: $CL3
+   Choice:      '2'
+
+   CDescription: $CL4
+   Choice:      '3'
+
+   DEF: 1
+	
+  OUT:          'Check_Level=%s'
+  }
+
+    PROMPT THRESHOLD
+     IF (SHD == 1) OPTIONAL
+     ELSE HIDDEN 
+	{
+    DESC:         $DESC_THRESHOLD
+    HELP:         $HELP_THRESHOLD
+    VALUES:       0-64000
+    TYPE:         DEC(5) 
+    DEFAULT:      UNDEFINED
+    OUT:          'Threshold=%s'
+    }
+
+
+    PROMPT SAMPLE 
+     IF (SHD == 1) OPTIONAL
+     ELSE HIDDEN 
+	{
+    DESC:         $DESC_SAMPLE
+    VALUES:       0-64000
+    TYPE:         DEC(5) 
+    DEFAULT:      UNDEFINED
+    OUT:          'Sample=%s'
+    }
+
+    LIST RSL 
+   IF (SLOT == UNDEFINED) HIDDEN
+   ELSE OPTIONAL
+    {
+    DESC:         $DESC_RSL
+    HELP:         $HELP_RSL
+    ;TYPE:       DEC(1)
+
+	CDescription: $RSL1
+	Choice: UNDEFINED
+
+	CDescription: $RSL2
+	Choice: 1   
+
+	DEF: 2
+
+    OUT:          ''
+    }
+
+     PROMPT BACKUP 
+     IF (RSL == 1) REQUIRED
+     ELSE HIDDEN 
+   {
+	    HELP:         $HELP_BACKUP
+	    DES:          $DESC_BACKUP
+	    TYPE:       DEC(5)
+	    OUT:          'Standby=%s'
+		DEF: UNDEFINED
+   }
+
+	
+;- - - - - - - - - - RSL Specific parameters - - - - - - - - - -
+     
+
+    PROMPT RETRIES 
+    IF (BACKUP != UNDEFINED) OPTIONAL 
+	ELSE HIDDEN
+	{
+    HELP:        $HELP_RETRIES
+    DES:         $DESC_RETRIES
+    VALUES:      1-64000
+    TYPE:        DEC(5) 
+    OUT:         'Retries=%s'
+	DEF:         UNDEFINED
+    }
+
+    LIST PREFERRED
+    IF (BACKUP != UNDEFINED) 
+	OPTIONAL 
+	ELSE
+		HIDDEN
+   {
+    HELP:         $HELP_PREFERRED
+    DES:         $DESC_PREFERRED
+
+	CDescription: $PF1
+	Choice: UNDEFINED
+
+	CDescription: $PF2
+	Choice: 'ON'   
+
+	DEF: 1
+
+    OUT:          'Preferred'
+    }
+
+
+
+    LIST NOALTCHECK
+    IF (BACKUP != UNDEFINED) 
+	OPTIONAL 
+	ELSE
+		HIDDEN
+   {
+    HELP:         $HELP_NOALTCHECK
+    DES:         $DESC_NOALTCHECK
+
+	CDescription: $AC1
+	Choice: 'UNDEFINED'
+
+	CDescription: $AC2
+	Choice: ' '
+
+	DEF: 1
+
+    OUT:          'NoAltCheck'
+    }
+
+
+    LIST PINGOFF
+    IF (BACKUP != UNDEFINED) 
+	OPTIONAL 
+	ELSE
+		HIDDEN
+   {
+    HELP:         $HELP_PINGOFF
+    DES:         $DESC_PINGOFF
+
+
+	CDescription: $PO1
+	Choice: UNDEFINED
+
+	CDescription: $PO2
+	Choice: 'ON'
+
+	DEF: 1
+
+    OUT:          'PingOff'
+    }
+
+
+
+    LIST NOALTPING
+    IF ((BACKUP != UNDEFINED) AND (PINGOFF != UNDEFINED))
+	OPTIONAL 
+	ELSE
+		HIDDEN
+   {
+    HELP:         $HELP_NOALTPING
+    DES:         $DESC_NOALTPING
+
+	CDescription: $AP1
+	Choice: UNDEFINED
+
+	CDescription: $AP2
+	Choice: 'ON'
+
+	DEF: 1
+
+    OUT:          'NoAltPing'
+    }
+
+ }
+
+;- - - - - - - - - - End RSL Specific parameters - - - - - - - - - -
+
+
+DLANG:  4
+;English
+	$3C980_1 = "3Com Fast EtherLink XL Server Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+$DESC_VLAN    =  "Virtual LAN ID"
+$HELP_VLAN    =  "Enter a valid VLAN identifier. A virtual NIC
+				(VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+$DESC_VSLOT    =  "Virtual Slot Identifier"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed to specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"
+
+LANG:   1
+;Chinese (Simplified)
+	$3C980_1 = "3Com Fast EtherLink Server Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+$DESC_VLAN   =  "Select VLAN ID"
+$HELP_VLAN    =  "Select the VLAN to which this VNIC will be attached to. A virtual NIC
+				(VNICs) is loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+
+$DESC_VSLOT    =  "Virtual Slot Number"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed to specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"
+
+
+LANG:   6
+;French
+	$3C980_1 = "3Com Fast EtherLink Server Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+$DESC_VLAN   =  "Select VLAN ID"
+$HELP_VLAN    =  "Select the VLAN to which this VNIC will be attached to. A virtual NIC
+				(VNICs) is loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+
+$DESC_VSLOT    =  "Virtual Slot Number"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed to specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"
+
+LANG:   7
+;German
+	$3C980_1 = "3Com Fast EtherLink XL Server Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+
+$DESC_VLAN   =  "Select VLAN ID"
+$HELP_VLAN    =  "Select the VLAN to which this VNIC will be attached to. A virtual NIC
+				(VNICs) is loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+$DESC_VSLOT    =  "Virtual Slot Number"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed to specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"
+
+LANG:   8
+;Italian
+	$3C980_1 = "3Com Fast EtherLink XL Server XL Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+$DESC_VLAN   =  "Select VLAN ID"
+$HELP_VLAN    =  "Select the VLAN to which this VNIC will be attached to. A virtual NIC
+				(VNICs) is loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+$DESC_VSLOT    =  "Virtual Slot Number"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed up specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"
+
+LANG:   9
+;Japanese
+	$3C980_1 = "3Com Fast EtherLink Server Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+$DESC_VLAN   =  "Select VLAN ID"
+$HELP_VLAN    =  "Select the VLAN to which this VNIC will be attached to. A virtual NIC
+				(VNICs) is loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+
+$DESC_VSLOT    =  "Virtual Slot Number"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed to specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"
+
+LANG:   10
+;Korean
+	$3C980_1 = "3Com Fast EtherLink Server Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+$DESC_VLAN   =  "Select VLAN ID"
+$HELP_VLAN    =  "Select the VLAN to which this VNIC will be attached to. A virtual NIC
+				(VNICs) is loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+
+$DESC_VSLOT    =  "Virtual Slot Number"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed to specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"
+
+LANG:   12
+;Portuguese (Brazil)
+	$3C980_1 = "3Com Fast EtherLink Server Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+$DESC_VLAN   =  "Select VLAN ID"
+$HELP_VLAN    =  "Select the VLAN to which this VNIC will be attached to. A virtual NIC
+				(VNICs) is loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+
+$DESC_VSLOT    =  "Virtual Slot Number"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed to specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"
+
+
+LANG:   13
+;Russian
+	$3C980_1 = "3Com Fast EtherLink Server Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+$DESC_VLAN   =  "Select VLAN ID"
+$HELP_VLAN    =  "Select the VLAN to which this VNIC will be attached to. A virtual NIC
+				(VNICs) is loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+
+$DESC_VSLOT    =  "Virtual Slot Number"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed to specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"
+
+
+LANG:   14
+;Spanish
+	$3C980_1 = "3Com Fast EtherLink Server XL Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+$DESC_VLAN    =  "Virtual LAN ID"
+$HELP_VLAN    =  "Enter a valid VLAN identifier. A virtual NIC
+				(VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+$DESC_VSLOT    =  "Virtual Slot Number"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed to specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"
+
+LANG:   16
+;Chinese (Traditional)
+	$3C980_1 = "3Com Fast EtherLink Server Driver "
+	$3C980_2 = "A 3C980 NIC must be present in a PCI slot before loading this driver."
+	$3C980_3 = "Slot Number"
+	$3C980_4 = "Select the PCI slot number of the NIC"
+	$3C980_5 = "Frame Types"
+	$3C980_6 = "The default frame type is 802.2."
+	$3C980_7 = "802.3"
+	$3C980_8 = "802.2"
+	$3C980_9 = "802.2 SNAP"
+	$3C980_10 = "Ethernet II"
+
+$DESC_VLAN   =  "Select VLAN ID"
+$HELP_VLAN    =  "Select the VLAN to which this VNIC will be attached to. A virtual NIC
+				(VNICs) is loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. "
+
+
+$DESC_VSLOT    =  "Virtual Slot Number"
+$HELP_VSLOT    =  "Enter a valid Slot identifier. Use this option only if you
+			are not allowed to specify the slot number because it is already 
+			in use. The slot parameter can only be used for the first Virtual
+			NIC. A virtual NIC (VNICs) are loaded for each VLAN selected. When defining a 
+				VLAN both the slot number and the VLAN number are used in
+				defining the VNIC. The virtual slot is the slot number of
+				the physical VNIC to which the virtual NIC will be attached."
+
+
+$DESC_RSL    =  "Resilient Link Configuration"
+$HELP_RSL    =  "Use this to enable access toRSL configuration parameters.
+				RSL must be configured if a Standby NIC is being used."
+$RSL2="RSL not enabled."
+$RSL1="Configure RSL."
+
+$DESC_BACKUP="Standby Slot Number"
+$HELP_BACKUP= "This field defines the NIC to be configured as a
+				standby NIC. This defines a matched pair of
+				NICs to provide NIC resiliency."
+
+$DESC_SHD    =  "SHD Configuration"
+$HELP_SHD    =  "Use this to enable access to SHD configuration parameters.
+				Default configuration will apply otherwise."
+$SHD2="Use default SHD configuration."
+$SHD1="Configure SHD."
+
+$DESC_CHECK_LEVEL    =  "Check Level"
+$HELP_CHECK_LEVEL    =  "Define the error monitoring level of the
+						driver. Basic is default and covers all the NIC
+						failure conditions. Enhanced checking monitors
+						extra driver internal conditions. Enhanced is more
+						CPU intensive."
+
+$CL1="Basic Level Checking"
+$CL2="All checking is disabled"
+$CL3="Enhanced Level Checking is enabled"
+$CL4="Both Basic and Enhanced Level Checking is enabled."
+
+
+$DESC_VERBOSE_LEVEL    =  "Log message Level"
+$HELP_VERBOSE_LEVEL    =  "Specify the log message Level. This is the level
+						 of messages which are logged to the console and the
+						 system error file."
+$VL1="Error messages logged"
+$VL2="Message logging disabled"
+$VL3="Warning messages logged"
+$VL4="Informational Messages logged"
+$VL5="Error and warning messages logged"
+$VL6="Error and Informational messages logged"
+$VL7="Warning and Informational messages logged"
+$VL8="All Messages logged"
+
+$DESC_RETRIES    =  "Switch back Retries"
+$HELP_RETRIES    =  "Specify the number of times a NIC can fail. Once this
+					count is reached then the NIC will be disabled. This ensures
+					that an infinite switch/switch back loop will be eliminated when
+					intermittant but serious errors occur. The default is no failure
+					limit."
+
+$DESC_THRESHOLD    =  "Transmit/Receive Error Threshold"
+$HELP_THRESHOLD    =  "Specify the number of individual transmit/receive
+					errors are allowed (within the error sample window size)
+					before an excessive transmit/recieve
+					error is flagged. See the users manual for the error conditions
+					which are tracked. "
+
+$DESC_SAMPLE    =  "Sample window size"
+$HELP_SAMPLE    =  "Specify the data transfer sample window size to which the
+					tolerated error threshold is applied. The data transfer
+					error monitoring can be disabled by setting this value to 0."
+
+
+$DESC_PREFERRED="Primary NIC preferred option"
+$HELP_PREFERRED="Use this option to indicate if the primary NIC is the
+				preferred NIC meaning if it fails and a switch to the standy
+				monitor occurs a switch back will occur if it recovers."
+$PF1="No NIC is preferred"
+$PF2="Primary NIC is preferred"
+
+$DESC_VLANMODE    =  "VLAN Configuration"
+$HELP_VLANMODE    =  "This will put the physical NIC into VLAN
+					mode and enable VLAN configuration. The NIC configured for
+					VLAN operation  must be connected to a VLT configured port in the 
+					3Com Switch"
+$VLM2="VLANs are disabled"
+$VLM1="VLANS are enabled"
+
+
+$DESC_NOALTCHECK    =  "Enable/Disale standby NIC monitoring."
+$HELP_NOALTCHECK    =  "Use the option to enable or disable monitoring of
+						the secondary NIC. When enabled the check level is
+						applied to both NICs. When disabled the NIC is assumed
+						to be working correctly and a switch will still occur
+						if the primary fails."
+$AC1="Standby NIC checking is enabled"
+$AC2="Standby NIC checking is disabled"
+
+$DESC_NOALTPING    =  "Enable/Disale pinging from standy NIC"
+$HELP_NOALTPING    =    "Use the option to enable or disable the sending of
+						ping frames by the standby NIC to the active NIC."
+
+$AP1="Ping frames from standby NIC are enabled"
+$AP2="Ping frames from standby NIC are disabled"
+
+$DESC_PINGOFF    =  "Enable disable NIC pinging"
+$HELP_PINGOFF    =  "Use the option to enable or disable the sending of
+						ping frames by the active and standby NICs"
+
+$PO1="Ping frames are enabled"
+$PO2="Ping frames are disabled"

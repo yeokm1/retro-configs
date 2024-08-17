@@ -1,0 +1,251 @@
+; KTC30.LDI
+; Kingston KNE30 EtheRx Client PCI Ethernet Adapter
+; Netware LAN Installation Information File
+
+VER: 2.10
+SYN: 1.00
+
+DR ktc30
+{
+    DES:    $ktc30_1
+    HELP:   $ktc30_2
+    PAR:    2.00
+    FILE:   KTC30.LAN
+
+    PROD:   'PCI.10EC.8029.0000.0000.0?',
+            'PCI.10EC.8029.10EC.8029.0?'
+
+;@# SPROD:   'Kingston KNE30 Ethernet Adapter',
+;@#          'Kingston KNE30 Ethernet Adapter'
+
+;@# CLIENT: KTC30.LAN, KTC30.COM
+;@# ALIAS: KTC30.LAN
+
+    PROMPT SLOT REQ
+    {
+        DES:    $ktc30_3
+        HELP:   $ktc30_4
+        
+        TYPE:   DECIMAL
+        VAL:    1-65535
+        DEF:    UNDEFINED
+        OUT:    'SLOT=%s'
+    }
+
+    FRAME FrameSelect
+    {
+        CD:     $ktc30_5
+        CH:     $ktc30_6
+        CD:     $ktc30_7
+        CH:     $ktc30_8
+        CD:     $ktc30_9
+        CH:     $ktc30_10
+        CD:     $ktc30_11
+        CH:     $ktc30_12
+        DEF:    1,2,3,4
+    }
+
+    PROMPT NODE OPTIONAL
+    {
+        DES:    $ktc30_13
+        TYPE:   HEX
+        VAL:    1-FFFFFFFFFFFE
+        DEF:    UNDEFINED
+        OUT:    'NODE=%s'
+    }
+
+}
+
+DLANG:    4
+;English
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+
+LANG:    1
+;CHINESE
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+
+
+LANG:    6
+;French
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+
+LANG:    7
+;German
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+
+LANG:    8
+;Italian
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+
+
+LANG:    9
+;JAPANESE
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+
+
+LANG:    10
+;KOREAN
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+
+
+LANG:    12
+;PORTUGESE
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+
+
+LANG:    13
+;RUSSIAN
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+
+LANG:    14
+;Spanish
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+
+
+LANG:    16
+;CHINESE
+    $ktc30_1 = "Kingston KNE30 Netware Driver (3.30 MLID specs)"
+    $ktc30_2 = "This driver supports KNE30T and KNE30BT adapters"
+    $ktc30_3 = "Slot"
+    $ktc30_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the KNE30 is installed."
+    $ktc30_5 = "802.3"
+    $ktc30_6 = "ethernet_802.3"
+    $ktc30_7 = "802.2"
+    $ktc30_8 = "ethernet_802.2"
+    $ktc30_9 = "SNAP"
+    $ktc30_10 = "ethernet_snap"
+    $ktc30_11 = "ethernet II"
+    $ktc30_12 = "ethernet_II"
+    $ktc30_13 = "Node Address"
+

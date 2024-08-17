@@ -1,0 +1,651 @@
+; CNEAMD.LDI
+;
+; NE2100, NE1500, PCnetISA, PCnetISA+,PCnetPCI, PCnet-Fast
+; Network Interface Cards.
+;
+; VeRsIoN=1.38 Novell LAN Installation Information File for CNEAMD.
+; CoPyRiGhT=(c)Copyright 1996, 1997, 1998, by Novell, Inc.  All rights reserved.
+
+VER: 1.38
+SYN: 1.00
+
+DR CNE2100
+{
+     DES: $CNE2100_1
+     HELP:     $CNE2100_2
+     PAR: 3.00
+     FILE:     CNEAMD.LAN
+     PROD:     'EISA.NVL.090.1'
+;@#  Sprod: 'Novell ~ NE2100 or compatible'
+;@# CLIENT: CNEAMD, NE1500T, NE2100
+;@# ALIAS: CNE2100.LAN, CNE1500T.LAN, NE2100.LAN, NE1500T.LAN
+
+	LIST Adapter_Bus_Type OPTIONAL
+	{
+		Description:	$CNE2100_9
+		Help:		$CNE2100_10
+
+		CDescription:	$CNE2100_11
+		Choice:		''
+		CDescription:	$CNE2100_12
+		Choice:		'ISA'
+
+		Default:	1
+		OutputFormat:	'%s'
+	}
+
+     PR INT
+	IF (BUS == ISA) REQ
+	ELSE HID
+     {
+          VAL: 3, 4, 5, 9, A, B, C, F
+          DEF: 3
+     }
+
+     PR PORT
+	IF (BUS == ISA) REQ
+	ELSE HID
+     {
+          VAL: 300, 320, 340, 360, 200, 220, 240, 260, 280, 2A0, 2C0, 2E0
+          DEF: 300
+          RES: 20
+     }
+
+     PR DMA
+	IF (BUS == ISA) REQ
+	ELSE HID
+     {
+          VAL: 3, 5, 6, 7
+          DEF: 5
+     }
+
+     PR SLOT
+	IF (BUS != ISA) REQ
+	ELSE HID
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,4
+     }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+     PR BELOW16 if(GT_16 == TRUE) REQUIRED else HIDDEN
+     {
+          TYP: STR
+          DEF: 'BELOW16'
+          VAL: 'BELOW16'
+          OUT: '%s'
+     }
+
+}
+
+DR CNE2100ISA
+{
+     DES: $CNE2100_3
+     HELP:     $CNE2100_4
+     PAR: 3.00
+     FILE:     CNEAMD.LAN
+     PROD:     'EISA.NVL.090.1'
+;@#  Sprod: 'Novell ~ PCnetISA or compatible'
+;@# CLIENT: CNEAMD
+;@# ALIAS: CNE2100.LAN, CNE1500T.LAN, NE2100.LAN, NE1500T.LAN
+
+	LIST Adapter_Bus_Type OPTIONAL
+	{
+		Description:	$CNE2100_9
+		Help:		$CNE2100_10
+
+		CDescription:	$CNE2100_11
+		Choice:		''
+		CDescription:	$CNE2100_12
+		Choice:		'ISA'
+
+		Default:	1
+		OutputFormat:	'%s'
+	}
+
+     PR INT
+	IF (BUS == ISA) REQ
+	ELSE HID
+     {
+          VAL: 3, 4, 5, 9, A, B, C, F
+          DEF: 3
+     }
+
+     PR PORT
+	IF (BUS == ISA) REQ
+	ELSE HID
+     {
+          VAL: 300, 320, 340, 360, 200,220,240,260,280,2A0,2C0,2E0
+          DEF: 300
+          RES: 20
+     }
+
+     PR DMA
+	IF (BUS == ISA) REQ
+	ELSE HID
+     {
+          VAL: 3, 5, 6, 7
+          DEF: 5
+     }
+
+     PR SLOT
+	IF (BUS != ISA) REQ
+	ELSE HID
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,4
+     }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+     PR BELOW16 if(GT_16 == TRUE) REQUIRED else HIDDEN
+     {
+          TYP: STR
+          DEF: 'BELOW16'
+          VAL: 'BELOW16'
+          OUT: '%s'
+     }
+
+}
+
+DR CNE2100PCI
+{
+     DES: $CNE2100_5
+     HELP:     $CNE2100_6
+     PAR: 3.00
+     FILE:     CNEAMD.LAN
+     PROD:     'PCI.1022.2000.*.*.*'
+;@#  Sprod: 'AMD ~ PCnetPCI,PCnetPCI_II,PCnet-Fast Ethernet'
+;@# CLIENT: CNEAMD
+;@# ALIAS: CNE2100.LAN, CNE1500T.LAN, NE2100.LAN, NE1500T.LAN
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,4
+     }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+	  LIST Adapter_Duplex OPTIONAL
+	  {
+		Description:	$CNE2100_13
+		Help:		$CNE2100_14
+
+		CDescription:	$CNE2100_12
+		Choice:		''
+		CDescription:	$CNE2100_11
+		Choice:		'FULLDUPLEX'
+
+		OutputFormat:	'%s'
+		DEF: 1
+	  }
+
+}
+
+
+DR CNE2100PNP
+{
+     DES: $CNE2100_7
+     HELP:     $CNE2100_8
+     PAR: 3.00
+     FILE:     CNEAMD.LAN
+     PROD:     'PNPISA.ADV.55A.A'
+;@#  Sprod: 'AMD ~ PCnetISA+ Ethernet Adapter'
+;@# CLIENT: CNEAMD
+;@# ALIAS: CNE2100.LAN, CNE1500T.LAN, NE2100.LAN, NE1500T.LAN
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,4
+     }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+     PR BELOW16 if(GT_16 == TRUE) REQUIRED else HIDDEN
+     {
+          TYP: STR
+          DEF: 'BELOW16'
+          VAL: 'BELOW16'
+          OUT: '%s'
+     }
+
+}
+
+
+
+DR CNE1500T
+{
+     DES: $CNE1500T_1
+     HELP:     $CNE1500T_2
+     PAR: 3.00
+     FILE:     CNEAMD.LAN
+     PROD:     'EISA.NVL.150.1'
+;@#  Sprod: 'Novell ~ NE1500T or compatible'
+;@# CLIENT: CNEAMD
+;@# ALIAS: CNE2100.LAN, CNE1500T.LAN, NE2100.LAN, NE1500T.LAN
+
+	LIST Adapter_Bus_Type OPTIONAL
+	{
+		Description:	$CNE2100_9
+		Help:		$CNE2100_10
+
+		CDescription:	$CNE2100_11
+		Choice:		''
+		CDescription:	$CNE2100_12
+		Choice:		'ISA'
+
+		Default:	1
+		OutputFormat:	'%s'
+	}
+
+
+     PR INT
+	IF (BUS == ISA) REQ
+	ELSE HID
+     {
+          VAL: 3, 4, 5, 9
+          DEF: 3
+     }
+
+     PR PORT
+	IF (BUS == ISA) REQ
+	ELSE HID
+     {
+          VAL: 300, 320, 340, 360
+          DEF: 300
+          RES: 20
+     }
+
+     PR DMA
+	IF (BUS == ISA) REQ
+	ELSE HID
+     {
+          VAL: 3, 5, 6, 7
+          DEF: 5
+     }
+
+     PR SLOT
+	IF (BUS != ISA) REQ
+	ELSE HID
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,4
+     }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+     PR BELOW16 if(GT_16 == TRUE) REQUIRED else HIDDEN
+     {
+          TYP: STR
+          DEF: 'BELOW16'
+          VAL: 'BELOW16'
+          OUT: '%s'
+     }
+
+}
+
+
+
+DLANG:    4
+;English
+     $CNE2100_1 = "Novell Ethernet NE2100"
+     $CNE2100_2 = "This driver (CNEAMD.LAN) supports the NE2100 network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $CNE2100_3 = "Novell Ethernet PCnetISA"
+     $CNE2100_4 = "This driver (CNEAMD.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $CNE2100_5 = "Novell Ethernet PCnetPCI, PCnetPCI_II, PCnet-Fast"
+     $CNE2100_6 = "This driver (CNEAMD.LAN) supports the network board
+installed in an PCI system."
+     $CNE2100_7 = "Novell Ethernet PCnetISA+ (PNP)"
+     $CNE2100_8 = "This driver (CNEAMD.LAN) supports the network board
+installed in an Plug and Play system."
+
+     $CNE2100_9 = "Is the card an ISA Card?"
+     $CNE2100_10 = "A value of 'Yes' is necessary to support legacy ISA cards.
+Plug and Play ISA is not considered legacy ISA."
+
+     $CNE2100_11 = "No"
+     $CNE2100_12 = "Yes"
+     $CNE2100_13 = "Activate Full Duplex mode ?"
+     $CNE2100_14 = "A value of 'Yes' will put PCnetPCI II into the Full
+Duplex mode."
+
+     $CNE1500T_1 = "Novell Ethernet NE1500T"
+     $CNE1500T_2 = "This driver (CNE1500T.LAN) supports the NE1500T network
+board installed in an ISA server.  It must be installed in a 16-bit expansion
+slot."
+
+LANG: 6
+;French
+     $CNE2100_1 = "Ethernet NE2100 de Novell"
+     $CNE2100_2 = "Ce pilote (CNEAMD.LAN) supporte la carte
+ rÇseau NE2100 installÇe sur un systäme
+ ISA. La carte doit àtre placÇe dans un
+ connecteur 16 octets."
+     $CNE2100_3 = "Ethernet PCnetISA de Novell"
+     $CNE2100_4 = "Ce pilote (CNEAMD.LAN) supporte la carte
+rÇseau installÇe sur un systäme ISA. La
+ carte doit àtre placÇe dans un connecteur
+ 16 octets."
+     $CNE2100_5 = "Ethernet PCnetPCI, PCnetPCI_II, PCnet-Fast de Novell"
+     $CNE2100_6 = "Ce pilote (CNEAMD.LAN) supporte la carte
+rÇseau installÇe sur un systäme PCI."
+     $CNE2100_7 = "Ethernet PCnetISA+ (PNP) de Novell"
+     $CNE2100_8 = "Ce pilote (CNEAMD.LAN) supporte la carte
+rÇseau installÇe sur un systäme Plug and Play."
+
+     $CNE2100_9 = "Cette carte est-elle une carte ISA ?"
+     $CNE2100_10 = "Choisissez 'Oui' pour prendre en charge
+ les cartes Legacy ISA. Les cartes Plug
+\nand Play ISA ne sont pas considÇrÇes
+ \ncomme Legacy ISA."
+
+     $CNE2100_11 = "Non"
+     $CNE2100_12 = "Oui"
+     $CNE2100_13 = "Activer le mode Duplex total ?"
+     $CNE2100_14 = "Choisissez 'Oui' pour mettre PCnetPCI II
+ en mode Duplex total."
+
+     $CNE1500T_1 = "Ethernet NE1500T de Novell"
+     $CNE1500T_2 = "Ce pilote (CNE1500T.LAN) supporte la
+ \ncarte rÇseau NE1500T installÇe sur un
+ serveur ISA. Il doit àtre installÇ dans
+ \nun connecteur d'extension 16 octets."
+
+LANG: 7
+;German
+     $CNE2100_1 = "Novell Ethernet NE2100"
+     $CNE2100_2 = "Dieser Treiber (CNEAMD.LAN) unterstÅtzt die in einem
+ISA-System installierte NE2100-Karte. Sie mu· in einem 16-Bit-Erweiterungssteckplatz
+installiert sein."
+     $CNE2100_3 = "Novell Ethernet PCnetISA"
+     $CNE2100_4 = "Dieser Treiber (CNEAMD.LAN) unterstÅtzt die in einem
+ISA-System installierte Netzwerkkarte. Sie mu· in einem 16-Bit-Erweiterungssteckplatz
+installiert sein."
+     $CNE2100_5 = "Novell Ethernet PCnetPCI, PCnetPCI_II, PCnet-Fast"
+     $CNE2100_6 = "Dieser Treiber (CNEAMD.LAN) unterstÅtzt die in einem
+PCI-System installierte Netzwerkkarte."
+     $CNE2100_7 = "Novell Ethernet PCnetISA+ (PNP)"
+     $CNE2100_8 = "Dieser Treiber (CNEAMD.LAN) unterstÅtzt die in einem
+Plug and Play-System installierte Netzwerkkarte."
+
+     $CNE2100_9 = "Ist die Karte eine ISA-Karte?"
+     $CNE2100_10 = "Die Auswahl 'Ja' ist fÅr die UnterstÅtzung der Legacy-ISA-Karten erforderlich.
+Plug Play-ISA ist keine Legacy-ISA."
+
+     $CNE2100_11 = "Nein"
+     $CNE2100_12 = "Ja"
+     $CNE2100_13 = "Vollen Duplex-Modus aktivieren ?"
+     $CNE2100_14 = "Mit der Auswahl 'Ja' wird der volle Duplex-Modus fÅr
+PCnetPCI II aktiviert."
+
+     $CNE1500T_1 = "Novell Ethernet NE1500T"
+     $CNE1500T_2 = "Dieser Treiber (CNE1500T.LAN) unterstÅtzt die in einem ISA-Server
+installierte NE1500T-Netzwerkkarte.  Er mu· in einen 16-Bit-Erweiterungssteckplatz
+installiert werden."
+
+LANG: 8
+;Italian
+     $CNE2100_1 = "Novell Ethernet NE2100"
+     $CNE2100_2 = "Questo driver CNEAMD.LAN supporta le schede di rete NE2100
+installate in un server ISA. Devono essere installate
+in uno slot di espansione da 16 bit."
+     $CNE2100_3 = "Novell Ethernet PCnetISA"
+     $CNE2100_4 = "Questo driver CNEAMD.LAN supporta le schede di rete installate 
+in un sistema ISA. Devono essere installate in slot di
+espansione a 16 bit."
+     $CNE2100_5 = "Novell Ethernet PCnetPCI, PCnetPCI_II, PCnet-Fast"
+     $CNE2100_6 = "Questo driver CNEAMD.LAN supporta le schede di rete installate 
+in un sistema PCI."
+     $CNE2100_7 = "Novell Ethernet PCnetISA+ (PNP)"
+     $CNE2100_8 = "Questo driver CNEAMD.LAN supporta le schede di rete installate 
+in un sistema Plug and Play."
+
+     $CNE2100_9 = "E' una scheda ISA?"
+     $CNE2100_10 = "Per poter supportare le schede ISA precedenti occorre usare il valore 'Sç'.
+Le schede ISA Plug and Play non appartengono a questa categoria."
+
+     $CNE2100_11 = "No"
+     $CNE2100_12 = "Sç"
+     $CNE2100_13 = "Attivare la modalitÖ Full Duplex?"
+     $CNE2100_14 = "Il valore 'Sç' attiverÖ la modalitÖ Full Duplex
+in PCnetPCI II."
+
+     $CNE1500T_1 = "Novell Ethernet NE1500T"
+     $CNE1500T_2 = "Questo driver CNE1500T.LAN supporta la scheda di rete
+NE1500T installata in un server ISA. Deve essere installata
+in uno slot di espansione da 16 bit."
+
+LANG: 12
+;Portuguese
+     $CNE2100_1 = "Novell Ethernet NE2100"
+     $CNE2100_2 = "Este driver (CNEAMD.LAN) suporta a placa de rede NE2100 
+instalada num sistema ISA. Ela deve ser instalada num slot de expans∆o de
+16-bits."
+     $CNE2100_3 = "Novell Ethernet PCnetISA"
+     $CNE2100_4 = "Este driver (CNEAMD.LAN) suporta a placa de rede
+instalada num sistema ISA. Ela deve ser instalada num slot de expans∆o de
+16-bits."
+     $CNE2100_5 = "Novell Ethernet PCnetPCI, PCnetPCI_II, PCnet-Fast"
+     $CNE2100_6 = "Este driver (CNEAMD.LAN) suporta a placa de rede
+instalada num sistema PCI."
+     $CNE2100_7 = "Novell Ethernet PCnetISA+ (PNP)"
+     $CNE2100_8 = "Este driver (CNEAMD.LAN) suporta a placa de rede
+ instalada num sistema Plug and Play."
+
+     $CNE2100_9 = "A placa Ç do tipo ISA?"
+     $CNE2100_10 = "Um valor 'Sim' Ç necess†rio para suportar as placas Legacy ISA.
+As placas ISA Plug and Play n∆o s∆o consideradas como Legacy ISA."
+
+     $CNE2100_11 = "N∆o"
+     $CNE2100_12 = "Sim"
+     $CNE2100_13 = "Ativar modo Full Duplex ?"
+     $CNE2100_14 = "Um valor 'Sim' colocar† o PCnetPCI II no modo Full
+Duplex."
+
+     $CNE1500T_1 = "Novell Ethernet NE1500T"
+     $CNE1500T_2 = "Este driver (CNE1500T.LAN) suporta a placa de rede NE1500T
+instalada em um servidor ISA. Ela deve ser instalada em um slot de expans∆o de
+16 bits."
+
+LANG: 14
+;Spanish
+     $CNE2100_1 = "Novell Ethernet NE2100"
+     $CNE2100_2 = "El controlador (CNEAMD.LAN) da soporte a la tarjeta de red
+NE2100 instalada en un sistema ISA. Se debe instalar en una ranura de expansi¢n
+de 16 bits."
+     $CNE2100_3 = "Novell Ethernet PCnetISA"
+     $CNE2100_4 = "El controlador (CNEAMD.LAN) da soporte a la tarjeta de red
+instalada en un sistema ISA. Se debe instalar en una ranura de expansi¢n
+de 16 bits."
+     $CNE2100_5 = "Novell Ethernet PCnetPCI, PCnetPCI_II, PCnet-Fast"
+     $CNE2100_6 = "El controlador (CNEAMD.LAN) da soporte a la tarjeta de red
+instalada en un sistema PCI."
+     $CNE2100_7 = "Novell Ethernet PCnetISA+ (PNP)"
+     $CNE2100_8 = "El controlador (CNEAMD.LAN) da soporte a la tarjeta de red
+instalada en un sistema Plug and Play."
+
+     $CNE2100_9 = "®Es Çsta una tarjeta ISA?"
+     $CNE2100_10 = "Para dar soporte a tarjetas ISA legadas indique 'S°'.
+Las tarjetas ISA de 'plug and play' no se consideran como ISA legadas."
+
+     $CNE2100_11 = "No"
+     $CNE2100_12 = "S°"
+     $CNE2100_13 = "®Activar el modo d£plex integral?"
+     $CNE2100_14 = "Indique 'S°' para colocar PCnetPCI II en modo
+d£plex integral."
+
+     $CNE1500T_1 = "Novell Ethernet NE1500T"
+     $CNE1500T_2 = "Este controlador (CNE1500T.LAN) ofrece soporte a la tarjeta de red
+NE1500T instalada en un servidor ISA. La misma debe estar instalada
+en una ranura de expansi¢n de 16 bits."
+
+LANG: 1
+;Chinese-Simplified
+     $CNE2100_1 = "Novell Ethernet NE2100"
+     $CNE2100_2 = "This driver (CNEAMD.LAN) supports the NE2100 network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $CNE2100_3 = "Novell Ethernet PCnetISA"
+     $CNE2100_4 = "This driver (CNEAMD.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $CNE2100_5 = "Novell Ethernet PCnetPCI, PCnetPCI_II, PCnet-Fast"
+     $CNE2100_6 = "This driver (CNEAMD.LAN) supports the network board
+installed in an PCI system."
+     $CNE2100_7 = "Novell Ethernet PCnetISA+ (PNP)"
+     $CNE2100_8 = "This driver (CNEAMD.LAN) supports the network board
+installed in an Plug and Play system."
+
+     $CNE2100_9 = "’‚ «“ª∏ˆ ISA ø®¬£ø"
+     $CNE2100_10 = "“™÷ß≥÷¥´Õ≥µƒ ISA Õ¯ø®£¨÷µ±ÿ–ÎŒ™°∞ «°±°£
+°∞º¥≤Âº¥”√°±µƒ ISA Õ¯ø®≤ª±ª»œŒ™ «¥´Õ≥Õ¯ø®°£"
+
+     $CNE2100_11 = "∑Ò"
+     $CNE2100_12 = " «"
+     $CNE2100_13 = "“™º§ªÓ»´À´π§∑Ω Ω¬ ?"
+     $CNE2100_14 = "A value of 'Yes' will put PCnetPCI II into the Full
+Duplex mode."
+
+     $CNE1500T_1 = "Novell Ethernet NE1500T"
+     $CNE1500T_2 = "This driver (CNE1500T.LAN) supports the NE1500T network
+board installed in an ISA server.  It must be installed in a 16-bit expansion
+slot."
+
+LANG: 16
+;Chinese-Traditional
+     $CNE2100_1 = "Novell Ethernet NE2100"
+     $CNE2100_2 = "¶π≈X∞ µ{¶°(CNEAMD.LAN) §‰¥©¶w∏À¶b ISA ®t≤Œ§U™∫ NE2100 ∫Ù∏Ù•d°C•≤∂∑¶w∏À®Ï 16 ¶Ï§∏™∫©µ¶˘¥°º—§§°C"
+     $CNE2100_3 = "Novell Ethernet PCnetISA"
+     $CNE2100_4 = "¶π≈X∞ µ{¶°(CNEAMD.LAN) §‰¥©¶w∏À¶b ISA ®t≤Œ§U™∫∫Ù∏Ù•d°C•≤∂∑¶w∏À®Ï 16 ¶Ï§∏™∫©µ¶˘¥°º—§§°C"
+     $CNE2100_5 = "Novell Ethernet PCnetPCI, PCnetPCI_II, PCnet-Fast"
+     $CNE2100_6 = "¶π≈X∞ µ{¶°(CNEAMD.LAN) §‰¥©¶w∏À¶b PCI ®t≤Œ§U™∫∫Ù∏Ù•d°C"
+     $CNE2100_7 = "Novell Ethernet PCnetISA+ (PNP)"
+     $CNE2100_8 = "¶π≈X∞ µ{¶°(CNEAMD.LAN) §‰¥©¶w∏À¶b¿H¥°ßY•Œ®t≤Œ§U™∫∫Ù∏Ù•d°C"
+
+     $CNE2100_9 = "¶π∫Ù∏Ù•d¨Oß_¨∞ ISA ∫Ù∏Ù•d°H"
+     $CNE2100_10 = "•≤∂∑≠n¶≥°u¨O°v™∫≠»•H§‰¥© legacy  ISA ™∫∫Ù∏Ù•d°C¿H¥°ßY•Œ™∫∫Ù∏Ù•d®√´D legacy ISA°C"
+
+     $CNE2100_11 = "ß_"
+     $CNE2100_12 = "¨O"
+     $CNE2100_13 = "¨Oß_∂}±“°u•˛≥°¬˘§u°vº“¶°°H"
+     $CNE2100_14 = "•≤∂∑≠n¶≥°u¨O°v™∫≠»•H±N PCnetPCI II ≥]©w¨∞•˛≠±¬˘§uº“¶°°C"
+
+     $CNE1500T_1 = "Novell Ethernet NE1500T"
+     $CNE1500T_2 = "¶π≈X∞ µ{¶°(CNE1500T.LAN) §‰¥©¶w∏À¶b ISA ¶¯™Aæπ§U™∫ NE1500T ∫Ù∏Ù•d°C•≤∂∑¶w∏À®Ï 16 ¶Ï§∏™∫©µ¶˘¥°º—§§°C"
+
+LANG: 9
+;Japanese
+     $CNE2100_1 = "Novell Ethernet NE2100"
+     $CNE2100_2 = "This driver (CNEAMD.LAN) supports the NE2100 network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $CNE2100_3 = "Novell Ethernet PCnetISA"
+     $CNE2100_4 = "This driver (CNEAMD.LAN) supports the network
+board installed in an ISA system.  It must be installed in a 16-bit expansion
+slot."
+     $CNE2100_5 = "Novell Ethernet PCnetPCIÅAPCnetPCI_IIÅAPCnet-Fast"
+     $CNE2100_6 = "This driver (CNEAMD.LAN) supports the network board
+installed in an PCI system."
+     $CNE2100_7 = "Novell Ethernet PCnetISA+ (PNP)"
+     $CNE2100_8 = "This driver (CNEAMD.LAN) supports the network board
+installed in an Plug and Play system."
+
+     $CNE2100_9 = "Is the card an ISA Card?"
+     $CNE2100_10 = "A value of 'Yes' is necessary to support legacy ISA cards.
+Plug and Play ISA is not considered legacy ISA."
+
+     $CNE2100_11 = "No"
+     $CNE2100_12 = "Yes"
+     $CNE2100_13 = "Activate Full Duplex mode ?"
+     $CNE2100_14 = "A value of 'Yes' will put PCnetPCI II into the Full
+Duplex mode."
+
+     $CNE1500T_1 = "Novell Ethernet NE1500T"
+     $CNE1500T_2 = "This driver (CNE1500T.LAN) supports the NE1500T network
+board installed in an ISA server.  It must be installed in a 16-bit expansion
+slot."
+

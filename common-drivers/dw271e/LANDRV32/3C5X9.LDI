@@ -1,0 +1,470 @@
+;DrIvEr DeScRiPtIoN
+
+VER:    2.00
+SYN:    1.00
+
+;3Com 3C5X9 EtherLink III v4.0 server driver information file
+;which support ISA bus, Plug and Play ISA bus, EISA bus and MCA bus
+
+DR 3C5X9_1
+{
+
+	DES:    $3C5X9_1
+	HELP:   $3C5X9_2
+	PAR:    2.00
+	FILE:   3C5X9.LAN
+        PROD:   
+																'MCA.627D',
+                'EISA.TCM.509.0',
+                'PNPISA.TCM.509.?',
+                'MCA.627C'
+                
+
+        ;@#  Sprod:  '3Com~ EtherLink III Adapter',
+        ;@#          '3Com~ EtherLink III 3C509B (EISA MODE)',
+        ;@#          '3Com~ 3Com EtherLink III (PnP MODE)',
+        ;@#          '3Com~ EtherLink III Adapter'
+
+        ;@#  Client: 3c5x9
+        ;@#  Alias: 3c5x9
+   LIST Adapter_Bus_Type OPTIONAL
+   {
+        DES:    $3C5X9_15
+        HELP:   $3C5X9_16
+
+        CDES:         "No"
+        Choice:       ''
+        CDES:         "Yes"
+        Choice:       'ISA'
+
+        Default:      1
+        OutputFormat: '%s'
+   }
+
+   PR	SLOT if(Adapter_Bus_Type==2) HID else REQ	
+   {
+	DES:	$3C5X9_3
+	HELP:	$3C5X9_4
+   }
+
+   PR	PORT if(Adapter_Bus_Type==2) REQ else HID	
+   {
+	DES:	$3C5X9_5
+	HELP:	$3C5X9_6
+
+	TYP:	HEX(3)
+        VAL:	200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 2A0,
+                2B0, 2C0, 2D0, 2E0, 2F0, 300, 310, 320, 330, 340, 350,
+                360, 370, 380, 390, 3A0, 3B0, 3C0, 3D0, 3E0
+	DEF:	300
+	RES:	10
+   }
+   
+   LIST   RXEARLY REQ    
+   {
+	DES:    $3C5X9_17
+	HELP:   $3C5X9_18
+	CDES:   "YES"
+	CHOICE: 'YES'
+	CDES:   "NO"
+	CHOICE: 'NO'
+	DEFAULT: 2
+        OutputFormat: 'RXEARLY=%s'
+   }
+
+
+   PR	IDPORT	OPTIONAL
+   {
+	DES:	$3C5X9_7
+	HELP:	$3C5X9_8
+
+	TYP:	HEX(3)
+	VAL:	110, 120, 130, 140, 150, 160, 170, 180, 190,
+ 		1A0, 1B0, 1C0, 1D0, 1E0, 1F0
+	DEF:	110	
+   }
+
+   PR	NODE
+   {
+   }
+
+   FR	FrameSelect
+   {
+	DES:	$3C5X9_9
+	HELP:	$3C5X9_10
+
+	CD:	$3C5X9_12
+	CH:	'Ethernet_802.2'
+
+	CD:	$3C5X9_11
+	CH:	'Ethernet_802.3'
+
+ 
+	CD:	$3C5X9_13
+	CH:	'Ethernet_SNAP'
+
+	CD:	$3C5X9_14
+	CH:	'Ethernet_II'
+
+	DEF:	1, 2, 3, 4
+   }
+}
+
+
+
+
+
+DLANG:	4
+;English
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   1
+;Chinese (Simplified)
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+
+LANG:	6
+;French
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:	7
+;German
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:	8
+;Italian
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+LANG:   9
+;Japanese
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   10
+;Korean
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   12
+;Portuguese (Brazil)
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   13
+;Russian
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+
+LANG:	14
+;Spanish
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+LANG:   16
+;Chinese (Traditional)
+	$3C5X9_1 = "3Com EtherLink III Family Driver v4.0 "
+	$3C5X9_2 = "You can use this driver in an ISA,
+                    a Plug and Play ISA, an EISA, or a MCA
+                    file server."
+        $3C5X9_3 = "Slot Number"
+	$3C5X9_4 = "Select the slot number holding the board for which
+                    you are loading the driver."
+        $3C5X9_5 = "IO Port"
+	$3C5X9_6 = "Select the IO port address"
+	$3C5X9_7 = "ID Port"
+	$3C5X9_8 = "Select the ID port address which will be used to
+		    activate the board."
+	$3C5X9_9 = "Frame Types"
+	$3C5X9_10= "The default frame types are the 802.2 and 802.3.
+		    It is strongly recommended that at least 802.2 be
+		    selected. For existing networks, select BOTH 802.2
+		    and 802.3."
+	$3C5X9_11=  "802.3"
+	$3C5X9_12=  "802.2"
+	$3C5X9_13=  "802.2 SNAP"
+	$3C5X9_14=  "Ethernet II"
+        $3C5X9_15=  "Is the card a <legacy ISA Card model num>?"
+        $3C5X9_16=  "A value of 'Yes' is necessary to support
+                     legacy ISA cards. Plug and Play ISA is not
+                     considered legacy ISA."
+        $3C5X9_17=  "Parallel Tasking Control"
+        $3C5X9_18=  "This parameter must be set to NO for NetWare
+                     Client32. For best performance in a Novell
+                     NetWare Server, set this parameter to YES." 
+
+

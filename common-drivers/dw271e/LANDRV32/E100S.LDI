@@ -1,0 +1,178 @@
+;DrIvEr DeScRiPtIoN
+;VeRsIoN=2.84
+;CoPyRiGhT=(c)Copyright 1997,1998 by Intel Corp.  All Rights Reserved.
+Version:                2.84
+SYN:  1.00
+
+;- File:E100S.LDI
+;- Intel EtherExpress(TM) PRO/100 Smart Installation Information File
+;- This file handles E100S PCI adapters.
+
+   Driver E100S
+
+{
+    DES:            $E100S_DESC
+    Help:           $E100S_DRV_HLP
+    File:           E100S.LAN
+    Prod:           'PCI.8086.1228.0000.0000.03'
+    PAR:            2.00
+;@# SPROD:          'Intel~EtherExpress(TM) PRO/100 Smart Adapter'
+;@# CLIENT:         E100SODI.COM, E100S.LAN
+;@# ALIAS:          E100S.LAN
+    
+
+    PR SLOT
+
+    {
+        Help:           $E100S_PORT_HELP
+        Type:           DECIMAL (5)
+        Val:            1 - 65535
+        Def:            UNDEFINED
+    }
+    
+    FR FrameSelect
+    {
+
+        Help:           $E100S_FRAME_HELP
+
+        CD:             $E100S_FRAMETYPE_1
+        CH:             'Ethernet_802.3'
+
+        CD:             $E100S_FRAMETYPE_2
+        CH:             'Ethernet_802.2'
+
+        CD:             $E100S_FRAMETYPE_3
+        CH:             'Ethernet_SNAP'
+                
+        CD:             $E100S_FRAMETYPE_4
+        CH:             'Ethernet_II'
+
+        DEF:            1,2,3,4
+
+    }
+
+}
+
+DLANG:  4
+;English
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+
+LANG:   6
+;French
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+
+LANG:   7
+;German
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+
+LANG:   8
+;Italian
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+
+LANG:   14
+;Spanish
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+
+LANG:  12
+;Portugese
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+
+LANG:   9
+;Japanese
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+
+LANG:   10
+;Korean
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+
+LANG:   1
+;Chinese (S)
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+
+LANG:   16
+;Chinese (T)
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+    
+LANG:   13
+;Russian
+    $E100S_DESC = "Intel EtherExpress(TM) PRO/100 Smart Adapter."
+    $E100S_DRV_HLP = "This driver supports the EtherExpress(TM) PRO/100 Smart Adapter\n"
+    $E100S_PORT_HELP = "Input the slot number for the adapter.\n"
+    $E100S_FRAME_HELP = "Select the frame types required by your network.  The driver supports the 802.2, 802.3, Ethernet SNAP, and Ethernet II frame types.  The default frame types are 802.2 and 802.3."
+    $E100S_FRAMETYPE_1 = "802.3"
+    $E100S_FRAMETYPE_2 = "802.2"
+    $E100S_FRAMETYPE_3 = "802.2 SNAP"
+    $E100S_FRAMETYPE_4 = "Ethernet II"
+    
+;DrIvEr DeScRiPtIoN EnD
+   

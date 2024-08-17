@@ -1,0 +1,118 @@
+Description: DRIVER.LST created Wed May 20 12:58:26 1998
+"3Com TokenLink Velocity PCI" 3C3X9 1 TOKEN
+"3Com 3C589 Lan PC Card Ethernet Driver" 3C589 1 ETHER
+"3Com EtherLink III Family Driver v4.0 " 3C5X9 1 ETHER
+"3Com Fast EtherLink Driver v4.2 " 3C59X 1 ETHER
+"3Com Fast EtherLink XL / EtherLink XL Driver " 3C90X 1 ETHER
+"3Com Fast EtherLink XL Server Driver " 3C980 1 ETHER
+"3Com TokenLink Velocity XL PCI Adapters" TLNKPODI 1 TOKEN
+"ACCTON EN1216 10/100 Fast Ethernet Adapter (32-Bit ODI)" ACC16 1 ETHER
+"Accton EN166x PnP-ISA Adapter" ACC6X 1 ETHER
+"Accton EN1207D-TX PCI Fast Ethernet Driver" ACCODI 1 ETHER
+"Accton EN1203, EN1207 PCI Series Ethernet driver" ACC07 1 ETHER
+"Accton EN1208 PCI Ethernet driver" 1208ODI 1 ETHER
+"AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter" ALN320 1 ETHER
+"AMD Ethernet PCnet-FAST, PCnet-FAST+" PCNTNW 1 ETHER
+"AMD Ethernet PCnet-PCI, PCnet-PCI_II" PCNTNW 2 ETHER
+"AMD Ethernet PCnet-ISA+, PCnet-ISA_II (PNP)" PCNTNW 3 ETHER
+"AMD Ethernet PCnet-ISA" PCNTNW 4 ETHER
+"Compaq NetFlex-3 Controller (Ethernet)" CPQNF3 7 ETHER
+"Compaq PCI 10BASE-T UTP Ethernet adapter" CPQNF3 48 ETHER
+"Compaq PCI 10/100 TX Fast Ethernet adapter" CPQNF3 50 ETHER
+"Compaq Integrated 10/100 TX UTP Controller" CPQNF3 61 ETHER
+"Compaq Dual 10/100 TX UTP Controller" CPQNF3 63 ETHER
+"Compaq Netelligent 10 T/2 PCI UTP/COAX Controller" CPQNF3 69 ETHER
+"Compaq Integrated Netflex-3/P Controller" CPQNF3 71 ETHER
+"Compaq 10/100 TX Embedded UTP Controller" CPQNF3 91 ETHER
+"Compaq NetFlex ENET-TR Controller (Ethernet)" CPQETHER 1 ETHER
+"Compaq NetFlex-2 ENET-TR Controller (Ethernet)" CPQETHER 2 ETHER
+"Compaq NetFlex ENET-TR Controller (Token Ring)" CPQTOKEN 1 TOKEN
+"Compaq NetFlex-2 ENET-TR Controller (Token Ring)" CPQTOKEN 2 TOKEN
+"Compaq NetFlex-2 TR Controller" CPQTOKEN 3 TOKEN
+"Compaq 32-bit DualSpeed Token Ring Controller" CPQTOKEN 4 TOKEN
+"Compaq Netelligent 4/16 TR PCI UTP/STP Controller" CPQTRPCI 1 TOKEN
+"Compaq Ethernet or Fast Ethernet NIC" N100 1 ETHER
+"Digital DC21X4 Ethernet PCI driver" DC21X4 1 ETHER
+"D-Link DFE-530TX PCI Fast Ethernet Adapter driver" DLKFET 1 ETHER
+"EAGLE NE/2" CNE2 2 ETHER
+"EAGLE NE2000" CNE2000 2 ETHER
+"EAGLE NE/2-32" CNE2_32 2 ETHER
+"Eagle NE3200" CNE3200 3 ETHER
+"EAGLE NE1000" NE1000 2 ETHER
+"HP 10/100VG LAN Driver v1.32" HPDDODI 1 ETHER
+"HP 10/100TX PCI Ethernet Adapter" HPTX 1 ETHER
+"IBM 10/100 EtherJet CardBus Adapter" IBMC 1 ETHER
+"IBM Auto LANStreamer PCI Adapter" IBMMPCO 100 ETHER
+"IBM Triple LANStreamer PCI Adapter" IBMMPCO 101 ETHER
+"IBM Auto LANStreamer MC 32 Adapter" IBMMPCO 102 ETHER
+"IBM LANStreamer MC 32 Adapter" IBMMPCO 103 ETHER
+"IBM LANStreamer MC 16 Adapter" IBMMPCO 104 ETHER
+"IBM Dual LANStreamer MC 32 Adapter" IBMMPCO 105 ETHER
+"IBM EtherStreamer MC 32 Adapter" IBMMPCO 106 ETHER
+"IBM Dual EtherStreamer MC 32 Adapter" IBMMPCO 107 ETHER
+"IBM PCI Token Ring Adapter" IBMTRPO 1 TOKEN
+"IBM Ethernet Credit Card Adapter II" CNE2000 5 ETHER
+"IBM 100/10 EtherJet PCI Adapter" IBMFE 1 ETHER
+"IBM Token-Ring" TOKEN 1 TOKEN
+"Intel EtherExpress32" CNE3200 2 ETHER
+"Intel EtherExpress PRO PCI Adapter" E100B 1 ETHER
+"Intel EtherExpress(TM) PRO/100 ISA Adapter" E100ISA 1 ETHER
+"Intel EtherExpress(TM) PRO/100 Smart Adapter." E100S 1 ETHER
+"Intel EtherExpress(TM) PRO/100 Server Adapter" E100SNW 1 ETHER
+"Intel EtherExpress(TM) PRO/10 LAN Adapter" EPRO 1 ETHER
+"Intel EtherExpress(TM) PRO/10 LAN Adapter with PnP enabled" EPRO 2 ETHER
+"Intel TokenExpress Adapters" TE16 1 TOKEN
+"Intel TokenExpress(TM) PRO Adapter" TPRO 1 TOKEN
+"Intel TokenExpress(TM) PRO Adapter with PnP enabled" TPRO 2 TOKEN
+"Intel EtherExpress(TM) PRO/100 Mobile CardBus 32" M32A 1 ETHER
+"Intel EtherExpress(TM) PRO/100 PC Card Mobile Adapter16" M16AODI 1 ETHER
+"Intel EtherExpress(TM) PRO/100 LAN/Modem PC Card Adapter" M16B 1 ETHER
+"Kingston KNE100TX Netware Driver (3.31 MLID specs)" KTC100 1 ETHER
+"Kingston KNE20 Netware Driver (3.30 MLID specs)" KTC20 1 ETHER
+"Kingston KNE2000 Netware Driver (3.30 MLID specs)" KTC2000 1 ETHER
+"Kingston KNE30 Netware Driver (3.30 MLID specs)" KTC30 1 ETHER
+"Kingston KNE40 Netware Driver (3.31 MLID specs)" KTC40 1 ETHER
+"Kingston EtheRx IC PC Card Ethernet Adapter" KTCPC2 1 ETHER
+"Kingston KNEPC3 Netware Driver (3.31 MLID specs)" KTCPCF 1 ETHER
+"Madge Token Ring C Hardware Support Module" CMDGODI 1 TOKEN
+"MICRODYNE NE2000" CNE2000 3 ETHER
+"Microdyne Token-Ring" CNTR2000 2 TOKEN
+"National Semiconductor NE4100 InfoMover" CNE2000 7 ETHER
+"National Semiconductor NE2000 InfoMover" CNE2000 4 ETHER
+"Novell Ethernet NE/2" CNE2 1 ETHER
+"Novell Ethernet NE/2-32" CNE2_32 1 ETHER
+"Novell Ethernet NE2000" CNE2000 1 ETHER
+"Novell Ethernet NE4100" CNE2000 6 ETHER
+"Novell Ethernet NE3200" CNE3200 1 ETHER
+"Novell Ethernet NE2100" CNEAMD 1 ETHER
+"Novell Ethernet PCnetISA" CNEAMD 2 ETHER
+"Novell Ethernet PCnetPCI, PCnetPCI_II, PCnet-Fast" CNEAMD 3 ETHER
+"Novell Ethernet PCnetISA+ (PNP)" CNEAMD 4 ETHER
+"Novell Ethernet NE1500T" CNEAMD 5 ETHER
+"Novell Token-Ring" CNTR2000 1 TOKEN
+"Novell Ethernet NE1000" NE1000 1 ETHER
+"Olicom Token-Ring 16/4 Adapters" OCTOK162 1 TOKEN
+"Olicom Ethernet ISA/IV Adapter (OC-217x)" OCE2XODI 1 ETHER
+"Olicom GoCard Ethernet PC Card (OC-2220)" OCE2XODI 2 ETHER
+"Olicom GoCard Eth/Modem PC Card (OC-2231/32)" OCE2XODI 3 ETHER
+"Olicom Ethernet ISA 10/100 Adapter (OC-2376)" OCE3XODI 1 ETHER
+"Olicom Ethernet ISA 10/100 Adapter (OC-2375)" OCE3XODI 2 ETHER
+"Olicom Ethernet MCA 10/100 Adapter (OC-2335)" OCE3XODI 3 ETHER
+"Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)" OCE4XODI 1 ETHER
+"Olicom Ethernet PCI/II 10 Adapter (OC-218x)" OCE4XODI 2 ETHER
+"Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)" OCE4XODI 3 ETHER
+"PEI G-NIC Gigabit Ethernet Adapter" PEI100X 1 ETHER
+"Proteon p1392plus non-PnP ISA Token-Ring" PRO32C 1 TOKEN
+"Proteon p1394plus PnP ISA Token-Ring" PRO32C 13 TOKEN
+"Proteon p1690plus PCI Token-Ring" PRO32C 25 TOKEN
+"Proteon p1990plus EISA Token-Ring" PRO32C 47 TOKEN
+"SMC Ethernet Adapter Server Driver" SMC8000 1 ETHER
+"SMC EtherPower II 10/100 32-Bit ODI Driver" SMCPWR2 1 ETHER
+"SysKonnect FDDI EISA Adapters" SKFENW 1 FDDI
+"SysKonnect FDDI PCI 64 Adapters" SKFPNW 1 FDDI
+"SysKonnect Token Ring ISA Adapters" SKTOKNW 1 TOKEN
+"SysKonnect Token Ring PCI Adapters" SKTOKNW 2 TOKEN
+"The PCI Fast Ethernet 10M/100M adapter" FETNWSRV 1 ETHER
+"Xircom CreditCard Ethernet 10/100 Adapter" XCEM 1 ETHER
+"Xircom CardBus Ethernet 10/100 Adapter" CBE 1 ETHER
+"Xircom CreditCard Ethernet 10/100 Adapter" CE3ODI 1 ETHER

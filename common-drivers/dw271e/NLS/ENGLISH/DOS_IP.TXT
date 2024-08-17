@@ -1,0 +1,293 @@
+                Novell Client DOS Install Options
+                            8/27/98
+
+=================================================================
+
+Contents
+
+1.0  Introduction
+2.0  Creating a Bootable Diskette for a DOS Install (IP-only)
+3.0  Enabling IP Protocols in the DOS Client for Across-the-Wire
+     Server Installations
+4.0  Primary Documentation Is HTML
+5.0  Trademarks
+6.0  Copyright, Disclaimer, Export Notice, Patents
+
+=================================================================
+
+
+1.0 Introduction
+
+  Novell Clients for various platforms are available on the
+  Client CD-ROM or from the Novell Corporate web site. However,
+  you might need to install the Novell Client on a workstation
+  that does not have a CD-ROM drive or does not have access to
+  the Internet.  You might also need to install a DOS IP-only
+  client in order to complete across-the-wire installations of
+  NetWare 5 servers. This document includes instructions for
+  both types of DOS IP-only installations.
+
+  Note: Other issues with the Novell Client for DOS and Windows
+  3.1x are contained in the doswin.txt file located at the root
+  and in the products/doswin32/nls/<language> directory.
+
+
+
+2.0 Creating a Bootable Diskette for a DOS Install (IP
+only)
+
+  To install the Novell Client on a workstation that does not
+  have a CD-ROM drive or does not have access to the Internet,
+  you must create a bootable diskette for a DOS install.  Once
+  the client is installed,  the workstation will have access to
+  the network.  
+
+  To create a bootable diskette, complete the following steps.
+
+     1. Make sure you have access to the Novell Client DOS files
+        located in the Products/Doswin32 directory.
+     
+     2. Format a 1.44MB high density diskette with the system
+        files by entering the following at the DOS prompt:
+  
+        FORMAT A: /S
+  
+     3. Copy himem.sys to the diskette.
+
+     4. In a text editor, create a config.sys file on the
+        diskette that includes the following command to load
+        himem.sys 
+  
+        DEVICE=A:\HIMEM.SYS
+
+     5. Create a Client32 directory on the diskette.
+
+     6. Use the nlmpackr.exe utility on the Client CD-ROM in the
+        Products/Doswin32 directory to add the following nlm
+        files from the following directories to the Client32
+        directory.
+     
+        FILE                  DIRECTORY           
+        trannta.nlm      Products/Doswin32/Client32
+        client32.nlm     Products/Doswin32/Client32
+        srvloc.nlm       Products/Doswin32/Client32
+        ethertsm.nlm     Products/Doswin32/Nios
+        lslc32.nlm       Products/Doswin32/Nios
+        cmsm.nlm         Products/Doswin32/Nios
+        nbic32.nlm       Products/Doswin32/Nios
+        tcpip.nlm        Products/Doswin32/Tcpip
+
+       using the following syntax for each NLM at the DOS
+       prompt:
+
+          NLMPACKR TRANTA.NLM A:\Client32\TRANTA.NLM
+
+     7. Copy the following files from the following directories
+        to the Client32 directory on the diskette:
+     
+        FILE                  DIRECTORY
+        nios.exe         Products/Doswin32/Nios
+        ping.msg         Products/Doswin32/Tcpip
+        ping.exe         Products/Doswin32/Tcpip
+        *.lan files      Products/Doswin32/Landrv32
+
+          NOTE: You will only be able to copy four or five LAN
+          drivers due to space restrictions. Choose the drivers
+          you frequently use) 
+
+
+     8. In a text editor, create a net.cfg file on the diskette
+        and make sure the BIND command reflects the LAN driver,
+        preferred server, and name context you are using.  See
+        Section 3.3 for a sample net.cfg file.
+
+     9. In a text editor, create an autoexec.bat file on the
+        diskette with the following settings:
+
+        LOAD A:\CLIENT32\NIOS.EXE
+        LOAD A:\CLIENT32\NBIC32.NLM
+        LOAD A:\CLIENT32\LSLC32.NLM
+        LOAD A:\CLIENT32\CMSM.NLM
+        LOAD A:\CLIENT32\ETHERTSM.NLM
+        LOAD A:\CLIENT32\3c90x.LAN FRAME=Ethernet_II
+        LOAD A:\CLIENT32\TCPIP.NLM
+        LOAD A:\CLIENT32\TRANNTA.NLM
+        LOAD A:\CLIENT32\SRVLOC.NLM
+        LOAD A:\CLIENT32\CLIENT32.NLM
+
+  You can boot from this diskette and login to the network in an
+  IP-only environment to complete an across-the-wire server
+  installation.
+
+
+
+3.0  Enabling IP Protocols in the DOS Client for
+     Across-the-Wire Server Installations 
+
+3.1 Enabling IP Protocols
+
+  You can install NetWare 5 servers across-the-wire in an
+  IP-only environment (No IPX traffic). The instructions outline
+  the changes needed to enable the DOS client to use IP
+  protocols. To do this, complete the following steps.
+
+  1. Run install.exe from the Products\Doswin32\ directory of
+     the Client CD.
+  
+  2. Choose to install the TCP/IP Protocol Stack and then
+     complete the installation.
+  
+     Note: Server installs do not currently support DHCP
+     addresses.  Choose User Specified and manually specify the
+     IP address, Router gateway, and subnetmask that the server
+     will use.
+
+  3. Configure the startnet.bat by doing the following:
+      a.  Remove "LOAD IPX.NLM" line
+      b.  Remove "LOAD SPX_SKTS.NLM"
+      c.  Remove all frame types except the Ethernet_II
+      d.  Add "LOAD SRVLOC.NLM" following the load of TCPIP.NLM
+
+  4. Configure net.cfg by doing the following:
+      a.  Add File Cache Level = 0 to the NetWare Dos Requester
+          section. This setting prevents the client from
+          allocating any memory to file cache.
+      b.  Add Preferred Server = <servername> or Preferred
+          Server = <IP address>  to the NetWare Dos Requester
+          section.
+      c.  Remove any lines that reference IPX or frame types
+          except Ethernet_II.  
+
+        Note: You may be modifying the net.cfg that was
+        generated by the DOS client install and this file
+        contains IPX references.          
+
+
+  5. In the autoexec.bat, remove the line 
+     @CALL C:\NOVELL\CLIENT32\STARTNET.  
+  
+      This allows you to boot the computer without running
+      STARTNET once the server install is finished.
+ 
+  6. Copy the trannta.nlm from the products\win95\ibm_enu 
+     directory on the client CD to C:\novell\client32. This 
+     will replace the existing IPX trannta.nlm.
+        
+		 
+
+3.2 Sample Startnet.bat
+
+     C:\NOVELL\CLIENT32\NIOS.EXE
+     LOAD C:\NOVELL\CLIENT32\NBIC32.NLM
+     LOAD C:\NOVELL\CLIENT32\LSLC32.NLM
+     LOAD C:\NOVELL\CLIENT32\CMSM.NLM
+     LOAD C:\NOVELL\CLIENT32\ETHERTSM.NLM
+     LOAD C:\NOVELL\CLIENT32\CNE2000.LAN  INT=3 PORT=300
+       RETRIES=5 FRAME=Ethernet_II
+     LOAD C:\NOVELL\CLIENT32\TCPIP.NLM
+     LOAD C:\NOVELL\CLIENT32\TRANNTA.NLM
+     LOAD C:\NOVELL\CLIENT32\SRVLOC.NLM
+     LOAD C:\NOVELL\CLIENT32\CLIENT32.NLM
+
+
+3.3 Sample Net.cfg
+
+     Protocol TCPIP
+       IP_ADDRESS 137.65.51.113
+       IP_ROUTER 137.65.51.254
+       IP_NETMASK 255.255.252.0
+       PATH TCP_CFG C:\NOVELL\CLIENT32\TCP
+       BIND CNE2000
+  
+     NETWARE DOS REQUESTER
+       FILE CACHE LEVEL = 0
+       FIRST NETWORK DRIVE = F
+       PREFERRED SERVER = <Servername or IP address>
+       NAME CONTEXT = "OU=CLIENT.O=NOVELL"
+
+
+
+
+=================================================================
+
+
+4.0  Primary Documentation Is HTML
+
+  The HTML files for the Novell Client for DOS and Windows
+  3.1x--containing information on installing, configuring,
+  using, understanding, and troubleshooting--are the primary
+  documentation.  The HTML documentation is available on the
+  Novell Client CD-ROM in the Novdocs directory.  The search and
+  print functionality are available on 32-bit operating systems
+  such as Windows 95 and Windows NT.
+
+  In addition to the HTML documentation, interface and enduser
+  documentation can be found in the Client help.  To access the
+  help, click Novell Client Help in the Novell Client program
+  group.  All the Client help information is accessible from
+  this file.  The Client help file (setup.hlp) can also be
+  accessed prior to installation in the
+  Client/Doswin32/Nls/<language> directory.
+
+
+=================================================================
+
+5.0 Trademarks
+
+  5.1 Novell Trademarks
+
+     Novell and NetWare are registered trademarks of Novell,
+     Inc. in the United States and other countries.
+
+     Internetwork Packet Exchange and IPX, and Novell Client are
+     trademarks of Novell, Inc.
+
+
+  5.2 Third-Party Trademarks
+
+     Windows is a trademark of Microsoft Corporation.
+
+
+=================================================================
+
+
+
+6.0 Copyright, Disclaimer, Export Notice, Patents
+
+  Novell, Inc., makes no representations or warranties with
+  respect to any software, and specifically disclaims any
+  express or implied warranties of merchantability, title, or
+  fitness for a particular purpose. Distribution of any Novell
+  software is forbidden without the express written consent of
+  Novell, Inc. Further, Novell reserves the right to discontinue
+  distribution of any Novell software. 
+
+  Novell is not responsible for lost profits or revenue, loss of
+  use of the software, loss of data, costs of recreating lost
+  data, the cost of any substitute equipment or program, or
+  claims by any party other than you.
+
+  Novell strongly recommends a backup be made before any
+  software is installed. Technical support for this software may
+  be provided at the discretion of Novell.
+  
+  Copyright (C)1993-1994, 1995-1998  Novell, Inc.  All rights
+  reserved.  No part of this publication may be reproduced,
+  photocopied, stored on a retrieval system, or transmitted
+  without the express written consent of the publisher.
+
+  This product may require export authorization from the U.S.  
+  Department of Commerce prior to exporting from the U.S. or 
+  Canada.
+  
+  U.S Patent Nos. 5,157,663; 5,349,642; 5,455,932; 5,555,3,139; 
+  5,553,143; 5,594,863; 5,608,903; 5,633,931; 5,652,854; 
+  5,671,414, 5,677,851; and 5,692,129.  U.S. and Foreign Patents 
+  Pending.
+
+
+
+
+
+
+

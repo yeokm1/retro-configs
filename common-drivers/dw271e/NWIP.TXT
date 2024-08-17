@@ -1,0 +1,298 @@
+Using NetWare/IP with the Novell Clients Included with NetWare 5
+
+
+-----------------------------------------------------------------------
+1.0 Using NetWare/IP Support
+-----------------------------------------------------------------------
+
+For IP connectivity on version of NetWare* prior to NetWare 5*, install 
+NetWare/IP*. NetWare/IP support allows your Novell* Client* workstation 
+to access NetWare services over a TCP/IP network. NetWare/IP provides 
+an IP solution that depends on the IPX/SPX* protocol family.
+
+NetWare 5 does not include NetWare/IP. In order for an IP-only NetWare 5 node 
+to communicate with an existing NetWare/IP network, the Migration Agent must 
+be installed on a server.
+
+NetWare/IP provides the following support services:
+
+* The Domain SAP/RIP Service (DSS) maintains two types of information required 
+  by NetWare servers and clients:
+
+  * Service Advertising Protocol (SAP) information about the available NetWare 
+    services
+
+  * Routing Information Protocol (RIP) information about routes between NetWare
+    servers
+
+  Once configured, the DSS automatically maintains this information and makes 
+  it available to all NetWare/IP nodes. NetWare/IP servers and clients use DSS 
+  servers to obtain service and routing information.
+
+* The Domain Name System (DNS) is a distributed database system used to locate 
+  computers in TCP/IP internetworks. NetWare/IP servers and clients use DNS to
+  locate the DSS server.
+
+
+-----------------------------------------------------------------------
+2.0 NetWare/IP Requirements
+-----------------------------------------------------------------------
+
+Before you can use NetWare/IP Support, you must have:
+
+* Microsoft** TCP/IP Services installed on your Windows** workstation. 
+  See your Windows documentation for instructions on installing TCP/IP.
+
+* Access to a NetWare/IP Server on the network.
+
+
+-----------------------------------------------------------------------
+3.0 Installing NetWare/IP
+-----------------------------------------------------------------------
+
+If you are going to install NetWare/IP, you must select either the IPX Only 
+option or the IP and IPX option when you install the client. There are two 
+ways to install NetWare/IP: at the same time as the Novell Client software
+during an unattended install or from the Network control panel after the 
+client has been installed.
+
+-----------------------------------------------------------------------
+3.1 Installing NetWare/IP during an Unattended Install
+-----------------------------------------------------------------------
+
+The configuration file includes two options that allow you to install 
+NetWare/IP during an unattended install:
+
+* Ask NetWareIP
+* Install NetWareIP
+
+These two options work together. The following scenarios are possible:
+
+1. AskNetWareIP=No, InstallNetWareIP=No
+   Nothing happens. You are not asked whether you want to install NetWare/IP, 
+   and NetWare/IP is not installed.
+
+2. AskNetWareIP=No, InstallNetWareIP=Yes
+   NetWare/IP is installed automatically without asking whether you want to 
+   install it.
+
+3. AskNetWareIP=Yes
+   You are asked whether you want to install NetWare/IP. You can choose Yes 
+   to install or No to not install. If you set AskNetWareIP to Yes, it is not 
+   necessary to set the InstallNetWareIP parameter. You can, however, set the 
+   InstallNetWareIP parameter anyway to determine whether the Yes or No button 
+   is the default button on the prompt that appears.
+
+4. AskNetWareIP=Yes, InstallNetWareIP=Yes
+   The prompt that asks whether you want to install NetWare/IP displays with 
+   the Yes button as the default.
+
+5. AskNetWareIP=Yes, InstallNetWareIP=No
+   The prompt that asks whether you want to install NetWare/IP displays with 
+   the No button as the default.
+
+-----------------------------------------------------------------------
+3.2 Installing NetWare/IP with the Network Control Panel
+-----------------------------------------------------------------------
+
+Install NetWare/IP from the Network control panel if you need to install 
+NetWare/IP on only one workstation and do not want to reinstall the entire 
+Novell Client.
+
+1. Click Start > Settings > Control Panel.
+
+2. Double-click Network.
+
+3. Click Services > Add > Novell NetWare/IP Support (NWIP) > OK.
+
+4. Optimize NetWare/IP.
+
+5. (Conditional) If TCP/IP isn't already configured, configure it.
+
+
+-----------------------------------------------------------------------
+4.0 Optimizing NetWare/IP
+-----------------------------------------------------------------------
+
+This section explains the NetWare/IP parameters you can configure to give 
+the client the maximum performance. To set the parameters, use the client 
+property pages.
+
+-----------------------------------------------------------------------
+4.1 Required Parameters
+-----------------------------------------------------------------------
+
+There are no required parameters when you install NetWare/IP Support if a 
+DSS server is on the same subnetwork as the NetWare/IP client. The client 
+is automatically configured.
+
+If there is no DSS server on the same subnetwork as the NetWare/IP client, 
+at least one of the following local parameter values must be configured during 
+installation:
+
+* NetWare/IP Domain, which specifies the NetWare/IP domain that this client 
+  belongs to. When the NetWare/IP domain is specified, DNS is used to locate 
+  any available DSS server on the network.
+
+  DNS must be configured correctly in Microsoft’s TCP/IP Services so that DSS 
+  servers can be located.
+
+* Preferred DSS, which specifies the IP addresses or subnetwork IP addresses 
+  of up to five DSS servers that are closest to this client.
+
+
+-----------------------------------------------------------------------
+4.2 Optional Parameters
+-----------------------------------------------------------------------
+
+The NetWare/IP client can use values for the following optional parameters 
+to optimize performance:
+
+* Initial DSS Contact Retries, which specifies the number of times the client 
+  attempts to communicate with a given DSS server at startup. The default is 
+  one retry, from a range of 0 to 50 retries. 
+
+* Retry Interval, which specifies the time interval (in seconds) between 
+  attempts to retry communicating with a given DSS server at startup. The 
+  default is 4 seconds, from a range of 1 to 100 seconds.
+
+* Nearest Server, which specifies the IP address or subnetwork IP address 
+  of the NetWare/IP server closest to this client.
+
+* NSQ Broadcast, which specifies whether this client will use Nearest Server 
+  Query (NSQ) broadcasts to locate the nearest server. By default, NSQ 
+  broadcast is set to On.
+
+-----------------------------------------------------------------------
+4.3 Global Parameters
+-----------------------------------------------------------------------
+
+In addition to the local parameters, the NetWare/IP client also obtains 
+network-wide configuration information from the DSS, such as the virtual 
+IPX* network number, UDP port numbers for NetWare/IP service, and 
+DSS-NetWare/IP synchronization interval.
+
+
+-----------------------------------------------------------------------
+5.0 NetWare/IP Issues
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+5.1 NetWare/IP: DHCP vs. Custom Configuration
+-----------------------------------------------------------------------
+
+If DHCP is not enabled, the only way to get NetWare/IP to run is 
+to use the custom configuration option. 
+
+To use this option, there must be a specified NetWare/IP domain or DSS 
+server; otherwise, NetWare/IP will not load.
+
+-----------------------------------------------------------------------
+5.2 NetWare/IP Performance on Windows NT 4.0 Multiprocessor 
+    Workstations
+-----------------------------------------------------------------------
+
+In the past, NetWare/IP has not performed well on Windows NT 4.0 
+multiprocessor workstations. This problem has been fixed in the 
+Microsoft Service Pack 2 for Windows NT 4.0.
+
+-----------------------------------------------------------------------
+5.3 NetWare/IP Multiboard Support
+-----------------------------------------------------------------------
+
+NetWare/IP does not support multiple network boards. NetWare/IP 
+will work over RAS alone or on the LAN alone. It does not work 
+when someone tries to use a board other than the one currently being 
+used.
+
+-----------------------------------------------------------------------
+5.4 NetWare/IP Auto-Connection over Dial-Up Servers
+-----------------------------------------------------------------------
+
+In the LAN environment, NetWare/IP clients can be automatically 
+configured by DHCP. This works only if your DHCP host can be 
+configured for NetWare/IP client configuration records. In a dial-up 
+environment, the NetWare/IP client usually depends on a DHCP 
+host located in the dial-up server itself. Again, this works only if the 
+DHCP host in the dial-up server can be configured for NetWare/IP 
+client configuration records.
+
+If you are using a dial-up server that cannot be so configured, then 
+you must manually configure the client.
+
+-----------------------------------------------------------------------
+5.5 NetWare/IP and the IP/IPX Gateway
+-----------------------------------------------------------------------
+
+NetWare/IP requires a TCP/IP protocol stack on the client and an IP 
+connection to the network. Although NetWare/IP coexists with the 
+IP/IPX Gateway, NetWare/IP cannot be run over the gateway. This 
+is because the gateway does not supply an IP connection to the 
+network for low-level services such as NetWare/IP.
+
+For example, if you want to run a NetWare/IP client over a dial-up 
+connection, you must enable IP for that connection.
+
+
+-----------------------------------------------------------------------
+6.0 Netware/IP and Changing IP Addresses
+-----------------------------------------------------------------------
+
+Your IPX/SPX application might stop working when the IP address
+of a given interface changes. If this occurs, you might have to 
+restart the application to recover.
+
+IP interface addresses can change because of TCP/IP manual configuration 
+changes, because a DHCP lease expires and is renewed with a different address, 
+or because your network connection goes down and up (such as when you 
+reestablish a RAS connection).
+
+You can avoid the changing address problem over RAS connections if you 
+statically configure the IP Address that your workstation uses over the 
+Dial-Up adapter.
+
+-----------------------------------------------------------------------
+7.0 Trademarks
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+7.1 Novell Trademarks
+-----------------------------------------------------------------------
+
+(* Novell trademark.)
+
+Internet Packet Exchange and IPX are trademarks of Novell, Inc.
+
+IPX/SPX is a trademark of Novell, Inc.
+
+NetWare is a registered trademark of Novell, Inc. in the United 
+States and other countries.
+
+NetWare 5 is a trademark of Novell, Inc.
+
+NetWare/IP is a trademark of Novell, Inc.
+
+Novell is a registered trademark of Novell, Inc. in the United States 
+and other countries.
+
+Novell Client is a trademark of Novell, Inc.
+
+Sequenced Packet Exchange and SPX are trademarks of Novell, Inc.
+
+-----------------------------------------------------------------------
+7.2 Third-Party Trademarks
+-----------------------------------------------------------------------
+
+(** Third-party trademark.)
+
+Microsoft and MS are registered trademarks of Microsoft 
+Corporation.
+
+Windows is a registered trademark of Microsoft Corporation.
+
+Windows NT is a registered trademark of Microsoft Corporation.
+
+
+
+
+

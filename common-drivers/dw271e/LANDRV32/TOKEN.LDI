@@ -1,0 +1,995 @@
+; VeRsIoN=1.18 Novell LAN Installation Information File for TOKEN.LAN
+; CoPyRiGhT=Copyright (c) 1998 IBM Corporation, All Rights Reserved
+;
+;  File Name     : TOKEN.LDI
+;  Extracted     : 5/15/98 at 11:56:07
+;  Last Changed  : 5/15/98 at 11:55:25
+;
+;  Shared Ram Token-Ring installation file
+
+SYN:  1.00
+
+DR TOKEN
+{
+   Des:      $TOKEN_1
+   Help:     $TOKEN_2
+   PAR:      2.02
+   File:     TOKEN.LAN
+   Time:     70
+
+   PROD:     'MCA.E001',
+             'EISA.IBM.0001.*',
+             'PNPISA.IBM.0001.*',
+             'PNPISA.IBM.1070.*',
+             'PNPISA.IBM.1080.*',
+             'PCMCIA.00A4.001E'
+
+   ;@# Sprod:   'IBM~IBM Auto 16/4 Token-Ring MC Adapter',
+   ;@#          'IBM~IBM Auto 16/4 Token-Ring ISA Adapter',
+   ;@#          'IBM~IBM Auto 16/4 Token-Ring ISA Adapter',
+   ;@#          'IBM~IBM Auto Wake Token-Ring ISA Adapter',
+   ;@#          'IBM~IBM Turbo 16/4 Token-Ring ISA Adapter',
+   ;@#          'IBM~IBM Turbo 16/4 Token-Ring PC Card'
+
+   ;@# Client: TOKEN.COM, TOKEN.LAN
+   ;@# Alias: TOKEN.LAN
+
+
+   PR SLOT   if (BUS == MCA) OPT
+                   els HID
+   {
+     Des:    $TOKEN_3
+     Val:    1-8
+   }
+
+   PR NUMNIC if (BUS != MCA) REQ
+                   els HID
+   {
+     Des:    $TOKEN_4
+     Help:   $TOKEN_5
+     Typ:    HEX(1)
+     Val:    1-2
+     Def:    1
+   }
+
+   PR PORT if (BUS != MCA AND NUMNIC > 1 ) REQ
+           els if (BUS != PCMCIA) REQ
+           els HID
+   {
+     Des:     $TOKEN_8
+     Help:    $TOKEN_9
+     Typ:     HEX(3)
+     Val:     004-FFC
+     Def:     A20
+     Res:     4
+     Out:     'PORT=%s'
+   }
+
+
+   PR NICUAA if (BUS != MCA AND NUMNIC > 1 ) OPT
+             els HID
+   {
+      Des:    $TOKEN_6
+      Help:   $TOKEN_7
+      Typ:    HEX(12)
+      Val:    1-FFFFFFFFFFFE
+      Def:    UND
+      Out:    'NIC_UAA=%s'
+   }
+
+
+   PR NODE
+   {
+   }
+
+   PR NOFULLDUPLEX     OPT
+   {
+      Des:    $TOKEN_13
+      Help:   $TOKEN_14
+      Typ:    STR
+      Val:    'NOFULLDUPLEX'
+      Out:    'NOFULLDUPLEX'
+    }
+
+   FR FrameSelect
+   {
+     Help:     $TOKEN_10
+     CD:       $TOKEN_11
+     Ch:       'Token-Ring'
+     CD:       $TOKEN_12
+     Ch:       'Token-Ring_SNAP'
+     Def:      1
+     Oct:      MSB
+   }
+
+   PR PCMCIA_INT  if (BUS != MCA ) OPT
+                  els HID
+   {
+      Des:     $TOKEN_15
+      Help:    $TOKEN_16
+      Typ:     HEX
+      Val:     3,6,7,9,a,b,c,f
+      Def:     UND
+      Out:     'PCMCIA_INT=%s'
+   }
+
+   PR NOSHALLOWMODE  if (BUS != MCA) OPT
+                     els HID
+   {
+      Des:    $TOKEN_17
+      Help:   $TOKEN_18
+      Typ:    STR
+      Val:    'NOSHALLOWMODE'
+      Out:    'NOSHALLOWMODE'
+    }
+
+   PR DATARATE if (BUS != MCA) OPT
+               els HID
+   {
+     Des:      $TOKEN_19
+     Help:     $TOKEN_20
+     Typ:      DEC
+     Val:      4,16
+     Def:      4
+     Out:      'Datarate=%s'
+   }
+
+  PR AUTORINGSPEED OPT
+  {
+    Des:       $TOKEN_21
+    Help:      $TOKEN_22
+    Typ:       STR
+    Val:       'AutoRingSpeed'
+    Out:       'AutoRingSpeed'
+  }
+
+  PR SRAMBASE OPT
+  {
+    Des:       $TOKEN_23
+    Help:      $TOKEN_24
+    Typ:       HEX(5)
+    Val:       80000-FC000
+    Def:       UND
+    Res:       100
+    Out:       'MEM0=%s'
+  }
+}
+
+
+
+DLANG:  4       ; english is default
+;English
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition to the PORT keyword parameter and
+ will override the port value entered.  It can be used when the I/O Port is unknown or changes
+ indeterminately via Plug and Play.  The NIC_UAA value identifies the NIC or network board to be
+ installed.  The value can be expressed in one of two ways.  The hexadecimal representation of
+ the 48-bit UAA or the ordinal value (in ascending UAA order) of the NIC to be installed.\n
+Example:  Given NIC A=10005A000089 and NIC B=08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "Required port value.  For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+
+
+
+
+LANG:  6
+;French
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition to the PORT keyword parameter and
+ will override the port value entered.  It can be used when the I/O Port is unknown or changes
+ indeterminately via Plug and Play.  The NIC_UAA value identifies the NIC or network board to be
+ installed.  The value can be expressed in one of two ways.  The hexadecimal representation of
+ the 48-bit UAA or the ordinal value (in ascending UAA order) of the NIC to be installed.\n
+Example:  Given NIC A=10005A000089 and NIC B=08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "Required. For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+
+
+
+
+LANG:   7
+;German
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition
+to the PORT keyword parameter.  It can be used when the I/O Port is
+unknown or changes indeterminately via Plug and Play.  The NIC_UAA value
+identifies the NIC or network board to be installed.  The value can be
+expressed in one of two ways.  The hexadecimal representation of the 48-bit
+UAA or the ordinal value (in ascending UAA order) of the NIC to be
+installed.\n
+Example:  Given NIC A - 10005A000089 and NIC B - 08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+
+
+
+
+LANG:   8
+;Italian
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition to the PORT keyword parameter and
+ will override the port value entered.  It can be used when the I/O Port is unknown or changes
+ indeterminately via Plug and Play.  The NIC_UAA value identifies the NIC or network board to be
+ installed.  The value can be expressed in one of two ways.  The hexadecimal representation of
+ the 48-bit UAA or the ordinal value (in ascending UAA order) of the NIC to be installed.\n
+Example:  Given NIC A=10005A000089 and NIC B=08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+
+
+
+
+LANG:   14
+;Spanish
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition to the PORT keyword parameter.
+It can be used when the I/O Port is unknown or changes indeterminately via Plug and Play.
+The NIC_UAA value identifies the NIC or network board to be installed.  The value can be
+expressed in one of two ways.  The hexadecimal representation of the 48-bit
+UAA or the ordinal value (in ascending UAA order) of the NIC to be
+installed.\n
+Example:  Given NIC A - 10005A000089 and NIC B - 08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+
+
+
+
+LANG:   12
+; Portuguese (Brazilian)
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition to the PORT keyword parameter and
+ will override the port value entered.  It can be used when the I/O Port is unknown or changes
+ indeterminately via Plug and Play.  The NIC_UAA value identifies the NIC or network board to be
+ installed.  The value can be expressed in one of two ways.  The hexadecimal representation of
+ the 48-bit UAA or the ordinal value (in ascending UAA order) of the NIC to be installed.\n
+Example:  Given NIC A=10005A000089 and NIC B=08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "Required port value.  For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+
+
+
+
+LANG:   9
+; Japanese
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition to the PORT keyword parameter and
+ will override the port value entered.  It can be used when the I/O Port is unknown or changes
+ indeterminately via Plug and Play.  The NIC_UAA value identifies the NIC or network board to be
+ installed.  The value can be expressed in one of two ways.  The hexadecimal representation of
+ the 48-bit UAA or the ordinal value (in ascending UAA order) of the NIC to be installed.\n
+Example:  Given NIC A=10005A000089 and NIC B=08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "Required port value.  For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+
+
+
+
+LANG:   10
+; Korean
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition to the PORT keyword parameter and
+ will override the port value entered.  It can be used when the I/O Port is unknown or changes
+ indeterminately via Plug and Play.  The NIC_UAA value identifies the NIC or network board to be
+ installed.  The value can be expressed in one of two ways.  The hexadecimal representation of
+ the 48-bit UAA or the ordinal value (in ascending UAA order) of the NIC to be installed.\n
+Example:  Given NIC A=10005A000089 and NIC B=08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "Required port value.  For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+
+
+
+
+LANG:   1
+; Chinese (Simplified)
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition to the PORT keyword parameter and
+ will override the port value entered.  It can be used when the I/O Port is unknown or changes
+ indeterminately via Plug and Play.  The NIC_UAA value identifies the NIC or network board to be
+ installed.  The value can be expressed in one of two ways.  The hexadecimal representation of
+ the 48-bit UAA or the ordinal value (in ascending UAA order) of the NIC to be installed.\n
+Example:  Given NIC A=10005A000089 and NIC B=08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "Required port value.  For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+
+
+
+
+LANG:   16
+; Chinese (Traditional)
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition to the PORT keyword parameter and
+ will override the port value entered.  It can be used when the I/O Port is unknown or changes
+ indeterminately via Plug and Play.  The NIC_UAA value identifies the NIC or network board to be
+ installed.  The value can be expressed in one of two ways.  The hexadecimal representation of
+ the 48-bit UAA or the ordinal value (in ascending UAA order) of the NIC to be installed.\n
+Example:  Given NIC A=10005A000089 and NIC B=08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "Required port value.  For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+
+
+
+
+LANG:   13
+; Russian
+ $TOKEN_1 = "IBM Token-Ring"
+ $TOKEN_2 = "This server driver (TOKEN.LAN)
+supports the following network boards:  IBM Token-Ring PC Adapter, 16/4
+Adapter, PC Adapter II, PC Adapter/A, 16/4 Adapter/A, 16/4 ISA-16 Adapter,
+16/4 MC Adapter, Auto 16/4 Token-Ring ISA Adapter, Auto 16/4 Token-Ring MC
+Adapter, Auto Wake Token-Ring ISA Adapter, and Turbo 16/4 Token-Ring ISA
+Adapter .  You can install a maximum of two token ring network boards in an
+ISA or Micro Channel server."
+ $TOKEN_3 = "Slot"
+ $TOKEN_4 = "Number of NICs this type"
+ $TOKEN_5 = "Specify the number of NICs or network boards of this type that you are installing."
+ $TOKEN_6 = "NIC_UAA"
+ $TOKEN_7 = "A NIC_UAA value can be specified in addition to the PORT keyword parameter and
+ will override the port value entered.  It can be used when the I/O Port is unknown or changes
+ indeterminately via Plug and Play.  The NIC_UAA value identifies the NIC or network board to be
+ installed.  The value can be expressed in one of two ways.  The hexadecimal representation of
+ the 48-bit UAA or the ordinal value (in ascending UAA order) of the NIC to be installed.\n
+Example:  Given NIC A=10005A000089 and NIC B=08005A00009B.  The
+correct NIC_UAA value to install NIC B can be expressed as NIC_UAA=08005A000009B
+or NIC_UAA=1."
+ $TOKEN_8 = "Port"
+ $TOKEN_9 = "Required port value.  For non-turbo class adapters, the port address for a
+primary network board is A20 hex, the port address for an alternate
+network board is A24 hex.  Note that all information for an IBM network
+board can be read from the board once the port is given, except for an
+alternate board's RAM address on an ISA bus.  Turbo class adapters are not
+subject to this restriction: any port address on a 4 byte boundary can be used."
+ $TOKEN_10 = "The driver defaults to the
+token ring (802.2) frame type.  Depending on the frame type your protocol
+requires, you can either change to TOKEN-RING 802.2 SNAP or choose both
+frame types and load the driver re-entrantly. Do not change the MSB/LSB
+parameter unless you are familiar with the effects of such
+a change."
+ $TOKEN_11 = "TOKEN-RING"
+ $TOKEN_12 = "TOKEN-RING_SNAP"
+ $TOKEN_13 = "NOFULLDUPLEX"
+ $TOKEN_14 = "By default, turbo and most auto class adapters will automatically attempt
+to open as if it were connected to a switched token ring network.  Failing
+that, it will attempt to open in normal token passing mode.  By including
+the NOFULLDUPLEX keyword, the open attempt in Full Duplex Mode is not
+attempted.  This feature is for backward compatibility."
+ $TOKEN_15 = "PCMCIA_INT"
+ $TOKEN_16 = "PCMCIA_INT parameters informs the driver of two things:
+1. That a PCMCIA bus adapter is being used, and 2. The interrupt number.
+Depending on the adapter being used and the mode of operation selected, the adapter
+can support two sets of interrupt, one being a super set of the other.  All adapters
+can use interrupt values 2/9,3,6,7 while enhanced mode adapters also support
+A hex (10 decimal), B hex (11 decimal), C hex (12 decimal), and F hex (15 decimal).
+Interrupt values A,B,C,and F must be entered in their hex values.  Consult the adapter
+manual for more info."
+ $TOKEN_17 = "NOSHALLOWMODE"
+ $TOKEN_18 = "Turbo class cards support shallow operation which
+have performance enhanced features such a fast path transmit and receive and
+no LLC processing done on the card as their standard mode of operation.  Inclusion
+of this keyword enables the traditional (auto class and below cards)
+operation (non fast path receives and on board 802.2 LLC processing enabled)
+on the adapter by the microcode.  This feature is for backward compatibility."
+ $TOKEN_19 = "Datarate"
+ $TOKEN_20 = "This tells the adapter the speed of the token-ring that it is connected
+to.  If this adapter is the 1st adapter to open on the ring, the ring speed will be
+set to this value.  If the ring speed is different from this value, the open will fail.
+Not Supported on MCA adapters."
+ $TOKEN_21 = "AutoRingSpeed"
+ $TOKEN_22 = "The presence of this parameter enables the adapters ring speed listen
+hardware of Auto and Turbo class adapters.  In the event the adapter opens onto
+the ring at the wrong speed, the adapter will change over to the proper speed automatically.
+This parameter will cause an adapter opening as the first adapter on the ring to fail."
+ $TOKEN_23 = "Shared Ram Base Address"
+ $TOKEN_24 = "PCMCIA adapters that are point enabled may require this parameter to properly
+locate the adapter shared ram area.  It is optional for all others."
+

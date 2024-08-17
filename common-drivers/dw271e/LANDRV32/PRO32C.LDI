@@ -1,0 +1,1034 @@
+; VeRsIoN=1.6 Proteon ODI Token Ring Installation Information file.
+; CoPyRiGhT=(c)Copyright 1998 by Proteon Inc.  All rights reserved.
+
+VER:    1.6
+SYN:    1.00
+
+DR PRO32C_ISA IF (BUS==ISA) OPT ELS HID
+{
+ DES:  $PRO32C_1
+ HELP: $PRO32C_2
+ PAR:  2.00
+ FILE: PRO32C.LAN
+ TIME: 100
+
+ ;@# Sprod:  'Proteon~p1392plus non-PnP ISA Token-Ring Adapter'
+
+ ;@# CLIENT: pidosodi.com
+
+ ;@# ALIAS:  pinw4xx.lan
+
+ PR SLOT
+ {
+ }
+
+ PR PORT REQ
+ {
+   TYP:  HEX(4)
+   RES:  10
+   VAL:  0100,0120,0140,0160,0180,01A0,01C0,01E0,0200,0220,0240,0260,
+	 0280,02A0,02C0,02E0,0300,0320,0340,0360,0380,03A0,03C0,03E0,
+	 0400,0420,0440,0460,0480,04A0,04C0,04E0,0500,0520,0540,0560,
+	 0580,05A0,05C0,05E0,0600,0620,0640,0660,0680,06A0,06C0,06E0,
+	 0700,0720,0740,0760,0780,07A0,07C0,07E0,0800,0820,0840,0860,
+	 0880,08A0,08C0,08E0,0900,0920,0940,0960,0980,09A0,09C0,09E0,
+	 0A00,0A20,0A40,0A60,0A80,0AA0,0AC0,0AE0,0B00,0B20,0B40,0B60,
+	 0B80,0BA0,0BC0,0BE0,0C00,0C20,0C40,0C60,0C80,0CA0,0CC0,0CE0,
+	 0D00,0D20,0D40,0D60,0D80,0DA0,0DC0,0DE0,0E00,0E20,0E40,0E60,
+	 0E80,0EA0,0EC0,0EE0,0F00,0F20,0F40,0F60,0F80,0FA0,0FC0,0FE0,
+	 1000,1A20,1E20,2000,2A20,2E20,3000,3A20,3E20,4000,4A20,4E20,
+	 5000,5A20,5E20,6000,6A20,6E20,7000,7A20,7E20,8000,8A20,8E20,
+	 9000,9A20,9E20,A000,AA20,AE20,B000,BA20,BE20,C000,CA20,CE20,
+	 D000,DA20,DE20,E000,EA20,EE20,F000,FA20,FC00,FC20,FC40,FC60,
+	 FC80,FCA0,FCC0,FCE0,FD00,FD20,FD40,FD60,FD80,FDA0,FDC0,FDE0,
+	 FE00,FE20,FE40,FE60,FE80,FEA0,FEC0,FEE0,FF00,FF20,FF40,FF60,
+	 FF80,FFA0,FFC0,FFE0
+   DEF:  0A20
+ }
+
+ PR DMA REQ
+ {
+   TYP:  HEX(1)
+   VAL:  5,6,7
+   DEF:  5
+ }
+
+ PR INT REQ
+ {
+   TYP:  HEX(1)
+   VAL:  3,4,5,6,7,9,A,B,C
+   DEF:  5
+ }
+
+ PR SPEED OPT
+ {
+   DES:  $PRO32C_3
+   HELP: $PRO32C_4
+   TYP:  DEC(2)
+   VAL:  4,16
+   DEF:  16
+   OUT:  'speed=%s'
+ }
+
+ PR CABLE OPT
+ {
+   DES:  $PRO32C_5
+   HELP: $PRO32C_6
+   TYP:  STR
+   VAL:  'UTP', 'STP'
+   DEF:  UND
+   OUT:  'cable=%s'
+ }
+
+ FR FrameSelect OPT
+ {
+   CD:   $PRO32C_7
+   CH:   'Token-Ring'
+   CD:   $PRO32C_8
+   CH:   'Token-Ring_SNAP'
+   DEF:  1
+ }
+
+ PR CONFIGURATION OPT
+ {
+   DES:  $PRO32C_9
+   HELP: $PRO32C_10
+   TYP:  STR
+   VAL:  'DTR', 'DTR-TKP', 'DTR-TXI'
+   DEF:  UND
+   OUT:  'configuration=%s'
+ }
+
+ PR QUIET OPT
+ {
+   DES:  $PRO32C_11
+   HELP: $PRO32C_12
+   TYP:  STR
+   VAL:  'QUIET'
+   DEF:  UND
+   OUT:  '%s'
+ }
+
+ PR NODE OPT
+ {
+   TYP:  STR(14)
+   OUT:  'node=%s'
+ }
+}
+
+DR PRO32C_PNPISA IF (BUS==PNPISA) OPT ELS HID
+{
+ DES:  $PRO32C_13
+ HELP: $PRO32C_14
+ PAR:  2.00
+ FILE: PRO32C.LAN
+ TIME: 100
+ PROD: 'PNPISA.INCLUDE.PRO.700.*'
+
+ ;@# Sprod:  'Proteon~p1394plus PnP ISA Token-Ring Adapter'
+
+ ;@# CLIENT: pidosodi.com
+
+ ;@# ALIAS:  pinw4xx.lan
+
+ PR SLOT
+ {
+ }
+
+ PR SPEED OPT
+ {
+   DES:  $PRO32C_15
+   HELP: $PRO32C_16
+   TYP:  DEC(2)
+   VAL:  4,16
+   DEF:  16
+   OUT:  'speed=%s'
+ }
+
+ FR FrameSelect OPT
+ {
+   CD:   $PRO32C_17
+   CH:   'Token-Ring'
+   CD:   $PRO32C_18
+   CH:   'Token-Ring_SNAP'
+   DEF:  1
+ }
+
+PR CONFIGURATION OPT
+ {
+   DES:  $PRO32C_21
+   HELP: $PRO32C_22
+   TYP:  STR
+   VAL:  'DTR', 'DTR-TKP', 'DTR-TXI'
+   DEF:  UND
+   OUT:  'configuration=%s'
+ }
+
+ PR QUIET OPT
+ {
+   DES:  $PRO32C_23
+   HELP: $PRO32C_24
+   TYP:  STR
+   VAL:  'QUIET'
+   DEF:  UND
+   OUT:  '%s'
+ }
+
+ PR NODE OPT
+ {
+   TYP:  STR(14)
+   OUT:  'node=%s'
+ }
+}
+
+DR PRO32C_PCI IF (BUS==PCI) OPT ELS HID
+{
+ DES:   $PRO32C_25
+ HELP:  $PRO32C_26
+ PAR:   2.00
+ FILE:  PRO32C.LAN
+ TIME:  100
+ PROD:  'PCI.INCLUDE.1108.0100.0000.0000.00'
+ PROD:  'PCI.INCLUDE.1108.0101.0000.0000.00'
+ PROD:  'PCI.INCLUDE.1108.0105.0000.0000.00'
+ PROD:  'PCI.INCLUDE.1108.0108.0000.0000.00'
+ PROD:  'PCI.INCLUDE.1108.0138.0000.0000.00'
+ PROD:  'PCI.INCLUDE.1108.0139.0000.0000.00'
+ PROD:  'PCI.INCLUDE.1108.013C.0000.0000.00'
+ PROD:  'PCI.INCLUDE.1108.013D.0000.0000.00'
+
+ ;@# Sprod:  'Proteon~p1690plus PCI Token-Ring Adapter',
+ ;@#         'Proteon~p1690plus PCI Dual Channel Token-Ring NIC',
+ ;@#         'Proteon~p1690plus PCI Token-Ring NIC (0105)',
+ ;@#         'Proteon~p1690plus PCI Token-Ring NIC (0108)',
+ ;@#         'Proteon~p1690plus PCI Token-Ring NIC (0138)',
+ ;@#         'Proteon~p1690plus PCI Token-Ring NIC (0139)',
+ ;@#         'Proteon~p1690plus PCI Token-Ring NIC (013C)',
+ ;@#         'Proteon~p1690plus PCI Token-Ring NIC (013D)'
+
+ ;@# CLIENT: ppdosodi.com
+
+ ;@# ALIAS:  ppnw4xx.lan
+
+ PR SLOT
+ {
+ }
+
+ PR SPEED OPT
+ {
+   DES:  $PRO32C_27
+   HELP: $PRO32C_28
+   TYP:  DEC(2)
+   VAL:  4,16
+   DEF:  16
+   OUT:  'speed=%s'
+ }
+
+ FR FrameSelect OPT
+ {
+   CD:   $PRO32C_29
+   CH:   'Token-Ring'
+   CD:   $PRO32C_30
+   CH:   'Token-Ring_SNAP'
+   DEF:  1
+ }
+
+PR CHANNEL OPT
+ {
+   DES:  $PRO32C_33
+   HELP: $PRO32C_34
+   TYP:  DEC(1)
+   VAL:  1,2
+   DEF:  UND
+   OUT:  'channel=%s'
+ }
+
+ PR CONFIGURATION OPT
+ {
+   DES:  $PRO32C_35
+   HELP: $PRO32C_36
+   TYP:  STR
+   VAL:  'DTR', 'DTR-TKP', 'DTR-TXI'
+   DEF:  UND
+   OUT:  'configuration=%s'
+ }
+
+ PR QUIET OPT
+ {
+   DES:  $PRO32C_37
+   HELP: $PRO32C_38
+   TYP:  STR
+   VAL:  'QUIET'
+   DEF:  UND
+   OUT:  '%s'
+ }
+
+ PR NODE OPT
+ {
+   TYP:  STR(14)
+   OUT:  'node=%s'
+ }
+}
+
+
+DR PRO32C_EISA IF (BUS==EISA) OPT ELS HID
+{
+ DES:  $PRO32C_47
+ HELP: $PRO32C_48
+ PAR:  2.00
+ FILE: PRO32C.LAN
+ TIME: 100
+ PROD: 'EISA.INCLUDE.PRO.600.2'
+ PROD: 'EISA.INCLUDE.PRO.600.*'
+
+ ;@# Sprod:  'Proteon~p1990plus EISA Token-Ring Adapter',
+ ;@#         'Proteon~p1990 EISA Token-Ring Adapter'
+
+ ;@# CLIENT: pedosodi.com
+
+ ;@# ALIAS:  penw4xx.lan
+
+ PR SLOT
+ {
+ }
+
+ FR FrameSelect OPT
+ {
+   CD:   $PRO32C_49
+   CH:   'Token-Ring'
+   CD:   $PRO32C_50
+   CH:   'Token-Ring_SNAP'
+   DEF:  1
+ }
+
+ PR CONFIGURATION OPT
+ {
+   DES:  $PRO32C_51
+   HELP: $PRO32C_52
+   TYP:  STR
+   VAL:  'DTR', 'DTR-TKP', 'DTR-TXI'
+   DEF:  UND
+   OUT:  'configuration=%s'
+ }
+
+ PR QUIET OPT
+ {
+   DES:  $PRO32C_53
+   HELP: $PRO32C_54
+   TYP:  STR
+   VAL:  'QUIET'
+   DEF:  UND
+   OUT:  '%s'
+ }
+
+ PR NODE OPT
+ {
+   TYP:  STR(14)
+   OUT:  'node=%s'
+ }
+}
+
+DLANG:  4
+;English
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+
+LANG:   1
+;Chinese (Simplified)
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+
+LANG:   6
+;French
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+
+LANG:   7
+;German
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+
+LANG:   8
+;Italian
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+
+LANG:   9
+;Japanese
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+
+LANG:   10
+;Korean
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+
+LANG:   12
+;Portugese (Brazilian)
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+
+LANG:   13
+;Russian
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+
+LANG:   14
+;Spanish
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+
+LANG:   16
+;Chinese (Traditional)
+        $PRO32C_1 = "Proteon p1392plus non-PnP ISA Token-Ring"
+        $PRO32C_2 = "This installation script supports p1392plus ISA token-ring adapters.
+	Although it will support the p1394plus, the PnP-ISA installation
+	script should be used for this card in a machine with either
+	a Plug-and-Play BIOS or a configuration manager loaded."
+	$PRO32C_3 = "Ring Speed"
+	$PRO32C_4 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_5 = "Cable type"
+	$PRO32C_6 = "Cable types are UTP for Unshielded Twisted Pair with RJ-45 connectors
+	  and STP for Shielded Twisted Pair with DB-9 connectors."
+	$PRO32C_7 = "802.5"
+	$PRO32C_8 = "802.5 SNAP"
+	$PRO32C_9 = "DTR Mode"
+	$PRO32C_10 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_11 = "Quiet"
+	$PRO32C_12 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+	$PRO32C_13 = "Proteon p1394plus PnP ISA Token-Ring"
+	$PRO32C_14 = "This installation script supports p1394plus PnP-ISA
+	token-ring adapter in a system with a Plug-and-Play
+	BIOS or a configuration manager running.  Use the
+	non-PnP installation script in other cases."
+	$PRO32C_15 = "Ring Speed"
+	$PRO32C_16 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_17 = "802.5"
+	$PRO32C_18 = "802.5 SNAP"
+	$PRO32C_21 = "DTR Mode"
+	$PRO32C_22 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_23 = "Quiet"
+	$PRO32C_24 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_25 = "Proteon p1690plus PCI Token-Ring"
+        $PRO32C_26 = "This installation script supports p1690plus PCI token-ring adapters."
+	$PRO32C_27 = "Ring Speed"
+	$PRO32C_28 = "Select the network ring speed as 16 (default) or 4 Mbit/s.
+	  Incorrect setting of Ring Speed may cause network failure."
+	$PRO32C_29 = "802.5"
+	$PRO32C_30 = "802.5 SNAP"
+	$PRO32C_33 = "Channel Number"
+	$PRO32C_34 = "The channel number is only required if you want to load
+	  the second channel of a dual channel card."
+	$PRO32C_35 = "DTR Mode"
+	$PRO32C_36 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_37 = "Quiet"
+	$PRO32C_38 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+        $PRO32C_47 = "Proteon p1990plus EISA Token-Ring"
+        $PRO32C_48 = "This installation script supports p1990plus EISA token-ring adapters."
+	$PRO32C_49 = "802.5"
+	$PRO32C_50 = "802.5 SNAP"
+	$PRO32C_51 = "DTR Mode"
+	$PRO32C_52 = "Use DTR (default) unless you need to force a protocol. DTR-TKP is
+	  half duplex only. DTR-TXI is full duplex only."
+	$PRO32C_53 = "Quiet"
+	$PRO32C_54 = "Set QUIET to suppress network warnings.  These include adapter
+	  opening and closing, and ring beaconing reports."
+

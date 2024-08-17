@@ -1,0 +1,733 @@
+VER:	1.00
+SYN:	1.00
+
+; Olicom Fast Ethernet server driver information file.
+
+
+Driver OC2376
+{
+ PROD:  'PNPISA.INCLUDE.OLC.951.1'
+;@# Sprod: 'Olicom~ Ethernet ISA 10/100 Adapter (OC-2376)'
+ DES:   $OCE3XODI_DES0
+ HELP:  $OCE3XODI_DRVHLP0
+ PAR:   1.00
+ FILE:  OCE3XODI.LAN
+; OF:    ETHERTSM.NLM,MSM.NLM,NBI.NLM
+
+
+;@#  CLIENT: oce3xodi
+;@#  ALIAS: oce3xodi
+
+ PR SLOT OPTIONAL
+  {
+  HELP: $OCE3XODI_SLOTHLP
+  }
+
+
+ FR FRMTYPE
+  {
+  HELP: $OCE3XODI_FRMHLP
+  CD:	$OCE3XODI_1
+  CH:	'Ethernet_802.3'
+  CD:	$OCE3XODI_2
+  CH:	'Ethernet_802.2'
+  CD:	$OCE3XODI_3
+  CH:	'Ethernet_SNAP'
+  CD:	$OCE3XODI_4
+  CH:	'Ethernet_II'
+  DEF:	1, 2
+  }
+
+ PR NODE
+  {
+  HELP: $OCE3XODI_NODEHLP
+  }
+
+ PR SPEED OPTIONAL
+  {
+  DES:  $OCE3XODI_SPEEDDES
+  HELP: $OCE3XODI_SPEEDHLP
+  TYPE: STRING
+  DEF: UNDEFINED
+  VALUES: 'AUTO','10','100'
+  OUTPUTFORMAT: 'SPEED=%s'
+  }
+
+ PR DUPLEX OPTIONAL
+  {
+  DES:   $OCE3XODI_DUPLEXDES
+  HELP: $OCE3XODI_DUPLEXHLP
+  TYPE: STRING
+  DEF: UNDEFINED
+  VALUES: 'AUTO','HALF','FULL'
+  OUTPUTFORMAT: 'DUPLEX=%s'
+  }
+}
+
+Driver OC2375
+{
+ PROD:  'PNPISA.INCLUDE.OLC.951.0'
+;@# Sprod: 'Olicom~ Ethernet ISA 10/100 Adapter (OC-2375)'
+ DES:   $OCE3XODI_DES2
+ HELP:  $OCE3XODI_DRVHLP0
+ PAR:   1.00
+ FILE:  OCE3XODI.LAN
+; OF:    ETHERTSM.NLM,MSM.NLM,NBI.NLM
+
+;@#  CLIENT: oce3xodi
+;@#  ALIAS: oce3xodi
+
+ PR SLOT OPTIONAL
+  {
+  HELP: $OCE3XODI_SLOTHLP
+  }
+
+
+ FR FRMTYPE
+  {
+  HELP: $OCE3XODI_FRMHLP
+  CD:	$OCE3XODI_1
+  CH:	'Ethernet_802.3'
+  CD:	$OCE3XODI_2
+  CH:	'Ethernet_802.2'
+  CD:	$OCE3XODI_3
+  CH:	'Ethernet_SNAP'
+  CD:	$OCE3XODI_4
+  CH:	'Ethernet_II'
+  DEF:	1, 2
+  }
+
+ PR NODE
+  {
+  HELP: $OCE3XODI_NODEHLP
+  }
+
+ PR SPEED OPTIONAL
+  {
+  DES:  $OCE3XODI_SPEEDDES
+  HELP: $OCE3XODI_SPEEDHLP
+  TYPE: STRING
+  DEF: UNDEFINED
+  VALUES: 'AUTO','10','100'
+  OUTPUTFORMAT: 'SPEED=%s'
+  }
+
+ PR DUPLEX OPTIONAL
+  {
+  DES:   $OCE3XODI_DUPLEXDES
+  HELP: $OCE3XODI_DUPLEXHLP
+  TYPE: STRING
+  DEF: UNDEFINED
+  VALUES: 'AUTO','HALF','FULL'
+  OUTPUTFORMAT: 'DUPLEX=%s'
+  }
+}
+
+Driver OC2335
+{
+ PROD:  'MCA.6447'
+;@# Sprod: 'Olicom~ Ethernet MCA 10/100 Adapter (OC-2335)'
+ DES:   $OCE3XODI_DES1
+ HELP:  $OCE3XODI_DRVHLP1
+ PAR:   1.00
+ FILE:  OCE3XODI.LAN
+; OF:    ETHERTSM.NLM,MSM.NLM,NBI.NLM
+
+;@#  CLIENT: oce3xodi
+;@#  ALIAS: oce3xodi
+
+ PR SLOT OPTIONAL
+  {
+  HELP: $OCE3XODI_SLOTHLP
+  }
+
+
+ FR FRMTYPE
+  {
+  HELP: $OCE3XODI_FRMHLP
+  CD:	$OCE3XODI_1
+  CH:	'Ethernet_802.3'
+  CD:	$OCE3XODI_2
+  CH:	'Ethernet_802.2'
+  CD:	$OCE3XODI_3
+  CH:	'Ethernet_SNAP'
+  CD:	$OCE3XODI_4
+  CH:	'Ethernet_II'
+  DEF:	1, 2
+  }
+
+ PR NODE
+  {
+  HELP: $OCE3XODI_NODEHLP
+  }
+
+ PR SPEED OPTIONAL
+  {
+  DES:  $OCE3XODI_SPEEDDES
+  HELP: $OCE3XODI_SPEEDHLP
+  TYPE: STRING
+  DEF: UNDEFINED
+  VALUES: 'AUTO','10','100'
+  OUTPUTFORMAT: 'SPEED=%s'
+  }
+
+ PR DUPLEX OPTIONAL
+  {
+  DES:   $OCE3XODI_DUPLEXDES
+  HELP: $OCE3XODI_DUPLEXHLP
+  TYPE: STRING
+  DEF: UNDEFINED
+  VALUES: 'AUTO','HALF','FULL'
+  OUTPUTFORMAT: 'DUPLEX=%s'
+  }
+}
+
+
+DLANG:	4
+;English
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+LANG:   1
+;Chinese (Simplified)
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+
+
+LANG:	6
+;French
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+
+LANG:	7
+;German
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+
+LANG:	8
+;Italian
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+LANG:   9
+;Japanese
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+LANG:   10
+;Korean
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+
+LANG:   12
+;Portuguese (Brazil)
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+LANG:   13
+;Russian
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+
+
+LANG:	14
+;Spanish
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+LANG:  16
+;Chinese (Traditional)
+	$OCE3XODI_1 = "802.3"
+	$OCE3XODI_2 = "802.2"
+	$OCE3XODI_3 = "802.2 SNAP"
+	$OCE3XODI_4 = "Ethernet II"
+
+ $OCE3XODI_DES0 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2376)"
+ $OCE3XODI_DES1 =        "Olicom Ethernet MCA 10/100 Adapter (OC-2335)"
+ $OCE3XODI_DES2 =        "Olicom Ethernet ISA 10/100 Adapter (OC-2375)"
+
+ $OCE3XODI_DRVHLP0 =     "This driver supports the Olicom Ethernet ISA 10/100
+		 Adapters in systems with an ISA or EISA bus."
+
+ $OCE3XODI_DRVHLP1 =     "This driver supports the Olicom Ethernet MCA 10/100
+		 Adapter in systems with an MCA bus."
+
+ $OCE3XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE3XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE3XODI_PORTHLP =     "Select the port value (base I/O address) that corresponds to
+		 the port address setting on the network board.\n\n
+
+		 Make sure the block of I/O addresses does not overlap
+		 addresses of other devices in the machine."
+
+ $OCE3XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE3XODI_SPEEDDES = "Speed"
+
+ $OCE3XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE3XODI_DUPLEXDES = "Duplex"
+
+ $OCE3XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+

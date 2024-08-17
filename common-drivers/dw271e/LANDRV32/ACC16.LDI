@@ -1,0 +1,293 @@
+;DrIvEr DeScRiPtIoN
+;
+;	Novell NetWare Server Driver Description File for ACC16.LAN
+;
+
+VER: 1.01
+SYN: 1.00
+
+DR ACC16
+{
+	DES:	"ACCTON EN1216 10/100 Fast Ethernet Adapter (32-Bit ODI)"
+	HELP:	"This driver supports PCI bus type."
+	PAR:	2.00
+	PROD:	'PCI.1317.0981.1113.1216.*'
+;@# SPROD:  'ACCTON EN1216 10/100 Fast Ethernet Adapter (32-Bit ODI)'
+
+;@# CLIENT: ACC16.LAN, ACC16.COM
+;@# ALIAS:  ACC16.LAN
+
+
+	FILE:	ACC16.LAN
+	TIME:	15
+
+	PR SLOT REQ
+	{
+	  VAL: 1-65535
+	}
+
+	FR Frame_Type
+	{
+		CD:  'Ethernet_802.2'
+		CH:  'Ethernet_802.2'
+		CD:  'Ethernet_802.3'
+		CH:  'Ethernet_802.3'
+		CD:  'Ethernet_SNAP'
+		CH:  'Ethernet_SNAP'
+		CD:  'Ethernet_II'
+		CH:  'Ethernet_II'
+		DEF:	1,2,3,4
+	}
+
+	LI Media_Type OPT
+	{
+		DES:	$ACC16_1
+		HELP:	$ACC16_2
+		CD:	$ACC16_3
+		CH:	$ACC16_4
+		CD:	$ACC16_5
+		CH:	$ACC16_6
+		CD:	$ACC16_7
+		CH:	$ACC16_8
+		CD:	$ACC16_9
+		CH:	$ACC16_10
+		CD:	$ACC16_11
+		CH:	$ACC16_12
+		DEF:	1
+		OUT:	'%s'
+	}
+	PR TXTHRESHOLD OPT
+	{
+		DES:			      $ACC16_13
+		HELP:			      $ACC16_14
+		TYP:			      DEC
+		Value:			      0 - 4
+		DEF:			      UND
+		OUT:			      'TXTHRESHOLD=%s'
+	}
+
+	PR NODE
+	{
+	}
+}
+
+DLANG:	4
+;English
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+LANG:	1
+;CHINESE
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+
+LANG:	6
+;French
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+LANG:	7
+;German
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+
+LANG:	8
+;Italian
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+LANG:	9
+;JAPANESE
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+
+LANG:	10
+;KOREAN
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+
+LANG:	12
+;PORTUGESE
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+
+LANG:	13
+;RUSSIAN
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+
+LANG:	14
+;Spanish
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+LANG:	16
+;CHINESE
+	$ACC16_1    = "Connection Media Type"
+	$ACC16_2    = "Please choose the media type that you would like to use."
+	$ACC16_3    = "Auto Detection Media"
+	$ACC16_4    = "AUTO"
+	$ACC16_5    = "10 BaseT"
+	$ACC16_6    = "10-HD"
+	$ACC16_7    = "10 BaseT Full-Duplex"
+	$ACC16_8    = "10-FD"
+	$ACC16_9    = "100 BaseTx"
+	$ACC16_10   = "100-HD"
+	$ACC16_11   = "100 BaseTx Full-Duplex"
+	$ACC16_12   = "100-FD"
+	$ACC16_13   = "Tx Threshold"
+	$ACC16_14   = "Tx Threshold can be set 0~3, 4 is Store forward"
+	$ACC16_15   = "0"
+	$ACC16_19   = "4"
+
+
+
+;DrIvEr DeScRiPtIoN EnD
+
+

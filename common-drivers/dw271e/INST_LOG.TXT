@@ -1,0 +1,88 @@
+              NetWare 5 Multiple Client Install Login Script
+                             June 1, 1998
+                                   
+Important:  Read this sample script in Notepad or WordPad to accommodate the log line
+lengths.
+
+Purpose
+
+If you plan to install the Novell Client software on multiple workstations, you can
+install from the network by copying files to the server and modifying the login
+script. Even if your network has workstations on multiple platforms, you can install
+and upgrade the client software on all platforms when users log in. The process
+requires five tasks:
+
+   1.   Create a folder on the NetWare server.
+   2.   Copy Novell Client files and other required files to this folder (workstations
+        can then read the files during login).
+   3.   Grant rights to the new folder.
+   4.   Create or update the appropriate configuration file (install.cfg, setup.ini,
+        nwsetup.ini, or unattended.txt file) for each platform-specific client.
+   5.   Create or modify the appropriate login script.  A sample script is included in
+        this file.
+
+If you are using this script to replace the Microsoft Client with the Novell Client
+for Windows 95, some user intervention is necessary. Due to Microsoft's limited
+scripting capabilities, users must close an open DOS box before the workstation is
+rebooted and the installation is completed. If you are installing the Novell Client
+for Windows 95 on a new workstation or are upgrading an existing client, no user
+intervention is necessary. This is not an issue for Windows NT
+
+
+Login Script
+
+Note:   In this sample, the information that is necessary to the script is represented
+        in all capital letters. The information you should customize for your network
+        is in lowercase letters
+
+        
+
+REM *****  Windows NT SECTION  *****
+IF <os> = "Windows_NT" THEN BEGIN
+   WRITE "Updating the Novell Client for Windows NT."
+   #\\server1\sys\public\client\winnt\i386\setupnw.exe/acu /u:unatt_nt.txt
+   EXIT
+END
+
+REM *****  Windows 95 SECTION  *****
+IF <winbootdir> <> "" THEN BEGIN
+   WRITE "Updating the Novell Client for Windows 95."
+   IF OS_VERSION="V7.00" THEN BEGIN
+        #\\server1\sys\public\client\win95\ibm_enu\setup.exe/acu/u:\\server1\sys\public\client\win95\ibm_enu\unatt_95.txt
+   ELSE
+        @\\server1\sys\public\client\win95\ibm_enu\setup.exe/acu/u:\\server1\sys\public\client\win95\ibm_enu\unatt_95.txt
+        EXIT
+   END
+   EXIT
+END
+
+REM *****  DOS/WIN SECTION  *****
+IF OS = "MSDOS" THEN BEGIN
+   IF PLATFORM <> "WIN" THEN BEGIN
+        WRITE " Updating the Novell Client for DOS and Windows 3.1x with the DOS install."
+        MAP y:=\\server1\sys\public\client\
+        #y:adm32\ibm_enu\dos_acu\nwdetect.exe client32_version 2.5.0
+        IF ERROR_LEVEL = "1" THEN BEGIN
+           #y:doswin32\install.exe
+           IF ERROR_LEVEL = "0" THEN BEGIN
+             #y:adm32\ibm_enu\dos_acu\nwstamp.exe client32_version 2.5.0
+             #y:adm32\ibm_enu\dos_acu\nwlog.exe /f z:\doslog\dosacu.log
+             #y:adm32\ibm_enu\dos_acu\reboot.com
+           ELSE
+             WRITE "Error running installation (%ERROR_LEVEL). Contact your network administrator"
+             #y:adm32\ibm_enu\dos_acu\nwlog.exe /f z:\doslog\failed.log
+           END
+        ELSE
+           WRITE "The Novell Client for DOS and Windows 3.1x was up-to-date."
+        END
+        EXIT
+   ELSE
+        WRITE " Updating the Novell Client for DOS and Windows 3.1x with the Windows install."
+        MAP y:=\\server1\sys\public\client\
+           @y:doswin32\nls\english\setup.exe /acu
+        EXIT
+    END
+END
+WRITE "OS %OS not supported by ACU"
+WRITE ""
+

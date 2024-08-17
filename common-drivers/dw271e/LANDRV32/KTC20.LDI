@@ -1,0 +1,146 @@
+; KTC20.LDI
+; Kingston KNE20 EtheRx ISA PnP Ethernet Adapter
+; Netware LAN Installation Information File
+
+VER: 1.22
+SYN: 1.00
+
+DR KTC20
+{
+     DES:   $KTC20_1
+     HELP:  $KTC20_2
+     PAR:   2.00
+     FILE:  KTC20.LAN
+
+     PROD:  'PnPISA.KTC.*.?'
+
+;@# Sprod:  'Kingston KNE20 ISA PnP Ethernet Adapter'
+
+;@# CLIENT: KTC20.LAN, KTC20.COM
+;@# ALIAS:  KTC20.LAN
+
+     PR SLOT
+	IF (BUS == PCI) REQ
+	ELSE HID
+     {
+	VAL: 1-65535
+     }
+
+     PR INT OPTIONAL
+     {
+          VAL: 2, 3, 4, 5, A, B, C, F
+          TYP:  HEX(1)
+          DEF: UNDEFINED
+        }
+
+     PR PORT OPTIONAL
+     {
+          VAL: 300, 320, 340, 360, 240, 280, 2C0
+          DEF: UNDEFINED
+          RES: 20
+     }
+
+
+     PR BOARD REQ
+     {
+          VAL: 1-4
+          TYP: HEX(1)
+          DEF: 1
+          OUT: 'BOARD=%s'
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 1,2
+     }
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+
+
+DLANG:    4
+;English
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."
+
+LANG:     6
+;French
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."
+
+LANG:     7
+;German
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."
+
+LANG:     8
+;Italian
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."
+
+LANG:     12
+;PORTUGESE
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."
+
+LANG:     14
+;Spanish
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."
+
+LANG:     9
+;JAPANESE
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."
+
+LANG:     10
+;KOREAN
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."
+
+LANG:     1
+;CHINESE
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."
+
+LANG:     16
+;CHINESE
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."
+
+
+LANG:     13
+;RUSSIAN
+     $KTC20_1 = "Kingston KNE20 Netware Driver (3.30 MLID specs)"
+     $KTC20_2 = "This driver (KTC20.LAN) supports KTC20BT or KTC20T network
+boards installed in 16-bit expansion slots in ISA servers. You can install up
+to four boards, as long as their settings do not conflict."

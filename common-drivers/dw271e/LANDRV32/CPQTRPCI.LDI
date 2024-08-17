@@ -1,0 +1,301 @@
+; CPQTRPCI.LDI
+;
+; Compaq Netelligent 4/16 TR PCI UTP/STP Controllers.
+;
+; VeRsIoN=1.00 Novell LAN Installation Information File for CPQTRPCI.
+; CoPyRiGhT=(c)Copyright 1997, by Compaq Computer Corp.  All rights reserved.
+
+Ver:	       1.00
+Syn:		   1.00
+
+Dr CPQTRPCI_DESCR
+
+     {
+	  Des:		          $CPQTRPCI_1
+	  Help:               $CPQTRPCI_2
+
+	  Par:                2.00
+	  Time:               30
+
+	  File:               CPQTRPCI.LAN
+
+	  Prod:               'PCI.10DA.0508.0000.0000.*', 'PCI.0E11.0508.0000.0000.*'
+
+;@#   Client:             CPQTRPCI.LAN
+;@#   ALIAS:              CPQTRPCI.LAN
+;@#	  SPROD:				'Compaq~Netelligent 4/16 TR PCI UTP/STP NIC',
+;@#						'Thomas-Conrad~4048 16/4Mbps PCI NIC'
+
+	  PR SLOT REQ
+	       {
+		    Typ:           DEC (8)
+		    Val:           1-65535
+		    Out:		   'SLOT=%s'
+	       }
+
+	  PR LINESPEED OPT
+	       {
+		    Des:		   $CPQTRPCI_4
+		    Help:          $CPQTRPCI_5
+		    Typ:	       DEC (2)
+		    Val:           4,16
+		    Out:           'LINESPEED=%s'
+	       }
+
+	  PR DETR OPT
+	       {
+		    Des:           $CPQTRPCI_6
+		    Help:          $CPQTRPCI_7
+		    Typ:           STR (10)
+		    Val:           $CPQTRPCI_8
+		    Out:           'DETR'
+	       }
+
+	  PR REINSERT OPT
+	       {
+		    Des:           $CPQTRPCI_10
+		    Help:          $CPQTRPCI_11
+		    Typ:           STR (10)
+		    Val:           $CPQTRPCI_8
+		    Out:           'REINSERT'
+	       }
+
+	  PR RBC OPT
+	       {
+		    Des:           $CPQTRPCI_19
+		    Help:          $CPQTRPCI_20
+		    Typ:           DEC (2)
+		    Val:           1-39
+		    Out:           'RBC=%s'
+	       }
+
+	  PR NODE OPT
+	       {
+		    Des:           $CPQTRPCI_15
+		    Typ:           HEX (12)
+		    Val:           400000000000-40007FFFFFFF
+	       }
+
+	  FR FrameSelect
+	       {
+		    Ch:            'TOKEN-RING'
+		    Ch:            'TOKEN-RING_SNAP'
+		    Def:           1
+		    Oct:           MSB
+	       }
+     }
+
+
+DLANG:  4
+;English
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   1
+;Chinese (Simplified)
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   6
+;French
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+       
+LANG:   7
+;German
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   8
+;Italian
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   9
+;Japanese
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   10
+;Korean
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   12
+;Portugese (Brazilian)
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+		      
+LANG:   13
+;Russian
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   16
+;Chinese (Traditional)
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   14
+;Spanish
+	$CPQTRPCI_1 = "Compaq Netelligent 4/16 TR PCI UTP/STP Controller"
+	$CPQTRPCI_2 = "This driver supports the Compaq PCI Token-Ring Controller."
+	$CPQTRPCI_4 = "Line Speed"
+	$CPQTRPCI_5 = "Enter the line speed of the ring that the controller is
+attached to.  If no value is entered, the controller will default to 16 Mbps."
+	$CPQTRPCI_6 = "Disable Early Token Release"
+	$CPQTRPCI_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+	$CPQTRPCI_8 = "SELECTED"
+	$CPQTRPCI_10 = "Reinsert"
+	$CPQTRPCI_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+	$CPQTRPCI_15 = "Locally-administered address"
+	$CPQTRPCI_19 = "Receive Buffer Count"
+	$CPQTRPCI_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+
+
+
+

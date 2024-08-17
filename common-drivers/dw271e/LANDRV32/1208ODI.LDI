@@ -1,0 +1,271 @@
+;DrIvEr DeScRiPtIoN
+;
+;       Novell NetWare Server Driver Description File for 1208ODI.LAN
+;
+
+VER: 1.10
+SYN: 1.00
+
+DR 1208ODI
+{
+        DES:    $EN1208_1
+        HELP:   $EN1208_2
+        PAR:    1.00
+        PROD:   'PCI.10EC.8029.0000.0000.*'
+        FILE:   1208ODI.LAN
+        TIME:   15
+
+;@# SPROD: 'Accton~EN1208 PCI Ethernet driver'
+
+;@# CLIENT: 1208ODI.LAN, 1208ODI.COM
+;@# ALIAS:  1208ODI.LAN
+ 
+
+
+        PROMPT SLOT
+        {
+                DES:    $EN1208_3
+                HELP:   $EN1208_3_1
+                TYPE:   DECIMAL
+                VAL:    1-65535
+                DEF:    UNDEFINED
+                OUT:    'SLOT=%s'
+        }
+
+        FRAME FrameSelect
+        {
+                CD:     $EN1208_4
+                CH:     $EN1208_5
+                CD:     $EN1208_6
+                CH:     $EN1208_7
+                CD:     $EN1208_8
+                CH:     $EN1208_9
+                CD:     $EN1208_10
+                CH:     $EN1208_11
+                DEF:    1,2,3,4
+        }
+
+        PROMPT NODE
+        {
+
+        }
+
+}
+
+DLANG:  4
+;English
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+LANG:   1
+;Chinese
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+
+LANG:   6
+;French
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+LANG:   7
+;German
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+
+LANG:   8
+;Italian
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+LANG:   9
+;Japanese
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+LANG:  10
+;Korean
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+LANG:  12
+;Portuguese
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+LANG:  13
+;Russian
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+
+
+LANG:   14
+;Spanish
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+LANG:   16
+;Chinese
+        $EN1208_1    = "Accton EN1208 PCI Ethernet driver"
+        $EN1208_2    = "This driver supports PCI bus type"
+        $EN1208_3    = "Slot"
+        $EN1208_3_1  = "Select the slot number that corresponds to the physical
+                        expansion slot where the board or other device is installed.
+                        The slot number from 1, for first ethernet device,
+                        and upwards."
+        $EN1208_4    = "802.3"
+        $EN1208_5    = "ethernet_802.3"
+        $EN1208_6    = "802.2"
+        $EN1208_7    = "ethernet_802.2"
+        $EN1208_8    = "SNAP"
+        $EN1208_9    = "ethernet_snap"
+        $EN1208_10   = "Ethernet II"
+        $EN1208_11   = "ethernet_II"
+        $EN1208_12   = "Node Address"
+
+
+
+;DrIvEr DeScRiPtIoN EnD
+

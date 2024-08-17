@@ -1,0 +1,566 @@
+VER: 1.06
+SYN: 1.00
+
+DR SMCPWR2
+{
+    Description:    $SMCPWR2_ADAP_DES
+    HELP:           $SMCPWR2_ADAP_HELP
+    PAR:            2.00
+    PROD:         'PCI.10b8.0005.10b8.a011.06',
+                'PCI.10B8.0005.10B8.a014.0?',
+                'PCI.10B8.0005.10B8.a015.0?',
+                'PCI.10B8.0005.10B8.80EE.05'
+
+    FILE:           SMCPWR2.LAN
+    Timeout:        5
+
+      
+;@# Sprod: 'SMC~EtherPower II 10/100 (9432TX) Ethernet Adapter',
+;@#        'SMC~EtherPower II 10/100 (9432TX) Ethernet Adapter',
+;@#        'SMC~EtherPower II 10/100 (9432BTX)Ethernet Adapter',
+;@#        'SMC~EtherPower II 10/100 Ethernet Family Adapter'
+
+;@# CLIENT: SMC9432, SMCPWR2
+;@# ALIAS: SMC9432.COM, SMCPWR2.COM, SMC9432.LAN, SMCPWR2.LAN
+
+
+    PROMPT SLOT
+    {
+        Description:    $SMCPWR2_SLOT_DES
+        HELP:   $SMCPWR2_SLOT_HELP
+
+        TYPE:   DECIMAL
+        VAL:    1-65535
+        DEF:    UNDEFINED
+        OUT:    'SLOT=%s'
+    }
+        
+        
+    PROMPT SCRAMBLEON REQ
+    {
+            Description:    $SMCPWR2_SYNC_DES
+            HELP:           $SMCPWR2_SYNC_HELP
+        
+            TYPE: DECIMAL
+            VAL:  1
+            DEF:  1
+            OutputFormat:  'SCRAMBLEON=%s'
+    }
+    
+    FRAME FrameSelect
+    {
+        HELP:           $SMCPWR2_FRAME_HELP
+                
+        CDescription:   $SMCPWR2_FD_802_3
+        Choice:         $SMCPWR2_FH_802_3
+        CDescription:   $SMCPWR2_FD_802_2
+        Choice:         $SMCPWR2_FH_802_2
+        CDescription:   $SMCPWR2_FD_SNAP
+        Choice:         $SMCPWR2_FH_SNAP
+        CDescription:   $SMCPWR2_FD_EII
+        Choice:         $SMCPWR2_FH_EII
+        Default:        2
+    }
+
+    PROMPT NODE OPTIONAL
+    {
+        Description:    $SMCPWR2_NODE_DES
+        TYPE:           HEX
+        Value:          1-FFFFFFFFFFFE
+        Default:        UNDEFINED
+        OutputFormat:   'NODE=%s'
+    }
+
+    LIST MediaType REQUIRED
+    {
+        Description:    $SMCPWR2_MT_DES
+        HELP:           $SMCPWR2_MEDIA_HELP
+
+        CDescription:   $SMCPWR2_MD_AUTO
+        Choice:         $SMCPWR2_MH_AUTO
+        CDescription:   $SMCPWR2_MD_UTP
+        Choice:         $SMCPWR2_MH_UTP
+        CDescription:   $SMCPWR2_MD_BNC
+        Choice:         $SMCPWR2_MH_BNC
+        Default:        1
+        OutputFormat:   'MediaType=%s'
+    }
+
+    LIST LineSpeed
+    if (MediaType == 2)
+        REQUIRED
+    else
+        HIDDEN
+    {
+        Description:    $SMCPWR2_SPD_DES
+        HELP:           $SMCPWR2_SPD_HELP
+
+        CDescription:   $SMCPWR2_SD_AUTO
+        Choice:         $SMCPWR2_SH_AUTO
+        CDescription:   $SMCPWR2_SD_10
+        Choice:         $SMCPWR2_SH_10
+        CDescription:   $SMCPWR2_SD_100
+        Choice:         $SMCPWR2_SH_100
+        CDescription:   $SMCPWR2_SD_10_Full
+        Choice:         $SMCPWR2_SH_10_Full
+        CDescription:   $SMCPWR2_SD_100_Full
+        Choice:         $SMCPWR2_SH_100_Full
+        Default:        1
+        OutputFormat:   'LineSpeed=%s'
+    }
+}
+
+DLANG:  4
+;English
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"
+
+
+
+LANG:   6
+;French
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"
+
+
+LANG:   7
+;German
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"
+
+LANG:   8
+;Italian
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"
+
+LANG:   14
+;Spanish
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"
+
+LANG:   12
+;PORTUGESE
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"
+
+LANG:   9
+;JAPANESE
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"
+
+LANG:   10
+;KOREAN
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"
+
+LANG:   1
+;CHINESE
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"
+
+LANG:   16
+;CHINESE
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"
+
+LANG:   13
+;RUSSIAN
+    $SMCPWR2_ADAP_DES       = "SMC EtherPower II 10/100 32-Bit ODI Driver"
+    $SMCPWR2_ADAP_HELP      = "This driver supports 9432 series Ethernet/Fast Ethernet adapters"
+    $SMCPWR2_SLOT_DES       = "Slot"
+    $SMCPWR2_SLOT_HELP      = "Select the slot number that corresponds to the logical
+                expansion slot where the board or other device is installed."
+    $SMCPWR2_FRAME_HELP     = "Select the frame type(s) for your network."
+    $SMCPWR2_FD_802_3       = "802.3"
+    $SMCPWR2_FH_802_3       = "ethernet_802.3"
+    $SMCPWR2_FD_802_2       = "802.2"
+    $SMCPWR2_FH_802_2       = "ethernet_802.2"
+    $SMCPWR2_FD_SNAP        = "SNAP"
+    $SMCPWR2_FH_SNAP        = "ethernet_snap"
+    $SMCPWR2_FD_EII         = "Ethernet II"
+    $SMCPWR2_FH_EII         = "ethernet_II"
+    $SMCPWR2_MT_DES         = "Media Type"
+    $SMCPWR2_MEDIA_HELP     = "Choose the cable type you would like to use."
+    $SMCPWR2_MD_UTP         = "Unshielded Twisted Pair (UTP)" 
+    $SMCPWR2_MH_UTP         = "UTP"
+    $SMCPWR2_MD_BNC         = "Coaxial Cable (BNC)"
+    $SMCPWR2_MH_BNC         = "BNC"
+    $SMCPWR2_MD_AUTO        = "Autodetect between UTP and BNC, Auto-Negotiate over UTP."
+    $SMCPWR2_MH_AUTO        = "AutoDetect"
+    $SMCPWR2_NODE_DES       = "Node Address"
+    $SMCPWR2_SPD_DES        = "Line Speed"
+    $SMCPWR2_SPD_HELP       = "Select Auto-Negotiate to automatically determine the best available
+                speed and duplex mode, or specify a speed and duplex mode."
+    $SMCPWR2_SD_AUTO        = "Auto-Negotiate"
+    $SMCPWR2_SH_AUTO        = "AutoNegotiate"
+    $SMCPWR2_SD_10          = "10 Mbps"
+    $SMCPWR2_SH_10          = "10"
+    $SMCPWR2_SD_100         = "100 Mbps"
+    $SMCPWR2_SH_100         = "100"
+    $SMCPWR2_SD_10_Full     = "10 Mbps Full Duplex"
+    $SMCPWR2_SH_10_Full     = "10FullDuplex"
+    $SMCPWR2_SD_100_Full    = "100 Mbps Full Duplex"
+    $SMCPWR2_SH_100_Full    = "100FullDuplex"
+    $SMCPWR2_SYNC_DES       = "Sync pulse"
+    $SMCPWR2_SYNC_HELP      = "Detection for early switches"

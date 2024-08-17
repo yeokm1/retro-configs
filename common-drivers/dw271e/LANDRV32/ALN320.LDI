@@ -1,0 +1,299 @@
+;DrIvEr DeScRiPtIoN
+
+VER: 2.10
+SYN: 1.00
+
+DR ALN320
+{
+        DES:    $ALN320_DES
+        HELP:   $ALN320_HELP
+        PAR:    2.00
+        FILE:   ALN320.LAN
+
+        PROD:   'PCI.1106.3043.*.*.*'
+
+        TIMEOUT:   60
+
+        ;@# Sprod: 'AcerLAN ALN-320 10/100 Base-Tx Fast Ethernet Adapter'
+
+        ;@# CLIENT: ALN320.LAN
+
+        ;@# ALIAS: ALN320.LAN
+
+        PROMPT SLOT OPTIONAL
+        {
+                DES:    $ALN320_3
+                HELP:   $ALN320_4
+
+                TYPE:   DECIMAL
+                VAL:    1-64
+                DEF:    UNDEFINED
+                OUT:    'SLOT=%s'
+        }
+
+        PR NODE
+        {
+        }
+
+        FR FrameSelect
+        {
+                CH:     'Ethernet_802.3'
+                CH:     'Ethernet_802.2'
+                CH:     'Ethernet_SNAP'
+                CH:     'Ethernet_II'
+                DEF:    1,2
+        }
+
+        PR AUTO OPTIONAL
+        {
+                DES:    $ALN320_7
+                HELP:   $ALN320_8
+
+                VAL:    0, 1
+                TYP:    HEX(1)
+                DEF:    UNDEFINED
+        }
+
+
+        PR FULLDUPLEX OPTIONAL
+        {
+                DES:    $ALN320_1
+                HELP:   $ALN320_2
+
+                VAL:    0, 1
+                TYP:    HEX(1)
+                DEF:    UNDEFINED
+        }
+        PR SPEED OPTIONAL
+        {
+                DES:    $ALN320_11
+                HELP:   $ALN320_12
+
+                VAL:    10, 100
+                TYPE:   DECIMAL
+                DEF:    UNDEFINED
+        }
+}
+
+
+DLANG:  4
+;English
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   6
+;French
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+LANG:   7
+;German
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   8
+;Italian
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   14
+;Spanish
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   9
+;Japanese
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   12
+;Portugese
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   10
+;Korean
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   1
+;Chinese
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   16
+;Chinese
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   13
+;Russian
+        $ALN320_1 = "Full Duplex"
+        $ALN320_2 = "Enable the Full Duplex Function."
+        $ALN320_3 = "Slot"
+        $ALN320_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $ALN320_7 = "AUTO"
+        $ALN320_8 = "Enable the AUTO Negotiation Function."
+
+        $ALN320_11 = "SPEED"
+        $ALN320_12 = "Select the SPEED between 10 and 100."
+
+        $ALN320_DES =  "AcerLAN ALN-320 10/100 Base-TX Fast Ethernet Adapter"
+        $ALN320_HELP = "This driver (ALN320.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+
+;DrIvEr DeScRiPtIoN EnD

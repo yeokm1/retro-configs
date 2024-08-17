@@ -1,0 +1,35 @@
+InS_StArT
+LANSUP.COM
+1.1
+^ODI Module for the IBM LAN Support Program,LANSUP.COM,IEM000
+!OIEM000()Primary or Alternate Adapter
+?Set this parameter if the LAN adapter is configured as an alternate adapter.
+ALTERNATE
+$OIEM000(SAPS)Number of SAPs
+?The maximum number of SAPs that can be open at one time. The maximum number is 126 (125 for NETBIOS).
+0
+126
+@1
+!OIEM000(LINK STATIONS)Number of Link Stations
+?The maximum number of link stations that can be open at one time.
+@1
+*OIEM000()RPL Reopen
+?Set this parameter if are you using RPL to load LANSUP.COM
+OPEN
+$OIEM000(MAX FRAME SIZE)Maximum Frame Size
+?Select the maximum frame size for the adapter.
+638
+17960
+@1150
+!RIEO000(IRQ)
+?If Micro channel adapter use interrupt 2,3,10,or 11  Else, if ISA or EISA use 2,3,or 7.
+@2
+3
+7
+10
+11
+InS_EnD
+
+VeRsIoN=2.00  Novell IBM LAN Support MLID installation file.
+CoPyRiGhT=(c) Copyright 1993 - 1996, by Novell, Inc. All rights reserved.
+

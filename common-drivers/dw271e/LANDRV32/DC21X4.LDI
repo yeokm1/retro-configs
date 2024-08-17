@@ -1,0 +1,617 @@
+;
+;       Novell NetWare Server Driver Description File for DC21X4.LAN
+;
+
+VER: 4.00 
+SYN: 1.00
+
+DR DC21X4
+{
+    DES:    $DC21X4_1
+    HELP:   $DC21X4_2
+    PAR:    2.00
+    PROD:   'PCI.1011.0002.*.*.*',
+	    'PCI.1011.0014.*.*.*',
+	    'PCI.1011.0009.*.*.*',
+	    'PCI.1011.0019.*.*.*'       
+
+
+    FILE:   DC21X4.LAN
+    TIME:   15
+
+;@# Sprod: 'Digital~EB47 PCI Networking Card',
+;@#        'Digital~EB435 10/100Mbps PCI Networking Card',
+;@#        'Digital~EB140A 10/100Mbps PCI Networking Card',
+;@#        'Digital~EB143DQS 10/100Mbps PCI Networking Card'
+
+;@# CLIENT: DC21x4
+;@# ALIAS: DC21x4
+
+    PR SLOT
+    {
+	DES:    $DC21X4_3
+	HELP:   $DC21X4_4
+	
+	TYP:    DEC
+	VAL:    1-65535
+	DEF:    UND
+	OUT:    'SLOT=%s'
+    }
+
+    FR FrameSelect
+    {
+	CD:     $DC21X4_5
+	CH:     $DC21X4_6
+	CD:     $DC21X4_7
+	CH:     $DC21X4_8
+	CD:     $DC21X4_9
+	CH:     $DC21X4_10
+	CD:     $DC21X4_11
+	CH:     $DC21X4_12
+	DEF:    1,2,3,4
+    }
+
+    LI Attachment OPT
+    {
+	HELP:      $DC21X4_13
+
+	CD:     $DC21X4_14
+	CH:     $DC21X4_15
+	CD:     $DC21X4_16
+	CH:     $DC21X4_17
+	CD:     $DC21X4_18
+	CH:     $DC21X4_19
+	CD:     $DC21X4_20
+	CH:     $DC21X4_21
+	CD:     $DC21X4_22
+	CH:     $DC21X4_23
+	CD:     $DC21X4_24
+	CH:     $DC21X4_25
+	CD:     $DC21X4_26
+	CH:     $DC21X4_27
+	OUT:    '%s'
+	DEF:    6    
+    
+    }
+
+    PR NODE OPT
+    {
+	DES:    $DC21X4_28
+	TYP:    HEX
+	VAL:    1-FFFFFFFFFFFE
+	DEF:    UND
+	OUT:    'NODE=%s'
+    }
+
+    LI Line_Speed OPT
+    {
+	DES:     $DC21X4_29
+	HELP:     $DC21X4_30
+
+	CD:     $DC21X4_31
+	CH:     $DC21X4_32
+	CD:     $DC21X4_33
+	CH:     $DC21X4_34
+	OUT:    'LINE_SPEED=%s'
+
+	DEF:    2\
+    }
+
+}
+
+
+
+
+DLANG:    4
+;English
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+LANG:    1
+;Chinese (Simplified)
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+
+
+LANG:    6
+;French
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+LANG:    7
+;German
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+LANG:    8
+;Italian
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+LANG:    9
+;Japanese
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+LANG:    10
+;Korean
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+LANG:    12
+;Portuguese (Brazil)
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+LANG:    13
+;Russian
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+
+
+
+LANG:    14
+;Spanish
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+LANG:    16
+;Chinese (Traditional)
+    $DC21X4_1 = "Digital DC21X4 Ethernet PCI driver"
+    $DC21X4_2 = "This driver supports PCI bus devices"
+    $DC21X4_3 = "Slot"
+    $DC21X4_4 = "Select the slot number that corresponds to the physical
+	    expansion slot where the board or other device is installed."
+    $DC21X4_5 = "802.3"
+    $DC21X4_6 = "ethernet_802.3"
+    $DC21X4_7 = "802.2"
+    $DC21X4_8 = "ethernet_802.2"
+    $DC21X4_9 = "SNAP"
+    $DC21X4_10 = "ethernet_snap"
+    $DC21X4_11 = "ethernet II"
+    $DC21X4_12 = "ethernet_II"
+    $DC21X4_13 = "Choose the connection/media type you would
+		like to use, or NONE for preprogramed card's 
+		default. Please note that since this driver supports
+	    multiple PCI ethernet controllers some of the options
+	    given are non applicable to some controllers, i.e. 100MBPS
+	    is not applicable to DC21040 10MBPS devices."
+    $DC21X4_14 = "Twisted Pair 10MBPS"
+    $DC21X4_15 = "TP"
+    $DC21X4_16 = "Twisted pair - Full Duplex 10MBPS"
+    $DC21X4_17 = "TP_FULL_DUPLEX"
+    $DC21X4_18 = "Twisted pair - Full Duplex 100MBPS"
+    $DC21X4_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $DC21X4_20 = "AUI - Thick Wire"
+    $DC21X4_21 = "AUI"
+    $DC21X4_22 = "BNC - Thin Wire"
+    $DC21X4_23 = "BNC"
+    $DC21X4_24 = "Fast Ethernet 100MBPS"
+    $DC21X4_25 = "LINE_SPEED=100"
+    $DC21X4_26 = "T4 Fast Ethernet 100MBPS"
+    $DC21X4_27 = "T4"
+    $DC21X4_28 = "Node Address"
+    $DC21X4_29 = "Line Speed"
+    $DC21X4_30 = "If this is a multi-speed device (such as DC21140 based
+	    network interface) select the speed you would like
+	    the interface to work in. Otherwise leave NO VALUE
+	    as your selection."
+    $DC21X4_31   = "10"
+    $DC21X4_32   = "10"
+    $DC21X4_33   = "100"
+    $DC21X4_34   = "100"
+
+
+

@@ -1,0 +1,253 @@
+;DrIvEr DeScRiPtIoN
+;****************************************************************************
+;                                                                           *
+;       Novell NetWare Server Driver Description File for ACCODI.LAN        *
+;                                                                           *
+;****************************************************************************
+
+VER: 1.01
+SYN: 1.00
+
+DR ACCODI
+{
+    DES:    $ACCODI_1
+    HELP:   $ACCODI_2
+    PAR:    2.00
+    PROD:   'PCI.1113.1211.1113.1211.*'
+
+;@# SPROD:  'Accton EN1207D-TX PCI Fast Ethernet Driver'
+
+;@# CLIENT: ACCODI.LAN, ACCODI.COM
+;@# ALIAS:  ACCODI.LAN
+
+    FILE:   ACCODI.LAN
+    TIME:   15
+
+    PROMPT SLOT
+    {
+        DES:    $ACCODI_3
+        HELP:   $ACCODI_4
+
+        TYPE:   DECIMAL
+        VAL:    1-65535
+        DEF:    UNDEFINED
+        OUT:    'SLOT=%s'
+    }
+
+    FRAME FrameSelect
+    {
+        CD:     $ACCODI_5
+        CH:     $ACCODI_6
+        CD:     $ACCODI_7
+        CH:     $ACCODI_8
+        CD:     $ACCODI_9
+        CH:     $ACCODI_10
+        CD:     $ACCODI_11
+        CH:     $ACCODI_12
+        DEF:    1,2,3,4
+    }
+
+    PROMPT NODE
+    {
+
+    }
+
+}
+
+
+DLANG:    4
+;English
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+
+LANG:    1
+;CHINESE
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+
+LANG:    6
+;French
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+LANG:    7
+;German
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+LANG:    8
+;Italian
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+LANG:    9
+;JAPANESE
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+
+LANG:    10
+;KOREAN
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+
+LANG:    12
+;PORTUGESE
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+
+LANG:    13
+;RUSSIAN
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+
+LANG:    14
+;Spanish
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+LANG:    16
+;CHINESE
+    $ACCODI_1  = "Accton EN1207D-TX PCI Fast Ethernet Driver"
+    $ACCODI_2  = "This driver supports PCI bus devices"
+    $ACCODI_3  = "Slot"
+    $ACCODI_4  = "Select the slot number that corresponds to the physical
+                  expansion slot where the board is installed."
+    $ACCODI_5  = "Ethernet_802.3"
+    $ACCODI_6  = "Ethernet_802.3"
+    $ACCODI_7  = "Ethernet_802.2"
+    $ACCODI_8  = "Ethernet_802.2"
+    $ACCODI_9  = "Ethernet_SNAP"
+    $ACCODI_10 = "Ethernet_SNAP"
+    $ACCODI_11 = "Ethernet_II"
+    $ACCODI_12 = "Ethernet_II"
+    $ACCODI_13 = "Node Address"
+
+
+;DrIvEr DeScRiPtIoN EnD
+

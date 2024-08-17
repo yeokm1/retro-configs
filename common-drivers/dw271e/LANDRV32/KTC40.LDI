@@ -1,0 +1,596 @@
+; KTC40.LDI
+; Kingston KNE40 EtheRx PCI Ethernet Adapter
+; Netware LAN Installation Information File
+
+VER: 3.11
+SYN: 1.00
+
+DR KTC40
+{
+    DES:    $KTC40_1
+    HELP:   $KTC40_2
+    PAR:    2.00
+    FILE:   KTC40.LAN
+
+    PROD:   'PCI.1011.0014.0000.0000.2?',
+	    'PCI.1011.0014.0000.0000.1?'
+
+;@# SPROD:   'Kingston KNE40 Ethernet Adapter',
+;@#          'Kingston KNE40 Ethernet Adapter'
+;@# CLIENT:  KTC40
+;@# ALIAS:   KTC40.LAN
+
+    PR SLOT REQ
+    {
+        DES:    $KTC40_3
+        HELP:   $KTC40_4
+        
+        TYP:   DEC
+        VAL:    1-65535
+        DEF:    UND
+        OUT:    'SLOT=%s'
+    }
+
+    FR FrameSelect
+    {
+        CD:     $KTC40_5
+        CH:     $KTC40_6
+        CD:     $KTC40_7
+        CH:     $KTC40_8
+        CD:     $KTC40_9
+        CH:     $KTC40_10
+        CD:     $KTC40_11
+        CH:     $KTC40_12
+        DEF:    1,2,3,4
+    }
+
+;    LI Attachment OPT
+;    {
+;        HELP:      $KTC40_13
+;
+;        CD:     $KTC40_14
+;        CH:     $KTC40_15
+;        CD:     $KTC40_16
+;        CH:     $KTC40_17
+;        CD:     $KTC40_18
+;        CH:     $KTC40_19
+;        CD:     $KTC40_20
+;        CH:     $KTC40_21
+;        CD:     $KTC40_22
+;        CH:     $KTC40_23
+;        CD:     $KTC40_24
+;        CH:     $KTC40_25
+;        CD:     $KTC40_26
+;        CH:     $KTC40_27
+;        OUT:    '%s'
+;    }
+
+    PR NODE OPT
+    {
+        DES:    $KTC40_28
+        TYP:   HEX
+        VAL:    1-FFFFFFFFFFFE
+        DEF:    UND
+        OUT:    'NODE=%s'
+    }
+
+;    LI Line_Speed OPT
+;    {
+;        DES:     $KTC40_29
+;        HELP:     $KTC40_30
+;
+;        CD:     $KTC40_31
+;        CH:     $KTC40_32
+;        CD:     $KTC40_33
+;        CH:     $KTC40_34
+;        OUT:    'LINE_SPEED=%s'
+;    }
+
+}
+
+DLANG:    4
+;English
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"
+
+
+LANG:    6
+;French
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"
+
+LANG:    7
+;German
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"
+
+LANG:    8
+;Italian
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"
+
+LANG:    14
+;Spanish
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"
+
+LANG:    12
+;Portugese
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"
+
+LANG:    9
+;Japanese
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"
+
+LANG:    10
+;Korean
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"
+
+LANG:    1
+;Chinese
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"
+
+LANG:    16
+;Chinese
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"
+
+LANG:    13
+;Russian
+    $KTC40_1 = "Kingston KNE40 Netware Driver (3.31 MLID specs)"
+    $KTC40_2 = "This driver supports PCI bus devices"
+    $KTC40_3 = "Slot"
+    $KTC40_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $KTC40_5 = "802.3"
+    $KTC40_6 = "ethernet_802.3"
+    $KTC40_7 = "802.2"
+    $KTC40_8 = "ethernet_802.2"
+    $KTC40_9 = "SNAP"
+    $KTC40_10 = "ethernet_snap"
+    $KTC40_11 = "ethernet II"
+    $KTC40_12 = "ethernet_II"
+    $KTC40_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $KTC40_14 = "Twisted Pair 10MBPS"
+    $KTC40_15 = "TP"
+    $KTC40_16 = "Twisted pair - Full Duplex 10MBPS"
+    $KTC40_17 = "TP_FULL_DUPLEX"
+    $KTC40_18 = "Twisted pair - Full Duplex 100MBPS"
+    $KTC40_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $KTC40_20 = "AUI - Thick Wire"
+    $KTC40_21 = "AUI"
+    $KTC40_22 = "BNC - Thin Wire"
+    $KTC40_23 = "BNC"
+    $KTC40_24 = "Fast Ethernet 100MBPS"
+    $KTC40_25 = "LINE_SPEED=100"
+    $KTC40_26 = "T4 Fast Ethernet 100MBPS"
+    $KTC40_27 = "T4"
+    $KTC40_28 = "Node Address"
+    $KTC40_29 = "Line Speed"
+    $KTC40_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $KTC40_31   = "10"
+    $KTC40_32   = "10"
+    $KTC40_33   = "100"
+    $KTC40_34   = "100"

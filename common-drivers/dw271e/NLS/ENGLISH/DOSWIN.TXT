@@ -1,0 +1,335 @@
+             Novell Client for DOS and Windows 3.1x 
+                          Release Notes
+                            9/16/98
+
+=================================================================
+
+Contents
+
+1.0  Installation Issues 
+2.0  General Issues
+3.0  Primary Documentation Is HTML
+4.0  Trademarks
+5.0  Copyright, Disclaimer, Export Notice, Patents
+
+
+=================================================================
+
+
+1.0 Installation Issues
+
+
+  1.1 Novell Client for DOS and Windows 3.1x is an IPX-only   
+     Application
+
+     The Novell Client for DOS and Windows 3.1x is an IPX-only
+     application.  If you want to connect to NetWare 5 IP-only
+     servers using the Novell Client for DOS and Windows 3.1x,
+     you must install Compatibility Mode on the IP-only servers
+     and have a Migration Agent on the network.
+
+     If you have only NetWare 3 or 4 servers, you do not have to
+     install additional software on the servers. 
+
+     Note: An across-the-wire installation can be done with the
+     DOS IP client. See the dos_ip.txt file located in the
+     products/doswin32/nls/<language> directory for details.
+
+  1.2 New Files Created during Installation 
+
+     The DOS Install creates new startnet.bat and net.cfg files.
+     The old files are left on the workstation but the
+     extensions are changed to .old.
+
+     The Windows Install creates new startnet.bat and net.cfg
+     files.  The old files are left on the workstation but the
+     extensions are changed to an incremental number (.00?)
+     based on how many times you have installed.
+
+
+  1.3 LAN Drivers That Request a SLOT Value
+
+     If you are using the following 32-bit LAN drivers, you
+     might be prompted to enter the SLOT value for the LAN
+     adapter after restarting the workstation.  This occurs
+     because you are loading an additional frame type.
+
+     LAN drivers that require a SLOT value: 
+ 
+       3C5X9 
+       3C589
+       3C59X
+       3C90X
+       E100B
+
+     To resolve this, add the SLOT number on the driver load
+     line of the startnet.bat file.  For example: 
+
+       LOAD 3C90X.LAN FRAME=ETHERNET_II SLOT=2
+
+     Note: Unfortunately, no official standard for determining
+     the slot value exists.  Most manufactures label the slots
+     on the back of the hardware or document the slot value in
+     the product documentation they provide.
+
+
+  1.4 "The LAN adapter could not be installed for this location. 
+      The adapter type has been set to none.  You will need to
+      edit the properties for this location and reinstall the
+      adapter or choose a different one before using this
+      location online"  
+
+     This message appears when the long driver name has changed
+     since the last time you installed. To resolve this, select
+     Install a New Adapter, and then choose the correct adapter
+     during installation.  This reinitializes the long driver
+     name with the correct string.
+
+
+  1.5 Workstation Freezes during DOS Install or Message "Error
+      reading LDI file" Occurs
+
+     During a DOS install (install.exe), the workstation freezes
+     or a message appears indicating that there is an error
+     reading the LDI file.  This error occurs because the
+     workstation does not have enough conventional memory to
+     handle LDI files over 40 KB.  To solve this problem:
+
+     1. In the products\doswin32\landrv32 directory, locate the
+        file for your LAN driver. 
+     
+       LDI file names correspond to the LAN driver name.
+
+     2. Open the file in a text editor.
+
+     3. Delete the unnecessary languages located at end of file
+        to reduce the file size.
+     
+     4. Save the modified LDI file to same directory.
+       
+       Note: If you are installing from CD-ROM, save this file
+       to a diskette.
+
+     5. Run install.exe again.
+       
+       Note: If you are installing from CD-ROM, choose
+       User-Specified Driver(16-bit or 32-bit), and then choose
+       this file from the diskette during installation.
+
+
+  1.6 Installing Windows 3.1x Dial-In Services
+
+     If you select the dial-in services option during the
+     Windows 3.1x installation (setup.exe), make sure that you
+     create a location profile during the initial installation. 
+     Dial-in services uses the location profile and requires
+     that one exist even if you will not be using multiple
+     location profiles for various configurations.     
+
+     If you select the dial-in services option and do not create
+     a location profile, you will not have access to the network
+     and will need to reinstall the client and create a location
+     profile. 
+
+
+  1.7 Installing Multiple Clients from a Login Script
+
+     If you plan to install the Novell Client software on
+     multiple workstations, you can install from the network by
+     copying files to the server and modifying the login script.
+     Even if your network has workstations on multiple
+     platforms, you can install and upgrade the client software
+     on all platforms when users log in. 
+
+     Complete instructions including a sample login script are
+     included in the inst_log.txt file located at the root of
+     the CD-ROM.
+
+=================================================================
+
+
+2.0  General Issues
+
+
+
+  2.1 Path Length Limited to 64 Characters with DOS Name Space
+
+     Directories on volumes that have only the DOS name space
+     cannot have a combined path length greater than 64
+     characters.  If the directory path has more than 64
+     characters, Get Current Directory fails and regresses the
+     path until it finds a directory with a path length of 64
+     characters or less.  This is not an issue for volumes that
+     have the long name space.
+
+
+  2.2 NDSManager v1.06 Hangs Workstation When Using the Create
+      Alias Feature  
+
+     NDSManager v1.06 might hang the client workstation if
+     Create Alias is used to move a partition.  To resolve this,
+     upgrade to the latest version of NDSManager (v1.24)
+     included in Support Pack 3.0. 
+
+
+  2.3 Windows for Workgroups Workstations Running the Client
+      and Norton Utilities 8.0 encounter a Device Driver
+      Conflict with Nioswin.nlm
+
+
+      If you are using  Windows for Workgroups using Norton
+      Utilities 8.0, you might encounter a device driver
+      conflict with nioswin.nlm.
+
+      To resolve this, upgrade the Norton symevnt.386 device
+      driver.  The file can be obtained at the following
+      Symantec FTP site:  ftp://ftp.symantec.com/public/english_us_canada/symevnt/. 
+      
+
+
+  2.4  Map.exe Might Fail When Mapping a Drive to an NDS Object
+
+
+      Map.exe is not IP-aware for NDS objects. As a result,
+      map.exe might fail if you try to use it to map a drive to
+      an NDS object with a command like the following:
+  
+           map n .mydir.organization.company
+
+      The failure will result in a message such as:
+
+           MAP-4.13-195: Directory
+          [N.mydir.organization.company] cannot be located
+
+      This error can be avoided by using one of the following
+      solutions:
+
+      * Use "map n server\vol:\directory" instead of "map n
+      .mydir.organization.company".
+
+      * Unbind IP from the server that the NDS object points to.
+
+      * Configure the Protocol Preferences of Novell Client
+      property page to use IPX only.
+
+
+  2.5 Login Windows Fails to Open in Windows
+
+
+      If you have installed and are using Z.E.N.works to manage
+      your workstations (Workstation Manager), the Windows GUI
+      login window might fail to open.  This is because
+      Workstation Manager has already authenticated to the
+      network to download the workstation preferences.  However,
+      the user is not logged in to the network.
+
+      To make sure that the login window appears every time the
+      workstation is started, complete the following steps:
+
+
+      1.  Double-click the Novell Client program group.
+ 
+      2.  Double-click NetWare User Tools.
+
+      3.  Double-click NetWare Settings (or Alt-S).
+
+      4.  Click the Startup tab.
+
+      5.  Check the Login If Authenticated check box.
+      
+      6.  Click OK.
+      
+      
+  2.6 DOS Utilities Supported Only When Used with IPX or IP
+  Compatibility Mode
+
+      The DOS Utilities (CX, MAP, CAPTURE, etc.) are supported
+      only when used with IPX or IP Compatibility Mode.  Use the
+      equivalent GUI-based utilities when accessing resources
+      that are only available from IP servers.
+
+
+=================================================================
+
+
+3.0  Primary Documentation Is HTML
+
+  The HTML files for the Novell Client for DOS and Windows
+  3.1x--containing information on installing, configuring, using,
+  understanding, and troubleshooting--are the primary
+  documentation.  The HTML documentation is available on the
+  Novell Client CD-ROM in the Novdocs directory.  The search and
+  print functionality are available on 32-bit operating systems
+  such as Windows 95 and Windows NT.
+
+  In addition to the HTML documentation, interface and enduser
+  documentation can be found in the Client help.  To access the
+  help, click Novell Client Help in the Novell Client program
+  group.  All the Client help information is accessible from this
+  file.  The Client help file (setup.hlp) can also be accessed
+  prior to installation in the client/doswin32/nls/<language>
+  directory.
+
+  
+=================================================================
+
+
+4.0 Trademarks
+
+  4.1 Novell Trademarks
+
+     Novell and NetWare are registered trademarks of Novell, Inc.
+     in the United States and other countries.
+
+     Internetwork Packet Exchange and IPX, NDS, NetWare 3,
+     NetWare 4, NetWare 5, and Novell Client are trademarks of
+     Novell, Inc.
+
+
+  4.2 Third-Party Trademarks
+
+     Windows and Windows NT are registered trademarks and Windows
+     95 is a trademark of Microsoft Corporation.
+
+
+=================================================================
+
+
+
+5.0 Copyright, Disclaimer, Export Notice, Patents
+
+  Novell, Inc., makes no representations or warranties with
+  respect to any software, and specifically disclaims any express
+  or implied warranties of merchantability, title, or fitness for
+  a particular purpose. Distribution of any Novell software is
+  forbidden without the express written consent of Novell, Inc.
+  Further, Novell reserves the right to discontinue distribution
+  of any Novell software. 
+
+  Novell is not responsible for lost profits or revenue, loss of
+  use of the software, loss of data, costs of recreating lost
+  data, the cost of any substitute equipment or program, or
+  claims by any party other than you.
+
+  Novell strongly recommends a backup be made before any software
+  is installed. Technical support for this software may be
+  provided at the discretion of Novell.
+  
+  Copyright (C)1993-1994, 1995-1998  Novell, Inc.  All rights
+  reserved.  No part of this publication may be reproduced,
+  photocopied, stored on a retrieval system, or transmitted
+  without the express written consent of the publisher.
+
+  This product may require export authorization from the U.S.  
+  Department of Commerce prior to exporting from the U.S. or 
+  Canada.
+  
+  U.S Patent Nos. 5,157,663; 5,349,642; 5,455,932; 5,555,3,139; 
+  5,553,143; 5,594,863; 5,608,903; 5,633,931; 5,652,854; 
+  5,671,414, 5,677,851; and 5,692,129.  U.S. and Foreign Patents 
+  Pending.
+
+
+
+
+

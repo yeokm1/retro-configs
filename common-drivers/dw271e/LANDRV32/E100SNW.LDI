@@ -1,0 +1,498 @@
+;DrIvEr DeScRiPtIoN
+;VeRsIoN=1.01
+;CoPyRiGhT=(c)Copyright 1997,1998 by Intel Corp.  All Rights Reserved.
+VER:  1.01
+SYN:  1.00
+
+;- Internal Version 1.01
+;- Changes:
+;- 03/20/98 V1.01 ; Change to update to latest TESTCON new syntax and new PROD number
+;- 03/01/98 V1.00 ; Change to update to latest LDI spec.
+;- 09/15/97 V0.63 : Change to correct PAR value
+;- 02/05/97 V0.62 : Changed Duplex to ForceDuplex
+;-                : Changed ISLVLAN to VLANMODE
+;- 01/22/97 V0.60 : Fixed Message $E100SNW_5. Changed DUPLEX to FULL
+;- 11/30/96 V0.47 : Original Version. First Transmittal to SWEAT
+;- File: E100SNW.LDI
+;- Intel EtherExpress(TM) PRO/100 Server Installation Information File
+
+   DR E100SNW
+   {
+      DES:      		$E100SNW_1
+      Help:             $E100SNW_2
+      File:             E100SNW.LAN
+      Prod:             'PCI.8086.5201.8086.0001.*'
+      PAR:              2.00
+      ;@# SPROD:	'Intel~EtherExpress(TM) PRO/100 Server'
+      ;@# Client:	E100SNW.LAN
+      ;@# Alias:	E100SNW.LAN
+
+      PR   SLOT    OPT
+
+      {
+	 Help:           $E100SNW_3
+	 TYP:            DEC (5)
+	 VAL:         	 1 - 65535
+	 DEF:        	 UND
+      }
+
+      PR   SPEED    OPT
+
+      {
+	 Help:           $E100SNW_4
+	 TYP:            DEC (3)
+	 VAL:         	 0, 10, 100
+	 DEF:        	 0
+	 Out:            'SPEED=%s'
+      }
+
+      PR   FORCEDUPLEX    OPT
+
+      {
+	 Help:           $E100SNW_5
+	 TYP:            DEC (1)
+	 VAL:         	 0, 1, 2
+	 DEF:            0
+	 Out:            'FORCEDUPLEX=%s'
+      }
+
+
+      PR   CONNECTOR OPT
+
+      {
+	 Help:           $E100SNW_6
+	 TYP:            DEC (1)
+	 VAL:         	 0, 1, 2
+	 DEF:        	 0
+	 Out:            'CONNECTOR=%s'
+      }
+
+
+      PR   VLANMODE  OPT
+
+      {
+	 Help:           $E100SNW_7
+	 TYP:            DEC (1)
+	 VAL:         	 0, 1
+	 DEF:        	 0
+	 Out:            'VLANMODE=%s'
+      }
+
+
+      FR    FrameSelect
+
+      {
+	  Help:            $E100SNW_8
+	  
+	 CD:     			$E100SNW_9
+	 CH:           		'Ethernet_802.3'
+
+	 CD:     			$E100SNW_10
+	 CH:           		'Ethernet_802.2'
+
+	 CD:     			$E100SNW_11
+	 CH:           		'Ethernet_SNAP'
+
+	 CD:     			$E100SNW_12
+	 CH:           		'Ethernet_II'
+
+	 DEF:          	    1,2
+
+      }
+
+   }
+   
+DLANG: 4
+;English   
+      
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Selects Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+
+LANG: 6
+;French   
+      
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Enables Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+
+      
+LANG: 7
+;German
+      
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Enables Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+
+      
+LANG: 8
+;Italian   
+      
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Enables Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+
+
+LANG: 14
+;Spanish  
+      
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Enables Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+
+LANG:  12
+;Portugese
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Enables Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+
+LANG:   9
+;Japanese
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Enables Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+
+LANG:   10
+;Korean
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Enables Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+
+LANG:   1
+;Chinese (S)
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Enables Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+
+LANG:   16
+;Chinese (T)
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Enables Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+
+LANG:   13
+;Russian
+       $E100SNW_1 = "Intel EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_2 = "This driver supports the EtherExpress(TM) PRO/100 Server Adapter"
+
+       $E100SNW_3 = "Slot number for the adapter.\n"
+
+       $E100SNW_4 = "Line speed override for the adapter. \n
+			  Disables auto-negotiation. \n
+			  Valid options are 0 (Auto), 10, or 100."
+
+       $E100SNW_5 =  "Duplex mode override for the adapter.\n
+					  User must specify speed when specifying Duplex. \n
+			  Valid options are 0 (Auto), 1 (HALF), 2 (FULL)."
+
+       $E100SNW_6 =  "Connector to use for network connection.\n
+			  Valid options are 0 (Auto), 1 (TPE), 2 (MII)."
+
+       $E100SNW_7 =  "Enables Vlan Mode for the driver.\n
+			  Valid options are 0 (Standard Mode: No VLAN), 1 (ISL VLAN).\n
+			  The default mode is non VLAN mode."
+
+       $E100SNW_8 =  "The driver defaults to 802.2 frame format. You
+			    may use this default to select from the other 3
+			    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $E100SNW_9 = "E100SNW 802.3"
+
+       $E100SNW_10= "E100SNW 802.2"
+
+       $E100SNW_11 = "E100SNW SNAP"
+
+       $E100SNW_12  = "E100SNW E_II"
+       
+;DrIvEr DeScRiPtIoN EnD

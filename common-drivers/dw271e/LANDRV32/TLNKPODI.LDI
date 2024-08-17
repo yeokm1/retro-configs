@@ -1,0 +1,353 @@
+;DrIvEr DeScRiPtIoN
+
+; %VER 3Com TokenLink Velocity XL PCI ODI Server LDI - V1.00c
+VER:   	1.00
+SYN:	1.00
+
+DR TLNKPODI
+{
+	DES:    $TLNKPODI_1
+	HELP:   $TLNKPODI_2
+
+	PAR:	2.00
+	FILE:	TLNKPODI.LAN
+	TIME:	60
+	PROD:	'PCI.10B7.3590.*.*.*'
+        ;@# Sprod:  '3Com~ TokenLink Velocity XL PCI Adapter'
+        ;@# Client: tlnkpodi
+        ;@# Alias: tlnkpodi
+	PROMPT SLOT REQ
+	{
+		DES:		$TLNKPODI_3
+		HELP:		$TLNKPODI_4
+		TYPE:		DECIMAL (8)
+		VALUES:		1-65535
+		OUTPUTFORMAT:	'SLOT=%s'
+	}
+
+
+	PROMPT NODE
+	{
+	}
+
+	FRAME	FrameSelect
+	{
+		DES:	$TLNKPODI_5
+		HELP:   $TLNKPODI_6
+
+		CD:	$TLNKPODI_7
+		CH:	'TOKEN-RING'
+		CD:	$TLNKPODI_8
+		CH:	'TOKEN-RING_SNAP'
+		DEF:    1
+		OCT:	MSB
+	}
+
+        PROMPT RINGSPEED OPTIONAL
+        {
+		DES:		$TLNKPODI_9
+		HELP:		$TLNKPODI_10
+
+		TYPE:		STRING (4)
+		VALUES:		'AUTO'
+		OUTPUTFORMAT:	'RINGSPEED=%s'
+	}
+
+	LIST TR_PROTO OPTIONAL
+	{
+		DES:		$TLNKPODI_11
+		HELP:		$TLNKPODI_12
+		CD:		$TLNKPODI_13
+		CH:		''
+		CD:		$TLNKPODI_14
+		CH:		'FULLDUPLEX'
+		CD:		$TLNKPODI_15
+		CH:		'CLASSICTR'
+		DEFAULT:	1
+                OUTPUTFORMAT:	'%s'
+	}
+
+	PROMPT RXBUFFER OPTIONAL
+	{
+		DES:		$TLNKPODI_16
+		HELP:		$TLNKPODI_17
+		TYPE:		DECIMAL (8)
+		VALUES:		2-12
+		OUTPUTFORMAT:	'RECEIVEBUFFERS=%s'
+	}
+
+	PROMPT TXBUFFER OPTIONAL
+	{
+		DES:		$TLNKPODI_18
+		HELP:		$TLNKPODI_19
+		TYPE:		DECIMAL (8)
+		VALUES:		2-10
+		OUTPUTFORMAT:	'TRANSMITBUFFERS=%s'
+	}
+
+}
+
+DLANG:	4
+; English
+	$TLNKPODI_1 = "3Com TokenLink Velocity XL PCI Adapters"
+	$TLNKPODI_2 = "TLNKPODI.LAN server driver supports 3Com TokenLink PCI adapters."
+	$TLNKPODI_3 = "Slot"
+	$TLNKPODI_4 = "Enter the PCI slot number."
+		
+	$TLNKPODI_5 = "Frame Types"
+	$TLNKPODI_6 = "The driver defaults to the 
+TOKEN-RING (802.2) frame type.  Depending on the frame type your protocol 
+requires, you can either change to Token-Ring 802.2 SNAP or choose both 
+frame types and load the driver re-entrantly. Do not change the MSB/LSB 
+parameter unless you are familiar with the effects and side effects of such 
+a change."
+	$TLNKPODI_7 = "TOKEN-RING"
+	$TLNKPODI_8 = "TOKEN-RING_SNAP"
+	$TLNKPODI_9 = "Ring Speed"
+	$TLNKPODI_10 = "The driver defaults to the current speed setting
+on the adapter if no value is specified. Enter AUTO to perform auto ring
+speed detection. If the adapter's current speed setting conflicts with the
+ring, it will switch to another speed. This option is only recommended for
+client stations and NOT server."
+	$TLNKPODI_11 = "Token Ring Protocol"
+	$TLNKPODI_12 = "The driver will default to the protocol of the
+current ring (Auto). Specify Dedicated Token Ring or Classic Token Ring
+protocol to use that protocol exclusively."
+	$TLNKPODI_13 = "Auto"
+	$TLNKPODI_14 = "Dedicated Token Ring"
+	$TLNKPODI_15 = "Classic Token Ring"
+	$TLNKPODI_16 = "Receive buffers"
+	$TLNKPODI_17 = "The driver defaults to calculating the number of
+receive buffers based on the ring speed and maximum frame size. Specifying
+a value here will override the calculation."
+	$TLNKPODI_18 = "Transmit buffers"
+	$TLNKPODI_19 = "Specifying a value to override the default number
+of transmit buffers."
+
+LANG:   1
+;Chinese (Simplified)
+	$TLNKPODI_1 = "3Com TokenLink PCI Adapters"
+	$TLNKPODI_2 = "No help info is available"
+	$TLNKPODI_3 = "No help info is available"
+	$TLNKPODI_4 = "No help info is available"
+	$TLNKPODI_5 = "No help info is available"
+	$TLNKPODI_6 = "No help info is available"
+	$TLNKPODI_7 = "No help info is available"
+	$TLNKPODI_8 = "No help info is available"
+	$TLNKPODI_9 = "No help info is available"
+	$TLNKPODI_10 = "No help info is available"
+	$TLNKPODI_11 = "No help info is available"
+	$TLNKPODI_12 = "No help info is available"
+	$TLNKPODI_13 = "No help info is available"
+	$TLNKPODI_14 = "No help info is available"
+	$TLNKPODI_15 = "No help info is available"
+	$TLNKPODI_16 = "No help info is available"
+	$TLNKPODI_17 = "No help info is available"
+	$TLNKPODI_18 = "No help info is available"
+	$TLNKPODI_19 = "No help info is available"
+  
+
+
+LANG:	6
+; French
+	$TLNKPODI_1 = "3Com TokenLink PCI Adapters"
+	$TLNKPODI_2 = "No help info is available"
+	$TLNKPODI_3 = "No help info is available"
+	$TLNKPODI_4 = "No help info is available"
+	$TLNKPODI_5 = "No help info is available"
+	$TLNKPODI_6 = "No help info is available"
+	$TLNKPODI_7 = "No help info is available"
+	$TLNKPODI_8 = "No help info is available"
+	$TLNKPODI_9 = "No help info is available"
+	$TLNKPODI_10 = "No help info is available"
+	$TLNKPODI_11 = "No help info is available"
+	$TLNKPODI_12 = "No help info is available"
+	$TLNKPODI_13 = "No help info is available"
+	$TLNKPODI_14 = "No help info is available"
+	$TLNKPODI_15 = "No help info is available"
+	$TLNKPODI_16 = "No help info is available"
+	$TLNKPODI_17 = "No help info is available"
+	$TLNKPODI_18 = "No help info is available"
+	$TLNKPODI_19 = "No help info is available"
+  
+LANG:	7
+; German
+	$TLNKPODI_1 = "3Com TokenLink PCI Adapters"
+	$TLNKPODI_2 = "No help info is available"
+	$TLNKPODI_3 = "No help info is available"
+	$TLNKPODI_4 = "No help info is available"
+	$TLNKPODI_5 = "No help info is available"
+	$TLNKPODI_6 = "No help info is available"
+	$TLNKPODI_7 = "No help info is available"
+	$TLNKPODI_8 = "No help info is available"
+	$TLNKPODI_9 = "No help info is available"
+	$TLNKPODI_10 = "No help info is available"
+	$TLNKPODI_11 = "No help info is available"
+	$TLNKPODI_12 = "No help info is available"
+	$TLNKPODI_13 = "No help info is available"
+	$TLNKPODI_14 = "No help info is available"
+	$TLNKPODI_15 = "No help info is available"
+	$TLNKPODI_16 = "No help info is available"
+	$TLNKPODI_17 = "No help info is available"
+	$TLNKPODI_18 = "No help info is available"
+	$TLNKPODI_19 = "No help info is available"
+  
+LANG:	8
+; Italian
+	$TLNKPODI_1 = "3Com TokenLink PCI Adapters"
+	$TLNKPODI_2 = "No help info is available"
+	$TLNKPODI_3 = "No help info is available"
+	$TLNKPODI_4 = "No help info is available"
+	$TLNKPODI_5 = "No help info is available"
+	$TLNKPODI_6 = "No help info is available"
+	$TLNKPODI_7 = "No help info is available"
+	$TLNKPODI_8 = "No help info is available"
+	$TLNKPODI_9 = "No help info is available"
+	$TLNKPODI_10 = "No help info is available"
+	$TLNKPODI_11 = "No help info is available"
+	$TLNKPODI_12 = "No help info is available"
+	$TLNKPODI_13 = "No help info is available"
+	$TLNKPODI_14 = "No help info is available"
+	$TLNKPODI_15 = "No help info is available"
+	$TLNKPODI_16 = "No help info is available"
+	$TLNKPODI_17 = "No help info is available"
+	$TLNKPODI_18 = "No help info is available"
+	$TLNKPODI_19 = "No help info is available"
+
+LANG:   9
+; Japanese
+	$TLNKPODI_1 = "3Com TokenLink PCI Adapters"
+	$TLNKPODI_2 = "No help info is available"
+	$TLNKPODI_3 = "No help info is available"
+	$TLNKPODI_4 = "No help info is available"
+	$TLNKPODI_5 = "No help info is available"
+	$TLNKPODI_6 = "No help info is available"
+	$TLNKPODI_7 = "No help info is available"
+	$TLNKPODI_8 = "No help info is available"
+	$TLNKPODI_9 = "No help info is available"
+	$TLNKPODI_10 = "No help info is available"
+	$TLNKPODI_11 = "No help info is available"
+	$TLNKPODI_12 = "No help info is available"
+	$TLNKPODI_13 = "No help info is available"
+	$TLNKPODI_14 = "No help info is available"
+	$TLNKPODI_15 = "No help info is available"
+	$TLNKPODI_16 = "No help info is available"
+	$TLNKPODI_17 = "No help info is available"
+	$TLNKPODI_18 = "No help info is available"
+	$TLNKPODI_19 = "No help info is available"
+  
+LANG:   10
+; Korean
+	$TLNKPODI_1 = "3Com TokenLink PCI Adapters"
+	$TLNKPODI_2 = "No help info is available"
+	$TLNKPODI_3 = "No help info is available"
+	$TLNKPODI_4 = "No help info is available"
+	$TLNKPODI_5 = "No help info is available"
+	$TLNKPODI_6 = "No help info is available"
+	$TLNKPODI_7 = "No help info is available"
+	$TLNKPODI_8 = "No help info is available"
+	$TLNKPODI_9 = "No help info is available"
+	$TLNKPODI_10 = "No help info is available"
+	$TLNKPODI_11 = "No help info is available"
+	$TLNKPODI_12 = "No help info is available"
+	$TLNKPODI_13 = "No help info is available"
+	$TLNKPODI_14 = "No help info is available"
+	$TLNKPODI_15 = "No help info is available"
+	$TLNKPODI_16 = "No help info is available"
+	$TLNKPODI_17 = "No help info is available"
+	$TLNKPODI_18 = "No help info is available"
+	$TLNKPODI_19 = "No help info is available"
+  
+LANG:   12
+; Portuguese (Brazil)
+	$TLNKPODI_1 = "3Com TokenLink PCI Adapters"
+	$TLNKPODI_2 = "No help info is available"
+	$TLNKPODI_3 = "No help info is available"
+	$TLNKPODI_4 = "No help info is available"
+	$TLNKPODI_5 = "No help info is available"
+	$TLNKPODI_6 = "No help info is available"
+	$TLNKPODI_7 = "No help info is available"
+	$TLNKPODI_8 = "No help info is available"
+	$TLNKPODI_9 = "No help info is available"
+	$TLNKPODI_10 = "No help info is available"
+	$TLNKPODI_11 = "No help info is available"
+	$TLNKPODI_12 = "No help info is available"
+	$TLNKPODI_13 = "No help info is available"
+	$TLNKPODI_14 = "No help info is available"
+	$TLNKPODI_15 = "No help info is available"
+	$TLNKPODI_16 = "No help info is available"
+	$TLNKPODI_17 = "No help info is available"
+	$TLNKPODI_18 = "No help info is available"
+	$TLNKPODI_19 = "No help info is available"
+  
+LANG:   13
+; Russian
+	$TLNKPODI_1 = "3Com TokenLink PCI Adapters"
+	$TLNKPODI_2 = "No help info is available"
+	$TLNKPODI_3 = "No help info is available"
+	$TLNKPODI_4 = "No help info is available"
+	$TLNKPODI_5 = "No help info is available"
+	$TLNKPODI_6 = "No help info is available"
+	$TLNKPODI_7 = "No help info is available"
+	$TLNKPODI_8 = "No help info is available"
+	$TLNKPODI_9 = "No help info is available"
+	$TLNKPODI_10 = "No help info is available"
+	$TLNKPODI_11 = "No help info is available"
+	$TLNKPODI_12 = "No help info is available"
+	$TLNKPODI_13 = "No help info is available"
+	$TLNKPODI_14 = "No help info is available"
+	$TLNKPODI_15 = "No help info is available"
+	$TLNKPODI_16 = "No help info is available"
+	$TLNKPODI_17 = "No help info is available"
+	$TLNKPODI_18 = "No help info is available"
+	$TLNKPODI_19 = "No help info is available"
+  
+
+
+LANG:	14
+; Spanish
+	$TLNKPODI_1 = "3Com TokenLink PCI Adapters"
+	$TLNKPODI_2 = "No help info is available"
+	$TLNKPODI_3 = "No help info is available"
+	$TLNKPODI_4 = "No help info is available"
+	$TLNKPODI_5 = "No help info is available"
+	$TLNKPODI_6 = "No help info is available"
+	$TLNKPODI_7 = "No help info is available"
+	$TLNKPODI_8 = "No help info is available"
+	$TLNKPODI_9 = "No help info is available"
+	$TLNKPODI_10 = "No help info is available"
+	$TLNKPODI_11 = "No help info is available"
+	$TLNKPODI_12 = "No help info is available"
+	$TLNKPODI_13 = "No help info is available"
+	$TLNKPODI_14 = "No help info is available"
+	$TLNKPODI_15 = "No help info is available"
+	$TLNKPODI_16 = "No help info is available"
+	$TLNKPODI_17 = "No help info is available"
+	$TLNKPODI_18 = "No help info is available"
+	$TLNKPODI_19 = "No help info is available"
+
+LANG:   16
+; Chinese (Traditional)
+	$TLNKPODI_1 = "3Com TokenLink PCI Adapters"
+	$TLNKPODI_2 = "No help info is available"
+	$TLNKPODI_3 = "No help info is available"
+	$TLNKPODI_4 = "No help info is available"
+	$TLNKPODI_5 = "No help info is available"
+	$TLNKPODI_6 = "No help info is available"
+	$TLNKPODI_7 = "No help info is available"
+	$TLNKPODI_8 = "No help info is available"
+	$TLNKPODI_9 = "No help info is available"
+	$TLNKPODI_10 = "No help info is available"
+	$TLNKPODI_11 = "No help info is available"
+	$TLNKPODI_12 = "No help info is available"
+	$TLNKPODI_13 = "No help info is available"
+	$TLNKPODI_14 = "No help info is available"
+	$TLNKPODI_15 = "No help info is available"
+	$TLNKPODI_16 = "No help info is available"
+	$TLNKPODI_17 = "No help info is available"
+	$TLNKPODI_18 = "No help info is available"
+	$TLNKPODI_19 = "No help info is available"
+  
+
+
+;DrIvEr DeScRiPtIoN EnD

@@ -1,0 +1,417 @@
+        VER: 1.01
+        SYN: 1.00
+        DR SMC8000
+        {
+                Des:    $SMC8000_DRIVER_DESCRIPTION
+                Help:   $SMC8000_DRIVER_HELP
+                File:   $SMC8000_DRIVER_FILE
+                Par:    1.00
+				PROD:   'EISA.ISA.871.2'
+;@# SPROD: 'SMC~EtherEZ 10T Adapter'
+;@# CLIENT: SMC8000
+;@# ALIAS:  SMC8000.LAN
+
+                Timeout: 5
+
+                PROMPT PORT
+                        if(BUS != MCA) REQUIRED
+                        else HIDDEN
+                {
+                        Type:           HEX(3)
+                        Values:         280, 200, 220, 240, 260, 2A0, 2C0, 2E0, 300, 320, 340, 360, 380
+                        Default:        280
+                        ReservedLength: 20
+                }
+
+                PROMPT SLOT
+                        if(BUS == MCA) REQUIRED
+                        else HIDDEN
+                {
+                        Type:   HEX(1)
+                        Values: 1, 2, 3, 4, 5, 6, 7
+                }
+
+                PROMPT MEMORY OPTIONAL
+                {        
+                        Help: $SMC8000_1
+                        Type:   HEX(5)
+                        Values: C0000,C2000,C4000,C6000,C8000,CA000,CC000,CE000,D0000,D2000,D4000,D6000,D8000,DA000,DC000,DE000
+ 			Default: UNDEFINED
+			ReservedLength: 200
+                }
+
+                PROMPT INT OPTIONAL
+                {
+                        Help: $SMC8000_2
+                        Type:   HEX(2)
+                        Values: 3, 4, 5, 7, 9, A, B, F
+                        Default: UNDEFINED
+                }
+
+                FRAME FrameSelect
+                {
+                        Help:$SMC8000_3
+
+                        CD:   $SMC8000_4
+                        CH:   'Ethernet_802.3'
+
+                        CD:   $SMC8000_5
+                        CH:   'Ethernet_802.2'
+
+                        CD:   $SMC8000_6
+                        CH:   'Ethernet_SNAP'
+
+                        CD:   $SMC8000_7
+                        CH:   'Ethernet_II'
+
+                        Def:    2, 1
+				
+                }
+
+
+        }
+
+
+
+
+DLANG:  4
+;English
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+
+LANG:   1
+;CHINESE
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+
+LANG:   6
+;French
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+
+LANG:   7
+;German
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+
+LANG:   8
+;Italian
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+
+LANG:   9
+;JAPANESE
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+
+LANG:   10
+;KOREAN
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+
+LANG:   12
+;POTUGESE
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+
+LANG:   13
+;RUSSIAN
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+
+LANG:   14
+;Spanish
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+
+LANG:   16
+;CHINESE
+        $SMC8000_1 = "This value is not required for soft-configured adapters."
+        $SMC8000_2 = "This value is not required for soft-configured adapters."
+        $SMC8000_3 = "The default frame type is 802.2.
+                              You can remove this frame type or
+                              add the 802.3, 802.2 SNAP, or the Ethernet II frame
+                              types."
+        $SMC8000_4 = "802.3"
+        $SMC8000_5 = "802.2"
+        $SMC8000_6 = "802.2 SNAP"
+        $SMC8000_7 = "Ethernet II"
+
+        ; default English
+        $SMC8000_DRIVER_DESCRIPTION ="SMC Ethernet Adapter Server Driver"
+        $SMC8000_DRIVER_HELP = "You can use this driver in an ISA (AT bus), EISA,
+                        or a microchannel NetWare server. You can have
+                        maximum of four network boards in your server.
+                        Their settings must not conflict.\n\n You can load
+                        the driver for each board and for each additional
+                        frame type assigned to the board (Maximum: 16 times).
+                        The driver loads reentrantly.\n"
+        $SMC8000_DRIVER_FILE = "SMC8000.LAN"
+
+
+
+
+
+
+
+

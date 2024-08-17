@@ -1,0 +1,1279 @@
+Syn: 1.00
+
+;     Compaq LAN Driver Installation (LDI) information file for adapters
+;     supported on the NetWare Programs From Compaq (NPFC) deliverable
+;
+;     Last Updated 10-11-96, for release on NPFC 3.05 Rev A
+;       - Added 100Base-FX to help strings
+;       - Added Client32 / Windows 3.1 bug workaround
+;
+;     10-17-96
+;       - Added NBI.NLM to OFiles List
+;
+;     12-31-96
+;       - Removed references to product codes names.
+;
+;     4-1-97
+;       - Added support for Netelligent 10 T/2 PCI UTP/COAX Controller
+;
+;       1-5-98 shartley
+;         - Combined differences between NSSD and Netelligent versions to
+;           allow sharing between the NSSD and Netelligent diskette releases.
+; Controller ID's currently supported by this file:
+;
+;.0x20F1110E Compaq NetFlex-3/E
+;.0x40F1110E Compaq NetFlex-3/E
+;.0xF1300E11 Compaq NetFlex-3/P
+;.0xF1500E11 Compaq NetFlex-3/P
+;.0xAE350E11 Compaq Integrated NetFlex-3/P
+; 0xAE340E11 Compaq Netelligent 10 T PCI UTP
+;*0xB0120E11 Compaq Netelligent 10 T/2 PCI UTP/Coax
+;*0xAE320E11 Compaq Netelligent 10/100 TX PCI UTP
+;*0xAE400E11 Compaq Netelligent Dual 10/100 TX PCI UTP
+;*0xAE430E11 Compaq Netelligent Integrated 10/100 TX UTP
+;*0xB0110E11 Compaq Netelligent 10/100 TX Embedded UTP
+;|
+;+- autonegotiation support:
+;   " " doesn't support it
+;   "." supports autonegotiation with 10/100 TX module
+;   "*" supports autonegotiation
+;
+;       2-26-98  jmcdaniel
+;         - Added new file specifications from Novell.  Includes new escape 
+;           sequence <;@#>, 'CLIENT' keyword, and support for five new
+;           languages: 9, 10, 1, 16, 13.
+;
+;       2-27-98  jmcdaniel
+;         - Shortened keywords to lengths requested by certification tests.
+;
+;*0xB0110E11 Compaq Netelligent 10/100 TX Embedded UTP
+DR Embedded_DESCR
+
+	{
+	DES:		$CPQNF3_91
+	Help:		$CPQNF3_92
+	PAR:		2.00
+	File:		CPQNF3.LAN
+;	OF:		MSM.NLM, ETHERTSM.NLM, NBI.NLM
+	PROD:		'PCI.0E11.B011.0000.0000.10'
+;@#   CLIENT:	CPQNF3.LAN
+;@#	ALIAS:	CPQNF3.LAN
+;@#   SPROD: 	'Compaq~Netelligent 10/100 TX Embedded UTP'
+
+	PR SLOT REQ
+		{
+		Typ:	DEC(5)
+		Val:	1-65535
+		}
+
+	PR NODE OPT
+		{
+		}
+
+	LI MEDIA_CONNECTOR
+		{
+		Des:	$CPQNF3_65
+		Help:	$CPQNF3_66
+		CD:	$CPQNF3_67
+		Ch:	UND
+		CD:	$CPQNF3_68
+		Ch:	'AUI'
+		Def:	1
+		Out:	'%s'
+		}
+
+	LI DUPLEX_MODE
+		{
+		Des:	$CPQNF3_13
+		Help:	$CPQNF3_23
+		CD:	$CPQNF3_22
+		Ch:	UND
+		CD:	$CPQNF3_18
+		Ch:	'10HD'
+		CD:	$CPQNF3_16
+		Ch:	'10FD'
+		CD:	$CPQNF3_17
+		Ch:	'100FD'
+		Def:	1
+		Out:	'%s'
+		}
+
+	FR FrameSelect
+		{
+		CD:	$CPQNF3_1
+		Ch:	'Ethernet_802.2'
+		CD:	$CPQNF3_2
+		Ch:	'Ethernet_802.3'
+		CD:	$CPQNF3_3
+		Ch:	'Ethernet_SNAP'
+		CD:	$CPQNF3_4
+		Ch:	'Ethernet_II'
+		Def:	1, 2
+		}
+	}
+
+;*0xAE430E11 Compaq Netelligent Integrated 10/100 TX UTP
+DR Integrated_DESCR
+
+	{
+	Des:		$CPQNF3_61
+	Help:		$CPQNF3_62
+	PAR:		2.00
+	File:		CPQNF3.LAN
+;	OF:		MSM.NLM, ETHERTSM.NLM, NBI.NLM
+	PROD:		'PCI.0E11.AE43.0000.0000.10'
+;@#	CLIENT:	CPQNF3.LAN
+;@#	ALIAS:	CPQNF3.LAN
+;@#	SPROD:	'Compaq~Netelligent Integrated 10/100 TX UTP'
+
+	PR SLOT REQ
+		{
+		Typ:	DEC(5)
+		Val:	1-65535
+		}
+
+	PR NODE OPT
+		{
+		}
+
+	LI MEDIA_CONNECTOR
+		{
+		Des:	$CPQNF3_65
+		Help:	$CPQNF3_66
+		CD:	$CPQNF3_67
+		Ch:	UND
+		CD:	$CPQNF3_68
+		Ch:	'AUI'
+		Def:	1
+		Out:	'%s'
+		}
+
+	LI DUPLEX_MODE
+		{
+		Des:	$CPQNF3_13
+		Help:	$CPQNF3_23
+		CD:	$CPQNF3_22
+		Ch:	UND
+		CD:	$CPQNF3_16
+		Ch:	'10FD'
+		CD:	$CPQNF3_17
+		Ch:	'100FD'
+		CD:	$CPQNF3_18
+		Ch:	'10HD'
+		CD:	$CPQNF3_19
+		Ch:	'100HD'
+		Def:	1
+		Out:	'%s'
+		}
+
+	FR FrameSelect
+		{
+		CD:	$CPQNF3_1
+		Ch:	'Ethernet_802.2'
+		CD:	$CPQNF3_2
+		Ch:	'Ethernet_802.3'
+		CD:	$CPQNF3_3
+		Ch:	'Ethernet_SNAP'
+		CD:	$CPQNF3_4
+		Ch:	'Ethernet_II'
+		Def:	1, 2
+		}
+	}
+
+;.0xAE350E11 Compaq Integrated NetFlex-3/P
+DR Integ10_DESCR
+
+	{
+	Des:		$CPQNF3_71
+	Help:		$CPQNF3_72
+	PAR:		2.00
+	File:		CPQNF3.LAN
+;	OF:		MSM.NLM, ETHERTSM.NLM, NBI.NLM
+	PROD:		'PCI.0E11.AE35.0000.0000.10'
+;@#	CLIENT:	CPQNF3.LAN
+;@#   ALIAS:	CPQNF3.LAN
+;@#	SPROD:	'Compaq~Integrated NetFlex-3/P'
+
+	PR SLOT REQ
+		{
+		Typ:	DEC(5)
+		Val:	1-65535
+		}
+
+	PR NODE OPT
+		{
+		}
+
+	LI MEDIA_CONNECTOR
+		{
+		Des:	$CPQNF3_65
+		Help:	$CPQNF3_66
+		CD:	$CPQNF3_67
+		Ch:	UND
+		CD:	$CPQNF3_68
+		Ch:	'AUI'
+		Def:	1
+		Out:	'%s'
+		}
+
+	LI DUPLEX_MODE
+		{
+		Des:	$CPQNF3_13
+		Help:	$CPQNF3_14
+		CD:	$CPQNF3_15
+		Ch:	UND
+		CD:	$CPQNF3_18
+		Ch:	'10HD'
+		CD:	$CPQNF3_16
+		Ch:	'10FD'
+		CD:	$CPQNF3_17
+		Ch:	'100FD'
+		Def:	1
+		Out:	'%s'
+		}
+
+	FR FrameSelect
+		{
+		CD:	$CPQNF3_1
+		Ch:	'Ethernet_802.2'
+		CD:	$CPQNF3_2
+		Ch:	'Ethernet_802.3'
+		CD:	$CPQNF3_3
+		Ch:	'Ethernet_SNAP'
+		CD:	$CPQNF3_4
+		Ch:	'Ethernet_II'
+		Def:	1, 2
+		}
+	}
+
+;*0xAE400E11 Compaq Netelligent Dual 10/100 TX PCI UTP
+DR Dual_DESCR
+
+	{
+	Des:		$CPQNF3_63
+	Help:		$CPQNF3_64
+	PAR:		2.00
+	File:		CPQNF3.LAN
+;	OF:		MSM.NLM, ETHERTSM.NLM, NBI.NLM
+	PROD:		'PCI.0E11.AE40.0000.0000.10'
+;@#	CLIENT:	CPQNF3.LAN
+;@#	ALIAS:	CPQNF3.LAN
+;@#	SPROD:	'Compaq~Netelligent Dual 10/100 TX PCI UTP'
+
+	PR SLOT REQ
+		{
+		Typ:	DEC(5)
+		Val:	1-65535
+		}
+
+	PR NODE OPT
+		{
+		}
+
+	LI DUPLEX_MODE
+		{
+		Des:	$CPQNF3_13
+		Help:	$CPQNF3_23
+		CD:	$CPQNF3_22
+		Ch:	UND       
+		CD:	$CPQNF3_16
+		Ch:	'10FD'
+		CD:	$CPQNF3_17
+		Ch:	'100FD'
+		CD:	$CPQNF3_18
+		Ch:	'10HD'
+		CD:	$CPQNF3_19
+		Ch:	'100HD'
+		Def:	1
+		Out:	'%s'
+		}
+
+	FR FrameSelect
+		{
+		CD:	$CPQNF3_1
+		Ch:	'Ethernet_802.2'
+		CD:	$CPQNF3_2
+		Ch:	'Ethernet_802.3'
+		CD:	$CPQNF3_3
+		Ch:	'Ethernet_SNAP'
+		CD:	$CPQNF3_4
+		Ch:	'Ethernet_II'
+		Def:	1, 2
+		}
+	}
+
+;*0xAE320E11 Compaq Netelligent 10/100 TX PCI UTP
+DR 10_100_DESCR
+
+	{
+	Desc:		$CPQNF3_50
+	Help:		$CPQNF3_51
+	PAR:		2.00
+	File:		CPQNF3.LAN
+;	OF:		MSM.NLM, ETHERTSM.NLM, NBI.NLM
+	PROD:		'PCI.0E11.AE32.0000.0000.10'
+;@#	CLIENT:	CPQNF3.LAN
+;@#	ALIAS:	CPQNF3.LAN
+;@#	SPROD:	'Compaq~Netelligent 10/100 TX PCI UTP'
+
+	PR SLOT REQ
+		{
+		Typ:	DEC(5)
+		Val:	1-65535
+		}
+
+	PR NODE OPT
+		{
+		}
+
+	LI DUPLEX_MODE
+		{
+		Desc:	$CPQNF3_13
+		Help:	$CPQNF3_23
+		CD:	$CPQNF3_22
+		Ch:	UND
+		CD:	$CPQNF3_16
+		Ch:	'10FD'
+		CD:	$CPQNF3_17
+		Ch:	'100FD'
+		CD:	$CPQNF3_18
+		Ch:	'10HD'
+		CD:	$CPQNF3_19
+		Ch:	'100HD'
+		Def:	1
+		Out:	'%s'
+		}
+
+	FR FrameSelect
+		{
+		CD:	$CPQNF3_1
+		Ch:	'Ethernet_802.2'
+		CD:	$CPQNF3_2
+		Ch:	'Ethernet_802.3'
+		CD:	$CPQNF3_3
+		Ch:	'Ethernet_SNAP'
+		CD:	$CPQNF3_4
+		Ch:	'Ethernet_II'
+		Def:	1, 2
+		}
+	}
+
+; 0xAE340E11 Compaq Netelligent 10 T PCI UTP
+DR 10_DESCR
+
+	{
+	Desc:		$CPQNF3_48
+	Help:		$CPQNF3_49
+	PAR:		2.00
+	File:		CPQNF3.LAN
+;	OF:		MSM.NLM, ETHERTSM.NLM, NBI.NLM
+	PROD:		'PCI.0E11.AE34.0000.0000.10'
+;@#	CLIENT:	CPQNF3.LAN
+;@#	ALIAS:	CPQNF3.LAN
+;@#	SPROD:	'Compaq~Netelligent 10T PCI UTP'
+
+	PR SLOT REQ
+		{
+		Typ:	DEC(5)
+		Val:	1-65535
+		}
+
+	PR NODE OPT
+		{
+		}
+
+	LI DUPLEX_MODE
+		{
+		Desc:	$CPQNF3_13
+		Help:	$CPQNF3_23
+		CD:	$CPQNF3_15
+		Ch:	UND
+		CD:	$CPQNF3_16
+		Ch:	'10FD'
+		CD:	$CPQNF3_18
+		Ch:	'10HD'
+		Def:	1
+		Out:	'%s'
+		}
+
+	FR FrameSelect
+		{
+		CD:	$CPQNF3_1
+		Ch:	'Ethernet_802.2'
+		CD:	$CPQNF3_2
+		Ch:	'Ethernet_802.3'
+		CD:	$CPQNF3_3
+		Ch:	'Ethernet_SNAP'
+		CD:	$CPQNF3_4
+		Ch:	'Ethernet_II'
+		Def:	1, 2
+		}
+	}
+
+;.0x20F1110E Compaq NetFlex-3/E
+;.0x40F1110E Compaq NetFlex-3/E
+;.0xF1300E11 Compaq NetFlex-3/P
+;.0xF1500E11 Compaq NetFlex-3/P
+DR CPQNF3_DESCR
+
+	{
+	Desc:		$CPQNF3_7
+	Help:		$CPQNF3_8
+	PAR:		2.00
+	File:		CPQNF3.LAN
+;	OF:		MSM.NLM, ETHERTSM.NLM, NBI.NLM
+	PROD:		'PCI.0E11.F130.0000.0000.10', 'PCI.0E11.F150.0000.0000.10', 'EISA.CPQ.F14.0', 'EISA.CPQ.F12.0'
+;@#	CLIENT:	CPQNF3.LAN
+;@#	ALIAS:	CPQNF3.LAN
+;@#	SPROD:	'Compaq~NetFlex-3/E',
+;@#			'Compaq~NetFlex-3/P',
+;@#			'Compaq~NetFlex-3/E',
+;@#			'Compaq~NetFlex-3/P'
+
+	PR SLOT REQ
+		{
+		Typ:	DEC(5)
+		Val:	1-65535
+		}
+
+	PR NODE OPT
+		{
+		}
+
+	LI MEDIA_CONNECTOR
+		{
+		Desc:	$CPQNF3_9
+		Help:	$CPQNF3_10
+		CD:	$CPQNF3_11
+		Ch:	UND
+		CD:	$CPQNF3_12
+		Ch:	'UTP'
+		Def:	1
+		Out:	'%s'
+		}
+
+	LI DUPLEX_MODE
+		{
+		Desc:	$CPQNF3_13
+		Help:	$CPQNF3_14
+		CD:	$CPQNF3_15
+		Ch:	UND
+		CD:	$CPQNF3_16
+		Ch:	'10FD'
+		CD:	$CPQNF3_17
+		Ch:	'100FD'
+		CD:	$CPQNF3_18
+		Ch:	'10HD'
+		CD:	$CPQNF3_19
+		Ch:	'100HD'
+		Def:	1
+		Out:	'%s'
+		}
+
+	FR FrameSelect
+		{
+		CD:	$CPQNF3_1
+		Ch:	'Ethernet_802.2'
+		CD:	$CPQNF3_2
+		Ch:	'Ethernet_802.3'
+		CD:	$CPQNF3_3
+		Ch:	'Ethernet_SNAP'
+		CD:	$CPQNF3_4
+		Ch:	'Ethernet_II'
+		Def:	1, 2
+		}
+	}
+
+;*0xB0120E11 Compaq Netelligent 10 T/2 PCI UTP/Coax
+DR 10_T_2_DESCR
+
+	{
+	Desc:		$CPQNF3_69
+	Help:		$CPQNF3_70
+	PAR:		2.00
+	File:		CPQNF3.LAN
+;	OF:		MSM.NLM, ETHERTSM.NLM, NBI.NLM
+	PROD:		'PCI.0E11.B012.0000.0000.10'
+;@#	CLIENT:	CPQNF3.LAN
+;@#	ALIAS:	CPQNF3.LAN
+;@#	SPROD:	'Compaq~Netelligent 10 T/2 PCI UTP/Coax'
+
+	PR SLOT REQ
+		{
+		Typ:	DEC(5)
+		Val:	1-65535
+		}
+
+		PR NODE OPT
+		{
+		}
+
+	LI MEDIA_CONNECTOR
+		{
+		Desc:	$CPQNF3_9
+		Help:	$CPQNF3_19A
+		CD:	$CPQNF3_11
+		Ch:	UND
+		CD:	$CPQNF3_12
+		Ch:	'UTP'
+		Def:	1
+		Out:	'%s'
+		}
+
+	LI DUPLEX_MODE
+		{
+		Desc:	$CPQNF3_13
+		Help:	$CPQNF3_23
+		CD:	$CPQNF3_22
+		Ch:	UND
+		CD:	$CPQNF3_18
+		Ch:	'10HD'
+		CD:	$CPQNF3_16
+		Ch:	'10FD'
+		Def:	1
+		Out:	'%s'
+		}
+
+	FR FrameSelect
+		{
+		CD:	$CPQNF3_1
+		Ch:	'Ethernet_802.2'
+		CD:	$CPQNF3_2
+		Ch:	'Ethernet_802.3'
+		CD:	$CPQNF3_3
+		Ch:	'Ethernet_SNAP'
+		CD:	$CPQNF3_4
+		Ch:	'Ethernet_II'
+		Def:	1, 2
+		}
+	}
+
+DLANG:  4
+;English
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."
+
+LANG:  1
+;Chinese (Simplified)
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."
+		     
+LANG:  6
+;French
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."
+
+
+LANG:  7
+;German
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."
+
+
+LANG:  8
+;Italian
+
+
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."
+
+LANG:  9
+;Japanese
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."
+
+LANG:  10
+;Korean
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."
+
+LANG:  12
+;Portuguese-Brazil
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."
+
+LANG:  13
+;Russian
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."
+
+LANG:  14
+;Spanish
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."
+
+LANG:  16
+;Chinese (Traditional)
+
+     $CPQNF3_1   =  "802.2 Ethernet"
+     $CPQNF3_2   =  "802.3 Ethernet"
+     $CPQNF3_3   =  "Ethernet SNAP"
+     $CPQNF3_4   =  "Ethernet II"
+
+     $CPQNF3_7   =  "Compaq NetFlex-3 Controller (Ethernet)"
+     $CPQNF3_8   =  "The CPQNF3.LAN driver supports the Compaq NetFlex-3
+		     family of network controllers installed in PCI or EISA
+		     servers.  Supported media types include 10Base-T,
+		     10Base-2, 100Base-TX, 100Base-FX, and 100VG-AnyLAN."
+     $CPQNF3_9   =  "Media Connector (10Base-T/10Base-2)"
+     $CPQNF3_10  =  "This option applies only when the 10Base-T/10Base-2
+		     module is installed on your NetFlex-3 controller."
+     $CPQNF3_11  =  "Auto Sense"
+     $CPQNF3_12  =  "Force UTP (RJ-45) Connector"
+     $CPQNF3_13  =  "Speed/Duplex Mode (10Base-T/100Base-TX/FX)"
+     $CPQNF3_14  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX/FX)."
+
+     $CPQNF3_15  =  "Auto/Half Duplex"
+     $CPQNF3_16  =  "Full Duplex at 20 Mbps (10 or 100Base-T)"
+     $CPQNF3_17  =  "Full Duplex at 200 Mbps (100Base-TX/FX)"
+     $CPQNF3_18  =  "Half Duplex at 10 Mbps (10 or 100Base-T)"
+     $CPQNF3_19  =  "Half Duplex at 100 Mbps (100Base-TX/FX)"
+     $CPQNF3_19A =  "By default, the driver auto-senses which cable type is
+		     attached to the controller (either ThinNET or UTP)."
+     $CPQNF3_22  =  "Auto-Negotiate"
+     $CPQNF3_23  =  "This option applies only when using a switching hub
+	     (10Base-T or 100Base-TX)."
+										
+     $CPQNF3_48  =  "Compaq PCI 10BASE-T UTP Ethernet adapter"
+     $CPQNF3_49  =  "This driver supports the Compaq
+		     PCI 10BASE-T UTP Ethernet adapter in a PCI server."
+			
+     $CPQNF3_50  =  "Compaq PCI 10/100 TX Fast Ethernet adapter"
+     $CPQNF3_51  =  "This driver supports the Compaq
+		     PCI 10/100 TX Fast Ethernet adapter in a PCI server."
+
+     $CPQNF3_61  =  "Compaq Integrated 10/100 TX UTP Controller"
+     $CPQNF3_62  =  "This driver supports the integrated PCI 10/100 TX
+		     Fast Ethernet adapter in a Proliant 2500"
+     $CPQNF3_63  =  "Compaq Dual 10/100 TX UTP Controller"
+     $CPQNF3_64  =  "This driver supports the PCI 10/100 TX Dual
+		     Port Fast Ethernet Adapter in a PCI server."
+     $CPQNF3_65  =  "Media Connector"
+     $CPQNF3_66  =  "This option will force use of AUI on the integrated
+		     controller.  By default, the UTP connector is
+		     used."
+     $CPQNF3_67  =  "UTP (RJ-45)"
+     $CPQNF3_68  =  "AUI/BNC"
+
+     $CPQNF3_69  =  "Compaq Netelligent 10 T/2 PCI UTP/COAX Controller"
+     $CPQNF3_70  =  "This driver supports the Compaq Netelligent 10 T/2
+		     PCI UTP/COAX Controller."
+     $CPQNF3_71  =  "Compaq Integrated Netflex-3/P Controller"
+     $CPQNF3_72  =  "This driver supports the integrated modular PCI
+		     Ethernet controller in Compaq servers and workstations."
+
+     $CPQNF3_91  =  "Compaq 10/100 TX Embedded UTP Controller"
+     $CPQNF3_92  =  "This driver supports the embedded PCI 10/100 TX
+		     Fast Ethernet adapter in Compaq servers and
+		     workstations."

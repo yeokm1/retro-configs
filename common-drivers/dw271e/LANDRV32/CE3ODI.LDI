@@ -1,0 +1,824 @@
+; Xircom CreditCard Ethernet 10/100 Adapter ODI LDI File
+; (c) Copyright 1997 by Xircom, Inc.  All rights reserved
+VER: 1.00
+SYN: 1.00
+
+DR CE3ODI
+{
+   DES:  $CE3ODI_DES
+   HELP: $CE3ODI_HELP
+   PAR:  1.00
+   FILE: CE3ODI.LAN
+   ;@#   SPROD: 'Xircom~CreditCard Ethernet 10/100 Adapter'
+   ;@#   CLIENT: CE3ODI.COM, CE3ODI.LAN
+   ;@#   ALIAS: CE3ODI.LAN
+
+   FR FrameSelect
+   {
+      CH:  'Ethernet_802.2'
+      CH:  'Ethernet_802.3'
+      CH:  'Ethernet_SNAP'
+      CH:  'Ethernet_II'
+      DEF: 1,2
+   }
+
+   PR IRQ OPTIONAL
+   {
+      VAL:      3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+      TYP:      DECIMAL(2)
+      OUT:      'IRQ=%s'
+      HELP:     $CE3ODI_IRQ_HELP
+   }
+
+   PR PORT OPTIONAL
+   {
+      DES:      'IO Address'
+      VAL:      280-380
+      TYP:      HEX(3)
+      RES:      20
+      OUT:      'PORT=%s'
+      HELP:     $CE3ODI_PORT_HELP
+   }
+
+   PR MEMORY OPTIONAL
+   {
+      DES:      'Memory Address'
+      VAL:      C0000-EFFFF
+      TYP:      HEX(8)
+      RES:      1000
+      OUT:      'MEM=%s'
+      HELP:     $CE3ODI_MEMORY_HELP
+   }
+
+   PR NODE
+   {
+   }
+
+   PR SOCKET
+   {
+      DES:  "PC Card Socket Number"
+      VAL:  1-4
+      TYP:  DECIMAL(1)
+      OUT:      "SOCKET=%s"
+      HELP:     $CE3ODI_SOCKET_HELP
+   }
+
+   LI NOCHECK
+   {
+      DES:      'Disable resource checking?'
+      CD:       $YES
+      CH:       'NOCHECK'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $CE3ODI_NOCHECK_HELP
+   }
+
+   LI VERBOSE
+   {
+      DES:      'Enable verbose messages?'
+      CD:       $YES
+      CH:       'VERBOSE'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $CE3ODI_VERBOSE_HELP
+   }
+
+   PR TXBUFFERSIZE
+   {
+      DES:      'Transmit buffer size'
+      TYP:      DECIMAL(2)
+      VAL:      1-20
+      OUT:      'TXBUFFERSIZE=%s'
+      HELP:     $CE3ODI_TXBUFFERSIZE_HELP
+   }
+
+  LI NOEARLYRX
+   {
+      DES:      'Disable early receives?'
+      CD:       $YES
+      CH:       'NOEARLYRX'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $CE3ODI_NOEARLYRX_HELP
+   }
+
+   LI NOEARLYTX
+   {
+      DES:      'Disable early transmits?'
+      CD:       $YES
+      CH:       'NOEARLYTX'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $CE3ODI_NOEARLYTX_HELP
+   }
+
+   LI LINESPEED
+   {
+      DES:      'Line speed'
+      CD:       '10 Mbits per second'
+      CH:       'LINESPEED=10'
+      CD:       '100 Mbits per second'
+      CH:       'LINESPEED=100'
+      CD:       'AUTO'
+      CH:       ''
+      DEF:      3
+      OUT:      '%s'
+      HELP:     $CE3ODI_LINESPEED_HELP
+   }
+
+   LI LINEMODE
+   {
+      DES:      'Line duplex mode'
+      CD:       'FULL'
+      CH:       'LINEMODE=FULL'
+      CD:       'HALF'
+      CH:       'LINEMODE=HALF'
+      CD:       'AUTO'
+      CH:       ''
+      DEF:      3
+      OUT:      '%s'
+      HELP:     $CE3ODI_LINEMODE_HELP
+   }
+
+   LI NOLED
+   {
+      DES:      'Disable LEDs?'
+      CD:       $YES
+      CH:       'NOLED'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $CE3ODI_NOLED_HELP
+   }
+
+   LI LINKDISABLE
+   {
+      DES:      'Disable link integrity?'
+      CD:       $YES
+      CH:       'LINKDISABLE'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $CE3ODI_LINKDISABLE_HELP
+   }
+
+}
+
+;English
+DLANG: 4
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in hexadecimal 
+		   notation. The adapter supports 16-bits of I/O address
+		   space, and requires 128 contiguous I/O addresses if run
+		   in I/O mode. If using memory-mapped I/O mode, no I/O 
+		   ports are necessary and this field should be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+;French
+LANG: 6
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+		
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+;German
+LANG: 7
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+		
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+;Italian
+LANG: 8
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+		
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+;Spanish
+LANG: 14
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+		
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+                        
+
+
+;Portugese
+LANG: 12
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in hexadecimal 
+		   notation. The adapter supports 16-bits of I/O address
+		   space, and requires 128 contiguous I/O addresses if run
+		   in I/O mode. If using memory-mapped I/O mode, no I/O 
+		   ports are necessary and this field should be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+;Japanese
+LANG: 9
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+		
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+;Korean
+LANG: 10
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+		
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+;Chinese (Simplified)
+LANG: 1
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+		
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+;Chinese (Traditional)
+LANG: 16
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+		
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+;Russian
+LANG: 13
+$CE3ODI_DES =  "Xircom CreditCard Ethernet 10/100 Adapter"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$CE3ODI_HELP = "This driver supports CE3ODI adapters for computers that have
+	     a PC Card slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$CE3ODI_IRQ_HELP =        "Selects a hardware interrupt for use by the adapter."
+		
+$CE3ODI_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$CE3ODI_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$CE3ODI_SOCKET_HELP = "Forces the driver to use a particular PC Card socket
+		   (or slot). Overrides automatic detection."
+
+$CE3ODI_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$CE3ODI_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of PCMCIA controller found."
+
+$CE3ODI_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$CE3ODI_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$CE3ODI_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$CE3ODI_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$CE3ODI_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$CE3ODI_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+                        

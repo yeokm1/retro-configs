@@ -1,0 +1,254 @@
+; CNE3200.LDI
+;
+; Novell NE3200 Network Interface Cards.
+;
+; VeRsIoN=1.05 Novell LAN Installation Information File for CNE3200.
+; CoPyRiGhT=(c)Copyright 1996, 1997, 1998, by Novell, Inc.  All rights reserved.
+
+VER: 1.05
+SYN: 1.00
+
+DR NOVELL_CNE3200
+{
+     DES: $CNE3200_1
+     HELP:     $CNE3200_2
+     PAR: 2.00
+     FILE:     CNE3200.LAN
+     PROD:     'EISA.NVL.070.1'
+;@#  Sprod: 'Novell ~ NE32000'
+;@# CLIENT: CNE3200
+;@# ALIAS: NE3200.LAN
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,4
+     }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+
+DR INTEL_CNE3200
+{
+     DES: $CNE3200_3
+     HELP:     $CNE3200_4
+     PAR: 2.00
+     FILE:     CNE3200.LAN
+     PROD:     'EISA.NVL.070.1'
+;@#  Sprod: 'INTEL ~ EtherExpress 32'
+;@# CLIENT: CNE3200
+;@# ALIAS: NE3200.LAN
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 1,2
+     }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+
+DR EAGLE_CNE3200
+{
+     DES: $CNE3200_5
+     HELP:     $CNE3200_6
+     PAR: 2.00
+     FILE:     CNE3200.LAN
+     PROD:     'EISA.NVL.070.1'
+;@#  Sprod: 'EAGLE ~ NE32000'
+;@# CLIENT: CNE3200
+;@# ALIAS: NE3200.LAN
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 1,2
+     }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+
+DLANG:    4
+;English
+     $CNE3200_1 = "Novell Ethernet NE3200"
+     $CNE3200_2 = "This driver (CNE3200.LAN) supports the NE3200 network board
+installed in an EISA server.  You can install up to four boards in a server."
+     $CNE3200_3 = "Intel EtherExpress32"
+     $CNE3200_4 = "This driver supports the Intel EtherExpress32 network board
+installed in an EISA server.  You can install up to four boards in a server."
+     $CNE3200_5 = "Eagle NE3200"
+     $CNE3200_6 = "This driver supports the EAGLE NE3200 and NE3200T network
+board installed in an EISA server.  You can install up to four boards in a
+server."
+
+
+LANG: 6
+;French
+     $CNE3200_1 = "Ethernet NE3200 de Novell"
+     $CNE3200_2 = "Ce pilote (CNE3200.LAN) supporte la carte
+ r‚seau NE3200 install‚e sur un serveur
+ EISA. Vous pouvez installer au maximum
+ quatre cartes sur un serveur."
+     $CNE3200_3 = "Intel EtherExpress32"
+     $CNE3200_4 = "Ce pilote supporte la carte r‚seau Intel
+ EtherExpress32 install‚e sur un serveur
+ EISA. Vous pouvez installer un maximum de
+ quatre cartes sur un serveur."
+     $CNE3200_5 = "Eagle NE3200"
+     $CNE3200_6 = "Ce pilote supporte les cartes r‚seau
+  EAGLE NE3200 et NE3200T install‚es sur un
+ serveur EISA. Vous pouvez installer un
+ maximum de quatre cartes sur un serveur."
+
+
+LANG: 7
+;German
+     $CNE3200_1 = "Novell Ethernet NE3200"
+     $CNE3200_2 = "Dieser Treiber (CNE3200.LAN) untersttzt die in einen EISA-
+Server installierte NE3200-Netzwerkkarte.  Sie k”nnen bis zu
+vier Karten in einen Server installieren."
+     $CNE3200_3 = "Intel EtherExpress32"
+     $CNE3200_4 = "Dieser Treiber untersttzt die in einen EISA-Server installierte
+Intel EtherExpress32-Netzwerkkarte. Sie k”nnen bis zu vier Karten
+in einen Server installieren."
+     $CNE3200_5 = "Eagle NE3200"
+     $CNE3200_6 = "Dieser Treiber untersttzt die in einen EISA-Server installierten
+EAGLE NE3200- und NE3200T-Netzwerkkarten. Sie k”nnen bis zu
+vier Karten in einen Server installieren."
+
+
+LANG: 8
+;Italian
+     $CNE3200_1 = "Novell Ethernet NE3200"
+     $CNE3200_2 = "Questo driver CNE3200.LAN supporta la scheda di rete NE3200 installata
+in un server EISA. E' possibile installare fino a quattro
+schede per server."
+     $CNE3200_3 = "Intel EtherExpress32"
+     $CNE3200_4 = "Questo driver supporta la scheda di rete Intel EtherExpress32
+installata in un server EISA. E' possibile installare fino a quattro
+schede per server."
+     $CNE3200_5 = "Eagle NE3200"
+     $CNE3200_6 = "Questo driver supporta le schede di rete EAGLE NE3200 e NE3200T
+installate in un server EISA. E' possibile installare fino a quattro
+schede per server."
+
+
+LANG: 12
+;Portuguese
+     $CNE3200_1 = "Novell Ethernet NE3200"
+     $CNE3200_2 = "Este driver (CNE3200.LAN) suporta a placa de rede NE3200
+instalada em um servidor EISA. Vocˆ pode instalar at‚ quatro placas em um servidor."
+     $CNE3200_3 = "Intel EtherExpress32"
+     $CNE3200_4 = "Este driver suporta a placa de rede Intel EtherExpress32
+instalada em um servidor EISA.  poss¡vel instalar at‚ quatro
+placas em um servidor."
+     $CNE3200_5 = "Eagle NE3200"
+     $CNE3200_6 = "Este driver suporta as placas de rede EAGLE NE3200 e NE3200T
+instaladas em um servidor EISA.  poss¡vel instalar at‚ quatro
+placas em um servidor."
+
+
+LANG: 14
+;Spanish
+     $CNE3200_1 = "Novell Ethernet NE3200"
+     $CNE3200_2 = "Este controlador (CNE3200.LAN) ofrece soporte a la tarjeta
+de red NE3200 instalada en un servidor EISA. Se pueden instalar
+hasta cuatro tarjetas en un servidor."
+     $CNE3200_3 = "Intel EtherExpress32"
+     $CNE3200_4 = "Este controlador ofrece soporte a la tarjeta de red Intel
+EtherExpress32 instalada en un servidor EISA. Se pueden
+instalar hasta cuatro tarjetas en un servidor."
+     $CNE3200_5 = "Eagle NE3200"
+     $CNE3200_6 = "Este controlador ofrece soporte a las tarjetas de red EAGLE
+NE3200 y NE3200T instaladas en un servidor EISA. Se pueden
+instalar hasta cuatro tarjetas en un servidor."
+
+
+LANG: 1
+;Chinese-Simplified
+     $CNE3200_1 = "Novell Ethernet NE3200"
+     $CNE3200_2 = "´ËÇı¶¯³ÌĞò (CNE3200.LAN) Ö§³Ö°²×°ÔÚ EISA ·şÎñÆ÷ÖĞµÄ NE3200 ÍøÂç°å¡£¿ÉÔÚÒ»¸ö·şÎñÆ÷ÖĞ°²×°¶à´ïËÄ¸ö°å¡£"
+     $CNE3200_3 = "Intel EtherExpress32"
+     $CNE3200_4 = "´ËÇı¶¯³ÌĞòÖ§³Ö°²×°ÔÚ EISA ·şÎñÆ÷ÖĞµÄ Intel EtherExpress32 ÍøÂç°å¡£¿ÉÔÚÒ»¸ö·şÎñÆ÷ÖĞ°²×°¶à´ïËÄ¸ö°å¡£"
+     $CNE3200_5 = "Eagle NE3200"
+     $CNE3200_6 = "´ËÇı¶¯³ÌĞòÖ§³Ö°²×°ÔÚ EISA ·şÎñÆ÷ÖĞµÄ EAGLE NE3200 ºÍ NE3200T ÍøÂç°å¡£¿ÉÔÚÒ»¸ö·şÎñÆ÷ÖĞ°²×°¶à´ïËÄ¸ö°å¡£"
+
+
+LANG: 16
+;Chinese-Traditional
+     $CNE3200_1 = "Novell Ethernet NE3200"
+     $CNE3200_2 = "¥»ÅX°Êµ{¦¡(CNE3200.LAN) ¤ä´©¦w¸Ë¦b EISA ¦øªA¾¹¤Wªº NE3200 ºô¸ô¥d¡C¦b¤@³¡¦øªA¾¹¤W±z¥i¦w¸Ë¦Ü¦h 4 ¤ùºô¸ô¥d¡C"
+     $CNE3200_3 = "Intel EtherExpress32"
+     $CNE3200_4 = "¥»ÅX°Êµ{¦¡¤ä´©¦w¸Ë¦b EISA ¦øªA¾¹¤Wªº Intel EtherExpress32 ºô¸ô¥d¡C¦b¤@³¡¦øªA¾¹¤W±z¥i¦w¸Ë¦Ü¦h 4 ¤ùºô¸ô¥d¡C"
+     $CNE3200_5 = "Eagle NE3200"
+     $CNE3200_6 = "¥»ÅX°Êµ{¦¡¤ä´©¦w¸Ë¦b EISA ¦øªA¾¹¤Wªº EAGLE NE3200 »P NE3200T ºô¸ô¥d¡C¦b¤@³¡¦øªA¾¹¤W±z¥i¦w¸Ë¦Ü¦h 4 ¤ùºô¸ô¥d¡C"
+
+
+LANG: 9
+;Japanese
+     $CNE3200_1 = "Novell Ethernet NE3200"
+     $CNE3200_2 = "This driver (CNE3200.LAN) supports the NE3200 network board
+installed in an EISA server.  You can install up to four boards in a server."
+     $CNE3200_3 = "Intel EtherExpress32"
+     $CNE3200_4 = "This driver supports the Intel EtherExpress32 network board
+installed in an EISA server.  You can install up to four boards in a server."
+     $CNE3200_5 = "Eagle NE3200"
+     $CNE3200_6 = "This driver supports the EAGLE NE3200 and NE3200T network
+board installed in an EISA server.  You can install up to four boards in a
+server."
+
+

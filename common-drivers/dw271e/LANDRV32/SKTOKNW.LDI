@@ -1,0 +1,1014 @@
+;DrIvEr DeScRiPtIoN
+;CoPyRiGhT=(C)Copyright 1993-1998 SysKonnect. All rights reserved
+
+VER:	1.09
+SYN:	1.00
+
+DR SKTOKNW_PCI
+{
+	DES:			$SKTOKNW_PCI_DES
+	HELP:			$SKTOKNW_HLP
+	PAR:			2.00
+	PROD:			PCI.1148.4200.*.*.*
+	;@#	SPROD:		'SysKonnect~Token Ring PCI Adapter SK-459x (SK-NET TR/PCI, TR/PCI+)'
+	;@#	CLIENT:		SKTOKNW.LAN
+	;@#	ALIAS:		SKTOKNW.LAN
+	FILE:			SKTOKNW.LAN
+;	OF:			NBI.NLM, MSM.NLM, TOKENTSM.NLM
+	TIME:			45
+
+	PR SLOT REQ
+	{
+		VAL:		1-65535
+	}
+
+	PR NODE OPT
+	{
+		DES:		$NODE_DES
+		HELP:		$NODE_HLP
+	}
+
+	FR FrameSelect OPT
+	{
+		CD:		"TOKEN-RING"
+		CH:		'Token-Ring'
+		CD:		"TOKEN-RING_SNAP"
+		CH:		'Token-Ring_SNAP'
+		DEF:		1,2
+		OCT:		MSB
+	}
+
+	PR SPEED REQ
+	{
+		DES:		$RATE_DES
+		HELP:		$RATE_HLP
+		TYP:		DEC(2)
+		VAL:		16,4
+		DEF:		16
+		OUT:		'SPEED=%s CARDTYPE=3'
+	}
+
+	LI MPR OPT
+	{
+		DES:		$MPR_DES
+		HELP:		$MPR_HLP
+		CD:		$MPR_CDES1
+		CH:		''
+		CD:		$MPR_CDES2
+		CH:		'MPR'
+		DEF:		1
+		OUT:		'%s'
+	}
+	LI QUIET OPT
+	{
+		DES:		$QUIET_DES
+		HELP:		$QUIET_HLP
+		CD:		$QUIET_CDES1
+		CH:		''
+		CD:		$QUIET_CDES2
+		CH:		'QUIET'
+		DEF:		2
+		OUT:		'%s'
+	}
+	LI DUPLEX OPT
+	{
+		DES:		$DUPLEX_DES
+		HELP:		$DUPLEX_HLP
+		CD:		$DUPLEX_AUTO
+		CH:		'AUTO'
+		CD:		$DUPLEX_HALF
+		CH:		'HALF'
+		CD:		$DUPLEX_FULL
+		CH:		'FULL'
+		DEF:		1
+		OUT:		'DUPLEX=%s'
+	}
+}
+
+DR SKTOKNW_ISA
+{
+	DES:			$SKTOKNW_ISA_DES
+	HELP:			$SKTOKNW_HLP
+	PAR:			1.00
+	;@# SPROD: 'SysKonnect~Token Ring ISA Adapter SK-4190 (SK-NET TR4/16+)'
+	;@# CLIENT: SKTOKNW.LAN
+	;@# ALIAS: SKTOKNW.LAN
+	FILE:			SKTOKNW.LAN
+;	OF:			NBI.NLM, MSM.NLM, TOKENTSM.NLM
+	TIME:			45
+
+	PR PORT1 REQ
+	{
+		DES:		$PORT_ISA_DES
+		HELP:		$PORT_ISA_HLP
+		TYP:		HEX(4)
+		VAL:		0A20, 1A20, 0B20, 1B20, 1980, 0980, 1900, 0900
+		DEF:		0A20
+		OUT:		'PORT=%s'
+		RES:		32
+	}
+
+	PR INT REQ
+	{
+		DES:		$INT_ISA_DES
+		HELP:		$INT_ISA_HLP
+		TYP:		HEX(1)
+		VAL:		3, 5, 9, A, B, C, F
+		DEF:		3
+		OUT:		'INT=%s'
+	}
+
+	PR DMA REQ
+	{
+		DES:		$DMA_ISA_DES
+		HELP:		$DMA_ISA_HLP
+		TYP:		DEC(1)
+		VAL:		5, 6, 7
+		DEF:		5
+		OUT:		'DMA=%s'
+	}
+
+	PR NODE OPT
+	{
+		DES:		$NODE_DES
+		HELP:		$NODE_HLP
+	}
+
+	FR FrameSelect OPT
+	{
+		CD:		"TOKEN-RING"
+		CH:		'Token-Ring'
+		CD:		"TOKEN-RING_SNAP"
+		CH:		'Token-Ring_SNAP'
+		DEF:		1,2
+		OCT:		MSB
+	}
+
+	PR SPEED REQ
+	{
+		DES:		$RATE_DES
+		HELP:		$RATE_HLP
+		TYP:		DEC(2)
+		VAL:		16,4
+		DEF:		16
+		OUT:		'SPEED=%s CARDTYPE=1'
+	}
+
+	LI MPR OPT
+	{
+		DES:		$MPR_DES
+		HELP:		$MPR_HLP
+		CD:		$MPR_CDES1
+		CH:		''
+		CD:		$MPR_CDES2
+		CH:		'MPR'
+		DEF:		1
+		OUT:		'%s'
+	}
+
+	LI SERVMEM if (GT_16 == TRUE) REQ
+			els OPT
+	{
+		DES:		$M16_DES
+		HELP:		$M16_HLP
+		CD:		$M16_CDES1
+		CH:		''
+		CD:		$M16_CDES2
+		CH:		'BELOW16'
+		DEF:		1
+		OUT:		'%s'
+	}
+
+	LI QUIET OPT
+	{
+		DES:		$QUIET_DES
+		HELP:		$QUIET_HLP
+		CD:		$QUIET_CDES1
+		CH:		''
+		CD:		$QUIET_CDES2
+		CH:		'QUIET'
+		DEF:		2
+		OUT:		'%s'
+	}
+	LI DUPLEX OPT
+	{
+		DES:		$DUPLEX_DES
+		HELP:		$DUPLEX_HLP
+		CD:		$DUPLEX_AUTO
+		CH:		'AUTO'
+		CD:		$DUPLEX_HALF
+		CH:		'HALF'
+		CD:		$DUPLEX_FULL
+		CH:		'FULL'
+		DEF:		1
+		OUT:		'DUPLEX=%s'
+	}
+}
+
+DLANG: 4
+;Default: English
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+LANG:	6
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+LANG:	7
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+LANG:	8
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+LANG:	14
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+LANG:	12
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+LANG:	9
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+LANG:	10
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+LANG:	1
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+LANG:	16
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+LANG:	13
+	$SKTOKNW_ISA_DES =    "SysKonnect Token Ring ISA Adapters"
+	$SKTOKNW_PCI_DES =    "SysKonnect Token Ring PCI Adapters"
+	$SKTOKNW_HLP =	  "This server driver supports the SK-NET TR4
+			 , SK-NET TR16 , SK-NET TR4/16
+			 , SK-NET TR4/16+ and SK-NET TR/PCI(+)"
+
+	$PORT_ISA_DES =	    "I/O port address"
+	$PORT_ISA_HLP =	    "The port address must match the DIP switch
+			     settings on the board."
+
+	$INT_ISA_DES =	    "Interrupt Level"
+	$INT_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$DMA_ISA_DES =	    "DMA Channel"
+	$DMA_ISA_HLP =	    "No DIP switch settings are required because the
+			     driver automatically performs board
+			     configuration."
+
+	$NODE_DES =	"Node Address"
+	$NODE_HLP =	"This parameter sets the locally administered
+			 address for the Token-Ring adapter. This
+			 address must be unique on the ring and ranges
+			 from 400000000000 to 7FFFFFFFFFFF. All 12
+			 digits must be entered!
+			 Do not change this address unless you are
+			 prepared to administer local addresses
+			 according to IEEE 802.2 specifications. Be
+			 careful not to enter a node address that is
+			 already in use by another station."
+
+	$RATE_DES =	"Data Rate"
+	$RATE_HLP =	"NOTE: selection of the wrong data rate may cause
+			 tremendous ring stress!"
+
+	$DUPLEX_DES =	"Duplex Mode"
+	$DUPLEX_HLP =	"Select AUTO if you are not sure which value to
+			 choose. If you select FULL, your adapter must be
+			 connected to a FULL DULEX capable Token Ring Switch
+			 and will work in Duplex Token Ring mode. The value
+			 HALF forces the adapter to operate in classic Token
+			 Ring mode."
+	$DUPLEX_AUTO =  "AUTO"
+	$DUPLEX_HALF =  "HALF"
+	$DUPLEX_FULL =  "FULL"
+
+	$MPR_DES =	"MPR Source Route Support"
+	$MPR_HLP =	"Select this option, if a
+			 Multiprotocol-Router (MPR) is installed on your
+			 system, and if it is configured as a Source Route
+			 bridge."
+	$MPR_CDES1 =	"No Source Route MPR"
+	$MPR_CDES2 =	"MPR Source Route Bridge Support"
+
+	$M16_DES =	"Server Memory"
+	$M16_HLP =	"If your server has more than 16 MB memory, the BELOW16
+			 commandline parameter is required for proper operation
+			 of the SK-NET Token-Ring ISA adapter!\n
+			 NOTE: Memory above 16MB must not be registered before
+			 the LAN driver is loaded!"
+	$M16_CDES1 =	"Less than 16 MB server memory"
+	$M16_CDES2 =	"More than 16 MB server memory"
+
+	$QUIET_DES =	"Quiet Mode"
+	$QUIET_HLP =	"Select this option if you want to suppress
+			 driver status messages.\n
+			 NOTE: Usage of this parameter is highly recommended
+			 for Client32!"
+	$QUIET_CDES1 =	"Status messages enabled"
+	$QUIET_CDES2 =	"Status messages disabled"
+
+;DrIvEr DeScRiPtIoN EnD
+
+

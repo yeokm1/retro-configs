@@ -1,0 +1,594 @@
+; KTC100.LDI
+; Kingston KNE100TX EtheRx PCI Fast Ethernet Adapter
+; Netware LAN Installation Information File
+
+VER: 2.10
+SYN: 1.00
+
+DR ktc100
+{
+    DES:    $ktc100_1
+    HELP:   $ktc100_2
+    PAR:    2.00
+    FILE:   KTC100.LAN
+    PROD:   'PCI.1011.0009.0000.0000.1?',
+	    'PCI.1011.0009.2646.0001.2?'
+
+;@#  SPROD:  'Kingston KNE100TX Fast Ethernet Adapter',
+;@#          'Kingston KNE100TX Fast Ethernet Adapter'
+;@#  CLIENT: KTC100
+;@#  ALIAS:	 KTC100.LAN
+
+    PR SLOT REQ
+    {
+        DES:    $ktc100_3
+        HELP:   $ktc100_4
+        
+        TYP:   DEC
+        VAL:    1-65535
+        DEF:    UND
+        OUT:    'SLOT=%s'
+    }
+
+    FR FrameSelect
+    {
+        CD:     $ktc100_5
+        CH:     $ktc100_6
+        CD:     $ktc100_7
+        CH:     $ktc100_8
+        CD:     $ktc100_9
+        CH:     $ktc100_10
+        CD:     $ktc100_11
+        CH:     $ktc100_12
+        DEF:    1,2,3,4
+    }
+
+;   LI Attachment OPT
+;   {
+;       HELP:      $ktc100_13
+;
+;        CD:     $ktc100_14
+;        CH:     $ktc100_15
+;        CD:     $ktc100_16
+;        CH:     $ktc100_17
+;        CD:     $ktc100_18
+;        CH:     $ktc100_19
+;        CD:     $ktc100_20
+;        CH:     $ktc100_21
+;        CD:     $ktc100_22
+;        CH:     $ktc100_23
+;        CD:     $ktc100_24
+;        CH:     $ktc100_25
+;        CD:     $ktc100_26
+;        CH:     $ktc100_27
+;        OUT:    '%s'
+;    }
+
+    PR NODE OPT
+    {
+        DES:    $ktc100_28
+        TYP:   HEX
+        VAL:    1-FFFFFFFFFFFE
+        DEF:    UND
+        OUT:    'NODE=%s'
+    }
+
+;    LI Line_Speed OPT
+;    {
+;        DES:     $ktc100_29
+;        HELP:     $ktc100_30
+
+;       CD:     $ktc100_31
+;        CH:     $ktc100_32
+;        CD:     $ktc100_33
+;        CH:     $ktc100_34
+;        OUT:    'LINE_SPEED=%s'
+;    }
+
+}
+
+DLANG:    4
+;English
+    $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"
+
+LANG:    6
+;French
+   $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"
+
+LANG:    7
+;German
+    $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"
+
+LANG:    8
+;Italian
+    $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"
+
+LANG:    14
+;Spanish
+    $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"
+
+LANG:    9
+;Japanese
+    $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"
+
+LANG:    10
+;Korean
+    $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"
+
+LANG:    1
+;Chinese
+    $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"
+
+LANG:    16
+;Chinese
+    $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"
+
+LANG:    13
+;Russian
+    $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"
+
+LANG:    12
+;Portugese
+    $ktc100_1 = "Kingston KNE100TX Netware Driver (3.31 MLID specs)"
+    $ktc100_2 = "This driver supports Netware 4.1X Server"
+    $ktc100_3 = "Slot"
+    $ktc100_4 = "Select the slot number that corresponds to the physical
+            expansion slot where the board or other device is installed."
+    $ktc100_5 = "802.3"
+    $ktc100_6 = "ethernet_802.3"
+    $ktc100_7 = "802.2"
+    $ktc100_8 = "ethernet_802.2"
+    $ktc100_9 = "SNAP"
+    $ktc100_10 = "ethernet_snap"
+    $ktc100_11 = "ethernet II"
+    $ktc100_12 = "ethernet_II"
+    $ktc100_13 = "Choose the connection/media type you would
+                like to use, or NONE for preprogramed card's 
+                default. Please note that since this driver supports
+            multiple PCI ethernet controllers some of the options
+            given are non applicable to some controllers, i.e. 100MBPS
+            is not applicable to DC21040 10MBPS devices."
+    $ktc100_14 = "Twisted Pair 10MBPS"
+    $ktc100_15 = "TP"
+    $ktc100_16 = "Twisted pair - Full Duplex 10MBPS"
+    $ktc100_17 = "TP_FULL_DUPLEX"
+    $ktc100_18 = "Twisted pair - Full Duplex 100MBPS"
+    $ktc100_19 = "TP_FULL_DUPLEX LINE_SPEED=100"
+    $ktc100_20 = "AUI - Thick Wire"
+    $ktc100_21 = "AUI"
+    $ktc100_22 = "BNC - Thin Wire"
+    $ktc100_23 = "BNC"
+    $ktc100_24 = "Fast Ethernet 100MBPS"
+    $ktc100_25 = "LINE_SPEED=100"
+    $ktc100_26 = "T4 Fast Ethernet 100MBPS"
+    $ktc100_27 = "T4"
+    $ktc100_28 = "Node Address"
+    $ktc100_29 = "Line Speed"
+    $ktc100_30 = "If this is a multi-speed device (such as DC21140 based
+            network interface) select the speed you would like
+            the interface to work in. Otherwise leave NO VALUE
+            as your selection."
+    $ktc100_31   = "10"
+    $ktc100_32   = "10"
+    $ktc100_33   = "100"
+    $ktc100_34   = "100"

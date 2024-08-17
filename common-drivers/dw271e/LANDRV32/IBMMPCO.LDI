@@ -1,0 +1,1077 @@
+;Installation Information file for the IBM Streamer Family ODI NetWare LAN Driver.
+ 
+VER:    2.04
+SYN:    1.00
+ 
+DR LANStreamerPCI
+{
+   DES:     $IBMMPCO_100
+ 
+   HELP:    $IBMMPCO_4
+ 
+   PAR:     2.00
+ 
+   PROD:    'PCI.1014.0018.0000.0000.*'
+ 
+   FILE:    IBMMPCO.LAN
+ 
+   TIME:     70
+
+   ;@# Sprod: 'IBM~Auto LANStreamer PCI Adapter'
+
+   ;@# CLIENT: IBMMPCO.COM, IBMMPCO.LAN
+   ;@# ALIAS: IBMMPCO.LAN
+
+   PR SLOT  OPT
+   {
+	TYP:  DEC (5)
+	VAL:  1-65536
+   }
+ 
+   PR NODE OPT
+   {
+   }
+ 
+   FR FrameSelect OPT
+   {
+	DES:    $IBMMPCO_5
+ 
+	HELP:   $IBMMPCO_6
+ 
+	CD:     $IBMMPCO_7
+	CH:     'TOKEN-RING'
+ 
+	CD:     $IBMMPCO_8
+	CH:     'TOKEN-RING_SNAP'
+ 
+	DEF:    1
+   }
+ 
+   PR RxBuffers OPT
+   {
+	DES:    $IBMMPCO_13
+ 
+	HELP:   $IBMMPCO_14
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    4, 8, 16, 32, 64
+ 
+	OUT:   'RXBUFFERS=%s'
+   }
+ 
+   PR TxBuffers OPT
+   {
+	DES:    $IBMMPCO_15
+ 
+	HELP:   $IBMMPCO_16
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    1, 2, 4, 8, 16
+ 
+	OUT:    'TXBUFFERS=%s'
+   }
+
+   PR DataRate OPT
+   {
+	DES:    $IBMMPCO_17
+ 
+	HELP:   $IBMMPCO_18
+ 
+	TYP:    HEX (2)
+ 
+	VAL:    A, 16, 4
+ 
+	OUT:   'DATARATE=%s'
+   }
+   PR EnableFDX OPT
+   {
+	DES:    $IBMMPCO_20
+ 
+	HELP:   $IBMMPCO_21
+ 
+	TYP:    STR
+ 
+	VAL:    'ENABLEFDX'
+ 
+	OUT:    '%s'
+   }
+ 
+}
+
+DR TripleLANStreamerPCI
+{
+   DES:         $IBMMPCO_101
+ 
+   HELP:        $IBMMPCO_4
+ 
+   PAR:         2.00
+ 
+   PROD:        'PCI.1014.0018.0000.0000.*'
+ 
+   FILE:        IBMMPCO.LAN
+ 
+   TIME:        70
+
+   ;@# Sprod:   'IBM~Triple LANStreamer PCI Adapter'
+
+   ;@# CLIENT: IBMMPCO.COM, IBMMPCO.LAN
+   ;@# ALIAS: IBMMPCO.LAN
+
+   PR SLOT  OPT
+   {
+	TYP:    DEC (5)
+	VAL:    1-65536
+   }
+ 
+   PR NODE OPT
+   {
+   }
+ 
+   FR FrameSelect OPT
+   {
+	DES:    $IBMMPCO_5
+ 
+	HELP:   $IBMMPCO_6
+ 
+	CD:     $IBMMPCO_7
+	CH:     'TOKEN-RING'
+ 
+	CD:     $IBMMPCO_8
+	CH:     'TOKEN-RING_SNAP'
+ 
+	DEF:    1
+   }
+ 
+   PR RxBuffers OPT
+   {
+	DES:    $IBMMPCO_13
+ 
+	HELP:   $IBMMPCO_14
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    4, 8, 16, 32, 64
+ 
+	OUT:   'RXBUFFERS=%s'
+   }
+ 
+   PR TxBuffers OPT
+   {
+	DES:    $IBMMPCO_15
+ 
+	HELP:   $IBMMPCO_16
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    1, 2, 4, 8, 16
+ 
+	OUT:   'TXBUFFERS=%s'
+   }
+
+   PR DataRate OPT
+   {
+	DES:    $IBMMPCO_17
+ 
+	HELP:   $IBMMPCO_18
+ 
+	TYP:    HEX (2)
+ 
+	VAL:    A, 16, 4
+ 
+	OUT:   'DATARATE=%s'
+   }
+ 
+}
+ 
+DR AutoLANStreamerMC32
+{
+   DES:     $IBMMPCO_102
+ 
+   HELP:    $IBMMPCO_4
+ 
+   PAR:     2.00
+ 
+   PROD:    'MCA.8FA2'
+ 
+   FILE:    IBMMPCO.LAN
+ 
+   TIME:    70
+
+   ;@# Sprod:  'IBM~Auto LANStreamer MC 32 Adapter'
+
+   ;@# CLIENT: IBMMPCO.COM, IBMMPCO.LAN
+   ;@# ALIAS: IBMMPCO.LAN
+
+   PR SLOT  OPT
+   {
+	TYP:       DEC (5)
+	VAL:       1-65536
+   }
+ 
+   PR NODE OPT
+   {
+   }
+ 
+   FR FrameSelect OPT
+   {
+	DES:    $IBMMPCO_5
+ 
+	HELP:   $IBMMPCO_6
+ 
+	CD:     $IBMMPCO_7
+	CH:     'TOKEN-RING'
+ 
+	CD:     $IBMMPCO_8
+	CH:     'TOKEN-RING_SNAP'
+ 
+	DEF:    1
+   }
+ 
+   PR RxBuffers OPT
+   {
+	DES:    $IBMMPCO_13
+ 
+	HELP:   $IBMMPCO_14
+ 
+	TYP:   DEC (2)
+ 
+	VAL:    4, 8, 16, 32, 64
+ 
+	OUT:    'RXBUFFERS=%s'
+   }
+ 
+   PR TxBuffers OPT
+   {
+	DES:    $IBMMPCO_15
+ 
+	HELP:   $IBMMPCO_16
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    1, 2, 4, 8, 16
+ 
+	OUT:    'TXBUFFERS=%s'
+   }
+}
+
+DR LANStreamerMC32
+{
+   DES:  $IBMMPCO_103
+ 
+   HELP: $IBMMPCO_4
+ 
+   PAR:  2.00
+ 
+   PROD: 'MCA.8FA0'
+ 
+   FILE: IBMMPCO.LAN
+ 
+   TIME: 70
+
+   ;@# Sprod:   'IBM~LANStreamer MC 32 Adapter'
+
+   ;@# CLIENT: IBMMPCO.COM, IBMMPCO.LAN
+   ;@# ALIAS: IBMMPCO.LAN
+ 
+   PR SLOT  OPT
+   {
+	TYP:  DEC (5)
+	VAL:  1-65536
+   }
+ 
+   PR NODE OPT
+   {
+   }
+ 
+   FR FrameSelect OPT
+   {
+	DES:  $IBMMPCO_5
+ 
+	HELP: $IBMMPCO_6
+ 
+	CD:   $IBMMPCO_7
+	CH:   'TOKEN-RING'
+ 
+	CD:   $IBMMPCO_8
+	CH:   'TOKEN-RING_SNAP'
+ 
+	DEF:  1
+   }
+ 
+   PR RxBuffers OPT
+   {
+	DES:    $IBMMPCO_13
+ 
+	HELP:   $IBMMPCO_14
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    4, 8, 16, 32, 64
+ 
+	OUT:    'RXBUFFERS=%s'
+   }
+ 
+   PR TxBuffers OPT
+   {
+	DES:    $IBMMPCO_15
+ 
+	HELP:   $IBMMPCO_16
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    1, 2, 4, 8, 16
+ 
+	OUT:   'TXBUFFERS=%s'
+   }
+}
+
+DR LANStreamerMC16
+{
+   DES:   $IBMMPCO_104
+ 
+   HELP:  $IBMMPCO_4
+ 
+   PAR:   2.00
+ 
+   PROD:  'MCA.8FA4'
+ 
+   FILE:  IBMMPCO.LAN
+ 
+   TIME:  70
+
+   ;@# Sprod:   'IBM~LANStreamer MC 16 Adapter'
+
+   ;@# CLIENT: IBMMPCO.COM, IBMMPCO.LAN
+   ;@# ALIAS: IBMMPCO.LAN
+ 
+   PR SLOT  OPT
+   {
+	TYP:  DEC (5)
+	VAL:  1-65536
+   }
+ 
+   PR NODE OPT
+   {
+   }
+ 
+   FR FrameSelect OPT
+   {
+	DES:  $IBMMPCO_5
+ 
+	HELP: $IBMMPCO_6
+ 
+	CD:   $IBMMPCO_7
+	CH:   'TOKEN-RING'
+ 
+	CD:   $IBMMPCO_8
+	CH:   'TOKEN-RING_SNAP'
+ 
+	DEF:  1
+   }
+ 
+   PR RxBuffers OPT
+   {
+	DES:    $IBMMPCO_13
+ 
+	HELP:   $IBMMPCO_14
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    4, 8, 16, 32, 64
+ 
+	OUT:    'RXBUFFERS=%s'
+   }
+ 
+   PR TxBuffers OPT
+   {
+	DES:    $IBMMPCO_15
+ 
+	HELP:   $IBMMPCO_16
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    1, 2, 4, 8, 16
+ 
+	OUT:    'TXBUFFERS=%s'
+   }
+}
+
+
+DR EtherStreamerMC32
+{
+   DES:        $IBMMPCO_106
+ 
+   HELP:       $IBMMPCO_4
+ 
+   PAR:     2.00
+ 
+   PROD:       'MCA.8FA8'
+ 
+   FILE:       IBMMPCO.LAN
+ 
+   TIME:       70
+
+   ;@# Sprod:   'IBM~EtherStreamer MC 32 Adapter'
+
+   ;@# CLIENT: IBMMPCO.COM, IBMMPCO.LAN
+   ;@# ALIAS: IBMMPCO.LAN
+ 
+   PR SLOT  OPT
+   {
+	TYP:     DEC (5)
+	VAL:     1-65536
+   }
+ 
+   PR NODE OPT
+   {
+   }
+ 
+   FR FrameSelect OPT
+   {
+	DES:    $IBMMPCO_5
+ 
+	HELP:   $IBMMPCO_6
+ 
+	CD:     $IBMMPCO_9
+	CH:     'ETHERNET_802.2'
+ 
+	CD:     $IBMMPCO_10
+	CH:     'ETHERNET_SNAP'
+ 
+	CD:     $IBMMPCO_11
+	CH:     'ETHERNET_802.3'
+ 
+	CD:     $IBMMPCO_12
+	CH:     'ETHERNET_II'
+ 
+	DEF:        1
+   }
+ 
+   PR RxBuffers OPT
+   {
+	DES:    $IBMMPCO_13
+ 
+	HELP:   $IBMMPCO_14
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    4, 8, 16, 32, 64
+ 
+	OUT:   'RXBUFFERS=%s'
+   }
+ 
+   PR TxBuffers OPT
+   {
+	DES:    $IBMMPCO_15
+ 
+	HELP:   $IBMMPCO_16
+ 
+	TYP:    DEC (2)
+ 
+	VAL:    1, 2, 4, 8, 16
+ 
+	OUT:   'TXBUFFERS=%s'
+   }
+}
+
+
+DLANG:  4
+;English
+  $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+  $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+  $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+  $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+  $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+  $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+  $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		       device driver for the NetWare server environment.  
+		       This driver works with the IBM Streamer Family Adapters."
+  $IBMMPCO_5 = "Frame Types"
+  $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		  this particular Streamer Family adapter.  The default frame type  
+		  is the first frame type listed.  Select the frame type that is  
+		  appropriate."
+  $IBMMPCO_7 = "Token-Ring 802.2"
+  $IBMMPCO_8 = "Token-Ring SNAP"
+  $IBMMPCO_9 = "Ethernet 802.2"
+  $IBMMPCO_10 = "Ethernet SNAP"
+  $IBMMPCO_11 = "Ethernet 802.3"
+  $IBMMPCO_12 = "Ethernet II"
+  $IBMMPCO_13 = "Number of receive buffers"
+  $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		  buffers used by the IBMMPCO LAN driver.  The value for this 
+		  keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		  The default is 32.  (Receive buffer size is defined by the  
+		  server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		  Please read the installation instructions and configure the minimum  
+		  receive packet buffers to the appropriate value in startup.ncf "
+  $IBMMPCO_15 = "Number of transmit buffers"
+  $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		  buffers used by the IBMMPCO LAN driver.  The value for this  
+		  keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		  The default is 16.  (Transmit buffer size is defined by the  
+		  server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+  $IBMMPCO_17 = "Network Data Rate"
+  $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		  PCI adapter. The value for this keyword must be one of: A, 16 
+		  or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+  $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		  buffers used by the IBMMPCO LAN driver.  The value for this  
+		  keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		  The default for this adapter is 1.  (Transmit buffer size is  
+		  defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		  ADMINISTRATION.)"
+  $IBMMPCO_20 = "EnableFDX"
+  $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+
+
+LANG:   6
+;French
+
+ $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+ $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+ $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+ $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+ $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+ $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+ $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		      device driver for the NetWare server environment.  
+		      This driver works with the IBM Streamer Family Adapters."
+ $IBMMPCO_5 = "Frame Types"
+ $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		 this particular Streamer Family adapter.  The default frame type  
+		 is the first frame type listed.  Select the frame type that is  
+		 appropriate."
+ $IBMMPCO_7 = "Token-Ring 802.2"
+ $IBMMPCO_8 = "Token-Ring SNAP"
+ $IBMMPCO_9 = "Ethernet 802.2"
+ $IBMMPCO_10 = "Ethernet SNAP"
+ $IBMMPCO_11 = "Ethernet 802.3"
+ $IBMMPCO_12 = "Ethernet II"
+ $IBMMPCO_13 = "Number of receive buffers"
+ $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		 buffers used by the IBMMPCO LAN driver.  The value for this 
+		 keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		 The default is 32.  (Receive buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		 Please read the installation instructions and configure the minimum  
+		 receive packet buffers to the appropriate value in startup.ncf "
+ $IBMMPCO_15 = "Number of transmit buffers"
+ $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default is 16.  (Transmit buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+ $IBMMPCO_17 = "Network Data Rate"
+ $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		 PCI adapter. The value for this keyword must be one of: A, 16 
+		 or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+ $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default for this adapter is 1.  (Transmit buffer size is  
+		 defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		 ADMINISTRATION.)"
+ $IBMMPCO_20 = "EnableFDX"
+ $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+ 
+
+LANG:   7
+;German
+
+ $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+ $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+ $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+ $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+ $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+ $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+ $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		      device driver for the NetWare server environment.  
+		      This driver works with the IBM Streamer Family Adapters."
+ $IBMMPCO_5 = "Frame Types"
+ $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		 this particular Streamer Family adapter.  The default frame type  
+		 is the first frame type listed.  Select the frame type that is  
+		 appropriate."
+ $IBMMPCO_7 = "Token-Ring 802.2"
+ $IBMMPCO_8 = "Token-Ring SNAP"
+ $IBMMPCO_9 = "Ethernet 802.2"
+ $IBMMPCO_10 = "Ethernet SNAP"
+ $IBMMPCO_11 = "Ethernet 802.3"
+ $IBMMPCO_12 = "Ethernet II"
+ $IBMMPCO_13 = "Number of receive buffers"
+ $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		 buffers used by the IBMMPCO LAN driver.  The value for this 
+		 keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		 The default is 32.  (Receive buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		 Please read the installation instructions and configure the minimum  
+		 receive packet buffers to the appropriate value in startup.ncf "
+ $IBMMPCO_15 = "Number of transmit buffers"
+ $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default is 16.  (Transmit buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+ $IBMMPCO_17 = "Network Data Rate"
+ $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		 PCI adapter. The value for this keyword must be one of: A, 16 
+		 or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+ $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default for this adapter is 1.  (Transmit buffer size is  
+		 defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		 ADMINISTRATION.)"
+ $IBMMPCO_20 = "EnableFDX"
+ $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+
+
+LANG:   8
+;Italian
+
+  $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+  $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+  $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+  $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+  $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+  $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+  $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		       device driver for the NetWare server environment.  
+		       This driver works with the IBM Streamer Family Adapters."
+  $IBMMPCO_5 = "Frame Types"
+  $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		  this particular Streamer Family adapter.  The default frame type  
+		  is the first frame type listed.  Select the frame type that is  
+		  appropriate."
+  $IBMMPCO_7 = "Token-Ring 802.2"
+  $IBMMPCO_8 = "Token-Ring SNAP"
+  $IBMMPCO_9 = "Ethernet 802.2"
+  $IBMMPCO_10 = "Ethernet SNAP"
+  $IBMMPCO_11 = "Ethernet 802.3"
+  $IBMMPCO_12 = "Ethernet II"
+  $IBMMPCO_13 = "Number of receive buffers"
+  $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		  buffers used by the IBMMPCO LAN driver.  The value for this 
+		  keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		  The default is 32.  (Receive buffer size is defined by the  
+		  server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		  Please read the installation instructions and configure the minimum  
+		  receive packet buffers to the appropriate value in startup.ncf "
+  $IBMMPCO_15 = "Number of transmit buffers"
+  $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		  buffers used by the IBMMPCO LAN driver.  The value for this  
+		  keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		  The default is 16.  (Transmit buffer size is defined by the  
+		  server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+  $IBMMPCO_17 = "Network Data Rate"
+  $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		  PCI adapter. The value for this keyword must be one of: A, 16 
+		  or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+  $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		  buffers used by the IBMMPCO LAN driver.  The value for this  
+		  keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		  The default for this adapter is 1.  (Transmit buffer size is  
+		  defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		  ADMINISTRATION.)"
+  $IBMMPCO_20 = "EnableFDX"
+  $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+
+
+LANG:   14
+;Spanish
+
+  $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+  $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+  $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+  $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+  $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+  $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+  $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		       device driver for the NetWare server environment.  
+		       This driver works with the IBM Streamer Family Adapters."
+  $IBMMPCO_5 = "Frame Types"
+  $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		  this particular Streamer Family adapter.  The default frame type  
+		  is the first frame type listed.  Select the frame type that is  
+		  appropriate."
+  $IBMMPCO_7 = "Token-Ring 802.2"
+  $IBMMPCO_8 = "Token-Ring SNAP"
+  $IBMMPCO_9 = "Ethernet 802.2"
+  $IBMMPCO_10 = "Ethernet SNAP"
+  $IBMMPCO_11 = "Ethernet 802.3"
+  $IBMMPCO_12 = "Ethernet II"
+  $IBMMPCO_13 = "Number of receive buffers"
+  $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		  buffers used by the IBMMPCO LAN driver.  The value for this 
+		  keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		  The default is 32.  (Receive buffer size is defined by the  
+		  server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		  Please read the installation instructions and configure the minimum  
+		  receive packet buffers to the appropriate value in startup.ncf "
+  $IBMMPCO_15 = "Number of transmit buffers"
+  $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		  buffers used by the IBMMPCO LAN driver.  The value for this  
+		  keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		  The default is 16.  (Transmit buffer size is defined by the  
+		  server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+  $IBMMPCO_17 = "Network Data Rate"
+  $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		  PCI adapter. The value for this keyword must be one of: A, 16 
+		  or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+  $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		  buffers used by the IBMMPCO LAN driver.  The value for this  
+		  keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		  The default for this adapter is 1.  (Transmit buffer size is  
+		  defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		  ADMINISTRATION.)"
+  $IBMMPCO_20 = "EnableFDX"
+  $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+
+
+LANG:   12
+;Portugese
+
+ $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+ $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+ $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+ $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+ $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+ $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+ $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		      device driver for the NetWare server environment.  
+		      This driver works with the IBM Streamer Family Adapters."
+ $IBMMPCO_5 = "Frame Types"
+ $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		 this particular Streamer Family adapter.  The default frame type  
+		 is the first frame type listed.  Select the frame type that is  
+		 appropriate."
+ $IBMMPCO_7 = "Token-Ring 802.2"
+ $IBMMPCO_8 = "Token-Ring SNAP"
+ $IBMMPCO_9 = "Ethernet 802.2"
+ $IBMMPCO_10 = "Ethernet SNAP"
+ $IBMMPCO_11 = "Ethernet 802.3"
+ $IBMMPCO_12 = "Ethernet II"
+ $IBMMPCO_13 = "Number of receive buffers"
+ $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		 buffers used by the IBMMPCO LAN driver.  The value for this 
+		 keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		 The default is 32.  (Receive buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		 Please read the installation instructions and configure the minimum  
+		 receive packet buffers to the appropriate value in startup.ncf "
+ $IBMMPCO_15 = "Number of transmit buffers"
+ $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default is 16.  (Transmit buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+ $IBMMPCO_17 = "Network Data Rate"
+ $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		 PCI adapter. The value for this keyword must be one of: A, 16 
+		 or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+ $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default for this adapter is 1.  (Transmit buffer size is  
+		 defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		 ADMINISTRATION.)"
+ $IBMMPCO_20 = "EnableFDX"
+ $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+
+
+LANG:   9
+;Japanese
+
+ $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+ $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+ $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+ $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+ $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+ $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+ $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		      device driver for the NetWare server environment.  
+		      This driver works with the IBM Streamer Family Adapters."
+ $IBMMPCO_5 = "Frame Types"
+ $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		 this particular Streamer Family adapter.  The default frame type  
+		 is the first frame type listed.  Select the frame type that is  
+		 appropriate."
+ $IBMMPCO_7 = "Token-Ring 802.2"
+ $IBMMPCO_8 = "Token-Ring SNAP"
+ $IBMMPCO_9 = "Ethernet 802.2"
+ $IBMMPCO_10 = "Ethernet SNAP"
+ $IBMMPCO_11 = "Ethernet 802.3"
+ $IBMMPCO_12 = "Ethernet II"
+ $IBMMPCO_13 = "Number of receive buffers"
+ $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		 buffers used by the IBMMPCO LAN driver.  The value for this 
+		 keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		 The default is 32.  (Receive buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		 Please read the installation instructions and configure the minimum  
+		 receive packet buffers to the appropriate value in startup.ncf "
+ $IBMMPCO_15 = "Number of transmit buffers"
+ $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default is 16.  (Transmit buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+ $IBMMPCO_17 = "Network Data Rate"
+ $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		 PCI adapter. The value for this keyword must be one of: A, 16 
+		 or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+ $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default for this adapter is 1.  (Transmit buffer size is  
+		 defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		 ADMINISTRATION.)"
+ $IBMMPCO_20 = "EnableFDX"
+ $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+
+
+LANG:  10
+;Korean
+
+ $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+ $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+ $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+ $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+ $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+ $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+ $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		      device driver for the NetWare server environment.  
+		      This driver works with the IBM Streamer Family Adapters."
+ $IBMMPCO_5 = "Frame Types"
+ $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		 this particular Streamer Family adapter.  The default frame type  
+		 is the first frame type listed.  Select the frame type that is  
+		 appropriate."
+ $IBMMPCO_7 = "Token-Ring 802.2"
+ $IBMMPCO_8 = "Token-Ring SNAP"
+ $IBMMPCO_9 = "Ethernet 802.2"
+ $IBMMPCO_10 = "Ethernet SNAP"
+ $IBMMPCO_11 = "Ethernet 802.3"
+ $IBMMPCO_12 = "Ethernet II"
+ $IBMMPCO_13 = "Number of receive buffers"
+ $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		 buffers used by the IBMMPCO LAN driver.  The value for this 
+		 keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		 The default is 32.  (Receive buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		 Please read the installation instructions and configure the minimum  
+		 receive packet buffers to the appropriate value in startup.ncf "
+ $IBMMPCO_15 = "Number of transmit buffers"
+ $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default is 16.  (Transmit buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+ $IBMMPCO_17 = "Network Data Rate"
+ $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		 PCI adapter. The value for this keyword must be one of: A, 16 
+		 or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+ $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default for this adapter is 1.  (Transmit buffer size is  
+		 defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		 ADMINISTRATION.)"
+ $IBMMPCO_20 = "EnableFDX"
+ $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+
+
+LANG:   1
+;Chinese (Simplified)
+
+ $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+ $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+ $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+ $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+ $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+ $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+ $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		      device driver for the NetWare server environment.  
+		      This driver works with the IBM Streamer Family Adapters."
+ $IBMMPCO_5 = "Frame Types"
+ $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		 this particular Streamer Family adapter.  The default frame type  
+		 is the first frame type listed.  Select the frame type that is  
+		 appropriate."
+ $IBMMPCO_7 = "Token-Ring 802.2"
+ $IBMMPCO_8 = "Token-Ring SNAP"
+ $IBMMPCO_9 = "Ethernet 802.2"
+ $IBMMPCO_10 = "Ethernet SNAP"
+ $IBMMPCO_11 = "Ethernet 802.3"
+ $IBMMPCO_12 = "Ethernet II"
+ $IBMMPCO_13 = "Number of receive buffers"
+ $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		 buffers used by the IBMMPCO LAN driver.  The value for this 
+		 keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		 The default is 32.  (Receive buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		 Please read the installation instructions and configure the minimum  
+		 receive packet buffers to the appropriate value in startup.ncf "
+ $IBMMPCO_15 = "Number of transmit buffers"
+ $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default is 16.  (Transmit buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+ $IBMMPCO_17 = "Network Data Rate"
+ $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		 PCI adapter. The value for this keyword must be one of: A, 16 
+		 or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+ $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default for this adapter is 1.  (Transmit buffer size is  
+		 defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		 ADMINISTRATION.)"
+ $IBMMPCO_20 = "EnableFDX"
+ $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+
+
+LANG:   16
+;Chinese (Traditional)
+
+ $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+ $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+ $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+ $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+ $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+ $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+ $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		      device driver for the NetWare server environment.  
+		      This driver works with the IBM Streamer Family Adapters."
+ $IBMMPCO_5 = "Frame Types"
+ $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		 this particular Streamer Family adapter.  The default frame type  
+		 is the first frame type listed.  Select the frame type that is  
+		 appropriate."
+ $IBMMPCO_7 = "Token-Ring 802.2"
+ $IBMMPCO_8 = "Token-Ring SNAP"
+ $IBMMPCO_9 = "Ethernet 802.2"
+ $IBMMPCO_10 = "Ethernet SNAP"
+ $IBMMPCO_11 = "Ethernet 802.3"
+ $IBMMPCO_12 = "Ethernet II"
+ $IBMMPCO_13 = "Number of receive buffers"
+ $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		 buffers used by the IBMMPCO LAN driver.  The value for this 
+		 keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		 The default is 32.  (Receive buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		 Please read the installation instructions and configure the minimum  
+		 receive packet buffers to the appropriate value in startup.ncf "
+ $IBMMPCO_15 = "Number of transmit buffers"
+ $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default is 16.  (Transmit buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+ $IBMMPCO_17 = "Network Data Rate"
+ $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		 PCI adapter. The value for this keyword must be one of: A, 16 
+		 or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+ $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default for this adapter is 1.  (Transmit buffer size is  
+		 defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		 ADMINISTRATION.)"
+ $IBMMPCO_20 = "EnableFDX"
+ $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+
+
+LANG:   13
+;Russian
+
+ $IBMMPCO_100 = "IBM Auto LANStreamer PCI Adapter"
+ $IBMMPCO_101 = "IBM Triple LANStreamer PCI Adapter"
+ $IBMMPCO_102 = "IBM Auto LANStreamer MC 32 Adapter"
+ $IBMMPCO_103 = "IBM LANStreamer MC 32 Adapter"
+ $IBMMPCO_104 = "IBM LANStreamer MC 16 Adapter"
+
+ $IBMMPCO_106 = "IBM EtherStreamer MC 32 Adapter"
+
+ $IBMMPCO_4 = "The IBMMPCO ODI LAN driver is the loadable module  
+		      device driver for the NetWare server environment.  
+		      This driver works with the IBM Streamer Family Adapters."
+ $IBMMPCO_5 = "Frame Types"
+ $IBMMPCO_6 = "The IBMMPCO LAN driver supports the following Frame Types for 
+		 this particular Streamer Family adapter.  The default frame type  
+		 is the first frame type listed.  Select the frame type that is  
+		 appropriate."
+ $IBMMPCO_7 = "Token-Ring 802.2"
+ $IBMMPCO_8 = "Token-Ring SNAP"
+ $IBMMPCO_9 = "Ethernet 802.2"
+ $IBMMPCO_10 = "Ethernet SNAP"
+ $IBMMPCO_11 = "Ethernet 802.3"
+ $IBMMPCO_12 = "Ethernet II"
+ $IBMMPCO_13 = "Number of receive buffers"
+ $IBMMPCO_14 = "The RXBUFFERS keyword specifies the number of receive 
+		 buffers used by the IBMMPCO LAN driver.  The value for this 
+		 keyword for the Server must be one of: 4, 8, 16, 32, 64. 
+		 The default is 32.  (Receive buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.) 
+		 Please read the installation instructions and configure the minimum  
+		 receive packet buffers to the appropriate value in startup.ncf "
+ $IBMMPCO_15 = "Number of transmit buffers"
+ $IBMMPCO_16 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default is 16.  (Transmit buffer size is defined by the  
+		 server SET command.  See NOVELL NETWARE SYSTEM ADMINISTRATION.)"
+ $IBMMPCO_17 = "Network Data Rate"
+ $IBMMPCO_18 = "The DATARATE keyword specifies Network data rate for the  
+		 PCI adapter. The value for this keyword must be one of: A, 16 
+		 or 4 (AutoSense, 16MBPS or 4MBPS). The default is Auto."
+ $IBMMPCO_19 = "The TXBUFFERS keyword specifies the number of transmit  
+		 buffers used by the IBMMPCO LAN driver.  The value for this  
+		 keyword for the Server must be one of: 1, 2, 4, 8, 16.  
+		 The default for this adapter is 1.  (Transmit buffer size is  
+		 defined by the server SET command.  See NOVELL NETWARE SYSTEM  
+		 ADMINISTRATION.)"
+ $IBMMPCO_20 = "EnableFDX"
+ $IBMMPCO_21 = "The ENABLEFDX keyword enables Full Duplex operation"
+
+ 
+
+
+ 
+
+
+

@@ -1,0 +1,646 @@
+VER:	1.00
+SYN:	1.00
+
+; Olicom Ethernet PCI/II 10/100 Adapter (OC-2325) driver information file.
+
+Dr OC2325
+{
+ PROD:  'PCI.108D.0012.0000.0000.0?'
+;@# Sprod: 'Olicom~ Ethernet PCI/II 10/100 Adapter (OC-2325)'
+ DES:   $OCE4XODI_DES2325
+ HELP:  $OCE4XODI_DRVHLP2325
+ PAR:   2.00
+ FILE:  OCE4XODI.LAN
+; OF:    ETHERTSM.NLM,MSM.NLM,NBI.NLM
+ TIME:  40
+
+;@#  CLIENT: oce4xodi
+;@#  ALIAS: oce4xodi
+
+ PR SLOT REQ
+  {
+  HELP: $OCE4XODI_SLOTHLP
+  TYP: DEC
+  VAL: 1-65535
+  DEF: UND
+  }
+
+ FR FRMTYPE
+  {
+  HELP: $OCE4XODI_FRMHLP
+  CD:	$OCE4XODI_1
+  CH:	'Ethernet_802.2'
+  CD:	$OCE4XODI_2
+  CH:	'Ethernet_802.3'
+  CD:	$OCE4XODI_3
+  CH:	'Ethernet_SNAP'
+  CD:	$OCE4XODI_4
+  CH:	'Ethernet_II'
+  DEF:	1, 2
+  }
+
+ PR NODE
+  {
+  HELP: $OCE4XODI_NODEHLP
+  }
+
+ PR SPEED OPT
+  {
+  DES:  $OCE4XODI_SPEEDDES
+  HELP: $OCE4XODI_SPEEDHLP
+  TYP: STR
+  DEF: UND
+  VAL: 'AUTO','10','100'
+  OUT: 'SPEED=%s'
+  }
+
+ PR DUPLEX OPT
+  {
+  DES:  $OCE4XODI_DUPLEXDES
+  HELP: $OCE4XODI_DUPLEXHLP
+  TYP: STR
+  DEF: UND
+  VAL: 'AUTO','HALF','FULL'
+  OUT: 'DUPLEX=%s'
+  }
+
+}
+
+; Olicom Ethernet PCI/II 10 Adapter (OC-218x) driver information file.
+
+Dr OC218X
+{
+ PROD:  'PCI.108D.0013.0000.0000.0?'
+;@# Sprod: 'Olicom~ Ethernet PCI/II 10 Adapter (OC-218x)'
+ DES:   $OCE4XODI_DES218x
+ HELP:  $OCE4XODI_DRVHLP218x
+ PAR:   2.00
+ FILE:  OCE4XODI.LAN
+; OF:    ETHERTSM.NLM,MSM.NLM,NBI.NLM
+ TIME:  40
+
+;@#  CLIENT: oce4xodi
+;@#  ALIAS: oce4xodi
+
+ PR SLOT REQ
+  {
+  HELP: $OCE4XODI_SLOTHLP
+  TYP: DEC
+  VAL: 1-65535
+  DEF: UND
+  }
+
+ FR FRMTYPE
+  {
+  HELP: $OCE4XODI_FRMHLP
+  CD:	$OCE4XODI_1
+  CH:	'Ethernet_802.2'
+  CD:	$OCE4XODI_2
+  CH:	'Ethernet_802.3'
+  CD:	$OCE4XODI_3
+  CH:	'Ethernet_SNAP'
+  CD:	$OCE4XODI_4
+  CH:	'Ethernet_II'
+  DEF:	1, 2
+  }
+
+ PR NODE
+  {
+  HELP: $OCE4XODI_NODEHLP
+  }
+
+ PR DUPLEX OPT
+  {
+  DES:  $OCE4XODI_DUPLEXDES
+  HELP: $OCE4XODI_DUPLEXHLP
+  TYP: STR
+  DEF: UND
+  VAL: 'HALF','FULL'
+  OUT: 'DUPLEX=%s'
+  }
+
+}
+
+; Olicom Ethernet PCI/II 10/100 Adapter (OC-2326) driver information file.
+
+Dr OC2326
+{
+ PROD:  'PCI.108D.0014.0000.0000.0?'
+;@# Sprod: 'Olicom~ Ethernet PCI/II 10/100 Adapter (OC-2326)'
+ DES:   $OCE4XODI_DES2326
+ HELP:  $OCE4XODI_DRVHLP2326
+ PAR:   2.00
+ FILE:  OCE4XODI.LAN
+; OF:    ETHERTSM.NLM,MSM.NLM,NBI.NLM
+ TIME:  40
+
+;@#  CLIENT: oce4xodi
+;@#  ALIAS: oce4xodi
+
+ PR SLOT REQ
+  {
+  HELP: $OCE4XODI_SLOTHLP
+  TYP: DEC
+  VAL: 1-65535
+  DEF: UND
+  }
+
+ FR FRMTYPE
+  {
+  HELP: $OCE4XODI_FRMHLP
+  CD:	$OCE4XODI_1
+  CH:	'Ethernet_802.2'
+  CD:	$OCE4XODI_2
+  CH:	'Ethernet_802.3'
+  CD:	$OCE4XODI_3
+  CH:	'Ethernet_SNAP'
+  CD:	$OCE4XODI_4
+  CH:	'Ethernet_II'
+  DEF:	1, 2
+  }
+
+ PR NODE
+  {
+  HELP: $OCE4XODI_NODEHLP
+  }
+
+ PR SPEED OPT
+  {
+  DES:  $OCE4XODI_SPEEDDES
+  HELP: $OCE4XODI_SPEEDHLP
+  TYP: STR
+  DEF: UND
+  VAL: 'AUTO','10','100'
+  OUT: 'SPEED=%s'
+  }
+
+ PR DUPLEX OPT
+  {
+  DES:  $OCE4XODI_DUPLEXDES
+  HELP: $OCE4XODI_DUPLEXHLP
+  TYP: STR
+  DEF: UND
+  VAL: 'AUTO','HALF','FULL'
+  OUT: 'DUPLEX=%s'
+  }
+
+}
+
+DLANG:	4
+;English
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+                 Adapters (OC-2325) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+ $OCE4XODI_SPEEDDES = "Speed"
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+ $OCE4XODI_DUPLEXDES = "Duplex"
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+LANG:  1
+;Chinese (Simplified)
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+                 Adapters (OC-2325) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+ $OCE4XODI_SPEEDDES = "Speed"
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+ $OCE4XODI_DUPLEXDES = "Duplex"
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+
+
+LANG:	6
+;French
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2325) in systems with a PCI bus."
+
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE4XODI_SPEEDDES = "Speed"
+
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE4XODI_DUPLEXDES = "Duplex"
+
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+
+
+LANG:	7
+;German
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2325) in systems with a PCI bus."
+
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE4XODI_SPEEDDES = "Speed"
+
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE4XODI_DUPLEXDES = "Duplex"
+
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+
+LANG:	8
+;Italian
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2325) in systems with a PCI bus."
+
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE4XODI_SPEEDDES = "Speed"
+
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE4XODI_DUPLEXDES = "Duplex"
+
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+LANG:  9
+;Japanese
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+                 Adapters (OC-2325) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+ $OCE4XODI_SPEEDDES = "Speed"
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+ $OCE4XODI_DUPLEXDES = "Duplex"
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+LANG:  10
+;Korean
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+                 Adapters (OC-2325) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+ $OCE4XODI_SPEEDDES = "Speed"
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+ $OCE4XODI_DUPLEXDES = "Duplex"
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+LANG:  12
+;Portuguese (Brazil)
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+                 Adapters (OC-2325) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+ $OCE4XODI_SPEEDDES = "Speed"
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+ $OCE4XODI_DUPLEXDES = "Duplex"
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+
+LANG:  13
+;Russian
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+                 Adapters (OC-2325) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+ $OCE4XODI_SPEEDDES = "Speed"
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+ $OCE4XODI_DUPLEXDES = "Duplex"
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+
+
+
+LANG:	14
+;Spanish
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2325) in systems with a PCI bus."
+
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+
+ $OCE4XODI_SPEEDDES = "Speed"
+
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+ $OCE4XODI_DUPLEXDES = "Duplex"
+
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+LANG:  16
+;Chinese (Traditional)
+	$OCE4XODI_1 = "802.2"
+	$OCE4XODI_2 = "802.3"
+	$OCE4XODI_3 = "802.2 SNAP"
+	$OCE4XODI_4 = "Ethernet II"
+
+ $OCE4XODI_DES2325    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2325)"
+ $OCE4XODI_DES218x    =  "Olicom Ethernet PCI/II 10 Adapter (OC-218x)"
+ $OCE4XODI_DES2326    =  "Olicom Ethernet PCI/II 10/100 Adapter (OC-2326)"
+ $OCE4XODI_DRVHLP2325 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+                 Adapters (OC-2325) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP218x =  "This driver supports the Olicom Ethernet PCI/II 10
+		 Adapters (OC-218x) in systems with a PCI bus."
+ $OCE4XODI_DRVHLP2326 =  "This driver supports the Olicom Ethernet PCI/II 10/100
+		 Adapters (OC-2326) in systems with a PCI bus."
+ $OCE4XODI_FRMHLP =      "The default frame types are 802.2 and 802.3. It is strongly
+		 recommended that at least 802.2 be enabled.\n
+		 If an existing network uses the 802.3 media header, enable
+		 this frame type also."
+ $OCE4XODI_NODEHLP =     "Do not change the network adapter's node address unless you
+		 are prepared to administer local node addresses. If not
+		 specified, the network board will use the globally assigned
+		 burned in address.\n
+		 If a node address is specified, it shall be specfied using
+		 11 or 12 hexdigits, and the 11th digit from the right shall
+		 be 2,6,A or E, as in 020987654321."
+ $OCE4XODI_SLOTHLP =     "Select the slot value that corresponds to
+		 the network board.\n\n"
+ $OCE4XODI_SPEEDDES = "Speed"
+ $OCE4XODI_SPEEDHLP = "Media speed used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+ $OCE4XODI_DUPLEXDES = "Duplex"
+ $OCE4XODI_DUPLEXHLP = "Duplex mode used by adapter. AUTO is default and 
+                 is automatic media detection.\n\n"
+
+

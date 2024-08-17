@@ -1,0 +1,421 @@
+
+SyntaxVersion: 1.00
+
+Driver HPDDODI
+{
+        Description:    $HPDDODI_1
+
+        Help:           $HPDDODI_2
+
+        File:           HPDDODI.LAN
+
+        PAR: 2.00
+;
+; The following PROD statement gives the product identification for
+; the adapters this driver supports.  For PCI the format is:
+;       'PCI.VVVV.DDDD.NNNN.SSSS.RR'
+; where: VVVV is the vendor ID, DDDD is the device ID
+;        NNNN is the subvendor ID (0000 for pre-v2.1 PCI hardware)
+;        SSSS is the subsystem ID (0000 for pre-v2.1 PCI hardware)
+;        RR is the revision number
+; For EISA the format is: 'EISA.VVV.PPP.R'
+; where: VVV is the vendor ID
+;        PPP is the product ID
+;        R is the revision number
+; This is fully documented in the v3.3 ODI specification
+;
+
+; The cards listed below are (in order): HPJ2585A, HPJ2973A,
+; HPJ2585B, HPJ2970A, and the HPJ2577A.
+
+        PROD: 'PCI.103C.1030.0000.0000.*',
+              'PCI.103C.1031.103C.1040.*',
+              'PCI.103C.1031.103C.1041.*',
+              'PCI.103C.1031.103C.1042.*',
+              'EISA.HWP.194.0'
+
+
+
+	;@# Sprod:	'Hewlett-Packard~HP J2585A',
+	;@# 		'Hewlett-Packard~HP J2973A',
+	;@# 		'Hewlett-Packard~HP J2585B',
+	;@# 		'Hewlett-Packard~HP J2970A',
+	;@# 		'Hewlett-Packard~HP J2577A'
+
+        ;@# CLIENT: Hpddodi.com, Hpddodi.lan
+        ;@# ALIAS: Hpddodi.lan
+
+; Adapter_Bus_Type is optional because it is only needed for
+; the legacy ISA (HPJ2573A) adapter.
+
+        LIST Adapter_Bus_Type OPTIONAL
+        {
+                Description:    $HPDDODI_5
+                Help:           $HPDDODI_6
+
+                CDescription:   $HPDDODI_17
+                Choice:         ''
+
+                CDescription:   $HPDDODI_18
+                Choice:         'ISA'
+
+                Default:        1
+                OutputFormat:   '%s'
+        }
+
+; If the bus type is 2 (ISA) then we'll allow the user to provide
+; a PORT.  This is optional because if only one card is in the
+; server we'll just go ahead and load the driver for it.  Since
+; the driver knows the PORT address from scanning the user doesn't
+; need to provide it here.  If more than one card was found, then
+; the user will need to provide a PORT.
+
+        PROMPT  PORT if (Adapter_Bus_Type == 2) OPTIONAL else HID
+        {
+                Values:         300, 100, 140, 180, 1C0, 200, 240, 
+                                280, 2C0, 340, 380, 3C0 
+                ReservedLength: 8
+                Help:           $HPDDODI_3  
+                }
+
+; For slot-based cards we normally need a slot number.  However,
+; if only one card was found we will just go ahead and load the
+; driver for that card.  Since we know the slot of that card
+; from scanning we don't need to prompt the user for it.  Thus
+; the SLOT prompt is optional.  If multiple cards are found then
+; we do need to prompt.
+
+        PROMPT SLOT if (Adapter_Bus_Type == 2) HID else OPTIONAL
+        {
+                Values:         1-65000
+                ReservedLength: 8
+                Help:           $HPDDODI_4
+        }
+
+
+        PROMPT NODE
+        {
+        }
+
+        FRAME   FrameSelect
+        {
+                Help:           $HPDDODI_9
+
+                CDescription:   $HPDDODI_10
+                Choice:         'Ethernet_802.3'
+
+                CDescription:   $HPDDODI_11
+                Choice:         'Ethernet_802.2'
+
+                CDescription:   $HPDDODI_12
+                Choice:         'Ethernet_SNAP'
+
+                CDescription:   $HPDDODI_13
+                Choice:         'Ethernet_II'
+
+                Default:        2
+        }
+}
+
+
+
+
+DLANG:  4
+;English
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Is the card a HPJ2573A?"
+        $HPDDODI_6 = "A value of 'Yes' is necessary to support
+                                legacy ISA cards. Plug and Play ISA is not
+                                considered legacy ISA."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+LANG:   1
+;Chinese (simplified)
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Enter the HP J2573A's bus type"
+        $HPDDODI_6 = "This value is necesarry to support legacy ISA cards."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+
+LANG:   6
+;French
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Enter the HP J2573A's bus type"
+        $HPDDODI_6 = "This value is necesarry to support legacy ISA cards."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+
+LANG:   7
+;German
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Enter the HP J2573A's bus type"
+        $HPDDODI_6 = "This value is necesarry to support legacy ISA cards."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+
+LANG:   8
+;Italian
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Enter the HP J2573A's bus type"
+        $HPDDODI_6 = "This value is necesarry to support legacy ISA cards."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+LANG:   9
+;Japanese
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Enter the HP J2573A's bus type"
+        $HPDDODI_6 = "This value is necesarry to support legacy ISA cards."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+
+LANG:   10
+;Korean
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Enter the HP J2573A's bus type"
+        $HPDDODI_6 = "This value is necesarry to support legacy ISA cards."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+
+LANG:   12
+;Portuguese (Brazil)
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Enter the HP J2573A's bus type"
+        $HPDDODI_6 = "This value is necesarry to support legacy ISA cards."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+
+LANG:   13
+;Russian
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Enter the HP J2573A's bus type"
+        $HPDDODI_6 = "This value is necesarry to support legacy ISA cards."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+
+LANG:   14
+;Spanish
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Enter the HP J2573A's bus type"
+        $HPDDODI_6 = "This value is necesarry to support legacy ISA cards."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+
+LANG:   16
+;Chinese (Traditional)
+        $HPDDODI_1 = "HP 10/100VG LAN Driver v1.32"
+        $HPDDODI_2 = "This driver supports the HP family of 10/100VG network boards."
+        $HPDDODI_3 = "The base I/O address for the HP J2573A network board (run HPVGSET.EXE for value)."
+        $HPDDODI_4 = "If more than one slot-based network board is installed in your
+                     server, you need to specify the slot for the board you wish to
+                     load.  On pre-v2.1 PCI machines the slot number needed may not
+                     match the physical slot number listed on your machine."
+        $HPDDODI_5 = "Enter the HP J2573A's bus type"
+        $HPDDODI_6 = "This value is necesarry to support legacy ISA cards."
+        $HPDDODI_8 = "ISA"
+        $HPDDODI_9 = "The driver defaults to using the 802.2 frame
+                                 type.  You can optionally remove this frame
+                                 type and/or add the 802.3, SNAP, or Ethernet II
+                                 frame types."
+        $HPDDODI_10 = "802.3"
+        $HPDDODI_11 = "802.2"
+        $HPDDODI_12 = "802.2 SNAP"
+        $HPDDODI_13 = "Ethernet II"
+        $HPDDODI_14 = "Enter the network board's bus type (legacy ISA only)"
+        $HPDDODI_15 = "Legacy ISA network board's require a bus type."
+        $HPDDODI_16 = "ISA"
+        $HPDDODI_17 = "No"
+        $HPDDODI_18 = "Yes"
+
+
+
+

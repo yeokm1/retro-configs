@@ -1,0 +1,295 @@
+;DrIvEr DeScRiPtIoN
+
+VER: 2.10
+SYN: 1.00
+
+DR FETNWSRV
+{
+        DES:    $FETNWSRV_DES
+        HELP:   $FETNWSRV_HELP
+        PAR:    2.00
+        PROD:   'PCI.1106.3043.*.*.*'
+        FILE:   FETNWSRV.LAN
+        TIME:   15
+
+;@#	CLIENT:	FETNWSRV.LAN
+;@#	ALIAS:	FETNWSRV.LAN
+;@#	SPROD:	'VIA Technologies~VT86C100A/VT5155A'
+	
+
+        PROMPT SLOT OPTIONAL
+        {
+                DES:    $FETNWSRV_3
+                HELP:   $FETNWSRV_4
+
+                TYPE:   DECIMAL
+                VAL:    1-64
+                DEF:    UNDEFINED
+                OUT:    'SLOT=%s'
+        }
+
+        PR NODE
+        {
+        }
+
+        FR FrameSelect
+        {
+                CH:     'Ethernet_802.3'
+                CH:     'Ethernet_802.2'
+                CH:     'Ethernet_SNAP'
+                CH:     'Ethernet_II'
+                DEF:    1,2
+        }
+
+        PR AUTO OPTIONAL
+        {
+                DES:    $FETNWSRV_7
+                HELP:   $FETNWSRV_8
+
+                VAL:    0, 1
+                TYP:    HEX(1)
+                DEF:    UNDEFINED
+        }
+
+        PR FULLDUPLEX OPTIONAL
+        {
+                DES:    $FETNWSRV_1
+                HELP:   $FETNWSRV_2
+
+                VAL:    0, 1
+                TYP:    HEX(1)
+                DEF:    UNDEFINED
+        }
+        PR SPEED OPTIONAL
+        {
+                DES:    $FETNWSRV_11
+                HELP:   $FETNWSRV_12
+
+                VAL:    10, 100
+                TYPE:   DECIMAL
+                DEF:    UNDEFINED
+        }
+}
+
+
+DLANG:  4
+;English
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   6
+;French
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+LANG:   7
+;German
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   8
+;Italian
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   14
+;Spanish
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   9
+;Japanese
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   10
+;Korean
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   12
+;Portugese (Brazil)
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   13
+;Russian
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   16
+;Chinese (Traditional)
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+LANG:   1
+;Chinese (Simplified)
+        $FETNWSRV_1 = "Full Duplex"
+        $FETNWSRV_2 = "Enable the Full Duplex Function."
+        $FETNWSRV_3 = "Slot"
+        $FETNWSRV_4 = "\nEnter the PCI Slot number of your LAN card
+                        to enable PCI auto config function."
+
+        $FETNWSRV_7 = "AUTO"
+        $FETNWSRV_8 = "Enable the AUTO Negotiation Function."
+
+        $FETNWSRV_11 = "SPEED"
+        $FETNWSRV_12 = "Select the SPEED between 10 and 100."
+
+        $FETNWSRV_DES =  "The PCI Fast Ethernet 10M/100M adapter"
+        $FETNWSRV_HELP = "This driver (FETNWSRV.LAN) supports PCI Fast Ethernet
+                network boards installed in PCI expansion slots in
+                server. You can install up to four boards as
+                long as their settings do not conflict."
+
+;DrIvEr DeScRiPtIoN EnD
+

@@ -1,0 +1,122 @@
+;------------------------------------------------------------------------------
+;	Netware Installation Information File
+;	Kingston Technology Company
+;	Kingston EtheRx PC Card 10/100 Fast Ethernet Adapter
+;           05/14/98 v1.1
+;------------------------------------------------------------------------------
+VER: 1.21
+SYN: 1.00
+
+DR KTCPCF
+{
+     DES:	$KTCPCF_1
+     HELP:	$KTCPCF_2
+     PAR:	2.00
+     FILE:	KTCPCF.LAN
+     
+     PROD:	'EISA.ISA.871.2, EISA.NVL.150.1'
+
+;@# SPROD:  'Kingston EtheRx PC Card 10/100 Fast Ethernet Adapter'
+;@# CLIENT: KTCPCF
+;@# ALIAS:  KTCPCF.LAN
+
+      PR INT REQ
+     {
+          VAL: 3, 4, 5, 9, A, B, C, F
+          TYP:  HEX(1)
+          DEF: 5
+        }
+
+     PR PORT REQ
+     {
+          VAL: 300, 320, 340, 360, 380, 3a0, 200, 220, 240, 260, 280, 2a0, 2c0, 2e0
+          DEF: 300
+          RES: 20
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 1,2
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+DLANG:    4
+;English
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+
+LANG:     6
+;French
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+
+LANG:     7
+;German
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+
+LANG:     8
+;Italian
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+
+LANG:     9
+;Japanese
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+
+LANG:     10
+;Korean
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+
+LANG:     1
+;Chinese
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+
+LANG:     13
+;Russian
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+
+LANG:     14
+;Spanish
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+
+LANG:     16
+;Chinese
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+
+LANG:     14
+;Spanish
+     $KTC2000_1 = "Kingston KNEPC3 Netware Driver (3.31 MLID specs)"
+     $KTC2000_2 = "This driver (KTCPCF.LAN) supports the Kingston KNE-PC3TX
+Fast Ethernet Adapter"
+

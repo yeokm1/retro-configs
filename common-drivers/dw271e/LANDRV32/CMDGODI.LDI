@@ -1,0 +1,302 @@
+;DrIvEr DeScRiPtIoN
+
+;
+; CMDGODI.LDI
+;
+; Supports Madge Token Ring Adapters.
+;
+; VeRsIoN=2.03 Madge Token Ring C HSM Driver Installation File for NetWare@
+; VeRsIoN=PRODUCT-ID: CMDGODI.LAN  2.09@
+; CoPyRiGhT=Copyright (c) 1997-1998 Madge Networks Ltd. All rights reserved.
+; MaDgE=4B39@
+;
+
+VER: 2.03
+SYN: 1.00
+
+DR CMDGODI
+{
+   DES:     $CMDGODI_1
+   HELP:    $CMDGODI_2
+   PAR:     2.00
+   FILE:    CMDGODI.LAN
+
+   PROD:    PCI.10B6.0001.*.*.*,    
+            PCI.10B6.0002.*.*.*,   
+            PCI.10B6.0004.*.*.*,    
+            PCI.10B6.0006.*.*.*,    
+            PCI.10B6.0007.*.*.*,    
+            PCMCIA.0141.0001,       
+            PCMCIA.0141.0002,       
+            EISA.MDG.000.2,         
+            EISA.MDG.000.3,         
+            EISA.MDG.000.4,         
+            PNPISA.MDG.010.1,       
+            PNPISA.MDG.030.1,       
+            PNPISA.MDG.201.0        
+
+   TIMEOUT: 60
+
+
+   ;@# Sprod:    'Madge~Smart 16/4 PCI Ringnode',
+   ;@#           'Madge~Smart 16/4 PCI Ringnode (BM) Mk2',
+   ;@#           'Madge~Smart 16/4 PCI Ringnode (BM) Mk1',
+   ;@#           'Madge~16/4 CardBus Adapter',
+   ;@#           'Madge~Presto PCI',
+   ;@#           'Madge~Smart 16/4 PCMCIA Ringnode',
+   ;@#           'Madge~Smart 16/4 PCMCIA Ringnode Mk2',
+   ;@#           'Madge~Smart 16/4 EISA Ringnode Mk2',
+   ;@#           'Madge~Smart 16/4 EISA Bridgenode',
+   ;@#           'Madge~Smart 16/4 EISA Ringnode Mk3',
+   ;@#           'Madge~Smart 16/4 ISA Client PnP Ringnode',
+   ;@#           'Madge~Smart 16/4 AT PnP Ringnode',
+   ;@#           'Madge~Blue+ 16/4 ISA PnP Adapter'
+
+   ;@# CLIENT: madgeodi.com, mcbodi.com, mtrodi.com, blutoken.com
+
+   ;@# ALIAS: madgeodi.lan, mtr32odi.lan
+
+   PR SLOT OPT
+        {
+            Val:            1-65535
+            Help:           $CMDGODI_3
+        }
+
+   PR PORT OPT
+        {
+            Val:            0-FFFF
+            Res:            10
+            Help:           $CMDGODI_4
+        }
+
+   PR BIA OPT
+        {
+            Description:    "Burned-In Address (BIA)"
+            Help:           $CMDGODI_5
+            Type:           STRING (12)
+            Output:         'BIA=%s'
+        }
+
+   PR NODE OPT
+        {
+            Val:            400000000000-47FFFFFFFFFF
+            Help:           $CMDGODI_6
+        }
+
+   FR FrameSelect OPT
+        {
+            Help:           $CMDGODI_7
+
+            CD:             $CMDGODI_8
+            CH:             'TOKEN-RING'
+
+            CD:             $CMDGODI_9
+            CH:             'TOKEN-RING_SNAP'
+
+            Def:            1
+            Oct:            MSB
+        }
+
+   PR AP OPT
+        {
+            Description:    $CMDGODI_10
+            Help:           $CMDGODI_13
+            Type:           STRING
+            Output:         'AP=1 %s'
+        }
+
+   PR AP2 OPT
+        {
+            Description:    $CMDGODI_11
+            Help:           $CMDGODI_13
+            Type:           STRING
+            Output:         'AP=2 %s'
+        }
+
+   PR AP3 OPT
+        {
+            Description:    $CMDGODI_12
+            Help:           $CMDGODI_13
+            Type:           STRING
+            Output:         'AP=3 %s'
+        }
+}
+
+
+DLANG:  4
+;English
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+LANG:   1
+;Chinese (Simplified)
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+LANG:   6
+;French
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+LANG:   7
+;German
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+LANG:   8
+;Italian
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+LANG:   9
+;Japanese
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+LANG:   10
+;Korean
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+LANG:   12
+;Portuguese (Brazil)
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+LANG:   13
+;Russian
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+LANG:   14
+;Spanish
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+LANG:   16
+;Chinese (Traditional)
+    $CMDGODI_1 = "Madge Token Ring C Hardware Support Module"
+    $CMDGODI_2 = "This driver supports Madge Token Ring adapters. For a complete list of supported adapters, see driver documentation. For additional information or help with installing this driver, call Madge Networks technical support at 1-800-876-2343 or (44) 1628 858700 (outside of North America)."
+    $CMDGODI_3 = "Select the adapter to use by SLOT number. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_4 = "Select the adapter to use by I/O PORT. If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_5 = "Select the adapter to use by Burned-In Address (BIA). If the machine contains multiple adapters, the adapter to use must be specified using either the PORT, SLOT or BIA parameter."
+    $CMDGODI_6 = "Specify a locally administered node address to override the burned-in address (BIA)."
+    $CMDGODI_7 = "\nThis driver defaults to using the TOKEN-RING frame type. The TOKEN-RING_SNAP frame type may also be required on multi-protocol networks."
+    $CMDGODI_8 = "TOKEN-RING"
+    $CMDGODI_9 = "TOKEN-RING_SNAP"
+    $CMDGODI_10 = "Advanced Configuration Parameter 1"
+    $CMDGODI_11 = "Advanced Configuration Parameter 2"
+    $CMDGODI_12 = "Advanced Configuration Parameter 3"
+    $CMDGODI_13 = "This field allows you to add extra parameters to your CMDGODI load line. See the driver documentation for possible parameters."
+
+;DrIvEr DeScRiPtIoN EnD

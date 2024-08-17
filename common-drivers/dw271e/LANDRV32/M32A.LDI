@@ -1,0 +1,1287 @@
+; Intel EtherExpress(TM) PRO/100 Mobile CardBus 32 ODI LDI File
+; Copyright 1998, Intel Corporation. All Rights Reserved.
+VER: 1.00
+SYN: 1.00
+
+DR M32A
+{
+   DES:  $M32A_DES
+   HELP: $MSG_HELP
+   PAR:  1.00
+;   PROD: 'CARDBUS.1011.0019.115D.0002.2'
+   FILE: M32A.LAN
+   ;@#   SPROD: 'Intel~EtherExpress(TM) PRO/100 Mobile CardBus 32 Adapter'
+   ;@#   CLIENT: M32AODI.COM, M32A.LAN
+   ;@#   ALIAS: M32A.LAN
+
+   FR FrameSelect
+   {
+      CH: 'Ethernet_802.2'
+      CH: 'Ethernet_802.3'
+      CH: 'Ethernet_SNAP'
+      CH: 'Ethernet_II'
+      DEF: 1,2
+   }
+
+   PR IRQ OPTIONAL
+   {
+      VAL:      3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+      TYP:      DECIMAL(2)
+      OUT:      'IRQ=%s'
+      HELP:     $MSG_IRQ_HELP
+   }
+
+   PR PORT OPTIONAL
+   {
+      VAL:      100-FF80
+      TYP:      HEX(4)
+      RES:      128
+      OUT:      'PORT=%s'
+      HELP:     $MSG_PORT_HELP
+   }
+
+   PR MEMORY OPTIONAL
+   {
+      DES:      'Memory Address'
+      VAL:      C0000-EFFFF000
+      TYP:      HEX(8)
+      RES:      1000
+      OUT:      'MEM=%s'
+      HELP:     $MSG_MEMORY_HELP
+   }
+
+   PR NODE
+   {
+   }
+
+   PR SOCKET
+   {
+      DES:  "CardBus Socket"
+      VAL:  1-4
+      TYP:  DECIMAL(1)
+      OUT:      "SOCKET=%s"
+      HELP:     $MSG_SOCKET_HELP
+   }
+
+   LI NOCHECK
+   {
+      DES:      'Disable resource checking?'
+      CD:       $YES
+      CH:       'NOCHECK'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $MSG_NOCHECK_HELP
+   }
+
+   LI VERBOSE
+   {
+      DES:      'Enable verbose messages?'
+      CD:       $YES
+      CH:       'VERBOSE'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $MSG_VERBOSE_HELP
+   }
+
+   LI NOPOLL
+   {
+      DES:      'Disable link polling?'
+      CD:       $YES
+      CH:       'NOPOLL'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $MSG_NOPOLL_HELP
+   }
+
+   PR RXBUFFERSIZE
+   {
+      DES:      'Receive buffer size'
+      TYP:      DECIMAL(3)
+      VAL:      1-100
+      OUT:      'RXBUFFERSIZE=%s'
+      HELP:     $MSG_RXBUFFERSIZE_HELP
+   }
+
+   PR TXBUFFERSIZE
+   {
+      DES:      'Transmit buffer size'
+      TYP:      DECIMAL(3)
+      VAL:      1-100
+      OUT:      'TXBUFFERSIZE=%s'
+      HELP:     $MSG_TXBUFFERSIZE_HELP
+   }
+
+   LI NOBURST
+   {
+      DES:      "Disable burst transfers?"
+      CD:       $YES
+      CH:       'NOBURST'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $MSG_NOBURST_HELP
+   }
+
+   LI NOEARLYRX
+   {
+      DES:      'Disable early receives?'
+      CD:       $YES
+      CH:       'NOEARLYRX'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $MSG_NOEARLYRX_HELP
+   }
+
+   LI NOEARLYTX
+   {
+      DES:      'Disable early transmits?'
+      CD:       $YES
+      CH:       'NOEARLYTX'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $MSG_NOEARLYTX_HELP
+   }
+
+   LI LINESPEED
+   {
+      DES:      'Line speed'
+      CD:       '10 Mbits per second'
+      CH:       'LINESPEED=10'
+      CD:       '100 Mbits per second'
+      CH:       'LINESPEED=100'
+      CD:       'AUTO'
+      CH:       ''
+      DEF:      3
+      OUT:      '%s'
+      HELP:     $MSG_LINESPEED_HELP
+   }
+
+   LI LINEMODE
+   {
+      DES:      'Line duplex mode'
+      CD:       'FULL'
+      CH:       'LINEMODE=FULL'
+      CD:       'HALF'
+      CH:       'LINEMODE=HALF'
+      CD:       'AUTO'
+      CH:       ''
+      DEF:      3
+      OUT:      '%s'
+      HELP:     $MSG_LINEMODE_HELP
+   }
+
+   LI IRQMODE
+   {
+      DES:      'IRQ mode'
+      CD:       'PCI'
+      CH:       'PCIIRQ'
+      CD:       'ISA'
+      CH:       'ISAIRQ'
+      CD:       'AUTO'
+      CH:       ''
+      DEF:      3
+      OUT:      '%s'
+      HELP:     $MSG_IRQMODE_HELP
+   }
+
+   LI ERT
+   {
+      DES:      'Early receive threshold'
+      CH:       'LOW'
+      CH:       'MEDIUM'
+      CH:       'HIGH'
+      DEF:      3
+      OUT:      'ERT=%s'
+      HELP:     $MSG_ERT_HELP
+   }
+
+   LI NOLED
+   {
+      DES:      'Disable LEDs?'
+      CD:       $YES
+      CH:       'NOLED'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $MSG_NOLED_HELP
+   }
+
+   LI LINKDISABLE
+   {
+      DES:      'Disable link integrity?'
+      CD:       $YES
+      CH:       'LINKDISABLE'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $MSG_LINKDISABLE_HELP
+   }
+
+   PR LATENCY
+   {
+      DES:      'CardBus latency'
+      VAL:      1-255
+      TYP:      DECIMAL(3)
+      OUT:      'LATENCY=%s'
+      HELP:     $MSG_LATENCY_HELP
+   }
+
+   LI NOWRITEPOST
+   {
+      DES:      'Disable write posting?'
+      CD:       $YES
+      CH:       'NOWRITEPOST'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $MSG_NOWRITEPOST_HELP
+   }
+
+   PR CACHE
+   {
+      DES:      'CardBus cache line size'
+      VAL:      0, 8, 16, 32
+      TYP:      DECIMAL(2)
+      OUT:      'CACHE=%s'
+      HELP:     $MSG_CACHE_HELP
+   }
+
+   LI NOPREFETCH
+   {
+      DES:      'Disable pre-fetching?'
+      CD:       $YES
+      CH:       'NOPREFETCH'
+      CD:       $NO
+      CH:       ''
+      DEF:      2
+      OUT:      '%s'
+      HELP:     $MSG_NOPREFETCH_HELP
+   }
+}
+
+;English
+DLANG: 4
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+
+;French
+LANG: 6
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+
+
+;German
+LANG: 7
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+
+
+;Italian
+LANG: 8
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+
+
+;Spanish
+LANG: 14
+
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+
+
+;Portugese
+LANG: 12
+
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+
+;Japanese
+LANG: 9
+
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+
+;Korean
+LANG: 10
+
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+
+;Chinese (Simplified)
+LANG: 1
+
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+
+;Chinese (Traditional)
+LANG: 16
+
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+
+;Russian
+LANG: 13
+
+$M32A_DES =  "Intel EtherExpress(TM) PRO/100 Mobile CardBus 32"
+
+$YES = "YES"
+$NO = "NO"
+
+
+$MSG_HELP = "This driver supports M32A adapters for computers that have
+	     a CardBus slot. This driver will support up to four adapters
+	     as long as the MEMORY, IRQ, and optionally IOADDRESS, keywords
+	     are set to different values"
+
+$MSG_IRQ_HELP = "Selects a hardware interrupt for use by the adapter.
+		If the computer system uses PCI interrupts on the CardBus
+		Bridge, this parameter is ignored (unless the IRQ mode field
+		is used to force ISA style IRQs)."
+
+$MSG_PORT_HELP = "Sets the base I/O address of the adapter in
+		 hexadecimal notation. The adapter supports
+		16-bits of I/O address space, and requires 128 contiguous
+		I/O addresses if run in I/O mode. If using memory-mapped
+		I/O mode, no I/O ports are necessary and this field should
+		be left blank."
+
+$MSG_MEMORY_HELP = "Sets the base memory address of the adapter in
+		   hexadecimal notation."
+
+$MSG_SOCKET_HELP = "Forces the driver to use a particular CardBus socket
+		   (or slot). Overrides automatic detection."
+
+$MSG_NOCHECK_HELP = "Disables verification of adapter resources."
+
+$MSG_VERBOSE_HELP = "Turns on detailed initialization information,
+		    including the type of CardBus bridge controller found."
+
+$MSG_NOPOLL_HELP = "Turns the polling feature of the driver off.
+		   Polling is used to detect cable faults and line speed."
+
+$MSG_RXBUFFERSIZE_HELP = "Sets the size of the adapter's receive
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_TXBUFFERSIZE_HELP = "Sets the size of the adapter's transmit
+			 packet buffer. Each packet adds approximately
+			 1520 bytes to the resident size."
+
+$MSG_NOBURST_HELP = "Disables burst mode reads on the adapter.
+		    Using this parameter may negatively impacting performance."
+
+$MSG_NOEARLYRX_HELP = "Disables Advanced Look-ahead Pipelining features of the adapter.
+		      Using this keyword may negatively impact performance."
+
+$MSG_NOEARLYTX_HELP = "Disables early transmit.
+		      Using this keyword may negatively impact performance."
+
+$MSG_LINESPEED_HELP = "Forces operation to 10 or 100 Mbps.
+		       If AUTO is selected the line speed will be
+		       automatically detected (default)."
+
+$MSG_LINEMODE_HELP = "Forces half-duplex or full-duplex mode for the network.
+		     If AUTO is selected the line mode will
+		     be determined automatically."
+
+$MSG_IRQMODE_HELP = "Forces the driver to use PCI or ISA IRQ routing.
+		     Disables automatic IRQ mode detection."
+
+$MSG_ERT_HELP = "Sets the Advanced Look-ahead Pipelining threshhold.
+		 Changing this value may affect network performance."
+
+$MSG_NOLED_HELP = "Turns the dongle LEDs off.
+		  This might be helpful on a mobile computer
+		  and may result in a modest increase in battery life."
+
+$MSG_LINKDISABLE_HELP = "Turns link integrity checking off.
+			Some older network configurations may require
+			this parameter to be set."
+
+$MSG_LATENCY_HELP = "Sets the latency timer for the CardBus Bridge. This
+		    parameter affects the bus mastering capabilities of the
+		    CardBus adapter."
+
+$MSG_NOWRITEPOST_HELP = "Disables write posting on the CardBus bridge.
+			Using this parameter may negatively impact performance."
+
+$MSG_CACHE_HELP = "Sets the system cache line size on the CardBus Bridge.
+		  Changing this parameter may affect network performance."
+
+$MSG_NOPREFETCH_HELP =  "Disables prefetching on the CardBus bridge in memory mode.
+			Using this keyword may negatively impact performance."
+

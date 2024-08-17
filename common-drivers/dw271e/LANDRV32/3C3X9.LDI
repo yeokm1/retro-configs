@@ -1,0 +1,304 @@
+; 3C3X9.LDI
+;
+; 3Com TokenLink Velocity PCI Controllers.
+;
+; VeRsIoN=1.00 Novell LAN Installation Information File for 3C3X9.
+; CoPyRiGhT=(C) Copyright 1994-96, 3Com Corp.  All rights reserved.
+
+Version:       1.00
+SyntaxVersion: 1.00
+
+Driver VELOCITY_DESCR
+
+     {
+          Description:        $VELOCITY_1
+          Help:               $VELOCITY_2
+
+          PAR:                2.00
+          Time:               30
+
+          File:               3C3X9.LAN
+
+          PROD:               'PCI.10B7.3390.0000.0000.*'
+
+          ;@# Sprod: '3Com~ TokenLink Velocity PCI Adapter(3C339)'
+          ;@# Client: 3c3x9
+          ;@# Alias: 3c3x9
+
+          PROMPT SLOT REQUIRED
+               {
+                    Type:          DECIMAL (8)
+                    Values:        1-65535
+                    OutputFormat:  'SLOT=%s'
+               }
+
+          PROMPT LINESPEED OPTIONAL
+               {
+                    Description:   $VELOCITY_4
+                    Help:          $VELOCITY_5
+                    Type:          DECIMAL (2)
+                    Values:        4,16
+                    OutputFormat:  'LINESPEED=%s'
+               }
+
+          PROMPT DETR OPTIONAL
+               {
+                    Description:   $VELOCITY_6
+                    Help:          $VELOCITY_7
+                    Type:          STRING (10)
+                    Values:        $VELOCITY_8
+                    OutputFormat:  'DETR'
+               }
+
+          PROMPT REINSERT OPTIONAL
+               {
+                    Description:   $VELOCITY_10
+                    Help:          $VELOCITY_11
+                    Type:          STRING (10)
+                    Values:        $VELOCITY_8
+                    OutputFormat:  'REINSERT'
+               }
+
+          PROMPT RBC OPTIONAL
+               {
+                    Description:   $VELOCITY_19
+                    Help:          $VELOCITY_20
+                    Type:          DECIMAL (2)
+                    Values:        1-39
+                    OutputFormat:  'RBC=%s'
+               }
+
+          PROMPT NODE OPTIONAL
+               {
+                    Description:   $VELOCITY_15
+                    Type:          HEX (12)
+                    Values:        400000000000-40007FFFFFFF
+               }
+
+          FRAME FrameSelect
+               {
+                    Choice:        'TOKEN-RING'
+                    Choice:        'TOKEN-RING_SNAP'
+                    Default:       1
+                    OctetBitOrder: MSB
+               }
+     }
+
+
+DLANG:	4
+;English
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   1
+;Chinese (Simplified)
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+
+
+LANG:	6
+;French
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+
+LANG:	7
+;German
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:	8
+;Italian
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   9
+;Japanese
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+
+LANG:   10
+;Korean
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+
+LANG:   12
+;Portuguese (Brazil)
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   13
+;Russian
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+
+
+LANG:	14
+;Spanish
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+LANG:   16
+;Chinese (Traditional)
+        $VELOCITY_1 = "3Com TokenLink Velocity PCI"
+        $VELOCITY_2 = "This driver supports the 3Com PCI Token-Ring adapter."
+        $VELOCITY_4 = "Line Speed"
+        $VELOCITY_5 = "Enter the line speed of the ring that the adapter is
+attached to.  If no value is entered, the adapter will default to 16 Mbps."
+        $VELOCITY_6 = "Disable Early Token Release"
+        $VELOCITY_7 = "Disables the early token release feature for 16Mbps
+networks.  This has no effect on 4Mbps networks."
+        $VELOCITY_8 = "SELECTED"
+        $VELOCITY_10 = "Reinsert"
+        $VELOCITY_11 = "If you want the driver to reinsert into the ring
+after it receives a MAC Remove frame, select this option."
+        $VELOCITY_15 = "Locally-administered address"
+        $VELOCITY_19 = "Receive Buffer Count"
+        $VELOCITY_20 = "A larger value can reduce the number of No Host
+Buffers Available.  A smaller value will reduce the amount of memory used."
+
+

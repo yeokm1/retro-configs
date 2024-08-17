@@ -1,0 +1,210 @@
+;;ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+;;บ File:     CPQETHER.LDI                                                 บ
+;;บ                                                                        บ
+;;บ Purpose:  Description and installation file for CPQETHER.LAN           บ
+;;บ                                                                        บ
+;;บ Notice:   (C) Copyright 1998 Compaq Computer Corporation.              บ
+;;บ           All rights reserved.                                         บ
+;;บ                                                                        บ
+;;บ           This program is an unpublished, copyrighted work that is     บ
+;;บ           proprietary to Compaq Computer Corporation and contains      บ
+;;บ           confidential information that is not to be reproduced or     บ
+;;บ           disclosed to any other person or entity without prior        บ
+;;บ           written consent from Compaq Computer Corporation in each and บ
+;;บ           every instance.                                              บ
+;;บ                                                                        บ
+;;บ           WARNING: Unauthorized reproduction of this program, as well  บ
+;;บ           as unauthorized preparation of derivative works based upon   บ
+;;บ           the program, or distribution of copies by sale, rental,      บ
+;;บ           lease, or lending, are violations of federal copyright laws  บ
+;;บ           and state trade secret laws, punishable by civil and         บ
+;;บ           criminal penalties.                                          บ
+;;ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+;DrIvEr DeScRiPtIoN
+Syn: 1.00
+Ver: 1.00
+
+;  Install file for the Compaq NetFlex and NetFlex-2 Ethernet Controllers
+
+DR CPQETHER_NETFLEX1
+{
+	DES: $CPQETHER_1
+	HELP: $CPQETHER_2
+	PAR: 2.00
+	FILE: CPQETHER.LAN
+	PROD: EISA.CPQ.610.0
+;@# CLIENT: CPQETHER.LAN, CPQETHNW.COM
+;@# ALIAS: CPQETHER.LAN
+;@# SProd: 'Compaq~NetFlex ENET-TR Controller (Ethernet)'
+
+	PR SLOT REQ
+	{
+		VAL: 1-65535
+	}
+
+	PR NODE
+	{
+	}
+
+	FR FrameSelect
+	{
+	CH: 'Ethernet_802.2'
+	CH: 'Ethernet_802.3'
+	CH: 'Ethernet_SNAP'
+	CH: 'Ethernet_II'
+	DEF: 1, 2
+	}
+}
+
+DR CPQETHER_NETFLEX2
+{
+	DES: $CPQETHER_3
+	HELP: $CPQETHER_4
+	PAR: 2.00
+	FILE: CPQETHER.LAN
+	PROD: EISA.CPQ.610.1
+;@# CLIENT: CPQETHER.LAN, CPQETHNW.COM
+;@# ALIAS: CPQETHER.LAN
+;@# SProd: 'Compaq~NetFlex-2 ENET-TR Controller (Ethernet)'
+
+	PR SLOT REQ
+	{
+		VAL: 1-65535
+	}
+
+	PR NODE
+	{
+	}
+
+	FR FrameSelect
+	{
+	CH: 'Ethernet_802.2'
+	CH: 'Ethernet_802.3'
+	CH: 'Ethernet_SNAP'
+	CH: 'Ethernet_II'
+	DEF: 1, 2
+	}
+}
+
+DLANG:	4
+;English
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+LANG:  6
+;French
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+LANG:  7
+;German
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+LANG:  8
+;Italian
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+LANG:  14
+;Spanish
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+LANG:  1
+;Chinese (Simplified)
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+LANG:  9
+;Japanese
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+LANG:  10
+;Korean
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+LANG:  12
+;Portuguese-Brazil
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+LANG:  13
+;Russian
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+LANG:  16
+;Chinese (Traditional)
+	$CPQETHER_1  =  "Compaq NetFlex ENET-TR Controller (Ethernet)"
+	$CPQETHER_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Ethernet operation."
+	$CPQETHER_3  =  "Compaq NetFlex-2 ENET-TR Controller (Ethernet)"
+	$CPQETHER_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Ethernet operation."
+
+

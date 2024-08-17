@@ -1,0 +1,328 @@
+;;ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+;;บ File:     CPQTOKEN.LDI                                                 บ
+;;บ                                                                        บ
+;;บ Purpose:  Description and installation file for CPQTOKEN.LAN           บ
+;;บ                                                                        บ
+;;บ Notice:   (C) Copyright 1998 Compaq Computer Corporation.              บ
+;;บ           All rights reserved.                                         บ
+;;บ                                                                        บ
+;;บ           This program is an unpublished, copyrighted work that is     บ
+;;บ           proprietary to Compaq Computer Corporation and contains      บ
+;;บ           confidential information that is not to be reproduced or     บ
+;;บ           disclosed to any other person or entity without prior        บ
+;;บ           written consent from Compaq Computer Corporation in each and บ
+;;บ           every instance.                                              บ
+;;บ                                                                        บ
+;;บ           WARNING: Unauthorized reproduction of this program, as well  บ
+;;บ           as unauthorized preparation of derivative works based upon   บ
+;;บ           the program, or distribution of copies by sale, rental,      บ
+;;บ           lease, or lending, are violations of federal copyright laws  บ
+;;บ           and state trade secret laws, punishable by civil and         บ
+;;บ           criminal penalties.                                          บ
+;;ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+;DrIvEr DeScRiPtIoN
+Syn: 1.00
+Ver: 1.00
+
+;  Install file for the Compaq NetFlex ENET-TR Controller (Token Ring)
+
+DR CPQTOKEN_NETFLEX_1
+{
+	DES: $CPQTOKEN_1
+	HELP: $CPQTOKEN_2
+	PAR: 2.00
+	FILE: CPQTOKEN.LAN
+	PROD: EISA.CPQ.610.0
+
+;@# CLIENT: CPQTOKEN.LAN, CPQTOKNW.COM
+;@# ALIAS: CPQTOKEN.LAN
+;@# SProd: 'Compaq~NetFlex ENET-TR Controller (Token Ring)'
+
+	PR SLOT REQ
+	{
+		VAL: 1-65535
+	}
+
+	PR NODE
+	{
+	}
+
+	FR FrameSelect
+	{
+	CH: 'Token-Ring'
+	CH: 'Token-Ring_SNAP'
+	DEF: 1
+	}
+}
+
+DR CPQTOKEN_NETFLEX_2
+{
+	DES: $CPQTOKEN_3
+	HELP: $CPQTOKEN_4
+	PAR: 2.00
+	FILE: CPQTOKEN.LAN
+	PROD: EISA.CPQ.610.1
+;@# CLIENT: CPQTOKEN.LAN, CPQTOKNW.COM
+;@# ALIAS: CPQTOKEN.LAN
+;@# SProd: 'Compaq~NetFlex-2 ENET-TR Controller (Token Ring)'
+
+	PR SLOT REQ
+	{
+		VAL: 1-65535
+	}
+
+	PR NODE
+	{
+	}
+
+	FR FrameSelect
+	{
+	CH: 'Token-Ring'
+	CH: 'Token-Ring_SNAP'
+	DEF: 1
+	}
+}
+
+DR CPQTOKEN_NETFLEX_2_TR
+{
+	DES: $CPQTOKEN_5
+	HELP: $CPQTOKEN_6
+	PAR: 2.00
+	FILE: CPQTOKEN.LAN
+	PROD: EISA.CPQ.600.2
+;@# CLIENT: CPQTOKEN.LAN, CPQTOKNW.COM
+;@# ALIAS: CPQTOKEN.LAN
+;@# SProd: 'Compaq~NetFlex-2 TR Controller'
+
+	PR SLOT REQ
+	{
+		VAL: 1-65535
+	}
+
+	PR NODE
+	{
+	}
+
+	FR FrameSelect
+	{
+	CH: 'Token-Ring'
+	CH: 'Token-Ring_SNAP'
+	DEF: 1
+	}
+}
+
+DR CPQTOKEN_DUALSPEED_TR
+{
+	DES: $CPQTOKEN_7
+	HELP: $CPQTOKEN_8
+	PAR: 2.00
+	FILE: CPQTOKEN.LAN
+	PROD: EISA.CPQ.600.0, EISA.CPQ.600.1
+;@# CLIENT: CPQTOKEN.LAN, CPQTOKNW.COM
+;@# ALIAS: CPQTOKEN.LAN
+;@# SProd: 'Compaq~32-bit DualSpeed Token Ring Controller'
+
+	PR SLOT REQ
+	{
+		VAL: 1-65535
+	}
+
+	PR NODE
+	{
+	}
+
+	FR FrameSelect
+	{
+	CH: 'Token-Ring'
+	CH: 'Token-Ring_SNAP'
+	DEF: 1
+	}
+}
+
+DLANG:  4
+;English
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+
+LANG:  6
+;French
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+
+LANG:  7
+;German
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+
+LANG:  8
+;Italian
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+
+LANG:  14
+;Spanish
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+
+LANG:  1
+;Chinese (Simplified)
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+
+LANG:  9
+;Japanese
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+
+LANG:  10
+;Korean
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+
+LANG:  12
+;Portuguese-Brazil
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+
+LANG:  13
+;Russian
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+
+LANG:  16
+;Chinese (Traditional)
+	$CPQTOKEN_1  =  "Compaq NetFlex ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_2  =  "This driver supports the Compaq NetFlex ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_3  =  "Compaq NetFlex-2 ENET-TR Controller (Token Ring)"
+	$CPQTOKEN_4  =  "This driver supports the Compaq NetFlex-2 ENET-TR
+Controller installed in an EISA server. Use this driver for a NetFlex-2
+ENET-TR controller configured for Token Ring operation."
+	$CPQTOKEN_5  =  "Compaq NetFlex-2 TR Controller"
+	$CPQTOKEN_6  =  "This driver supports the Compaq NetFlex-2 TR
+Controller installed in an EISA server."
+	$CPQTOKEN_7  =  "Compaq 32-bit DualSpeed Token Ring Controller"
+	$CPQTOKEN_8  =  "This driver supports the Compaq DualSpeed
+Token Ring Controller installed in an EISA server."
+

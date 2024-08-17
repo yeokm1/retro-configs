@@ -1,0 +1,584 @@
+VER:    1.03
+SYN:    1.00
+
+Driver NORMAL
+{
+ PROD:  'PCI.108D.0001.0000.0000.0?',
+    'PNPISA.OLC.943.0',
+    'MCA.0A84',
+    'MCA.0A85',
+    'MCA.0A86',
+    'MCA.0142',
+    'EISA.OLC.901.?',
+    'EISA.OLC.902.?',
+    'PCMCIA.0121.2032',
+    'PCMCIA.0121.2132',
+    'PCMCIA.0121.3032',
+    'PCMCIA.0121.3232'
+ DES:   $OCTOK162_DES
+ HELP:  $OCTOK162_DRVHLP
+ PAR:   2.00
+ FILE:  OCTOK162.LAN
+
+ TIME:  90
+
+;@# Sprod:     'Olicom~Token-Ring PCI/II 16/4 Adapter (OC-3137)',
+;@#            'Olicom~Token-Ring ISA 16/4 Adapter (OC-3118)',
+;@#            'Olicom~Token-Ring MCA 16/4 Adapter (OC-3129)',
+;@#            'Olicom~Token-Ring MCA 16/4 Adapter (OC-3129)',
+;@#            'Olicom~Token-Ring MCA 16/4 Adapter (OC-3129)',
+;@#            'Olicom~Token-Ring MCA 16/4 Adapter (OC-3129)',
+;@#            'Olicom~Token-Ring EISA 16/4 Adapter (OC-3133)',
+;@#            'Olicom~Token-Ring EISA 16/4 Adapter (OC-3133)',
+;@#            'Olicom~GoCard Token-Ring PC Card (OC-3220)',
+;@#            'Olicom~GoCard Token-Ring PC Card (OC-3221)',
+;@#            'Olicom~GoCard TR/Modem 144 PC Card (OC-3230)',
+;@#            'Olicom~GoCard TRN/Modem 336 PC Card (OC-3232)'
+
+
+;@#  CLIENT: octok16.com
+;@#  ALIAS: octok162
+
+ PR SLOT
+  {
+  Values: 1-65535
+  HELP: $OCTOK162_SLOTHLP
+  }
+
+ LIST EarlyTxMode OPTIONAL
+  {
+  DES:  $OCTOK162_EARLYTXDES
+  HELP: $OCTOK162_EARLYTXHLP
+  CD: "OFF"
+  CH: 'NOEARLYTX'
+  CD: "ON"
+  CH: UNDEFINED
+  Default: 2
+  OutputFormat: '%s'
+  }
+
+ FR FRMTYPE
+  {
+  HELP: $OCTOK162_FRMHLP
+  CD:   $OCTOK162_1
+  CH:   'Token-Ring'
+  CD:   $OCTOK162_2
+  CH:   'Token-Ring_SNAP'
+  DEF:  1
+  OCT:  MSB
+  }
+
+ PR NODE
+  {
+  HELP: $OCTOK162_NODEHLP
+  }
+
+ PR SPEED OPTIONAL
+  {
+  DES:  $OCTOK162_SPEEDDES
+  HELP: $OCTOK162_SPEEDHLP
+  TYPE: STRING
+  DEFAULT: UNDEFINED
+  VALUES: '4','16'
+  OUTPUTFORMAT: 'SPEED=%s'
+  }
+
+ PR SHOWINFO
+  {
+  DES:  $OCTOK162_INFODES
+  HELP: $OCTOK162_INFOHLP
+  TYPE: HEX (1)
+  VALUES:  0-1
+  DEFAULT: 0
+  OUTPUTFORMAT: 'SHOWINFO=%s'
+  }
+}
+
+
+
+DLANG:  4
+;English
+    $OCTOK162_1 = "TOKEN-RING"
+    $OCTOK162_2 = "TOKEN-RING_SNAP"
+
+ $OCTOK162_DES =        "Olicom Token-Ring 16/4 Adapters"
+
+ $OCTOK162_DRVHLP =     "The server driver (OCTOK162.LAN) supports all 16 bit Olicom
+         Token-Ring 16/4 Adapters and the Olicom Token-Ring PCI
+         Adapter."
+
+ $OCTOK162_EARLYTXDES = "Early Transmit"
+
+ $OCTOK162_EARLYTXHLP = "Switch Early Transmit capability ON or OFF (Default is ON).
+	The keyword is applicable only to PCI adapters and adapters using DMA."
+
+ $OCTOK162_FRMHLP =      "The driver defaults to the Token-Ring (802.2) frame type.
+         Depending on the frame type your protocol requires, you can
+         either change to Token-Ring_SNAP (SNAP on top of 802.2) or
+         choose both frame types by loading the driver reentrantly.
+         Do not change the MSB/LSB parameter unless you are familiar
+         with the consequences of such a change."
+
+ $OCTOK162_SLOTHLP =     "Select the number for the (E)ISA, MCA or PCI expansion slot
+         in which the Token-Ring network adapter is installed."
+ 
+ $OCTOK162_NODEHLP =     "Do not change the network adapter's node address unless you
+         are prepared to administer local node addresses. If not
+         specified, the network board will use the globally assigned
+         burned in address.\n
+         If a node address is specified, it MUST adhere to the
+         following rules: If MSB order (the default) is used, the
+         node address shall consist of 12 hexadecimal digits, the
+         leftmost being 4,5,6 or 7, as in 4000ABCD1234.\n
+         If LSB order is used, the 11th digit from the right shall
+         be 2,6,A or E, as in 020987654321."
+
+ $OCTOK162_SPEEDDES = "Token Ring Speed"
+
+ $OCTOK162_SPEEDHLP = "Media speed used by adapter. This setting overrides
+	the configured adapter media speed"
+
+ $OCTOK162_INFODES =     "Info message control"
+
+ $OCTOK162_INFOHLP =     "The value 1 enables some alerts messages of
+         a more informative character (Single Station, Duplex Mode)
+         that are suppressed by default."
+
+LANG:  1
+;Chinese (Simplified)
+    $OCTOK162_1 = "TOKEN-RING"
+    $OCTOK162_2 = "TOKEN-RING_SNAP"
+
+ $OCTOK162_DES =        "Olicom Token-Ring 16/4 Adapters"
+
+ $OCTOK162_DRVHLP =     "The server driver (OCTOK162.LAN) supports all 16 bit Olicom
+         Token-Ring 16/4 Adapters and the Olicom Token-Ring PCI
+         Adapter."
+
+ $OCTOK162_EARLYTXDES = "Early Transmit"
+
+ $OCTOK162_EARLYTXHLP = "Switch Early Transmit capability ON or OFF (Default is ON).
+	The keyword is applicable only to PCI adapters and adapters using DMA."
+
+ $OCTOK162_FRMHLP =      "The driver defaults to the Token-Ring (802.2) frame type.
+         Depending on the frame type your protocol requires, you can
+         either change to Token-Ring_SNAP (SNAP on top of 802.2) or
+         choose both frame types by loading the driver reentrantly.
+         Do not change the MSB/LSB parameter unless you are familiar
+         with the consequences of such a change."
+
+ $OCTOK162_SLOTHLP =     "Select the number for the (E)ISA, MCA or PCI expansion slot
+         in which the Token-Ring network adapter is installed."
+ 
+ $OCTOK162_NODEHLP =     "Do not change the network adapter's node address unless you
+         are prepared to administer local node addresses. If not
+         specified, the network board will use the globally assigned
+         burned in address.\n
+         If a node address is specified, it MUST adhere to the
+         following rules: If MSB order (the default) is used, the
+         node address shall consist of 12 hexadecimal digits, the
+         leftmost being 4,5,6 or 7, as in 4000ABCD1234.\n
+         If LSB order is used, the 11th digit from the right shall
+         be 2,6,A or E, as in 020987654321."
+
+ $OCTOK162_SPEEDDES = "Token Ring Speed"
+
+ $OCTOK162_SPEEDHLP = "Media speed used by adapter. This setting overrides
+	the configured adapter media speed"
+
+ $OCTOK162_INFODES =     "Info message control"
+
+ $OCTOK162_INFOHLP =     "The value 1 enables some alerts messages of
+         a more informative character (Single Station, Duplex Mode)
+         that are suppressed by default."
+
+
+LANG:   6
+;French
+    $OCTOK162_1 = "TOKEN-RING"
+    $OCTOK162_2 = "TOKEN-RING_SNAP"
+
+ $OCTOK162_DES =        "Olicom Token-Ring 16/4 Adapters"
+
+ $OCTOK162_DRVHLP =     "The server driver (OCTOK162.LAN) supports all 16 bit Olicom
+         Token-Ring 16/4 Adapters and the Olicom Token-Ring PCI
+         Adapter."
+
+ $OCTOK162_EARLYTXDES = "Early Transmit"
+
+ $OCTOK162_EARLYTXHLP = "Switch Early Transmit capability ON or OFF (Default is ON).
+	The keyword is applicable only to PCI adapters and adapters using DMA."
+
+ $OCTOK162_FRMHLP =      "The driver defaults to the Token-Ring (802.2) frame type.
+         Depending on the frame type your protocol requires, you can
+         either change to Token-Ring_SNAP (SNAP on top of 802.2) or
+         choose both frame types by loading the driver reentrantly.
+         Do not change the MSB/LSB parameter unless you are familiar
+         with the consequences of such a change."
+
+ $OCTOK162_SLOTHLP =     "Select the number for the (E)ISA, MCA or PCI expansion slot
+         in which the Token-Ring network adapter is installed."
+
+ $OCTOK162_NODEHLP =     "Do not change the network adapter's node address unless you
+         are prepared to administer local node addresses. If not
+         specified, the network board will use the globally assigned
+         burned in address.\n
+         If a node address is specified, it MUST adhere to the
+         following rules: If MSB order (the default) is used, the
+         node address shall consist of 12 hexadecimal digits, the
+         leftmost being 4,5,6 or 7, as in 4000ABCD1234.\n
+         If LSB order is used, the 11th digit from the right shall
+         be 2,6,A or E, as in 020987654321."
+
+ $OCTOK162_SPEEDDES = "Token Ring Speed"
+
+ $OCTOK162_SPEEDHLP = "Media speed used by adapter. This setting overrides
+	the configured adapter media speed"
+
+ $OCTOK162_INFODES =     "Info message control"
+
+ $OCTOK162_INFOHLP =     "The value 1 enables some alerts messages of
+         a more informative character (Single Station, Duplex Mode)
+         that are suppressed by default."
+
+
+LANG:   7
+;German
+    $OCTOK162_1 = "TOKEN-RING"
+    $OCTOK162_2 = "TOKEN-RING_SNAP"
+
+ $OCTOK162_DES =        "Olicom Token-Ring 16/4 Adapters"
+
+ $OCTOK162_DRVHLP =     "The server driver (OCTOK162.LAN) supports all 16 bit Olicom
+         Token-Ring 16/4 Adapters and the Olicom Token-Ring PCI
+         Adapter."
+
+ $OCTOK162_EARLYTXDES = "Early Transmit"
+
+ $OCTOK162_EARLYTXHLP = "Switch Early Transmit capability ON or OFF (Default is ON).
+	The keyword is applicable only to PCI adapters and adapters using DMA."
+
+ $OCTOK162_FRMHLP =      "The driver defaults to the Token-Ring (802.2) frame type.
+         Depending on the frame type your protocol requires, you can
+         either change to Token-Ring_SNAP (SNAP on top of 802.2) or
+         choose both frame types by loading the driver reentrantly.
+         Do not change the MSB/LSB parameter unless you are familiar
+         with the consequences of such a change."
+
+ $OCTOK162_SLOTHLP =     "Select the number for the (E)ISA, MCA or PCI expansion slot
+         in which the Token-Ring network adapter is installed."
+
+ $OCTOK162_NODEHLP =     "Do not change the network adapter's node address unless you
+         are prepared to administer local node addresses. If not
+         specified, the network board will use the globally assigned
+         burned in address.\n
+         If a node address is specified, it MUST adhere to the
+         following rules: If MSB order (the default) is used, the
+         node address shall consist of 12 hexadecimal digits, the
+         leftmost being 4,5,6 or 7, as in 4000ABCD1234.\n
+         If LSB order is used, the 11th digit from the right shall
+         be 2,6,A or E, as in 020987654321."
+
+ $OCTOK162_SPEEDDES = "Token Ring Speed"
+
+ $OCTOK162_SPEEDHLP = "Media speed used by adapter. This setting overrides
+	the configured adapter media speed"
+
+ $OCTOK162_INFODES =     "Info message control"
+
+ $OCTOK162_INFOHLP =     "The value 1 enables some alerts messages of
+         a more informative character (Single Station, Duplex Mode)
+         that are suppressed by default."
+
+
+LANG:   8
+;Italian
+    $OCTOK162_1 = "TOKEN-RING"
+    $OCTOK162_2 = "TOKEN-RING_SNAP"
+
+ $OCTOK162_DES =        "Olicom Token-Ring 16/4 Adapters"
+
+ $OCTOK162_DRVHLP =     "The server driver (OCTOK162.LAN) supports all 16 bit Olicom
+         Token-Ring 16/4 Adapters and the Olicom Token-Ring PCI
+         Adapter."
+
+ $OCTOK162_EARLYTXDES = "Early Transmit"
+
+ $OCTOK162_EARLYTXHLP = "Switch Early Transmit capability ON or OFF (Default is ON).
+	The keyword is applicable only to PCI adapters and adapters using DMA."
+
+ $OCTOK162_FRMHLP =      "The driver defaults to the Token-Ring (802.2) frame type.
+         Depending on the frame type your protocol requires, you can
+         either change to Token-Ring_SNAP (SNAP on top of 802.2) or
+         choose both frame types by loading the driver reentrantly.
+         Do not change the MSB/LSB parameter unless you are familiar
+         with the consequences of such a change."
+
+ $OCTOK162_SLOTHLP =     "Select the number for the (E)ISA, MCA or PCI expansion slot
+         in which the Token-Ring network adapter is installed."
+
+ $OCTOK162_NODEHLP =     "Do not change the network adapter's node address unless you
+         are prepared to administer local node addresses. If not
+         specified, the network board will use the globally assigned
+         burned in address.\n
+         If a node address is specified, it MUST adhere to the
+         following rules: If MSB order (the default) is used, the
+         node address shall consist of 12 hexadecimal digits, the
+         leftmost being 4,5,6 or 7, as in 4000ABCD1234.\n
+         If LSB order is used, the 11th digit from the right shall
+         be 2,6,A or E, as in 020987654321."
+
+ $OCTOK162_SPEEDDES = "Token Ring Speed"
+
+ $OCTOK162_SPEEDHLP = "Media speed used by adapter. This setting overrides
+	the configured adapter media speed"
+
+ $OCTOK162_INFODES =     "Info message control"
+
+ $OCTOK162_INFOHLP =     "The value 1 enables some alerts messages of
+         a more informative character (Single Station, Duplex Mode)
+         that are suppressed by default."
+
+LANG:  9
+;Japanese
+    $OCTOK162_1 = "TOKEN-RING"
+    $OCTOK162_2 = "TOKEN-RING_SNAP"
+
+ $OCTOK162_DES =        "Olicom Token-Ring 16/4 Adapters"
+
+ $OCTOK162_DRVHLP =     "The server driver (OCTOK162.LAN) supports all 16 bit Olicom
+         Token-Ring 16/4 Adapters and the Olicom Token-Ring PCI
+         Adapter."
+
+ $OCTOK162_EARLYTXDES = "Early Transmit"
+
+ $OCTOK162_EARLYTXHLP = "Switch Early Transmit capability ON or OFF (Default is ON).
+	The keyword is applicable only to PCI adapters and adapters using DMA."
+
+ $OCTOK162_FRMHLP =      "The driver defaults to the Token-Ring (802.2) frame type.
+         Depending on the frame type your protocol requires, you can
+         either change to Token-Ring_SNAP (SNAP on top of 802.2) or
+         choose both frame types by loading the driver reentrantly.
+         Do not change the MSB/LSB parameter unless you are familiar
+         with the consequences of such a change."
+
+ $OCTOK162_SLOTHLP =     "Select the number for the (E)ISA, MCA or PCI expansion slot
+         in which the Token-Ring network adapter is installed."
+ 
+ $OCTOK162_NODEHLP =     "Do not change the network adapter's node address unless you
+         are prepared to administer local node addresses. If not
+         specified, the network board will use the globally assigned
+         burned in address.\n
+         If a node address is specified, it MUST adhere to the
+         following rules: If MSB order (the default) is used, the
+         node address shall consist of 12 hexadecimal digits, the
+         leftmost being 4,5,6 or 7, as in 4000ABCD1234.\n
+         If LSB order is used, the 11th digit from the right shall
+         be 2,6,A or E, as in 020987654321."
+
+ $OCTOK162_SPEEDDES = "Token Ring Speed"
+
+ $OCTOK162_SPEEDHLP = "Media speed used by adapter. This setting overrides
+	the configured adapter media speed"
+
+ $OCTOK162_INFODES =     "Info message control"
+
+ $OCTOK162_INFOHLP =     "The value 1 enables some alerts messages of
+         a more informative character (Single Station, Duplex Mode)
+         that are suppressed by default."
+
+LANG:  10
+;Korean
+    $OCTOK162_1 = "TOKEN-RING"
+    $OCTOK162_2 = "TOKEN-RING_SNAP"
+
+ $OCTOK162_DES =        "Olicom Token-Ring 16/4 Adapters"
+
+ $OCTOK162_DRVHLP =     "The server driver (OCTOK162.LAN) supports all 16 bit Olicom
+         Token-Ring 16/4 Adapters and the Olicom Token-Ring PCI
+         Adapter."
+
+ $OCTOK162_EARLYTXDES = "Early Transmit"
+
+ $OCTOK162_EARLYTXHLP = "Switch Early Transmit capability ON or OFF (Default is ON).
+	The keyword is applicable only to PCI adapters and adapters using DMA."
+
+ $OCTOK162_FRMHLP =      "The driver defaults to the Token-Ring (802.2) frame type.
+         Depending on the frame type your protocol requires, you can
+         either change to Token-Ring_SNAP (SNAP on top of 802.2) or
+         choose both frame types by loading the driver reentrantly.
+         Do not change the MSB/LSB parameter unless you are familiar
+         with the consequences of such a change."
+
+ $OCTOK162_SLOTHLP =     "Select the number for the (E)ISA, MCA or PCI expansion slot
+         in which the Token-Ring network adapter is installed."
+ 
+ $OCTOK162_NODEHLP =     "Do not change the network adapter's node address unless you
+         are prepared to administer local node addresses. If not
+         specified, the network board will use the globally assigned
+         burned in address.\n
+         If a node address is specified, it MUST adhere to the
+         following rules: If MSB order (the default) is used, the
+         node address shall consist of 12 hexadecimal digits, the
+         leftmost being 4,5,6 or 7, as in 4000ABCD1234.\n
+         If LSB order is used, the 11th digit from the right shall
+         be 2,6,A or E, as in 020987654321."
+
+ $OCTOK162_SPEEDDES = "Token Ring Speed"
+
+ $OCTOK162_SPEEDHLP = "Media speed used by adapter. This setting overrides
+	the configured adapter media speed"
+
+ $OCTOK162_INFODES =     "Info message control"
+
+ $OCTOK162_INFOHLP =     "The value 1 enables some alerts messages of
+         a more informative character (Single Station, Duplex Mode)
+         that are suppressed by default."
+
+LANG:  12
+;Portuguese (Brazil)
+    $OCTOK162_1 = "TOKEN-RING"
+    $OCTOK162_2 = "TOKEN-RING_SNAP"
+
+ $OCTOK162_DES =        "Olicom Token-Ring 16/4 Adapters"
+
+ $OCTOK162_DRVHLP =     "The server driver (OCTOK162.LAN) supports all 16 bit Olicom
+         Token-Ring 16/4 Adapters and the Olicom Token-Ring PCI
+         Adapter."
+
+ $OCTOK162_EARLYTXDES = "Early Transmit"
+
+ $OCTOK162_EARLYTXHLP = "Switch Early Transmit capability ON or OFF (Default is ON).
+	The keyword is applicable only to PCI adapters and adapters using DMA."
+
+ $OCTOK162_FRMHLP =      "The driver defaults to the Token-Ring (802.2) frame type.
+         Depending on the frame type your protocol requires, you can
+         either change to Token-Ring_SNAP (SNAP on top of 802.2) or
+         choose both frame types by loading the driver reentrantly.
+         Do not change the MSB/LSB parameter unless you are familiar
+         with the consequences of such a change."
+
+ $OCTOK162_SLOTHLP =     "Select the number for the (E)ISA, MCA or PCI expansion slot
+         in which the Token-Ring network adapter is installed."
+ 
+ $OCTOK162_NODEHLP =     "Do not change the network adapter's node address unless you
+         are prepared to administer local node addresses. If not
+         specified, the network board will use the globally assigned
+         burned in address.\n
+         If a node address is specified, it MUST adhere to the
+         following rules: If MSB order (the default) is used, the
+         node address shall consist of 12 hexadecimal digits, the
+         leftmost being 4,5,6 or 7, as in 4000ABCD1234.\n
+         If LSB order is used, the 11th digit from the right shall
+         be 2,6,A or E, as in 020987654321."
+
+ $OCTOK162_SPEEDDES = "Token Ring Speed"
+
+ $OCTOK162_SPEEDHLP = "Media speed used by adapter. This setting overrides
+	the configured adapter media speed"
+
+ $OCTOK162_INFODES =     "Info message control"
+
+ $OCTOK162_INFOHLP =     "The value 1 enables some alerts messages of
+         a more informative character (Single Station, Duplex Mode)
+         that are suppressed by default."
+
+LANG:  13
+;Russian
+    $OCTOK162_1 = "TOKEN-RING"
+    $OCTOK162_2 = "TOKEN-RING_SNAP"
+
+ $OCTOK162_DES =        "Olicom Token-Ring 16/4 Adapters"
+
+ $OCTOK162_DRVHLP =     "The server driver (OCTOK162.LAN) supports all 16 bit Olicom
+         Token-Ring 16/4 Adapters and the Olicom Token-Ring PCI
+         Adapter."
+
+ $OCTOK162_EARLYTXDES = "Early Transmit"
+
+ $OCTOK162_EARLYTXHLP = "Switch Early Transmit capability ON or OFF (Default is ON).
+	The keyword is applicable only to PCI adapters and adapters using DMA."
+
+ $OCTOK162_FRMHLP =      "The driver defaults to the Token-Ring (802.2) frame type.
+         Depending on the frame type your protocol requires, you can
+         either change to Token-Ring_SNAP (SNAP on top of 802.2) or
+         choose both frame types by loading the driver reentrantly.
+         Do not change the MSB/LSB parameter unless you are familiar
+         with the consequences of such a change."
+
+ $OCTOK162_SLOTHLP =     "Select the number for the (E)ISA, MCA or PCI expansion slot
+         in which the Token-Ring network adapter is installed."
+ 
+ $OCTOK162_NODEHLP =     "Do not change the network adapter's node address unless you
+         are prepared to administer local node addresses. If not
+         specified, the network board will use the globally assigned
+         burned in address.\n
+         If a node address is specified, it MUST adhere to the
+         following rules: If MSB order (the default) is used, the
+         node address shall consist of 12 hexadecimal digits, the
+         leftmost being 4,5,6 or 7, as in 4000ABCD1234.\n
+         If LSB order is used, the 11th digit from the right shall
+         be 2,6,A or E, as in 020987654321."
+
+ $OCTOK162_SPEEDDES = "Token Ring Speed"
+
+ $OCTOK162_SPEEDHLP = "Media speed used by adapter. This setting overrides
+	the configured adapter media speed"
+
+ $OCTOK162_INFODES =     "Info message control"
+
+ $OCTOK162_INFOHLP =     "The value 1 enables some alerts messages of
+         a more informative character (Single Station, Duplex Mode)
+         that are suppressed by default."
+
+
+
+LANG:   14
+;Spanish
+    $OCTOK162_1 = "TOKEN-RING"
+    $OCTOK162_2 = "TOKEN-RING_SNAP"
+
+ $OCTOK162_DES =        "Olicom Token-Ring 16/4 Adapters"
+
+ $OCTOK162_DRVHLP =     "The server driver (OCTOK162.LAN) supports all 16 bit Olicom
+         Token-Ring 16/4 Adapters and the Olicom Token-Ring PCI
+         Adapter."
+
+ $OCTOK162_EARLYTXDES = "Early Transmit"
+
+ $OCTOK162_EARLYTXHLP = "Switch Early Transmit capability ON or OFF (Default is ON).
+	The keyword is applicable only to PCI adapters and adapters using DMA."
+
+ $OCTOK162_FRMHLP =      "The driver defaults to the Token-Ring (802.2) frame type.
+         Depending on the frame type your protocol requires, you can
+         either change to Token-Ring_SNAP (SNAP on top of 802.2) or
+         choose both frame types by loading the driver reentrantly.
+         Do not change the MSB/LSB parameter unless you are familiar
+         with the consequences of such a change."
+
+ $OCTOK162_SLOTHLP =     "Select the number for the (E)ISA, MCA or PCI expansion slot
+         in which the Token-Ring network adapter is installed."
+
+ $OCTOK162_NODEHLP =     "Do not change the network adapter's node address unless you
+         are prepared to administer local node addresses. If not
+         specified, the network board will use the globally assigned
+         burned in address.\n
+         If a node address is specified, it MUST adhere to the
+         following rules: If MSB order (the default) is used, the
+         node address shall consist of 12 hexadecimal digits, the
+         leftmost being 4,5,6 or 7, as in 4000ABCD1234.\n
+         If LSB order is used, the 11th digit from the right shall
+         be 2,6,A or E, as in 020987654321."
+
+ $OCTOK162_SPEEDDES = "Token Ring Speed"
+
+ $OCTOK162_SPEEDHLP = "Media speed used by adapter. This setting overrides
+	the configured adapter media speed"
+
+ $OCTOK162_INFODES =     "Info message control"
+
+ $OCTOK162_INFOHLP =     "The value 1 enables some alerts messages of
+         a more informative character (Single Station, Duplex Mode)
+         that are suppressed by default."
+
+

@@ -1,0 +1,1060 @@
+; VeRsIoN=2.11 Installation Information File for the IBM PCI Token Ring Adapter
+; CoPyRiGhT=Copyright (c) 1998 IBM Corporation, All Rights Reserved
+
+VER: 2.11
+SYN: 1.00
+
+DR IBMTRPO
+{
+  DES:  $D01
+  HELP: $H01
+  PAR:  2.00
+  FILE: IBMTRPO.LAN
+  TIME: 60
+  PROD: 'PCI.1014.003E.0000.0000.*', 
+        'PCI.1014.003E.1014.003E.*', 
+        'PCI.1014.003E.1014.00CD.*' 
+
+  ;@# Sprod: 'IBM~IBM PCI Token Ring Adapter',
+  ;@# 	     'IBM~IBM PCI Token Ring Adapter',
+  ;@# 	     'IBM~IBM PCI Wake On LAN Token Ring Adapter'
+
+  ;@# CLIENT: IBMTRPO.LAN, IBMTRPO.EXE
+  ;@# ALIAS: IBMTRPO.LAN
+
+  PR SLOT
+  {
+    TYP: DEC (5)
+    VAL: 0-66560
+  }
+
+  PR NODE OPT
+  {
+  }
+
+  FR FrameSelect OPT
+  {
+    DES:  $D02
+    HELP: $H02
+    CD:   $F01
+    CH:   'TOKEN-RING'
+    CD:   $F02
+    CH:   'TOKEN-RING_SNAP'
+    DEF:  1
+  }
+
+  PR RxBuffers OPT
+  {
+    DES:  $D03
+    HELP: $H03
+    TYP:  DEC (2)
+    VAL:  4-64
+    DEF:  32
+    OUT:  'RXBUFFERS=%s'
+  }
+
+  PR TxBuffers OPT
+  {
+    DES:  $D04
+    HELP: $H04
+    TYP:  DEC (2)
+    VAL:  1-16
+    DEF:  16
+    OUT:  'TXBUFFERS=%s'
+  }
+
+  LI DataRate OPT
+  {
+    DES:  $D05
+    HELP: $H05
+    CD:   $K01
+    CH:   'AUTO'
+    CD:   $K02
+    CH:   'M4'
+    CD:   $K03
+    CH:   'M16'
+    DEF:  1
+    OUT:  'DATARATE=%s'
+  }
+
+  LI FullDuplex OPT
+  {
+    DES:  $D06
+    HELP: $H06
+    CD:   $K04
+    CH:   'YES'
+    CD:   $K05
+    CH:   'NO'
+    DEF:  1
+    OUT:  'FULLDUPLEX=%s'
+  }
+
+  LI Standby OPT
+  {
+    DES:  $D07
+    HELP: $H07
+    CD:   $K05
+    CH:   UND
+    CD:   $K04
+    CH:   'STANDBY'
+    DEF:  1
+    OUT:  '%s'
+  }
+
+  LI PriorityTx OPT
+  {
+    DES:  $D08
+    HELP: $H08
+    CD:   $K05
+    CH:   UND
+    CD:   $K04
+    CH:   'PRIORITYTX'
+    DEF:  1
+    OUT:  '%s'
+  }
+
+  PR TxPriMax IF (PriorityTx == 2) OPT ELS HID
+  {
+    DES:  $D09
+    HELP: $H09
+    TYP:  DEC (1)
+    VAL:  0-6
+    DEF:  5
+    OUT:  'TXPRIMAX=%s'
+  }
+
+  PR TxPriThresh IF (PriorityTx == 2) OPT ELS HID
+  {
+    DES:  $D10
+    HELP: $H10
+    TYP:  DEC (1)
+    VAL:  1-6
+    DEF:  3
+    OUT:  'TXPRITHRESH=%s'
+  }
+
+  LI RTSWEnable OPT
+  {
+    DES:  $D11
+    HELP: $H11
+    CD:   $K05
+    CH:   'NO'
+    CD:   $K04
+    CH:   'YES'
+    DEF:  1
+    OUT:  'RTSWENABLE=%s'
+  }
+
+  PR RTSWTableSize IF (RTSWEnable == 2) OPT ELS HID
+  {
+    DES:  $D12
+    HELP: $H12
+    TYP:  DEC (4)
+    VAL:  16, 32, 64, 128, 256, 512, 1024
+    DEF:  1024
+    OUT:  'RTSWTABLESIZE=%s'
+  }
+}
+
+DLANG: 4 ; English
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+
+LANG:  6 ; French
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+
+LANG:  7 ; German
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+
+LANG:  8 ; Italian
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+
+LANG: 14 ; Spanish
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+
+LANG: 12 ; Portuguese (Brazilian)
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+
+LANG:  9 ; Japanese
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+
+LANG: 10 ; Korean
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+
+LANG:  1 ; Chinese (Simplified)
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+
+LANG: 16 ; Chinese (Traditional)
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+
+LANG: 13 ; Russian
+
+$D01 = "IBM PCI Token Ring Adapter"
+$H01 = "The IBM PCI Token Ring Adapter Hardware Specific Module (IBMTRPO.LAN) is the
+       loadable module device driver for the ODI NetWare server environment.  This driver
+       works with the IBM PCI Token Ring Adapter."
+
+$D02 = "Frame Types"
+$H02 = "The IBMTRPO.LAN driver supports Token Ring frame types.  Select the frame types
+       that are appropriate for the installed IBM PCI Token Ring Adapter.  The default
+       frame type is Token Ring 802.2."
+
+$F01 = "Token Ring 802.2"
+$F02 = "Token Ring SNAP"
+$K01 = "Automatic"
+$K02 = "4 Mbps"
+$K03 = "16 Mbps"
+$K04 = "Enabled"
+$K05 = "Disabled"
+
+$D03 = "Number of Receive Buffers"
+$H03 = "The Number of Receive Buffers keyword specifies the number of receive buffers used
+       by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be in the
+       range 4-64.  The default is 32.  (Receive buffer size is defined by the server SET
+       command.  See Novell NetWare System Administration.)"
+
+$D04 = "Number of Transmit Buffers"
+$H04 = "The Number of Transmit Buffers keyword specifies the number of transmit buffers
+       used by the IBMTRPO.LAN driver.  The value of this keyword for the Server must be
+       in the range 1-16.  The default is 16.  (Transmit buffer size is defined by the
+       server SET command.  See Novell NetWare System Administration.)"
+
+$D05 = "Network Data Rate"
+$H05 = "The Network Data Rate keyword specifies network data rate for the IBM PCI Token
+       Ring Adapter.  The network data rate is automatically detected by default."
+
+$D06 = "Full Duplex"
+$H06 = "The Full Duplex keyword permits the IBMTRPO.LAN driver to activate Token Ring full
+       duplex operation supported by the IBM PCI Token Ring Adapter and the NetWare server
+       environment.  Full Duplex capability is enabled by default."
+
+$D08 = "Priority Transmit"
+$H08 = "The Priority Transmit keyword permits the IBMTRPO.LAN driver to activate the
+       priority transmit capability supported by the IBM PCI Token Ring Adapter and the
+       NetWare server environment.  Priority Transmit capability is disabled by default."
+
+$D09 = "Priority Transmit Maximum Level"
+$H09 = "The Priority Transmit Maximum Level keyword permits the IBMTRPO.LAN driver to set
+       the maximum priority level that the adapter will accept.  If any frame is queued
+       for transmission at a priority level higher than this, it will be transmitted at
+       this maximum level.  The value of this keyword must be in the range 0-6.  The
+       default is 5."
+
+$D10 = "Priority Transmit Threshold"
+$H10 = "The Priority Transmit Threshold keyword permits the IBMTRPO.LAN driver to set the
+       threshold for priority transmits.  The IBM PCI Token Ring adapter has two transmit
+       channels.  All frames with priority level 0 through this threshold will be
+       transmitted over the low priority channel.  All frames with a priority level
+       greater than this threshold up to the maximum will be transmitted over the high
+       priority channel.  The value of this keyword must be in the range 1-6.  The default
+       is 3."
+
+$D11 = "Route Switching"
+$H11 = "The Route Switching keyword permits the IBMTRPO.LAN driver to dynamically switch
+       the routes of IP traffic if possible.  An IBM MSS Server (8210) is required to take
+       advantage of this function.  Additionally, the MSS Server must be configured to
+       support Route Switching.  Route Switching is disabled by default."
+
+$D12 = "Route Switch Table Size"
+$H12 = "The Route Switch Table Size keyword specifies the number of entries in the Route
+       Switch cache table.  Allowable values are 16, 32, 64, 128, 256, 512, and 1024.
+       Workstations or clients should set this value to one of the smaller values while
+       servers should set this value to one of the larger values.  The default value is
+       1024."
+
+$D07 = "Standby Mode"
+$H07 = "The Standby Mode keyword permits the adapter being controlled by the IBMTRPO.LAN
+       driver to function as a redundant network interface adapter in conjunction with
+       RNIC.NLM.  If this keyword is used, the adapter will be used for redundancy
+       purposes only, and will NOT function as a normal adapter.  Standby Mode is disabled
+       by default."
+

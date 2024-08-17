@@ -102,6 +102,14 @@ The Thinkpad X61 is a laptop released in 2007 by IBM. The machine is configured 
 
 <img src="laptops/thinkpad-x61/photos/x61-front.jpg" width="500">
 
+## 7. [Thinkpad X13 Gen 1 (Intel)](laptops/thinkpad-x13g1) (2020)
+
+The Thinkpad X13 Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM to have legacy 16-bit OS-support and S3 sleep state.
+
+<img src="laptops/thinkpad-x13-g1/photos/x13g1-front-egpu-dock-full.jpg" width="500">
+
+The machine is configured to boot to DOS 6.22 from a USB flash drive. It can get network connectivity through PCIe-based network adapters via the USB-C Thunderbolt 3 port.
+
 # Virtual Machines
 
 Not exactly retro PCs but I just wanted to store the settings I use for my virtual playgrounds. This is typically for me to do quick and dirty testing without powering up my actual retro-PCs.
@@ -201,7 +209,7 @@ In Win 98SE
 6.  [SHSUCDX 3.06](http://adoxa.altervista.org/shsucdx/index.html)
 7.  [GRUBFORDOS](https://sourceforge.net/projects/grub4dos/files/GRUB4DOS/)
 8.  [svgaptch for VESA compliance](https://download.wcnews.com/files/other/wcpc/)
-9. [Crynwr](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/repos/pkg-html/crynwr.html)
+9.  [Crynwr](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/repos/pkg-html/crynwr.html)
 10. [Unisound](https://www.vogons.org/viewtopic.php?f=62&t=72553)
 11. [Microsoft Mouse 8.20](https://winworldpc.com/product/microsoft-mouse/8x)
 12. [Microsoft Mouse 9.01](https://winworldpc.com/product/microsoft-mouse/9x)
@@ -218,6 +226,7 @@ In Win 98SE
 23. [3C905 drivers](https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/3com/3c905/support.3com.com/infodeli/tools/nic/3c905.htm)
 24. [SC55 Soundfont](https://github.com/trevor0402/SC55Soundfont)
 25. [Via 4in1 drivers](https://theretroweb.com/chipsets/670)
+26. [Novell Netware DOS client](https://community.microfocus.com/img/oes/w/tips/34501/netware-dos-client)
 
 # Common software sources
 

@@ -1,0 +1,532 @@
+;============================================================================
+; E100ISA.LDI
+;
+; Intel EtherExpress(TM) PRO/100 ISA Adapter
+;============================================================================
+
+  Version:  2.20
+  SyntaxVersion:  1.00
+
+Driver E100ISA 
+{
+	Description:    $E100ISA_DESC
+	Help:                   $E100ISA_HELP
+	Par:                    2.00
+	Prod:                   'PnPISA.INT.10C.0','PnPISA.INT.10C.1'
+	File:                   E100ISA.LAN
+   ;@# 	SPROD:		'Intel~EtherExpress(TM) PRO/100 ISA Adapter'
+   ;@# 	Client:		E100ISA.LAN
+   ;@# 	Alias:		E100ISA.LAN
+
+PROMPT SLOT OPTIONAL
+	{
+	Values:                 1 - 65535
+	}
+
+PROMPT SERIAL OPTIONAL
+	{
+	Description:    $E100ISA_1
+	Help:                   $E100ISA_SERIALHELP
+	Type:                   HEX (8)
+	Values:                 0 - FFFFFFFF
+	Default:                UNDEFINED
+	OutputFormat:   'SERIAL=%s'
+	}
+
+PROMPT MEDIATYPE OPTIONAL
+	{
+	Description:    $E100ISA_2
+	Help:                   $E100ISA_MEDIAHELP
+	Type:                   STRING (8)
+	Values:                 AUTO , HALF10 , FULL10 , HALF100 , FULL100
+	Default:                AUTO
+	OutputFormat:   'MEDIATYPE=%s'
+	}
+
+PROMPT NODE
+	{
+	}
+
+FRAME FrameSelect 
+	{
+	Description:    $E100ISA_3
+	Help:                   $E100ISA_FRAMEHELP
+	CDescription:   $E100ISA_4
+	Choice:                 'Ethernet_802.2'
+	CDescription:   $E100ISA_5
+	Choice:                 'Ethernet_802.3'
+	CDescription:   $E100ISA_6
+	Choice:                 'Ethernet_SNAP'
+	CDescription:   $E100ISA_7
+	Choice:                 'Ethernet_II'
+	Default:                1, 2
+	}
+
+PROMPT RXEARLY OPTIONAL
+	{
+	Description:    $E100ISA_8
+	Help:                   $E100ISA_RXEARLYHELP
+	Type:                   STRING (3)
+	Values:                 ON, OFF
+	Default:                OFF
+	OutputFormat:   'RXEARLY=%s'
+	}
+
+PROMPT USE32BITIO OPTIONAL
+	{
+	Description:    $E100ISA_9
+	Help:                   $E100ISA_USE32HELP
+	Type:                   STRING (3)
+	Values:                 YES, NO
+	Default:                NO
+	OutputFormat:   'USE32BITIO=%s'
+	}
+
+; end Driver E100ISA
+}
+
+DLANG:  4
+;English-American
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+LANG:  1
+
+;Chinese-Simplified
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+LANG:   6
+;French
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+
+LANG:   7
+;German
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+LANG:   8
+;Italian
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+LANG:   9
+;Japanese
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+LANG:   10
+;Korean
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+LANG:  12
+;Portugese-Brazil
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+LANG:  13
+;Russian
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+LANG:   14
+;Spanish
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+LANG:  16
+;Chinese-Traditional
+	$E100ISA_1 = "Adapter serial number"
+	$E100ISA_2 = "Media type and Speed"
+	$E100ISA_3 = "Ethernet Frame Type selections"
+	$E100ISA_4 = "802.2"
+	$E100ISA_5 = "802.3"
+	$E100ISA_6 = "802.2 SNAP"
+	$E100ISA_7 = "Ethernet II"
+	$E100ISA_8 = "RxEarly - RxPipelining"
+	$E100ISA_9 = "Use32BitIO - Bus Width"
+
+	$E100ISA_DESC           = "Intel EtherExpress(TM) PRO/100 ISA Adapter"
+	$E100ISA_HELP           = "The Intel EtherExpress(TM) PRO/100 ISA Adapter's hardware configuration is 				
+		performed by E100ISA Installation or PlugNPlay configuration.\n         
+		You only need to specify NetWare configuration information or the       
+		adapter's SERIAL number if multiple E100ISA adapters are being used"
+	$E100ISA_SERIALHELP     = "The adapter's serial number is a unique identifier.				
+		and must be specified if multiple E100ISA ISA adapters are used         
+		in one PC."
+	$E100ISA_MEDIAHELP      = "You can select a specific media type and speed to 				
+		use or you can let the driver software automatically determine          
+		the media type and speed."
+	$E100ISA_FRAMEHELP      = "The driver defaults to using the 802.2 frame type.				
+		You can remove this frame type and/or add 802.3, 802.2 SNAP,            
+		or Ethernet II frame types. \nSelect the frame type that is used        
+		by the protocol that your network requires.\n If you select a           
+		frame type other than the default, configure both the server and        
+		the client to use the same frame type.\n We recommend that you  
+		select at least 802.2.\n        For existing networks, select both              
+		802.2 and 802.3."
+	$E100ISA_RXEARLYHELP = "The RxEarly keyword enables \"Receive Pipelineing\".					
+		Receive Pipelining can provide a significant performance increase       
+		when used in a server. It is not supported by Windows95 or                      
+		Client32.\n"
+	$E100ISA_USE32HELP      = "This adapter can use either 32 bit I/O or 16 bit I/O.  			
+		The default of 16 bit I/O is safe in all machines. Using 32 bit         
+		I/O may provide a performance increase but can be problematic           
+		with some motherboards. Use with caution.\n"
+
+
+
+

@@ -1,0 +1,6 @@
+REGEDIT
+HKEY_CLASSES_ROOT\Network\Novell\SystemConfig\NetworkProvider\GraphicalLogin\NWLGE\ZXContext\RunContext = 0
+HKEY_CLASSES_ROOT\Network\Novell\SystemConfig\NetworkProvider\GraphicalLogin\NWLGE\ZXContext\AllowWild = 0
+HKEY_CLASSES_ROOT\Network\Novell\SystemConfig\NetworkProvider\GraphicalLogin\NWLGE\ZXContext\LoginExtName = LGNCON16.DLL
+HKEY_CLASSES_ROOT\Network\Novell\SystemConfig\NetworkProvider\GraphicalLogin\NWLGE\ZXContext\LoginExtDesc = Login Extension for Contextless names
+HKEY_CLASSES_ROOT\Network\Novell\SystemConfig\NetworkProvider\GraphicalLogin\NWLGE\ZXContext\LoginExtType = 32769

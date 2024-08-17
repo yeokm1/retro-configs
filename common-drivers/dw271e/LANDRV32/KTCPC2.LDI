@@ -1,0 +1,145 @@
+;	Netware Installation Information File
+;	Kingston Technology Company
+;	Kingston EtheRx IC PC Card
+
+VER: 1.21
+SYN: 1.00
+
+DR KTCPC2
+{
+     DES:	$KTCPC2_1
+     HELP:	$KTCPC2_2
+     PAR:	2.00
+     FILE:	KTCPC2.LAN
+     
+     PROD:	'EISA.ISA.871.2, EISA.NVL.150.1'
+
+;@# SPROD:	'Kingston KNE-PC2 EtheRx IC PC Card'
+
+;@# CLIENT: KTCPC2.COM, KTCPC2.LAN
+;@# ALIAS:  KTCPC2.LAN
+
+     PR INT REQ
+     {
+          VAL: 3, 4, 5, 9, A, B, C, F
+          TYP:  HEX(1)
+          DEF: 5
+        }
+
+     PR PORT REQ
+     {
+          VAL: 300, 320, 340, 360, 380, 3a0, 200, 220, 240, 260, 280, 2a0, 2c0, 2e0
+          DEF: 300
+          RES: 20
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 1,2
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+
+
+DLANG:    4
+;English
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+
+
+LANG:     1
+;CHINESE
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+
+
+
+
+
+LANG:     6
+;French
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+
+
+
+
+LANG:     7
+;German
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+
+
+
+
+LANG:     8
+;Italian
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+
+
+
+LANG:     9
+;JAPANESE
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+
+
+LANG:     10
+;KOREAN
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+
+
+LANG:     12
+;PORTUGESE
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+
+
+LANG:     13
+;RUSSIAN
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+
+
+
+LANG:     14
+;Spanish
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+
+
+
+
+LANG:     16
+;CHINESE
+     $KTCPC2_1 = "Kingston EtheRx IC PC Card Ethernet Adapter"
+     $KTCPC2_2 = "This driver (KTCPC2.LAN) supports Kingston KNE-PC2 
+network boards."
+

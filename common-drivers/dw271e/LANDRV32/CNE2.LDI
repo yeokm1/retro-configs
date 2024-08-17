@@ -1,0 +1,185 @@
+; CNE2.LDI
+;
+; Novell NE2 Network Interface Cards.
+;
+; VeRsIoN=1.05 Novell LAN Installation Information File for CNE2.
+; CoPyRiGhT=(c)Copyright 1996, 1997, 1998, by Novell, Inc.  All rights reserved.
+
+VER: 1.05
+SYN: 1.00
+
+DR NOVELL_CNE2
+{
+     DES:  $CNE2_1
+     HELP:  $CNE2_2
+     PAR: 2.00
+     PROD:     'MCA.7154'
+     FILE:     CNE2.LAN
+;@#  Sprod: 'Novell ~ NE2 or compatible'
+;@# CLIENT: CNE2
+;@# ALIAS: NE2.LAN
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,4
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+
+}
+
+DR EAGLE_CNE2
+{
+     DES:  $CNE2_3
+     HELP:  $CNE2_4
+     PAR: 2.00
+     PROD:     'MCA.7154'
+     FILE:     CNE2.LAN
+;@#  Sprod: 'EAGLE ~ NE2 or compatible'
+;@# CLIENT: CNE2
+;@# ALIAS: NE2.LAN
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.3'
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          DEF: 2
+        }
+
+     PR RETRIES
+     {
+          VAL: 0-255
+          DEF: 5
+     }
+
+}
+
+
+DLANG:    4
+;English
+     $CNE2_1 =  "Novell Ethernet NE/2"
+     $CNE2_2 =    "This driver (CNE2.LAN) supports NE2 or NE2T network boards
+installed in MCA servers.  You can install up to four boards in a server."
+     $CNE2_3 =  "EAGLE NE/2"
+     $CNE2_4 =    "This driver (CNE2.LAN) supports EAGLE NE2 or NE2T network
+boards installed in MCA servers.  You can install up to four boards in a
+server."
+
+
+LANG: 6
+;French
+     $CNE2_1 =  "Ethernet NE/2 de Novell"
+     $CNE2_2 =    "Ce pilote (CNE2.LAN) supporte les cartes
+ rÇseau NE2 ou NE2T installÇes sur des
+ serveurs MCA. Vous pouvez installer
+ jusqu'Ö quatre cartes sur un serveur."
+     $CNE2_3 =  "EAGLE NE/2"
+     $CNE2_4 =    "Ce pilote (CNE2.LAN) supporte les cartes
+ rÇseau EAGLE NE2 ou NE2T installÇes sur
+ des serveurs MCA. Vous pouvez installer
+\njusqu'Ö quatre cartes sur un serveur."
+
+
+LANG: 7
+;German
+     $CNE2_1 =  "Novell Ethernet NE/2"
+     $CNE2_2 =    "Dieser Treiber (CNE2.LAN) unterstÅtzt in MCA-Servern installierte
+NE2- oder NE2T-Netzwerkkarten.  Sie kînnen bis zu vier Karten in einen
+Server installieren."
+     $CNE2_3 =  "EAGLE NE/2"
+     $CNE2_4 =    "Dieser Treiber (CNE2.LAN) unterstÅtzt in MCA-Servern installierte
+EAGLE NE2- oder NE2T-Netzwerkkarten.  Sie kînnen bis zu vier Karten
+in einen Server installieren."
+
+
+LANG: 8
+;Italian
+     $CNE2_1 =  "Novell Ethernet NE/2"
+     $CNE2_2 =    "Questo driver CNE2.LAN supporta le schede di rete NE2 o NE2T
+installate su server MCA. E' possibile installare fino a quattro schede
+per server."
+     $CNE2_3 =  "EAGLE NE/2"
+     $CNE2_4 =    "Questo driver CNE2.LAN supporta le schede di rete EAGLE NE2
+o NE2T installate su server MCA. E' possibile installare fino a quattro
+schede per server."
+
+
+LANG: 12
+;Portuguese
+     $CNE2_1 =  "Novell Ethernet NE/2"
+     $CNE2_2 =    "Este driver (CNE2.LAN) suporta placas de rede NE2 ou NE2T
+instaladas em servidores MCA. Vocà pode instalar atÇ quatro placas em um servidor."
+     $CNE2_3 =  "EAGLE NE/2"
+     $CNE2_4 =    "Este driver (CNE2.LAN) suporta placas de rede EAGLE NE2 ou NE2T
+instaladas em servidores MCA. Vocà pode instalar atÇ quatro placas em um
+servidor."
+
+
+LANG: 14
+;Spanish
+     $CNE2_1 =  "Novell Ethernet NE/2"
+     $CNE2_2 =    "Este controlador (CNE2.LAN) ofrece soporte a las tarjetas de
+red NE2 o NE2T instaladas en servidores MCA. Se pueden instalar 
+hasta cuatro tarjetas en un servidor."
+     $CNE2_3 =  "EAGLE NE/2"
+     $CNE2_4 =    "Este controlador (CNE2.LAN) ofrece soporte a las tarjetas de
+red EAGLE NE2 o NE2T instaladas en servidores MCA. Se pueden
+instalar hasta cuatro tarjetas en un servidor."
+
+
+LANG: 1
+;Chinese-Simplified
+     $CNE2_1 =  "Novell Ethernet NE/2"
+     $CNE2_2 =    "¥À«˝∂Ø≥Ã–Ú (CNE2.LAN) ÷ß≥÷∞≤◊∞‘⁄ MCA ∑˛ŒÒ∆˜÷–µƒ NE2 ªÚ NE2T Õ¯¬Á∞Â°£ø…‘⁄“ª∏ˆ∑˛ŒÒ∆˜÷–∞≤◊∞∂‡¥ÔÀƒ∏ˆ∞Â°£"
+     $CNE2_3 =  "EAGLE NE/2"
+     $CNE2_4 =    "¥À«˝∂Ø≥Ã–Ú (CNE2.LAN) ÷ß≥÷∞≤◊∞‘⁄ MCA ∑˛ŒÒ∆˜÷–µƒ EAGLE NE2 ªÚ NE2T Õ¯¬Á∞Â°£ø…‘⁄“ª∏ˆ∑˛ŒÒ∆˜÷–∞≤◊∞∂‡¥ÔÀƒ∏ˆ∞Â°£"
+
+
+LANG: 16
+;Chinese-Traditional
+     $CNE2_1 =  "Novell Ethernet NE/2"
+     $CNE2_2 =    "•ª≈X∞ µ{¶° (CNE2.LAN) §‰¥©¶w∏À¶b MCA ¶¯™Aæπ§W™∫ NE2 ©Œ NE2T ∫Ù∏Ù•d°C§@≥°¶¯™Aæπ§§•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+     $CNE2_3 =  "EAGLE NE/2"
+     $CNE2_4 =    "•ª≈X∞ µ{¶° (CNE2.LAN) §‰¥©¶w∏À¶b MCA ¶¯™Aæπ§W™∫ EAGLE NE2 ©Œ NE2T ∫Ù∏Ù•d°C§@≥°¶¯™Aæπ§§•i¶w∏À¶‹¶h 4 §˘∫Ù∏Ù•d°C"
+
+
+LANG: 9
+;Japanese
+     $CNE2_1 =  "Novell Ethernet NE/2"
+     $CNE2_2 =    "This driver (CNE2.LAN) supports NE2 or NE2T network boards
+installed in MCA servers.  You can install up to four boards in a server."
+     $CNE2_3 =  "EAGLE NE/2"
+     $CNE2_4 =    "This driver (CNE2.LAN) supports EAGLE NE2 or NE2T network
+boards installed in MCA servers.  You can install up to four boards in a
+server."
+
+

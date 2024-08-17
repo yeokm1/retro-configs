@@ -1,0 +1,100 @@
+;************************************************************************
+;*
+;*  Chapter 1. How to use this patch file?
+;*
+;*      This file (RTEND2.TXT) contains info. that helps you patch
+;*      'RTEND.DOS'(v1.11) file into your own NDIS2 driver.
+;*
+;*      To generate your custom driver, please follow the steps
+;*      described below:
+;*
+;*      a). Follow the instructions to edit the message area in each
+;*          line. Save this file when you finish editing.
+;*          ( see CHAPTER 2 for more details ! )
+;*
+;*         !!! NOTE: DO NOT EDIT THE OFFSET AND LENGTH AREA !!!
+;*
+;*      b). Make sure that you have the following files in your working
+;*          directory:
+;*
+;*              RTPATCH.EXE     ------->   The patch execution file
+;*              RTEND.DOS       ------->   RTL8168B NDIS2 driver file
+;*              RTEND2.TXT      ------->   RTEND.DOS patch info. file
+;*
+;*      c). After you decide the name for your NDIS2 driver,
+;*          simply type:
+;*
+;*          > rtpatch  RTEND.DOS   RTEND2.txt  <put driver name here>  <?
+;*
+;*         !!! NOTE: DO NOT USE THE SAME DRIVER NAME AS THE ORIGINAL
+;*                   DRIVER!!!
+;*
+;*      d). If no error occurs, you should find your custom driver is
+;*          generated under your working directory.
+;*
+;*
+;* Chapter 2. How to edit this file ?
+;*
+;*
+;*      Each line in this file contains a display message info. of the
+;*      driver. Each line has the same format:
+;*
+;*          <offset> <length> <message>
+;*      e.g.
+;*           1266      28      'NDIS2 driver for RTL8168',0dh,0ah,'$';
+;*           ----      --      ----------------------------------------
+;*                                                                
+;*        Do not edit here!       |                                 | EOL
+;*                           Put your own message here!           |
+;*          (HEX)     (DEC)                                     delimiter
+;*
+;*
+;*
+;*      *NOTE: DO NOT EDIT THE <offset> AND <length> AREA !!!
+;*
+;*      *NOTE: Anything after comment character ';' will be ignored!
+;*
+;*      *NOTE: Always add ';'(EOL) at end of each line!
+;*
+;*      *NOTE: If delimiter is needed, keep delimiter intact! In this case,
+;*             leave the '$' as the last byte.
+;*
+;*      *NOTE: 0H can only be added as delimiter! Message after 0H will be lost!
+;*
+;*      *NOTE: Total length of your message should not exceed <length>.
+;*
+;*      *NOTE: If you must use the comment character (;) in your message,
+;*             put 3bh instead of ';'. Same for (').
+;*
+;*      *NOTE: Do not exceed 250 characters in each line.
+;*
+;************************************************************************
+
+
+;************************************************************************
+;       Put your driver name here  (delimiter is '$')
+;************************************************************************
+20a  8 'RTEND','$',0;   maximum ----> 6 + '$'+ 0 ;driver name for PCI-E NIC, ie RTL8168B
+929d 8 'RTEND','$',0;   maximum ----> 6 + '$'+ 0 ;driver name for PCI-E NIC, ie RTL8168B
+
+;************************************************************************
+;       Put your adapter name instead of 'RTL8168B' (no delimiter)
+;************************************************************************
+8f47  80 'Realtek RTL8168/8111 Family Gigabit Ethernet Adapter',0 ;RTL8168B
+909f  80 'CopyRight : Copyright @ 2006, Realtek Semiconductor Corp.',0 
+
+;877a  2   ECh,10h;     ;VID
+;87f5  2   ECh,10h;
+;88b7  2   ECh,10h;
+;88e5  2   ECh,10h;
+;8909  2   ECh,10h;
+;90d5  2   ECh,10h;
+
+;8777  2   39h,81h;     ;DID
+;88b4  2   39h,81h;
+;88e2  2   39h,81h;
+;8906  2   39h,81h;
+;90d2  2   39h,81h;
+
+
+
