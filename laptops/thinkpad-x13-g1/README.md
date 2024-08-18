@@ -154,7 +154,7 @@ time nc -d 192.168.1.71 2000 > bogus.bin
 
 The last 3 columns show the memory usage of the different driver components in bytes. 
 
-We can see the transfer speeds do not even come close to the 1 Gbit/s or 125 Mb/s or 128 KB/s.
+We can see the transfer speeds do not even come close to the 1 Gbit/s or 125 Mb/s or 128000 KB/s.
 
 ## Sources
 
