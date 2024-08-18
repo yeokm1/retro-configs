@@ -164,3 +164,4 @@ We can see the transfer speeds do not even come close to the 1 Gbit/s or 125 Mb/
 4. [Realtek NDIS2 driver](https://www.realtek.com/Download/List?cate_id=584)
 5. [MTCP speed test guide](https://www.brutman.com/mTCP/mTCP_Performance.html)
 6. [Packet drivers](https://packetdriversdos.net/)
+7. [Intel DOS](https://www.intel.com/content/www/us/en/download/2595/intel-ethernet-adapter-drivers-for-ms-dos-final-release.html)
