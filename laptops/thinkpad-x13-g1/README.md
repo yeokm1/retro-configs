@@ -2,6 +2,8 @@
 
 The Thinkpad X13 Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM to have legacy 16-bit OS-support and S3 sleep state.
 
+Background of this project can be read from my [blog post](https://yeokhengmeng.com/2024/08/dos-on-thinkpad-x13-gen1/).
+
 <img src="photos/x13g1-front-egpu-dock-full.jpg" width="500">
 
 The machine is configured to boot to DOS 6.22 from a USB flash drive.
