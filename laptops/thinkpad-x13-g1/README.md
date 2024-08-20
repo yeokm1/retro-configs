@@ -182,19 +182,6 @@ Benchmark video run:
 
 [![X13G1 benchmark video](https://img.youtube.com/vi/YMfRvdlx4pg/default.jpg)](https://youtu.be/YMfRvdlx4pg)
 
-* 00:23 - 2 - 3DBench (Superscape) 1.0c (Faster PCs) - 106.5 FPS
-* 00:43 - 3 - Chris's 3D Benchmark - 218.1 score, 130.8 FPS
-* 01:10 - 5 - PC Player benchmark 320x200 8bpp - 139.4 score
-* 01:45 - 6 - PC Player benchmark 640x480 8bpp - 22.2 score
-* 02:19 - a - Doom min. details (Slower PCs) - timed 2134 gametics in 294 realticks, 254.04 FPS
-* 02:43 - b - Doom max. details (Faster PCs) - timed 2134 gametics in 1799 realticks, 41.52 FPS
-* 03:49 - c - Quake timedemo - 969 frames, 7.5s, 128.5 FPS
-* 04:10 - d - Quake timedemo 360x480 - 969 frames, 21.7s, 44.7 FPS
-* 04:48 - m - TOPBENCH 3.8 - 290 score
-* 04:55 - n - Speedsys 4.78 - 2904.46 score
-* 08:16 - e - Quake timedemo 640x480 - 969 frames, 167.4s, 5.8 FPS
-* 11:23 - l - Landmark System Speed Test 6.00
-
 ## Sources
 
 1. [X13 Hardware Maintenance Manual](https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-x-series-laptops/thinkpad-x13-type-20t2-20t3)
