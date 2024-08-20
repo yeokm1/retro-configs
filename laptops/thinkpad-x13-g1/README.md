@@ -162,25 +162,23 @@ We can observe the transfer speeds do not even come close to the 1 Gbit/s or 125
 
 I ran several benchmark applications from [Phil's Computer Lab DOS Benchmark Pack](https://www.philscomputerlab.com/dos-benchmark-pack.html) in stock configuration. These are the results.
 
-| Index | Description                      | Real mode                               | Protected Mode              |
-|-------|----------------------------------|-----------------------------------------|-----------------------------|
-| 1     | 3DBench (Superscape) 1.0         | 11.1 (incorrect)                        |                             |
-| 2     | 3DBench (Superscape) 1.0c        | 106.5                                   |                             |
-| 3     | Chris's 3D Benchmark             | 218.1 score, 130.8 FPS                  |                             |
-| 5     | PC Player benchmark 320x200 8bpp | 139.4                                   |                             |
-| 6     | PC Player benchmark 640x480 8bpp | 22.2                                    |                             |
-| a     | Doom min. details                | 2134 gametics, 294 realtics, 253.04 FPS |                             |
-| b     | Doom max. details                | 2134 gametics, 1799 realtics, 41.52 FPS |                             |
-| c     | Quake timedemo                   | 969 Frames, 7.5s, 128.4 FPS             |                             |
-| d     |  Quake timedemo 360x480          | 969 Frames, 21.7s, 44.7FPS              |                             |
-| e     | Quake timedemo 640x480           | Crash (likely insufficient memory)      | 969 Frames, 167.7s, 5.8 FPS |
-| l     | Landmark System Speed Test 6.00  | Cannot start                            | 6                           |
-| m     | TOPBENCH 3.8                     | 290                                     |                             |
-| n     | Speedsys 4.78                    | 2904.46 score                           |                             |
-
-Benchmark video run:
-
 [![X13G1 benchmark video](https://img.youtube.com/vi/YMfRvdlx4pg/default.jpg)](https://youtu.be/YMfRvdlx4pg)
+
+| Time  | Idx | Description                      | Real mode                               | Protected Mode              |
+|-------|-----|----------------------------------|-----------------------------------------|-----------------------------|
+| 00:06 | 1   | 3DBench (Superscape) 1.0         | 11.1 (incorrect)                        |                             |
+| 00:23 | 2   | 3DBench (Superscape) 1.0c        | 106.5                                   |                             |
+| 00:43 | 3   | Chris's 3D Benchmark             | 218.1 score, 130.8 FPS                  |                             |
+| 01:10 | 5   | PC Player benchmark 320x200 8bpp | 139.4                                   |                             |
+| 01:45 | 6   | PC Player benchmark 640x480 8bpp | 22.2                                    |                             |
+| 02:19 | a   | Doom min. details                | 2134 gametics, 294 realtics, 253.04 FPS |                             |
+| 02:43 | b   | Doom max. details                | 2134 gametics, 1799 realtics, 41.52 FPS |                             |
+| 03:49 | c   | Quake timedemo                   | 969 Frames, 7.5s, 128.4 FPS             |                             |
+| 04:10 | d   | Quake timedemo 360x480           | 969 Frames, 21.7s, 44.7FPS              |                             |
+| 04:48 | m   | TOPBENCH 3.8                     | 290                                     |                             |
+| 04:55 | n   | Speedsys 4.78                    | 2904.46 score                           |                             |
+| 08:16 | e   | Quake timedemo 640x480           | Crash (likely insufficient memory)      | 969 frames, 167.4s, 5.8 FPS |
+| 11:23 | l   | Landmark System Speed Test 6.00  | Cannot start                            | Unreliable results          |
 
 ## Sources
 
