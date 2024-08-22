@@ -160,9 +160,11 @@ We can observe the transfer speeds do not even come close to the 1 Gbit/s or 125
 
 ## Performance benchmarks
 
-I ran several benchmark applications from [Phil's Computer Lab DOS Benchmark Pack](https://www.philscomputerlab.com/dos-benchmark-pack.html) in stock configuration. These are the results.
+I ran several benchmark applications from [Phil's Computer Lab DOS Benchmark Pack](https://www.philscomputerlab.com/dos-benchmark-pack.html) in stock configuration. 
 
 [![X13G1 benchmark video](https://img.youtube.com/vi/YMfRvdlx4pg/default.jpg)](https://youtu.be/YMfRvdlx4pg)
+
+These are the results:
 
 | Time  | Idx | Description                      | Real mode                               | Protected Mode              |
 |-------|-----|----------------------------------|-----------------------------------------|-----------------------------|
