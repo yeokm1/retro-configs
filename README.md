@@ -56,19 +56,7 @@ In Win 98SE
 
 In WFW 3.11
 
-## 2. [Dell Latitude LM M166ST](laptops/latitude-lm) (1996)
-
-A barebones Pentium MMX laptop configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
-
-<img src="laptops/latitude-lm/photos/lm-wfw.jpg" width="500">
-
-In Windows for Workgroups 3.11
-
-<img src="laptops/latitude-lm/photos/lm-win98.jpg" width="500">
-
-In Windows 98SE
-
-## 3. [Toshiba Satellite 315CDT](laptops/satellite-315cdt) (1996)
+## 2. [Toshiba Satellite 315CDT](laptops/satellite-315cdt) (1996)
 
 The Toshiba laptop is configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE. This machine's interesting feature is that it comes with an original Yamaha OPL3 for FM synthesis which is uncommon for a laptop.
 
@@ -80,7 +68,7 @@ In Win 98SE
 
 In WFW 3.11
 
-## 4. [Hand386](laptops/hand386) (2023)
+## 3. [Hand386](laptops/hand386) (2023)
 
 This is a new 386-based palmtop released in 2023. It runs on DOS 6.22 and Windows for Workgroups (WFW) 3.11.
 
@@ -88,7 +76,7 @@ This is a new 386-based palmtop released in 2023. It runs on DOS 6.22 and Window
 
 Here the system is running Descent on lowest quality setting.
 
-## 5. [Book8088v2](laptops/book8088) (2023)
+## 4. [Book8088v2](laptops/book8088) (2023)
 
 This is a new 8088-based subnotebook released in 2023. I have set it up to run DOS 6.22, Win 1.03 and Win 2.03.
 
@@ -96,13 +84,13 @@ This is a new 8088-based subnotebook released in 2023. I have set it up to run D
 
 Here it is shown running CGA Compatibility tester.
 
-## 6. [Thinkpad X61](laptops/thinkpad-x61) (2007)
+## 5. [Thinkpad X61](laptops/thinkpad-x61) (2007)
 
 The Thinkpad X61 is a laptop released in 2007 by IBM. The machine is configured to multi-boot to DOS 6.22, Windows 10 32-bit and Xubuntu.
 
 <img src="laptops/thinkpad-x61/photos/x61-front.jpg" width="500">
 
-## 7. [Thinkpad X13 Gen 1 (Intel)](laptops/thinkpad-x13-g1) (2020)
+## 6. [Thinkpad X13 Gen 1 (Intel)](laptops/thinkpad-x13-g1) (2020)
 
 The Thinkpad X13 Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM to have legacy 16-bit OS-support and S3 sleep state.
 
@@ -197,6 +185,18 @@ In WFW 3.11
 <img src="deprecated/thinkpad-390e/photos/390e-win98se.jpg" width="500">
 
 In Win 98SE
+
+## 6. [Dell Latitude LM M166ST](deprecated/latitude-lm) (1996)
+
+A barebones Pentium MMX laptop configured to dual-boot to DOS 6.22/Windows for Workgroups (WFW) 3.11 and Windows 98SE.
+
+<img src="deprecated/latitude-lm/photos/lm-wfw.jpg" width="500">
+
+In Windows for Workgroups 3.11
+
+<img src="deprecated/latitude-lm/photos/lm-win98.jpg" width="500">
+
+In Windows 98SE
 
 
 # Common drivers sources
