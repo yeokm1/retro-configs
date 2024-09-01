@@ -101,7 +101,7 @@ All the 3 network adapters I tried requires NDIS 2 drivers provided by the manuf
 
 <img src="photos/x13g1-rtl8125.jpg" width="500">
 
-A 2.5GBE link can actually be negotiated as shown by the driver if the cable and the other end is capable of it. In practice though, the pratical speed is nowhere near.
+A 2.5GBE link can actually be negotiated as shown by the driver if the cable and the other end is capable of it. In practice though, the actual speed is nowhere near.
 
 ### Apple Thunderbolt 2 1GbE with TB3-TB2 adapter (Broadcom)
 
