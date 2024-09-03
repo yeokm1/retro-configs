@@ -55,7 +55,7 @@ Sound Blaster and OPL3 support is provided by the [SBEMU](https://github.com/cra
 
 <img src="photos/x301-network.jpg" width="500">
 
-ODI Network drivers and Packet driver shim loaded successfully 
+ODI Network drivers and Packet driver shim loaded successfully.
 
 ## Windows 10 Drivers
 
