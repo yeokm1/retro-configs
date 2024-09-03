@@ -98,6 +98,15 @@ The Thinkpad X13 Gen 1 (Intel) is a modern laptop released in 2020. I believe it
 
 The machine is configured to boot to DOS 6.22 from a USB flash drive. It can get network connectivity through PCIe-based network adapters via the USB-C Thunderbolt 3 port.
 
+## 7. [Thinkpad X301](laptops/thinkpad-x301) (2008)
+
+The Thinkpad X301 is a laptop released in 2008 by Lenovo as a technical update to the famously thin X300 (Kodachi).
+
+<img src="laptops/thinkpad-x301/photos/x301-front.jpg" width="500">
+
+The machine is configured to multi-boot to DOS 6.22, Windows 10 64-bit and Lubuntu. 
+
+
 # Virtual Machines
 
 Not exactly retro PCs but I just wanted to store the settings I use for my virtual playgrounds. This is typically for me to do quick and dirty testing without powering up my actual retro-PCs.
@@ -198,7 +207,6 @@ In Windows for Workgroups 3.11
 
 In Windows 98SE
 
-
 # Common drivers sources
 
 1.  [Toshiba generic CD driver CDROMDRV](https://www.legroom.net/howto/msdos)
@@ -243,5 +251,3 @@ In Windows 98SE
 11. [MS-DOS 6.22 install disks](https://winworldpc.com/product/ms-dos/622)
 12. [Windows for Workgroups 3.11 install disks](https://winworldpc.com/product/windows-3/wfw-311)
 13. [CPU Identification Utility - CHKCPU](http://www.steunebrink.info/chkcpu.htm)
-
-

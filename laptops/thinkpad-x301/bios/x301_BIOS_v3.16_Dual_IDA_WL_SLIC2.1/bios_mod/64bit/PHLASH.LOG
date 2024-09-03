@@ -1,0 +1,2350 @@
+--- Log started: 06/18/15 21:00:09
+Initializing...
+Log file       : C:\Users\User\Desktop\x301DualIDABIOS\64bit\PHLASH.LOG
+Settings file  : C:\Users\User\Desktop\x301DualIDABIOS\64bit\PHLASH.INI (found)
+Executable     : C:\Users\User\Desktop\x301DualIDABIOS\64bit\WinPhlash64.exe
+    Version    : 1.0.49.0    Build      : Phoenix WinPhlash64
+    Date       : 6/19/2015
+Resource file  : C:\Users\User\Desktop\x301DualIDABIOS\64bit\PHLASHLC.DLL (loaded)
+Help file      : C:\Users\User\Desktop\x301DualIDABIOS\64bit\WINPHLASH.HLP
+App name       : Phoenix WinPhlash64
+OS Information : Windows NT 6.1.7601 Service Pack 1 - supported
+isNT_AUTHORITY_SYSTEM_account: User. => False.
+gVBL_Flag = False(0h).
+PrepareAnalysisStage...
+
+[06/18/15 21:00:21]
+Preparation stage
+    
+    Processing parameters...
+        Image file     : C:\Users\User\Desktop\x301DualIDABIOS\64bit\BIOS.ROM
+        Backup file    : C:\Users\User\Desktop\x301DualIDABIOS\64bit\BIOS.BAK
+    
+    Loading new BIOS image file...
+        Opening file C:\Users\User\Desktop\x301DualIDABIOS\64bit\BIOS.ROM...
+        Allocating 8430774 bytes...
+        Reading 32768 bytes from the file starting at      0...
+        Reading 32768 bytes from the file starting at  32768...
+        Reading 32768 bytes from the file starting at  65536...
+        Reading 32768 bytes from the file starting at  98304...
+        Reading 32768 bytes from the file starting at 131072...
+        Reading 32768 bytes from the file starting at 163840...
+        Reading 32768 bytes from the file starting at 196608...
+        Reading 32768 bytes from the file starting at 229376...
+        Reading 32768 bytes from the file starting at 262144...
+        Reading 32768 bytes from the file starting at 294912...
+        Reading 32768 bytes from the file starting at 327680...
+        Reading 32768 bytes from the file starting at 360448...
+        Reading 32768 bytes from the file starting at 393216...
+        Reading 32768 bytes from the file starting at 425984...
+        Reading 32768 bytes from the file starting at 458752...
+        Reading 32768 bytes from the file starting at 491520...
+        Reading 32768 bytes from the file starting at 524288...
+        Reading 32768 bytes from the file starting at 557056...
+        Reading 32768 bytes from the file starting at 589824...
+        Reading 32768 bytes from the file starting at 622592...
+        Reading 32768 bytes from the file starting at 655360...
+        Reading 32768 bytes from the file starting at 688128...
+        Reading 32768 bytes from the file starting at 720896...
+        Reading 32768 bytes from the file starting at 753664...
+        Reading 32768 bytes from the file starting at 786432...
+        Reading 32768 bytes from the file starting at 819200...
+        Reading 32768 bytes from the file starting at 851968...
+        Reading 32768 bytes from the file starting at 884736...
+        Reading 32768 bytes from the file starting at 917504...
+        Reading 32768 bytes from the file starting at 950272...
+        Reading 32768 bytes from the file starting at 983040...
+        Reading 32768 bytes from the file starting at 1015808...
+        Reading 32768 bytes from the file starting at 1048576...
+        Reading 32768 bytes from the file starting at 1081344...
+        Reading 32768 bytes from the file starting at 1114112...
+        Reading 32768 bytes from the file starting at 1146880...
+        Reading 32768 bytes from the file starting at 1179648...
+        Reading 32768 bytes from the file starting at 1212416...
+        Reading 32768 bytes from the file starting at 1245184...
+        Reading 32768 bytes from the file starting at 1277952...
+        Reading 32768 bytes from the file starting at 1310720...
+        Reading 32768 bytes from the file starting at 1343488...
+        Reading 32768 bytes from the file starting at 1376256...
+        Reading 32768 bytes from the file starting at 1409024...
+        Reading 32768 bytes from the file starting at 1441792...
+        Reading 32768 bytes from the file starting at 1474560...
+        Reading 32768 bytes from the file starting at 1507328...
+        Reading 32768 bytes from the file starting at 1540096...
+        Reading 32768 bytes from the file starting at 1572864...
+        Reading 32768 bytes from the file starting at 1605632...
+        Reading 32768 bytes from the file starting at 1638400...
+        Reading 32768 bytes from the file starting at 1671168...
+        Reading 32768 bytes from the file starting at 1703936...
+        Reading 32768 bytes from the file starting at 1736704...
+        Reading 32768 bytes from the file starting at 1769472...
+        Reading 32768 bytes from the file starting at 1802240...
+        Reading 32768 bytes from the file starting at 1835008...
+        Reading 32768 bytes from the file starting at 1867776...
+        Reading 32768 bytes from the file starting at 1900544...
+        Reading 32768 bytes from the file starting at 1933312...
+        Reading 32768 bytes from the file starting at 1966080...
+        Reading 32768 bytes from the file starting at 1998848...
+        Reading 32768 bytes from the file starting at 2031616...
+        Reading 32768 bytes from the file starting at 2064384...
+        Reading 32768 bytes from the file starting at 2097152...
+        Reading 32768 bytes from the file starting at 2129920...
+        Reading 32768 bytes from the file starting at 2162688...
+        Reading 32768 bytes from the file starting at 2195456...
+        Reading 32768 bytes from the file starting at 2228224...
+        Reading 32768 bytes from the file starting at 2260992...
+        Reading 32768 bytes from the file starting at 2293760...
+        Reading 32768 bytes from the file starting at 2326528...
+        Reading 32768 bytes from the file starting at 2359296...
+        Reading 32768 bytes from the file starting at 2392064...
+        Reading 32768 bytes from the file starting at 2424832...
+        Reading 32768 bytes from the file starting at 2457600...
+        Reading 32768 bytes from the file starting at 2490368...
+        Reading 32768 bytes from the file starting at 2523136...
+        Reading 32768 bytes from the file starting at 2555904...
+        Reading 32768 bytes from the file starting at 2588672...
+        Reading 32768 bytes from the file starting at 2621440...
+        Reading 32768 bytes from the file starting at 2654208...
+        Reading 32768 bytes from the file starting at 2686976...
+        Reading 32768 bytes from the file starting at 2719744...
+        Reading 32768 bytes from the file starting at 2752512...
+        Reading 32768 bytes from the file starting at 2785280...
+        Reading 32768 bytes from the file starting at 2818048...
+        Reading 32768 bytes from the file starting at 2850816...
+        Reading 32768 bytes from the file starting at 2883584...
+        Reading 32768 bytes from the file starting at 2916352...
+        Reading 32768 bytes from the file starting at 2949120...
+        Reading 32768 bytes from the file starting at 2981888...
+        Reading 32768 bytes from the file starting at 3014656...
+        Reading 32768 bytes from the file starting at 3047424...
+        Reading 32768 bytes from the file starting at 3080192...
+        Reading 32768 bytes from the file starting at 3112960...
+        Reading 32768 bytes from the file starting at 3145728...
+        Reading 32768 bytes from the file starting at 3178496...
+        Reading 32768 bytes from the file starting at 3211264...
+        Reading 32768 bytes from the file starting at 3244032...
+        Reading 32768 bytes from the file starting at 3276800...
+        Reading 32768 bytes from the file starting at 3309568...
+        Reading 32768 bytes from the file starting at 3342336...
+        Reading 32768 bytes from the file starting at 3375104...
+        Reading 32768 bytes from the file starting at 3407872...
+        Reading 32768 bytes from the file starting at 3440640...
+        Reading 32768 bytes from the file starting at 3473408...
+        Reading 32768 bytes from the file starting at 3506176...
+        Reading 32768 bytes from the file starting at 3538944...
+        Reading 32768 bytes from the file starting at 3571712...
+        Reading 32768 bytes from the file starting at 3604480...
+        Reading 32768 bytes from the file starting at 3637248...
+        Reading 32768 bytes from the file starting at 3670016...
+        Reading 32768 bytes from the file starting at 3702784...
+        Reading 32768 bytes from the file starting at 3735552...
+        Reading 32768 bytes from the file starting at 3768320...
+        Reading 32768 bytes from the file starting at 3801088...
+        Reading 32768 bytes from the file starting at 3833856...
+        Reading 32768 bytes from the file starting at 3866624...
+        Reading 32768 bytes from the file starting at 3899392...
+        Reading 32768 bytes from the file starting at 3932160...
+        Reading 32768 bytes from the file starting at 3964928...
+        Reading 32768 bytes from the file starting at 3997696...
+        Reading 32768 bytes from the file starting at 4030464...
+        Reading 32768 bytes from the file starting at 4063232...
+        Reading 32768 bytes from the file starting at 4096000...
+        Reading 32768 bytes from the file starting at 4128768...
+        Reading 32768 bytes from the file starting at 4161536...
+        Reading 32768 bytes from the file starting at 4194304...
+        Reading 32768 bytes from the file starting at 4227072...
+        Reading 32768 bytes from the file starting at 4259840...
+        Reading 32768 bytes from the file starting at 4292608...
+        Reading 32768 bytes from the file starting at 4325376...
+        Reading 32768 bytes from the file starting at 4358144...
+        Reading 32768 bytes from the file starting at 4390912...
+        Reading 32768 bytes from the file starting at 4423680...
+        Reading 32768 bytes from the file starting at 4456448...
+        Reading 32768 bytes from the file starting at 4489216...
+        Reading 32768 bytes from the file starting at 4521984...
+        Reading 32768 bytes from the file starting at 4554752...
+        Reading 32768 bytes from the file starting at 4587520...
+        Reading 32768 bytes from the file starting at 4620288...
+        Reading 32768 bytes from the file starting at 4653056...
+        Reading 32768 bytes from the file starting at 4685824...
+        Reading 32768 bytes from the file starting at 4718592...
+        Reading 32768 bytes from the file starting at 4751360...
+        Reading 32768 bytes from the file starting at 4784128...
+        Reading 32768 bytes from the file starting at 4816896...
+        Reading 32768 bytes from the file starting at 4849664...
+        Reading 32768 bytes from the file starting at 4882432...
+        Reading 32768 bytes from the file starting at 4915200...
+        Reading 32768 bytes from the file starting at 4947968...
+        Reading 32768 bytes from the file starting at 4980736...
+        Reading 32768 bytes from the file starting at 5013504...
+        Reading 32768 bytes from the file starting at 5046272...
+        Reading 32768 bytes from the file starting at 5079040...
+        Reading 32768 bytes from the file starting at 5111808...
+        Reading 32768 bytes from the file starting at 5144576...
+        Reading 32768 bytes from the file starting at 5177344...
+        Reading 32768 bytes from the file starting at 5210112...
+        Reading 32768 bytes from the file starting at 5242880...
+        Reading 32768 bytes from the file starting at 5275648...
+        Reading 32768 bytes from the file starting at 5308416...
+        Reading 32768 bytes from the file starting at 5341184...
+        Reading 32768 bytes from the file starting at 5373952...
+        Reading 32768 bytes from the file starting at 5406720...
+        Reading 32768 bytes from the file starting at 5439488...
+        Reading 32768 bytes from the file starting at 5472256...
+        Reading 32768 bytes from the file starting at 5505024...
+        Reading 32768 bytes from the file starting at 5537792...
+        Reading 32768 bytes from the file starting at 5570560...
+        Reading 32768 bytes from the file starting at 5603328...
+        Reading 32768 bytes from the file starting at 5636096...
+        Reading 32768 bytes from the file starting at 5668864...
+        Reading 32768 bytes from the file starting at 5701632...
+        Reading 32768 bytes from the file starting at 5734400...
+        Reading 32768 bytes from the file starting at 5767168...
+        Reading 32768 bytes from the file starting at 5799936...
+        Reading 32768 bytes from the file starting at 5832704...
+        Reading 32768 bytes from the file starting at 5865472...
+        Reading 32768 bytes from the file starting at 5898240...
+        Reading 32768 bytes from the file starting at 5931008...
+        Reading 32768 bytes from the file starting at 5963776...
+        Reading 32768 bytes from the file starting at 5996544...
+        Reading 32768 bytes from the file starting at 6029312...
+        Reading 32768 bytes from the file starting at 6062080...
+        Reading 32768 bytes from the file starting at 6094848...
+        Reading 32768 bytes from the file starting at 6127616...
+        Reading 32768 bytes from the file starting at 6160384...
+        Reading 32768 bytes from the file starting at 6193152...
+        Reading 32768 bytes from the file starting at 6225920...
+        Reading 32768 bytes from the file starting at 6258688...
+        Reading 32768 bytes from the file starting at 6291456...
+        Reading 32768 bytes from the file starting at 6324224...
+        Reading 32768 bytes from the file starting at 6356992...
+        Reading 32768 bytes from the file starting at 6389760...
+        Reading 32768 bytes from the file starting at 6422528...
+        Reading 32768 bytes from the file starting at 6455296...
+        Reading 32768 bytes from the file starting at 6488064...
+        Reading 32768 bytes from the file starting at 6520832...
+        Reading 32768 bytes from the file starting at 6553600...
+        Reading 32768 bytes from the file starting at 6586368...
+        Reading 32768 bytes from the file starting at 6619136...
+        Reading 32768 bytes from the file starting at 6651904...
+        Reading 32768 bytes from the file starting at 6684672...
+        Reading 32768 bytes from the file starting at 6717440...
+        Reading 32768 bytes from the file starting at 6750208...
+        Reading 32768 bytes from the file starting at 6782976...
+        Reading 32768 bytes from the file starting at 6815744...
+        Reading 32768 bytes from the file starting at 6848512...
+        Reading 32768 bytes from the file starting at 6881280...
+        Reading 32768 bytes from the file starting at 6914048...
+        Reading 32768 bytes from the file starting at 6946816...
+        Reading 32768 bytes from the file starting at 6979584...
+        Reading 32768 bytes from the file starting at 7012352...
+        Reading 32768 bytes from the file starting at 7045120...
+        Reading 32768 bytes from the file starting at 7077888...
+        Reading 32768 bytes from the file starting at 7110656...
+        Reading 32768 bytes from the file starting at 7143424...
+        Reading 32768 bytes from the file starting at 7176192...
+        Reading 32768 bytes from the file starting at 7208960...
+        Reading 32768 bytes from the file starting at 7241728...
+        Reading 32768 bytes from the file starting at 7274496...
+        Reading 32768 bytes from the file starting at 7307264...
+        Reading 32768 bytes from the file starting at 7340032...
+        Reading 32768 bytes from the file starting at 7372800...
+        Reading 32768 bytes from the file starting at 7405568...
+        Reading 32768 bytes from the file starting at 7438336...
+        Reading 32768 bytes from the file starting at 7471104...
+        Reading 32768 bytes from the file starting at 7503872...
+        Reading 32768 bytes from the file starting at 7536640...
+        Reading 32768 bytes from the file starting at 7569408...
+        Reading 32768 bytes from the file starting at 7602176...
+        Reading 32768 bytes from the file starting at 7634944...
+        Reading 32768 bytes from the file starting at 7667712...
+        Reading 32768 bytes from the file starting at 7700480...
+        Reading 32768 bytes from the file starting at 7733248...
+        Reading 32768 bytes from the file starting at 7766016...
+        Reading 32768 bytes from the file starting at 7798784...
+        Reading 32768 bytes from the file starting at 7831552...
+        Reading 32768 bytes from the file starting at 7864320...
+        Reading 32768 bytes from the file starting at 7897088...
+        Reading 32768 bytes from the file starting at 7929856...
+        Reading 32768 bytes from the file starting at 7962624...
+        Reading 32768 bytes from the file starting at 7995392...
+        Reading 32768 bytes from the file starting at 8028160...
+        Reading 32768 bytes from the file starting at 8060928...
+        Reading 32768 bytes from the file starting at 8093696...
+        Reading 32768 bytes from the file starting at 8126464...
+        Reading 32768 bytes from the file starting at 8159232...
+        Reading 32768 bytes from the file starting at 8192000...
+        Reading 32768 bytes from the file starting at 8224768...
+        Reading 32768 bytes from the file starting at 8257536...
+        Reading 32768 bytes from the file starting at 8290304...
+        Reading 32768 bytes from the file starting at 8323072...
+        Reading 32768 bytes from the file starting at 8355840...
+        Reading 32768 bytes from the file starting at 8388608...
+        Reading  9390 bytes from the file starting at 8421376...
+    
+    Looking for interface descriptors and code...
+        cbSearch=    8192 (0x00002000)
+        cbSearch=   12288 (0x00003000)
+        cbSearch=   16384 (0x00004000)
+        cbSearch=   20480 (0x00005000)
+        cbSearch=   24576 (0x00006000)
+        cbSearch=   28672 (0x00007000)
+        cbSearch=   32768 (0x00008000)
+        cbSearch=   36864 (0x00009000)
+        cbSearch=   40960 (0x0000A000)
+        cbSearch=   45056 (0x0000B000)
+        cbSearch=   45056 (0x0000B000)
+        BIOS image size is          : 8388608 (0x00800000)
+        Descriptors and code size is:  42131 (0x0000A493)
+    
+    Verifying interface descriptors and code...
+        Allocating 42276 bytes for interface data and code...
+        Copying interface data and code...
+        Looking for the part table structure...
+        Part table contains 1 device(s)...
+        Looking for part descriptor...
+        Looking for the text descriptor table structure...
+        Looking for Text descriptor...
+            Device name  : SPI_DESC_8M (000500FF)
+            Version label: ALPHA
+            Block info   : 2048X4K
+        Looking for the platform descriptor ...
+        Looking for the IBM table...
+        IBM signature  found. 
+        Verifying the block table ...
+        	4GB flash area is 1F2000 bytes: FFE0E000-FFFFFFFF
+        	Flash DXE driver size is 8CB8 bytes: 77C2F450
+        
+        	compare [] with [$SLP]...PSIF_ProtectSLPFlag=0.
+    Combine flags from the platform descriptor with flags from UI or command line
+        Platform descriptor flags : 00000001
+        UI or command line flags  : 00000023
+        UI or command line masks  : 00000000
+        Effective flags           : 00000023
+        DMI update mode           : 0
+    Stage completed
+
+[06/18/15 21:00:23]
+Analysis stage
+    
+    Loading and initializing driver...
+        Installing and loading Windows NT driver: C:\Users\User\Desktop\x301DualIDABIOS\64bit\PHLASHNT.SYS
+        Initializing driver...
+        
+        SFLS - Get Entry Point
+        
+        SFLS Get Entry Point ERROR.
+    
+    Read system BIOS to analysis
+        gEscdSaveMode = 1 gSetupVarVolSaveMode=0 gUefiVarVolSaveMode=0.
+        checkFfsValid ...
+        
+        checkFfsValid(4770020h, 800000h, 1)
+          gFfsModuleAddressMaxium=7fffffh
+        volumedir location=7dfa00h.
+        It's FFS type bios.
+        ffs_format_version=2. ffsModCnt=18
+         [ 0]:[ff800000h ..+1000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[0h ..+1000h].
+         [ 1]:[ff801000h ..+5f5000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[1000h ..+5f5000h].
+         [ 2]:[ffdf6000h ..+2000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[5f6000h ..+2000h].
+         [ 3]:[ffdf8000h ..+8000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[5f8000h ..+8000h].
+         [ 4]:[ffe00000h ..+2000h] Owner=FD21E8FD-2525-4A95-BB90-47EC5763FF9E in[600000h ..+2000h]. =>record0.
+         [ 5]:[ffe02000h ..+1000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[602000h ..+1000h].
+         [ 6]:[ffe03000h ..+b000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[603000h ..+b000h].
+         [ 7]:[ffe0e000h ..+1000h] Owner=C02310D0-D754-4539-B0CF-9F9F2618D4A9 in[60e000h ..+1000h]. =>record1.
+         [ 8]:[ffe0f000h ..+1000h] Owner=72F22B11-CEAB-42E2-958A-0DA1622D94E3 in[60f000h ..+1000h]. =>record2.
+         [ 9]:[ffe10000h ..+7eff0h] Owner=FED91FBA-D37B-4EEA-8729-2EF29FB37A78 in[610000h ..+7eff0h]. at[610000h..68eff0h] O.K.
+         [10]:[ffe8eff0h ..+1000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[68eff0h ..+1000h].
+         [11]:[ffe8fff0h ..+10h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[68fff0h ..+10h].
+         [12]:[ffe90000h ..+20000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[690000h ..+20000h].
+         [13]:[ffeb0000h ..+100000h] Owner=FED91FBA-D37B-4EEA-8729-2EF29FB37A78 in[6b0000h ..+100000h]. at[6b0000h..7b0000h] O.K.
+         [14]:[fffb0000h ..+b6h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[7b0000h ..+b6h].
+         [15]:[fffb00b6h ..+2ff4ah] Owner=FED91FBA-D37B-4EEA-8729-2EF29FB37A78 in[7b00b6h ..+2ff4ah]. at[7b00b6h..7e0000h] O.K.
+         [16]:[fffe0000h ..+800h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[7e0000h ..+800h].
+         [17]:[fffe0800h ..+1f800h] Owner=FED91FBA-D37B-4EEA-8729-2EF29FB37A78 in[7e0800h ..+1f800h]. at[7e0800h..800000h] O.K.
+          deCompressRomExec ...
+          search module '_B00' ...
+            section: size=8h type=c6h. target=f0be0h 
+            section: size=a22dh type=1h.BcpSeg module found: 4e91d30h-a24dh [24,a221,f424] 
+          prepare decode(4e91d54, a229) ...
+          efiUncompress(a221, f424) ...
+          gRomExecCompressed=1h
+          getBcpSysInfo(2437fdc, f424) ... O.K.
+          getBcpDmiInfo(2437fdch, f424h, fffff410h) ... 
+            dmi[0]=2cbch, 20cch => LENOVO 
+            dmi[1]=2cd8h, 20e8h => 北北    
+            dmi[2]=2cf4h, 2104h => Not Available 
+            dmi[3]=2d10h, 2120h => PLR-SERIAL# 
+            dmi[4]=2c3bh, 204bh => LENOVO 
+            dmi[5]=2c57h, 2067h => 北北    
+            dmi[6]=2c73h, 2083h => ThinkPad T60p 
+            dmi[7]=2c8fh, 209fh => SERIAL#          
+            dmi[8]=2e0ch, 221ch => LENOVO 
+            dmi[9]=2e28h, 2238h => Not Available 
+            dmi[10]=2e44h, 2254h => Not Available 
+            dmi[11]=2e60h, 2270h => Not Available 
+            dmi[12]=2caah, 20bah => 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+            dmi[13]=2e7ch, 228ch => IBM ThinkPad Embedded Controller -[                 ]- O.K.
+        
+          Vol recorder ...
+          Vol[0] '  ESCD': (600000h, 2000h)
+          Vol[1] ' SETUP': (60e000h, 1000h)
+          Vol[2] ' UEFIV': (60f000h, 1000h)
+          Vol[3] '  DMIV': (62ffe8h, 1018h)
+        checkFfsValid(4f80020h, 800000h, 0)
+          gFfsModuleAddressMaxium=7fffffh
+        volumedir location=7dfa00h.
+        It's FFS type bios.
+        ffs_format_version=2. ffsModCnt=18
+         [ 0]:[ff800000h ..+1000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[0h ..+1000h].
+         [ 1]:[ff801000h ..+5f5000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[1000h ..+5f5000h].
+         [ 2]:[ffdf6000h ..+2000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[5f6000h ..+2000h].
+         [ 3]:[ffdf8000h ..+8000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[5f8000h ..+8000h].
+         [ 4]:[ffe00000h ..+2000h] Owner=FD21E8FD-2525-4A95-BB90-47EC5763FF9E in[600000h ..+2000h]. =>record0.
+         [ 5]:[ffe02000h ..+1000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[602000h ..+1000h].
+         [ 6]:[ffe03000h ..+b000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[603000h ..+b000h].
+         [ 7]:[ffe0e000h ..+1000h] Owner=C02310D0-D754-4539-B0CF-9F9F2618D4A9 in[60e000h ..+1000h]. =>record1.
+         [ 8]:[ffe0f000h ..+1000h] Owner=72F22B11-CEAB-42E2-958A-0DA1622D94E3 in[60f000h ..+1000h]. =>record2.
+         [ 9]:[ffe10000h ..+7eff0h] Owner=FED91FBA-D37B-4EEA-8729-2EF29FB37A78 in[610000h ..+7eff0h]. at[610000h..68eff0h] O.K.
+         [10]:[ffe8eff0h ..+1000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[68eff0h ..+1000h].
+         [11]:[ffe8fff0h ..+10h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[68fff0h ..+10h].
+         [12]:[ffe90000h ..+20000h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[690000h ..+20000h].
+         [13]:[ffeb0000h ..+100000h] Owner=FED91FBA-D37B-4EEA-8729-2EF29FB37A78 in[6b0000h ..+100000h]. at[6b0000h..7b0000h] O.K.
+         [14]:[fffb0000h ..+b6h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[7b0000h ..+b6h].
+         [15]:[fffb00b6h ..+2ff4ah] Owner=FED91FBA-D37B-4EEA-8729-2EF29FB37A78 in[7b00b6h ..+2ff4ah]. at[7b00b6h..7e0000h] O.K.
+         [16]:[fffe0000h ..+800h] Owner=F6AE0F63-5F8C-4316-A2EA-76B9AF762756 in[7e0000h ..+800h].
+         [17]:[fffe0800h ..+1f800h] Owner=FED91FBA-D37B-4EEA-8729-2EF29FB37A78 in[7e0800h ..+1f800h]. at[7e0800h..800000h] O.K.
+          deCompressRomExec ...
+          search module '_B00' ...
+            section: size=8h type=c6h. target=f0be0h 
+            section: size=a22dh type=1h.BcpSeg module found: 56a1d30h-a24dh [24,a221,f424] 
+          prepare decode(56a1d54, a229) ...
+          efiUncompress(a221, f424) ...
+          gRomExecCompressed=3h
+          getBcpSysInfo(2447fe4, f424) ... O.K.
+          getBcpDmiInfo(2447fe4h, f424h, fffff410h) ... 
+            dmi[0]=2cbch, 20cch => LENOVO 
+            dmi[1]=2cd8h, 20e8h => 北北    
+            dmi[2]=2cf4h, 2104h => Not Available 
+            dmi[3]=2d10h, 2120h => PLR-SERIAL# 
+            dmi[4]=2c3bh, 204bh => LENOVO 
+            dmi[5]=2c57h, 2067h => 北北    
+            dmi[6]=2c73h, 2083h => ThinkPad T60p 
+            dmi[7]=2c8fh, 209fh => SERIAL#          
+            dmi[8]=2e0ch, 221ch => LENOVO 
+            dmi[9]=2e28h, 2238h => Not Available 
+            dmi[10]=2e44h, 2254h => Not Available 
+            dmi[11]=2e60h, 2270h => Not Available 
+            dmi[12]=2caah, 20bah => 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+            dmi[13]=2e7ch, 228ch => IBM ThinkPad Embedded Controller -[                 ]- O.K.
+        
+          Vol recorder ...
+          Vol[0] '  ESCD': (600000h, 2000h)
+          Vol[1] ' SETUP': (60e000h, 1000h)
+          Vol[2] ' UEFIV': (60f000h, 1000h)
+          Vol[3] '  DMIV': (62ffe8h, 1018h)checkFfsValid completed
+    
+    Get BIOS information from image file...
+        
+        PhlashGetBcpSysInfo ... copyNewImageDmiInfo BCPSYS information:
+            Version    : 3.3
+            Size       : 131
+            Date       : 10/26/2012
+            Time       : 10:16:37
+            Part number: 6EET56WW(6EET)
+            OemVer  : 
+        BCPDMI information:
+            Version    : 2.11
+            Size       : 40
+            OEM strings: 1
+            OEM strings: IBM ThinkPad Embedded Controller -[                 ]-
+        New BIOS        :a524h, a493h, 800000h, ffe0e000h, 1f2000h, 1h
+    
+    Get BIOS information from system...
+        
+        PhlashGetBcpSysInfo ... copyOldImageDmiInfo BCPSYS information:
+            Version    : 3.3
+            Size       : 131
+            Date       : 10/26/2012
+            Time       : 10:16:37
+            Part number: 6EET56WW(6EET)
+            OemVer  : 
+        BCPDMI information:
+            Version    : 2.11
+            Size       : 40
+            OEM strings: 1
+            OEM strings: IBM ThinkPad Embedded Controller -[                 ]-
+        BIOS image is not Axx swapped
+        Old BIOS        :a524h, a493h, 800000h, ffe0e000h, 1f2000h, 1h
+    Stage completed
+
+[06/18/15 21:00:40]
+Get BIOS information from image file...
+    
+    PhlashGetBcpSysInfo ... copyNewImageDmiInfo BCPSYS information:
+        Version    : 3.3
+        Size       : 131
+        Date       : 10/26/2012
+        Time       : 10:16:37
+        Part number: 6EET56WW(6EET)
+        OemVer  : 
+    BCPDMI information:
+        Version    : 2.11
+        Size       : 40
+        OEM strings: 1
+        OEM strings: IBM ThinkPad Embedded Controller -[                 ]-
+    New BIOS        :a524h, a493h, 800000h, ffe0e000h, 1f2000h, 1h
+
+[06/18/15 21:00:40]PrepareAnalysisStage end.
+PrepareAnalysisStage...
+PrepareAnalysisStage end.
+CPhlashDlg::DoModal...
+CPhlashDlg::OnInitDialog...
+CPhlashDlg::OnInitDialog end.
+CPhlashDlg::OnPhlash ...
+CPhlash::Run ...
+CPhlash::Run I ...
+CPhlash::Run II...
+
+Combine flags from the platform descriptor with flags from UI or command line
+    Platform descriptor flags : 00000001
+    UI or command line flags  : 00000022
+    UI or command line masks  : 01D121A6
+    Effective flags           : 00000022
+    DMI update mode           : 0
+
+[06/18/15 21:02:24]
+Read system BIOS stage
+    Skipped: ROM read already.
+    Stage completed
+
+[06/18/15 21:02:24]
+Saving system BIOS backup file...
+    Creating file C:\Users\User\Desktop\x301DualIDABIOS\64bit\BIOS.BAK...
+    Writing 32768 bytes to the file starting at      0...
+    Writing 32768 bytes to the file starting at  32768...
+    Writing 32768 bytes to the file starting at  65536...
+    Writing 32768 bytes to the file starting at  98304...
+    Writing 32768 bytes to the file starting at 131072...
+    Writing 32768 bytes to the file starting at 163840...
+    Writing 32768 bytes to the file starting at 196608...
+    Writing 32768 bytes to the file starting at 229376...
+    Writing 32768 bytes to the file starting at 262144...
+    Writing 32768 bytes to the file starting at 294912...
+    Writing 32768 bytes to the file starting at 327680...
+    Writing 32768 bytes to the file starting at 360448...
+    Writing 32768 bytes to the file starting at 393216...
+    Writing 32768 bytes to the file starting at 425984...
+    Writing 32768 bytes to the file starting at 458752...
+    Writing 32768 bytes to the file starting at 491520...
+    Writing 32768 bytes to the file starting at 524288...
+    Writing 32768 bytes to the file starting at 557056...
+    Writing 32768 bytes to the file starting at 589824...
+    Writing 32768 bytes to the file starting at 622592...
+    Writing 32768 bytes to the file starting at 655360...
+    Writing 32768 bytes to the file starting at 688128...
+    Writing 32768 bytes to the file starting at 720896...
+    Writing 32768 bytes to the file starting at 753664...
+    Writing 32768 bytes to the file starting at 786432...
+    Writing 32768 bytes to the file starting at 819200...
+    Writing 32768 bytes to the file starting at 851968...
+    Writing 32768 bytes to the file starting at 884736...
+    Writing 32768 bytes to the file starting at 917504...
+    Writing 32768 bytes to the file starting at 950272...
+    Writing 32768 bytes to the file starting at 983040...
+    Writing 32768 bytes to the file starting at 1015808...
+    Writing 32768 bytes to the file starting at 1048576...
+    Writing 32768 bytes to the file starting at 1081344...
+    Writing 32768 bytes to the file starting at 1114112...
+    Writing 32768 bytes to the file starting at 1146880...
+    Writing 32768 bytes to the file starting at 1179648...
+    Writing 32768 bytes to the file starting at 1212416...
+    Writing 32768 bytes to the file starting at 1245184...
+    Writing 32768 bytes to the file starting at 1277952...
+    Writing 32768 bytes to the file starting at 1310720...
+    Writing 32768 bytes to the file starting at 1343488...
+    Writing 32768 bytes to the file starting at 1376256...
+    Writing 32768 bytes to the file starting at 1409024...
+    Writing 32768 bytes to the file starting at 1441792...
+    Writing 32768 bytes to the file starting at 1474560...
+    Writing 32768 bytes to the file starting at 1507328...
+    Writing 32768 bytes to the file starting at 1540096...
+    Writing 32768 bytes to the file starting at 1572864...
+    Writing 32768 bytes to the file starting at 1605632...
+    Writing 32768 bytes to the file starting at 1638400...
+    Writing 32768 bytes to the file starting at 1671168...
+    Writing 32768 bytes to the file starting at 1703936...
+    Writing 32768 bytes to the file starting at 1736704...
+    Writing 32768 bytes to the file starting at 1769472...
+    Writing 32768 bytes to the file starting at 1802240...
+    Writing 32768 bytes to the file starting at 1835008...
+    Writing 32768 bytes to the file starting at 1867776...
+    Writing 32768 bytes to the file starting at 1900544...
+    Writing 32768 bytes to the file starting at 1933312...
+    Writing 32768 bytes to the file starting at 1966080...
+    Writing 32768 bytes to the file starting at 1998848...
+    Writing 32768 bytes to the file starting at 2031616...
+    Writing 32768 bytes to the file starting at 2064384...
+    Writing 32768 bytes to the file starting at 2097152...
+    Writing 32768 bytes to the file starting at 2129920...
+    Writing 32768 bytes to the file starting at 2162688...
+    Writing 32768 bytes to the file starting at 2195456...
+    Writing 32768 bytes to the file starting at 2228224...
+    Writing 32768 bytes to the file starting at 2260992...
+    Writing 32768 bytes to the file starting at 2293760...
+    Writing 32768 bytes to the file starting at 2326528...
+    Writing 32768 bytes to the file starting at 2359296...
+    Writing 32768 bytes to the file starting at 2392064...
+    Writing 32768 bytes to the file starting at 2424832...
+    Writing 32768 bytes to the file starting at 2457600...
+    Writing 32768 bytes to the file starting at 2490368...
+    Writing 32768 bytes to the file starting at 2523136...
+    Writing 32768 bytes to the file starting at 2555904...
+    Writing 32768 bytes to the file starting at 2588672...
+    Writing 32768 bytes to the file starting at 2621440...
+    Writing 32768 bytes to the file starting at 2654208...
+    Writing 32768 bytes to the file starting at 2686976...
+    Writing 32768 bytes to the file starting at 2719744...
+    Writing 32768 bytes to the file starting at 2752512...
+    Writing 32768 bytes to the file starting at 2785280...
+    Writing 32768 bytes to the file starting at 2818048...
+    Writing 32768 bytes to the file starting at 2850816...
+    Writing 32768 bytes to the file starting at 2883584...
+    Writing 32768 bytes to the file starting at 2916352...
+    Writing 32768 bytes to the file starting at 2949120...
+    Writing 32768 bytes to the file starting at 2981888...
+    Writing 32768 bytes to the file starting at 3014656...
+    Writing 32768 bytes to the file starting at 3047424...
+    Writing 32768 bytes to the file starting at 3080192...
+    Writing 32768 bytes to the file starting at 3112960...
+    Writing 32768 bytes to the file starting at 3145728...
+    Writing 32768 bytes to the file starting at 3178496...
+    Writing 32768 bytes to the file starting at 3211264...
+    Writing 32768 bytes to the file starting at 3244032...
+    Writing 32768 bytes to the file starting at 3276800...
+    Writing 32768 bytes to the file starting at 3309568...
+    Writing 32768 bytes to the file starting at 3342336...
+    Writing 32768 bytes to the file starting at 3375104...
+    Writing 32768 bytes to the file starting at 3407872...
+    Writing 32768 bytes to the file starting at 3440640...
+    Writing 32768 bytes to the file starting at 3473408...
+    Writing 32768 bytes to the file starting at 3506176...
+    Writing 32768 bytes to the file starting at 3538944...
+    Writing 32768 bytes to the file starting at 3571712...
+    Writing 32768 bytes to the file starting at 3604480...
+    Writing 32768 bytes to the file starting at 3637248...
+    Writing 32768 bytes to the file starting at 3670016...
+    Writing 32768 bytes to the file starting at 3702784...
+    Writing 32768 bytes to the file starting at 3735552...
+    Writing 32768 bytes to the file starting at 3768320...
+    Writing 32768 bytes to the file starting at 3801088...
+    Writing 32768 bytes to the file starting at 3833856...
+    Writing 32768 bytes to the file starting at 3866624...
+    Writing 32768 bytes to the file starting at 3899392...
+    Writing 32768 bytes to the file starting at 3932160...
+    Writing 32768 bytes to the file starting at 3964928...
+    Writing 32768 bytes to the file starting at 3997696...
+    Writing 32768 bytes to the file starting at 4030464...
+    Writing 32768 bytes to the file starting at 4063232...
+    Writing 32768 bytes to the file starting at 4096000...
+    Writing 32768 bytes to the file starting at 4128768...
+    Writing 32768 bytes to the file starting at 4161536...
+    Writing 32768 bytes to the file starting at 4194304...
+    Writing 32768 bytes to the file starting at 4227072...
+    Writing 32768 bytes to the file starting at 4259840...
+    Writing 32768 bytes to the file starting at 4292608...
+    Writing 32768 bytes to the file starting at 4325376...
+    Writing 32768 bytes to the file starting at 4358144...
+    Writing 32768 bytes to the file starting at 4390912...
+    Writing 32768 bytes to the file starting at 4423680...
+    Writing 32768 bytes to the file starting at 4456448...
+    Writing 32768 bytes to the file starting at 4489216...
+    Writing 32768 bytes to the file starting at 4521984...
+    Writing 32768 bytes to the file starting at 4554752...
+    Writing 32768 bytes to the file starting at 4587520...
+    Writing 32768 bytes to the file starting at 4620288...
+    Writing 32768 bytes to the file starting at 4653056...
+    Writing 32768 bytes to the file starting at 4685824...
+    Writing 32768 bytes to the file starting at 4718592...
+    Writing 32768 bytes to the file starting at 4751360...
+    Writing 32768 bytes to the file starting at 4784128...
+    Writing 32768 bytes to the file starting at 4816896...
+    Writing 32768 bytes to the file starting at 4849664...
+    Writing 32768 bytes to the file starting at 4882432...
+    Writing 32768 bytes to the file starting at 4915200...
+    Writing 32768 bytes to the file starting at 4947968...
+    Writing 32768 bytes to the file starting at 4980736...
+    Writing 32768 bytes to the file starting at 5013504...
+    Writing 32768 bytes to the file starting at 5046272...
+    Writing 32768 bytes to the file starting at 5079040...
+    Writing 32768 bytes to the file starting at 5111808...
+    Writing 32768 bytes to the file starting at 5144576...
+    Writing 32768 bytes to the file starting at 5177344...
+    Writing 32768 bytes to the file starting at 5210112...
+    Writing 32768 bytes to the file starting at 5242880...
+    Writing 32768 bytes to the file starting at 5275648...
+    Writing 32768 bytes to the file starting at 5308416...
+    Writing 32768 bytes to the file starting at 5341184...
+    Writing 32768 bytes to the file starting at 5373952...
+    Writing 32768 bytes to the file starting at 5406720...
+    Writing 32768 bytes to the file starting at 5439488...
+    Writing 32768 bytes to the file starting at 5472256...
+    Writing 32768 bytes to the file starting at 5505024...
+    Writing 32768 bytes to the file starting at 5537792...
+    Writing 32768 bytes to the file starting at 5570560...
+    Writing 32768 bytes to the file starting at 5603328...
+    Writing 32768 bytes to the file starting at 5636096...
+    Writing 32768 bytes to the file starting at 5668864...
+    Writing 32768 bytes to the file starting at 5701632...
+    Writing 32768 bytes to the file starting at 5734400...
+    Writing 32768 bytes to the file starting at 5767168...
+    Writing 32768 bytes to the file starting at 5799936...
+    Writing 32768 bytes to the file starting at 5832704...
+    Writing 32768 bytes to the file starting at 5865472...
+    Writing 32768 bytes to the file starting at 5898240...
+    Writing 32768 bytes to the file starting at 5931008...
+    Writing 32768 bytes to the file starting at 5963776...
+    Writing 32768 bytes to the file starting at 5996544...
+    Writing 32768 bytes to the file starting at 6029312...
+    Writing 32768 bytes to the file starting at 6062080...
+    Writing 32768 bytes to the file starting at 6094848...
+    Writing 32768 bytes to the file starting at 6127616...
+    Writing 32768 bytes to the file starting at 6160384...
+    Writing 32768 bytes to the file starting at 6193152...
+    Writing 32768 bytes to the file starting at 6225920...
+    Writing 32768 bytes to the file starting at 6258688...
+    Writing 32768 bytes to the file starting at 6291456...
+    Writing 32768 bytes to the file starting at 6324224...
+    Writing 32768 bytes to the file starting at 6356992...
+    Writing 32768 bytes to the file starting at 6389760...
+    Writing 32768 bytes to the file starting at 6422528...
+    Writing 32768 bytes to the file starting at 6455296...
+    Writing 32768 bytes to the file starting at 6488064...
+    Writing 32768 bytes to the file starting at 6520832...
+    Writing 32768 bytes to the file starting at 6553600...
+    Writing 32768 bytes to the file starting at 6586368...
+    Writing 32768 bytes to the file starting at 6619136...
+    Writing 32768 bytes to the file starting at 6651904...
+    Writing 32768 bytes to the file starting at 6684672...
+    Writing 32768 bytes to the file starting at 6717440...
+    Writing 32768 bytes to the file starting at 6750208...
+    Writing 32768 bytes to the file starting at 6782976...
+    Writing 32768 bytes to the file starting at 6815744...
+    Writing 32768 bytes to the file starting at 6848512...
+    Writing 32768 bytes to the file starting at 6881280...
+    Writing 32768 bytes to the file starting at 6914048...
+    Writing 32768 bytes to the file starting at 6946816...
+    Writing 32768 bytes to the file starting at 6979584...
+    Writing 32768 bytes to the file starting at 7012352...
+    Writing 32768 bytes to the file starting at 7045120...
+    Writing 32768 bytes to the file starting at 7077888...
+    Writing 32768 bytes to the file starting at 7110656...
+    Writing 32768 bytes to the file starting at 7143424...
+    Writing 32768 bytes to the file starting at 7176192...
+    Writing 32768 bytes to the file starting at 7208960...
+    Writing 32768 bytes to the file starting at 7241728...
+    Writing 32768 bytes to the file starting at 7274496...
+    Writing 32768 bytes to the file starting at 7307264...
+    Writing 32768 bytes to the file starting at 7340032...
+    Writing 32768 bytes to the file starting at 7372800...
+    Writing 32768 bytes to the file starting at 7405568...
+    Writing 32768 bytes to the file starting at 7438336...
+    Writing 32768 bytes to the file starting at 7471104...
+    Writing 32768 bytes to the file starting at 7503872...
+    Writing 32768 bytes to the file starting at 7536640...
+    Writing 32768 bytes to the file starting at 7569408...
+    Writing 32768 bytes to the file starting at 7602176...
+    Writing 32768 bytes to the file starting at 7634944...
+    Writing 32768 bytes to the file starting at 7667712...
+    Writing 32768 bytes to the file starting at 7700480...
+    Writing 32768 bytes to the file starting at 7733248...
+    Writing 32768 bytes to the file starting at 7766016...
+    Writing 32768 bytes to the file starting at 7798784...
+    Writing 32768 bytes to the file starting at 7831552...
+    Writing 32768 bytes to the file starting at 7864320...
+    Writing 32768 bytes to the file starting at 7897088...
+    Writing 32768 bytes to the file starting at 7929856...
+    Writing 32768 bytes to the file starting at 7962624...
+    Writing 32768 bytes to the file starting at 7995392...
+    Writing 32768 bytes to the file starting at 8028160...
+    Writing 32768 bytes to the file starting at 8060928...
+    Writing 32768 bytes to the file starting at 8093696...
+    Writing 32768 bytes to the file starting at 8126464...
+    Writing 32768 bytes to the file starting at 8159232...
+    Writing 32768 bytes to the file starting at 8192000...
+    Writing 32768 bytes to the file starting at 8224768...
+    Writing 32768 bytes to the file starting at 8257536...
+    Writing 32768 bytes to the file starting at 8290304...
+    Writing 32768 bytes to the file starting at 8323072...
+    Writing 32768 bytes to the file starting at 8355840...
+    Writing 32768 bytes to the file starting at 8388608...
+    Writing  9363 bytes to the file starting at 8421376...
+    Stage completed
+
+[06/18/15 21:02:26]
+Flashing new BIOS stage
+    Check if BIOS part numbers are the same
+    Passed Ok
+    
+    [06/18/15 21:02:26]theIbm.checkIBM() ...
+    
+    [06/18/15 21:02:26]CheckIbmPassword() ...00000000
+    Start IBM Query Pap
+    Update BIOS
+    SLP process begin
+        SLP case 3:/prot:$slp:aa.bin doesn't appears in the command line, and the BIOS.WPH contains SLP talbe
+        	process protect area '$SLP'...
+    
+    [06/18/15 21:02:26]
+    mergePhoenixVolume(ESCD=1,SETUP=2,UEFI=1,DMIV=1) ...
+      newImg[0]:4d70020h,2000h<=>  oldRom:5580020h,2000h
+      newImg[1]:4d7e020h,1000h<=>  oldRom:558e020h,1000h
+      newImg[2]:4d7f020h,1000h<=>  oldRom:558f020h,1000h
+      newImg[3]:4da0008h,1018h<=>  oldRom:55b0008h,1018h
+      merged ESCD ...
+      mergePhoenixVol ...  [4d70020h,2000h] <= [5580020h,2000h] not a dmiv ... 
+      merged ESCD = 1
+      merged SETUP ...
+      compareSetupVarVol()... 
+      ROM var[0] => File var[0].
+      ROM var[1] => File var[1].
+      ROM var[2] => File var[2].
+      ROM var[3] => File var[3].
+      ROM var[4] => File var[4].
+      ROM var[5] => File var[5].
+      ROM var[6] => File var[6].
+      ROM var[7] => File var[7].
+      ROM var[8] => File var[8].
+      ROM var[9] => File var[9].
+      ROM var[10] => File var[10].
+      ROM var[11] => File var[11].
+      ROM var[12] => File var[12].
+      ROM var[13] => File var[13].
+      ROM var[14] => File var[14].
+      ROM var[15] => File var[15].
+      ROM var[16] => File var[16].
+      ROM var[17] => File var[17].
+      ROM var[18] => File var[18].
+      ROM var[19] => File var[19].
+      ROM var[20] => File var[20].
+      ROM var[21] => File var[21].
+      ROM var[22] => File var[22].
+      ROM var[23] => File var[23].
+      ROM var[24] => File var[24].
+      ROM var[25] => File var[25].
+      ROM var[26] => File var[26].
+      ROM var[27] => File var[27].
+      ROM var[28] => File var[28].Vars merged from ROM.
+      merged UEFI ...
+      mergePhoenixVol ...  [4d7f020h,1000h] <= [558f020h,1000h] not a dmiv ... 
+      merged UEFI = 1
+      merged DMIV ...
+      mergePhoenixVol ...  [4da0008h,1018h] <= [55b0008h,1018h] is a dmiv ... 
+      merged DMIV = 1
+    mergePhoenixVolume completed.
+    [06/18/15 21:02:27]Start flashing image
+        Calling driver to BEGIN flash
+        
+        Map blocks in Block Table to Parts in Part table....
+            Passed Ok
+        
+        Start flashing block by block
+        Number of Blocks : 128
+        
+        DataSize : 800000
+        Skip bootblock 128 since it is write protected.
+        
+        DataSize : 7f0000
+        Skip bootblock 127 since it is write protected.
+        
+        DataSize : 7e0000
+         Block index : 126 Block Size : 10000
+         Erase Block 126 ...	 Erase Block 126, ok!
+         program Block 126 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 126, ok!
+         verify Block 126 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 126, ok!
+        
+        DataSize : 7d0000
+         Block index : 125 Block Size : 10000
+         Erase Block 125 ...	 Erase Block 125, ok!
+         program Block 125 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 125, ok!
+         verify Block 125 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 125, ok!
+        
+        DataSize : 7c0000
+         Block index : 124 Block Size : 10000
+         Erase Block 124 ...	 Erase Block 124, ok!
+         program Block 124 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 124, ok!
+         verify Block 124 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 124, ok!
+        
+        DataSize : 7b0000
+         Block index : 123 Block Size : 10000
+         Erase Block 123 ...	 Erase Block 123, ok!
+         program Block 123 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 123, ok!
+         verify Block 123 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 123, ok!
+        
+        DataSize : 7a0000
+         Block index : 122 Block Size : 10000
+         Erase Block 122 ...	 Erase Block 122, ok!
+         program Block 122 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 122, ok!
+         verify Block 122 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 122, ok!
+        
+        DataSize : 790000
+         Block index : 121 Block Size : 10000
+         Erase Block 121 ...	 Erase Block 121, ok!
+         program Block 121 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 121, ok!
+         verify Block 121 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 121, ok!
+        
+        DataSize : 780000
+         Block index : 120 Block Size : 10000
+         Erase Block 120 ...	 Erase Block 120, ok!
+         program Block 120 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 120, ok!
+         verify Block 120 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 120, ok!
+        
+        DataSize : 770000
+         Block index : 119 Block Size : 10000
+         Erase Block 119 ...	 Erase Block 119, ok!
+         program Block 119 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 119, ok!
+         verify Block 119 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 119, ok!
+        
+        DataSize : 760000
+         Block index : 118 Block Size : 10000
+         Erase Block 118 ...	 Erase Block 118, ok!
+         program Block 118 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 118, ok!
+         verify Block 118 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 118, ok!
+        
+        DataSize : 750000
+         Block index : 117 Block Size : 10000
+         Erase Block 117 ...	 Erase Block 117, ok!
+         program Block 117 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 117, ok!
+         verify Block 117 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 117, ok!
+        
+        DataSize : 740000
+         Block index : 116 Block Size : 10000
+         Erase Block 116 ...	 Erase Block 116, ok!
+         program Block 116 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 116, ok!
+         verify Block 116 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 116, ok!
+        
+        DataSize : 730000
+         Block index : 115 Block Size : 10000
+         Erase Block 115 ...	 Erase Block 115, ok!
+         program Block 115 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 115, ok!
+         verify Block 115 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 115, ok!
+        
+        DataSize : 720000
+         Block index : 114 Block Size : 10000
+         Erase Block 114 ...	 Erase Block 114, ok!
+         program Block 114 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 114, ok!
+         verify Block 114 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 114, ok!
+        
+        DataSize : 710000
+         Block index : 113 Block Size : 10000
+         Erase Block 113 ...	 Erase Block 113, ok!
+         program Block 113 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 113, ok!
+         verify Block 113 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 113, ok!
+        
+        DataSize : 700000
+         Block index : 112 Block Size : 10000
+         Erase Block 112 ...	 Erase Block 112, ok!
+         program Block 112 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 112, ok!
+         verify Block 112 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 112, ok!
+        
+        DataSize : 6f0000
+         Block index : 111 Block Size : 10000
+         Erase Block 111 ...	 Erase Block 111, ok!
+         program Block 111 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 111, ok!
+         verify Block 111 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 111, ok!
+        
+        DataSize : 6e0000
+         Block index : 110 Block Size : 10000
+         Erase Block 110 ...	 Erase Block 110, ok!
+         program Block 110 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 110, ok!
+         verify Block 110 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 110, ok!
+        
+        DataSize : 6d0000
+         Block index : 109 Block Size : 10000
+         Erase Block 109 ...	 Erase Block 109, ok!
+         program Block 109 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 109, ok!
+         verify Block 109 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 109, ok!
+        
+        DataSize : 6c0000
+         Block index : 108 Block Size : 10000
+         Erase Block 108 ...	 Erase Block 108, ok!
+         program Block 108 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 108, ok!
+         verify Block 108 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 108, ok!
+        
+        DataSize : 6b0000
+         Block index : 107 Block Size : 10000
+         Erase Block 107 ...	 Erase Block 107, ok!
+         program Block 107 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 107, ok!
+         verify Block 107 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 107, ok!
+        
+        DataSize : 6a0000
+         Block index : 106 Block Size : 10000
+         Erase Block 106 ...	 Erase Block 106, ok!
+         program Block 106 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 106, ok!
+         verify Block 106 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 106, ok!
+        
+        DataSize : 690000
+         Block index : 105 Block Size : 10000
+         Erase Block 105 ...	 Erase Block 105, ok!
+         program Block 105 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 105, ok!
+         verify Block 105 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 105, ok!
+        
+        DataSize : 680000
+         Block index : 104 Block Size : 10000
+         Erase Block 104 ...	 Erase Block 104, ok!
+         program Block 104 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 104, ok!
+         verify Block 104 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 104, ok!
+        
+        DataSize : 670000
+         Block index : 103 Block Size : 10000
+         Erase Block 103 ...	 Erase Block 103, ok!
+         program Block 103 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 103, ok!
+         verify Block 103 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 103, ok!
+        
+        DataSize : 660000
+         Block index : 102 Block Size : 10000
+         Erase Block 102 ...	 Erase Block 102, ok!
+         program Block 102 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 102, ok!
+         verify Block 102 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 102, ok!
+        
+        DataSize : 650000
+         Block index : 101 Block Size : 10000
+         Erase Block 101 ...	 Erase Block 101, ok!
+         program Block 101 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 101, ok!
+         verify Block 101 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 101, ok!
+        
+        DataSize : 640000
+         Block index : 100 Block Size : 10000
+         Erase Block 100 ...	 Erase Block 100, ok!
+         program Block 100 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 100, ok!
+         verify Block 100 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 100, ok!
+        
+        DataSize : 630000
+         Block index : 99 Block Size : 10000
+         Erase Block 99 ...	 Erase Block 99, ok!
+         program Block 99 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 99, ok!
+         verify Block 99 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 99, ok!
+        
+        DataSize : 620000
+         Block index : 98 Block Size : 10000
+         Erase Block 98 ...	 Erase Block 98, ok!
+         program Block 98 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         program Block 98, ok!
+         verify Block 98 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         offset : 2000 Size : 1000	 Retry Count = 1 
+         offset : 3000 Size : 1000	 Retry Count = 1 
+         offset : 4000 Size : 1000	 Retry Count = 1 
+         offset : 5000 Size : 1000	 Retry Count = 1 
+         offset : 6000 Size : 1000	 Retry Count = 1 
+         offset : 7000 Size : 1000	 Retry Count = 1 
+         offset : 8000 Size : 1000	 Retry Count = 1 
+         offset : 9000 Size : 1000	 Retry Count = 1 
+         offset : a000 Size : 1000	 Retry Count = 1 
+         offset : b000 Size : 1000	 Retry Count = 1 
+         offset : c000 Size : 1000	 Retry Count = 1 
+         offset : d000 Size : 1000	 Retry Count = 1 
+         offset : e000 Size : 1000	 Retry Count = 1 
+         offset : f000 Size : 1000	 Retry Count = 1 
+         Verify Block 98, ok!
+        
+        DataSize : 610000
+         Block index : 97 Block Size : 2000
+         Erase Block 97 ...	 Erase Block 97, ok!
+         program Block 97 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         program Block 97, ok!
+         verify Block 97 ...
+         offset : 0 Size : 1000	 Retry Count = 1 
+         offset : 1000 Size : 1000	 Retry Count = 1 
+         Verify Block 97, ok!
+        
+        DataSize : 60e000
+        Skip block 96 since it is write protected.
+        
+        DataSize : 600000
+        Skip block 95 since it is write protected.
+        
+        DataSize : 5f0000
+        Skip block 94 since it is write protected.
+        
+        DataSize : 5e0000
+        Skip block 93 since it is write protected.
+        
+        DataSize : 5d0000
+        Skip block 92 since it is write protected.
+        
+        DataSize : 5c0000
+        Skip block 91 since it is write protected.
+        
+        DataSize : 5b0000
+        Skip block 90 since it is write protected.
+        
+        DataSize : 5a0000
+        Skip block 89 since it is write protected.
+        
+        DataSize : 590000
+        Skip block 88 since it is write protected.
+        
+        DataSize : 580000
+        Skip block 87 since it is write protected.
+        
+        DataSize : 570000
+        Skip block 86 since it is write protected.
+        
+        DataSize : 560000
+        Skip block 85 since it is write protected.
+        
+        DataSize : 550000
+        Skip block 84 since it is write protected.
+        
+        DataSize : 540000
+        Skip block 83 since it is write protected.
+        
+        DataSize : 530000
+        Skip block 82 since it is write protected.
+        
+        DataSize : 520000
+        Skip block 81 since it is write protected.
+        
+        DataSize : 510000
+        Skip block 80 since it is write protected.
+        
+        DataSize : 500000
+        Skip block 79 since it is write protected.
+        
+        DataSize : 4f0000
+        Skip block 78 since it is write protected.
+        
+        DataSize : 4e0000
+        Skip block 77 since it is write protected.
+        
+        DataSize : 4d0000
+        Skip block 76 since it is write protected.
+        
+        DataSize : 4c0000
+        Skip block 75 since it is write protected.
+        
+        DataSize : 4b0000
+        Skip block 74 since it is write protected.
+        
+        DataSize : 4a0000
+        Skip block 73 since it is write protected.
+        
+        DataSize : 490000
+        Skip block 72 since it is write protected.
+        
+        DataSize : 480000
+        Skip block 71 since it is write protected.
+        
+        DataSize : 470000
+        Skip block 70 since it is write protected.
+        
+        DataSize : 460000
+        Skip block 69 since it is write protected.
+        
+        DataSize : 450000
+        Skip block 68 since it is write protected.
+        
+        DataSize : 440000
+        Skip block 67 since it is write protected.
+        
+        DataSize : 430000
+        Skip block 66 since it is write protected.
+        
+        DataSize : 420000
+        Skip block 65 since it is write protected.
+        
+        DataSize : 410000
+        Skip block 64 since it is write protected.
+        
+        DataSize : 400000
+        Skip block 63 since it is write protected.
+        
+        DataSize : 3f0000
+        Skip block 62 since it is write protected.
+        
+        DataSize : 3e0000
+        Skip block 61 since it is write protected.
+        
+        DataSize : 3d0000
+        Skip block 60 since it is write protected.
+        
+        DataSize : 3c0000
+        Skip block 59 since it is write protected.
+        
+        DataSize : 3b0000
+        Skip block 58 since it is write protected.
+        
+        DataSize : 3a0000
+        Skip block 57 since it is write protected.
+        
+        DataSize : 390000
+        Skip block 56 since it is write protected.
+        
+        DataSize : 380000
+        Skip block 55 since it is write protected.
+        
+        DataSize : 370000
+        Skip block 54 since it is write protected.
+        
+        DataSize : 360000
+        Skip block 53 since it is write protected.
+        
+        DataSize : 350000
+        Skip block 52 since it is write protected.
+        
+        DataSize : 340000
+        Skip block 51 since it is write protected.
+        
+        DataSize : 330000
+        Skip block 50 since it is write protected.
+        
+        DataSize : 320000
+        Skip block 49 since it is write protected.
+        
+        DataSize : 310000
+        Skip block 48 since it is write protected.
+        
+        DataSize : 300000
+        Skip block 47 since it is write protected.
+        
+        DataSize : 2f0000
+        Skip block 46 since it is write protected.
+        
+        DataSize : 2e0000
+        Skip block 45 since it is write protected.
+        
+        DataSize : 2d0000
+        Skip block 44 since it is write protected.
+        
+        DataSize : 2c0000
+        Skip block 43 since it is write protected.
+        
+        DataSize : 2b0000
+        Skip block 42 since it is write protected.
+        
+        DataSize : 2a0000
+        Skip block 41 since it is write protected.
+        
+        DataSize : 290000
+        Skip block 40 since it is write protected.
+        
+        DataSize : 280000
+        Skip block 39 since it is write protected.
+        
+        DataSize : 270000
+        Skip block 38 since it is write protected.
+        
+        DataSize : 260000
+        Skip block 37 since it is write protected.
+        
+        DataSize : 250000
+        Skip block 36 since it is write protected.
+        
+        DataSize : 240000
+        Skip block 35 since it is write protected.
+        
+        DataSize : 230000
+        Skip block 34 since it is write protected.
+        
+        DataSize : 220000
+        Skip block 33 since it is write protected.
+        
+        DataSize : 210000
+        Skip block 32 since it is write protected.
+        
+        DataSize : 200000
+        Skip block 31 since it is write protected.
+        
+        DataSize : 1f0000
+        Skip block 30 since it is write protected.
+        
+        DataSize : 1e0000
+        Skip block 29 since it is write protected.
+        
+        DataSize : 1d0000
+        Skip block 28 since it is write protected.
+        
+        DataSize : 1c0000
+        Skip block 27 since it is write protected.
+        
+        DataSize : 1b0000
+        Skip block 26 since it is write protected.
+        
+        DataSize : 1a0000
+        Skip block 25 since it is write protected.
+        
+        DataSize : 190000
+        Skip block 24 since it is write protected.
+        
+        DataSize : 180000
+        Skip block 23 since it is write protected.
+        
+        DataSize : 170000
+        Skip block 22 since it is write protected.
+        
+        DataSize : 160000
+        Skip block 21 since it is write protected.
+        
+        DataSize : 150000
+        Skip block 20 since it is write protected.
+        
+        DataSize : 140000
+        Skip block 19 since it is write protected.
+        
+        DataSize : 130000
+        Skip block 18 since it is write protected.
+        
+        DataSize : 120000
+        Skip block 17 since it is write protected.
+        
+        DataSize : 110000
+        Skip block 16 since it is write protected.
+        
+        DataSize : 100000
+        Skip block 15 since it is write protected.
+        
+        DataSize : f0000
+        Skip block 14 since it is write protected.
+        
+        DataSize : e0000
+        Skip block 13 since it is write protected.
+        
+        DataSize : d0000
+        Skip block 12 since it is write protected.
+        
+        DataSize : c0000
+        Skip block 11 since it is write protected.
+        
+        DataSize : b0000
+        Skip block 10 since it is write protected.
+        
+        DataSize : a0000
+        Skip block 9 since it is write protected.
+        
+        DataSize : 90000
+        Skip block 8 since it is write protected.
+        
+        DataSize : 80000
+        Skip block 7 since it is write protected.
+        
+        DataSize : 70000
+        Skip block 6 since it is write protected.
+        
+        DataSize : 60000
+        Skip block 5 since it is write protected.
+        
+        DataSize : 50000
+        Skip block 4 since it is write protected.
+        
+        DataSize : 40000
+        Skip block 3 since it is write protected.
+        
+        DataSize : 30000
+        Skip block 2 since it is write protected.
+        
+        DataSize : 20000
+        Skip block 1 since it is write protected.
+        
+        DataSize : 10000
+        Skip block 0 since it is write protected.
+        Calling driver to END flash
+    Stage completed
+
+Cleanup stage
+    Stage completed
+    Stage completed
+Restarting system...
+Shutting down the computer...
+--- Log stopped: 06/18/15 21:04:40
+
+--- Log started: 06/18/15 21:04:40
+CPhlashDlg::OnPhlash end
+--- Log stopped: 06/18/15 21:04:40
+
+--- Log started: 06/18/15 23:15:57
+Initializing...
+Log file       : C:\Users\User\Desktop\x301DualIDABIOS\64bit\PHLASH.LOG
+Settings file  : C:\Users\User\Desktop\x301DualIDABIOS\64bit\PHLASH.INI (found)
+Executable     : C:\Users\User\Desktop\x301DualIDABIOS\64bit\WinPhlash64.exe
+    Version    : 1.0.49.0    Build      : Phoenix WinPhlash64
+    Date       : 6/19/2015
+Resource file  : C:\Users\User\Desktop\x301DualIDABIOS\64bit\PHLASHLC.DLL (loaded)
+Help file      : C:\Users\User\Desktop\x301DualIDABIOS\64bit\WINPHLASH.HLP
+App name       : Phoenix WinPhlash64
+OS Information : Windows NT 6.1.7601 Service Pack 1 - supported
+isNT_AUTHORITY_SYSTEM_account: User. => False.
+gVBL_Flag = False(0h).
+--- Log stopped: 06/18/15 23:16:03
+
