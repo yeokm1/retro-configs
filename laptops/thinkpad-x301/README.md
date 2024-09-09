@@ -6,6 +6,8 @@ The Thinkpad X301 is a laptop released in 2008 by Lenovo as a technical update t
 
 The machine is configured to multi-boot to DOS 6.22, Windows 10 64-bit and Lubuntu. 
 
+I wrote a book review that is based on this machine: https://yeokhengmeng.com/2024/09/book-review-the-race-for-perfect/
+
 ## Specifications
 
 These are the specifications specific to the Thinkpad I have:
@@ -59,7 +61,7 @@ ODI Network drivers and Packet driver shim loaded successfully.
 
 ## Windows 10 Drivers
 
-Windows 10 can be installed properly on the system however some drivers have to be installed manually to full clear all Device Manager errors.
+Windows 10 can be installed properly on the system however some drivers have to be installed manually to fully clear all Device Manager errors.
 
 1. Power Management Driver: http://download.lenovo.com/ibmdl/pub/pc/pccbbs/mobiles/gtku09ww.exe
 2. Power Manager: http://download.lenovo.com/ibmdl/pub/pc/pccbbs/mobiles/guu403ww.exe
