@@ -19,11 +19,11 @@ These are the specifications of this modern machine.
 * ASUS Pro B650M-CT-CSM motherboard
 * 2x32GB DDR5-5600 CL36 Kingston Fury
 * Coolermaster Hyper 212 Spectrum V3 CPU cooler
-* 1TB NVME Crucial T500 Pro
+* 1TB NVME Crucial T500
 * From previous build
     * Seasonic S12II 520W PSU
     * Coolermaster N400 midtower ATX case
-    * Sound Blaster AE-5
+    * Sound BlasterX AE-5
     * 512GB NVME Samsung 870 Evo Plus
     * 1TB SATA Crucial MX300
     * 3.5" floppy Drive with internal USB adapter
