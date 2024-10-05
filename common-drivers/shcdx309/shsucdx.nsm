@@ -11,6 +11,9 @@
 ; v3.04, October, 2006.
 ; v3.05, February, 2011.
 ; v3.06, September, 2019.
+; v3.07, April, 2020.
+; v3.08, February, 2021.
+; v3.09, September, 2022.
 ;
 ;*** Begin original comments (abridged):
 ;***************************************************************************
@@ -138,7 +141,7 @@ NoRedir 	equ	0ffh		; equate required for table terminator
 %define RC_OK		0		; help, tilde/ro, successful uninstall
 					; 1..32 first drive number (A=1)
 
-%assign COMPILE_FLAG hl(6,0)
+%assign COMPILE_FLAG hl(7,0)
 %ifdef i8086
   %assign COMPILE_FLAG COMPILE_FLAG | bit(0)
 %endif
@@ -170,7 +173,7 @@ NoRedir 	equ	0ffh		; equate required for table terminator
 		db	13		; overwrite JMP if TYPEd
 CopyrightMsg
 dln "SHSUCDX by Jason Hood <jadoxa@yahoo.com.au>. | Derived from v1.4b by"
-dln "Version 3.06 (20 September, 2019). Freeware. | John H. McCoy, October 2000,"
+dln "Version 3.09 (2 September, 2022). Freeware.  | John H. McCoy, October 2000,"
 dlz "http://shsucdx.adoxa.vze.com/                | Sam Houston State University."
 		db	26
 
@@ -202,7 +205,6 @@ DInvalid		dlz "/D: invalid drive letter."
 DUnitNumber		dlz "/D: expecting unit number (0-99)."
 DMaxNumber		dlz "/D: expecting maximum units (1-9)."
 LMissingValue		dlz "/L: expecting value."
-LNoD			dlz "/L: must follow /D."
 LInvalid		dlz "/L: invalid drive letter."
 LBadNumber		dlz "/L: only two digits allowed."
 
@@ -2365,6 +2367,9 @@ FindEntry
 FindName
 	uses	es
 	ld	es, ds
+%ifdef HS
+	mmov	cl, [.flag+2], [bx+DrvEnt.Type]
+%endif
 	mov	bx, [bx+DrvEnt.Bufp]
 	repeatr di, ns
 	 call	CdReadBlk			; returns CH = 0
@@ -2374,6 +2379,7 @@ FindName
 	 mov	dx, [BP_(scratch)]
 %endif
 	 for0	si, bx, {[si] ,ne, ch}, cx	; {[si] nzb}
+.flag:	 cntnub [si+isoDir.Flags] ,&, ASSOCFILE
 	  call	Match
 Matchfunc iw
 %ifdef i8086
@@ -3408,6 +3414,7 @@ CopyDrives
 	mov	al, DrvEnt_size
 	mulb	[es:NoDrives]
 	mov	si, Drive
+	if. z,	mmov cl, [es:FirstDriveNo], [si+DrvEnt.No]
 	mov	di, si
 	add	di, ax
 	repeatb [NoDrives]
@@ -3973,18 +3980,13 @@ DoLetter
 	 ret
 	fi
 	mov	di, [DriverIndex]
-	if di ,e, Drivers
-	 mov	si, LNoD		; Haven't seen /D
-	 stc
-	 ret
-	fi
 	lodsb
 	cbit	al, 5
 	sub	al, 'A'
 	if al ,b, 32
-	 sub	di, DrvrEnt_size - DrvrEnt.Drive
-	 stosb
-	 ;clc
+	 if. {di ,ne, Drivers}, sub di, DrvrEnt_size
+	 mov	[di+DrvrEnt.Drive], al
+	 clc
 	 ret
 	fi
 	mov	si, LInvalid		; Not a valid drive

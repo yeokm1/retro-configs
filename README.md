@@ -42,6 +42,14 @@ This is an Open Frame PC I use as a testbench based on a Pentium 3. The machine 
 
 <img src="desktops/open-frame-pc/photos/ofpc-top.jpg" width="500">
 
+## 5. [Modern Ryzen desktop](desktops/modern-ryzen-desktop) (2024)
+
+<img src="desktops/modern-ryzen-desktop/photos/ryzendos-dos-setup.jpg" width="500">
+
+This is my modern desktop rig built in 2024 but I configured it to run MS-DOS 6.22 as an experiment.
+
+It has a very modern AMD Ryzen 5 7600 3.8Ghz and Nvidia GeForce RTX 4060 Ti 16GB.
+
 # Laptops
 
 ## 1. [Thinkpad T42](laptops/thinkpad-t42) (2004)
@@ -105,7 +113,6 @@ The Thinkpad X301 is a laptop released in 2008 by Lenovo as a technical update t
 <img src="laptops/thinkpad-x301/photos/x301-front.jpg" width="500">
 
 The machine is configured to multi-boot to DOS 6.22, Windows 10 64-bit and Lubuntu. 
-
 
 # Virtual Machines
 
@@ -213,28 +220,27 @@ In Windows 98SE
 2.  [Cutemouse](http://cutemouse.sourceforge.net/)
 3.  [MTCP TCP/IP stack](http://www.brutman.com/mTCP/)
 4.  [ODI to Packet Driver v3.1](http://wiki.freedos.org/wiki/index.php/Networking_FreeDOS_-_ODI_driver_installation)
-5.  [SHSUCDX 3.03F](http://optimizr.dyndns.org/dos/shsucdx.html)
-6.  [SHSUCDX 3.06](http://adoxa.altervista.org/shsucdx/index.html)
-7.  [GRUBFORDOS](https://sourceforge.net/projects/grub4dos/files/GRUB4DOS/)
-8.  [svgaptch for VESA compliance](https://download.wcnews.com/files/other/wcpc/)
-9.  [Crynwr](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/repos/pkg-html/crynwr.html)
-10. [Unisound](https://www.vogons.org/viewtopic.php?f=62&t=72553)
-11. [Microsoft Mouse 8.20](https://winworldpc.com/product/microsoft-mouse/8x)
-12. [Microsoft Mouse 9.01](https://winworldpc.com/product/microsoft-mouse/9x)
-13. [Xircom PE3-10BT drivers](https://www.vogonsdrivers.com/getfile.php?fileid=1347)
-14. [3c589 Packet driver](http://download.caltech.se/download/fluke/DAQ/NetDAQ/disk2/packet/)
-15. [3C589N DOS and Windows drivers](http://files.mpoli.fi/hardware/NET/3COM/3C589N.ZIP)
-16. [PFE500c drivers](https://www.driverguide.com/driver/amp/detail.php?driverid=114194)
-17. [Cardsoft 3.1](https://archive.org/details/simpletechnology_pcmcia21cardsocket_systemsoftcardsoftv31_cardview)
-18. [JEMM](https://github.com/Baron-von-Riedesel/Jemm)
-19. [RTC_micro8088](https://github.com/wilco2009/RTC_micro8088)
-20. [Freddy V ch375v022](https://www.vogonsdrivers.com/getfile.php?fileid=1991&menustate=0)
-21. [3C509B-nestor driver for 8088](https://github.com/hackerb9/3C509B-nestor)
-22. [DOS Ethernet drivers taken from T400 website](https://support.lenovo.com/mn/en/downloads/ds001865)
-23. [3C905 drivers](https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/3com/3c905/support.3com.com/infodeli/tools/nic/3c905.htm)
-24. [SC55 Soundfont](https://github.com/trevor0402/SC55Soundfont)
-25. [Via 4in1 drivers](https://theretroweb.com/chipsets/670)
-26. [Novell Netware DOS client](https://community.microfocus.com/img/oes/w/tips/34501/netware-dos-client)
+5.  [SHSUCDX 3.06](http://adoxa.altervista.org/shsucdx/index.html)
+6.  [GRUBFORDOS](https://sourceforge.net/projects/grub4dos/files/GRUB4DOS/)
+7.  [svgaptch for VESA compliance](https://download.wcnews.com/files/other/wcpc/)
+8.  [Crynwr](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/repos/pkg-html/crynwr.html)
+9. [Unisound](https://www.vogons.org/viewtopic.php?f=62&t=72553)
+10. [Microsoft Mouse 8.20](https://winworldpc.com/product/microsoft-mouse/8x)
+11. [Microsoft Mouse 9.01](https://winworldpc.com/product/microsoft-mouse/9x)
+12. [Xircom PE3-10BT drivers](https://www.vogonsdrivers.com/getfile.php?fileid=1347)
+13. [3c589 Packet driver](http://download.caltech.se/download/fluke/DAQ/NetDAQ/disk2/packet/)
+14. [3C589N DOS and Windows drivers](http://files.mpoli.fi/hardware/NET/3COM/3C589N.ZIP)
+15. [PFE500c drivers](https://www.driverguide.com/driver/amp/detail.php?driverid=114194)
+16. [Cardsoft 3.1](https://archive.org/details/simpletechnology_pcmcia21cardsocket_systemsoftcardsoftv31_cardview)
+17. [JEMM](https://github.com/Baron-von-Riedesel/Jemm)
+18. [RTC_micro8088](https://github.com/wilco2009/RTC_micro8088)
+19. [Freddy V ch375v022](https://www.vogonsdrivers.com/getfile.php?fileid=1991&menustate=0)
+20. [3C509B-nestor driver for 8088](https://github.com/hackerb9/3C509B-nestor)
+21. [DOS Ethernet drivers taken from T400 website](https://support.lenovo.com/mn/en/downloads/ds001865)
+22. [3C905 drivers](https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/3com/3c905/support.3com.com/infodeli/tools/nic/3c905.htm)
+23. [SC55 Soundfont](https://github.com/trevor0402/SC55Soundfont)
+24. [Via 4in1 drivers](https://theretroweb.com/chipsets/670)
+25. [Novell Netware DOS client](https://community.microfocus.com/img/oes/w/tips/34501/netware-dos-client)
 
 # Common software sources
 
