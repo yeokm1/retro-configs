@@ -10,6 +10,8 @@ The machine is configured to boot to DOS 6.22 from an external USB drive.
 
 Demo video of Doom, Planet X3, ChatGPT and CPUID. Descent runs too fast to be playable.
 
+Background of this project can be read from my [blog post](https://yeokhengmeng.com/2024/10/modern-pc-vintage-twist/).
+
 ## Specifications
 
 These are the specifications of this modern machine.
