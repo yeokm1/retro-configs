@@ -23,10 +23,10 @@ These are the specifications of this modern machine.
 * Coolermaster Hyper 212 Spectrum V3 CPU cooler
 * 1TB NVME Crucial T500
 * From previous build
-    * Seasonic S12II 520W PSU
+    * Seasonic S12II 520W PSU (non-modular)
     * Coolermaster N400 midtower ATX case
-    * Sound BlasterX AE-5
-    * 512GB NVME Samsung 870 Evo Plus
+    * Creative Sound BlasterX AE-5
+    * 512GB NVME Samsung 970 Evo Plus
     * 1TB SATA Crucial MX300
     * 3.5" floppy Drive with internal USB adapter
     * LG Blu-ray Rewriter
