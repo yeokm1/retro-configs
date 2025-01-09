@@ -1,5 +1,5 @@
 mTCP Overview
-2023-03-31 Version
+2024-10-20 Version
 Michael Brutman (mbbrutman@gmail.com)
 
 Home page: http://www.brutman.com/mTCP/mTCP.html
@@ -29,6 +29,9 @@ personal computers running DOS.  Applications include:
  - SNTP.EXE, a Simple Network Time Protocol client for synching your clock
  - SPDTEST.EXE, a program for benchmarking your TCP/IP network speed
  - TELNET.EXE, a Telnet client with reasonable good ANSI terminal emulation
+
+New this release! NETDRIVE.SYS and NETDRIVE.EXE - network attached storage!
+
 
 The TCP/IP code is compiled into each application allowing for each
 application to choose the features that they need.  This approach allows
@@ -113,10 +116,11 @@ to choose the shelter.)
 
 Licensing
 
-This version (2023-03-31) of mTCP is available as open
+This version (2024-10-20) of mTCP is available as open
 source software under the terms of the GNU General Public License
 version 3.  Please see COPYING.TXT which includes the terms of the
-license.
+license.  NetDrive and HTTPSERV are not included under an open
+source  license; they remain closed until I am satisifed with them.
 
 In short, share and enjoy while respecting the license.  Although
 it is open source software I still maintain the copyright to all of

@@ -1,7 +1,7 @@
 echo off
 echo 
-echo mTCP Services by M Brutman (mbbrutman@gmail.com) (C)opyight 2023
-echo   Version: Mar 31 2023
+echo mTCP Services by M Brutman (mbbrutman@gmail.com) (C)opyright 2024
+echo   Version: Oct 20 2024
 echo 
 if "%1"=="version" goto version
 if "%1"=="quote" goto quote
@@ -49,7 +49,7 @@ echo (Note for floppy users: this slow because it uses a temp file)
 goto end
 :nc
 echo Protocol_Version 1 >> services.$$$
-echo Client_Date 2023-03-31 >> services.$$$
+echo Client_Date 2024-10-20 >> services.$$$
 echo Done >> services.$$$
 echo 
 echo Server response:
