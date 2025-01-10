@@ -51,8 +51,8 @@ Wifi, EMS and HDD emulation. Provided PMEMM EMS driver is loaded to initialise t
 
 <img src="photos/xttest-speedtest.jpg" width="800">
 
-Left: PC Sprint in default clock speed
-Right: PC Sprint overclocking CPU
+* Left: PC Sprint in default clock speed
+* Right: PC Sprint overclocking CPU
 
 # Reference
 1. [Manual](https://theretroweb.com/motherboards/s/amax-engineering-amax-2000xt)
