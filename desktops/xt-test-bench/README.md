@@ -13,7 +13,7 @@ I have set it up to run DOS 6.22.
 * 640KB RAM
 * [Monotech PS/2 to XT Converter](https://monotech.fwscart.com/product/ps-2-to-xt-keyboard-converter)
 
-<img src="photos/xttest-cpu.jpg" width="600">
+<img src="photos/xttest-cpu.jpg" width="800">
 
 50x14x7mm heatsinks are applied to 8088 and 8087 to vent off the heat to preserve chip lifespan. [Aliexpress purchase links](https://www.aliexpress.com/item/1005004923109486.html)
 
@@ -49,7 +49,7 @@ Wifi, EMS and HDD emulation. Provided PMEMM EMS driver is loaded to initialise t
 
 ### Landmark System Speed Test
 
-<img src="photos/xttest-speedtest.jpg" width="600">
+<img src="photos/xttest-speedtest.jpg" width="800">
 
 Left: PC Sprint in default clock speed
 Right: PC Sprint overclocking CPU
