@@ -50,6 +50,14 @@ This is my modern desktop rig built in 2024 but I configured it to run MS-DOS 6.
 
 It has a very modern AMD Ryzen 5 7600 3.8Ghz and Nvidia GeForce RTX 4060 Ti 16GB.
 
+## 6. [XT Test Bench](desktops/xt-test-bench/) (1985)
+
+This is a clone XT motherboard suspected to be [AMAX 2000XT](https://theretroweb.com/motherboards/s/amax-engineering-amax-2000xt) or similar. It is acting as my adhoc XT-based test bench.
+
+I have set it up to run DOS 6.22.
+
+<img src="desktops/xt-test-bench/photos/xttest-board.jpg" width="600">
+
 # Laptops
 
 ## 1. [Thinkpad T42](laptops/thinkpad-t42) (2004)
