@@ -56,3 +56,4 @@ Wifi, EMS and HDD emulation. Provided PMEMM EMS driver is loaded to initialise t
 
 # Reference
 1. [Manual](https://theretroweb.com/motherboards/s/amax-engineering-amax-2000xt)
+2. [Picomem stuff](https://github.com/FreddyVRetro/ISA-PicoMEM/)
