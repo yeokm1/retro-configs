@@ -108,7 +108,7 @@ The Thinkpad X61 is a laptop released in 2007 by IBM. The machine is configured 
 
 ## 6. [Thinkpad X13 Gen 1 (Intel)](laptops/thinkpad-x13-g1) (2020)
 
-The Thinkpad X13 Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM to have legacy 16-bit OS-support and S3 sleep state.
+The Thinkpad X13 Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM that supports legacy 16-bit OSes and S3 sleep state.
 
 <img src="laptops/thinkpad-x13-g1/photos/x13g1-front-egpu-dock-full.jpg" width="500">
 
