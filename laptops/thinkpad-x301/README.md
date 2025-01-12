@@ -4,7 +4,7 @@ The Thinkpad X301 is a laptop released in 2008 by Lenovo as a technical update t
 
 <img src="photos/x301-front.jpg" width="500">
 
-The machine is configured to multi-boot to DOS 6.22, Windows 10 64-bit and Lubuntu. 
+The machine is configured to multi-boot to DOS 6.22, Windows XP and Lubuntu. 
 
 I wrote a book review that is based on this machine: https://yeokhengmeng.com/2024/09/book-review-the-race-for-perfect/
 
@@ -19,7 +19,7 @@ These are the specifications specific to the Thinkpad I have:
 * 13.3" TFT display with 1440x900 resolution
 * 512GB Kingston KC600 mSATA SSD with 1.8" adapter
 * Intel Gigabit PRO/1000
-* Intel Dual Band 802.11ac 7260 (BIOS whitelist removed)
+* Intel Dual Band 802.11n 6200AGN (BIOS whitelist removed)
 
 ## SSD
 
@@ -31,15 +31,21 @@ To update it with a more modern drive, an mSATA SSD was used with an adapter.
 
 ## BIOS
 
-To use third-party Wifi cards like the modern Intel 7260 outside of the default wifi whitelist, the BIOS must be modified. 
+To use third-party Wifi cards like the modern Intel card outside of the default wifi whitelist, the BIOS must be modified. 
 
 A third-party modified BIOS was obtained from [here](https://x301.mcdonnelltech.com/) disables Wifi whitelist among other changes.
 
 ## Boot Configuration setup
 
-To boot between DOS and Windows 10, [EasyBCD](https://neosmart.net/EasyBCD/) was used to configure Windows boot loader.
+## Windows XP
 
-<img src="photos/x301-multiboot.jpg" width="400">
+The Windows XP setup recognises the DOS primary partition and enters it in its bootloader entry.
+
+<img src="photos/x301-multiboot-xp.jpg" width="500">
+
+For drivers, I initially tried Thinkvantage System Update 3.16 for Windows XP but it seems the servers are now down now. Lenovo's website also does not seem to still host the legacy drivers.
+
+To mitigate this, I used [Snappy Driver Installer Origin](https://www.glenn.delahoy.com/snappy-driver-installer-origin/).
 
 ## DOS setup
 
@@ -59,7 +65,11 @@ Sound Blaster and OPL3 support is provided by the [SBEMU](https://github.com/cra
 
 ODI Network drivers and Packet driver shim loaded successfully.
 
-## Windows 10 Drivers
+## Windows 10 Setup (deprecated, kept for reference)
+
+To boot between DOS and Windows 10, [EasyBCD](https://neosmart.net/EasyBCD/) was used to configure Windows boot loader.
+
+<img src="photos/x301-multiboot-10.jpg" width="400">
 
 Windows 10 can be installed properly on the system however some drivers have to be installed manually to fully clear all Device Manager errors.
 

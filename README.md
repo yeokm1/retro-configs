@@ -120,7 +120,7 @@ The Thinkpad X301 is a laptop released in 2008 by Lenovo as a technical update t
 
 <img src="laptops/thinkpad-x301/photos/x301-front.jpg" width="500">
 
-The machine is configured to multi-boot to DOS 6.22, Windows 10 64-bit and Lubuntu. 
+The machine is configured to multi-boot to DOS 6.22, Windows XP and Lubuntu. 
 
 # Virtual Machines
 
