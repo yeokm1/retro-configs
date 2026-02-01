@@ -1,0 +1,672 @@
+                         ENCRYPTED DISK PATCH
+
+                             Version 2.0
+
+                              10/24/2013
+
+                       Copyright (C) 2006-2013
+                          By Rudolph R. Loew
+
+
+
+The Encrypted Disk Patch Software patches the BIOS and Windows 98/98SE/ME to
+provide full Disk Encryption. All files on the Hard Drive(s) are Encrypted
+as they are written and Decrypted as they are read, so no unencrypted data is
+ever placed on the Hard Drive(s). If all of the Hard Drive(s) are Encrypted,
+all Temporary Files, Cache Files, History Files, Swap Files, Slack Space,
+etc. are Encrypted, as well as all Application Files, leaving no opportunity
+for anyone to recover sensitive data. Laptops with all Hard Drives Encrypted
+would no longer be a security threat, as no data or programs could be
+recovered from them, if they were stolen.
+
+This patch updates the standard IDE controller (ESDI_506.PDR in the Windows
+SYSTEM\IOSUBSYS Directory). If you are using a controller card such as the
+Promise Card included with some Maxtor or Western Digital drives, this Patch
+will not affect drives connected to the Card(s). If you have installed the
+Intel Application Accelerator, this driver may no longer be used and will
+not work. SATA drives are not supported. A matching Boot Manager intercepts
+the BIOS Disk Access Calls and provides Encryption/Decryption in DOS Mode.
+The Boot Manager obtains the Password(s) from the User before the Operating
+System Boots up and passes the information to the Windows Driver.
+
+
+
+DEMO VERSION
+
+The Demo Version of this Software has only the Floppy Based Boot Manager
+Setup (DFMINST.COM) and uses a fixed Password on all Encrypted Hard Drives.
+The Hard Disk Based Encrypted Boot Managers are on the Full Version only.
+The ability to use secure Passwords requires use of the Full Version.
+If you are using the Demo Version, you will need to obtain the Full Version
+of this Software for these features. See Below for Ordering Information.
+
+If you are using the Demo Version, ignore any instructions relating to the
+Hard Drive Based Encrypted Disk Managers and their Setup Programs BMINST.COM
+and FLOPINST.COM and substitute the Demo Floppy Installer DFMINST.COM in
+place of the Full Version FMINST.COM. All Hard Drives Encrypted with the
+Demo Version will have a Password of " " regardless of the Password typed.
+A blank Password will still disable Encryption/Decryption on the specified
+Hard Drive.
+
+WARNING: Encrypted drives created by the Demo version CANNOT be converted to
+         a more secure Password using the Full Version. You must copy the
+         files to another drive or use mirroring software to duplicate the
+         drive.
+
+
+
+REQUIREMENTS
+
+Windows 95 Release 2 (See Windows 95 Below)
+Windows 98, 98SE or ME (See WINDOWS ME Section Below if using Windows ME)
+Motherboard IDE Controller recognized by the Default ESDI_506.PDR Port Driver
+
+For Hard Drives larger than 137GB:
+High Capacity Disk Patch from Rudolph R. Loew
+BIOS support for hard drives >137GB (48-Bit LBA) or
+Large Hard Drive Version of the Encrypted Disk Boot Manager
+
+WARNING: Some BIOSes have defective support for 48-Bit LBA. Rearranging
+         Drives may cause a previously working system to fail. Verify
+         support using 48BITLBA.EXE for all Drive arrangements you plan to
+         use. In particular, VIA EPIA BIOSes before 07/05 may claim to
+         support 48-Bit LBA, and will show the full size of the Drive, but
+         will not actually support the Drive if it is not the Primary Master.
+         Users of VIA EPIA motherboards should contact the Author to obtain
+         a Patched BIOS if needed.
+
+
+
+BIOS SUPPORT VERIFICATION (for Hard Drives larger than 137GB)
+
+The 48BITLBA program tests your Computer's support for Large Hard Drives.
+You will need at least one Hard Drive larger than 137GB connected to either
+of the IDE connectors on your Motherboard. This Program is available in the
+HIGH CAPACITY DISK PATCH Demo Package at:
+
+http://rloew1.no-ip.com
+
+Run the Program from DOS, not a DOS Box, to verify BIOS, or Boot Manager,
+support for Large Hard Drives. A "48-BIT Support Verified" message should be
+displayed next to the Large Hard Drive's Number and Size Report. Otherwise
+your BIOS may not support Large Hard Drives.
+
+If you get a "Last 28 Bit Sector Unsupported" message, your BIOS or Boot
+Manager has a bug making it incompatable with your Hard Drive.
+
+WARNING: Some BIOSes have defective support for 48-Bit LBA. Rearranging
+Drives may cause 48-Bit LBA support to fail. Verify support with all Drive
+arrangements you plan to use. In particular, there are some BIOSes that only
+support 48-Bit LBA on the MASTER Drive on the PRIMARY IDE Bus.
+
+
+
+DRIVER USAGE VERIFICATION
+
+The DISKDVR Program scans the Registry and displays the Port Driver being
+used by Windows for each IDE Bus and it's associated Info (.INF) file.
+This Program must be run from a Windows DOS Box.
+
+The Port Driver used for each IDE Bus that will be used with Large Hard
+Drives must be ESDI_506.PDR for the Patch to work.
+
+This is the Windows Default Port Driver. If you have loaded other IDE
+Drivers, Windows may no longer use the ESDI_506.PDR Port Driver.
+
+If the Port driver is reported as INTELATA.MPD, the Intel Application
+Accelerator is controlling that IDE Bus. The Intel Application Accelerator
+must be uninstalled before using the Encrypted Disk Patch.
+
+If the Port driver is reported as VIADSK.MPD, the IDE Bus is being controlled
+by a VIA MiniPort Driver. The June 2003 version of the VIA MiniPort Driver,
+the latest version as of this release, is not compatable with some Hard
+Drives and cannot be easily removed. It is not compatable with the Encrypted
+Disk Patch.
+
+If any other Port Driver is reported, please contact the Author for further
+information.
+
+NOTE: Running DISKDVR +ALL will display all Hard Disk Controllers (hdc) in
+      the Registry. This includes many USB Drives.
+      Running DISKDVR -SCSI will display all SCSI Disk Controllers
+      (SCSIAdapter) in the Registry..
+
+
+
+PATCH INSTALLATION
+
+If you need full security, you will have to do a clean install of Windows
+into an Encrypted Hard Drive or mirror an existing Hard Drive into an
+Encrypted Hard Drive. Go to the NEW WINDOWS INSTALLATION or MIRROR EXISTING
+Drive section.
+
+The following will encrypt a newly added Hard Drive in an existing System.
+
+Windows ME users should read the WINDOWS ME Section Below before Installing.
+High Capacity Disk Patch users should read the HIGH CAPACITY DISK PATCH
+Section Below before Installing.
+
+1. Download and UnZip the Programs to a known location.
+   Do not UnZip the Programs to the C:\ Directory if you do not want the
+   AUTOEXEC.BAT File to be replaced.
+2. Open a MS-DOS Box (Windows 98 or 98SE Only) or Boot into DOS.
+   WARNING Do not Install the Patch from Windows ME. Boot from DOS or Windows
+   ME SAFE MODE.
+3. Go to the Directory where the programs are located.
+4. Run PATCHEXP to expand the Driver.
+   This is not needed for the Version 2226 of the Windows 98 SE Driver.
+5. Run PATCHENC to install the patch.
+6. If you are using any other Boot Manager go to step 9.
+7. You can install the Encrypted Boot Manager on your Hard Drive by runnimg
+   the BMINST.COM Program and goting to step 10. Otherwise continue.
+8. You can install the Encrypted Boot Manager on your Hard Drive from a
+   bootable Floppy by runnimg the FLOPINST.COM Program to create a Bootable
+   Installation Floppy. Create the Floppy Disk, and Reboot without removing
+   the Floppy Disk. This can be done from Windows ME. Otherwise continue.
+9. You can load the Encrypted Boot Manager from a Floppy each time you boot
+   your Computer. This does not modify your Hard Drive and will work with
+   other Boot Managers. Create an ENCRYPTION Floppy Disk using the FMINST.COM
+   Program. Place the Floppy Disk in your A: Drive before booting your
+   Computer.
+10. Reboot and enter your Password(s) (see Below). Do not enter a Password
+    for the first (System) Drive.
+11. If you are using a Floppy Disk to run your Partitioning Software, Press
+    CNTL-C when Prompted and Insert your Partitioning Software Floppy.
+12. Partition all drives that are being encrypted.
+13. Reinsert the ENCRYPTION Floppy if you are using one.
+14. Reboot and enter your Password(s) (see Below).
+15. Format all partitions on drives that are being encrypted.
+
+
+
+NEW WINDOWS INSTALLATIONS
+
+If you want to have full security, the Windows System Drive must be
+Encrypted. This requires that you do a clean install of Windows onto an
+Encrypted Hard Drive. You will also have to Patch the Windows Driver after it
+has been placed on the Hard Drive and Before it is used by Windows.
+
+ 1. Place the Patch Programs on a Bootable DOS Floppy Disk with a CD Driver
+    and Partitioning and Formatting Utilities.
+ 2. Prepare a Boot Manager Floppy using the FMINST Program.
+ 3. Boot from the Boot Manager Floppy.
+ 4. Enter Passwords for Drives to be Encrypted.
+ 5. Press CTRL-C to Boot from a Floppy.
+ 6. Insert the Bootable DOS Floppy from step 1.
+ 7. Partition the Encrypted Hard Drives and any others needing Partitioning.
+ 8. Repeat Steps 3 thru 6.
+10. Format all new Partitions.
+11. Insert the Windows Installation CD.
+12. Perform the Windows installation until the FIRST reboot.
+    Do not leave the Computer unattended in case Windows reboots without
+    prompting.
+13. Repeat Steps 3 thru 6.
+14. Run the Patch Programs.
+15. Repeat Steps 3 and 4.
+16. Continue the Windows Installation keeping the Boot Manager Floppy in the
+    drive and repeat step 4 after each reboot.
+    If the driver was not found in Step 14, insert the Boot Manager Floppy
+    perform Steps 13 and 14 at the Second Windows Reboot. If the Program
+    still cannot find the driver, you will have to look for the
+    ESDI_506.PDR and use the Specific File option described above. DO NOT
+    allow Windows to startup after the Second Reboot until the Patch has
+    been Installed successfully.
+17. You may optionally install the Encrypted Boot Manager on your Boot Hard
+    Drive using the BMINST or FLOPINST Programs. Otherwise continue to use
+    the Boot Manager Floppy on each Reboot.
+
+If you have a CD Burner or you install Windows from files placed on the hard
+drive, you can purchase a pre-patched Installation Cabinet File for your
+version of Windows. By replacing the original Cabinet File in the Installation
+CD or Folder you can install Windows without further patching. This will not
+protect you if an update replaces the Patched driver or it is corrupted.
+
+WARNING: If you install Motherboard Drivers provided by the manufacturer of
+the Motherboard, you may disable the Patched Driver. You may also have the
+option to skip installation of these Drivers. Run the DISKDVR.EXE Program
+after installing the Drivers but BEFORE you reboot the Computer. You may
+have to choose the "Reboot Later" option if asked to Reboot to run the
+Program. If the DISKDVR.EXE Program reports that a Port Driver other than
+ESDI_506.PDR is now selected, you will have to uninstall it before rebooting.
+If you can't uninstall it, you will have to start the Windows Installation
+from scratch.
+
+
+
+MIRRORING EXISTING DRIVES
+
+To Encrypt, Decrypt or change the Password on an existing Drive, you will
+need to mirror the entire Drive to another Hard Drive of at least the same
+size. You have the option of mirroring back to the First Hard Drive if the
+Second Hard Drive is larger or is on loan.
+
+1. Prepare a Boot Manager Floppy using the FMINST Program.
+2. Place both Hard Drives in a single Computer connected to either of the IDE
+   connectors on the Motherboard.
+3. Insert the Boot Manager Floppy in the A: Drive and Boot your Computer.
+4. Enter the Passwords for each Drive.
+   On the Source Drive, enter it's Password if already Encrypted, else none.     
+   On the Destination Drive, enter it's Password if Encryption is desired,
+   else none.
+   On all other drive, enter their Passwords (if any) or none.
+5. If your Mirroring Program is NOT on a Floppy skip to Step 10.
+6. Press CTRL-C when Prompted.
+7. Insert your Bootable DOS Disk with your Partitioning Tools.
+8. Mirror your Drives.
+9. Shutdown and Remove Drive(s) from System, you are done.
+10. If you are mirroring your Boot Drive and are running Windows, terminate
+    as many tasks as possible.
+    NOTE: The mirror will be flagged as improperly Shutdown if you boot from
+          it . This should not be a problem if no other activity is changing
+          your Boot Drive during the Mirroring operation.
+11. Use your Mirroring Software to Mirror your Drive.
+12. Shutdown and Remove Drive(s) from System, you are done.
+
+
+
+USING THE ENCRYPTED DISK SOFTWARE
+
+If you are using the Floppy Based Encrypted Boot Manager (created by FMINST),
+place the Floppy in the A: Drive before Booting your Computer.
+
+The Encrypted Boot Manager takes control during Boot.
+It will ask for Passwords for each IDE Hard Drive that it finds.
+Enter a Password of up to 16 Characters for each drive you wish to Encrypt.
+A blank Password will disable Encryption for that Drive.
+You will then be prompted to press CTRL-C if you wish to Boot from a Floppy.
+You can Press CTRL-C and insert a Bootable Floppy, or wait 5 Seconds for
+ the Hard Drive to Boot.
+The Passwords are automatically passed to Windows.
+Passwords should be at least 9 characters and the last character should be
+ different from the first character. A Password consisting of Space Characters
+ is not considered blank.
+
+WARNING: Passwords CANNOT be added, deleted, or changed without replacing
+         all data on the affected Hard Drive(s).
+
+NOTE: If the Encrypted Disk Driver is not Installed or fails to Install,
+      Windows may go into Compatability Mode and allow access to the Encrypted
+      Hard Drive using the Encrypted Boot Manager at reduced performance.
+      To verify that the Encrypted Disk Patch is working properly, open the
+      Device Manager and verify that the Hard Disk Controllers do not have a
+      Yellow Exclamation Mark next to them. In Compatability mode, performance
+      will be reduced and any CD/DVD drive on the same IDE bus will be
+      unavailable.
+
+
+
+AUTOMATIC PATCH INSTALLATION/VERIFICATION (Windows 98 and 98SE Only)
+
+The Program can be setup to automatically verify and repatch, if necessary,
+each time the computer is booted. This will prevent corruption if the Patch
+is overwritten by other software.
+
+If an unrecognized or corrupt driver is found, the Program will prevent
+Bootup from progressing to prevent possible corruption.
+
+IMPORTANT: Do not use this method with Windows ME.
+
+To Setup Automatic Patch Installation/Verification perform the following
+steps:
+
+1. Download and UnZip the Program to a known location.
+2. Copy the PATCHEXP.EXE to C:\PATCHEXP.EXE
+3. Copy the PATCHENC.EXE to C:\PATCHENC.EXE
+4. If there is no C:\AUTOEXEC.BAT file or it is empty, copy the supplied
+   UnZipped AUTOEXEC.BAT to C:\AUTOEXEC.BAT.
+5. If you already have a C:\AUTOEXEC.BAT file, add the following line to it:
+
+   C:\PATCHEXP.EXE -V
+   C:\PATCHENC.EXE -V
+
+   Do not use LOADHIGH or LH with this program, it is not needed.
+
+
+If you wish to put the Programs in a different Folder perform the following
+step:.
+
+Add the following line to your C:\AUTOEXEC.BAT file:
+
+X:\PATH\PATCHEXP.EXE -V
+X:\PATH\PATCHENC.EXE -V
+
+Where X:\PATH is the Drive and Folder where the Program is located.
+
+
+WARNING: If the Patch Program ever interrupts the Boot Sequence and reports
+an error. It is STRONGLY recommended that you do NOT press ENTER to Continue
+if you have any Encrypted Drives. You should Press RESET to Reboot the
+Computer and either use a Boot Floppy or the "Command Prompt Only" from the
+Windows Startup Menu until the problem is resolved.
+
+
+
+WINDOWS 95
+
+Author has not tested Windows 95 Support and Microsoft claims that Windows
+95 does not support more than 32GB. Use this Patch with Windows 95 at your
+own risk.
+
+It is strongly recommended that you update your Disk Driver up to Version
+4.00.1116 or later before installing the Patch. The upgrade to Version
+4.00.1116 is available from Microsoft at
+
+http://support.microsoft.com/kb/171353/EN-US/
+
+
+
+WINDOWS ME
+
+Windows ME contains a number of changes that affect the Installation and
+Verification of the Encrypted Disk Patch.
+
+Windows ME does not use the AUTOEXEC.BAT file during boot so Automatic
+Installation and Verification cannot be performed. Commands placed in the
+AUTOEXEC.BAT file will be ignored.
+
+Microsoft added a function called "System File Protection" (SFP) that
+prevents changes to System files including the ESDI_506.PDR file Patched by
+the Encrypted Disk Patch. This function cannot be disabled.
+
+If any file protected by SFP is changed, SFP will replace it with the old
+version a few seconds later without any warning or indication.
+
+The Patch can only be Installed from DOS, not a DOS Box, or from SAFE MODE
+where SFP is not active.
+
+The Patch can be Uninstalled in Windows but a Reinstallation will be lost.
+
+To stop SFP from protecting the ESDI_506.PDR file, perform the following
+steps:
+
+1. Boot from DOS
+2. Edit the FILELIST.XML file in the Windows SYSTEM\RESTORE folder.
+3. Remove the lines referring to the FILELIST.XML and ESDI_506.PDR files.
+4. Save the updated file.
+
+Windows ME has a new feature called "System Restore" which allows changes to
+be rolled back. If you use System Restore to rollback before the Patch was
+installed, you will lose the Patch and risk losing access.
+
+
+
+UNINSTALL PATCH (See WARNING Section Below)
+
+1. Download and UnZip the Program to a known location (if necessary).
+2. Open a MS-DOS Box or Boot into DOS.
+3. Go to the Directory where the program is located.
+4. Run PATCHENC.
+5. Type Yes to the Uninstall request to uninstall the patch.
+6. Run PATCHEXP.
+7. Type Yes to the Uninstall request to uninstall the expansion.
+8. Remove the C:\AUTOEXEC.BAT file or the line in it that invokes the
+   PATCHEXP and PATCHENC Programs if you are using the Automatic
+   Installation/Verification Mode of the Software.
+9. If you have installed the Encrypted Boot Manager on your Hard Drive (using
+   BMINST or FLOPINST) run UNINST to remove the Boot Manager. If you are
+   using the Floppy Disk created by FMINST or DFMINST you do not need to
+   uninstall the Boot Manager. Removing the Floppy Disk from your A: drive
+   will stop it from running. The Floppy can be reformatted if no longer
+   needed.
+10. Repartition and reformat any Hard Drives that were previously Encrypted.
+
+
+
+OTHER PROGRAMS, PATCHES, DRIVERS AND UPDATES
+
+There are a number of other programs which can disable this Patch if they are
+installed. Some overwrite the ESDI_506.PDR Port Driver, while others reassign
+the IDE driver in the Registry bypassing the ESDI_506.PDR Port Driver.
+
+The following is a list of known programs that will disable this Patch. There
+are probably others. Any program that promises to improve Hard Disk
+performance, except defraggers, or provide monitoring of Hard Disk operations,
+is suspect.
+
+Microsoft Fix Q243450.
+
+    This Fix updates the ESDI_506.PDR in Windows 98 or 98SE to fix a
+    problem with some Phoenix BIOSes. The Encrypted Disk Patch can Patch
+    this Fix.
+
+    1. Run the Microsoft Patch but do NOT reboot.
+    2. Reinstall the Encrypted Disk Patch.
+    3. Reboot
+
+Intel Application Accelerator.
+
+    The Intel Application Accelerator provides Large Hard Drive Support and
+    other features for certain Intel Chipsets. This program will bypass the
+    ESDI_506.PDR Port Driver and use one called INTELATA.MPD instead. This
+    program is not compatable with the Encrypted Disk Patch and must be
+    Uninstalled.
+
+VIA IDE Miniport Driver.
+
+    The VIA IDE Miniport Driver provides Large Hard Drive Support and
+    other features for certain VIA Chipsets. This program will bypass the
+    ESDI_506.PDR Port Driver and use one called VIADSK.MPD instead.
+    Version 3.20B is the most recent version to date (08/03).
+    The Driver has a flaw that can cause errors to appear on Large Seagate
+    Drives and possibly others. This program is very difficult to uninstall,
+    and is not compatable with the Encrypted Disk Patch.
+
+Unfortunately there is no way to determine what effect other programs will
+have until they are installed. Some installations cannot be undone. If the
+program does not return an error to Windows, causing it to go into
+Compatability Mode, and this Patch cannot be reapplied, you will not be able
+to access your data.
+
+Doing a complete backup of your system is STRONGLY recommended before
+installing any such program.
+
+
+
+WARNING
+
+IF THE PASSWORD(S) ARE LOST ALL DATA ON THOSE ENCRYPTED HARD DRIVES WILL BE
+INACCESSIBLE UNTIL THE PASSWORD IS FOUND. NO WORKAROUND OR RECOVERY OPTION IS
+AVAILABLE FROM AUTHOR.
+
+THE POTENTIAL EXISTS FOR DATA LOSS TO OCCUR DUE TO ERRORS IN THE PATCH OR
+IF THE PATCHED DRIVER IS BYPASSED OR OVERWRITTEN. DO NOT USE IN CRITICAL
+SYSTEMS OR WHERE HUMAN SAFETY IS INVOLVED.
+
+Please E-Mail any Bug Reports to RLoew@hotmail.com.
+
+If you install a Windows update that replaces the ESDI_506.PDR file or
+uninstalls the Patch, you may be unable to access the encrypted files.
+If your system files are encrypted, you will not be able to boot Windows
+normally. You will have to boot in Safe Mode or into DOS to repatch the
+driver. If in doubt, rerun the PATCHEXP and PATCHENC Programs BEFORE allowing
+Windows to Reboot and Answer NO to the Uninstall Request if it appears. If
+the Computer Reboots before you can run the Program, make it boot in Safe
+Mode, apply the Patch and Reboot again. See the AUTOMATIC PATCH
+INSTALLATION/VERIFICATION Section above for instructions to setup Windows to
+have the Patch Verified and Reinstalled (if necessary) on each boot.
+
+Usage without the Encrypted Disk Manager will disasble all Encryption and
+Decryption. Encrypted files will not be accessible. Windows may crash if
+data drives are Encrypted. Windows will not boot if the Drive it is on is
+encrypted
+
+Installing this Patch on Windows NT, 2000, or XP has not been tested and may
+corrupt your Hard Drive.
+
+
+
+OPTIONS
+
+The Programs automatically examine the Computer to locate the Driver File.
+
+The Programs can be redirected to Patch a specific File by specifying a
+FileName as follows:
+
+PATCHEXP MYDRIVER.PDR
+PATCHENC MYDRIVER.PDR
+
+The Drive File is renamed to provide a Backup File before the Patched Driver
+File is written. The Backup File has the same name as the Driver File but the
+extension is changed to .ba_ (PATCHEXP) and .bac (PATCHENC) provided the
+FileName has an extension. If not, .ba_ and .bac extensions are added.
+
+If an earlier Version of the Patch is found, or a Demo Version, it is
+replaced with the new Version. The Backup File is used to create the new
+Patch so it must be present.
+
+The Patched Driver File is deleted and the Backup File is renamed back if the
+Patch is Uninstalled. If the Backup File is not present, the Patch cannot be
+Uninstalled.
+
+The two Patch Programs should be run in the following order:
+See the HIGH CAPACITYT DISK PATCH Section Below if using PATCHATA.
+
+Installation:    PATCHEXP then PATCHENC
+UnInstallation:  PATCHENC then PATCHEXP
+
+The INSTALL/VERIFY mode is specified by adding "-V" (ex. PATCHENC -V).
+
+   The Program will verify if the Patch is present or not.
+   If present, the Program will print a report and exit.
+   If not, the Program will attempt to Install the Patch.
+   If successful, the Program will print a report and exit.
+   If not, the Program will print a failure report and wait until you press
+   ENTER or you REBOOT the Computer (Strongly recommened).
+
+
+
+MULTIPLE BOOT WITH OTHER OPERATING SYSTEMS
+
+The Floppy based Boot Manager Loader (created by FMINST) is compatable with
+multiple boot systems consisting of DOS and/or Windows 98/SE/ME systems.
+Each separate Windows 98/98SE/ME System must be Patched individually.
+All other Operating Systems must be placed on unencrypted Drives and not
+recognize any partiitons on the Encrypted Drives.
+
+
+
+BOOTMAN
+
+BOOTMAN is a Mini Boot Manager designed to provide Large Hard Drive support
+for BIOSes that only support 137GB. It is not compatable with the Encrypted
+Disk Patch. An Encrypted Disk Patch Boot Manager with Large Hard Drive
+support is available at no extra charge for existing BOOTMAN customers.
+Uninstall BOOTMAN before installing the ENCRYPTED BOOT MANAGER.
+
+
+
+HIGH CAPACITY DISK PATCH
+
+The HIGH CAPACITY DISK PATCH provides Large Hard Drive support for Windows
+98/SE/ME. It is compatable with the Encrypted Disk Patch. This Patch is
+required to use Hard Drives Larger than 137GB with Windows 98, SE or ME.
+You may also need BIOS support for large Hard Drives, see BOOTMAN above.
+New Customers, Please contact Rudolph R. Loew (See Below) for more
+information on this Product.
+
+If you are using the HIGH CAPACITY DISK PATCH with the ENCRYPTED DISK PATCH,
+you will need to combine the installations.
+
+Read the MANUAL.TXT files for both Packages before proceeding.
+
+Use the installation instructions above but add the PATCHATA Program to the
+DOS Floppy and run the PATCHATA Program immediately before running the
+PATCHEXP and PATCHENC Programs wherever they are used.
+
+Uninstall in the following order:
+
+PATCHENC
+PATCHEXP
+PATCHATA
+
+Uninstalling in any other order may remove more than one Patch at a time
+and will leave unneeded backup files.
+
+
+If using the AUTOMATIC INSTALLATION/VERIFY feature, you will need to combine
+the data in the two supplied AUTOEXEC.BAT files or add the following to an
+existing AUTOEXEC.BAT:
+
+C:\PATCHATA -V
+C:\PATCHEXP -V
+C:\PATCHENC -V
+
+You will also need to copy all three Programs to your C:\ folder.
+
+
+
+RELATED PRODUCTS
+
+RFDISK   Nondestructive partitioning Program with Large Disk support and
+         support for multiple boot and selectable partition configurations.
+
+QFORMAT  Quick formatter for FAT Partitions.
+
+PARTS    Partition Mapper.
+
+WINXX.CAB  Windows Cabinet File with Patch already applied.
+
+BIOS     Large Disk Support Patches for Tyan S1590 Motherboard and others.
+
+EPIA     Patched BIOSes to fix bug in VIA EPIA BIOSes from 01/02 thru 06/05.
+
+DOS      Patches to DOS 6.2 to access drives larger than 8GB.
+
+PATCH137 High Capacity Disk Patch to Support Hard Drives larger than 137GB.
+
+PATCH2TB Patch to Support Hard Drives larger than 2200GB (Beta).
+
+
+
+ORDERING
+
+To purchase Full Version copies of this Software:
+Send $20 US per copy of the Standard Version or $25 US for the Version
+with Hard Drive BIOS Support, to:
+
+Rudolph Loew
+506 Bieling Rd.
+Elmont, NY 11003
+USA
+
+Payment can be made as follows:
+
+1. Cash
+2. Money Order drawn on a US Bank or Post Office
+3. Personal Check drawn on a US Bank (Delivery made after Check clears)
+4. International Postal Money Order accepted by the US Postal Service
+5. Bank Account or Cash Balance funded Payment via Paypal to rloew@hotmail.com
+   Credit or Debit Card funded Paypal Payments will be DENIED
+6. Western Union
+7. Other options may be available from the following authorized Distributors:
+
+C. C. Anderson  http://slesarc.x10host.com
+
+Warning: International Checks or Money Orders, not described above, will not
+be accepted and will not be returned without an additional $2 US handling
+charge.
+
+Delivery is by E-Mail. You MUST include the E-Mail address you want the
+Software to be sent to. It will be a 48KB Zipped Attachment.
+Please type or print your E-Mail address clearly. Sending me an E-Mail when
+you place an order will insure that I have your correct E-Mail address.
+
+Prices and Terms may change at any time. Download the current Version of this
+Software from http://rloew1.no-ip.com or from Simtel before ordering.
+
+For additional information or help placing your order, please refer to
+CONTACT INFORMATION Below.
+
+
+
+CONTACT INFORMATION
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+Website:  http://rloew1.no-ip.com

@@ -1,0 +1,74 @@
+                        TERABYTE PLUS PACKAGE
+
+                             Version 3.0
+
+                              11/02/2015
+
+                        Copyright (C) 2010-2015
+                          By Rudolph R. Loew
+                             
+                             
+
+Version 3.0    Released 11/02/15
+                  IO.SYS updated for INT 2136 Large Cluster Fix
+                  Added Support for Windows Only Partitions.
+                  Switched to Compiled Version of ESDI_506.PDR.
+                  Corrected bad jumps in earlier ESDI_506 Patches.
+                  Chenged Drive Identifier from Gewneric Type to
+                   Manufacturer Name String
+                  Unblocked Optical Drives connected as Masters on Legacy
+                   Controllers.
+                  Replaced SATA0180.INF with ATA0180.INF.
+                  Made ATA0180.INF Generic for Class Code 0180.
+                  Added INF File and Patch Program for early VIA Controllers.
+                  Reenabled BIOS Drive Scan.
+                  Corrected Interrupt Handling when performing BIOS Scan.
+                  Corrected bad Port Mask in I/O Trace Routine.
+                  Fixed issue in LBA Check Code when used with certain BIOSes.
+                  Corrected odd address bug in DBLBUFF.SYS
+                  Added Support for VIA RAID Controllers.
+                  Added FLOPBLK.SYS to support Large Sector Floppy Disks.
+                  Updated RFDISK, RFORMAT and BOOTMAN2 Packages. See
+                   respective HISTORY.TXT Files for details.
+
+Version 2.1    Released 02/19/13
+
+                  Upgraded DISKTSD to Windows ME Version.
+                  Added full support for USB Drives above 2TiB.
+                  Updated RFDISK Package.
+
+Version 2.0    Released 10/13/12
+
+                  Patched IO.SYS to treat Type 0xF Extended Chain Records as
+                   Type 5.
+                  Fixed IO.SYS Loader to fully load LOGO.
+                  Fixed IO.SYS to correctly compute Root Directory Size on
+                   Large Sector Drives.
+                  Moved Patches in IO.SYS to restore text Strings.
+                  Added Large Sector Floppy Support
+                  Reworked Last Non-DOS Partition fix.
+                  Added support for multiple Extended Partitions.
+                  Added Read(16), Write(16), Write/Verify(16) Support for
+                   SCSI and USB.
+
+Version 1.3    Released 08/28/11
+
+                  Updated RFDISK and RFORMAT Packages.
+                  Updated Installation Floppy Image.
+
+Version 1.2    Released 03/20/11
+
+                  Fixed 48BITLBA.EXE and BOOTMAN DDO in BOOTMAN2 Package.
+                  Updated BOOTMAN2, RFDISK and RFORMAT Packages.
+                  Updated Installation Floppy Image.
+
+Version 1.1    Released 11/21/10
+
+                  Fixed 48BITLBA.EXE in BOOTMAN2 Package and Installation
+                   Floppy
+                  Updated BOOTMAN2 Package.
+                  Updated Installation Scripts to support Windows 98.
+
+Version 1.0    Released 11/04/10
+
+                  Initial Release

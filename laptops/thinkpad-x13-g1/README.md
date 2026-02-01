@@ -185,9 +185,4 @@ These are the results:
 ## Sources
 
 1. [X13 Hardware Maintenance Manual](https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-x-series-laptops/thinkpad-x13-type-20t2-20t3)
-2. [Microsoft Network Client 3.0](https://archive.org/details/MSCLIENT30)
-3. [Vogons forum guide on DOS networking](https://www.vogons.org/viewtopic.php?f=61&t=61823&p=691154#p691154)
-4. [Realtek NDIS2 driver](https://www.realtek.com/Download/List?cate_id=584)
-5. [MTCP speed test guide](https://www.brutman.com/mTCP/mTCP_Performance.html)
-6. [Packet drivers](https://packetdriversdos.net/)
-7. [Intel DOS](https://www.intel.com/content/www/us/en/download/2595/intel-ethernet-adapter-drivers-for-ms-dos-final-release.html)
+2. [MTCP speed test guide](https://www.brutman.com/mTCP/mTCP_Performance.html)

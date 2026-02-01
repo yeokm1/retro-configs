@@ -1,0 +1,144 @@
+                       HIGH CAPACITY DISK PATCH
+
+                            Version 5.3
+
+                             10/11/2008
+
+                       Copyright (C) 2003-2008
+                          By Rudolph R. Loew
+                             
+                             
+
+Version 5.3    Released 10/11/08
+
+                  Website information updated to reflect change.
+                  Added Documentation on Motherboard based SATA.
+
+Version 5.2    Released 11/04/06
+
+                  Masked Sector Number on 28-Bit LBA Drives.
+                  Added Direct I/O Enable Command.
+                  Added EPIA BIOS bug Warning.
+                  Upgraded Code Size Check.
+                  Added Test for Backup File Before Uninstalling.
+
+Version 5.1    Released 08/07/06
+
+                  Added Windows 95 Support.
+                  Added defective BIOS warning to Manual.
+                  Adjusted Signature for Promise Card Compatability.
+                  Tested Windows ME Defrag Support for large Paritions.
+                  Adjusted I/O timing to match existing code.
+
+Version 5.0    Released 07/05/06
+
+                  Replaced Signature Code with new Algorithm
+                  Revised 48BITLBA.EXE Signature Check
+                  Added 48BITLBA.EXE Signature Check for TeraByte Patch
+                  Added Support Test to 48BITLBA even if Signature found
+                  Replaced 28-Bit LBA / 48-Bit LBA Selection Algorithm
+
+Version 4.6    Released 04/23/06
+
+                  Replaced Signature Code
+                  Revised 48BITLBA.EXE Signature Check
+                  Added Verification Option to 48BITLBA.EXE
+                  Added Disk Caching Detection Code to 48BITLBA.EXE
+                  Added Sector Zero Restore to 48BITLBA.EXE
+
+Version 4.5    Released 09/16/05
+
+                  Revised Documentation
+
+Version 4.4    Released 08/04/05
+
+                  Replaced Signature Code
+                  Revised 48BITLBA.EXE Signature Check
+                  Added SCSI Driver Option to DISKDVR.EXE
+
+Version 4.3    Released 07/26/05
+
+                  Revised 48BITLBA.EXE messages.
+                  Updated user's manual
+
+Version 4.2    Released 07/08/05
+
+                  Upgraded 48BITLBA.EXE and added Gigabyte Display
+                  Updated user's manual
+
+Version 4.1    Released 05/01/05
+
+                  Replaced Signature Code in Patch
+                  Rewrote Signature Check in 48BITLBA.EXE
+                  Added DISKDVR.EXE to Package
+                  Added MaxDrives option to 48BITLBA.EXE
+                  Revised User's Manual
+
+Version 4.0    Released 04/03/05
+
+                  Rewrote Patch Installer Program
+                  Added Upgrade Capability to Installer
+                  Fixed Backup Name Generator
+                  Updated Documentation
+                  Fixed Last Sector Test in 48BITLBA.EXE
+                  Lowered threshold Sector to 2^28 - 2^8
+                  Replaced Signature Code in Patch
+                  Rewrote Signature Check in 48BITLBA.EXE
+                  Added Demo Version Check to 48BITLBA.EXE
+                  Added Version Check to Installer
+
+Version 3.1    Released 03/22/05
+
+                  Added Volume Locking to 48BITLBA Program
+
+Version 3.0    Released 02/28/05
+
+                  Added Signature to Patch.
+                  Added Signature checking to 48BITLBA Program
+                  Added Windows ME Installation Warnings to Manual
+                  Added Other Programs Section to Manual
+                  Updated Documentation
+
+Version 2.1    Released 12/11/04
+
+                  Fixed Incompatability with Seagate Drives
+                  Added 48BITLBA.EXE to Package
+
+Version 2.0b   Released 12/05/04
+
+                  Added Documentation for Partition Limits
+                  Added Information on Boot Manager
+                  Updated Ordering Information
+
+Version 2.0a   Released 11/19/04 (Demo Only)
+
+                  Fixed Error in Demo Code
+
+Version 2.0    Released 07/26/04
+
+                  Moved Patch Area to Restore Debug Functionality
+                  Reworked Backup Code to Use Rename
+                  Added Windows ME Startup Warning
+                  Updated Documentation
+                
+Version 1.1    Released 07/23/04
+
+                  Fixed Corruption when Uninstall Fails
+
+Version 1.0a   Released 07/15/04
+
+                  Added Automatic Installation/Verify Documentation
+                  Added AUTOEXEC.BAT file for new Installations
+                  Minor Corrections to Documentation
+
+Version 1.0    Released 06/04/04
+
+                  Added Verify Mode
+                  Added Identification String
+                  Revised Text Stubs
+                  Converted Program to 16 Bit for DOS Compatability 
+                  Removed Registry Test
+                 
+Version 0.1    Released 12/07/03
+
+                  Original Release

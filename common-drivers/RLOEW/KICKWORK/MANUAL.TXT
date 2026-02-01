@@ -1,0 +1,159 @@
+                        KICKWORK 1.3 (ADF VERSION)
+                                
+                                Version 1.0
+
+                                06/30/2017
+
+                        Copyright (C) 1988-2017
+                           By Rudolph R. Loew
+
+
+The KickWork 1.3 (ADF Version) is a digital version of the KickWork 1.3 Disk
+previously sold by Amigo Business Computers.
+
+KickWork 1.3 combines the Amiga 1000 Kickstart and Workbench Disks into a
+single Disk. This allow an Amiga 1000 to boot into Workbench on Powerup
+without the need to swap Disks. This supports unattended operation where no
+one is available to swap disks after a power failure. Unlike some other
+solutions, KickWork does not need to write to the disk at any time so it is
+not susceptable to failure due to intermittent power. The disk may be write
+protected to insure safety.
+
+
+
+REQUIREMENTS
+
+Amiga 1000
+512KB RAM
+Kickstart 1.3 Disk
+Workbench 1.3 (for Customization and Documentation)
+
+
+
+CONTENTS
+
+KICKWORK.ADF    KickWork Disk Image
+MANUAL.TXT      This Manual
+
+
+
+INSTALLATION
+
+Since Commodore never allowed the distribution of Kickstart, KickWork must
+extract the necessary Kickstart Code from Memory. This requires a Setup to
+be done to configure the Disk. Perform the following procedure to configure
+the Disk.
+
+1. Write the KickWork Disk Image File to an 880K Floppy Disk. Do not Write
+   Protect it.
+2. Turn off your Amiga 1000 if on.
+3. Insert your Kickstart 1.3 Disk.
+4. Turn on your Amiga 1000.
+5. When it prompts for a Workbench Disk, insert the KickWork Disk you created.
+6. If no errors occurred, it should display "KickWork Installed".
+7. Turn off and on your Amiga 1000.
+8. Customize your KickWork Disk as needed.
+9. Optionally, write protect the KickWork Floppy Disk.
+
+
+
+SPECIAL AND MODIFIED FILES
+
+There are three files that require special handling.
+
+The "kickstart" file is a placeholder for the Kickstart image. Do not modify,
+rename, or delete this File.
+
+The "Info" Progrsm has been modified to properly display the KickWork Disk's
+Information. If you are using a Hard Disk, you should copy the Info File from
+the KickWork Disk over the unmodified copies. The mnodified Info Program can
+be used without KickWork. The only side effect is that a Kickstart Disk will
+show up as an Empty Disk instead of a KICK Disk.
+
+The "DiskCopy" Program has been modified to recognize KickWork Disks and make
+the proper modification to the signature of the Copy so that the Operating
+System can distinguish it from the original if both are present at the same
+time. If you are using a Hard Disk, you should also copy the DiskCopy File
+from the KickWork Disk over the unmodified copies. The modified DiskCopy
+Program can be used without KickWork. The unmodified DiskCopy will make exact
+copies of KickWork Disks. If two are present at the same time you can cause
+corruption and/or a crash.
+
+
+
+CUSTOMIZATION
+
+The KickWork Disk has to reserve space for Kickstart so it only allows around
+620KB of Workbench Files. As shipped, the KickWork disk has a subset of the
+Workbench files and is nearly full. You may customize it as you would an
+ordinary Workbench Disk except for the "kickstart" file and taking the
+information in the SPECIAL AND MODIFIED FILES Section into acoount. If you
+are adding Programs or Files, you will have to remove some first.
+
+Once configured, the KickWork Disk will not be recognized in any other Amiga
+such as a non-KickWork 1000, a 500, 600, 2000, 3000 or 4000. If you have a
+second Floppy Drive or a Hard Drive, you can transfer the files easily.
+Otherwise you will need to use a RAM Disk to transfer Files by swapping the
+Disks.
+
+You can also do most of your Customization on an unconfigured KickWork Disk
+as long as you avoid altering the Files used for configuration. These are:
+
+S:Startup-Sequence  *
+S:Maker             *
+C:Copy
+C:Execute
+C:Run
+C:EndCLI
+C:Delete
+C:Rename
+C:Echo
+L:Ram-Handler
+KickWork.Maker      *
+
+The files marked by "*" are removed automatically during Configuration.
+You can remove any of the others after completing Configuration.
+
+S:Startup-Real replaces S:Startup-Sequence after Configuration. You can
+place your modified Startup Commands in this File.
+
+
+
+OTHER INFORMATION
+
+A normal Workbench Disk can be Booted after Booting KickWork.
+
+An unconfigured KickWork Disk can be copied safely with an unmodified
+DiskCopy, and can be read and written on other Amigas.
+
+
+
+CAUTIONS:
+
+KickWork will not Boot if you have already booted your Amiga 1000 with a
+Kickstart Disk. You will have to turn it off and on to boot KickWork.
+
+When running KickWork, inserting Kickstart Disks may cause problems and any
+attempt to write files to the Kickstart Disk will likely corrupt it. Having
+two present can cause a crash.
+
+If you are using a Hard Disk with FFS, KickWork will assume it is using OFS
+and corrupt the Hard Drive unless you specify FFS as a Custom FileSystem and
+Install the Driver into the Hard Drive Partition area.
+
+Programs that check Disk Type may not recognize a KickWork Disk. Info and
+DiskCopy are two examples. This is why they needed modification.
+
+
+
+CONTACT INFORMATION
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+Website:  http://rloew1.no-ip.com

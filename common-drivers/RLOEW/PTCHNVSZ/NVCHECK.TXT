@@ -1,0 +1,186 @@
+                   NVIDIA GRAPHICS CARD SIZE PATCH
+                   COMPATIBILITY and IRQ EOI CHECK
+
+                             Version 3.0
+
+                              06/04/2017
+
+                        Copyright (C) 2015-2017
+                          By Rudolph R. Loew
+                             
+                             
+
+The nVidia Graphics Card Size Patch Package provides two solutions to the
+problem of NVidia Graphics Cards that use memory banking to access Video RAM.
+This causes a problem in most Windows 95, 98, 98SE or ME Systems when a 512MB
+Graphics Card reports only 256MB of Memory Mapped I/O Space when configured.
+
+One Patch changes the Video Driver Code to properly support the smaller
+directly accessible Video Memory of the Card. The second Patch modifies the
+Graphics Card BIOS to report the full size of the Video RAM when
+configurated.
+
+This Package provides a Test Program to determine if the Patches are
+compatible with your Graphics Card and if they are needed before you purchase
+the Patch Package.
+
+
+REQUIREMENTS
+
+DOS
+Windows 95, 98, 98SE or ME.
+6xxx or 7xxx Series nVidia Graphics Card.
+nVidia Graphics Card Driver Version 82.69 (not included) (for Driver Patch)
+
+
+CONTENTS
+
+NVCHECK.EXE     Compatibility Check Program
+TESTEOI.VXD     Interrupt EOI Bug Check VXD
+NVCHECK.TXT     This File
+
+
+
+COMPATIBILITY CHECK
+
+Run this program from DOS or a DOS Box in Windows 95, 98, 98SE or ME.
+It will list the Video Cards it finds along with a report.
+
+"Invalid Size or Unrecognized Video Card" indicates that the Graphics Card or
+it's configuration is not recognizeable by this Software.
+
+"Size Changed During Initialization" indicates that the Graphics Card has
+been improperly modified and is reporting different sizes at different times.
+
+"Resources Correctly Allocated    No Patch Needed" indicates that the
+Graphics Card does not use Memory Banking and does not need Patching.
+If the Card does not work, it may need the Option ROM Disable Patch. Contact
+Author for further information.
+
+"Resource Over Allocated    Contact Author for Possible Fix" indicates that
+the Graphics Card is Overallocating Space. No Patch is needed to make this
+Card work but it uses more MMIO Space than is needed. A custom fix may be
+possible.
+
+"Resource Under Allocated    Driver Patch or BIOS Flash Needed" indicates
+that the Graphics Card uses Memory banking and is compatible with these
+Patches.
+
+"Resource Under Allocated    Driver Patch Needed. BIOS Flash Uncertain"
+indicates that the Graphics Card uses Memory banking and is compatible with
+the Driver Patch. The BIOS Patch option may not work.
+
+
+TESTEOI
+
+There is a bug in some of the nVidia Drivers that causes them not to provide
+a proper End Of Interrupt (EOI) signal before returning from their Interrupt
+Routines.
+
+When an EOI is not sent, the Interrupt remains active and no new Interrupts
+for that IRQ can occur. This is likely to cause problems with any device
+that shares that IRQ.
+
+The Mouse Pointer is updated on the Graphics Interrupt. If the Interrupt
+fails, the Mouse Pointer freezes until a timeout occurs. The timeouts occur
+once every 15 Seconds so the Mouse Pointer will jump once every 15 seconds.
+
+Particularly on newer motherboards, especially the 970 series, the Graphics
+IRQ is shared with the SATA Hard Disk Controller and/or USB Controllers.
+Interrupt failure can cause "Disk Write Error" BSODs and/or USB Failure or
+crashes.
+
+TESTEOI.VXD is a test VXD that can be used to determine if the Interrupt EOI
+Bug is an issue with your System.
+
+1. Install the file in your Windows\System Folder.
+2. Add the following lne to the [386Enh] Section of your SYSTEM.INI File
+
+DEVICE=TESTEOI.VXD
+
+3. Reboot
+
+The problem is very intermittent and may take many hours or even days to
+appear. Keeping the CPU and Disk Drive busy seems to increase the frequency
+of occurance. If you have been having problems with frequent Mouse freezes
+then it should take less time.
+
+When the Bug is detected, either a BSOD or Popup will appear telling you that
+TESTEOI detected a missing EOI. Closing the Notice will let you continue but
+part of your System will still be frozen.
+
+If TESTEOI detects missing EOIs, then you will need my Interrupt Fixup VXD
+Files. They are included in the NVSIZE Package, but can also be purchased
+separately if your Graphics Card does not need the NVSIZE Patch.
+
+
+LICENSE
+
+This Test Software may be freely distributed provided that all Files are
+included and unmodified.
+
+
+ORDERING
+
+The latest Version of this Test Program may be obtained at no cost from
+http://rloew1.no-ip.com. If no longer available, please contact me at:
+rloew@hotmail.com.
+
+To purchase the nVidia Graphics Card Size Patch Package
+Send $20 US + $1 S&H = $21 US per copy to:
+
+To purchase only the Interrupt Fixup Package
+Send $10 US + $1 S&H = $11 US per copy to:
+
+Rudolph Loew
+506 Bieling Rd.
+Elmont, NY 11003
+USA
+
+Payment can be made as follows:
+
+1. Cash
+2. Money Order drawn on a US Bank or Post Office
+3. Personal Check drawn on a US Bank (Delivery made after Check clears)
+4. International Postal Money Order accepted by the US Postal Service
+5. Paypal to rloew@hotmail.com
+6. Western Union
+
+Warning: International Checks or Money Orders, not described above, will not
+be accepted and will not be returned without an additional $2 US handling
+charge.
+
+Other Payment terms and methods may be available through authorized
+Distributors of this Product. The following is a list of authorized
+Distributors at this time:
+
+C. C. Anderson  http://slesarc.x10hosting.com
+
+Delivery is by E-Mail. You MUST include the E-Mail address you want the
+Software to be sent to.
+Please type or print your E-Mail address clearly. Sending me an E-Mail when
+you place an order will insure that I have your correct E-Mail address.
+
+Prices and Terms may change at any time.
+
+For additional information or help placing your order,
+I can be reached in the following ways:
+
+E-Mail: rloew@hotmail.com
+Phone:  1-516-352-9078
+
+
+
+QUESTIONS AND COMMENTS
+
+Please direct any questions or comments about the Program or the
+Documentation to me at rloew@hotmail.com or as described under ORDERING.
+Please send any Bug Reports to rloew@hotmail.com.
+
+
+MAILING LIST
+
+If you would like to be notified about updates and/or fixes or other products
+from Rudolph Loew, E-Mail me at rloew@hotmail.com and ask to be put on my
+Mailing list. Your E-Mail address will not be given out nor will you receive
+any unsolicited mail. You can unsubscribe at any time.

@@ -1,0 +1,29 @@
+                   NVIDIA GRAPHICS CARD SIZE PATCH
+
+                             Version 3.0
+
+                              06/04/2017
+
+                        Copyright (C) 2015-2017
+                          By Rudolph R. Loew
+                             
+                             
+
+Version 3.0    Released 06/12/16
+
+                  Added FIXEOI Files and Documentation.
+
+Version 2.0    Released 06/12/16
+
+                  Added FIXINTR Beta Files and Documentation.
+                  Added Class Code to NVSIZE Display.
+                  Masked Subclass to show Secondary Devices in NVSIZE.
+                  Minor fixes to PATCHNVC.
+
+Version 1.0a   Released 11/03/15
+
+                  Updated Licensing terms
+
+Version 1.0    Released 10/16/15
+
+                  Original Release

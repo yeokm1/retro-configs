@@ -1,0 +1,7 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\VMM32Files]
+"udf.vxd"=-
+
+[-HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\VxD\UDF]
+

@@ -1,0 +1,418 @@
+                   NVIDIA GRAPHICS CARD SIZE PATCH
+
+                             Version 3.0
+
+                              06/06/2017
+
+                        Copyright (C) 2015-2017
+                          By Rudolph R. Loew
+                             
+                             
+
+REQUIREMENTS
+
+DOS
+Windows 95, 98, 98SE or ME.
+6xxx or 7xxx Series nVidia Graphics Card.
+nVidia Graphics Card Driver Version 82.69 (not included) (for Driver Patch)
+
+
+CONTENTS
+
+PATCHNVC.EXE    Graphics Driver Patch
+PTCHNVSZ.EXE    BIOS Image Patch Program
+PATCHOPT.EXE    Patch PCI.VXD to Disable Video Option ROM Config
+NVFLASH.EXE     nVidia BIOS Flash Program  (Copyright www.techpowerup.com)
+CWSDPMI.EXE     DPMI Support Program       (Copyright CW Sandmann)
+NVSIZE.EXE      Display Video RAM and MMIO Space Sizes 
+NVCHECK.EXE     Compatibility Check Program
+NVCHECK.TXT     Compatibility Check Program Manual
+README.TXT      General Information
+MANUAL.TXT      This File
+LICENSE.TXT     License terms and conditions
+HISTORY.TXT     Revision History
+FIXINTR.VXD     Interrupt Fixup VXD (All IRQs) (Beta)
+FIXINTR#.VXD    Interrupt Fixup VXD (Individual IRQs) #=IRQ (Beta)
+FIXEOI.VXD      Alternate Interrupt Fixup VXD (All IRQs)
+TESTEOI.VXD     Interrupt EOI Bug Check Program
+
+
+LICENSE
+
+Read the Licensing terms and conditions in the LICENSE.TXT file before
+using the Patch Program. Usage of any of the Patch Programs constitutes
+acceptance of all of the terms and conditions in the LICENSE.TXT file.
+
+
+OVERVIEW
+
+
+512MB Graphics Cards have proven to be problematical when used with Windows
+95, 98, 98SE and ME. It appears that nVidia decided to change their design
+approach after releasing some 512MB Cards.
+
+Previously they provided access to the entire Video RAM through the Memory
+Mapped I/O Space. This approach unfortunately limits the amount of System
+RAM that can be used by 32-Bit OSes.
+
+With the later 512MB Cards they decided to Bank Memory access through a
+smaller MMIO Space, typically 256MB. Starting with the 8xxx series they also
+implemented a Memory Page Mapper similar to the MMU in the CPU.
+
+The 7200GS is an example of the earlier design. The 7950GT is an example of
+the later one.
+
+The 82.69 nVidia Driver does not recognize the difference between the
+reported amount of Video RAM and the size of the MMIO Space allocated to the
+Card. The Driver overwrites the MMIO Space above the Video Card's allocation.
+
+Depending upon what is in the next 256MB of MMIO Space, your Computer can
+crash or other Devices, such as USB, can malfunction.
+
+The nVidia Graphics Card Size Patch provides two solutions to the problem
+of NVidia Graphics Cards that use memory banking to access Video RAM.
+This causes a problem in most Windows 95, 98, 98SE or ME Systems when a 512MB
+Graphics Card reports only 256MB of Memory Mapped I/O Sapce when configured.
+
+The Driver Patch changes the Video Driver Code to properly support the
+smaller directly accessible Video Memory of the Card. This provides a simpler
+fix that can handle more cards and avoids the risk of Flashing a Graphics
+Card BIOS. The disadvantages are that only half of the Video RAM will be
+useable and the Driver may become incompatible with some earlier Video Cards.
+The Shutdown Patch is included with the Driver Patch.
+
+The BIOS Patch modifies the Graphics Card BIOS to report the full size of
+the Video RAM when configured. This has the advantage that the full amount
+of Video RAM is available and the Card will work if moved from Computer to
+Computer. The disadvantage is the greater complexity and risk of Flashing a
+BIOS and a reduction in available 32-Bit RAM in any Operating System..
+
+Both Patches can be applied to a single System. The full amount of Video RAM
+will still be available.
+
+A third Patch is provided to Disable Video Option ROM Configuration. Some
+BIOS and Graphics Card combinations set an Invalid Option ROM address that
+confuses the Configurator. If you cannot Boot Windows in Normal Mode after
+applying one or both of the above Patches, or it reports an Error on the
+Display Driver. This Patch is probably needed. There is no disadvantage to
+do this Patch if not needed.
+
+A set of Interrupt Fixup Files (FIXINTR) are provided to handle loss of
+Interrupts due to mishandling of End Of Interrupt (EOI) commands by the
+NVidia Graphics Driver. Symptoms of this problem include Mouse Pointer
+freezing, Disk Write Error BSODs and USB problems.
+
+An alternative Interrupt Fixup File (FIXEOI) is provided if the FIXINTR Files
+cannot be used on your System.
+
+
+INSTALLATION
+
+Extract the files from the PTCHNVSZ.ZIP Package into a single Folder.
+
+
+DRIVER PATCH
+
+1. Obtain the 82.69 Version of the nVidia Graphics Driver for Windows 9x if
+   you do not already have it. It can be obtained from the MDGX Website at
+   http://www.mdgx.com/files/nv8269.php
+
+Graphics Cards such as the 7950GT require this Version to work with Windows
+95, 98, 98SE or ME.
+
+2. Install the Driver if not already installed.
+3. Remove the Shutdown fix if you have installed it. This Patch contains the
+   fix.
+4. Boot to DOS or Safe Mode. Normal Mode probably will not work.
+5. If in Safe Mode, open a DOS Box.
+6. Go to the WINDOWS\SYSTEM Folder.
+7. Copy the PATCHNVC.EXE from the Patch Package Folder to the WINDOWS\SYSTEM
+   Folder.
+8. Rename NVCORE.VXD to NVCORE.BAK
+9. Run:
+
+   PATCHNVC NVCORE.BAK NVCORE.VXD
+
+   If you get an error, delete NVCORE.VXD, rename NVCORE.BAK back to
+   NVCORE.VXD and contact Author.
+
+10. You can delete PATCHNVC.EXE if no longer needed.
+    Do not delete NVCORE.BAK if you want to be able to uninstall.
+
+11. Reboot unless doing another Patch next.
+
+
+BIOS PATCH
+
+Do not Patch if your Computer crsahes or hangs frequently or if Power is
+unreliable. Interrupting the BIOS Flash can permanantly disable your Video
+Card.
+
+WARNING: Do not Patch an 8xxx or later Video Card using this Software.
+         Do not Patch a Video Card earlier than a 5xxx using this Software.
+         You can brick your Video Card if you do so.
+
+1. Boot to DOS.
+2. Go to the Patch Package Folder.
+3. Run:
+
+   NVFLASH --save ORIG.ROM
+
+4. Run:
+
+   PTCHNVSZ ORIG.ROM MOD.ROM 512
+
+   This assumes a 512MB Graphics Card. Contact Author if not.
+
+5. If no error, run:
+
+   NVFLASH MOD.ROM
+
+   Do not interrupt or turn off your system until this command completes.
+   If you get an error, retry immediately.
+
+   Do not delete the ORIG.ROM File if you want to be able to uninstall the
+   Patch.
+
+6. Reboot unless doing another part next.
+
+
+OPTION ROM PATCH
+
+1. Boot to DOS or Safe Mode. Normal Mode probably will not work.
+2. If in Safe Mode, open a DOS Box.
+3. Go to the WINDOWS\SYSTEM Folder.
+4. Copy the PATCHOPT.EXE from the Patch Package Folder to the WINDOWS\SYSTEM
+   Folder.
+8. Rename PCI.VXD to PCI.BAK
+9. Run:
+
+   PATCHOPT PCI.BAK PCI.VXD
+
+   If you get an error, delete PCI.VXD, rename PCI.BAK back to
+   PCI.VXD and contact Author.
+
+10. You can delete PATCHOPT.EXE if no longer needed.
+    Do not delete PCI.BAK if you want to be able to uninstall.
+11. Reboot unless doing another part next.
+
+
+FIXINTR VXD
+
+Read FIXINTR Section below before Installing.
+
+1. Place FIXINTR.VXD or one or more FIXINTR#.VXD (where # is the selected IRQ)
+   File(s) in your WINDOWS\SYSTEM Folder.
+2. Edit your WINDOWS\SYSTEM.INI File.
+3. In the [386Enh] Section, add the following line(s)
+
+   device=FIXINTR.VXD
+
+   or one or more
+
+   device=FIXINTR#.VXD (where # is the selected IRQ)
+
+4. Reboot unless doing another part next.
+
+If FIXINTR does not work, identify the IRQ used by your nVidia Graphics
+Card using the Resource Tab in Device Manager. If the IRQ is greater than 9,
+convert it into Hexadecimal (10=A, 11=B, 12=C, 13=D, 14=E, 15=F).
+Substitute the '#' character in the Instructions with the IRQ digit or letter.
+
+If neither work, substitute FIXINTR.VXD with FIXEOI.VXD in the Instructions.
+
+Uninstall the previous Line and File before trying the next one.
+Do not mix FIXINTR, FIXEOI or FIXINTR# Files together in SYSTEM.INI.
+
+
+UNINSTALL:
+
+DRIVER PATCH
+
+1. Go to WINDOWS\SYSTEM Folder
+2. Delete NVCORE.VXD
+3. Rename NVCORE.BAK back to NVCORE.VXD
+
+BIOS PATCH
+
+1. Boot to DOS.
+2. Go to the Patch Package Folder.
+3. Run:
+
+   NVFLASH  ORIG.ROM
+
+   Do not interrupt or turn off your system until this command completes.
+   If you get an error, retry immediately.
+
+OPTION ROM PATCH
+
+1. Go to WINDOWS\SYSTEM Folder
+2. Delete PCI.VXD
+3. Rename PCI.BAK back to PCI.VXD
+
+FIXINTR VXD
+
+1. Boot into Safe Mode if Normal Mode is unbootable.
+2. Edit your WINDOWS\SYSTEM.INI File.
+3. Remove the following line(s) from the [386Enh]] Section if present:
+
+device=FIXINTR.VXD
+device=FIXINTR#.VXD (#=IRQ)
+device=FIXEOI.VXD
+
+4. Optionally, remove the FIXINTR.VXD, FIXEOI.VXD or FIXINTR#.VXD File(s)
+   from the WINDOWS\SYSTEM Folder.
+
+Reboot after uninstalling Patch(es) and/or VXDs for them to take effect.
+
+
+NVSIZE and NVCHECK
+
+These two Programs provide information on the way a nVidia Graphics Card uses
+Memory.
+
+NVCHECK is a freely redistributable Program that determines the need for
+either the Driver or BIOS Patches. It is available on my Website to test
+Video Cards before purchasing this Patch Package. See the NVCHECK.TXT File
+for further details and usage.
+
+NVSIZE displays the size of the Video Card as reported by Four, Five if you
+use the VESA Option, different Methods. Discrepancies between these Numbers
+is the underlying cause of problems or crashes that this Package is intended
+to resolve.
+
+Running NVSIZE will display all of the Video Cards Detected. If not a nVidia
+Card, it will only print the PCI Address, Class Code and the Card's VID:PID.
+If a nVidia Card is found, it will also display the Video RAM Address and
+the two Control Space Addresses BAR0 and BAR2 on the same line.
+
+For nVidia Cards it will read the true Video RAM Size from the Card's
+Registers and report it as "NV VRAM SIZE".
+
+It will then test the size of the PCI BAR1 Register to determine the amount
+of System MMIO Space that is or will be Allocated for Video RAM. This is the
+"CFG PCI SIZE".
+
+The same test will be performed on the PCI Image Registers on the Video Card
+and reported as "NV PCI SIZE".
+
+The fourth test reads the active BAR1 size Bits and computes the expected
+PCI BAR1 size.
+
+Doing tests 2 thru 4 should always return the same value. If they disagree
+than the Video Card is most likely not compatible with the Patches in this
+Package.
+
+If all four sizes agree than this Video Card does not need the Driver or BIOS
+Patches.
+
+If the First result (NV VRAM SIZE) is less than the others then the Card is
+overallocating MMIO Space. This will not cause problems but may reduce the
+amount of total 32-Bit RAM that can be used by any Operating System. I have
+Patches for some Video Cards that exhibit this behavior such as the 6200GS.
+
+If the First result (NV VRAM SIZE) is greater than the others then the Card
+is underallocating MMIO Space. This implies that the Card is using a banking
+system to access the otherwise unavailable Video RAM. The Driver Patch
+insures that the Driver stays within the MMIO Space and only uses the First
+bank. The BIOS Patch increases the allocation of MMIO Space so that the
+Driver can access the entire Video RAM without banking. The increased
+allocation will reduce the maximum amount of 32-Bit RAM by up to twice the
+amount of the allocation. This would affect all 32-Bit Operating Systems
+on the Computer. 64-Bit Memory will normally be increased by the same amount
+in most Motherboards.
+
+Regardless of the results of this test, it may still need the Option ROM
+Disable Patch if a spurious Option ROM Resource is detected during Windows
+Boot. Windows may crash or the Driver will fail usually with a Resource
+Conflict.
+
+A fifth test reports the Size returned by the VESA Info Command. This test is
+enabled by running "NVSIZE VESA". This is only used in DOS. This test is run
+after all Video Cards have been scanned. It is not recommended to run this
+test in Windows as it will force the DOS Box to Full Screen Mode and you
+will have to manually reset the DOS Box to Windowed Mode. This will tell you
+how much Video RAM will be useable from DOS Programs.
+
+These programs will recognize and Display Secondary Controllers such as the
+Second GPU in a 7950 GX2 Card. They will have a Class Code that is not 0300.
+Since they may not be initialized, the Size reports may have zeroes or
+spurious values in them. This may also happen if you have more than one
+active Graphics Card present.
+
+Except as noted, these two program can be run from DOS or Windows 9x.
+
+
+FIXINTR VXD (Beta) and FIXEOI VXD
+
+NOTICE: The FIXINTR and FIXINTR# fixes have not been tested on a large
+        enough set of Motherboards or Driver configurations. There is no
+        guarantee that these Files will be compatible with your setup.
+        If they are not compatible, use FIXEOI instead.
+
+The FIXINTR VXDs place themselves in the Virtual IRQ chains and provide
+the proper End Of Interrupt (EOI) signal when the NVidia Graphics Driver
+fails to do so.
+
+The FIXEOI VXD polls the status of the Virtual IRQs and sends an EOI Command
+to them when they are stuck for more than 400mSec.
+
+When an EOI is not sent, the Interrupt remains active and no new Interrupts
+for that IRQ can occur. This is likely to cause problems with any device
+that shares that IRQ.
+
+The Mouse Pointer is updated on the Graphics Interrupt. If the Interrupt
+fails, the Mouse Pointer freezes until a timeout occurs. The timeouts occur
+once every 15 Seconds so the Mouse Pointer will jump once every 15 seconds.
+
+Particularly on newer motherboards, especially the 970 series, the Graphics
+IRQ is shared with the SATA Hard Disk Controller and/or USB Controllers.
+Interrupt failure can cause "Disk Write Error" BSODs and/or USB Failure or
+crashes.
+
+I have provided an all IRQ Version of my Interrupt Fixup Program called
+FIXINTR.VXD, as well as a set of Single IRQ Versions called FIXINTR#.VXD
+where # is the IRQ. The IRQ Number is Hexadecimal so IRQs 10-15 are
+represented by A-F.
+
+Some Motherboards will work with the all IRQ Version, some will not.
+If your Computer does not Boot with the all IRQ Version Installed, go into
+Safe Mode and Uninstall it. FIXEOI.VXD is provided in case neither option
+works.
+
+To use a specific IRQ Version, use Device Manager to examine the Resources
+used by your Graphics Card. Note the Interrupt Request Number. Convert
+Numbers from 10 to 15 to their corresponding Hexadecimal Digits A to F.
+Select the appropriate FIXINTR#.VXD File and Install it as described above.
+
+If your Computer does not Boot, go into Safe Mode and Uninstall it.
+
+If none of the Fixes work you can try the following:
+
+If you are not using the 82.69 Version of the NVidia Driver you can try
+upgrading it.
+Reinstall Windows with the "SETUP /p i" Option or disable ACPI.
+
+If this doesn't work, send me an E-Mail and maybe I can help.
+
+
+TESTEOI
+
+TESTEOI.VXD is a test VXD that can be used to determine if the Interrupt EOI
+Bug is an issue with your System.
+
+1. Install the file in your Windows\System Folder.
+2. Add the following lne to the [386Enh] Section of your SYSTEM.INI File
+
+DEVICE=TESTEOI.VXD
+
+3. Reboot
+
+The problem is very intermittent and may take many hours or even days to
+appear. Keeping the CPU and Disk Drive busy seems to increase the frequency
+of occurence. If you have been having problems with frequent Mouse freezes
+then it should take less time.
+
+When the Bug is detected, either a BSOD or Popup will appear telling you that
+TESTEOI detected a missing EOI. Closing the Notice will let you continue but
+part of your System will still be frozen.

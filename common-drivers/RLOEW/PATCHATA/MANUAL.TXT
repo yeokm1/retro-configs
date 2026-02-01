@@ -1,0 +1,610 @@
+                       HIGH CAPACITY DISK PATCH
+
+                            Version 5.3a
+
+                             11/27/2015
+
+                       Copyright (C) 2003-2015
+                          By Rudolph R. Loew
+
+
+
+The High Capacity Disk Patch Program patches Windows 98/98SE/ME to provide
+direct support for Hard Drives larger than 137GB without requiring a
+controller card or the Intel Application Accelerator which can only be
+used with some Intel Chipset Motherboards. The Patch installs support for the
+48-Bit LBA addressing mode required for Hard Drives larger than 137GB.
+
+This patch updates the standard IDE controller (ESDI_506.PDR in the Windows
+SYSTEM\IOSUBSYS Directory). If you are using a controller card such as the
+Promise Card included with some Maxtor or Western Digital drives, this Patch
+will not affect drives connected to the Card(s). If you have installed the
+Intel Application Accelerator, this driver may no longer be used and the
+Patch is not needed and may not have any effect. SATA drives may or may not
+be supported depending on configuration.
+
+NOTE: Some documentation and utilities use a different definition of
+Gigabytes (GB) based on powers of 2. The 28-Bit addressing limit using this
+definition is 128GB.
+
+
+
+REQUIREMENTS
+
+Windows 95 Release 2 (See Windows 95 Below)
+Windows 98, 98SE or ME (See WINDOWS ME Section Below if using Windows ME)
+Motherboard IDE and/or SATA Controller recognized by the Default ESDI_506.PDR
+ Port Driver. Customized SATA .INF files are required, contact author for
+ further information
+
+BIOS support for hard drives >137GB (48-Bit LBA) or
+A Windows Compatible Boot Manager that supports hard drives >137GB
+A Mini Boot Manager is now available from Rudolph R. Loew
+
+WARNING: Some BIOSes have defective support for 48-Bit LBA. Rearranging
+         Drives may cause a previously working system to fail. Verify
+         support using 48BITLBA.EXE for all Drive arrangements you plan to
+         use. In particular, VIA EPIA BIOSes before 07/05 may claim to
+         support 48-Bit LBA, and will show the full size of the Drive, but
+         will not actually support the Drive if it is not the Primary Master.
+         Users of VIA EPIA motherboards should contact the Author to obtain
+         a Patched BIOS if needed.
+
+
+
+IMPORTANT: If you have installed a Version older than 5.0 you MUST Uninstall
+           it using the Original Version before attempting to Install this
+           Version of the Patch. You can Uninstall the old Version and
+           Install the new Version without risk of data loss as long as you
+           do not Boot Windows while the Patch is not Installed. Windows ME
+           users must Boot into DOS or SAFE MODE to install the new Version.
+           After you have successfully updated the Patch to your system you
+           will need to replace the old Patch program and update your
+           AUTOEXEC.BAT if you are using the Automatic
+           Installation/Verification feature described later.
+
+           NOTE: The name of the Patch program in the Full Versions is
+           PATCHATA.EXE while the name in the Demo Versions is PATCH137.EXE.
+
+
+
+BIOS SUPPORT VERIFICATION
+
+The 48BITLBA program tests your Computer's support for Large Hard Drives.
+You will need at least one Hard Drive larger than 137GB connected to either
+of the IDE connectors on your Motherboard.
+
+Run the Program from DOS, not a DOS Box, to verify BIOS, or Boot Manager,
+support for Large Hard Drives. A "48-BIT Support Verified" message should be
+displayed next to the Large Hard Drive's Number and Size Report. Otherwise
+your BIOS may not support Large Hard Drives.
+
+If you get a "Last 28 Bit Sector Unsupported" message, your BIOS or Boot
+Manager has a bug making it incompatible with your Hard Drive.
+
+WARNING: Some BIOSes have defective support for 48-Bit LBA. Rearranging
+Drives may cause 48-Bit LBA support to fail. Verify support with all Drive
+arrangements you plan to use. In particular, there are some BIOSes that only
+support 48-Bit LBA on the MASTER Drive on the PRIMARY IDE Bus.
+
+
+
+DRIVER USAGE VERIFICATION
+
+The DISKDVR Program scans the Registry and displays the Port Driver being
+used by Windows for each IDE Bus and it's associated Info (.INF) file.
+This Program must be run from a Windows DOS Box.
+
+The Port Driver used for each IDE Bus that will be used with Large Hard
+Drives must be ESDI_506.PDR for the Patch to work.
+
+This is the Windows Default Port Driver. If you have loaded other IDE
+Drivers, Windows may no longer use the ESDI_506.PDR Port Driver.
+
+If the Port driver is reported as INTELATA.MPD, the Intel Application
+Accelerator is controlling that IDE Bus. The Intel Application Accelerator
+must be uninstalled before using the High Capacity Disk Patch.
+
+If the Port driver is reported as VIADSK.MPD, the IDE Bus is being controlled
+by a VIA MiniPort Driver. The June 2003 version of the VIA MiniPort Driver,
+the latest version as of this release, is not compatible with some Hard
+Drives and cannot be easily removed. A Patched version of the MiniPort Driver
+is available, please contact Author for further information.
+
+If any other Port Driver is reported, please contact the Author for further
+information.
+
+NOTE: Running DISKDVR +ALL will display all Hard Disk Controllers (hdc) in
+      the Registry. This includes many USB Drives.
+      Running DISKDVR -SCSI will display all SCSI Disk Controllers
+      (SCSIAdapter) in the Registry..
+
+
+
+PATCH INSTALLATION
+
+Windows ME users should read the WINDOWS ME Section Below before Installing.
+
+1. Download and UnZip the Program to a known location.
+   Do not UnZip the Program to the C:\ Directory if you do not want the
+   AUTOEXEC.BAT File to be replaced.
+2. Open a MS-DOS Box (Windows 98 or 98SE Only) or Boot into DOS.
+   WARNING Do not Install the Patch from Windows ME. Boot from DOS or Windows
+   ME SAFE MODE.
+3. Go to the Directory where the program is located.
+4. Run PATCHATA to install the patch.
+5. The Patch will take effect the next time Windows is Booted.
+
+
+
+AUTOMATIC PATCH INSTALLATION/VERIFICATION (Windows 98 and 98SE Only)
+
+This method can be used when installing Windows 98 or 98SE or after
+installation to Install or Verify the Patch on each Reboot.
+
+1. Download and UnZip the Program to a known location.
+2. Copy the PATCHATA.EXE to C:\PATCHATA.EXE
+3. If there is no C:\AUTOEXEC.BAT file or it is empty, copy the supplied
+   UnZipped AUTOEXEC.BAT to C:\AUTOEXEC.BAT.
+4. If you already have a C:\AUTOEXEC.BAT file, add the following line to it:
+
+   C:\PATCHATA.EXE -V
+
+   Do not use LOADHIGH or LH with this program, it is not needed.
+
+See the AUTOMATIC VERIFICATION AND UPDATE Section below if you wish to put
+the PATCHATA.EXE Program in a different Folder.
+
+WARNING: If the Patch Program ever interrupts the Boot Sequence and reports
+an error. It is STRONGLY recommended that you do NOT press ENTER to Continue
+if you have already defined Partitions extending above the 137GB limit on
+any Drive. You should Press RESET to Reboot the Computer and either use a
+Boot Floppy or the "Command Prompt Only" from the Windows Startup Menu until
+the problem is resolved.
+
+
+
+Windows 95
+
+Support for Windows 95 has been added in Version 5.1. Only OSR 2 has been
+tested. Author has not tested Windows 95 RTM Support and Microsoft claims
+that Windows 95 does not support more than 32GB. Use this Patch with Windows
+95 RTM at your own risk.
+
+It is strongly recommended that you update your Disk Driver up to Version
+4.00.1116 or later before installing the Patch. The upgrade to Version
+4.00.1116 is available from Microsoft at
+
+http://support.microsoft.com/kb/171353/EN-US/
+
+
+
+WINDOWS ME
+
+Windows ME contains a number of changes that affect the Installation and
+Verification of the High Capacity Disk Patch.
+
+Windows ME does not use the AUTOEXEC.BAT file during boot so Automatic
+Installation and Verification cannot be performed. Commands placed in the
+AUTOEXEC.BAT file will be ignored.
+
+Microsoft added a function called "System File Protection" (SFP) that
+prevents changes to System files including the ESDI_506.PDR file Patched by
+the High Capacity Disk Patch. This function cannot be disabled.
+
+If any file protected by SFP is changed, SFP will replace it with the old
+version a few seconds later without any warning or indication.
+
+The Patch can only be Installed from DOS, not a DOS Box, or it can be
+installed from SAFE MODE where SFP is not active.
+
+The Patch can be Uninstalled in Windows but a Reinstallation will be lost.
+
+To stop SFP from protecting the ESDI_506.PDR file, perform the following
+steps:
+
+1. Boot from DOS
+2. Edit the FILELIST.XML file in the Windows SYSTEM\RESTORE folder.
+3. Remove the lines referring to the FILELIST.XML and ESDI_506.PDR files.
+4. Save the updated file.
+
+Windows ME has a new feature called "System Restore" which allows changes to
+be rolled back. If you use System Restore to rollback before the Patch was
+installed, you will lose the Patch and risk corruption.
+
+
+
+WINDOWS SUPPORT VERIFICATION
+
+The 48BITLBA Program can be run from Windows, in a DOS Box, to verify proper
+operation of the Patch after you have installed it.
+
+NOTE: If you just installed or upgraded the Patch, you must reboot before
+      performing this test.
+
+If you have existing data on your Hard Drive above the 137GB limit there is
+a very small chance that Windows might access sector 268435456 which is
+temporarily modified during the test. To eliminate this possibility, run the
+command as follows:
+
+48BITLBA -LOCK
+
+NOTE: If your DOS Box is displayed as a Window, running this Program with the
+      -LOCK option will force the DOS Box to Full Screen Mode and you will
+      have to reset the Screen Mode from the DOS Box's Properties to return
+      to Window Mode.
+
+If some of your Hard Drives are not displayed, you can increase the range of
+Physical Drives that the Program will scan by specifying the number of Drives
+to scan as follows:
+
+48BITLBA ###
+
+Where ### is the number of Drives to scan (1 to 127).
+
+The 48BITLBA Program will first test each drive for High Capacity Disk Patch
+support. If verified, an appropriate message will be printed. Then the
+48BITLBA Program will test the drive for 48-Bit LBA support and report the
+results.
+
+The High Capacity Disk Patch Support Test requires that the 48BITLBA Program
+and the High Capacity Disk Patch use the same signature. This version uses a
+different signature than previous versions. Mixing different versions can
+prevent the 48BITLBA Program from verifying support.
+
+If you get a "Last 28 Bit Sector Unsupported" message, Windows is using a
+Driver that supports 48-Bit LBA but has a bug making it incompatible with
+your Hard Drive.
+
+
+
+UNINSTALL PATCH (See WARNING Section Below)
+
+1. Download and UnZip the Program to a known location (if necessary).
+2. Open a MS-DOS Box or Boot into DOS.
+3. Go to the Directory where the program is located.
+4. Run PATCHATA.
+5. Type Yes to the Uninstall request to uninstall the patch.
+6. Remove the C:\AUTOEXEC.BAT file or the line in it that invokes the
+   PATCHATA Program if you are using the Automatic Installation/Verification
+   Mode of the Program.
+
+
+
+OTHER PROGRAMS, PATCHES, DRIVERS AND UPDATES
+
+There are a number of other programs which can disable this Patch if they are
+installed. Some overwrite the ESDI_506.PDR Port Driver, while others reassign
+the IDE driver in the Registry bypassing the ESDI_506.PDR Port Driver.
+
+The following is a list of known programs that will disable this Patch. There
+are probably others. Any program that promises to improve Hard Disk
+performance, except defraggers, or provide monitoring of Hard Disk operations,
+is suspect.
+
+Microsoft Fix Q243450.
+
+    This Fix updates the ESDI_506.PDR in Windows 98 or 98SE to fix a
+    problem with some Phoenix BIOSes. This Fix does not provide 48-Bit LBA
+    support. The High Capacity Disk Patch can Patch this Fix.
+
+    1. Run the Microsoft Patch but do NOT reboot.
+    2. Rerun the High Capacity Disk Patch.
+    3. Reboot
+
+Intel Application Accelerator.
+
+    The Intel Application Accelerator provides Large Hard Drive Support and
+    other features for certain Intel Chipsets. This program will bypass the
+    ESDI_506.PDR Port Driver and use one called INTELATA.MPD instead. This
+    program can be used as is. The 48BITLBA Program will no longer be able
+    to verify proper operation on WIndows ME systems.
+
+VIA IDE Miniport Driver.
+
+    The VIA IDE Miniport Driver provides Large Hard Drive Support and
+    other features for certain VIA Chipsets. This program will bypass the
+    ESDI_506.PDR Port Driver and use one called VIADSK.MPD instead.
+    Version 3.20B is the most recent version to date (08/03).
+    The Driver has a flaw that can cause errors to appear on Large Seagate
+    Drives and possibly others. This program CANNOT be uninstalled.
+
+    Use of this program is NOT recommended.
+
+    If you do install this program, Author has an updated Port Driver file that
+    corrects the flaw in this Driver. You can order this file by contacting
+    me by E-Mail.
+
+Unfortunately there is no way to determine what effect other programs will
+have until they are installed. Some installations cannot be undone. If the
+program does not support Large Hard Drives and this Patch cannot be reapplied,
+you risk corruption if the program cannot be uninstalled before rebooting
+Windows.
+
+Doing a complete backup of your system is STRONGLY recommended before
+installing any such program.
+
+
+
+WARNING
+
+THE POTENTIAL EXISTS FOR DATA LOSS TO OCCUR DUE TO ERRORS IN THE PATCH OR
+IF THE PATCHED DRIVER IS BYPASSED OR OVERWRITTEN. DO NOT USE IN CRITICAL
+SYSTEMS OR WHERE HUMAN SAFETY IS INVOLVED.
+
+Please E-Mail any Bug Reports to RLoew@hotmail.com.
+
+If you install a Windows update that replaces the ESDI_506.PDR file or
+uninstalls the Patch, and have Partitions defined that extend above the 137GB
+limit there is a possibility of data loss anywhere on that drive. This is due
+to a flaw in the original version of the ESDI_506.PDR file that misinterprets
+sectors above the 137GB limit as being sectors below it. Since Microsoft
+has decided not to add large disk support to any Windows before 2000, any
+updates are likely to have the same flaw. If in doubt, rerun the PATCHATA
+Program BEFORE allowing Windows to Reboot and Answer NO to the Uninstall
+Request if it appears. If the Computer Reboots before you can run the
+Program, make it boot in Safe Mode, apply the Patch and Reboot again. See the
+AUTOMATIC PATCH INSTALLATION/VERIFICATION Section above for instructions to
+setup Windows to have the Patch Verified and Reinstalled (if necessary) on
+each boot.
+
+Installing this Patch on a Computer without BIOS Support for large drives is
+not recommended. The Patch is bypassed if Windows disables the Driver or if
+Windows is in Safe Mode. In either case, the BIOS may cause data loss if it
+mishandles sectors above the 137GB limit as does the Microsoft Driver. A bad
+shutdown will trigger SCANDISK which is very likely to corrupt your Hard Disk.
+
+Usage with a Disk Manager other than BOOTMAN (See Below) may or may not work.
+Proper operation in Windows Mode is uncertain and may corrupt your system.
+
+Installing this Patch on Windows NT, 2000, or XP has not been tested and may
+corrupt your Hard Drive.
+
+If you are installing Windows in a system which has partitions on any drive
+extending above the 137GB limit you must apply the Patch after Windows
+installs it's unpatched driver but before it tries to use it. If you are
+installing Windows 98 or 98SE, see the AUTOMATIC PATCH
+INSTALLATION/VERIFICATION Section Steps 1-3 above. If you are installing
+Windows ME, use the alternate method described in the NEW WINDOWS
+INSTALLATION section below for instructions.
+
+
+
+OPTIONS
+
+The Program automatically examines the Computer to locate the Driver File.
+
+The Program can be redirected to Patch a specific File by specifying a
+FileName as follows:
+
+PATCHATA MYDRIVER.PDR
+
+The Drive File is renamed to provide a Backup File before the Patched Driver
+File is written. The Backup File has the same name as the Driver File but the
+extension is changed to .bak provided the FileName has an extension. If not,
+a .bak extension is added.
+
+If an earlier Version of the Patch is found, or a Demo Version, it is
+replaced with the new Version. The Backup File is used to create the new
+Patch so it must be present.
+
+The Patched Driver File is deleted and the Backup File is renamed back if the
+Patch is Uninstalled. If the Backup File is not present, the Patch cannot be
+Uninstalled.
+
+The INSTALL/VERIFY mode is specified by adding "-V" (ex. PATCHATA -V).
+
+   The Program will verify if the Patch is present or not.
+   If present, the Program will print a report and exit.
+   If not, the Program will attempt to Install the Patch.
+   If successful, the Program will print a report and exit.
+   If not, the Program will print a failure report and wait until you press
+   ENTER or you REBOOT the Computer (Strongly recommened).
+
+
+
+HARD DRIVE SIZE LIMITS
+
+The High Capacity Disk Patch provides support for Hard Drives up to the
+32 Bit Addressing Limit of 2199GB. Possible DOS, BIOS or Windows flaws may
+limit support to 1099GB or less. Raw Disk access tools may have their own
+limits. Microsoft claims that FDISK is limited to 512GB.
+
+
+
+PARTITION SIZE LIMITS
+
+The size of individual Partitions are subject to additional limitations due
+to FileSystem design and Partition management tools. Microsoft specifies a
+maximum Partition size of 128GB. Third Party Partition Management tools may
+have other limits. A few Programs have bugs that can cause problems when very
+large Partitions are used or they have a lot of free space.
+
+The Windows 98 and SE versions of DEFRAG and SCANDISK (in Windows Mode) are
+limited to less than 136.9GB. Some people have reported limits as low as
+127GB.
+
+WARNING: Diskeeper 10 claims to support Partitions up to 768GB and Windows
+         98/SE/ME. Tests show that it can corrupt large Partitions.
+
+DOS, WINDOWS and SCANDISK (in DOS Mode) can handle 1100GB.
+
+It is recommended that you Partition your Large Hard Drive with 2 or more
+Partitions so that no single Primary or Logical Partition is larger than
+127GB.
+
+If you must create individual Partitions larger than 127GB you will be unable
+to run DEFRAG or SCANDISK (from Windows) if you are running Windows 98 or SE,
+unless you find a suitable third party Program or replace the following files
+with copies from Windows ME.
+
+WINDOWS\DEFRAG.EXE
+WINDOWS\SCANDSKW.EXE
+WINDOWS\SYSTEM\DSKMAINT.DLL
+
+Using the Windows ME files approach has been tested and appears to work but
+has not been tested extensively. Use at your own risk.
+
+NOTE: Defragmenting a very large Partition can take a very long time. A 465GB
+      highly fragmented Partition took over 6 Days to Defragment.
+
+
+FDISK can be used to Partition Large Hard Drives but will incorrectly report
+sizes above 64GB. You will need to enter sizes as Percentages in order to
+use the full capacity of the Hard Drive.
+
+The 128GB Version of FDISK from Microsoft is NOT recommended. Under some
+circumstances, it creates corrupt Partitions.
+
+
+
+NEW WINDOWS INSTALLATIONS
+
+If you are doing a clean install of Windows into a Computer where any of the
+drives has a partition extending above the 137GB limit you must install the
+Patch before Windows has a chance to use it's unpatched driver. Corruption
+may occur before you can complete the installation otherwise. If the Windows
+partition itself is above the 137GB limit it will DEFINTELY CRASH.
+
+The simplest way of installing the Patch on a new Installation of Windows 98
+or 98SE is to place the instructions to patch the driver in the
+C:\AUTOEXEC.BAT startup Batch File. See the AUTOMATIC PATCH
+INSTALLATION/VERIFICATION Section Steps 1-3 above for instructions.
+
+If you do not wish to install the Patch using the C:\AUTOEXEC.BAT file, or
+you are installing Windows ME, you can install the Patch using the following
+steps:
+
+ 1. Place the Patch Program on a Bootable DOS Floppy Disk.
+ 2. Perform the Windows installation until the FIRST reboot.
+    Do not leave the Computer unattended in case Windows reboots without
+    prompting.
+ 3. Insert the Floppy Disk before Windows Reboots. If Windows Reboots without
+    warning, insert the Floppy Disk as soon as the Screen goes Blank.
+    Ignore any instructions to remove any Floppy Disks.
+ 4. Let Windows Reboot the Computer if it doesn't Reboot automatically.
+ 5. When DOS finishes Booting, run the Patch Program.
+    If the Program cannot find the driver skip to Step 9.
+ 6. Remove the Floppy Disk.
+ 7. Press the Reset Button or CTRL-ALT-DEL.
+ 8. Continue the Windows Installation.
+ 9. If the driver was not found in Step 5, perform Steps 6 and 7, then repeat
+    steps 2 thru 5 at the Second Windows Reboot. If the Program still cannot
+    find the driver, you will have to look for the ESDI_506.PDR and use the
+    Specific File option described above. DO NOT allow Windows to startup
+    after the Second Reboot until the Patch has been Installed successfully.
+
+If you have a CD Burner or you install Windows from files placed on the hard
+drive, you can purchase a pre-patched Installation Cabinet File for your
+version of Windows. By replacing the original Cabinet File in the Installation
+CD or Folder you can installs Windows without further patching. This will not
+protect you if an update replaces the Patched driver or it is corrupted.
+
+WARNING: If you install Motherboard Drivers provided by the manufacturer of
+the Motherboard, you may disable the Patched Driver. Please contact the
+Motherboard manufacturer to insure any IDE, ATA or ATAPI Drivers they install
+are 48-Bit LBA compatible. You may also have the option to skip installation
+of these Drivers. Run the DISKDVR.EXE Program after installing the Drivers
+but BEFORE you reboot the Computer. You may have to choose the "Reboot Later"
+option if asked to Reboot to run the Program. If the DISKDVR.EXE Program
+reports that a Port Driver other than ESDI_506.PDR is now selected, you will
+have to uninstall it before rebooting unless you have verified that it
+supports Large Hard Drives. If you can't uninstall it, you will have to start
+the Windows Installation from scratch.
+
+
+
+MULTIPLE BOOT WITH OTHER OPERATING SYSTEMS
+
+The Patch is compatible with multiple boot systems. Each separate Windows
+98/98SE/ME System must be Patched individually. All other Operating Systems
+must be 48-Bit LBA compatible to avoid corrupting the Windows 98/98SE/ME
+Systems and/or each other.
+
+WARNING: Installing an Operating System that is NOT 48-Bit LBA compatible
+into an existing system or one where Partitions, of any kind, cross or are
+above the 137GB limit risks causing corruption. This is true even if a 48-Bit
+LBA compatible Service Pack will be installed immediately after, or the
+Partition, the Operating System will be installed on, is entirely below the
+137GB limit.
+
+Windows XP users must use a copy of XP with SP1 or later already incorporated.
+If you wish to install Windows XP Original Edition, you can contact the
+Author to purchase an upgrade kit that provides the necessary files.
+The rest of SP1 or SP2 can then be installed later.
+
+
+
+AUTOMATIC VERIFICATION AND UPDATE: (Windows 98 and 98SE Only)
+
+IMPORTANT: Do not use this method with Windows ME.
+
+The Program can be setup to automatically verify and repatch, if necessary,
+each time the computer is booted. This will prevent corruption if the Patch
+is overwritten by other software.
+
+Add the following line to your C:\AUTOEXEC.BAT file:
+
+X:\PATH\PATCHATA.EXE -V
+
+Where X:\PATH is the Drive and Folder where the Program is located.
+
+If an unrecognized or corrupt driver is found, the Program will prevent
+Bootup from progressing to prevent possible corruption.
+
+WARNING: If the Patch Program ever interrupts the Boot Sequence and reports
+an error. It is STRONGLY recommended that you do NOT press ENTER to Continue
+if you have already defined Partitions extending above the 137GB limit on
+any Drive. You should Press RESET to Reboot the Computer and either use a
+Boot Floppy or the "Command Prompt Only" from the Windows Startup Menu until
+the problem is resolved.
+
+
+
+BOOTMAN
+
+BOOTMAN is a Mini Boot Manager designed to provide Large Hard Drive support
+for BIOSes that only support 137GB. It is compatible with DOS, Windows and
+the High Capacity Disk Patch. Please contact Rudolph R. Loew (See Below) for
+more information on this Product.
+
+
+
+RELATED PRODUCTS
+
+RFDISK   Nondestructive partitioning Program with Large Disk support and
+         support for multiple boot and selectable partition configurations.
+
+QFORMAT  Quick formatter for FAT Partitions.
+
+SATA     SATA .INF files for Chipset based SATA controllers
+
+PARTS    Partition Mapper.
+
+WINXX.CAB  Windows Cabinet File with Patch already applied.
+
+BIOS     Large Disk Support Patches for Tyan S1590 Motherboard and others.
+
+EPIA     Patched BIOSes to fix bug in VIA EPIA BIOSes from 01/02 thru 06/05.
+
+DOS      Patches to DOS 6.2 to access drives larger than 8GB.
+
+XPPATCH  Updates to Windows XP Original Edition to provide 48-Bit LBA support
+         during installation.
+
+PATCHENC Patch to Support Encrypted Hard Drives.
+
+PATCH2TB Patch to Support Hard Drives larger than 2200GB.
+
+
+CONTACT INFORMATION
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+Website:  http://rloew1.no-ip.com

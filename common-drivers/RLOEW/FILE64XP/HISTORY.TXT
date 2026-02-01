@@ -1,0 +1,13 @@
+            R. Loew Electronics Large File Emulator for XP
+
+                          Version 1.0
+
+                           03/18/2018
+
+                     Copyright (C) 2011-2018
+                       By Rudolph R. Loew
+
+
+Version 1.0    Released 03/18/18
+
+                  Original Release

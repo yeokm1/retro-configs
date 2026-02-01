@@ -1,0 +1,15 @@
+Rudolph Loew <rloew@hotmail.com>
+Attachments4/27/14
+
+to me 
+Dear Mr. Dallas,
+
+I have identified a bug in the Slipstream Package I sent you on 08/27/11.
+The Cabinet ID was not set. This is only important if you use the /A (Process ALL cabinets) option of EXTRACT.
+I have attached an update package for this. Rename the FIXCAB.JPG to FIXCAB.ZIP before unpacking.
+
+Sincerely,
+
+
+Rudolph R. Loew
+rloew@hotmail.com

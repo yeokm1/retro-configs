@@ -1,0 +1,4 @@
+;Add to [386Enh] Section
+
+[386Enh]
+device=CREGFIX.VXD

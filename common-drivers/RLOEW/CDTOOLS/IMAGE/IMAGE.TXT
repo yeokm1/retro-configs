@@ -1,0 +1,153 @@
+                      Bootable Image Building
+
+                For Users of RFDISK, RFORMAT and CDTOOLS.
+
+
+
+Users with RFDISK, RFORMAT and CDTOOLS can prepare Floppy and Hard Disk
+Emulation Boot Images in an expedited manner, using the tools in combination.
+
+There are four type of Bootable Images supported by the CDTOOLS.
+
+No-Emulation Boot.
+Standard Floppy Boot Emulation.
+Extended Floppy Boot Emulation.
+Hard Disk Boot Emulation.
+
+
+No-Emulation Boot Images consist of pure Code. These need to be created by
+Compilers and/or Assemblers with the Origin set to 7C0:0 and a length less
+than approx 600KB.
+
+Standard Floppy Boot Emulation Images are created by constructing a Bootable
+Floppy Disk, with the desired Software on it, then Ripping an Image of it.
+
+Extended Floppy Boot Emulation Images require a more complex procedure to
+create. The Procedure is described in the Supplement SUPP.TXT. Standard
+Floppy Boot Images for Floppy Drives, such as the 2.88MB, Drive that may be
+unavailable, can be created using the Extended Floppy Boot Image Creation
+Process.
+
+Standard Hard Disk Boot Emulation Images are created by constructing a
+Bootable Hard Disk, with the desired Software on it, then Ripping an Image of
+it, in the same manner as the Standard Floppy Disks.
+
+
+
+REQUIREMENTS
+
+Windows 98, 98SE or ME.
+Windows XP with added ASPI Layer.
+CD/DVD/BD Drive that supports the Disks being used.
+
+NOTE: BD-R Disks are not currently supported for Writing.
+
+
+
+CONTENTS
+
+IMAGE.TXT     This File.
+SUPP.TXT      Extended Bootable Floppy Supplement.
+GETDISK.EXE   Disk or Partition Extractor (Ripper).
+
+
+
+GETDISK
+
+Getdisk is a Disk/Partition Reader. It can be used to rip Partition Data into
+a File. The Command Syntax is:
+
+GETDISK DiskNumber StartSector EndSector FileName
+
+or
+
+GETDISK DiskNumber StartSector +Length FileName
+
+or
+
+GETDISK DriveLetter StartSector EndSector FileName
+
+or
+
+GETDISK DriveLetter StartSector +Length FileName
+
+The Disk Number is the Interrupt 13 Number. 0x80 = First Hard Drive.
+0 can be used for A: in Windows.
+
+The Drive Letter is the Mount Drive Letter from A: to Z:.
+
+If Length is specified, the "+" symbol must be prepended.
+
+Start Sector and End Sector can be 64 Bit Values for use with the TBPLUS
+Package.
+
+Length is limited to less than 8388608 Sectors as the File must be less than
+4GiB.
+
+
+
+STANDARD FLOPPY BOOT IMAGE CREATION
+
+1. Format an appropriately sized Floppy Disk.
+2. Install Operating System and other desired Files.
+3. Rip the Floppy Image using any Disk Ripper. The Included GETDISK can be
+   used as follows:
+
+   GETDISK A: 0 2400 ImageFileName  (1.2MB Floppy)  (Use B: for Second Drive)
+   GETDISK A: 0 2880 ImageFileName  (1.44MB Floppy)  (Use B: for Second Drive)
+   GETDISK A: 0 5760 ImageFileName  (2.88MB Floppy)  (Use B: for Second Drive)
+
+Alternatively use the method described in the Extended Floppy Boot Emulation
+Image Creation instructions SUPP.TXT and choose one of the Standard Sizes.
+
+
+
+STANDARD HARD DISK IMAGE CREATION
+
+You will need an Empty Hard Drive, or one that can be completely erased.
+
+1. Run RFDISK.
+2. Select the Drive
+3. Use the "K" to clear all Partitions (if any).
+4. Use the "M" to refresh/install the MBR
+5. Create the Primary and Extended Partitions you desire.
+   Use only CHS Partition Types (1, 4, 6 and B for Data and 5 for Extended).
+6. Set the intended Boot Partition Active.
+7. Use the "E" command to Erase the Headers in each Data Partition.
+8. Write changes to Disk with the "W" Command.
+
+9. Determine the number of Sectors required to hold the Disk Image. If you
+   have not determined this in advance, you can obtain the number as
+   follows:
+
+   Select the Drive again.
+   Set the Geometry using "G 1 1".
+   Write down the highest End=### Number shown.
+   If the Number is larger than the size of the Disk you plan to burn or
+      16434495 (8GB), whichever is less, then the Image is too big. You will
+      have to redo your layout.
+   Quit RFDISK. DO NOT Write any changes.
+
+RFORMAT allows unmounted Partitions to be Formatted. You can Format the
+Partitions at this point using the "Drive Partition#" Mode. See the RFORMAT
+Users Manual for Details. If you Format all of the Partitions here, you can
+skip Step 11.
+
+10. Reboot Computer.
+
+One or more new Partitions will be added to your Computer representing the
+Partitions on the Hard Drive. Existing Partitions may be moved to new Drive
+Letters. All new Partitions should be reported as invalid or empty if
+pre-formatted.
+
+11. Format and optionally Label each New Partition. Be careful not to Erase
+    existing Partitions.
+12. Place Operating System and other desired Files into the Partitions. Boot
+    Files such as IO.SYS must go into the Partition that represents the Boot
+    Partition on the New Drive.
+13. Rip an Image of the Hard Drive with any Ripping Tool. The included
+    GETDISK can be used as follows:
+
+    GETDISK DriveNumber 0 N
+    DriveNumber is the INT 13 Drive Number (0x80 = C:)
+    N is the total number of Sectors needed, as determined in Step 9.

@@ -1,0 +1,154 @@
+                Extended Floppy Image Building Supplement
+
+                For Users of RFDISK, RFORMAT and CDTOOLS.
+
+
+
+Users with RFDISK, RFORMAT and CDTOOLS can prepare Extended Floppy Emulation
+Boot Images in an expedited manner, using the tools in combination.
+
+Since there is no penalty for using Boot Mode 3 for any size Image, the
+Instructions are written for Mode 3. You would need to change the Sectors
+per Track to 15 for Mode 1 or 18 for Mode 2, instead of 36, and recompute the
+Number of Cylinders required for the desired Image size.
+
+
+
+Step 1 is to determine the size of the Image you want to create. If you have
+plenty of room on the Disk you are creating, you can use the maximum size
+as given in the examples. In this case you can skip the rest of Step 1.
+Otherwise you will need to estimate the amount of space you will need. A
+conservative estimate of size would be as follows.
+
+Total Size of Data
+plus
+Number of Files and Directories multiplied by 1KB.
+plus 1% of the above amounts
+plus 20KB
+
+Divide the number of Bytes by 512 to get the number of Sectors (73728 Max).
+Divide the number of Sectors by 2 then by 36 (or 15 or 18 see above) to get
+the number of Cylinders (1024 Max).
+
+
+
+Step 2 is to create a Partition to hold the Image during assembly.
+
+If you have a blank Hard Drive or a Hard Drive that can be completely erased,
+go to Step 2A.
+
+If you have a blank USB Drive or a USB Drive that can be completely erased,
+go to Step 2B.
+
+If you must use an existing Hard Drive, there must be enough space for a new
+Partition big enough or a Partition that can be reformatted. Go to Step 2C.
+
+
+Step 2A
+
+1. Run RFDISK.
+2. Select the Hard Drive to be used.
+3. M  (Create MBR)
+4. K  (Remove all existing Partitions (if needed))
+5. G 2 36  (set Geometry (adjust if using Mode 1 or 2)).
+6. A E 1 1024  (substitute # of Cylinders plus 1 if not maximum size)
+7. E 1  (Erase Partition Data)
+8. W  (Write to Disk)
+9. Q  (Quit)
+
+
+Step 2B
+
+You can create an Image using USB with MBR by following the Steps in 2A except that you
+select the USB Drive in step 2.
+
+
+Step 2C
+
+If you adding a Partition, follow the instructions for RFDISK to add a 5
+Cylinder Type E Partition (40MB for typical Geometry). Otherwise choose a
+Partition that can be erased that is at least 5 Cylinders (40MB).
+
+Change the Partition Type to E if not already set.
+
+Use the Erase "E" Command to clear the Partition before Writing to the Disk.
+
+If you added a Partition, reboot the Computer.
+
+Go to Step 3A instead of Step 3.
+
+
+
+Step 3 is to Format the Partition (after Steps 2A or 2B ONLY).
+
+1. Run RFORMAT as follows:
+
+   RFORMAT DriveNumber P1 16 M 0xF0
+
+   DriveNumber is the INT 13 Number, 0x80 = First Hard Drive
+
+2. Reboot Computer if using a Hard Disk. Unplug and replug if using a USB
+   Drive.
+
+
+Step 3A is to Format the Partition after Step 2C ONLY.
+
+1. Run RFORMAT as follows:
+
+   RFORMAT DriveLetter 16 S 73728 G 2 36 512 M 0xF0
+
+   DriveLetter is the Letter the Drive is mounted to (C: to Z:).
+
+   Replace 73728 with actual number of Sectors if not using the Maximum Size.
+   If number of Sectors is less than 5000 replace 16 with 12.
+   Replace 36 with 15 or 18 if using Modes 1 or 2 respectively.
+
+2. Reboot Computer.
+
+
+
+Step 4 is to Assemble the Partition.
+
+Build Image by Creating Directories and adding Files to new Partition.
+
+
+
+Step 5 is to Rip the Partition to create the Boot Image File.
+
+Rip the Image using a Disk Ripper. The included GETDISK can do this as
+follows:
+
+GETDISK DriveLetter 0 73728 ImageFile (Replace 73728 with the actual
+number of Sectors if not using the Maximum. Do not put the Image File
+on the new Partition.
+
+
+
+If you are creating more than one Boot Image and do not need to increase the
+size of the Partition, you can go to Step 3 or 3A (as appropriate) to create
+the next one.
+
+
+If you used Step 2C, you will have a non-standard Partition on your Hard
+Drive. When you are finished using the Partition and no longer need it, you
+can restore your Hard Drive as follows.
+
+1. Run RFDISK.
+2. Select the Drive
+3. You should see a Partition that is marked "INV".
+4. If you had created the Partition, you can simply remove it.
+5. If you want to keep it, or restore a reformatted Partition, clear the
+   Partition with the 'E' Command.
+6. Write the Updates to the Drive.
+7. Reboot the Computer.
+8. If you kept the Partition, reformat it normally.
+
+
+
+Step 6 is to create ISO Files or burn Disks using the Boot Image File.
+See the CDTOOLS Manual for this procedure.
+
+NOTE: The Image Files as created this way do not have the correct settings
+for direct use. Use the Force Mode Optino "-F" even if the Images are the
+same size as one of the three standard sized Floppies. BUILDCD or MAKECD
+will reject the Boot Image if the Force Mode Option is not set.

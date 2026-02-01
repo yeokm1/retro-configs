@@ -1,0 +1,99 @@
+               WINDOWS 95/98/SE/ME RAM LIMITATION PATCH
+
+                             Version 7.2
+
+                              06/11/2017
+
+                       Copyright (C) 2007-2017
+                          By Rudolph R. Loew
+                             
+                             
+
+Version 7.2    Released 06/11/17
+               Verification Code rewritten to handle more Versions.
+               Windows ME Patch adjusted for >3.5GiB of RAM.
+               Documentation Updated for U98SESP3.
+
+Version 7.1    Released 06/11/17
+
+                  Fixed VCACHE Extraction Code.
+                  Fixed Incorrect Error Message.
+                  Split Real Mode Setup for VMM32.VXD and VMM.VXD.
+
+Version 7.0    Released 02/19/10
+
+                  Updated Demo Mode Patch.
+                  Added Windows 95 Support.
+                  Added Code to Repatch after Updates.
+
+Version 6.2    Released 08/04/09
+
+                  Corrected Demo Mode Patch.
+                  Restored /M Command to Demo Version.
+
+Version 6.1    Released 07/09/09
+
+                  Added AGP Move Command.
+
+Version 6.0    Released 02/22/09
+
+                  Fixed Incorrect Error Report when removing VMM.VXD file.
+                  Reduced Table limit in Windows ME to prevent overflow.
+                  Added SPLIT8MB.EXE to free Low Memory.
+                  Added Documentation on Ethernet Issues.
+                  Added PROTHOOK Option.
+                  Added Move VXD Data Option.
+                  Revised Option Syntax.
+                  Expanded Option Descriptions.
+
+Version 5.1    Released 10/11/08
+
+                  Fixed Installer to not report success if VMM32.VXD skipped.
+                  Added documentation on known incompatibilities
+                  Corrected minor documentation errors.
+
+Version 5.0    Released 04/12/08
+
+                  Replaced Hard Coded Patch Tables with Pattern Match Tables.
+                  Added Code to Patch Real Mode Memory Mapping Code.
+                  Rewrote Patch Insertion Code.
+                  Removed Arena Table Patch.
+                  Replaced Relocation Table Patches.
+                  Added Code to Patch VMM32.VXD File.
+                  Removed HIMEM.SYS Patch Code.
+                  Removed Documentation on Localization restrictions.
+                  Changed Demo Mode to 10 Minute Time Limit.
+
+Version 4.0    Released 03/28/08
+
+                  Added code to ignore Localized data.
+                  Reworked error cleanup code.
+                  Fixed Uninstall Deletion Error.
+                  Corrected Code for VMM.VXD Ver 2225.
+                  Added Documentation on Localization.
+
+Version 3.2    Released 11/27/07
+
+                  Fixed bug in option parsing code.
+                  Updated Documentation on options.
+
+Version 3.1    Released 11/06/07
+
+                  Removed excess space in VMM32 File.
+                  Rearranged memory tables in Windows ME.
+                  Fixed bug in Windows ME Demo Code.
+
+Version 3.0    Released 10/30/07
+
+                  Added Windows ME Support.
+                  Renamed Package to reflect Windows ME Support.
+
+Version 2.0    Released 10/10/07
+
+                  Redesigned to extract and Patch VMM.VXD and VCACHE.VXD.
+                  Support added for Microsoft Hotfixes.
+                  Added Option to customize Maximum Disk Cache setting.
+
+Version 1.0    Released 09/25/07
+
+                  Original Release

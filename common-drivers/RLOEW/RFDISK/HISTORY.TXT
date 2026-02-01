@@ -1,0 +1,180 @@
+           R. Loew Electronics Disk Partitioning Utility
+
+                          Version 3.0
+
+                           11/02/2015
+
+                     Copyright (C) 2008-2015
+                       by Rudolph R. Loew
+                             
+                             
+Version 3.0    Released 11/02/15
+
+                  Added Lock around all INT 13 Calls
+                  Fixed Profile Scan when Geometry is incorrect.
+                  Removed overreads on Query Responses so they can be Batched.
+                  Limited Erase to One Head only.
+                  Added TBPLUS Windows Only Partitions 9 and 13.
+                  Increased Erase to 13 Sectors.
+                  Added Pause and Reload after Simulated Write in
+                   Diagnostic Mode.
+                  Added Code to process TBPLUS Windows Only Secondary
+                   Extensions without -E.
+                  Allowed Partitions to start on first head when Overlap
+                   Enabled.
+                  Changed Numeric Displays to Unsigned.
+                  Fixed Erase to Zero Out Sectors.
+                  Added -G Option to allow space for GPT.
+                  Added -H Option to display Cyls/Heads/Secs in Hexadecimal.
+                  Added Code to Test for GPT Mismatch.
+                  Corrected Code for Cylinder Setting in Geometry Command.
+                  Moved Drive Display after Overlay Processing.
+                  Made Display Code Graphics Mode Compatable.
+                  Added MaxGeom Option.
+                  Added Partition Geometry Command.
+                  Added GPT Checks and Warnings
+                  Added Clear Overlays Option to MBR Command
+
+Version 2.10   Released 02/19/13
+
+                  Fixed error in Duplicate Signature Repair Function.
+
+Version 2.9    Released 10/13/12
+
+                  Added warnings about Vista,7,8 adding unexpected partitions.
+                  Added warnings about CHS partitions and possible geometry
+                   conflicts.
+                  Made Hide Function unsigned.
+                  Added Dual Mode Partition Documentation.
+                  Disabled recognition of Logical mapping of Dual Mode
+                   Partitions.
+                  Corrected spurious character displayed on Dual Mode
+                   Partitions.
+                  Added Change Start Option and Documentation.
+
+Version 2.8    Released 05/11/11
+
+                  Added Code to Check MBR Checksums and Partition Signatures.
+                  Added Option to Fix MBR Checksum and Partition Collisions.
+                  Fixed Error Message Bug in Default MBR.
+                  Removed unneeded Resets in Default MBR.
+
+Version 2.7    Released 05/11/11
+
+                  Added documentation on Installing XP and Cloned Disks.
+                  Preserved Current Place when Install/Uninstall Multiboot
+                   is declined.
+
+Version 2.6    Released 03/20/11
+
+                  Added Code to Check for Bad Disk Parameters
+                  Limited Drive Scan to 16 by Default
+
+
+Version 2.5    Released 11/04/10
+
+                  Added Checks for BOOTMAN MBRs.
+                  Added TBPLUS Doumentation.
+
+Version 2.4    Released 10/19/10
+
+                  Reworked Partiiton sizes of ExtMBR Partitions
+                  Reduced number of Buffers needed for Writing Extended
+                   Partition Entries.
+                  Corrected Partition Limit Validation Routine
+                  Alignment Option "++" now ignored for ExtMBR Partitions.
+                  Added Sector Size Flag and Checks to Single Boot MBR.
+                  Added Documentation on External Drives.
+
+Version 2.3    Released 09/09/10
+
+                  Changed Error Message for 40-Bit Partition
+                  Corrected Extended MBR Partition Length
+                  Corrected Extended MBR Partition Validity Check
+                  Disabled Geometry Tests on 40-Bit MBR
+                  Disabled CHS on 40-Bit MBR
+                  Added ExtMBR to Display
+                  Corrected Overlay loader in MBR.
+                  Corrected Code to preserve Overlay and XP data when
+                   refreshing MBR.
+
+Version 2.2    Released 08/10/10
+
+                  Added Code to "K" Command to Clear Errors.
+                  Fixed Set 1024/4096 Cylinder Error in CHS Mode.
+                  Added Automatic Switch to CHS if no Extended Interrupt
+                   13 Disks Found.
+                  Corrected Subroutine Version Error that disabled 2.1 Fixes.
+
+Version 2.1    Released 08/02/10
+
+                  Fixed 1 Cylinder Error in CHS Mode Size Report.
+                  Disabled CHS I/O to Cylinders above 1023/4095.
+                  Added Out of CHS Bounds Message to Error Messages.
+                  Changed Error Messages to use Decimal Sector and Cylinder Numbers.
+                  Fixed Error in CHS I/O Subroutine.
+                  Added -XT Option.
+                  Added XT Mode Docs
+
+Version 2.0    Released 07/11/10
+
+                  Added Large Sector support.
+                  Added Support for Primary/Extended Partitions.
+                  Updated INSTOVLY and UNINSTOV.
+                  Changed "reference" to "profile"
+                  Added Drive # to Multi-Boot Prompts.
+                  Added Null Profile (SPACE Key) to Multi-Boot Prompts.
+                  Added Null Option to SetActive Command.
+                  Multi-Boot MBR now skips over other MBRs during Boot.
+                  Added Warning if Overlapping Partitions have benn removed.
+                  Added several Warnings to Write Command.
+                  Revised Erase Boot Area function.
+                  Moved Sector I/O to Far Segment.
+                  Corrected INT 13(8) Report.
+                  Corrected Check for Multi-Boot MBR.
+                  Rewrote Standard MBR.
+                  Added Rotate Drive Code to Null Sector.
+                  Allowed Selection of Null Profile with S Command.
+                  Rewrote W Partition to modify existing Boot Sector.
+                  Added Extention Option to Write Command.
+                  Added ++ Offset Option.
+                  Added ExtMBR Option.
+                  Added Input Validation Code.
+                  Added Hexidecimal/Octal/Binary Input Fromats.
+
+Version 1.5    Released 12/31/09
+
+                  Added Code to handle Overlay Table.
+                  Added Overlay Installer and UnInstaller.
+                  Added Overlay Table Refresh Command.
+
+Version 1.4    Released 12/25/09
+
+                  Added Data Stamp to MBR to ensure Unique Checksums.
+
+Version 1.3    Released 01/24/09
+
+                  Added MBR option on Install Multi-Boot Command.
+                  Added Save and Load Sector Image Commands.
+                  Changed Command Code for Input Redirect Command.
+                  Replaced Multi-Boot MBR.
+
+Version 1.2    Released 01/11/09
+
+                  Added Cylinder Number to Error Messages.
+                  Added "All" Option to Find Command
+                  Added Break Handler to Find Command.
+                  Updated Documentation on Find Command.
+                  Added Documentation on recovering Partitions.
+                  Completed Windows XP/Vista Drive mapping support.
+                  Revised Documentation on XP/Vista Drive Letter Mapping.
+                  Fixed Partition Table Copy Error for D and W Partitions.
+
+Version 1.1    Released 07/22/08
+
+                  Added partial Windows XP/Vista Drive mapping support.
+                  Added Examples to Documentation.
+                        
+Version 1.0    Released 05/08/08
+
+                  Original Release

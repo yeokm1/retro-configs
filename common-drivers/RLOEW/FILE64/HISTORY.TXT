@@ -1,0 +1,51 @@
+               R. Loew Electronics Large File Emulator
+
+                          Version 2.3
+
+                           04/20/2017
+
+                     Copyright (C) 2011-2017
+                       By Rudolph R. Loew
+
+
+Version 2.3    Released 04/20/17
+
+                  Added Code to convert Files Larger than 4GiB-4KiB on open.
+                  Corrected Documentation errors.
+                  Updated Windows XP optional package descriptions.
+
+Version 2.2    Released 06/11/16
+
+                  Corrected Code for expanding Short File Names.       
+
+Version 2.1    Released 06/30/14
+
+                  Added Code to expand Short File Names.
+                  Added information on the windows XP Wrapper DLL
+                  Corrected typos in the User Manual.
+
+Version 2.0    Released 06/30/14
+
+                  Added KernelEx 4.5.2 compatability.
+                  Replaced DLLHOOK loader with FILE64.VXD loader.
+                  Now shared Code.
+                  Shutdown problem eliminated.
+                  Corrected FindFile/FindNext bugs when using subdirectories.
+                  Added 32-Bit Legacy File Functions.
+                  Fixed FILE64HANDLE function.
+                  Removed added attributes and removed hiding extensions.
+                  Rewrote code to use original name for base file.
+                  Rewrote code to use double '`' to indicate extension.
+                  Enabled direct access to extensions.
+                  Enabled direct access to base file with ``0 extension.
+                  Added Extent Presence Attribute Flag (Bit 24)to FindFirst,
+                     FindNext and GetFileAttributesEX, not GetFileAttributes.
+                  Changed Extent Size to 4GiB-4KiB.
+                  Changed Path Identifier to ##64.
+                  Added Code to handle Oversized Files as Non-File64 Files.
+                  Added Code to CopyFile and MoveFile to handle more cases.
+                  Added MERGEBIG and SPLITBIG Tools.
+
+Version 1.0    Released 08/22/11
+
+                  Original Release

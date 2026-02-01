@@ -1,0 +1,87 @@
+           R. Loew Electronics Disk Formatting Utility
+
+                           Version 1.8
+
+                           10/29/2015
+
+                     Copyright (C) 2010-2015
+                       by Rudolph R. Loew
+                             
+                             
+
+Version 1.8    Released 10/29/15
+
+                  Removed overreads on Query Responses so they can be Batched.
+                  Added check for Existing Size in PBR if no Geometry.
+                  Changed DISK ID for Universal Recognition.
+                  Added TBPLUS Windows Only Partition Support
+                  Added Multiple Extended Partition Support to Numbered
+                   Logical Drive Option.
+                  Changed Boot Records to use LBA Mode, whenever possible,
+                   on Untyped Partitions and Partition Types >=0xC.
+                  Added -MBR Option to add MBR Entry to Boot Record if
+                   Offset is Zero.
+                  Added TBPLUS Mode Formatting to Display of Start Sector.
+                  Corrected Boot Code for computing Second Boot Sector
+                   Address.
+                  Added High Nibble Options for future applications.
+                  Corrected Code for Demo.
+
+Version 1.7    Released 10/13/12
+
+                  Allowed align with zero offset.
+                  Documented problem with >4080 root entries.
+                  Offset and root dir ents now displayed unsigned.
+                  Fixed incorrect flags in BPB update for Floppies.
+                  Added warning for >=(secsize<<3) root entries.
+
+Version 1.6    Released 08/28/11
+
+                  Enabled setting BASE to 0.
+                  Added Create Partition Image Option.
+
+Version 1.5    Released 03/20/11
+
+                  Added Code to handle modified Drive Letter assignments.
+
+Version 1.4    Released 11/04/10
+
+                  Revised Warning Messages.
+                  Added TBPLUS Documentation.
+
+Version 1.3    Released 10/19/10
+
+                  Corrected alignment code for Extended MBR Partitions.
+                  Added Warnings for improper lengths of Extended MBR Partitions.
+                  Placed Warning Messages after Partition Parameter Display.
+                  Added ExtMBR Format Start Address to Display.
+                  Limited Default Cluster Size to 32KB.
+                  Added Documentation for USB Drivers and Bad Sectors.
+
+Version 1.2    Released 09/20/10
+
+                  Corrected Sector Count in FAT32 Large Sector Boot Code
+                  Added MBR Bypass Offset Code in 40-Bit Boot Sector Patch
+                  Added 40-Bit Mapping when writing to Physical Drives
+                  Added Primary and Logical Sector #'s to Physical Drive Mode
+
+Version 1.1    Released 07/11/10
+
+                  Corrected Documentation for -DOS6 Option
+                  Set lower Default Cluster Size for small Partitions
+                  Redesigned Alignment Option to minimize use of Offset mod,
+                  Revised and extended -BootOnly Option.
+                  Set Default Geometry to Values Read by INT 13H.
+                  Modified Boot Sectors to support Large Logical Sectors.
+                  Modified Boot Sectors to correct Error String Pointers.
+                  Modified Boot Sectors to support IO.SYS Loader to Boot
+                   from Large Logical Sectors.
+                  Modified Boot Sector Writer to support Large Logical Sectors.
+                  Updated Prompts.
+                  Added Offset to Physical Mode.
+                  Removed "New" from Display when No Parameters are changed. 
+                  Added Boot Drive (Unit #) Option.
+
+Version 1.0    Released 05/20/10
+
+                  Original Release

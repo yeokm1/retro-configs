@@ -1,0 +1,738 @@
+             R. Loew Electronics Command Line File Manager
+
+                          Version 2.0
+
+                           08/24/2011
+
+                     Copyright (C) 2003-2011
+                       by Rudolph R. Loew
+
+
+
+
+The R. Loew Electronics Command Line File Manager Utility provides the
+ability to List, Copy, Move, Exchange, Delete or perform Scripts on Files
+with Wildcards and numerous selection options.
+
+
+
+REQUIREMENTS
+
+Windows 95, 98, 98SE, ME, 2K, XP, Vista, or 7.
+
+
+
+CONTENTS
+
+XFILE.EXE       File Management Utility (Full Version Only)
+XFILED.EXE      File Management Utility (Demo Version Only)
+README.TXT      This File
+MANUAL.TXT      Users Manual
+LICENSE.TXT     License Terms and Conditions
+HISTORY.TXT     Revision History
+
+
+
+DEMO VERSION
+
+The Demo Version runs with the Query Option enabled and cannot make any
+changes to a Drive or run Scripts,
+
+
+
+INSTALLATION/UNINSTALLATION
+
+None required. Run Executable from a DOS Box to use.
+
+
+
+OPERATION
+
+XFILE first separates each Path into a BASE and a Wildcard TAIL as described
+in the Section on Wildcards below. 
+
+XFILE scans one or more BASE Directory Trees depth first. This means that it
+scans Subdirectories and their Subdirectories as they are encountered rather
+than scanning a complete Directory and then scanning the Subdirectories. Each
+File or Directory found is checked against the specified Wildcard to see if
+it matches the criteria. Depending on the Command, Directories are processed
+when entered and/or when left.
+
+The File Processing routine generates the name of the File, to be compared
+to, by combining the Specified Path and the TAIL portion of the File Name
+being Processed. Any specified comparisons are done between the two Files. If
+satisifed, any Source or Target File Names are generated in the same manner
+and the specified Command is executed.
+
+If the File has not been moved or deleted and there are two or more
+sequential Commands specifying the same Search Path, the Processing Routine
+will loop through the other Commands before returning to the Scanner.
+
+
+
+XFILE COMMAND LINE SYNTAX
+
+The Command Line Syntax consists of the following Sections in the order
+given.
+
+OPTIONS
+
+One or more Options, described below, that affect all Commands.
+
+COMMANDS
+
+One or more Commands as described below. Commands will be executed one after
+the other unless Adjacent Commands share the same Search Path (First Index
+Number). In this case they executed in order on each File Found within one
+Pass of the Directory Tree Scanner.
+
+SEPARATOR
+
+A single dash "-" used to separate Commands from the Path Arguments
+
+PATHS and SHELL STRINGS
+
+Up to 9 Paths with Wildcards and/or Scanned Letters or Shell Command Strings
+for the Execute and Proecess Commands.
+
+DATES
+
+One or two Dates, either Unix style Dates, File Names, or "*".
+
+
+A quick summary of the Command Line Syntax can be displayed by typing XFILE
+with no arguments.
+
+
+
+COMMANDS
+
+Commands consist of a Command Letter, one to four Path Index Numbers, and any
+Selection or modifier options. There are no spaces within a Command.
+
+The Command Letters are as follows:
+
+C = Copy 
+D = Delete 
+E = Execute a Shell Command passing the File Name to it
+L = List Names
+M = Move or Rename
+P = Process a Script with the Source and Target File Names as Arguments.
+R = Rename only, do not Copy and Delete
+S = Show Names and Details
+X = eXchange Files
+
+These are described in their own Sections Below.
+
+The Path Index Numbers are digits from 1 to 9 indicating which of the up to 9
+Paths to use. If a Minus "-" is placed in front of a Path Number then only
+the final FileName part of the TAIL being Processed will be used. This is
+used to support Flat Directories. See the PATH INDEX NUMBERS Section Below
+for more details.
+
+The function of the up to four Path Index Number Arguments is described in
+the PATH INDEX NUMBERS Section and under the Individual Command Sections
+below.
+
+The Selection and Modifier options are single letters that define the
+Selection Criteria and modify the Command, display or ask for user input.
+These are described in the SELECTION AND MODIFIER OPTIONS Section Below.
+
+
+
+PATHS AND SHELL STRINGS
+
+Path Arguments consist of one or more of the following:
+
+Search Arguments which may or may not contain Wildcards and Scanned
+Characters. These are specified by the first Path Index Number and are used
+to specify the Directory Trees to be scanned.
+
+Other Path Arguments are used as Bases to construct File Names. They can have
+Scanned Characters but cannot have Wildcards. They can also end in one or
+more "*" Characters to Discard Directories from the TAIL or a "\" Character
+to use the final Segment of the SEARCH NAME instead of the TAIL when there
+are no Wildcards in the SEARCH NAME.
+
+The Execute Command uses a Quoted String Argument that consists of a complete
+Shell Command Line with the following substitutions:
+
+{} is replaced by the File Name.
+}{ is replaced by the Short File Name of the Specified File Name.
+Quotes are placed around the substitutions and adjacent text unless disabled.
+
+CAUTION: If the Search Argument uses Scanned Character Wildcards, any Forward
+Slash "/" Characters in the Quoted String Argumnt Characters will be
+substituted. This can cause unintended results if used for Command Modifiers
+or other purposes in the Shell Command Line.
+
+The Process (P) Command uses the Argument as the name of a Batch file and
+possible initial Arguments, if quoted. It passes the Source and Target File
+Names as additional Arguments. Quotes are placed around the added Arguments
+unless disabled.
+
+
+
+DATES
+
+One or two Dates can be placed at the end of the XFILE Command.
+
+If one Date is present, the A or B Selection Arguments will refer to it.
+Do not use A and B in the same Command.
+
+If two Dates are present, the A or B Selection Arguments will refer to the
+second one. Using both the A and B in the same Command will Select Files
+between the two Dates. The first Date must be before the Second Date.
+
+Dates are global across all Commands in a XFILE Command Line.
+
+Dates can be in an UNIX Format as follows:
+
+YYMMDD[HH[MM[SS]]]
+
+or as a File Name whos Last Modified Date will be used, or as "*" which
+represents the Current Time.
+
+
+
+OPTIONS
+
+A number of Options may be specified to modify the behavior of XFILE and
+apply to all Commands given. Each Option starts with a Minus "-" Character,
+followed by No Letter, One Letter or Two Letter Option Code and a possible
+Argument. No spaces are allowed.
+
+Numerical arguments can be in Decimal, Hexadecimal (preceeded by 0x), Octal
+(preceeded by 0o) or Binary (preceeded by 0b).
+
+The Set Buffer Size Option has no Option Letter and has only a numerical
+argument (ex. -1024). This sets the size of the Buffer used to Copy or Move
+Files. The Minimum is 512 Bytes and the Default is 65536.
+
+The -A Option tells XFILE to Query rather than Skip a Filename that is too
+long. This can be used with the -F Option to identify very long names.
+
+The -C Option forces XFILE to use the DOS Box's Console Input rather than any
+redirected Standard Input for responses to Queries.
+
+The -F Option sets the maximum length of a File Name Segment to the specified
+length. File Names longer than this limit will be skipped unless the -A
+Option is specified. The Default is 254.
+
+The -H Option tells XFILE to attempt to preserve the Short File Name
+associated with the File being Copied or Moved. This Option can only be used
+under Windows 9X and is not supported by CD or DVD Disks or most NAS Drives.
+Only Drives that use Short Name Tails starting with ~1 are supported. Do not
+specify the -H Option if copying files on a single Drive that use hashes, or
+between two Drives that use the same Hash to create Short File Names.
+
+The -K Option tells XFILE to override the K (Compare File Size Only)
+Selection Argument for Files smaller than the specified length. This allows
+XFILE to do a full compare on small files while allowing larger Files to be
+tested for size differences only. If the length is set to -1, empty Files
+will be skipped.
+
+The -L Option is used to ignore an initial blank line input to XFILE. This
+Option may be needed with certain remote Shell implementations.
+
+The -M Option sets the Mininum Number of Files that need to be processed by
+XFILE to return ErrorLevel=0. This can be used in Scripts to determine if
+XFILE processed the desired number of Files. The Default is 1.
+
+The -O Option selects the OEM Page for handling extended ASCII File Names.
+The Default is ANSI.
+
+The -P Option prevents XFILE from changing or removing Protected Files.
+An Error will be reported if XFILE attempts to change or remove a Protected
+File if this Option is set.
+
+The -R Option enables Automatic Retries on an Error and Optionally sets the
+number of attempts before skipping the File. If not set, XFILE will Query if
+an Error occurs. The Number of Retries, if not specified, is 5.
+
+The -S Option causes XFILE to display each File scanned as they are
+encountered. The names will be shown on the current line with no Line Feeds
+to advance the Cursor or Scroll. Use -S- to add Line Feeds so that each
+File can be seen. Specifying a FileName (ex. -Slog) will cause XFILE to save
+the list of Files Processed in the specifed File.
+
+The -T Option sets the tolerance when comparing File Timestamps. Normally
+File times are compared directly to determine if earlier, same, or later.
+Setting this option will allow a File to be Selected properly even if it's
+Timestamp is off a few Seconds. The -TZ Option also allows a plus or minus
+one hour deviation in case a Daylight Savings Time discrepancy has occurred.
+The Tolerance is in Seconds and must be specified except if using -TZ.
+
+The -X Option sets the range that the Scanned Character Wildcard will be
+Scanned over. The Argument consists of two Letters in ascending order. The
+Scanned Character Wildcard will be Scanned starting with the first Letter and
+will be incremented through the last Letter. This allows the Wildcard to be
+scanned over a range other than the Default C to Z. The Default was intended
+for Scanning Hard Drives. Specifying A to Z (-XAZ) would also include the
+Floppy Drives. Numbers can be Specified (ex. -X09 to scan from 0 to 9). Both
+letters must be in the same case. Using other symbols or mixed Characters may
+fail or cause unexpected results. Wildcards Characters should not be scanned
+over.
+
+
+
+WILDCARDS
+
+XFILE supports the standard DOS Wildcards "?" and "*". In addition it
+supports Directory Wildcards that allow parsing over an indeterminate number
+of Directories. This allows searching for Files anywhere in a Directory Tree.
+
+** skips over one or more Directory Levels
+   ex. A**B matches A\xxx\yyy\B
+
+*** skips over one or more Directory Levels then zero or more Characters in a
+    Name
+    ex. A***B matches A\xxx\yyy\zzzB
+
+*** skips over zero or more Characters in a Name then one or more Directory
+    Levels
+    ex. A****B matches Axzz\yyy\zzz\B
+
+***** skips over zero or more Characters in a Name before and after one or
+      more Directory Levels
+      ex. A*****B matches Awww\xxx\yyy\zzzB
+
+The Scanned Character Wildcard "/" is not a true Wildcard, but a placeholder
+for a character that is scanned over a range when XFILE finds one or more in
+the Search Argument (See PATH INDEX NUMBER Section Below). It is ignored
+when splitting the Search Argument. See SCANNED CHARACTER WILDCARD Below for
+more details.
+
+When XFILE processes a Search Argument (The First Path Index Number), it
+looks for Wildcards. The Path Segments before the First Segment containing a
+Wildcard become the BASE for the Search and the remainder is the Wildcard
+TAIL.
+
+ex.  aaa\bbb\cc?\dd*  BASE=aaa\bbb  TAIL=cc?\dd*
+
+See PATH INDEX NUMBERS Below for more details.
+
+
+
+SCANNED CHARACTER WILDCARD
+
+If XFILE finds one or more Scanned Character Wildcards "/" when it processes
+a Search Argument (The First Path Index Number), it will replace all
+occurances of the "/" character, in all Arguments, with the first Letter of
+the Scan Range set by the -X Option or "C" if the Default Scan Range. It will
+then process the Command. When the Command completes, it will increment each
+occurance to the next Letter and reinvoke the Command. This will be done
+until the last Letter of the Scan Range has been processed. This Wildcard
+will not be substituted in any other Path Arguments for a Command unless it
+is used in the Search Argument.
+
+
+
+SEARCH
+
+When Processing a Command, XFILE starts it's Search at the BASE Directory
+generated by the Wildcard parser. When a File or Directory is found, the
+portion of it's Path after the BASE is computed and becomes the FILE TAIL.
+Each File or Directory is then passed to the File Processor along with the
+BASE and FILE TAIL. The File Processor checks the FILE TAIL agains the
+Wildcard TAIL and continues Processing if it matches.
+
+If a Directory Matches the Wildcard, all SubDirectories and Files within are
+considered to Match and will be Processed.
+
+If a Directory is a possible Parent Directory but doesn't Match, it will not
+be Processed but the Scanner will be told to search into it. If it is not a
+possible Parent Directory, the Scanner will be told to skip over it.
+
+
+
+PATH INDEX NUMBERS
+
+XFILE uses up to four PATH Arguments for processing a Command. The Path
+Index Numbers are the Numbers in a Command String after the Command Type
+Letter. They Index into the Arguments that follow the Separator "-"
+Character. The PATH pointed to by the First Path Index Number is the SEARCH
+PATH used to create the BASE and Wildcard TAIL. The File processing routine
+takes the BASE and FILE TAIL and combines them to produce the CURRENT
+FILENAME. The other Path Index Numbers are processed by combining the Indexed
+Path String with the FILE TAIL. If a negative Path Index Number is specified,
+only the final FileName Segment of the FILE TAIL is used. If a Path has a "\"
+at the end, the SEARCH PATH has no Wildcards, and the FILE TAIL is empty, the
+Final FileName Segment will be used instead of the FILE TAIL.
+
+The CURRENT FILENAME is used as the Default SOURCE FILENAME for the Copy,
+Move, Exchange and Process Commands. The CURRENT FILENAME is used as the
+Default TARGET FILENAME for all of the other Commands.
+
+If a Selection Option is specified that requires a comparison between two
+Files then the Second Index Number is processed to produce the REFERENCE
+FILENAME.
+
+The Processed Second Path Index Number is used as the Default TARGET FILENAME
+for the Copy, Move, Rename, Exchange and Process Commands whether a REFERENCE
+FILENAME is produced or not.
+
+The last Path Index Number is used as a Shell String by the Execute and
+Process Commands.
+
+One or two additional Path Index Numbers may be specified depending upon
+Command. These will not be the last Path Index Numbers in the Execute or
+Process Commands.
+
+If one additional Path Index Numbers is specified, it will be processed and
+used as the TARGET FILENAME.
+
+If both additional Path Index Numbers are specified, the first will be
+processed and used as the SOURCE FILENAME. The second will be processed and
+used as the TARGET FILENAME. This is only supported by the Copy, Move,
+Rename and Exchange Commands.
+
+XFILE will check and disallow incorrect or excess numbers of Path Arguments
+as determined by the Command and Selection Options.
+
+The purpose of these four FileNames are described in the File Comparison and
+Individual Command Sections Below.
+
+
+
+FILE COMPARISONS
+
+When a Command using a Selection Option that requires two files to be
+compared or tested in some way. XFILE will use the CURRENT FILENAME and the
+REFERENCE FILENAME as the two files. Depending upon the specific Options, the
+Files may be tested for Presence, Timestamp, or may be Opened and their data
+compared.
+
+
+
+SELECTION AND MODIFIER OPTIONS
+
+The Selection Options set criteria for choosing which Files are Processed.
+The Modifier Options alter the behavior of XFILE when a File is Processed.
+
+The Selection Options that require a comparison between Files (See FILE
+COMPARISONS Section Above) are as follows:
+
+C = Changed          File size or data different.
+CK = Changed Size    File size different. Data is checked if File smaller
+                     than set by -K Option.
+I = Identical        File size and data identical.
+IK = Identical Size  File size identical. Data checked if File smaller than
+                     set by -K Option.
+E = Exists           Reference File exists.
+N = New              Reference File does not exist.
+L = Larger           File larger than Reference File.   
+
+The following Options are affected by the -T and -TZ Options.
+
+O = Older            File older than Reference File.
+U = Update           File newer than Reference File.   
+UO = Diff Date       File Timestamp different from Reference File.
+EUO = Same Date      File Timestamp same as Reference File.
+EO = Older or same   File older than or same Date as Reference File.
+EU = Newr or samee   File newer than or same Date as Reference File.   
+
+The Selection Options that do not require a comparison between Files are as
+follows:
+
+D = Directories      Process Directories Only
+F = Files            Process Files Only (Directories are Searched and created
+                     as needed)
+T = Text             Base ASCII Text Files Only   
+S = Suppress Hidden  Skip Hidden and System Files
+Y = Hidden Only      Hidden and System Files Only
+Z = Case Sensitive   FILE TAIL must match case of WILDCARD TAIL
+
+The following Options are affected by the -T and -TZ Options.
+
+A = After            File Timestamp is after the DATE1 (Last) Argument
+B = Before           File Timestamp is before or the same as the DATE1 (Last)
+                     Argument
+AB = Between         File Timestamp is the same as the DATE2 (Next to Last)
+                     Argument or between the DATE2 and the DATE1 (Last)
+                     Argument
+
+The Modifier Options are as follows:
+
+X = Append           When Copying a larger File over a Smaller File, append
+                     only the extra Data.
+Q = Query            Query before performing a Command on a File.
+R = No Recursion     Do not Enter SubDirectories (will Process Directory
+                     itself)
+P = Path Request     Query for Destination Path for each File.
+S = Name Request     Query for Full Destination Name for each File.
+V = Progress Report  Show Files being Processed and Comparison Progress
+W = No File Warning  Print Message if no Files Processed by Command
+J = Not Matched      Show Files that do not Match Selection criteria.
+G = Date/Attr        Copy Modification Date and Attributes only. Do not alter
+                     data. Destination File must exist.
+* = No Attributes    Do not set Attributes when Copying File.
+- = No Quotes        Do not add quotes around substitutions in Execute or
+                     Added Arguments in Process Commands.
+M = No Messages      Do not show Action Messages
+MM = No Errors       Do not show Error Messages
+MMM = No Output      Do not show Action or Error Messages
+
+
+
+PRECEDENCE
+
+When combining Selection Options, each option must be satisfied except as
+described above or when combining N or L with C, I, O, and/or U. In this
+case, satisfying either group is sufficient.
+
+
+
+INDIVIDUAL COMMANDS
+
+The Commands supported by XFILE are described Below. Refer to the PATH INDEX
+NUMBER Section above for explanation of the SOURCE and TARGET FILENAMES
+described in the descriptions.
+
+
+
+COPY COMMAND
+
+The Copy Command copies the SOURCE FILENAME to the TARGET FILENAME.
+Directories are automatically Created if needed. If the Destination File
+exists it will be unprotected if Hidden, System and/or Read Only. Then it
+will be Overwritten.
+
+
+
+MOVE COMMAND
+
+The Move Command attempts to Move the SOURCE FILENAME to the TARGET FILENAME.
+If it fails, it copies the SOURCE FILENAME to the TARGET FILENAME then
+deletes the SOURCE FILENAME. Directories are automatically Created if needed.
+If the Destination File exists it will be unprotected if Hidden, System
+and/or Read Only. Then it will be Overwritten.
+
+
+
+RENAME COMMAND
+
+The Rename Command attempts to Rename the SOURCE FILENAME to the TARGET
+FILENAME. If it fails, an Error is reported and handled according to the
+Automatic Retry Setting set by the -R Command.
+
+
+
+EXCHANGE (X) COMMAND
+
+The Exchanges Command Exchanges the SOURCE FILENAME and the TARGET FILENAME.
+The Destination File or Directory is renamed to a Temporary Name. The Source
+File or Directory is Moved to the Destination Name and the Destination File
+is moved to the Source Name. The Temporary Name is the same as the Target
+FileName with the last Character set to ASCII 160. Do not use this Command if
+the Target FileName ends with the ASCII 160 Character or another File or
+Directory exists with the same Name as the Temporary.
+
+
+
+DELETE COMMAND
+
+The Delete Command deletes the TARGET FILENAME. Directories can be deleted if
+they are empty when the corresponding Directory in the SEARCH PATH is exited.
+Files and Directories will be unprotected if Hidden, System and/or Read Only.
+Then it will be Deleted. If not restricted, XFILE will normally Delete all of
+the contents of a Directory before attempting to Delete the Directory itself.
+
+
+
+LIST COMMAND
+
+The List Command lists each TARGET FILENAME corresponding to each CURRENT
+FILENAME that matches the Selection criteria. Only the File Path is shown.
+
+
+
+SHOW COMMAND
+
+The Show Command lists each TARGET FILENAME corresponding to each CURRENT
+FILENAME that matches the Selection criteria. The Files Type, Size and Last
+Modified Date are displayed as well in the following Format:
+
+YYMMDD-HHMMSS  Size or Directory  Name
+
+
+
+EXECUTE COMMAND
+
+The Execute Command Executes a Shell Command with the TARGET FILENAME
+substituted for the markers in the Shell String pointed to by the last Path
+Index Number. The Shell String is copied and each occurance of "{}" is
+replaced by the TARGET FILENAME and each occurance of "}{" is replaced by
+the Short File Name for the TARGET FILENAME. Quotes are placed around each
+Substitution and adjacent text unless overridden by the "-" Modifier. The
+resulting String is Executed.
+
+
+
+PROCESS COMMAND
+
+The Process Command Executes a Shell Command with the CURRENT and TARGET
+FILENAMEs appended to the Shell String pointed to by the last Path
+Index Number.  The Shell String is copied and the two FileNames are appended.
+Quotes are placed around each FileName unless overridden by the "-" Modifier.
+The resulting String is Executed. There is no Option to override the CURRENT
+FileName.
+
+
+
+ERRORS
+
+When an Error occurs during a Copy or the Copy phase of a Move, the
+Destination file will be deleted.
+
+If Automatic Retries are not enabled, XFILE will Query before continuing.
+If Automatic Retries are enabled, XFILE will retry the specified number of
+times then skip the file if still unsuccessful.
+
+
+ABORT
+
+Pressing CTRL-C will Signal XFILE to stop. If XFILE is in the middle of
+Copying a File, a Warning will be printed, and the Copy will be completed
+before Stopping. Pressing CTRL-C a second time will abort the Copy and the
+File will be deleted. Other Commands will be completed for the Current File
+before Stopping. An ABORT message will be printed when XFILE stops.
+
+
+RETURN CODES
+
+XFILE returns the following Return Codes:
+
+0  = No Errors and the Minimum number of Files Processed.
+5  = Not Enough Files Processed. None if Default.
+10 = No Commands or Paths
+20 = Invalid Argument or Memory Error
+
+
+
+CAUTIONS AND WARNINGS
+
+When Copying, Moving, Renaming, etc., XFILE may encounter the Destination
+FileName of an earlier File as it continues Scanning the Search Path. If it
+matches the Wildcard and Selection criteria, XFILE may Process it, leading to
+unintended consequences. This is particularly true when Copying or Moving
+files from the Current Directory to a SubDirectory. If this is likely, it is
+recommended that you use the Query Modifier so you can see each File before
+it is Processed.
+
+You will see Error Messages if a Command tries to Examine, Update, or Delete
+the Root Directory of a Drive. You can ignore these Errors or use the "F"
+Selection Option to skip over Directories.
+
+Created Directories will have the Current Date, not the Date of the Source
+Directory in Windows NT, XP, Vista or 7. The Date will be copied to the new
+Directory in Windows 98, 98SE and ME unless the "*" (No Attributes) Option is
+set.
+
+Only the Target Directories for actually Processed Directories will have
+their Attributes Set. Higher level Directories created will have no
+Attributes Set. If you use the "F" Selection Option, no created Directories
+will have any Attributes Set.
+
+
+
+EXAMPLES
+
+XFILE C12 - A B
+
+ Copy all Files in Directory Tree A to Directory Tree B.
+
+XFILE C12NC D21N - A B
+
+ Update Directory Tree B to Match Directory Tree A.
+
+XFILE C12NU C21NU - A B
+
+ Sync Directory Trees A and B to latest files in each.
+
+XFILE C123N - A B C
+
+ Copy all Files in Directory Tree A but not in Directory Tree B to Directory
+ Tree C.
+
+XFILE L1 - A***.JPG
+
+ List all .JPG files anywhere in Directory Tree A.
+
+XFILE E13 E23 - *.TXT *.BAT "EDIT {}"
+
+ Edit all .TXT and .BAT files in the Current Directory.
+
+XFILE C2-1-12U - UPDATE PROJECT
+
+ Update all files anywhere in Directory Tree PROJECT with same names as Files
+ in Directory UPDATE.
+
+XFILE P123CQ - A B "FC /B"
+
+ Show Binary differences between files in Directory Tree A and Directory Tree
+ B. Query before each display.
+
+XFILE S1FAB - A 090101 090201
+
+ Show all Files in Directory Tree A Last Modified in January 2009.
+
+XFILE D1D - A
+
+ Delete all Empty Directories in Directory Tree A.
+
+XFILE D12I - A B
+
+ Delete Files in Directory Tree A Identical to corresponding Files in
+ Directory Tree B.
+
+XFILE S12NC S21N - A B
+
+ Compare Directory Tree A and Directory Tree B.
+
+XFILE C12 C13 - A B C
+
+ Copy Files in Directory Tree A to Directory Trees B and C. Directory Tree A
+ is scanned only once.
+
+XFILE -XDZ D1 - /:\RECYCLED
+
+ Delete the Recycle Bin on all drives except C:.
+
+XFILE -XDG C12 - /:\ H:\BACKUP\/
+
+ Backup Drives D: thru G: to folders D thru G respectively in H:\BACKUP
+
+XFILE M2-1-1-3o M2-1-1-4eu - FILES WINDOWS UPDATE OLDER
+
+ Compare Files in Directory FILES with Same Named Files in Directory Tree
+ WINDOWS. Move newer files to UPDATE Directory, older Files to OLDER
+ Directory. Unmatched and same Date Files will remain in Directory FILES.
+
+
+
+RELATED PRODUCTS
+
+RENEX     Advanced File Renamer with Path Rearrangement Options.
+
+EXECLIST  Execute Shell Commands based on a List of Files.
+
+EXECSEQ   Execute Shell Commands based on a Sequence of Numbers or Letters.
+
+FILE64    Large File Emulator for Windows 9x.
+
+
+
+CONTACT INFORMATION
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+Website:  http://rloew.x10hosting.com
+
+IP = conference.no-ip.org  PORT = 8192  (Conference Console)

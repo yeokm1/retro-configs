@@ -1,0 +1,68 @@
+[Version]
+Signature="$CHICAGO$"
+Class=USB
+provider=%RRL%
+
+[Manufacturer]
+%MfgName%=RLoew
+
+[RLoew]
+%Generic%=Generic.install,USB\Class_08&SubClass_02&Prot_50
+%Generic%=Generic.install,USB\Class_08&SubClass_05&Prot_50
+%Generic%=Generic.install,USB\Class_08&SubClass_06&Prot_50
+%GenericFDD%=Generic.install,USB\Class_08&SubClass_04&Prot_00
+%RLUSB\DISK.DeviceDesc%=RLUSBpdr.install,RLUSB\DISK
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+[DestinationDirs]
+; \<WINDIR>\SYSTEM32\DRIVERS
+RLUSB.files = 10,System32\Drivers
+
+; \<WINDIR>\SYSTEM\IOSUBSYS
+RLUSBpdr.files = 12
+
+[Generic.install]
+CopyFiles=RLUSB.files, RLUSBpdr.files
+AddReg=RLUSB.addreg
+
+[Generic.install.HW]
+AddReg=RLUSB.HW.addreg
+
+[RLUSB.addreg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,RLUSB9X.SYS
+
+;;[RLUSB.HW.addreg]
+;;HKR,,UpperFilters,0,"USBNTMAP.SYS"
+
+; Install the port driver
+[RLUSBpdr.install]
+AddReg=RLUSBpdr.addreg
+
+[RLUSBpdr.addreg]
+HKR,,DevLoader,,*ios
+HKR,,PortDriver,,RLUSBPDR.PDR
+
+[RLUSB.files]
+RLUSB9X.SYS
+;;USBNTMAP.SYS
+
+[RLUSBpdr.files]
+RLUSBPDR.PDR
+
+[SourceDisksNames]
+1000 = "USB Mass Storage Driver Disk","",,
+
+[SourceDisksFiles]
+RLUSB9X.SYS = 1000
+RLUSBPDR.PDR = 1000
+;;USBNTMAP.SYS = 1000
+
+[Strings]
+RRL="RLoew"
+MfgName="RLoew"
+Generic="Generic USB Drive"
+GenericFDD="Generic USB Floppy Drive"
+RLUSB\DISK.DeviceDesc="USB Mass Storage Device"

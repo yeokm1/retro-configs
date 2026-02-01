@@ -1,0 +1,6 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\VxD\USB2STOP]
+"Start"=hex:00
+"StaticVxD"="USB2STOP.VXD"
+

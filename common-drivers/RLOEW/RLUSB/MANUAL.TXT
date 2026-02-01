@@ -1,0 +1,223 @@
+           RLUSB9X USB Mass Storage Driver for Windows 95+
+
+                             Version 1.0
+
+                              07/15/2014
+
+                          Copyright (C) 2014
+                          By Rudolph R. Loew
+                             
+                             
+
+This USB Mass Storage Driver is designed to support Hard Drives, Floppy
+Drives, Optical Drives, Keys and other Mass Storage Devices that use the USB
+Interface. In particular, this Driver was designed to work with Windows 95
+although it can be used with later Windows such as Windows 98.
+
+Previously available USB Mass Storage Drivers for Windows 95 either had
+serious bugs or were limited to a small subset of USB Mass Storage Devices.
+Optical Drive support was lacking in all USB Drivers tested.
+
+
+
+REQUIREMENTS
+
+Windows 95B, 95C, 98, or 98SE.
+
+The Microsoft USB Supplement and USB Update Packages must be installed in
+Windows 95 before installing this Package. See additional information below.
+Windows 95B Users need to Install IE4 and/or the Y2K Update.
+
+NOTE: Usage with Windows 98 or 98SE is possible but not recommended as there
+      are better USB Mass Storage Drivers for these Operating Systems.
+                       
+
+CONTENTS
+
+RLUSB9X.INF     Information File for Driver
+RLUSB9X.SYS     WDM Driver File
+RLUSBPDR.PDR    IOS Driver File
+USB2STOP.EXE    USB 2 Disable Program
+USB2STOP.VXD    USB 2 Disable Driver
+USB2STOP.REG    USB 2 Disable Driver Startup Setup
+USB2UN.REG      USB 2 Disable Driver Startup Uninstall
+HOTPLUG.EXE     USB Monitor and Eject Control
+README.TXT      General Information
+MANUAL.TXT      This File
+HISTORY.TXT     Revision History
+LICENSE.TXT     License Terms and Conditions
+
+
+
+INSTALLATION
+
+1. Uninstall any existing USB Mass Storage Devices and USB Mass Storage
+   Drivers.
+2. Remove all USB Mass Storage Information Files from the WINDOWS\INF and
+   WINDOWS\INF\OTHER Folders.
+3. Disconnect all USB Mass Storage Devices from your Computer.
+4. Go to the Directory where the program is located.
+5. If your Computer does NOT support USB 2 skip to Step 12.
+6. You have two options to Install USB2STOP. If you want to run USB2STOP.EXE
+   during DOS Bootup go to Step 7. If you want to run USB2STOP.VXD during
+   Windows Startup go to Step 10.
+7. Copy USB2STOP.EXE to your WINDOWS\COMMAND Folder.
+8. Add the following Line to your C:\AUTOEXEC.BAT File:
+
+USB2STOP
+
+   LH is not needed.
+
+9. Skip to Step 12.
+10. Copy USB2STOP.VXD to your WINDOWS\SYSTEM Folder.
+11. Run the following Command and acknowledge the prompts:
+
+REGEDIT USB2STOP.REG
+
+
+12. Copy HOTPLUG.EXE to your Startup Folder.
+    This Step may not be needed if your are using Windows 98 or SE.
+
+13. Reboot.
+14. Connect an USB Mass Storage Device to your Computer.
+15. When prompted, point the Device Manager to the Folder where you stored
+    the Files from this Package.
+
+
+
+UNINSTALL
+
+1. Delete RLUSB9X.INF from your WINDOWS\INF Folder.
+   It may be in your WINDOWS\INF\OTHER Folder with Rloew prepended.
+2. Delete RLUSB9X.SYS from your WINDOWS\SYSTEM Folder.
+3. Delete RLUSBPDR.PDR from your WINDOWS\SYSTEM\IOSUBSYS Folder.
+4. Uninstall all USB Mass Storage Devices and Drivers using Device Manager.
+5. Delete HOTPLUG.EXE from your Startup Folder.
+6. Skip to Step 11 if you did not Install either USB2STOP File.
+7. Delete USB2STOP.EXE from your WINDOWS\COMMAND Folder, if you Installed it.
+8. Delete USB2STOP.VXD from your WINDOWS\SYSTEM Folder, if you Installed it.
+9. Run the following Command and acknowledge the prompts:
+
+REGEDIT USB2UN.REG
+
+10. Remove the Line containing "USB2STOP" from your C:\AUTOEXEC.BAT File.
+    If you added it.
+11. Disconnect all USB Mass Storage Devices from your Computer.
+12. Reboot.
+
+
+
+HOTPLUG:
+
+The HOTPLUG.EXE monitors USB Mass Storage Devices and provides an Ejection
+feature. It works similarly to the HOTPLUG/SYSTRAY Function in Windows ME.
+
+A Tray Icon will appear whenever USB Mass Storage Devices are present.
+
+Left Clinking the Icon will bring up a List of Devices and the Drive
+Letter(s) associated. Clicking an entry will Eject the device. You will
+receive a prompt upon success or failure.
+
+Right Clinking the Icon will bring up a List of Devices and the Drive
+Letter(s) associated but will list individual Units of a Device separately.
+Clicking an entry will put up a Prompt. Select YES to Eject the device. You
+will receive a prompt upon success or failure.
+
+Ejecting individual Units of a Device will not make it safe to Disconnect
+the Device.
+
+
+
+OPTIONS:
+
+The USB2STOP.EXE Program (not USB2STOP.VXD) has two Options:
+
+USB2STOP [Controller_BitMask] [Reset]
+
+The first is a BitMask that allow USB 2 to be disabled on individual
+Controllers. USB 2 Controllers are enumerated by the order they appear in
+the list of PCI Devices.  The BitMask is a single Digit from 1 thru 7.
+
+1 = Disable First USB 2 Controller.
+2 = Disable Second USB 2 Controller.
+4 = Disable Third USB 2 Controller.
+
+These numbers can be added to disable more than one Controller.
+
+Ex. 7 = 1 + 2 + 4 = Disable First, Second and Third USB 2 Controllers.
+
+The Second Option forces a Reset of the USB 2 Controller back to USB 1 Mode
+rather than setting the Channels to USB 1 Mode.
+
+
+
+MICROSOFT WINDOWS 95 USB FILES:
+
+Microsoft released two Packages required to support USB on Windows 95.
+
+1. USB Supplement Package USBSUPP.EXE
+2. USB Update Package USBUPD2.EXE
+
+These can be found on the Windows 95 OSR 2.5 CD or on the Internet.
+
+Two additional Hotfixes from Microsoft and one from Toshiba provide the
+latest USB Drivers for Windows 95.
+
+Conner McCoy (LoneCrusader at MSFN), without his help this Driver would have
+been much harder to develop, has packed together the above Packages into a
+single Installer called XUSBSUPP. As of the release date of Version 1.0 of
+this Driver, XUSBSUPP is available at the following URL.
+
+http://lonecrusader.x10host.com/xusbsupp.html
+
+Alternate URL: http://www.tmeeco.eu/9X4EVER/GOODIES/XUSBSUPP.ZIP
+
+HOTPLUG requires CFGMGR32.DLL which is contained in IE4 and the Y2K Update.
+Windows 95B Users will need to Install one or the other of these Packages,
+or extract this File ad place it in their WINDOWS\SYSTEM Folder.
+
+Mr. McCoy has indicated that he plans to integrate CFGMGR32.DLL and this USB
+Mass Storage Driver into a future Version of his XUSBSUPP creating a
+complete USB solution for Windows 95.
+
+
+
+WINDOWS 98 and 98SE
+
+Better Drivers are available for Windows 98 and 98SE such as my Generic USB
+Mass Storage Drivers available on my Website or Windows ME or later based USB
+Drivers such as NUSB. If you are using a Customized Version as described
+below, this does not apply. HOTPLUG.EXE and USB2STOP.* should not be used in
+Windows 98 or 98SE Systems as their functionality already exists or is not
+needed.
+
+For compatabilty with Windows 95, the USBNTMAP Upper Filter has been disabled
+in the INF File. If you are using Windows 98 or 98SE, you can enable the
+USBNTMAP Upper Filter by uncommenting the 4 lines, that have ";;" at the
+beginning, by removing both semi-colons in the RLUSB9X.INF File.
+
+
+
+CUSTOMIZED VERSIONS
+
+Customized Version of this Driver can be made upon request or as the need
+arises. The following is a short list of possible features being considered:
+
+1. Full Drive Encryption.
+2. Logical Sector Size Remapping.
+3. Logging for Debugging purposes.
+4. Support for >2TiB Drives.
+
+
+
+CONTACT INFORMATION
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+Website:  http://rloew1.no-ip.com

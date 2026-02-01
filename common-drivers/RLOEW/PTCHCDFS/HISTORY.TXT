@@ -1,0 +1,14 @@
+                       CD/DVD DRIVE SIZE PATCH
+
+                             Version 0.1
+
+                              06/14/2009
+
+                          Copyright (C) 2009
+                          By Rudolph R. Loew
+                             
+                             
+
+Version 0.1    Released 06/14/09
+
+                  Original Release

@@ -128,6 +128,14 @@ This is a new 386-based subnotebook released in 2024. It runs on DOS 6.22 and Wi
 
 <img src="laptops/pocket386/photos/pocket386.jpg" width="600">
 
+## 9. [Thinkpad P14s Gen 1 (Intel)](laptops/thinkpad-p14sg1) (2020)
+
+The Thinkpad P14s Gen 1 (Intel) is a modern laptop released in 2020.
+
+<img src="laptops/thinkpad-p14sg1/photos/p14sg1-front.jpg" width="500">
+
+The machine is configured to boot from Windows 98 SE from the internal NVME drive.
+
 # Virtual Machines
 
 Not exactly retro PCs but I just wanted to store the settings I use for my virtual playgrounds. This is typically for me to do quick and dirty testing without powering up my actual retro-PCs.
@@ -227,48 +235,3 @@ In Windows for Workgroups 3.11
 <img src="deprecated/latitude-lm/photos/lm-win98.jpg" width="500">
 
 In Windows 98SE
-
-# Common drivers sources
-
-1.  [Toshiba generic CD driver CDROMDRV](https://www.legroom.net/howto/msdos)
-2.  [Cutemouse](http://cutemouse.sourceforge.net/)
-3.  [MTCP TCP/IP stack](http://www.brutman.com/mTCP/)
-4.  [ODI to Packet Driver v3.1](http://wiki.freedos.org/wiki/index.php/Networking_FreeDOS_-_ODI_driver_installation)
-5.  [SHSUCDX 3.06](http://adoxa.altervista.org/shsucdx/index.html)
-6.  [GRUBFORDOS](https://sourceforge.net/projects/grub4dos/files/GRUB4DOS/)
-7.  [svgaptch for VESA compliance](https://download.wcnews.com/files/other/wcpc/)
-8.  [Crynwr](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/distributions/1.2/repos/pkg-html/crynwr.html)
-9. [Unisound](https://www.vogons.org/viewtopic.php?f=62&t=72553)
-10. [Microsoft Mouse 8.20](https://winworldpc.com/product/microsoft-mouse/8x)
-11. [Microsoft Mouse 9.01](https://winworldpc.com/product/microsoft-mouse/9x)
-12. [Xircom PE3-10BT drivers](https://www.vogonsdrivers.com/getfile.php?fileid=1347)
-13. [3c589 Packet driver](http://download.caltech.se/download/fluke/DAQ/NetDAQ/disk2/packet/)
-14. [3C589N DOS and Windows drivers](http://files.mpoli.fi/hardware/NET/3COM/3C589N.ZIP)
-15. [PFE500c drivers](https://www.driverguide.com/driver/amp/detail.php?driverid=114194)
-16. [Cardsoft 3.1](https://archive.org/details/simpletechnology_pcmcia21cardsocket_systemsoftcardsoftv31_cardview)
-17. [JEMM](https://github.com/Baron-von-Riedesel/Jemm)
-18. [RTC_micro8088](https://github.com/wilco2009/RTC_micro8088)
-19. [Freddy V ch375v022](https://www.vogonsdrivers.com/getfile.php?fileid=1991&menustate=0)
-20. [3C509B-nestor driver for 8088](https://github.com/hackerb9/3C509B-nestor)
-21. [DOS Ethernet drivers taken from T400 website](https://support.lenovo.com/mn/en/downloads/ds001865)
-22. [3C905 drivers](https://lost-contact.mit.edu/afs/sur5r.net/service/drivers+doc/3com/3c905/support.3com.com/infodeli/tools/nic/3c905.htm)
-23. [SC55 Soundfont](https://github.com/trevor0402/SC55Soundfont)
-24. [Via 4in1 drivers](https://theretroweb.com/chipsets/670)
-25. [Novell Netware DOS client](https://community.microfocus.com/img/oes/w/tips/34501/netware-dos-client)
-26. [AdlibW](https://archive.org/details/ADLIBW_ZIP).
-
-# Common software sources
-
-1. [Enhanced DOSKEY 2.8](http://paulhoule.com/doskey/)
-2. [nusb33 Win 98 Universal USB drivers](https://www.philscomputerlab.com/windows-98-usb-storage-driver.html)
-3. [DOSIDLE 2.51](https://www.vogons.org/viewtopic.php?p=438763#p438763)
-4. [CheckIt System Info tool](https://winworldpc.com/product/checkit/30)
-5. [MS-DOS 3.30 install disks](https://winworldpc.com/product/ms-dos/3x)
-6. [Windows 1.04 install disks](https://winworldpc.com/product/windows-10/104)
-7. [Win95 OSR2 boot disk](https://winworldpc.com/product/microsoft-windows-boot-disk/95-osr2x)
-8. [Win 98 SE boot disk](https://www.bootdisk.com/bootdisk.htm)
-9. [PLIP v11.2](http://macall.net/)
-10. [Mount VHD images easily on Windows](https://www.howtogeek.com/51174/mount-and-unmount-a-vhd-file-in-windows-explorer-via-a-right-click/)
-11. [MS-DOS 6.22 install disks](https://winworldpc.com/product/ms-dos/622)
-12. [Windows for Workgroups 3.11 install disks](https://winworldpc.com/product/windows-3/wfw-311)
-13. [CPU Identification Utility - CHKCPU](http://www.steunebrink.info/chkcpu.htm)

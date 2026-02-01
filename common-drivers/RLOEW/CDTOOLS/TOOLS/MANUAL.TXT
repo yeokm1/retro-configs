@@ -1,0 +1,513 @@
+               R. Loew Electronics CD/DVD/BD TOOLS
+
+                          Version 1.2
+
+                           09/19/2011
+
+                       Copyright (C) 2011
+                       By Rudolph R. Loew
+
+
+The CD/DVD/BD Tools Package contains Programs for Reading and Writing CD,
+DVD, or Blu-Ray Disks. These tools are written for use with Windows 98, 98SE,
+and ME.
+
+
+
+REQUIREMENTS
+
+Windows 98, 98SE or ME.
+Windows XP with added ASPI Layer.
+CD/DVD/BD Drive that supports the Disks being used.
+
+NOTE: BD-R Disks are not currently supported for Writing.
+      Filesystem Builders and Readers do not support UDF so DVD Video and
+      Blu-Ray Video are not supported.
+
+
+
+CONTENTS
+
+README.TXT    This File.
+MANUAL.TXT    User's Manual.
+HISTORY.TXT   Version History.
+LICENSE.TXT   User License File.
+LISTASPI.EXE  Lists available ASPI Drives (CD, USB, SCSI etc.)
+MAKECD.EXE    Builds CD Filesystem and Burns CD/DVD/BD Directly.
+BUILDCD.EXE   Builds CD Filesystem and creates Image Files.
+WRITECD.EXE   Burns Image File to CD/DVD/BD.
+WRITEDVD.EXE  Burns Spanned Image Files to CD/DVD/BD.
+ERASECD.EXE   Erases CD-RW and DVD-RW for Sequential Writing.
+FMTCD.EXE     Formats CD-RW for Packet Writing.
+FMTDVD.EXE    Formats DVD+RW and BD-RW for Random Writing.
+VERIFYCD.EXE  Verifies CD/DVD/BD against Image File.
+VERDVD.EXE    Verifies CD/DVD/BD against Spanned Image Files.
+GETCDBT.EXE   Extracts Boot Image from CD/DVD/BD.
+GETASPI.EXE   Disk Extractor (Ripper).
+EXTRISO.EXE   Extract Files from ISO.
+XPASPI.REG    Windows XP Registry Patch for ASPI Layer Installation Bug.
+
+
+DEFINITIONS
+
+R.A.I.L   Raw/Adapter/ID/LUN.  This is the code used to identify a specific
+          Drive. Raw=1 sets Raw Access Mode which has not been Implemented.
+          Adapter Number, ID Number, and LUN Number can be obtained from
+          LISTASPI. The code is computed as follows:
+
+          R.A.I.L =  Raw*4096 + Adapter*256 + ID*16 + LUN
+
+          It can be entered in Decimal or as  0xRAIL where R, A, I, L are the
+          respective Numbers.
+
+          Example 0x110 (272) = Adapter 1 ID 1 LUN 0.
+
+BOOT MODE  0 = No Emulation.   Boot Code is loaded at 7C0:0 and executed.
+           1 = 1.2MB Flopppy   Boot Code access emulates a 1.2MB Floppy.
+           2 = 1.44MB Flopppy  Boot Code access emulates a 1.44MB Floppy.
+           3 = 2.88MB Flopppy  Boot Code access emulates a 2.88MB Floppy.
+           4 = Hard Disk       Boot Code access emulates a Hard Disk as C:.
+
+
+
+PARAMETERS
+
+Numerical Parameters are entered using the following format:
+
+#####  Decimal Numbers
+0x###  Hexadecimal Numbers
+0o###  Octal Numbers
+0b###  Binary Numbers
+
+# represents a digit within the appropriate range of '0' thru 'F'.
+  'A' thru 'F' is case insensitive
+
+NOTE: Octal format using a leading zero is NOT supported.
+
+Text Parameters such as Paths or Volume Names must be quoted if containing
+spaces or to specify a blank entry.
+
+
+PROGRAM USAGE
+
+All Programs except VERIFYCD and VERDVD will display an abbreviated Syntax
+Description if run with no Options. Use "/?" Option with VERIFYCD or VERDVD.
+
+
+LISTASPI
+
+LISTASPI lists the available ASPI Devices. CD/DVD/BD Drives, USB Drives,
+SCSI Drives, and many IDE and SATA Add-on Cards use ASPI. ASPI is the
+protocol used by Windows to handle Devices that present a SCSI-like
+interface.
+CD, DVD and BD Drives can be identified by having TYPE=5. Use the Adapter
+Number, ID Number and LUN to determine the R.A.I.L code to use in the
+CD/DVD/BD reading or burning Programs.
+
+
+MAKECD
+
+MAKECD is the main Program for this Package.
+
+The Command Syntax is as follows:
+
+MAKECD [option] .... R.A.I.L VolumeName [SrcPath DestPath] ....
+or
+MAKECD [option] .... R.A.I.L VolumeName PathFile
+
+The Options are one or more of the following:
+
+-B BootImg      Add Bootable Image File BootImg. If the Image is recognized
+                as a 1.2MB, 1.44MB or 2.88MB Floppy Image, the default mode
+                will be set accordingly. Otherwise MODE=4 (Hard Disk
+                Emulation) will be used.
+-F Mode         Override the default Mode selection used by the -B Option.
+-C              Add the Short Name of Files to the Comment field of each
+                Directory Entry.
+-N              Do not create a separate ISO 9660 Short Named Directory for
+                DOS.
+-P              Add 150 Sector Pad to end of Disk.
+-Q              Query on each Directory or File to be included.
+-D              Diagnostic Mode. Lists SCSI Command Packets.
+-E              Sets Test mode for CD-R. Emulates writing without actual
+                buring. This is used to test if system speed is adequate.
+-X CT DM LS     Sets Writing Parameters for CD Disks.
+                CT = Track Mode
+                DM = Data Block Type
+                LS = Link Size
+-T              Sets TAO (Track At Once) Mode. Otherwise DAO (Disk At Once).
+-S Speed        Set Writing Speed.
+-# Buffers      Sets Number of 64KB Buffers to use. Default 512.
+
+R.A.I.L         R.A.I.L is Drive Code described above.
+VolumeName      The Volume Name to be put on the Disk.
+SrcPath         The Directory Tree containing files to be placed on the Disk.
+DestPath        The Directory on the Disk to place the Files. Use "" (quotes
+                required) to place in the Root Directory. Do not use . or "."
+                for the Root Directory.
+PathFile        A File containing SrcPath DestPath pairs when there are too
+                many separate pairs to list on the Command line.
+
+
+The PathFile format is as follows:
+
+SrcPath DestPath
+SrcPath DestPath
+SrcPath DestPath
+.       .
+.       .
+.       .
+
+If two separate SrcPath DestPath pairs try to create the same File Name on
+the Disk, the second one will be ignored. The comparison is case sensitive
+so two File Names can be created that only differ in Case. This applies to
+Directory Names as well.
+
+There is no check for invalid characters in DestPath arguments so unuseable
+Files will be put on the Disk unless the Operating System reading the Disk
+supports them.
+
+By default, an ISO 9660 FileSystem supporting Short File Names and a Joliet
+FileSystem supporting Long File Names will be placed on the Disk. Both will
+point to the same File Data. UDF is not currently supported.
+
+MAKECD will scan all of the SrcPath Directory Trees and build a List of
+Files to be transferred. It will then verify that there is enough space on
+the Disk. You will then be prompted before the Disk is Burned.
+
+
+BUILDCD
+
+BUILDCD functions like MAKECD but creates ISO Images rather than burning the
+actual Disk. It is used when Custom Modifications are required to the Image
+before Burning, or where many copies will be made.
+
+The Command Syntax is as follows:
+
+BUILDCD [option] .... ImageFile/BaseName VolumeName [SrcPath DestPath] ....
+or
+BUILDCD [option] .... ImageFile/BaseName VolumeName PathFile
+
+The Options are the same as MAKECD (see above) except for Options related to
+burning (-D, -E, -X, -T, -S and -#) which are not needed, and an Option to
+set the Maximum Size of each Image File has been added.
+
+-M MaxFile Size  Sets the Maximum Size of an Image File. If the ISO Image is
+                 larger than the MaxFileSize, it will be split up into
+                 multiple Files. The Default is 4GiB-2KiB.
+
+ImageFile/BaseName  Is the Name give to the First (Only) Image File to be
+                    created.
+
+VolumeName, SrcPath, and DestPath are the same as described for MAKECD.
+
+
+If multiple Image Files are needed, the following algorithm will be used to
+name the added Files.
+
+If the ImageFile/BaseName does not have a three letter extension then the
+extension .001 will be added to the Name for the Second File.
+
+If the ImageFile/BaseName has a three letter extension that does not consist
+of three decimal digits, then the extension will be changed to .001 for the
+Second File.
+
+If the ImageFile/BaseName has a three letter extension that does consist
+of three decimal digits or the Third or later Image File Segment is being
+created, then the extension will be incremented for the Next File.
+
+
+WRITECD
+
+WRITECD Burns an ISO Image to a CD, DVD or BD-RE Disk
+
+The Command Syntax is as follows:
+
+WRITECD [option] .... ImageFile R.A.I.L [Cue]
+
+The Options are the same as the MAKECD Burning Options (-D, -E, -X, -S, and
+-#) except as follows:
+
+-T          Sets Raw Cue Mode if Cue List used.
+-N          Do not correct Header Time Codes in Raw Mode.    
+
+File        The ISO Image File to be Burned.
+R.A.I.L     Drive Code.
+Cue         Cue Sheet File (If Required).    
+
+
+WRITEDVD
+
+WRITEDVD Burns a spanned set of ISO Image Files to a DVD or BD-RE Disk
+
+The Command Syntax is as follows:
+
+WRITEDVD [option] .... R.A.I.L File ....
+or
+WRITEDVD [option] .... R.A.I.L Base
+
+The Options are the same as WRITECD Burning Options except for the following:
+
+The Options are the same as the MAKECD Burning Options (-D, -E, -X, -S, and
+-#) except as follows:
+
+-V          Verify Data Written to Disk after Burning.
+
+File        One or More ISO Image File Segments
+Base        Base File Name. Image Files are scanned as follows:
+            Base.000, Base.001, Base.002 etc.
+
+
+ERASECD
+
+ERASECD Erases a CD-RW or DVD-RW. Resets Disk to Sequential Writing Mode.
+
+The Command Syntax is as follows:
+
+ERASECD R.A.I.L
+
+
+FMTCD
+
+FMTCD       Formats a CD-RW Disk for Packet Writing.
+
+The Command Syntax is as follows:
+
+FMTCD R.A.I.L
+
+
+FMTDVD
+
+FMTDVD Formats a DVD+RW or BD-RE Disk for Packet Writing.
+
+The Command Syntax is as follows:
+
+FMTDVD R.A.I.L
+
+
+VERIFYCD
+
+VERIFYCD Verifies a CD, DVD or BD Disk.
+
+The Command Syntax is as follows:
+
+VERIFYCD [*Verify] [-R.A.I.L] [+StartSector] [File [Raw]]
+or
+VERIFYCD /?
+
+
+-V            Double Verifies each Block to test for Data Transfer Errors.
+-I R.A.I.L    Specify Drive Code. Otherwise uses first Drive Found. Use '-' +
+              R.A.I.L Code. Do not use negative Hex Equivalent.
+-S StartSec   Specify Starting Sector to compare with File.
+File          File to Compare Disk Data Against. If not specified, only
+              Readability is checked.
+Raw           Read Sectors RAW (2352 Bytes per Sector) when comparing to
+              File.
+/?            Show Syntax 
+
+
+VERIFYDVD
+
+VERIFYDVD Verifies a CD, DVD or BD Disk against a spanned set of Files.
+
+The Command Syntax is as follows:
+
+VERDVD [-Verify] [-Id R.A.I.L] [-S StartSector] [FileBase | Files]
+or
+VERDVD /?
+
+
+-V            Double Verifies each Block to test for Data Transfer Errors.
+-I -R.A.I.L   Specify Drive Code. Otherwise uses first Drive Found. Use '-' +
+              R.A.I.L Code. Do not use negative Hex Equivalent.
+-S StartSec   Specify Starting Sector to compare with File.
+FileBase      Base Name of Image File Set to Verify against. Files scanned
+              will be as follows:
+              FileBase.000, FileBase.001, FileBase.002 etc.
+Files         List of Image Files to verify against.
+              If none specified, only Readability is checked.
+
+
+/?            Show Syntax
+
+
+GETCDBT
+
+GETCDBT Extracts a Bootable Image form a CD, DVD or BD Disk.
+
+The Command Syntax is as follows:
+
+GETCDBT R.A.I.L File
+
+R.A.I.L       R.A.I.L is Drive Code described above.
+File          File Name to Write Boot Image to.
+
+
+GETASPI
+
+GETASPI copies Data from an ASPI Drive to an Image File.
+
+The Command Syntax is as follows:
+
+GETASPI [-RetryBad] R.A.I.L StartSector EndSector|+Length|0 File
+
+-RetryBad     Retry Bad Sectors
+R.A.I.L       R.A.I.L is Drive Code described above.
+StartSector   Sector to begin Copy
+EndSector     Sector to stop Copy (0 = End of Drive)
+or
++Length       Number of Sectors (Format is +### where ### is the Length)
+File          File Name to Write Image to.
+
+
+EXTRISO
+
+EXTRISO extracts or lists the Files in an ISO Image. EXTRISO will extract the
+Joliet Filesystem if it exists, otherwise it will extract the ISO-9660
+Filesystem. EXTRISO does not recognize the UDF Filesystem.
+
+The Command Syntax is as follows:
+
+EXTRISO DestPath|-ListOnly FileBase|Files
+
+DestPath      Destination Path to place Extracted Files.
+or
+-ListOnly     Only List Files, do not extract.
+FileBase      Base Name of Image File Set to Extract or List. Files scanned
+              will be as follows:
+              FileBase.000, FileBase.001, FileBase.002 etc.
+Files         List of Image Files to verify against.
+
+NOTE: DestPath must not start with "-", prepend with ".\" if the Path starts
+      with "-".
+
+
+
+BOOT IMAGES
+
+Adding Boot Images to a CD, DVD or BD Disk allows the Disk to be Booted
+directly without support from any other Drive.
+
+There are three Versions of the El-Torito CD Boot Protocol, No-Emulation,
+Floppy Emulation and Hard Disk Emulation.
+
+No-Emulation just runs the Boot Image Code. This is used to Boot from a Custom
+Loader or to add a BIOS Dynamic Drive Overlay (DDO). The Boot Image Code will
+be loaded into RAM starting at 7C0:0 and can be up to approx 600KB long. The
+Code will be called at 7C0:0 (not 0:7C00 as in other Emulations or BIOS Boot
+Calls). No-Emulation is Boot Mode 0. The Force Mode Option "-F" must be used
+to specify No-Emulation Mode.
+
+Floppy Emulation emulates Booting a Floppy Disk. Only the First Sector is
+loaded and run at 0:7C00. BIOS Calls to the A: (0) Drive are mapped to the
+Boot Image on the Disk. The original A: (if present) is remapped to the B:
+(1) Drive to allow access to real Floppies. Floppy Emulation uses Boot Modes
+1, 2 and 3. The three Modes determine the Geometry of the Emulation. Mode 1
+specifies 1.2MB Floppy Geometry. Mode 2 specifies 1.44MB Geometry. Mode 3
+specified 2.88MB Geometry. If the Boot Images are standard 1.2MB, 1.44MB or
+2.88MB Floppy Images, the Boot Mode will be set automatically.
+
+Hard Disk Emulation emulates Booting a Hard Disk. Only the First Sector is
+loaded and run at 0:7C00. BIOS Calls to the C: (0x80) Drive, and other
+Partitions on the same Drive, are mapped to the Boot Image on the Disk. All
+other Hard Disks are mapped to the next Drive ID starting with 0x81. Hard
+Disk Emulation uses Boot Mode 4. If the Boot Image does not match the
+standard size of a 1.2MB, 1.44MB or 2.88MB Floppy Disk, Boot Mode 4 will be
+assumed. If the Boot Image does match one of these sizes, you will need to
+use the Force Mode "-F" Option to set Boot Mode 4.
+
+The actual Boot Mode used will be displayed before you are queried to start
+burning a Disk. You can verify that the appropriate Boot Mode has been
+selected before continuing.
+
+
+
+NON-STANDARD BOOT IMAGES
+
+The El-Torito standard for Bootable Floppy Images sets a limit of 80
+Cylinders in the Floppy Emulation. BIOSes typically allow 1024 Cylinders
+so the Floppy Images can be as big as 36MB. The limits are as follows:
+
+Boot Mode 1:  15,728,640 Bytes or 30720 Sectors.
+Boot Mode 2:  18,874,368 Bytes or 36864 Sectors.
+Boot Mode 3:  37,748,736 Bytes or 73728 Sectors.
+
+You will need to use the Force Mode Option "-F" to set the Boot Mode for
+these Images.
+
+NOTE: If you use the Force Mode Option 1, 2 or 3, the program will
+automatically fill in the Geometry, Media Type, Drive Number and Start Sector
+fields so you will not need to Patch them if you use a ripped Hard Disk Image.
+
+
+
+XPASPI.REG
+
+XPASPI.REG is a Registry Update File for Windows XP to correct a possible Bug
+in ADAPTEC's ASPI Layer Version 4.71.2 Installation. Run this Script if the
+ASPI Layer does not Install properly.
+
+
+
+WINDOWS XP
+
+The CDTOOLS Package can be run with Windows XP only if an ASPI Layer has been
+installed and is functioning. You can download ASPI 4.71.2 from Adaptec at
+http://www.adaptec.com and Install it. Run the LISTASPI Program to test if it
+is Installed Properly. If not, run the XPASPI.REG File which corrects a
+possible Installation Bug.
+
+
+
+LARGE IMAGE FILES
+
+If running in standard Windows 9X, Image Files must be split into smaller
+pieces. BUILDCD, WRITEDVD, EXTRISO and VERDVD support Images spanned across
+Multiple Files.
+
+If running in Windows XP with an NTFS Partition, or running in Windows 9X
+with FILE64 Active, GETASPI, WRITEDVD, EXTRISO and VERDVD will work with an
+Image File larger than 4GiB. See the Documentation with FILE64 for proper
+usage.
+
+
+
+LIMITATIONS
+
+MAKECD, BUILDCD and EXTRISO do not recognize or support UDF so Files larger
+than 4GiB-2 cannot be Extracted or Burned.
+
+BUILDCD will not create Image Files larger than 4GiB-2 even if running under
+XP or FILE64. It will create multiple Files instead.
+
+WRITECD is designed for Burning CDs. It does not support Images larger than
+4GiB even if split into Multiple Files. Use WRITEDVD for larger Images.
+
+VERIFYCD can test a Disc larger than 4GiB but cannot compare one to an Image.
+Use VERDVD if you want to compare to an Image larger than 4GiB or Spanned.
+
+
+RELATED PRODUCTS
+
+RFDISK   Advanced Disk Partitioning Tool.
+
+RFORMAT  Configurable Formatter for FAT Partitions.
+
+FILE64   Large File Emulator
+
+
+
+CONTACT INFORMATION
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+Website:  http://rloew1.no-ip.com
+
+IP = conference.no-ip.org  PORT = 8192 (Conference Console)

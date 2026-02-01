@@ -1,0 +1,26 @@
+           R. Loew Electronics Command Line File Manager
+
+                          Version 2.0
+
+                           08/24/2011
+
+                     Copyright (C) 2003-2011
+                       by Rudolph R. Loew
+                             
+                             
+Version 2.0    Released 08/24/11
+
+                  Fixed letter scan to use Upper Case Searches when Lower
+                  Case Range Set
+                  Added Code to Set Dates on Directories in Windows 9X.
+                  Added support for Files larger than 4GiB.
+
+Version 1.1    Released 02/06/11
+
+                  Updated Documentation
+                  Added -P (Protection) Option
+                  Removed undesired attribute reset.
+
+Version 1.0    Released 12/25/10
+
+                  Original Release

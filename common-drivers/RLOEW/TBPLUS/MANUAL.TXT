@@ -1,0 +1,542 @@
+                        TERABYTE PLUS PACKAGE
+
+                             Version 3.0
+
+                              11/02/2015
+
+                        Copyright (C) 2010-2015
+                          By Rudolph R. Loew
+                             
+                             
+
+The TeraByte Plus Package is a set of Tools and Patches that provide support
+for Hard Drives with Larger Capacities and/or Larger Sector Sizes than was
+possible previously with DOS and Windows 98 and 98SE.
+
+Support is provided for Internal and External Hard Drives up to 32768TiB.
+
+Extended Support is provided for 64-Bit Addressed SCSI and USB Drives.
+
+Logical Sector Sizes are supported up to 32KB in DOS and 4KB in Windows.
+
+Larger Logical Sector Sizes can be emulated on Drives with smaller Sectors.
+
+Support is added for Clusters up to 256 Sectors in length, allowing for
+ extra large FAT12 and FAT16 Partitions if needed.
+
+Support provided for Multiple Extended Partitions per Drive.
+
+Windows only Partition Support is provided to allow Data Partitions to be
+used by Windows that are beyond the support range of the BIOS without
+requiring the BOOTMAN2 DDO to be installed.
+
+Boot Support is added for all of these Configurations.
+
+Native Mode SATA Support is provided to allow SATA Drives to be connected
+ directly to the Motherboard without using RAID Drivers.
+
+Generic SATA Drivers are provided to support many SATA Controller Cards
+ including the JMicron PCI-E Cards.
+
+The RFDISK Partitioning Utility provides Advanced Partitioning capability and
+can Install a Multi-Boot Profile MBR that allows setting up Multiple Boot
+Configurations selectable during Boot. This Package is also available
+separately.
+
+The RFORMAT Formatting Utility provides Advanced Formatting capability
+allowing control over Partition Parameters such as Cluster Size, Reserved
+Space, etc. This Package is also available separately.
+
+The Universal Disk Boot Manager Package (BOOTMAN2) is an Overlay that
+provides BIOS support for Hard Drives that are not supported by the
+Motherboard's own BIOS. This Package is also available separately.
+
+
+
+REQUIREMENTS
+
+DOS, Windows 98 or 98SE compatable with English Version Patches.
+Floppy Drive (for Floppy based programs)
+CD/DVD Drive (for CD based programs)
+No AHCI Only SATA Controllers Present (see SATA AND ESATA DRIVES below)
+
+
+
+SETUP
+
+Unzip each of the five ZIP Files into separate Folders. For convenience, use
+the names of the Packages for the Folder Names.
+
+In the case of the PATCH.ZIP and TOOLS.ZIP Packages, preserve the Directory
+Structure when Unzipping (-d option of PKUNZIP).
+
+Read the User's Manuals of the RFDISK, RFORMAT and BOOTMAN2 Packages.
+Read the README.TXT Files of the PATCH and TOOLS Packages.
+
+If you are planning to set up a Computer where the Boot Partition(s) require
+the use of the Boot Manager (see the BOOTMAN2 User's Manual) or are Installing
+a new copy of Windows, prepare the Floppy or CD/DVD Disks needed. The Image
+Files you will need are in the TOOLS and BOOTMAN2 Packages. Refer to the
+Installation Procedure in the BOOTMAN2 User's Manual for detailed
+Installation Instructions.
+
+If you need BOOTMAN2 Support (See appropriate discussion(s) below), Install
+BOOTMAN2 as specified in it's User's Manual.
+
+Install the Patches required. Use INSTALL.BAT for full support. If only using
+DOS, you can use INSTALLD.BAT to Install. If only using Large USB Drives from
+Windows or BIOS Supported SATA Drives (See below) you can use INSTALLW.BAT to
+Install. The Patches and Install Scripts are in the PATCH Package.
+
+There are two provided INF for Hard Disk Controllers set in RAID Mode.
+If you intend to enable RAID Mode, you will need to remove one of them.
+If you are using early VIA SATA Controllers that do not support AHCI, remove
+the ATA0104A.INF file, otherwise remove the ATA0104.INF File.
+
+If you are using an early VIA SATA Controller in IDE Mode, run the PATCHPCI
+Program to avoid a potential hang.
+
+Add the BLKSIZE.SYS Device to your CONFIG.SYS Files if needed (See below).
+The BLKSIZE.SYS File is in the TOOLS Package.
+
+Add the FLOPBLK.SYS Device to your CONFIG.SYS Files if you plan to use Large
+Sector Floppy Disks. The FLOPBLK.SYS File is in the TOOLS Package.
+
+Copy the RFDISK.EXE and RFORMAT.EXE Files to an Appropriate Folder in your
+System.
+
+Reboot.
+
+You can now Partition and Format Drives as described in the appropriate User's
+Manuals and as described below.
+
+
+
+SATA AND ESATA DRIVES
+
+In DOS, SATA and ESATA Drives are treated similarly to PATA Drives using the
+Motherboard BIOS or Add-In Card BIOS. ESATA Drives are NOT treated as
+removable and must be present before Booting.
+
+Windows 9x does not properly handle SATA Controllers that are in Native Mode.
+The ESDI_506.PDR Patch combined with the SATA.INF File corrects this problem.
+You will need to set the Motherboard SATA Controller(s) to Native Mode in the
+BIOS to use this Driver.
+
+The Motherboard Vendor supplied SATA Drivers are generally configured as RAID
+Controllers and require that the BIOS be set to RAID mode. These Drivers
+generally do not support Hard Drives larger than 2TiB and will not support
+Sector Size Mapping.
+
+Add-In SATA Controllers either do not have a Windows 9x Driver or provide a
+RAID or AHCI Driver. These Drivers generally do not support Hard Drives
+larger than 2TiB either. Generic RAID and RAID/AHCI Driver INF Files are
+added during Patching to support these. This includes the PCI-E JMicron Card
+that has no Windows 9x Driver. AHCI only SATA Controllers are not supported
+and will crash Windows unless the ATA0106.INF File is removed.
+
+The HighPoint Rocket 620 HBA Card packaged with some Western Digital 3TB Hard
+Drives is an AHCI Only Controller and CANNOT be used with this Package.
+
+Some SATA Controllers are Classified as SCSI Controllers such as the SI 3512.
+To avoid possible conflicts, the SATA0180.INF File only supports the SI 3512
+Controller. Contact the Author to add support for other Controllers.
+
+SATA CD and DVD Drives should work normally in Windows but may not be
+available in DOS. This may be an issue for Installing Windows on a Computer
+that does not have a Floppy Drive. The Installation Software in this Package
+uses the same Drivers as the Windows 98SE CD. You will need to obtain a
+suitable DOS Driver and add it to the CD Image before burning the
+Installation CD. Contact Author for more details.
+
+Like DOS, Windows 9x using ESDI_506.PDR does not recognize ESATA Drives as
+removable, so ESATA Drives must not be connected or disconnected while
+Windows or DOS is running.
+
+
+
+LARGE PHYSICAL SECTOR DRIVES
+
+Large Physical Sector Drives (LPS) are Hard Drives that use Sector Sizes
+Internally that are larger than 512 Bytes but report and emulate 512 Byte
+Sectors at the Computer Interface.
+
+Currently only the Western Digital "Advanced Format" Drives use Large
+Physical Sectors (4KB) but more will in the future.
+
+These Drives will work without additional considerations but due to the
+possible misalignment of data transfers, speed especially of writes, can be
+significantly reduced. To minimize this problem, RFORMAT supports an Alignment
+Option that will insure that Windows 9x will align it's data transfers with
+the Physical Sectors of the Hard Drive. See the RFORMAT and RFDISK User's
+Manuals for more details. If Sector Size Mapping is used and set to the
+Physical Sector Size (4KB for Advanced Format Drives), alignment will not be
+needed.
+
+Do not use the Windows XP Compatability Jumper if provided.
+
+
+
+LARGE LOGICAL SECTOR DRIVES
+
+Large Logical Sector Drives (LLS) are Hard Drives that use Sector Sizes
+larger than 512 Bytes at the Computer Interface.
+
+Currently no Internal Hard Drive uses Large Logical Sectors, so support of LLS
+Drives in BOOTMAN2 has not been verified. When LLS Drives become available
+further testing will be performed. There is a possibility that such Drives
+may crash BIOSes making them unuseable until newer BIOSes support them.
+
+The Seagate Go-Flex 3TB USB Hard Drive uses 4KB Logical Sectors but the
+BIOSes tested either ignored it or crashed. See Sections on USB Drives and
+Sector Size Mapping below for more details.
+
+If the BIOS properly handles a LLS Drive, and properly reports it's Sector
+Size, then BOOTMAN2 support will not be needed as the patched IO.SYS File
+will handle it automatically. If the Hard Drive follows the ATA Standard
+then the Patched Windows 98SE Driver will handle it as well.
+
+If not, and the BIOS doesn't crash and manages to load the BOOTMAN2 Overlay,
+BOOTMAN2 will be able to take over and support the Drive.
+
+RFDISK and RFORMAT will automatically handle these Drives but the Overlay
+feature including the BOOTMAN2 Overlay will not be supported by RFDISK's
+Overlay Installer.
+
+DOS can handle 32KB Logical Sectors but will probably run slowly due to lack
+of Buffers. 16KB would be more reasonable. Windows 9x is limited to 4KB
+Logical Sectors.
+
+Standard Partitioners and Formatters do not support Large Logical Sector
+Hard Drives. Standard Partition Boot Sectors cannot be used on Large Logical
+Sector Hard Drives.
+
+Large Sector Hard Drives may not be compatable with old non Plug and Play
+Hard Drive Controllers.
+
+
+
+SECTOR ADDRESSING LIMITS
+
+There are a number of limitations in the Addressing of Sectors on Hard Disks.
+
+Some of the early ones were due to BIOS issues and are taken care of by the
+BOOTMAN2 Overlay. The exception to this is the 32GiB limit in Award BIOSes
+before 1999. This is due to a Divide Overflow that crashes the BIOS. Since
+the Computer does not Boot, BOOTMAN2 never gets a chance to take over. The
+only workaround was to set a Capacity Jumper that made the Drive look smaller
+and then use an Overlay to restore the true size. Modern Drives do not have
+32GB Jumpers but they can be set to 32GB with Special Software. A Modified
+BOOTMAN2 is available that will undo the 32GB limit setting so that the full
+Disk can be used. Some modern BIOSes use this same Hard Drive Function to
+reserve space for a BIOS Backup, so resetting the limit on these Motherboards
+will cause corruption. The Modified BOOTMAN2 must only be used in these old
+Systems. Contact Author for more details.
+
+The 137GB (128GiB) limit is due to the 28 Bit limitation of the earlier LBA
+interface protocol. The newer protocol supports 48 Bits allowing 128PiB. 
+BIOSes after 2002 generally support the newer protocol up to 2TiB. Windows 9x
+did not support the newer protocol. A number of third market Drivers added
+support up to 2TiB. The TBPLUS Patches add support for the full 48 Bits.
+
+A 512GiB limit due to another Divide Overflow bug has been observed in one
+BIOS. The Modified BOOTMAN2 described above may be useable but using it may
+risk corruption.
+
+The 2TiB limit is due to the 32 Bit Sector Addressing limit which is the size
+of the largest data word supported by the CPU. Addressing more than 32 Bits
+requires multi data word math that seemed unnecessary when the code was
+originally written.
+
+One workaround to this is to use larger Logical Sector Sizes (See above).
+With 4KB Sectors, as used by the Seagate 3TB Go-Flex USB Drives, this limit
+is extended to 16TiB. The Sector Size Mapping Option (See below) can also
+extend this limit to as much as 128TiB using 32KB Sectors and can be used
+with DOS.
+
+Most of the Motherboard BIOSes tested did not support more than 32-Bit Sector
+Addressing. Typically they ignored the high bits returning a nonsensical
+size such as 801GB for the Seagate 3TB Hard Drive, and wrapping around to the
+start when accessing beyond the 2TiB limit.
+
+Add-In PCI and PCI-E Cards do appear to properly support 48-Bit Drives. Even
+the old Promise TX133 Cards does when used with an IDE to SATA Adapter.
+Their Windows Drivers do not. AHCI Cards use a different Interface and are
+not compatable unless they also support IDE or RAID mode.
+
+Another limitation is the MBR Specification. It only uses 32-Bit Start and
+Length fields for Partitions. A newer Specification known as the GUID
+Partition Table (GPT) supports larger Hard Drives but requires EFI BIOSes
+that are only now becoming available, and are not supported by DOS or Windows
+9x. I have developed a Proprietary Extension to the MBR Format to support up
+to 40 Bit Partition Start Addresses in a manner that minimizes the amount of
+modifications to DOS and Windows needed.
+
+RFDISK supports this Extension when used with the "-ExtMBR" Option Argument.
+The TBPLUS Patches for DOS and Windows support these Extended MBR Formats.
+BOOTMAN2 is not needed if all Drives above 2TiB are connected to Controllers
+whose BIOSes fully support 48-Bit Addressing and don't use Sector Size
+Mapping.
+
+
+
+WINDOWS ONLY PARTITIONS
+
+The TBPLUS Package adds the ability to create Partitions that are only
+recognized in Windows and only when running with the TBPLUS Protected Mode
+Driver. Since these Partitions are not run in DOS or through the BIOS in
+Windows, there is no need to insure BIOS Support for these Partitions. This
+allows Data Partitions to lie outside the BIOS limits without requiring the
+BOOTMAN2 DDO. The BOOTMAN2 DDO will still be required to Create and Format
+these Partitions from DOS. Additional details are in the RFDISK
+Documentation.
+
+Note: They will not be recognized in Compatabiltiy Mode or Safe Mode.
+
+
+
+PARTITION LIMITS
+
+A 31-Bit limit to Partition Size in Windows 9x is due to a Signed Number bug
+in the FileSystem Driver. The TBPLUS Windows Patch corrects this Problem.
+The RFDISK Warning about this problem can be safely ignored.
+                                      
+Partition size is limited to 32-Bits in the MBR and in the FileSystem
+Drivers so the Extended MBR Format does not increase it. This limits a
+Partition's size to 2TiB for 512 Byte Logical Sectors. Larger Logical Sector
+Sizes can increase this limit to as much as 16TiB in Windows and up to 128TiB
+in DOS. See Large Logical Sectors Drives above and Sector Size Mapping below.
+
+
+
+USB DRIVES
+
+USB Drives are not supported by BOOTMAN2 and all requests will be passed
+through to the BIOS. A warning, identifying the Drive(s) that will not be
+handled, will be displayed by BOOTMAN2 during Boot.
+
+Testing so far indicates that BIOSes either ignore or crash on USB Drives
+that use Large Logical Sectors. This may change in the future. Combined with
+the 32-Bit Sector Addressing limit, this limits USB Drives to 2TiB at Boot.
+See Sector Addressing Limits above.
+
+Windows 9x USB Drivers only support 32-Bit Sector Addresses so USB Drives are
+limited to 2TiB using 512 Byte Logical Sectors with a Maximum of 16TiB using
+4KB Logical Sectors. A Patch in this Pacakge removes this limit but
+requires 64-Bit compatable USB Controllers in the Drive Enclosure.
+
+The Seagate Go-Flex USB 2.0 Adapter (P/N 9ZH9P9-RAA) sold with the Go-Flex
+3TB Drive switches to a 4KB Logical Sector Mode, with alternate ID as well,
+when a Hard Drive larger than 2TiB is connected. This allows Hard Drives up
+to 16TiB to be used with Windows without 64-Bit Support Patching. This
+Adapter appears to work with other Hard Drives such as the Western Digital
+3TB Hard Drive.
+
+Older USB Enclosures only support 32-Bit Sector Addresses and do not
+simulate larger Sector Sizes so USB Drives are limited to 2TiB.
+
+All USB 3 Enclosures tested support 64-Bit Sector Address and are not limited.
+
+The Windows 98SE Patches add the 4KB Logical Sector Support needed for Hard
+Drives connected to the Go-Flex Adapter. Generic USB Drivers are included in
+the installation Disk Image and TOOLS Package to support the Go-Flex Adapter
+if needed.
+
+
+
+SECTOR SIZE MAPPING
+
+The Sector Size Mapping Option allows Large Logical Sector (LLS) Hard Drives
+to be simulated even if the Hard Drive itself has smaller Logical Sectors.
+
+This can be used to extend some of the limits such as the 2TiB limit of
+Partition Sizes, non-Extended MBR's or the 512TiB limit of the Extended MBR
+Format.
+
+Using a 4KB Sector Size will automatically align data transfers on a Large
+Physical Sector Hard Drive such as the Western Digital "Advanced Format"
+Drives.
+
+It can also be used to allow a 2Tib to 16Tib Hard Drive to be used with and
+without a dual Mode USB Adapter, such as the Seagate Go-Flex, while
+preserving the 4KB Logical Sector Interface in both modes.
+
+BOOTMAN2 is required to enable this emulation. If not present the true size
+will be reported.
+
+The TBPLUS Patches provides DOS and Windows support for this function.
+
+Another use for Sector Size Mapping is to create FAT based CD or DVD Images.
+By setting the Logical Sector Size to 2048 and creating a FAT Partition, you
+can create a Logical Drive that can then be copied to a CD or DVD to build a
+FAT16 or FAT32 based Read-Only CD/DVD Disk.
+
+
+
+BOOTMAN2 SUPPORT
+
+The need for BOOTMAN2 support must be determined for each possible
+configuration. The easiest way to test if BOOTMAN2 Support is needed is to
+use a FMINST created Floppy to Boot the Computer. If it prompts "Press CTRL-C
+To Boot From Floppy", BOOTMAN2 Support is required. If you are planning to
+use Sector Size Mapping (see below), you will need BOOTMAN2 Support.
+There is no harm in Installing BOOTMAN2 if it is not needed, as it will
+remove itself from Memory if it doesn't find anything to do. Do not use a
+FMINST created Floppy if BOOTMAN2 is installed on the Boot Hard Drive.
+
+BOOTMAN2 doesn't test for the EPIA bug so you should use the 48BITLBA.EXE
+Program from True DOS to determine support. If it reports that 48-Bit LBA
+Support is NOT Available on a Drive then you will need either to Press and
+Hold the CTRL and ALT Keys on your Keyboard until the BOOTMAN2 Prompt is
+displayed or obtain a Modified BOOTMAN2 from the Author.
+
+
+
+RFDISK AND RFORMAT
+
+RFDISK is a Partitioning Tool included in the TBPLUS Package to provide
+advanced Partitioning capability for Hard Drives supported by TBPLUS. It also
+can install a Multiple Boot Profile MBR that provides different Partition
+Configurations selectable during Boot.
+
+RFORMAT is a Formatting Tool included in the TBPLUS Package to provide
+advanced Formatting capability for Hard Drives supported by TBPLUS. It
+provide complete control of Partition Parameters.
+
+Both of these Tools are also available separately.
+
+Each of these Tools will Print Warnings when using TBPLUS features that are
+not supported by unmodified DOS or Windows. If you have TBPLUS fully
+installed you can safely ignore these Warnings as long as the Partition's
+Drive is not moved to an Unpatched Computer.
+
+These Warnings cover the following TBPLUS Features:
+
+Large Logical Sectors
+256 Sectors per Clusters
+Extended MBR Start Address
+Multiple Extended Partitions in one Profile
+1TiB FileSystem (VFAT) Bug
+Non-DOS Last Logical Partition (LPART) Bug
+
+The 512 Sector per Cluster Option is for Windows XP only and requires a
+separate Patch not included in the TBPLUS Package.
+
+
+
+PARTITIONING AND FORMATTING LARGE LOGICAL SECTOR HARD DRIVES
+
+Successfully Partitioning and Formatting Large Logical Sector Hard Drives
+requires certain steps be performed to be done properly.
+
+If you are setting up a Boot Hard Drive or installing Windows, follow the
+Instructions in the BOOTMAN2 User's Manual.
+
+Either Install BOOTMAN2 to the Boot Hard Drive or prepare a Bootable Floppy
+or CD to load BOOTMAN2.
+
+If you are planning to use Sector Size Mapping, Install a standard MBR, not
+a Multi-Boot MBR, in the Drive(s) to be mapped. Then use the SETSECSZ Program
+to set the Logical Sector Size (see the TOOLS README.TXT for details).
+
+If using the FMINST created Floppy, insert it in the A: Drive.
+
+Reboot.
+
+Use RFDISK to Partition the Drives, installing the Multi-Boot Profile MBRs as
+needed.
+
+If you use RFORMAT using the Drive Number / Partition Number Format instead
+of the Drive Letter Format, Format all of the Drives and Reboot. Skip the
+remaining steps.
+
+If you are not using the Installation Floppy or CD, add BLKSIZE.SYS to your
+CONFIG.SYS File and set the argument to the largest Logical Sector Size used.
+See TOOLS README.TXT for details.
+
+Reboot.
+
+If you are using the Installation Floppy or CD, select Option 3 if any Hard
+Drive is using Sectors larger than 4KB. Otherwise use the Default.
+
+Use RFORMAT to Format all new Partitions.
+
+If you are not using the Installation Floppy or CD, you can remove the
+BLKSIZE.SYS Driver in your CONFIG.SYS File.
+
+
+
+UNINSTALL
+
+If using a Hard Disk based BOOTMAN2 Overlay, follow the Instructions in the
+BOOTMAN2's User's Manual to Uninstall it.
+
+Run the appropriate Uninstall Script in the PATCH Folder to remove the DOS
+and/or Windows Patches. If the Script Fails, you can uninstall the Patches
+by restoring the original Files from their corresponding .BAK Files in C:\
+and the WINDOWS, WINDOWS\SYSTEM\IOSUBSYS and WINDOWS\SYSTEM\VMM32 Folders.
+If no .BAK File exists for the VFAT.VXD and/or IOS.VXD in the
+WINDOWS\SYSTEM\VMM32 Folder, simply delete them.
+Delete the SATA.INF, ATA0104.INF, ATA0106.INF and SATA0180.INF Files in the
+WINDOWS\INF Folder.
+
+
+
+WINDOWS VERSIONS
+
+The Patches in this Package are based on the last official Updates of the
+English Versions of the Files for Windows 98SE. The Patches appear to be
+compatable with Windows 98 but extensive testing has not been done. If a
+problem occurs please contact the Author.
+
+Use with non-English versions should work but any messages produced by the
+Patched Files will be in English. Use with DBCS versions such as Chinese or
+Japanese is not currently supported. Do not attempt to relocalize the IO.SYS
+file, it will crash.
+
+
+
+RELATED PRODUCTS:
+
+PATCHMEM  Windows 95/98/SE/ME RAM Limitation Patch supports up to 4GB of RAM.
+
+PARTS     Partition Mapper.
+
+DISK      Disk and Partition Reader, Writer and Copier.
+
+DOS       Patches to DOS 6.2 to access drives larger than 8GB.
+
+XFILE     Advanced File Management Utility.
+
+XPSP      Update files and instructions for installing Windows XP on a Large
+          Hard Drive.
+
+          NOTE: This Package is required even if the BIOS supports 48-Bit LBA
+          and the Boot Manager is not required.
+
+
+
+WARNING:
+
+THE POTENTIAL EXISTS FOR DATA LOSS TO OCCUR DUE TO ERRORS IN THE PATCHES OR
+IF THE BOOT MANAGER IS NOT INSTALLED, BYPASSED OR OVERWRITTEN. DO NOT USE IN
+CRITICAL SYSTEMS OR WHERE HUMAN SAFETY IS INVOLVED. BOOTING FROM A FLOPPY
+DISK WITHOUT USING THE BOOT MANAGER'S FLOPPY BOOT OPTION WILL PREVENT THE
+BOOT MANAGERS CODE FROM BEING INSTALLED. BOOTING FROM A CD OR USB DEVICE WILL
+ALSO PREVENT INSTALLATION OF THE BOOT MANAGER'S CODE.
+
+Please E-Mail any Bug Reports to RLoew@hotmail.com.
+
+
+
+CONTACT INFORMATION:
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+IP = conference.no-ip.org  PORT = 8192  (Conference Console)

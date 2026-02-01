@@ -1,0 +1,1844 @@
+             R. Loew Electronics Disk Partitioning Utility
+
+                          Version 3.0
+
+                           11/02/2015
+
+                     Copyright (C) 2008-2015
+                       by Rudolph R. Loew
+
+
+
+
+The R. Loew Electronics Disk Partitioning Utility provides the ability to
+precisely partition a Hard Drive using one or more Boot profiles.
+
+
+
+REQUIREMENTS
+
+DOS, Windows 95, 98, 98SE or ME.
+BIOS or DDO Support for the size of Hard Drive required to run in normal mode.
+TeraByte Plus (TBPLUS) Package if using Extended Features.
+
+
+
+CONTENTS
+
+RFDISK.EXE      Disk Partitioning Utility (Full Version Only)
+RFDISKD.EXE     Disk Partitioning Utility (Demo Version Only)
+INSTOVLY.EXE    Overlay Installer (Full Version Only)
+UNINSTOV.EXE    Overlay UnInstaller (Full Version Only)
+MANUAL.TXT      Users Manual
+LICENSE.TXT     License Terms and Conditions
+HISTORY.TXT     Revision History
+
+
+
+DEMO VERSION
+
+The Demo Version supports all of the Commands except the Write, PutMBR and
+Xcize Commands. This allows you to try out the Program but you will not be
+able to change any of the Partitions on the Hard Drive. You will be able to
+Install and Uninstall the Multi Boot MBR but only Profile "0" will be
+available.
+
+
+
+INSTALLATION/UNINSTALLATION
+
+None required. Run Executable from DOS or a DOS Box to use.
+
+
+
+COMMAND SYNTAX
+
+RFDISK [-RAW] [-CHS] [-XT] [-ExtMBR] [-Overlap] [-NoSwap] [-FixSig] [-Hex]
+       [-GPT] [-MaxGeom] [-#(MaxDrive)] Write|Diag
+
+The -RAW Option specifies that RFDISK should use Direct I/O to access the Hard
+Drive. Only standard Motherboard IDE drives can be accessed in this mode.
+This can be used on older computers that do not support large hard drives.
+
+The -CHS Option specifies that RFDISK should use CHS (Old Interrupt 13 Calls)
+Addressing rather than the default LBA (Interrupt 13 Extensions) Addressing.
+A maximum of 8GB can be Partitioned in this mode. If no Drives are supported
+by LBA Addressing, the CHS Option will be invoked automatically.
+
+If both -RAW and -CHS Options are specified, RFDISK will use CHS Direct I/O
+Commands rather than LBA Direct I/O Commands to the Hard Drives.
+
+The -XT Option enables 4096 Cylinder Support for CHS Mode. This Protocol was
+used in PC/XT and PC/AT Computers by some Third-Party Software, such as
+SCO-UNIX. It is not supported by DOS or Windows.
+
+The -ExtMBR Option enables an Extension to the MBR Format to support Hard
+Drives larger than 2TiB. The last 8GiB in the first 2TiB of the Hard Drive
+will be reserved. This Option also enables support for Windows Only
+Partitions. The TeraBye Plus Pacakge is required to utilize this Extension.
+
+The Overlap Option disables checking for Partition Overlaps.
+
+The NoSwap Option disables rearrangement of multiple Primary Partitions when
+the Active Partition is not the first. They will be placed in ascending order.
+
+The FixSig Option enables correction of Conflicting Signatures and/or
+Checksums, See SIGNATURES, CHECKSUMS and COLLISIONS Section below.
+
+The Hex Option causes all Sector, Head or Cylinder Numbers to be displayed
+in Hexadecimal. Numeric Input is not affected so "0x" must be prefixed to
+Hexadecimal values other than the Partition Type as described below.
+
+The GPT Option reserves Sectors 1 thru 34 for the Main GPT Table. This
+allows the sharing of MBR based Partitions and GPT Partitions.
+
+The MaxGeom Option forces the CHS Geometry of the End of the first Partition
+to 255 Heads and 63 Sectors regardless of the Geometry selected. 
+This works around a bug in some older Intel Motherboards.
+
+The #MaxDrive limits the number of Hard Drives scanned. Some systems lockup
+if nonexistent Hard Drives are scanned. This Option can be used to prevent
+Lockup by limiting the number of drives scanned to the number of drives
+present. The format of this option is "-#" where # in the number of drives.
+For example, to scan two drives use "-2".
+
+The Write Parameter enables Writing of updated Partition information.
+The Diag Parameter disables Writing of updated Partition information,
+Instead a list of changes is shown. This is for Diagnostic purposes.
+
+Either Write or Diag must be specified. Otherwise the Syntax message will be
+shown and the Program will exit. Any other letter will be treated as Diag.
+
+Disk and Partition Errors and Warnings will be Displayed as they are
+encountered before the Initial Display Screen.
+
+
+
+SINGLE BOOT MODE
+
+Single Boot Mode is the default mode when initially Partitioning a Drive or
+when modifying a Drive that was Partitioned elsewhere. A standard Master Boot
+Record can be written and all Partitioning information is placed within this
+Sector. In this mode all Boot Profile References will be shown as "-" and all
+Partitions will be automatically linked to the default profile.
+
+
+
+MULTI BOOT MODE
+
+Multi Boot Mode provides for the support of multiple Boot Profiles. A
+proprietary Master Boot Record is used containing a copy of the Active Boot
+Profile. Successive Sectors contain standard MBRs or other types of Boot
+Records along with the Partition information for each successive Boot Profile.
+
+Once the Multi Boot MBR is written to a Hard Drive, RFDISK will automatically
+run in Multi Boot Mode for that Drive. Uninstalling or Erasing the Multi Boot
+MBR is required to return to Single Boot Mode.
+
+If Multi Boot Mode is enabled on the Boot Hard Drive, Overlays can be added
+to provide additional Boot Time Functionality (See Overlays Below).
+
+WARNING: Installing Windows Vista, 7 or 8 may install additional Partitions
+that could overwrite Data in Partitions that are not in the Active Profile.
+It is recommended that these Operating Systems be installed first.
+
+
+
+MULTI BOOT PROFILES
+
+Each Boot Profile is assigned a Letter (Case Insensitive), a Number or "@".
+Profile "0" is automatically defined as the First Profile. This Profile will
+be used by any Boot Profile that contains a Boot or Custom Record rather than
+a MBR. Reserved Profiles "D" and "W" also use this Profile. Reserved Profiles
+"D" and "W" are used with additional support Programs to support DOS 6 and
+DOS 7 Boots along with Windows using the same C: Partition.
+
+Multi Boot Mode can be used on Non-Boot Drives to allow selecting Partition
+Profiles at Boot Time. The Boot Drive must be setup in Multi Boot Mode to
+support this option. Otherwise Partition Profile Selection must be done by
+running RFDISK to change the Profile Selected and Rebooting.
+
+If a Profile is named "@" and is the Active Profile, it will only be used if
+the Drive is not the Boot Drive. The "0" Profile will be used instead if the
+Drive is the Boot Drive. This allows a Drive to have a Boot Partition that
+is not visible when the Drive is not the Boot Drive.
+
+
+
+OVERVIEW MODE
+
+At startup, after a Write Command, or a Multi Boot Setup Command, the Program
+goes into Overview Mode. In this mode all Drives are displayed and Partition
+editing Commands are disabled. Using the Drive "D" Command with no Drive
+Number will also switch to Overview Mode. Multi Boot Setup Commands should be
+run in this mode, otherwise any unwritten changes will be lost. If there is
+only one Hard Drive, overview mode is disabled and RFDISK will go directly
+into Drive Mode.
+
+
+
+DRIVE MODE
+
+When the Drive "D" Command is used with a Drive Number, RFDISK will enter
+Drive Mode. In this mode only one Drive is displayed and the Drive Editing
+Commands will be enabled. This mode is exited when the Write "W" Command
+is executed. Using a Multi Boot Setup Command, or quitting will exit this
+mode without saving any unwritten changes. Selecting another Drive will
+discard unwritten changes and switch to the new Drive.
+
+
+
+DISPLAY
+
+When RFDISK is started and after each Command, RFDISK displays the partitions
+currently defined. In Overview Mode all Drives are displayed. In Drive Mode,
+only the Selected Drive is Displayed. After Writing or using a Multi Boot
+Setup Command, all Drives are rescanned and Validated.
+
+The First line contains the Drive Number, Estimated Geometry and Profile
+Information for a Drive.
+
+Partsecs is the Number of Sectors used by the Multi Boot MBR. In Single Boot
+Mode the Count will be 1. The Terminating Null Sector is not included.
+
+The Brackets contain a list where each character represents a sector. 
+"." is the Multi Boot MBR
+"0" is the First (Default) Profile Sector
+"-" is the Standard MBR in Single Boot Mode
+Any other Number or Letter represents a Multi Boot Profile ID.
+The Terminating Boot Rotator Sector used in Multi Boot Mode is not included.
+
+The Active Entry is the ID of the currently Active Profile and represents the
+Partition Profile currently written to the MBR. This is the Profile that will
+be used if the Computer is Booted from a Different Drive such as a Floppy or
+USB Drive without invoking the Multi Boot MBR.
+
+If the Drive is larger then 2TiB and the -ExtMBR Option is specified, the
+size of the Drive using the Extended Partition Format will be displayed.
+
+If the estimated Drive Geometry does not match the Interrupt 13 reports, the
+discrepancies are displayed. It is not unusual for the INT13(48) Geometry to
+disagree. If the INT13(8) Geometry disagrees, CHS Partitions will not work
+in the current Computer if the Geometry is not reconciled.
+
+If the Hex Option was specified on the Command Invocation, the numerical
+values in the above items will be displayed in Hexadecimal.
+
+If the Drive has been configured in Multi Boot Mode, but the proprietary MBR
+code has been overwritten, a warning may be displayed. This will happen if
+Windows is installed after a Multi Boot Drive is setup. Use the MBR Command
+to reload the Multi Boot MBR Code and Write it to the Drive. If the Multi
+Boot Mode is not recognized, use the Install/Uninstall Multi Boot Command
+and specify MBR at the Prompt to restore the MBR.
+
+A Warning is displayed if the MBR is not recognized. If a Disk Manager
+(BOOTMAN) MBR is detected a notice will be displayed.
+
+If Multi-Boot Profiles are enabled and a GPT is present, a Warning will
+appear if the GPT Option was not specified in the Command Invocation.
+
+The following lines show the Defined Partitions for the particular Drive.
+
+Part  indicates a Primary Partition or Extended Partition Header
+LPart indicates a Logical Partition
+Type= is the Hexadecimal Partition Type Code
+      0 = Filler (Undefined)
+      1 = FAT12 CHS Partition
+      4 = FAT16 CHS Partition (Less Than 32MB)
+      5 = Extended CHS Partition
+      6 = FAT12/FAT16 CHS Partition (Over 32MB)
+      7 = NTFS
+      9 = Windows Only Extended Partition
+      B = FAT32 CHS Partition
+      C = FAT32 LBA Partition
+      D = Windows Only FAT32 LBA Partition
+      E = FAT16 LBA Partition
+      F = Extended LBA Partition
+
+      Other codes are used by other Operating Systems.
+      Some Partitioners hide Partitions by adding 10 (Hex) to the Type.
+
+DOS 6.2 recognizes Types 1, 4, 5 and 6 and is limited to 8GB.
+
+Primary and Extended Partitions ending above 1023 Cylinder (approx 8GB
+typically) must be LBA Partitions (7, C, E or F).
+
+All DOS Logical Partitions must be defined using CHS Partition Types, unless
+used with the TBPLUS modified IO.SYS file. They will take on the attributes
+of their enclosing Extended Partition.
+
+All Partitions defined within the range of an Extended Partition are set to
+Logical Partitions and are referenced as Part of it.
+
+Start= is the Starting Cylinder. A trailing "+" indicates that the Partition
+starts on Head 1. A trailing "++" indicates that the Partition start has been
+offset for Alignment purposes.
+
+Logical Partitions always start on Head 1 as Head 0 holds the Extension
+Record. A Primary Partition on Cylinder 0 must also start on Head 1.
+An Extended Partition cannot start on Cylinder 0.
+
+End= is the Cylinder after the End of the Partition.
+
+If a Partition does not Start or End on Head 0 or 1 and Sector 1, the
+entry is shown as Cyl/Head/Sec.
+
+If the Hex Option was specified on the Command Invocation, the Start and End
+values will be displayed in Hexadecimal.
+
+The estimated Geometry is used to convert between Cylinder and Sector
+Numbers. For the Default Geometry of 255 Heads and 63 Sectors, each Cylinder
+is a little less than 8MB.
+
+If an existing Partition has a defined CHS geometry it is used, otherwise
+INT13 calls are used to get the Geometry. If none are valid, 255/63 is used.
+The Geometry "G" Command can be used to manually set the Geometry used.
+
+The Status field indicates the status of the Boot Record for the Partition:
+VALID  indicates a Boot Record with Valid Partition Info is present
+INV    indicates a Boot Record with Incorrect Info is Present
+DOSOF  indicates a Boot Record with Valid DOS 6 Partition Info is present
+ERASE! indicates a Boot Record that has been marked for erasure
+blank  indicates no detected Boot Record or is not a DOS Partition
+
+A Partition marked ERASE! will have it's Boot Record Erased if the Write
+Command is used. The Erase Flag can be Toggled On or Off with the Erase "E"
+Command. After Writing, the Status field will be blank indicating no Boot
+Record.
+
+Ref= lists the Profile ID(s) this Partition is Linked to. This Partition will
+be copied to the MBR, and enabled, if any one of the listed Profiles is
+invoked during Boot. In Single Boot Mode the Partition will always be linked
+to the MBR and a "-" will be shown in the Display.
+
+Act= lists the Profile ID(s) in which this Partition will be the Active
+Partition. This Partition will be tagged as Active in each of these Profiles.
+In Single Boot Mode there is no need to specify a Profile and the Display
+will show a "-" if it is marked Active.
+
+The Active Partition will be placed First in the Partition Table regardless
+of Position unless the NoSwap option is used in the RFDISK Command Line.
+
+If Overlays are present, they will be listed at the end of the listing for
+the Drive they are located on.
+
+After all Drives are listed, any Collisions between Signatures and or
+Checksums will be listed. If the FixSig Option has been specified, you will
+be Queried after each Collision is listed to correct the Collision. See the
+SIGNATURES, CHECKSUMS and COLLISIONS Section below.
+
+
+COMMANDS
+
+RFDISK commands consist of three types of Commands.
+
+Overview Commands are used to take actions that are not specific to a single
+Drive and to select a Drive. These Commands are always enabled.
+
+Drive Commands affect only a single Drive and are enabled only when a Drive
+is selected.
+
+Multi Boot Setup Commands are used to Install, UnInstall and Modify Multi
+Boot structures. These are always enabled but will discard any changes made
+in Drive mode.
+
+All Commands only require that the first letter of the Command be used.
+
+The "?" Commands displays a summary of enabled Commands.
+
+Pressing ENTER alone redisplays the Drive or all Drives depending upon mode.
+
+
+ARGUMENTS
+
+The arguments to Commands have the following format:
+
+Partition Types are in Hexadecimal, with or without leading 0. Do not add 'H'
+to the end. A leading "0x" is optional.
+
+Profile References are single Letters or Numerals. If Multi-Boot Profiles are
+not set on a Drive, leave blank. A '-' will be displayed in reports.
+'?', '*', or [SPACE] can be used in the 'S' Command.
+
+All other numerical arguments can be entered as follows:
+
+Decimal:   ####  (ex. 123)  leading zeroes are ignored
+Hex:     0x####  (ex. 0x123)
+Octal:   0o####  (ex. 0o123)
+Binary:  0b####  (ex. 0b101)
+
+Drive numbers start with 0 for the first Hard Drive (Int 13 DL=0x80)
+Floppy Drives cannot be accessed.
+
+The 'Add' Command supports Head/Sector Offset options '+' or '++'.
+
+If the -ExtMBR Option has been specified, an additional Format is enabled
+for entering Partition Start and End locations beyond the 2TiB limit.
+
+Instead of entering Cylinder numbers, the following Format is used:
+
+###:###
+
+The Number to the left is the high 32 Bits of the Sector # as a 64 Bit Number.
+This is currently limited to between 1 and 255. For a 512-Byte Sector Size,
+this translates to 2TiB each.
+
+The Number to the right is Bits 24-31 of the Sector # as a 64 Bit Number.
+This is currently limited to between 0 and 255. For a 512-Byte Sector Size,
+this translates to 8GiB each.
+
+This allows specification of the Start and Stop Sector over a range of 512TiB
+in multiples of 8GiB, for a 512-Byte Sector Hard Drive.
+
+Formats cannot be mixed and the length of a Partition must be less than 2Tib
+for a 512-Byte Sector Hard Drive. These limitations do not apply to an
+Extended Partition (Type 5 or F).
+
+This Extended MBR Format is valid only for FAT32 Partitions (Types B and C).
+No Driver support is currently available for FAT12 or FAT16.
+
+
+
+OVERVIEW COMMANDS
+
+These Commands are enabled in Overview Mode as well as Drive Mode.
+
+
+The Drive (D) Command selects a Drive to Edit. Selecting a Specific Drive
+enables Drive Mode.
+
+D #   selects Drive #
+
+D     discards any unwritten changes and returns to Overview Mode
+
+The current settings of the Drive will be displayed.
+If a previous Drive was selected, any unwritten changes are discarded.
+
+
+The Hide (H) Command hides partitions above a specified limit to reduce the
+number of Partitions displayed.
+
+H #   hides Partitions above Cylinder #
+H 0   hides all Logical Partitions
+H     restores display of all Partitions
+
+Hidden Partitions are shown as a line of asterisks,  one for each Partition
+
+
+The OldValues (O) Command discards any unwritten changes and rereads the
+Drives. The Mode is not changed. The syntax is as follows:
+
+O     
+
+
+The +InputFile (+) Command attaches a Text file to be used for Command Input.
+Control is returned when End Of File is reached. This can be used to execute
+a predetermined series of Commands and can be used with the Build "B" Command
+to restore an earlier configuration or to duplicate a configuration.
+
++FILE  Runs the Commands contained within "FILE"
+
+
+The Quit (Q) Command exits RFDISK. All unwritten data is discarded. The
+Command Syntax is:
+
+Q
+
+
+
+DRIVE COMMANDS
+
+Drive Commands affect a single drive and are only enabled in Drive Mode.
+Changes are not written to the Drive until the WRITE Command is executed.
+
+The Add (A) Command adds a new Partition to the Drive. The Syntax is as
+follows:
+
+A Type Start End [+][+]
+
+Type is the Hexadecimal Partition Type
+Start is the Start Cylinder
+End is the Cylinder after the End of the Partition
+The Optional "+" specifies that the Partition Starts on Head 1 instead of 0.
+
+Using "++" specifies that the Partition Starts on Head 2 instead of 0 or 1 if
+the Number of Sectors per Track is Odd. Otherwise it will start on the
+Second Sector of Head 1. This is for Alignment purposes (see ALIGNMENT below).
+This Option is not available for Partitions using the ExtMBR feature.
+
+Logical Partitions and Partitions starting at 0 automatically start on head 1.
+
+If you set the last Logical Partition on the last Hard Drive to a Non-DOS
+Type, such as NTFS, RFDISK will display a Warning. A bug in the standard DOS
+IO.SYS File can cause problems if this is done. If you are using the TBPLUS
+Patches on your System, or a Patched IO.SYS, you can safely ignore this
+Warning.
+
+
+The Change (C) Command changes the Type and/or End of an Existing Partition
+The Syntax is as follows:
+
+C Type Start NewType [NewEnd [NewStart]]
+
+Type is the Hexadecimal Partition Type
+Start is the Start Cylinder
+NewType is the New Hexadecimal Partition Type
+The optional NewEnd sets the Cylinder after the End of the Partition
+The optional NewStart sets the Starting Cylinder of the Partition
+
+WARNING: Changing the Size or Offset of an Existing Partition does not move
+      or resize the data or the Boot Record. The Partition will be marked
+      INVALID. Saving the changes may corrupt Data so the change cannot be
+      safely done later.
+
+
+The Remove (R) Command removes an existing Partition. The Syntax is as
+Follows:
+
+R Type Start
+
+Type is the Hexadecimal Partition Type
+Start is the Start Cylinder
+
+Removing a Partition does not erase the Boot Record or data so the Partition
+can be restored intact, even after a Write, if it is not overwritten.
+Removing an Extended Partition will remove all Logical Partitions within it.
+They will have to be restored individually.
+If you haven't Written the changes you can use the "O" to undo them.
+
+
+The KillAll (K) Command removes all Partitions from a Drive. This can be used
+with the <InputFile Command to load a predefined set of Partitions.
+The Syntax is:
+
+K
+
+The Multi Boot Mode and Profile IDs are not removed.
+If you haven't Written the changes you can use the "O" to undo them.
+
+
+The Link (L) Command attaches a Partition to a Multi Boot Profile. The
+Command can be repeated to attach the Partition to more than one Profile.
+Logical Partitions do not need to be Linked since thay are part of an
+Extended Partition. Link the Extended Partition, to link all of it's Logical
+Partitions. In Single Boot Mode all Partitions are linked so this command is
+not needed. The Syntax is as follows:
+
+L Type Start Profile
+
+Type is the Hexadecimal Partition Type
+Start is the Start Cylinder
+Profile is the Multi Boot Profile ID 
+
+Linking a Logical Partition, maps it as a Primary Partition into one or more
+Profiles. The Logical Partition itself is marked Unknown (Type 7F) in ALL
+Profiles. The Partition can be made Active with the T Command and Booted
+from. See "Dual Mode" Partitions below for additional information.
+
+
+The UnLink (U) Command detaches a Partition from a Multi Boot Profile. Repeat
+the Command to detach from multiple Profiles. The Syntax is as follows:
+
+U Type Start Profile
+
+Type is the Hexadecimal Partition Type
+Start is the Start Cylinder
+Profile is the Multi Boot Profile ID 
+
+
+The NewProfile (N) Command adds a New Multi Boot Profile and defines it's ID.
+The Syntax is as follows:
+
+N Profile
+
+Profile is the Multi Boot Profile ID 
+
+The new Profile will be added to the end of the Profile list and will have
+no Partitions Linked to it. Adding Reserved ID's "D" or "W" will add the
+Profiles to the List, and enable them, but they cannot be linked to as they
+use Profile "0". The Profile will have standard MBR code.
+
+
+The SetActiveProfile (S) Command sets the currently Active ID which will be
+used for the next Boot and copies the Profile's Partition information into
+the MBR. Use this command to preselect a Profile if the computer will be
+rebooted from Floppy or USB as the Multi Boot MBR will not be able to copy
+the Profile. The Syntax is as follows:
+
+S Profile
+
+Profile is the Multi Boot Profile ID 
+
+The Write Command must be used to commit these changes.
+
+To force a prompt on the next Boot set the ID to "?". The MBR will be in an
+undefined state if the Computer is Booted from a Floppy or USB Drive. If this
+is a possibility, set the Profile to be used, commit the changes using the
+Write Command, reselect the Drive, then set the Active Table Profile to "?"
+and use the Write Command again to commit it.
+
+Leaving the Profile ID blank will set NULL Mode. This will make the Drive
+appear Unpartitioned at the next Boot. If this is a Boot Drive, an Overlay
+will be loaded to allow Booting from the Next, or Subsequent, Drive.
+
+The SetActiveProfile Command is the only way to change the Active Profile on
+a Non-Boot Drive if the Boot Drive is not setup with a Multi Boot MBR.
+
+
+The ToggleActive (T) Partition Command toggles on or off the Active flag for
+the Partition in the specified Profile. In Single Boot Mode, the Profile ID
+is not used. If turned on, the Partition will be the Active Partition if the
+specified Profile is used during Boot. The Syntax is as follows:
+
+T Type Start Profile
+
+Type is the Hexadecimal Partition Type
+Start is the Start Cylinder
+Profile is the Multi Boot Profile ID (Multi Boot Mode Only) 
+
+
+The EraseBootToggle (E) Command toggles the Erase Boot Flag. If set, RFDISK
+will Erase the Boot Record of the Partition when the Write Command is used to
+commit the Partition changes to the Hard Drive. If the flag is set, the
+status will show "ERASE!". The Syntax is as follows:
+
+E Type Start
+
+Type is the Hexadecimal Partition Type
+Start is the Start Cylinder
+
+Extended Partitions cannot be Erased.
+
+It is strongly recommended that you set the Erase Boot Flag on any new or
+redefined Partition that will be Formatted after Reboot. Do not Erase if you
+plan on recovering the old Partition or data in it.
+
+
+The ZeroFillExt (Z) Command adds or Removes Null (Type 0) Partitions in any
+unallocated portions of any Extended Partitions. Unallocated areas may cause
+problems if they contain apparently valid Partition records. In addition,
+Partitions after the unallocated area may be lost. Add the Null records
+before Writing changes and remove them before adding Logical Partitions.
+The Syntax is as follows:
+
+Z A   Adds Null Partitions
+Z R   Removes Null Partitions   
+
+Do not use Null Records if installing Windows XP or later. If you need to
+fill in gaps, add the Null Records then use the Change Command to change the
+Type Code to an unused Type such as 10.
+
+
+The Geometry (G) Command has two forms depending upon the number of arguments.
+
+The first Geometry (G) Command uses two or three arguments. It sets global
+Geomtry for the entire Drive. It overrides any detected Drive Geometry. LBA
+Start and End Sectors of existing Partitions will not be changed. CHS entries
+and the start and end of new Partitions will be computed using the new
+Geometry. The Partition Display will be based on the new Geometry.
+The Syntax is as follows:
+
+G Heads Sectors [Cylinders]
+
+Heads is the Number of Heads per Cylinder
+Sectors is the Number of Sectors per Track
+The optional Cylinders argument sets the maximum number of Cylinders used.
+If not present, the Cylinder limit is recalculated from the estimated Drive
+size.
+
+You can display the start and end points of each partition in Megabytes by
+setting the Geometry to 63 heads and 31 sectors. Use 64 Heads and 32 Sectors
+for MiB (Binary Megabytes). Return the Geometry to the original setting
+before continuing.
+
+Setting the Geometry to 1 Head and 1 Sector will display start and end points
+of each Partition in Sectors.
+
+The second Geometry (G) Command uses four arguments. It sets the Geometry of
+a specific Partition. LBA Start and End Sectors of the Partitions will not be
+changed. CHS entries of the Partitions will be computed using the new
+Geometry. The Partition Display will not change but a Geometry mismatch
+warning may be shown. The Syntax is as follows:
+
+G Type Start Heads Sectors
+
+Type is the Hexadecimal Partition Type
+Start is the Start Cylinder
+Heads is the Number of Heads per Cylinder
+Sectors is the Number of Sectors per Track
+
+
+CAUTION: Most BIOSes require that the Geometry be set to the values shown by
+the Interrupt 13 AH=8 Call on any CHS accessible Partitions before committing
+the changes.
+
+Sector size is based on the size detected when the Drive is scanned. It
+cannot be changed by RFDISK.
+
+
+The Find (F) Command scans for Partition Table entries. The Syntax is as
+follow:
+
+F [Start [All]]
+
+The Optional Start argument is the Starting Cylinder for the Scan.
+
+If "All" is specified Nested Partitions are displayed. Otherwise the Find
+Command skips over any valid Partition's data and continues scanning after
+the end of the Partition. Scanning will be significantly slower if "All"
+is specified.
+
+To scan every sector set the Geometry to 2 Heads and 1 Sector before using
+the Find Command with the "All" option. Scanning a large Disk may take
+several hours.
+
+The Find Command can be interrupted by pressing CTRL-C once.
+
+
+The Validate (V) Command reverifies the Boot Record of a Partition. The
+Syntax is as follows:
+
+V Type Start
+
+Type is the Hexadecimal Partition Type
+Start is the Start Cylinder
+
+
+The Build (B) Command creates a text file containing the Commands needed to
+create the current configuration of the Drive. Importing the commands using
+the <InputFile Command will rebuild the current setup on the then current
+Drive. The Syntax is as follows:
+
+B SaveFile
+
+SaveFile is the name of the file the commands will be written to.
+
+The Boot Mode and Profile IDs are not saved and must be present on the Drive
+before restoring the Partitions.
+
+All previous Partition information will be erased unless you edit the Saved
+File and remove the K Command in the First Line.
+
+
+The MBR (M) Command replaces any existing MBR with either a conventional
+MBR or the Multi Boot MBR code. The Syntax is as follows:
+
+M [ClearOverlays]
+
+The standard MBR is a Windows 98 MBR modified to set Partition Type 7 (MTFS)
+to LBA mode. The Write Command must be used to commit the MBR.
+The MBR's Timestamp will be updated, based on the Current Time.
+
+If the GPT Mode of the Multi-Boot Profile MBR is being changed, a Warning
+will be displayed before allowing you to execute this command.
+
+If a Disk Manager (BOOTMAN) MBR is present, a Warning will be displayed
+before allowing you to execute this command.
+
+If the ClearOverlays Option is specified, any Overlays installed will be
+removed. They will need to be reinstalled with INSTOVLY. If you are upgrading
+the Multi-Boot Profile MBR from a previous Version, you should use this
+option to clear spurious Overlays that might result from the change.
+
+The >SectorImageFile (>) Command saves the MBR and Multi Boot Profile Sectors
+from the current Drive to a File. This File can be used to reproduce the
+complete configuration.
+
+>FILE  Saves the Sectors into "FILE"
+
+
+The <SectorImageFile (<) Command loads the MBR and Multi Boot Profile Sectors
+of the current Drive from a File, replacing the previous Configuration.
+RFDISK then returns to Overview Mode.
+
+<FILE  Loads the Sectors from "FILE"
+
+
+The Write (W) Command commits all of the changes to the Drive and returns to
+Overview Mode. If Diagnostic Mode is set in the RFDISK Command Line, a list
+of changes will be printed instead of Writing to the Hard Drive. The Drives
+will be rescanned before returning to Overview Mode. The Syntax is as follow:
+
+W [W_Extension]
+
+The W_Extension Option is a Three Letter Extension that will replace the
+Extension of the IO.SYS File to be loaded when Booting from the "W" Profile.
+Ex. W EBD will Boot from IO.EBD in the Boot Partition.
+
+If RFDISK detects non-fatal issues with the settings, it will display a
+Warning and Prompt if it is OK to Continue. Pressing anything other than "Y"
+will abort the Write.
+
+The following issues will produce these Warnings:
+
+Partitions detected but will be lost due to Errors or Overlaps.
+Partition not referenced by any Profile will be lost.
+Logical Sector length changed from last Write.
+Multiple Extended or Active Partitions.
+Default Profile Missing.
+GPT detected but not specified in the Command Invocation when writing a
+Multi-Boot Profile.
+
+Continuing from the first three issues can cause Partition information to be
+lost.
+
+
+The Refresh Overlay Table Command '@' is used to rebuild the list of Overlays
+when it has been erased by a Multi Boot Setup Command or if the Overlays
+or Overlay Table has been damaged. The presence of Unknown Entries (UNK[xx])
+or the OVERLAY: line being shown with no Overlays listed indicates that the
+Overlay Table needs to be Updated. Failure to do so may make your Hard Drive
+Unbootable. The Syntax is as follow:
+
+@
+
+This command is recommended after any upgrade to RFDISK when using the
+Multi-Boot MBRs. Overlays may not work or be damaged if the Physical Sector
+Size has been overridden by the SETSECSZ Program.
+
+
+
+MULTI BOOT SETUP COMMANDS
+
+The Multi Boot Setup Commands will discard any unwritten changes to the
+current Drive and switch to Overview Mode before executing. These commands
+will be written to the Hard Drive immediately and do not require the Write
+Command. You will be prompted before making changes. All Overlays will be
+lost. Use the '@" Command to scan for and add back Overlays.
+
+
+The Install/Uninstall (I) Multi Boot MBR Command will switch the Drive
+between Single Boot Mode and Multi Boot Mode. A New MBR will be written and
+the Partitions will be moved to Profile "0" or back to the MBR. The Syntax is
+as follows:
+
+I Drive# [UnInstRef]
+
+Drive is the Number of the Drive
+The optional UnInstRef argument specifies the ID of the Profile who's
+Partitions will be copied to the Single Boot Mode MBR during an Uninstall.
+If not specified, the "0" Profile Partitions will be copied.
+
+During an Install, the Single Boot Mode Partitions will be copied to the "0"
+Profile. Any disabled Profiles left over from the last Uninstall will be
+lost unless you specify MBR at the Prompt. Use the PutMBR Command if you need
+to preserve them and accidentally typed "Y" at the Prompt.
+
+If a Disk Manager (BOOTMAN) MBR is present, a Warning will be displayed
+before allowing you to execute this command.
+
+If a GPT is detected but the GPT Option was not specified in the Command
+Invocation, a Warning will be displayed before allowing you to execute this
+command.
+
+Uninstalling will disable all Profiles on the Drive. The Profiles can be
+retrieved by using the PutMBR Command provided that the Install Multi Boot
+Command has not been executed with "Y" at the prompt, and the sectors
+following the MBR have not been overwritten.
+
+
+The PutMBR (P) Command Reinstalls Multi Boot Mode along with any Profiles\
+that were disabled by the last Uninstall. Then the MBR code and Partition
+Table from Single Boot Mode is copied to the specified Profile. If the
+Profile does not exist, a new Profile will be added to the end of the list.
+The Syntax is as follows:
+
+P Drive# [Profile]
+
+Drive is the Number of the Drive
+The optional Profile argument specifies the ID of the Profile where the
+Single Boot Mode MBR and Partitions will be copied to. If not specified,
+they will be copied to the "0" Profile.
+
+This allows user specified MBR codes to be placed in Profiles. To add a
+custom MBR Profile, perform the following steps:
+
+1. Uninstall Multi Boot Mode, optionally, specifying the Profile to be put in
+   the MBR.
+2. Exit RFDISK.
+3. Install the custom MBR.
+4. Run RFDISK.
+5. Edit the Partitions as needed and commit any changes.
+6. Use the PutMBR Command to place the MBR and Partitions in the desired
+   Profile.
+
+The custom MBR must be one Sector long. If not the Profiles may be corrupted
+and the new Profile will not boot.
+
+An individual Profiles MBR can be refreshed with the Built-In MBR by
+performing the following steps:
+
+1. Uninstall Multi Boot Mode, optionally, specifying the Profile to be put in
+   the MBR.
+2. Select the Drive.
+3. Run the MBR Command.
+4. Run the Write Command.
+5. Use the PutMBR Command to place the MBR and Partitions in the desired
+   Profile.
+
+The PutMBR Command can be used to restore the Multi-Boot Profiles after the
+Multi-Boot MBR is Overwritten by an Installer such as Windows XP.
+
+If a GPT is detected but the GPT Option was not specified in the Command
+Invocation, a Warning will be displayed before allowing you to execute this
+command.
+
+
+The eXcise (X) Command removes a Profile Sector and packs the remaining
+sectors. The Syntax is as follows:
+
+X Drive# Profile
+
+Drive is the Number of the Drive
+Profile specifies the ID of the Profile to be removed.
+The Default "0" Profile cannot be removed.
+
+
+
+NULL Profile
+
+The NULL Profile allows a given Hard Drive to be treated as unpartitioned.
+Using the "S" Command with no Profile ID or pressing the [SPACE] Key during
+Boot Configuration will select the NULL Profile.
+
+If the Boot Drive is set to the NULL Profile, an Overlay in the Terminal
+Sector will be loaded. This code will scan the remaining Drives until it
+finds one that is not set for the NULL Profile or is unrecognized.
+It will then install a Hook to renumber the Hard Drives. The New Boot Drive
+will be assigned 0x80 to allow it to Boot. The remaining Drives will be
+assinged 0x81 and up. The Drive(s) below the Boot Drive will be assigned
+numbers after the others. This will allow access to them by RFDISK.
+You will be able to reenable them with the "S" Command
+
+If the Overlay is active Drive Numbers will have been altered. If you use
+RFDISK in Normal Mode, you will see your Drives rearranged. Since the RAW
+Mode does not use Interrupt 13, RFDISK will show the physical arrangement of
+the Drives in RAW Mode.
+
+
+
+PARTITIONS
+
+RFDISK recognized 4 types of Partitions: Primary, Extended, Logical and Dual
+Mode.
+
+In addition, RFDISK recognizes two Windows Only Partition Types that are only
+recognized in Windows 9x with the TeraByte Plus Patches. See the WINDOWS ONLY
+PARTITIONS Section below.
+
+Primary Partitions are all Partitions except Types 5 and F that are not
+nested within an Extended Partition.
+
+Extended Partitions 5 and F are containers for Logical Partitions.
+
+Logical Partitions are Partitions except 5 and F that are contained within
+a preexisting Extended Partition.
+
+Dual Mode Partitions are Partitions that are contained within a preexisting
+Extended Partition and are also defined as a Primary Partition in at least
+one Profile. See "Dual Mode" Partitions below for more information.
+
+Logical Partitions are not normally Linked or made Active. The enclosing
+Extended Partition is linked to the desired Profiles. All Logical Partitions,
+within an Extended Partition, are enabled or disabled together.
+
+If you Link a Logical Partition, RFDISK will create a Duplicate Primary
+Partition in the linked MBR. If both the Enveloping Extended Partition and
+the Linked Logical Partition are linked to the same. or only, Profile, then
+the Partition will be assigned two Drive Letters. This is not recommended as
+corruption can occur if DOS or Windows writes to both of them. A Linked
+Logical Partition can be made Active.
+
+Type 0 Partitions are used to fill in gaps in Extended Partitions. These are
+considered free space by some utilities. RFDISK uses them to fill gaps that
+might otherwise be misinterpreted as containing other Partitions. The "Z"
+Command can be used to add or remove these Partitions.
+
+A Primary or Extended Partition that has no links to it in Multi Boot Mode
+will not be written to any Profile and will disappear when the Write Command
+is used.
+
+Partitions with Types above 7F may cause later Partitions to not be detected.
+This is a bug in some versions of DOS. You may want to place these Partitions
+at the end of the Drive.
+
+Each Profile can support up to 4 Primary and Extended Partitions. More than
+4 Partitions can be setup but the Write Command will not execute if there are
+more than 4 Partitions in any Profile. Only one Extended Partition is
+recognized by DOS and Windows. Multiple Primary Partitions in a single
+Profile will be handled by DOS and Windows as follows:
+
+Assign First Primary Partition in each Drive in INT13 order.
+Assign all Logical Partitions in each Drive in INT13 order.
+Assign remaining Primary Partitions in each Drive in INT13 order.
+
+The Active Partition in each Profile will be placed First so that it can be
+recognized as Drive C: on the Boot Drive. This can be overridden by the
+NoSwap Option in the RFDISK Command Line.
+
+Partitions can be placed in as many Profiles as desired.
+
+A Profile with no Partitions linked to it can be used to prevent a secondary
+Drive from being recognized by selecting this Profile during Boot.
+
+The reserved "D" and "W" Profiles set up a Boot Overlay that uses the "0"
+Profile but replaces the Boot Sector Code, pointed to, with custom code.
+These are used to invoke modified IO.SYS files that allow use of DOS 6, DOS 7
+and Windows 98 with a single C: Partition. They are displayed in lower case
+in the Profile Display. Custom Boot Sectors also use the "0" Profile for
+their Partitions. Contact author for information on these features.
+
+WARNING: Partitions are not checked for size or total count.
+Making a Partition too large or small may make the Partition unusable.
+If too many Partitions are accessible at one time, DOS will ignore Partitions
+after Z:.
+Having more than one Active Partition in a single Profile will cause Boot
+failure.
+
+
+DUAL MODE PARTITIONS
+
+Dual Mode Partitions are Partitions that are contained within a preexisting
+Extended Partition and are also defined as a Primary Partition in at least
+one Profile. The Primary Partition mapping can be made Active with the Toggle
+Command so the Partition can be Booted. The Logical Partition in the Extended
+Partition chain will be marked Unknown (Type 0x7F) so it cannot be accessed
+from ANY profile. This gives more flexibility in laying out a Hard Drive.
+
+To create a Dual Mode Partition, first create the Logical Partition using the
+Add Command as described above. Use the Link Command to define a Primary
+Partition in one or more Profiles. In Single Boot Mode, use the Link Command
+without a target Profile to define the Primary Partition.
+
+The Partition can be reverted back to a Logical Partition be removing the
+Active Flags and Unlinking all Profiles.
+
+Switching between a Logical Partition and a Dual Mode Partition may require
+that the Partition be Reformatted. If you have RFORMAT, you can use the
+-BootOnly Option to do this without losing your Data. You will need to either
+reboot first or use RFORMAT's Pri# or Log# Mode. Drive letters probably will
+change.
+
+
+MULTIPLE EXTENDED PARTITIONS
+
+Standard DOS and Windows 9x only support one Extended Partition. The Terabyte
+Plus Package 2.0 or higher adds support for multiple Extended Partitions per
+Drive. RFDISK allows multiple Extended Partitions to be defined. A Warning
+will be shown if two of more Extended Partitions are found when you attempt
+to Write out the new MBR. If you are going to use the Hard Drive in a System
+with the TBPLUS Patches, you can continue from the Warning.
+
+
+CHS and LBA
+
+Cylinder/Head/Sector (CHS) Addressing mode is supported by all versions of
+DOS and Windows. Primary Partition Types 1, 4, 6 and B, and Extended
+Partitions of Type 5 are addressed by CHS. CHS Partitions are limited to the
+first 1024 Cylinders so they are limited to approx 8GB or less depending upon
+the Geometry. CHS accessible Partitions must be configured using the Geometry
+used by the BIOS.
+
+CHS Partition Geometry settings MUST match the settings used by the BIOS of
+the Computer in which the Hard Disk Data is going to be accessed. In
+addition, the Partition needs to start at the beginning of a Cylinder for
+Primary Partitions or Head 1 for a Logical Partition. Either kinf must end at
+the end of a Cylinder.
+
+Logical Block Addressing (LBA) is supported by DOS 7 and up and Windows 95
+and up. Primary Partition Types 7, C and E and Extended Partitions of Type F
+are addressed by LBA. There is no limit on the size or location of LBA
+Partitions and they are not dependent upon the Geometry setting. The Geometry
+setting is only used to compute the Sector numbers from the entered Cylinder
+numbers and to create the CHS entries for Partitions below 8GB.
+
+Logical Partitions are accessed according to the type of Extended Partition.
+All Logical Partitions, including Types 6 and B, are accessed by LBA if the
+Extended Partition is Type F. Unpatched DOS 7 will not properly recognize
+Logical Partitions using the LBA Types C or E. Use 6 or B instead.
+
+
+WINDOWS ONLY PARTITIONS
+
+RFDISK supports Partitions that are recognized by Windows 9x with the
+TeraByte Plus Patches but are not recognized by DOS. These Partitions are
+only visible when Windows is running with Protected Mode Driver support,
+not in compatability Mode or Safe Mode. This allows Partitions to be used in
+Windows with the TeraByte Plus Driver, that are not supported by the System
+BIOS, without requiring a DDO for DOS Support.
+
+Type 9 is the Windows Only equivalent of a Type F Extended LBA Partition.
+The Extended Partition and Logical Partitions within will be invisible to
+DOS. It can coexist with a Type 5 or Type F Partition.
+
+The TeraByte Plus Package allows multiple Extended Partition and allows
+Type C or E Logical Partitions.
+
+Type D is the Windows Only equivalent of a Type C FAT32 LBA Partition.
+It can be a Primary Partition or placed in a Type 9 or Type F Extended
+Partition.
+
+Specify the ExtMBR Option in the Command Invocation to setup these
+Partitions.
+
+The TeraByte Plus Package is required to use these Partitions.
+
+
+GPT COMPATABILITY
+
+RFDISK provides for using a mixed MBR based and GPT based Partition setup.
+Specifying the GPT Option in the Command Invocation, causes RFDISK to reserve
+the 33 Sector Main GPT starting in Sector 1. The Profiles are stored starting
+in Sector 34.
+
+The Computer must support UEFI for the GPT and have an useable CSM to support
+the MBR. You must be able to boot DOS from an USB Floppy or Key, and you
+will need access to the Hard Drive, if working on the target system.
+
+You will need GPT Partitioning tools as RFDISK does not provide GPT support.
+
+Run RFDISK with the GPT and OVERLAP Options. ExtMBR also if needed.
+
+1. Install a Multi-Boot MBR.
+2. Install a Profile for Booting from the GPT.
+3. Set the Geometry to 1 Head 1 Sector
+4. Create a Partition as follows:
+   A EE 1 34
+5. Link the Partition to the GPT Profile.
+6. Restore the original Geometry.
+7. Setup your MBR Profiles and Partitions.
+   If Partitions are being shared, you will need to match the Start and End
+   Sectors between the MBR Entries and the GPT Entries.
+8. Write out the Data.
+9. Quit
+10. Format the MBR Partitions and Install Software.
+
+GPT based Partitions are usually placed on 1MiB Boundaries. If you intend to
+share Partitions between the MBR and GPT OSes, you need to match the Start
+and End Sectors. You can simplify this by setting the Geometry to 64 Heads
+and 32 Sectors. This will make the Logical Cylinders 1MiB each. You can also
+set the Geometry to 1 Head and 1 Sector but you will need to specify
+multiples or 2048 for the Start and End Sectors. Do not create any CHS
+Partitions or try to share Logical Partitions.
+
+Most systems will stay in the Mode (MBR or GPT) last used. If your BIOS
+switches you to GPT on Boot, you may need to use the BIOSes Boot Selection
+Menu and choose the legacy Hard Drive to boot in MBR Mode.
+
+To switch to GPT from MBR Mode, select the GPT Profile and reboot again.
+
+To switch to MBR from GPT Mode, use the BIOSes Boot Selection Menu to choose
+the legacy Hard Drive and immediately select a MBR Profile.
+
+To avoid having to make multiple keystrokes very quickly, you may want to set
+the Profile to "*" so that you are prompted on every Boot.
+
+
+
+XT MODE
+
+The XT Mode provides support for the PC/XT and PC/AT Protocol for 4096
+Cylinders using the top two bits of DH. When specified, CHS Start and End
+Entries in the Partition Table will use this protocol rather than wrapping
+at 1024 Cylinders as is done in normal mode. The Protocol will be disabled
+on any Drive which is set for more than 64 Heads. It is not necessary to
+specify the -CHS Option to use XT Mode. Using XT Mode with the -CHS Option
+requires a BIOS that recognizes the Protocol.
+
+Neither DOS nor Windows supports this Protocol. Partitions using this
+Protocol will be flagged with Warnings.
+
+XT Mode Partitions will be converted to Normal Partitions if the Drive is
+Written to during a session when the -XT Option is not specified.
+
+Normal Mode Partitions will be converted to XT Partitions if the Drive is
+Written to during a session when the -XT Option is specified and the Drive
+is set to 64 Heads or less, if the Partition's Cylinder Number is above 1023.
+This is only relevant the CHS Partition Types (1, 4, 5, 6, 0E). It is ignored
+on LBA Partitions.
+
+The -XT Option affects all Drives. It is recommended that you only work on
+the specific Drives needing XT Protocol whn specifying the -XT Option.
+
+
+
+GEOMETRY
+
+The Geometry of a Drive consists of the number of Cylinders on a Drive, the
+number of Heads per Cylinder, and the number of Sectors per Track. RFDISK
+obtains the head and sector information from 3 sources in the following order:
+
+The first valid Partitions CHS End Record.
+Interrupt 13 AH=8 Results
+Interrupt 13 AH=48H Results
+
+The first one is used to set the Estimated Geometry.
+
+If none are found, the Geometry is set to 255 Heads and 63 Sectors.
+
+If the three results disagree, or the Geometry is set manually to a different
+ value, a Warning is displayed each time the Drive is Displayed.
+
+Interrupt 13 AH=48H is used to get the Drive Size and is used with the other
+two settings to determine the number of Cylinders. If the command fails or
+returns 0, the Cylinder count is displayed as "????" and no "Out of Range"
+checking is done.
+
+Sector Size is read from the Interrupt 13 AH=48H data or by reading a Sector
+if the Command Fails. The Sector Size cannot be changed within RFDISK and is
+recorded in the MBR during a Write.
+
+Normally all Partitions created by RFDISK start at the first Sector of Head 0
+or Head 1 of the specified Cylinder regardless of whether CHS or LBA is used
+to access it.
+
+The Geometry Command allows these setting to be overridden. Setting a
+Geometry of 1/1 using the following Command:
+
+G 1 1
+
+will allow Partitions to be placed at specific Sectors. Logical Partitions,
+or Partitions specifying Sector 0, will be written to the following Sector
+as the Extension Record or MBR will be written first.
+
+Some BIOSes require that the Geometry be set to the values shown for
+Interrupt 13 AH=8 before Writing the changes to the Hard Drive if there are
+any CHS accessible Partitions in any Profile that will be used.
+
+The MaxGeom Option forces the CHS Geometry of the End of the first Partition
+to 255 Heads and 63 Sectors regardless of the Geometry selected. 
+Some older Intel Motherboards will incorrectly handle or even crash on Drives
+that appear to have incorrect Geometries. If you are using other Geometries
+when working with RFDISK, you may see Warnings about Geometry inconsistencies
+when wou restart RFDISK. They can be ignored on LBA Partitions.
+
+
+
+OVERLAYS
+
+Overlays provide additional functionality such as Large Disk Support, Full
+Drive Encryption, RAM Drives etc. These Overlays are run by the Multi Boot MBR
+before the selected Boot Profile is loaded.
+
+Overlays can be installed in any Hard Drive, but only the Overlays in the
+Boot Drive will be executed.
+
+If the Physical Sector Size of the Boot Drive is overridden by a DDO,
+including one in an Overlay, any Overlays may not work or may be damaged.
+
+Currently only 512 Byte Sector Hard Drives are supported by the Overlay
+feature.
+
+Overlays are installed in the first Track of the Hard Drive. They are
+installed using the INSTOVLY Utility. The Program Syntax is as follows:
+
+INSTOVLY OverlayFile [Drive]
+
+OverlayFile is the Overlay Image Loader File.
+Drive is the optional Hard Drive Number.
+
+Overlay Image Loader Files are provided in the appropriate Application Package
+along with their Stand Alone Versions. They have the File Extension ".OVL".
+
+Overlays are removed by running the UNINSTOV Utility. The Program Syntax is
+as follows:
+
+UNINSTOV [Drive]
+
+Drive is the optional Hard Drive Number.
+
+The UNINSTOV Utility will Display the contents of the first Track of a given
+Hard Drive one entry at a time. Press the "Y" and "ENTER" keys to Delete an
+Overlay or an Unrecognized Sector. Pressing any other key, then "ENTER" will
+not delete the Entry. Unrecognized Sectors may be present for other purposes.
+Do not delete them unless you are sure they are not needed. If you remove
+Overlays by using the Multi Boot Profile Commands in RFDISK, you will still
+need to remove them from the Hard Drive using UNINSTOV before Reinstalling
+them. It is recommended that you remove all Overlays using UNINSTOV before
+using the Multi Boot Profile Setup Commands.
+
+
+
+LARGE SECTOR DRIVES
+
+Large Sector Drives are Hard Drives with Sectors larger than 512 Bytes.
+There are two types of Large Sector Drives. The First are Drives, such as
+the Western Digital "Advanced Format" Drives that use Large Physical Sectors
+("LPS") Internally but still interface to the Computer using 512 Bytes
+Logical Sectors. The Second are Drives that use Large Logical Sectors ("LLS")
+to interface to the Computer. Many SCSI Drives can be configured to do this. 
+
+LPS Drives will work with any Software but will run slowly if Reads and
+Writes are not Aligned of Physical Sector Boundaries. See ALIGNMENT Section
+below for more information.
+
+LLS Drives are not currently available in PATA or SATA. Drives using 4KiB
+Logical Sectors will support up to 16TiB without requiring MBR Extensions.
+Most BIOSes will probably not support these Drives. RFDISK can support LLS
+Drives with up to 32KiB Logical Sectors. You will requires the LARGESEC or
+TBPLUS Patch Package to support LLS Drives under DOS or Windows 98. Please
+contact Authore for additional information.
+
+USB Hard Drives between 2TiB and 16TiB may use 4KB Logical Sectors. The
+currently available Seagate Go-Flex 3TiB Drive does so. The BIOSes I have
+tested do not appear to support this Drive and one will not Boot at all.
+The Drive will need to be attached while Windows is running before RFDISK can
+be used to Partition it.
+
+
+
+ALIGNMENT
+
+Large Physical Sector ("LPS") Hard Drives (See LARGE SECTOR DRIVES above),
+use Physical Sectors on the Drive that are a Multiple of the 512-Byte Logical
+Sectors used by the Drive Interface. This can cause a significant reduction
+in speed if Computer Reads and Writes Blocks that are not Aligned on Physical
+Sector Boundaries. If a Non-Aligned Write Command is sent to the Drive, it
+has to Read in One or Two Physical Sectors, modify the portion being Written,
+and then Writing out the result to the Drive.
+
+Windows 9x Reads and Writes Hard Disk data in 4KiB Blocks which is the X86's
+Page Size. If the Cluster Size is at least 4KiB, which it usually is, then
+Aligning Reads and Writes to a 4KiB Physical Sector Hard Drive can be done.
+
+Unfortunately, standard Partition layouts and Windows 9X do not respect any
+Alignment. The RFORMAT Formatting Tool, available from the Author, can Align
+a Partition for Windows 9X to LPS Drives. Other Formatters, such as FDISK
+will not take Alignment into consideration. Although RFORMAT can Align any
+Partition properly, and is compatable with most Disk Management Software,
+some poorly written Programs may have problems with Partitions where RFORMAT
+has to adjust the Partition by an Odd number of Sectors. To avoid this, if it
+an issue, you can use RFDISK to adjust the Partition to make it unnecessary
+for RFORMAT to have to make an adjustment of an Odd number of Sectors.
+
+To do this, you have to insure that the Partition starts on an Odd Numbered
+Sector if it is being Formatted for FAT12 or FAT16, or an Even Numbered
+Sector if it is being Formatted for FAT32.
+
+The Start Sector of Standard Partitions are as follows:
+
+C x H x S        for Primary Partitions not on Cylinder 0
+(C x H x S) + S  for Logical Partitions and Primary Partition on Cylinder 0
+
+C is the Starting Cylinder
+H is the number of Heads in the Current Geometry
+S is the number of Sectors in the Current Geometry
+
+If the Partitions is correctly Even or Odd, then it can be used as is.
+If not it will need to be adjusted.
+
+The most compatable way of doing this is to increment the Starting Cylinder
+by one. This will only work if both H and S (see above) are Odd. Fortunately,
+most Computers configure Hard Drives to 255 Heads and 63 Sectors, so this
+will usually work. A Primary Partition on Cylinder 0 will have to be moved to
+Cylinder 2 as an offset is added when on Cylinder 0. This will not work in
+Computers that use 240 Heads.
+
+The next choice is to add the "+" Option to the "A" Command (see ADD Command
+above) for a Primary Partition Only. This will add an additional S Sectors to
+the Start Sector of a Primary Partition, so that it uses the same formula as
+used for Lgical Partitions. This only works for Primary Partitions, not on
+Cylinder 0, and only if S is Odd. Nearly all Modern Hard Drives are
+configured with 63 Sectors, so this should work. USB Drives may not be
+configured this way.
+
+The last, and least compatable, choice is to add the "++" Option to the "A"
+Command (see ADD Command above). This will cause RFDISK to use the following
+formula for computing the Start Sector of any kind of Partition.
+
+(C x H x S) + S + X
+
+C, H and S as above.
+
+X = S  if S is Odd  (Two Head Offset from Cylinder Boundary)
+X = 1  if S is Even (One Head + 1 Sector Offset from Cylinder Boundary)
+
+The "++" Option is not available for Extended MBR Partitions (See Below).
+Only FAT32 is supported and the Partitions starts on an 8GiB boundary
+regardless of the Offset ("+" Option) of it's alias. RFORMAT will be able
+to align the Partition without modifying the Offset of the Partition.
+See the RFORMAT Documentation for further details.
+
+
+
+EXTENDED MBR (40-Bit LBA)
+
+The standard MBR is limited to 32-Bit Partition Start Sector Numbers.
+This limits the size of a standard Logical Sector Size Drive to 2TiB.
+
+The Extended MBR Format includes an extended format for Partition Start
+Sector Numbers, developed by the Author, to allow 40 Bit Numbers to be used.
+The 40BITLBA or TBPLUS Patch Package will be required for DOS and Windows 9X
+to Support these Partitions. Please Contact Author for additional information.
+
+To support these Partitions, RFDISK allows Inputting the Partition Start and
+End values using the following Format:
+
+###:###
+
+The Left Hand Number represents Bits 32-39 of a 40 Bit Number (Range 1-255).
+The Right Hand Number represents Bits 24-31 of a 40 Bit Number (Range 0-255).
+Bits 8-15 are set to 0.
+Bits 0-7 are used for Partition and Boot Structures.
+
+Ex. 2:128 = Start at 5TiB (2 x 2TiB + 128 * 8GiB).
+
+This allows specifying a Partition on a 8GiB Boundary over a range of 512TiB
+for a standard Logical Sector Size Drive.
+
+Start and End Values must be at least 2TiB (1:0) and the Partition Length
+cannot be more than 2TiB. Mixed Cylinder and Extended Format Values cannot
+be used in a single Data Partition. This does not apply to the Extended
+Partition wrappers (Type 5 or F).
+
+Only FAT32 Data Partitions (Type B or C) are supported by the Patched Drivers.
+FAT12 and FAT16 are not supported.
+
+The last 8GiB of the first 2TiB of the Hard Drive is reserved for use by the
+Extended MBR Format. This space cannot be used for other purposes when using
+the Extended MBR Format or with DOS or Windows Patched by the 40BITLBA Patch
+Package.
+
+
+
+BIOS OR WINDOWS SUPPORT
+
+To properly operate RFDISK must be able to access the Partitions it is
+working with. The BIOS or Windows 9x, if running in Windows, must support the
+full capacity of the portion of the Drive seen or being configured,
+otherwise RFDISK may fail or corrupt other data. If in DOS and the BIOS does
+not support the Drive, a DDO or a TSR such as DISKBIOS will need to be
+installed first. Windows 9x will need Patching if the Hard Drive is larger
+than 137GB.
+
+
+
+SIGNATURES, CHECKSUMS AND COLLISIONS
+
+Windows has to Match Disk Drives and Partitions to their DOS equivalents
+during Windows Boot. Disk Drives are Matched using two methods in standard
+Windows, an I/O Test and a Checksum of the MBR. Unforunately the I/O test
+often doesn't work on newer Hardware and/or SATA Drives so the SATA Patch
+(sold separately) disables this test. This leaves only the Checksum test for
+Disk Drives. Partitions, partcularly Partitions of the same size at the same
+offset in different Drives, are distinguished by what should be an unique
+Signature. If a Drive's MBR or a Partition is created by a tool, or is Cloned
+by a tool, that does not take this into consideration, a duplicate Signature
+or Checksum will result. This can cause problems as Windows may or may not
+scan the Drives in the same order as DOS does, resulting in Drive Number or
+Letter swaps.
+
+
+RFDISK will scan all Drives and Valid FAT Partitions for collisions between
+these Signatures and/or Checksums. Any conflicts will be displayed at the
+end of any full Display (no Drive Selected). Drive Checksum collisions can
+be corrected by selecting one of the Drives involved, running the "M" Command
+to refresh the MBR and writing it.
+
+If Partition Signature Collisions are present, you can either Erase the
+Partition and Reformat, non-destructively Refresh the Partition using RFORMAT
+with the "-B" Option, or use the built-in Signature Updater.
+
+To use the Signature Updater, rerun RFDISK with the "-FixSig" Option. Each
+Partition Signature Collision will be shown one at a time, followed by a
+Query. You can choose to update the First Partition shown, the Second
+Partition shown, or skip. If three or more Partitions have the same Signature,
+you may see a Partition repeated. Drive Checksum Collisions are shown before
+the Partition Signature Collisions, but no queries are offered. Correct these
+Collisions as described earlier.
+
+
+
+INSTALLING WINDOWS
+
+Installing Windows overwrites the MBR, disabling Multi-Boot Mode.
+
+If you have not yet setup Multi-Boot Mode, you can Install Windows first and
+then setup Multi-Boot Mode.
+
+If you have already setup Multi-Boot Mode, the following Procedure will work
+with all versions of Windows:
+
+1. Use the >SectorImageFile Command to save an Image of the Drive
+   Configuration(s) for each Drive.
+2. Install Windows.
+3. Use the <SectorImageFile Command to restore the Drive Configuration(s) for
+   each Drive.
+
+or
+
+1. Run RFDISK W
+2. Create the Profile if not already present.
+3. I # X (# is the Drive Number)
+         (X is the ID Letter of the Profile to be used)
+4. Reboot
+5. Install Windows
+6. Run RFDISK W
+7. P # X (# is the Drive Number)
+         (X is the ID Letter of the Profile to be used)
+8. Reboot
+
+Windows 98, SE amd ME do not remove the Multi-Boot Signature. You can Install
+these versions of Windows and then repair the Multi-Boot Mode by using the
+"MBR" Command in RFDISK.
+
+Windows XP and many others remove the Multi-Boot Signature. You can Install
+these versions of Windows and then repair the Multi-Boot Mode by using the
+Install/UnInstall Multi Boot Command and type "MBR" at the Prompt.
+
+The Windows XP Installer will corrupt Partitions after a Null Partition. If
+using Null Partitions as fillers, change their Type Code to 10 or other
+unused Code before installing Windows XP.
+
+Windows XP may have problems with very large Partitions or Hard Drives. It is
+recommended that you use the Build SaveFile Command or the >SectorImageFile
+Command to save your Setup before Installing.
+
+
+
+BOOT PROFILE SELECTION
+
+When setup in Multi Boot Mode, a Partition Profile can be selected at Boot
+time.
+
+Normally the last used Profiles will be reused if the Computer is rebooted.
+
+To activate the Multi Boot Menu, Press and Hold down the Left-Control Key
+or Left-Alt Key before the Hard Drive boots.
+
+The Drive Number, a Dash and the Previous Profile ID will be displayed and a
+">" prompt will be shown. The Previous Profile ID will be blank if the NULL
+Profile is selected.
+                                      
+Pressing ENTER will reuse the previous Profile for this and all remaining
+Drives.
+
+Press the Number or Letter Key to select the same or a new Profile.
+Pressing the [SPACE] Key will select the NULL Profile.
+Response is immediate, so a selection cannot be undone.
+
+Successive drives will repeat these steps until there are no more drives.
+Drives that do not have a Multi Boot MBR will be skipped.
+
+If you do not Press the Left-Control or Left-Alt Key, the current Profiles
+will be shown for each Drive in sequence without stopping to prompt.
+
+Pressing the "?" key before pressing the desired Profile key will force the
+Drive to query on the next Boot. "?" will be shown as the previous Profile
+on the next Boot and you will have to enter a new Profile. The "?" kay can
+be used each time to force a query on the following Boot.
+
+Pressing the "*" key before pressing the desired Profile key will force the
+Drive to query on all successive Boots. To turn off the permanent query mode,
+press the "?" key and enter a new Profile. The Drive will query one more time
+on the following Boot. It will not query again unless you use the "?" or "*"
+keys again or use the Left-Control or Left-Alt Key later.
+
+The Right-Control Key is not used by RFDISK so it can be used to bring up a
+Windows Boot Menu without triggering a Multi Boot Prompt.
+
+Whenever a Profile is manually selected, the Partition table from the
+Profile's Sector is copied to the main MBR. This allows DOS, Windows etc. to
+read the Partitions. This process is repeated on all succeeding Drives. The
+MBR or Boot Record from the First Drive's Profile is read into memory and
+executed.
+
+If the Boot Drive has the NULL Profile selected, a Drive Rotation Overlay
+will be installed. This Overlay will scan the following Drives until it finds
+one not set for the NULL Profile. The Drives will be renumbered so this Drive
+becomes the Boot Drivc, the remaining Drives will assigned 81H, 82H, ...
+The Drives before the new Boot Drive will be assigned Drive Numbers after the
+others. Be aware of this if using RFDISK under such conditions, as the Drive
+Numbers won't match their Physical Configuration unless you use -RAW Mode.
+After selection is complete, a Message will appear indicating the amount of
+Drive Rotation. If the Query Options "?" or "*" are active on the new Boot
+Drive, you will be queried again. You will need to Press "?" to reenable the
+"?" query Option and them reenter the Partition ID character. The drive
+rotation message may be hard to read as the screen may update almost
+immediately as Bootup progresses. The scan will repeated on the next Reboot,
+so the rotation is not permanent. If Boot fails and you Boot from a Floppy or
+CD, without Pressing RESET or Powering Down, the rotation may remain in
+effect.
+
+
+
+REPAIRING OR REBUILDING AN EXISTING PARTITION TABLE
+
+If you have a saved copy of your Configuration, you can use the "<FILE"
+Command to reload the Configuration.
+
+If you have Multi Boot setup on your Drive and only the MBR has been damaged,
+use the following procedure to restore youe Hard Drive:
+
+1. D #   (# is your drive number starting from 0)
+2. M     (new MBR)
+3. If RFDISK shows Multi Boot Mode Not Active:
+   K     (erase all partitions)
+4. W     (write out new MBR)
+5. If RFDISK shows Multi Boot Mode Active for Drive #, Stop Here.
+6. I #   (# is your drive number starting from 0)
+7. At the confirmation Prompt, Type MBR
+
+If the Multi Boot Profile sectors have been damaged, you will have to rebuild
+the Profile list using the "I" and "N" Commands before recovering Partitions.
+
+Use the "Find" Command to locate Partitions. The "Hide" Command and the
+Starting Point can be used to limit the amount displayed. Write Down all
+Partitions found. If any seem to be missing, try the "Find" Command with the
+"All" Option.
+
+Select the Drive using the "D" Command.
+Add all Primary and Extended Partitions with the "A" command.
+Make sure you use the correct Type Code for each Partition.
+Use 'E' for FAT16, 'C' for FAT32, 'F' for EXTENDED etc.
+Partitions entirely within the first 8GB can use '6' for FAT16 or 'B' for
+FAT32. Using '5' for an EXTENDED Partition is not recommended.
+If a Partition appears with "INV" in it's status area, it is not a proper
+Partition or is damaged and MUST be removed with the "R" Command.
+Do not add Logical Partitions at this time.
+If Multi Boot is setup, assign all Partitions to Profiles using the "L"
+Command.
+Use the "T" Command to set the Active Partition(s).
+Use the "W" Command to Write out the repaired MBR.
+The Logical Partitions should now be visible.
+If a Partition appears with "INV" in it's status area, it is not a proper
+Partition or is damaged and MUST be removed with the "R" Command.
+Use the "Z A" Command to fill in gaps. If any Partitions appear with type 0,
+you have gaps that might contained lost or damaged Partitions.
+If none are found, you should be done. If everything has been recovered,
+stop here.
+Use the "Z R" Command to remove the zero fill Partitions.
+Manually add any missing Partitions found by the "Find" Command or from any
+Partitioning notes you may have.
+Use the "Z A" Command to fill in gaps. If any Partitions appear with type 0,
+you still have gaps that might contained lost or damaged Partitions.
+Do not continue if any gaps are found unless you are sure you there is no
+more data to recover and that all Partitions are correct. The Zero Fill
+Partitions will overwrite some data in the unallocated areas.
+Use the "W" Command to Write out the updated Partition Data.
+
+
+
+RECOVERING FROM EZ-DRIVE
+
+If you have EZ-DRIVE installed on a Hard Drive and can no longer Boot it,
+or you want to access it from a system without EZ-DRIVE, you can recover the
+Drive using RFDISK. EZ-DRIVE will no longer be operational after recovery.
+
+If you have a Disk Editor or Hex Dump Program, you may be able to recover
+the Partition Type information from the second sector at locations 1C2, 1D2,
+1E2 and 1F2. If so, write down the four one byte entries listed in Hex.
+They should be values such as 0, 6, 7, B, C, E, or F. If not they may not be
+valid.
+
+Run RFDISK and select the Drive to be recovered.
+You should see a number of Partitions listed with a Type of 54 or 55.
+If you recorded the Partition Types (see above), ignoring any type 0 entries,
+change the Partition Types, using the "C" Command,in order, to the Types you
+wrote down.
+
+Otherwise, if the difference between the End Cylinder and the Start Cylinder
+is less than 261, change the Partition type to 'E' using the "C" Command.
+If 261 or more, change the Partition Type to 'C'.
+
+The first Partition should show "VALID" in it's Status area. If you have more
+than one Primary Partition, it should also be reported as "VALID".
+
+The Extended Partition, if any, will be reported as "INV" or have Blank
+status. Change the Extended Partition's Type using the "C" Command to 'F'.
+
+Execute the "M" Command to refresh the MBR Code.
+Execute the "W" Command to write out all of the changes.
+
+The logical Partitions, if any, should now be visible.
+
+
+
+DISK IMAGES AND CLONED DISKS
+
+If you do a direct Sector by Sector Copy of one Disk Drive to another, the
+Timestamps on the MBRs will be the same. Combined with having the same
+Partitions, this can lead to identical Checksums. Windows uses these
+Checksums to distinguish Drives if other tests fail. The SATA Patch,
+included in the TBPLUS Package, disables these other tests.
+
+To reset the MBR's Timestamp after copying the Drive, Select the Drive using
+RFDISK, run the MBR Command and then the Write Command. This can be done on
+either the Original Drive or the Copied Drive to insure that they have
+different Timestamps.
+
+The individual Partitions will also have duplicate Serial Numbers so you will
+need to update them as well. This can be done easily using RFORMAT. Refer to
+the RFORMAT Manual for details.
+
+
+
+EXAMPLES
+
+The following examples are for a 250GB Hard drive with the following Geometry
+as reported by RFDISK:
+
+Cylinders=30515 Heads=255 Sectors=63
+
+
+EXAMPLE 1:
+
+To create 3 Partitions, on the first Hard Drive, consisting of:
+
+1. A   2.1GB FAT16 Primary Partition (Largest Standard FAT16 Partition)
+2. A 136.5GB FAT32 Logical Partition (Largest supported 98/SE SCANDISK)
+3. A 111.9GB FAT32 Logical Partition (Remaining Space)
+
+enter the following Commands:
+
+D 0                Select Drive 0
+K                  Erase any old Partitons (if needed)
+M                  Install MBR (if needed)
+A 6 0 260          260 Cylinder FAT16 (Type 6) Primary Partition
+A F 260 30515      Extended Partition (Type F) Filling Remaining Space
+A C 260 16904      16604 Cylinder FAT32 (Type C) Logical Partition
+A C 16904 30515    13611 Cylinder FAT32 (Type C) Logical Partition
+W                  Write Changes
+
+
+EXAMPLE 2:
+
+To create 2 equal sized Logical Partitions, one FAT32 and one NTFS on the
+second Hard Drive enter the following Commands:
+
+D 1                Select Drive 1
+K                  Erase any old Partitons (if needed)
+M                  Install MBR (if needed)
+A F 1 30515        Extended Partition (Type F) Filling Entire Drive
+A C 1 15258        15257 Cylinder FAT32 (Type C) Logical Partition
+A 7 15258 30515    15257 Cylinder NTFS (Type 7) Logical Partition
+W                  Write Changes
+
+NOTE: Extended Partitions cannot start on Cylinder 0
+
+
+
+UPGRADING RFDISK
+
+If you have used other Partitioning Tools or an earlier version of RFDISK to
+partition your Hard Drive, please follow the instructions below.
+
+If you are not using the Multi-Boot Profile:
+
+I have rewritten the standard MBR Code. You do not need to Upgrade to this
+new Version if your Computer runs fine. You will get a Warning about an
+unrecognized or corrupt MBR when you use RFDISK. You can ignore the Warning
+or refresh the MBR by selecting the Drive, using the "M" Command and using
+the "W" Command on the Drive(s) showing the Warning.
+
+If you are using the Multi-Boot Profile:
+
+It is strongly recommended that you upgrade the Multi-Boot Profile MBR and
+Overlay Table on each Drive that has it. The existing MBR will work as
+before, and can be updated, but some functions, such as the NULL Profile,
+cannot be added and the new Overlay Management Programs may not work
+properly.
+
+To update the Multi-Boot Profile MBR, perform the following steps on each
+Drive with a Multi-Boot MBR:
+
+1. D #
+2. M
+3. @
+4. W
+
+Where # is the Drive Number of each Disk in turn.
+The "@" Command is needed to update the Overlay Table as it's size has
+changed.
+
+The individual MBRs in the Profiles will not be updated.
+
+
+
+USB AND OTHER EXTERNAL DRIVES
+
+If your BIOS and/or DOS supports USB Drives, you can use RFDISK to Partition
+it using the same commands as for Hard Drives. If not, you will have to run
+Windows 9x and connect the USB Drive after Windows 9x is running.
+
+Some USB Drivers do not support Interrupt 13H Calls so you cannot use them
+with RFDISK. You will need to uninstall the USB Driver for the Particular
+Drive and remove it's associated INF File. You can install my free Generic
+USB Driver (available on my Website) or the Public Domain NUSB or USB20DRV
+Drivers.
+
+Large Sector USB Drives such as the Seagate Go-Flex 3TiB Drive can be
+Partitioned with RFDISK, but the Partitions will not appear upon reconnection
+until they are Formatted. You will need to use RFORMAT to do the Initial
+Format of a new or redefined Partition.
+
+
+
+RELATED PRODUCTS
+
+RFORMAT  Configurable formatter for FAT Partitions.
+
+QFORMAT  Quick formatter for FAT Partitions.
+
+PARTS    Partition Mapper.
+
+PATCH137 Large Disk Support Patch for Windows 98, 98SE and ME.
+
+BOOTMAN  Large Disk Support BIOS Overlay for DOS, Windows 98, 98SE and ME.
+
+IO.DOS   Modified IO.SYS files for use with "D" and "W" Profiles.
+IO.EBD
+
+TBPLUS   TeraByte Plus Support Package. Contains the following:
+         LARGESEC
+         40BITLBA
+         RFDISK
+         RFORMAT
+         IO.256/VFAT
+         PATCH137 (Extended)
+         BOOTMAN (Extended)
+
+LARGESEC Large Logical Sector Support Package for DOS and Windows.
+         Supports 16TiB Hard Drives. Can be combined with 40BITLBA.
+
+40BITLBA Extended MBR Support Package for DOS and Windows.
+         Supports 512TiB Hard Drives. Can be combined with LARGESEC.
+
+IO.256   Patch to support 256 Sector per Cluster FileSystems.
+VFAT     Supports 8GB FAT16 Partitions.
+
+BIOS     Large Disk Support Patches for Tyan S1590 Motherboard and others.
+
+EPIA     Patched BIOSes to fix bug in VIA EPIA BIOSes from 01/02 thru 06/05.
+
+DOS      Patches to DOS 6.2 to access Drives larger than 8GB.
+
+XPPATCH  Updates to Windows XP Original Edition to provide 48-Bit LBA support
+         during installation.
+
+PATCHENC Patch to Support Encrypted Hard Drives.
+
+
+
+WINDOWS XP AND VISTA
+
+RFDISK will maintain one copy of the Disk Management Information, used by
+Windows XP and Vista to arrange Drive Letters, in the MBR and in each
+Extended Partition. If you have more than one Windows XP and/or Vista Profile,
+you may not be able to set the Drive Letter arrangements independently.
+
+
+
+CONTACT INFORMATION
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+Website:  http://rloew1.no-ip.com
+
+IP = conference.no-ip.org  PORT = 8192  (Conference Console)

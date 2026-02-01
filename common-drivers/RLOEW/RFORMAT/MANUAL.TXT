@@ -1,0 +1,447 @@
+             R. Loew Electronics Disk Formatting Utility
+
+                           Version 1.8
+
+                           10/29/2015
+
+                     Copyright (C) 2010-2015
+                       by Rudolph R. Loew
+
+
+
+
+The R. Loew Electronics Disk Formatting Utility provides the ability to
+precisely format a Hard Drive Partition.
+
+
+
+REQUIREMENTS
+
+DOS, Windows 95, 98, 98SE or ME.
+BIOS or Overlay support for the size of Hard Drive required to run in normal
+mode.
+TeraByte Plus (TBPLUS) Package if using Extended Features.
+
+
+
+DEMO VERSION
+
+The Demo Version supports all of the Options but will not Write to the Disk.
+The Install/Uninstall Multi-Boot Profile will Write to the Disk but only a
+single Profile will be set up.
+This allows you to try out the Program but you will not be able to change any
+Data on the Hard Drive.
+
+
+
+INSTALLATION/UNINSTALLATION
+
+None required. Run Executable from DOS or a DOS Box to use.
+
+
+
+COMMAND SYNTAX
+
+RFORMAT [-BootOnly...] [-DOS6] [-Ext EXT] [-LogOnly] [-MBR] [-HighNibbleFill]
+   DrvLtr|ImageName|(Num Off|Pri#|Log#) 12|16|32|Erase [Secs #]
+   [ClusSize #] [Offset #] [FATSize #] [RootClus #] [DirEnts #] [HighNibble #]
+   [Align #] [Media #] [Geometry H# S# Slen#] [Base #] [NumFats #] [Unit #]
+
+
+RFORMAT [-BootOnly....] [-DOS6] [-Ext EXT] [-LogOnly]
+   DrvLtr|ImageName|(Num Off|Pri#|Log#) 12|16|32|Erase
+   [Secs #] [ClusSize #] [Offset #] [FATSize #] [RootClus #] [DirEnts #]
+   [Align #] [Media #] [Geometry H# S# Slen#] [Base #] [NumFats #] [Unit #]
+
+NOTE: All arguments must be placed on one line.
+
+The -BootOnly Option tells RFORMAT to Write Only the Boot Sector(s). This
+will leave the FAT Table and Directories intact. No Files will be erased.
+If used with the Erase Command, only one Sector will be Erased.
+
+If FAT32 is specified, repeating the -BootOnly Option allows selective
+initialization of the reserved area. If the Option is used twice, the
+reserved space below the FAT Tables will be erased. If it is specified three
+times, the reserved area will not be erased, but the FAT Tables and Root
+Directory will be Cleared.
+
+WARNING: If the Partition's Parameters are changed, using the -BootOnly
+         Option will cause the data to be corrupted.
+
+The -DOS6 Option Installs a DOS 6 compatable Boot Sector to allow Booting of
+DOS 6. Do not use on Partitions Booting Windows 9x.
+
+The -Ext Option changes the expected extension of the Boot File (IO.SYS).
+This option is useful in Multi-Boot environments where two or more
+Operating Systems share the same C: Drive. EXT is the desired 3 letter
+extension to be used. For example:
+
+-Ext EBD  will Boot IO.EBD instead of IO.SYS.
+
+The -MBR Option tells RFORMAT to add a MBR entry to the Partition
+Boot Record when writing a Floppy or Non-MBR USB Drive so that the Drive can
+be Booted either way.
+
+The -LogOnly Option tells RFORMAT to only access the Hard Drive using Logical
+Drive Letters rather than Interrupt 13 Calls.
+
+The -HighNibbleFill Option fills the normally unused High Nibble of all FAT
+Table entries with the later specified High Nibble. This is for potential
+future applications.
+
+The DrvLtr is the letter assigned to the Partition from A: to Z:.
+
+Or specifying an Image File tells RFORMAT to Create an Image File (ImageName)
+of the Formatted area instead of writing to a Hard Disk.
+
+Alternatively the INT 13 Drive Number "Num" and Start Sector "Off", "Pri#" or
+"Log#" can be specified. This is for Drives that do not have Partitions such
+as Floppies, SuperDrives and some USB Drives or for Partitions that have not
+been recognized by DOS or Windows. Using the Drive Number on a Hard Drive or
+Partitioned USB Drive with a Zero Offset will overwrite the MBR. A specific
+Primary Partition can be specified by using "Pri#" where # is the Partition
+Number from 1 to 4. A specific Logical Partition can be specified by using
+"Log#" where # is the Partition Number starting from 1. Large Sector USB
+Drives must be formatted this way as Windows will not assign a Drive Letter
+to a Partition if it is not formatted and they cannot be accessed from DOS.
+Using this method is also recommended when Formatting Large Sector Hard
+Drives if you don't use the BLKSIZE.SYS Driver. If you use the Absolute Start
+Sector "Off" argument, you will need to specify the Number of Sectors for the
+Partition (see Secs Option Below).
+
+RFORMAT supports multiple Extended Partitions but requires the TeraByte Plus
+Patches for the Partitions to be accessible.
+
+The Drive Number "Num" is 0 for the A: Drive, 1 for the B: Drive, 0x80 for
+the Boot Hard Drive and 0x81 and up for the remaining Hard Drives.
+
+You will need to reboot to see a Partition that was not previously detected
+or has had it's setting changed.
+
+If using a Multi-Boot Profile created by RFDISK, the currently selected
+Partition Profile will be used. Otherwise you will have to use the "S" option
+in RFDISK to select the Profile containing the desired Partition and Write
+your selection to the Drive. After formatting you can reselect another
+Profile with RFDISK.
+
+A Drive Letter, or Drive Number and Offset arguments, is required.
+
+The Partition type can be specified as 12 for FAT12, 16 for FAT16, or 32 for
+FAT32; using E will erase the Boot Sector(s). This argument is required.
+The E Choice will erase 9 Sectors unless the -BootOnly Option is used. In
+this case only the first Sector will be Erased. Erasing only the First Sector
+of a FAT32 Partition is not enough to clear the Partition.
+
+The remaining options override the settings that RFORMAT computes for the
+Partition. Changing them may degrade operation or possibly corrupt other
+Partitions.
+
+The Secs Option sets the total number of Sectors in the Partition. RFORMAT
+uses the reported size as a default. If set larger than the Partition size,
+the following Partition(s) may get overwritten. This Option is required if
+the Drive Number and Absolute Start Sector were specified earlier.
+
+The ClusSize Option sets the number of Sectors per Cluster. RFORMAT uses the
+algorithm specified by Microsoft for FAT32 Partitions and uses the smallest
+Cluster Size allowable for a given Partition size for FAT12 and FAT16.
+Cluster SIze must be a Power of 2. Setting 128 Sectors per Cluster will cause
+problems with some Programs and cannot be used as a Boot Partition without
+Patches. Setting 256 Sectors per Cluster requires a Patched IO.SYS and
+VFAT.VXD to use the Partition. 512 Sector Clusters can only be used with a
+Patched Windows XP. Contact Author for details on these Patches. If you set
+the Cluster Size too small, RFORMAT will increase it until a Valid Format can
+be creeted.
+
+The Offset Option changes the Offset of the first FAT Table. Increasing this
+setting can provide space for hidden data, extra boot sectors, or to skip
+over bad Sectors. The default is 1 for FAT12 and FAT16. The default is 32 for
+FAT32. The minimum for FAT32 is 9. If the Align Option is also used, the
+selected Offset will be at least the specified Offset.
+
+The FATSize Option sets the number of Sectors in each FAT. Changing this
+setting will reduce the available space for Files. Increasing this setting
+may be useful if the Partition will be Clonedm or expanede,  to a larger
+Partition.
+
+The RootClus Option sets the initial Root Cluster for FAT32 Partitions.
+The default setting and minimum setting is 2.
+
+The DirEnts Option sets the number of Entries in the Root Directory for FAT12
+and FAT16 Partitions. The size will be rounded up to completely fill all
+Sectors. The Maximum number of Directory Sectors is limited to 255. On a
+Drive with 512 Byte Sectors the Maximum number of Directory Entries is 4080.
+Large Sector Hard Drives are limited to (Secsize * 8) - 16 Directory Entries
+subject to an absolute limit of 65540.
+
+The HighNibble Option fills the normally unused High Nibble of all allocated
+FAT Table entries with the specified Nibble value. If the -HighNibbleFill
+Option was specified earlier, the High Nibble is set on all Dat Table Entries.
+This is for potential future applications.
+
+The Align Option sets the absolute Sector location of the Start of the Data
+Area of the Partition to have a specific Alignment. RFORMAT will
+automatically take into account the Start Sector of the Partition. If you are
+using the Western Digital "Advanced Format" Drive or other Drive with 4KiB
+Physical Sectors, use Align 8. This is designed for Windows 9X, not XP.
+The Align value must be a Power of 2.
+
+The Media Option changes the Media Byte. Changing this will probably make the
+Partition unuseable.
+
+The Geometry Option sets the Number of Heads, Number of Sector per Track, and
+the Sector Size. The Defaults are the Values returned by Interrupt 13 AH=8
+and a Sector Read Test. If not readable, the Default for Hard Drives is 255
+Heads, 63 Sectors and 512 Byte Sectors. The Default for Floppies is 2 Heads
+and 18 Sectors. This Option should only be used if you need a different
+Geometry. Using Sectors larger than 512 Bytes requires Patches to several
+DOS and Windows Files to be used. All three numbers must be specified if this
+Option is used. If the Sector Size is changed, you will need to reboot
+before using the Partition.
+
+The Base Option set the Partition Start Field in the Boot record. Changing
+this setting can cause corruption to other Partitions if set incorrectly.
+
+The NumFats Option set the number of copies of the FAT Table. DOS and Windows
+will only recognize Partitions with 1 or 2 FAT Tables. The default is 2.
+Some RAMDISKs use 1.
+
+The Unit Option sets the Boot Drive recorded in the Boot Sector. The default
+is 0 for Floppy Disks and 0x80 for Hard Disks. This can be used with
+ChainLoaders but the standard IO.SYS does not properly handle Booting from a
+Partiiton that will not be mapped to C:.
+
+All arguments and Options, except the FAT Type, can be specified using the
+First letter of the Option Name.
+
+Numerical Arguments (specified as '#' in the syntax) can be entered in
+Decimal, Hexadecimal as 0x####, Octal as 0o####, or Binary as 0b####.
+
+In most cases the defaults should be used as in the following examples:
+
+RFORMAT A: 12
+RFORMAT C: 16
+RFORMAT D: 32
+
+Id you use any settings to modify the Partition, it is recommended that you
+record this information on paper or another Drive or Partition. This will
+allow you to Recover the Partition if it gets damaged.
+
+
+
+OPERATION
+
+When run, RFORMAT will compute the value of Parameters not specified in the
+Command Line. If the configuration is Invalid, the Program will Print an
+Error Message and Stop. Warnings will be Printed if non-fatal issues are
+found. The Program will read any existing Boot Record and compare the
+results. Depending upon the results, one of three displays will be shown.
+
+If no recognizeable Partition exists, it will display the new Partition
+Settings.
+
+If an existing Partition has the same format, it will display one column
+with the Partition Settings.
+
+If an existing Partition has a different format, it will display two columns
+showing the old and new Partition Settings.
+
+You will then be asked to confirm that you want to proceed. Anything other
+than 'Y' will be treated as No.
+
+If you instructed RFORMAT to Erase the Partition, it will Prompt you to
+Continue and will do so if you enter 'Y'.
+
+
+
+ALIGNMENT
+
+Some of the newer TeraByte or larger Hard Drives use larger Physical Sectors
+internally to increase capacity. The Western Digital "Advanced Format" Drives
+use a 4KB Physical Sector. To efficiently use these Drives, Reads and Writes
+should be in multiples of the Physical Sector Size and should start and end
+on a Physical Sector Boundary. Windows 9X uses 4KB Blocks to Read and Write
+Hard Disks, but no provision was made to align these transfers to Physical
+Sector Boundaries.
+
+The Alignment Option of RFORMAT adjusts the FAT Table Size and Offset so that
+the Data Area is Aligned to the Specified Boundary. Since the Underlying
+Partitions may not be aligned in any way, Formatting multiple Partitions
+using the Alignment Option and the same settings may result in non-identical
+Partitions. In addition, changing the FAT Table Offset may cause some
+problems with poorly written Disk Utilities that expect the standard settings.
+
+If you need to insure compatability with these Utilities, you may need to
+change the starting point of the Partition. For most Computers, moving the
+Start of the Partition up or down one Cylinder will do this. To do this, run
+the RFORMAT Program, using the oroignal Partition, as follows:
+
+RFORMAT X: 16 A 8
+or
+RFORMAT X: 32 A 8
+
+If the chosen # of Offset Sectors is 1 (for FAT12 or FAT16) or 32 (for FAT32)
+the existing Partition is OK as is. If not, repartition, reboot and repeat
+the test. It should be OK now. If not, your BIOS is using a geometry that
+makes Alignment more complex. The RFDISK Partitioning Utility (See Related
+Products Below) has an Option to assist in Aligning a Partition.
+
+If you use a Hard Drive with Logical Sectors the same size as the Physical
+Sectors, or use the TBPLUS Patch Package to Map the Logical Sectors Size to be
+the sames size as the Physical Sectors, then Alignment is unnecessary.
+
+
+
+RECOVERY
+
+Use the -BootOnly Option to repair or update a Damaged Boot Sector(s).
+If the settings are not affected, or the Partition is unrecognized, RFORMAT
+can be used to used to Repair the Partition without losing data.
+
+If the Boot Sector is corrupted, causing DOS to not recognize the correct
+size of the Partition, use the Erase Command with the -BootOnly Option to
+Clear the Boot Sector, reboot the Computer, then install the appropriate
+Partition Type with the -BootOnly Option. This will only work if RFORMAT
+was originally used to Format the Partition and the same settings are used.
+
+
+
+USB AND OTHER EXTERNAL DRIVES
+
+USB and other External Drives can be Formatted by RFORMAT in the same manner
+as Internal Drives as long as a Drive Letter has been assigned to the
+Partition to be Formatted. If no Drive Letter has been assigned or Windows
+does not recognize the Partition, you will need to use the Drive Number and
+Start Sector instead of the Drive Letter when Formatting (see Syntax above).
+In Windows 9x, some USB Drivers do not support Interrupt 13H Calls so the
+External Drive may not be accessible by it's Drive Number. If you cannot
+access the Partition by it's Drive Letter or by it's Drive Number, you will
+either need to Format it from DOS (without Windows running) or replace the
+USB Driver.
+
+To replace the USB Driver you will need to do the following:
+
+1. Uninstall the Driver for the particular Drive that you want to Format.
+2. Remove it's INF file from the WINDOWS\INF or WINDOWS\INF\OTHER Folder.
+3. Get and Install a Generic USB Driver such as the free Driver on my Website
+   or a Public Domain Driver such as NUSB or USB20DRV.
+
+Large Sector USB Drives such as the Seagate Go-Flex 3TiB Hard Drive will not
+be assigned Drive Letters after Partitioning and before Initial Formatting,
+so you will need to use the Drive Number and Start Sector Syntax to do the
+Initial Format. After Intial Format you can disconnect and reconnect the
+Drive and the Drive Letter(s) should be assigned. You will be able to
+Reformat using the assigned Drive Letters after that.
+
+
+
+FLOPPY AND USB NON-MBR Disks
+
+USB Drives can be Partitioned with a MBR or have a single Partition without.
+Floppy Disks are always Formatted without a MBR.
+If a Drive Letter is assigned, you can Format these Drives normally. If not,
+you need to use a Physical Drive Number and an Offset of Zero. You will also
+need to specify the size of the Partition.
+
+When Formatting a NON-MBR Drive you have the Option to add a MBR Entry inside
+the Boot Record so that the Drive can be Booted or accessed as a MBR or
+NON-MBR Drive. Specify the -MBR Option to add this entry during Formatting
+or Initializing.
+
+
+
+WINDOWS ONLY PARTITIONS
+
+RFORMAT recognized Windows Only Partitions when selecting a Primary or
+Logical Partition. If running from Windows 9x with the TeraByte Plus Package,
+they can be accessed through Drive Letters. When running from DOS, make sure
+your BIOS supports access to the portion of the Hard Drive where the
+Partition is located.
+
+
+
+IMAGE FILES
+
+RFORMAT can Create an Image File of the portion of the Partition that would
+be Formatted. This includes the Boot area, Reserved Area, FAT Tables and
+initial Root Directory. Specify "ImageName" in the shown Syntax above to
+Create an Image File. An Image File Name must consist of at least 2
+characters, not starting with a "-" or a Numeric Digit and must be a File
+Name, not a Directory or Drive. If you need to specify an incompatable Name,
+prepend it with ".\" (Ex. .\111 or .\A).
+
+
+
+BAD SECTOR HANDLING
+
+RFORMAT does not scan for Bad Sectors and does not save Bad Cluster Data from
+a previous Format. If you are concerned about Bad Sectors and want to detect
+them and/or lock them out, you will need to run SCANDISK or other Integrity
+Checking Program to find them.
+
+
+
+TBPLUS
+
+The TBPLUS Package adds support for Larger Hard Drives, Large Sector Sizes,
+Larger Cluster Sizes and Patches a number of Bugs in DOS and Windows 98SE.
+RFORMAT Displays a number of Warnings when Formatting a Partition that will
+require the TBPLUS Patches to function properly. If you have the TBPLUS
+Patches Installed, you can safely ignore these Warnings. Additional
+information on TBPLUS is available from the Author and on
+
+http://rloew1.no-ip.com
+
+
+
+RELATED PRODUCTS
+
+RFDISK   Advanced Configurable Partitioner.
+
+TBPLUS   Multi-Terabyte Hard Drive Support Package. Contains the following:
+         RFDISK
+         RFORMAT
+         LARGESEC
+         40BITLBA
+         PATCH137 (Extended)
+         BOOTMAN
+         IO.256/VFAT
+         IO.32K/VFAT
+
+
+PARTS    Partition Mapper.
+
+PATCH137 Large Disk Support Patch for Windows 98, 98SE and ME.
+
+BOOTMAN  Large Disk Support BIOS Overlay for DOS, Windows 98, 98SE and ME.
+
+IO.256   Patch to support 256 Sector per Cluster FileSystems.
+VFAT     Supports 8GB FAT16 Partitions.
+
+LARGESEC Patch to support up to 32KB Logical Sectors FileSystems.
+
+40BITLBA Patch to support up to 512TiB Hard Drives.
+
+BIOS     Large Disk Support Patches for Tyan S1590 Motherboard and others.
+
+EPIA     Patched BIOSes to fix bug in VIA EPIA BIOSes from 01/02 thru 06/05.
+
+DOS      Patches to DOS 6.2 to access Drives larger than 8GB.
+
+XPPATCH  Updates to Windows XP Original Edition to provide 48-Bit LBA support
+         during installation.
+
+PATCHENC Patch to Support Encrypted Hard Drives.
+
+
+
+CONTACT INFORMATION
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+Website:  http://rloew1.no-ip.com

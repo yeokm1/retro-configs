@@ -1,0 +1,3 @@
+Load in AUTOEXEC.BAT to remove phantom drives before 9x GUI loads.
+
+Subsequently connecting a USB Floppy under 9x should work as normal.

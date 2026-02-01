@@ -1,0 +1,415 @@
+               R. Loew Electronics Large File Emulator
+
+                          Version 2.3
+
+                           04/20/2017
+
+                     Copyright (C) 2011-2017
+                       By Rudolph R. Loew
+
+
+This Package intercepts User Mode FileSystem API requests so that a set of
+smaller Files will appear as a single large File. This allows Programs to
+Create Files that are larger than 4GiB. These Files can then be Read or
+Modified by other Programs. Downloading and Playing or Archiving Blu-Ray
+Videos are a example of what can be done with this Package.
+
+This Package consists of two Parts; the FILE64.VXD System API Hooker and the
+FILE64 Large File Emulator API.
+
+The FILE64.VXD System API Hooker Patches the Entrypoint Address Resolver
+used by the Executable Program Loader and GetProcAddress to locate API Entry
+Points.
+
+
+REQUIREMENTS
+
+Windows 98, 98SE or ME.
+Windows XP (requires separate package. see FILE64XP below)
+
+
+
+INSTALLATION:
+
+Unpack this Package into a New Empty Directory. Do not mix these files with
+others or add the Directory to your Command PATH.
+
+Place the FILE64.DLL and FILE64.VXD files in your WINDOWS\SYSTEM Folder.
+
+Edit your WINDOWS\SYSTEM.INI File.
+
+In the [386Enh] Section add the following line:
+
+device=FILE64.VXD
+
+Save the File.
+
+Then Reboot your Computer.
+
+
+
+UNINSTALL:
+
+Edit your WINDOWS\SYSTEM.INI File.
+
+In the [386Enh] Section remove the following line:
+
+device=FILE64.VXD
+
+Save the File.
+
+Then Reboot your Computer.
+
+Delete FILE64.DLL and FILE64.VXD from your WINDOWS\SYSTEM Folder.
+
+
+
+DEACTIVATION and REACTIVATION:
+
+You can temporarily deactivate FILE64 by commenting the "device=FILE64.VXD"
+line in the [386Enh] Section of your WINDOWS\SYSTEM.INI File and rebooting.
+
+Uncomment the line and reboot to Reactivate FILE64.
+
+
+
+OPERATION:
+
+The Large File Emulator API handles Large Files by creating smaller files
+having the same name, as the specified Name, but with "``#" appended, where #
+is the extension number starting from 1 when the File is larger than
+4Gib-4KiB. The Base Name can be found, opened and manipulated, but the actual
+data may be transferred to/from the Extension Files as well. Each Extension
+File is also limited to 4GiB-4KiB. The Extension Files will not appear in
+Windows Explorer or any Directory Search using 32-Bit Software. DOS will show
+all of the Files and Extensions as they are stored on the Hard Drive.
+
+
+
+USAGE:
+
+Since the Large File Emulator is not fully compatable with normal file usage,
+the Emulator is designed to limit itself to specific Directories. To enable
+the Emulator for a new Directory, either Name it to "##64" or one of it's
+Parent Directores, such as C:\DOWNLOAD\##64\VIDEO.
+
+Any Folder that contains one or more levels named "##64" is considered a
+FILE64 Enabled Folder. This is true even over a Network to a Computer not
+running FILE64. Only the Path Name Counts. A File named "##64" will also be
+Enabled.
+
+Directories not containing a Path Segment of "##64" will be passed through to
+the standard System API Calls. These will be considered Non-FILE64 Enabled.
+
+It is not recommended to rename a Directory with existing Files as Files
+larger than 4GiB-4KiB will not be split. These files can still be used but
+cannot be expanded.
+
+Download Large Files by pointing your Downloader to a File or Directory
+within a FILE64 Enabled Directory.
+
+Windows Explorer will show an ICON for the Base Name only.
+
+You can Play Large Media Files by naming the File or Clicking on it's ICON,
+in Windows Explorer.
+
+You can Copy, Move or Delete Large Files by clicking on the BASE File ICON.
+If you have Files with sizes between 4GiB-4KiB and 4GiB and are Moving to or
+from a Non-Enabled Directory, do a Copy First and then Delete the Originals.
+Do not send to the Recycle Bin.
+
+Files 4GiB and larger cannot be Copied or Moved to Non-Enabled Folders.
+If you need to store these Files or transfer them to a non-enabled archive,
+place them in a separate FILE64 Enabled Folder. Use DOS to rename the Folder
+so it is no longer FILE64 Enabled. You can then backup or transfer the Files
+and Extensions but you cannot read them or use them. When you are ready to
+use them again, place them in a non-FILE64 Enable Folder. Then use DOS to
+rename the Folder to enable FILE64. The Files can now be read, used or
+Copied. Additional methods are described in the ACCESSING THE UNDERLYING
+FILES Section below.
+
+You can Archive or Extract Large Files using 7-ZIP. Make sure the Archive is
+in an Enabled Directory if is larger than 4GiB or can grow to 4GiB.
+
+
+
+DOS BOX:
+
+DOS and it's Commands do not use the System File APIs so they will not
+recognize Large Files. The Directory Command will only show the Base File
+with a maximum size of 4GiB-4KiB and the Extension Files. DOS Commands cannot
+handle Files larger than 2GiB so they cannot be used on these Files.
+
+Delete all Extensions belonging to the same BASE File. You may be able to
+delete files based on their Short Names but be careful you do not Delete
+Files you intended to keep.
+
+Large Files can be handled from a DOS Box more effectively using a compatable
+File Manager such as my XFILE Version 2.0 or later.
+
+XCOPY should not be used unless all Files are less than 4GiB-4KiB Bytes.
+
+
+
+WINDOWS EXPLORER:
+
+Windows Explorer is safe to use to Copy Files and Folders. As expected, you
+will get an error if you try to Copy a File that is 4GiB or larger to a
+Non-FILE64 Folder.
+
+Windows Explorer can Move a File that is larger than 4GiB-4KiB to a FILE64
+Enabled Folder but it will not be expandable. A non-expandable File can also
+be moved back to a Non-FILE64 Enabled Folder. Do a Copy followed by a Delete
+if you need to move such Files. Do not send to the Recycle Bin.
+
+
+
+NETWORKS:
+
+You can copy Large Files to or from FILE64 Enabled Folders on other
+Computers as long as the "##64" level is in the Full Path. The remote
+Computer does not need to support FILE64 but it will not be able to use the
+Files if it does not.
+
+Native Large Files such as on a Windows XP System using NTFS cannot be
+accessed over a Network. These Files must be split into smaller pieces using
+a Program such as SPLITBIG and must be done from the Computer hosting the
+Files. The Split Files can be transferred and reassembled on the Windows 9x
+Computer. Or they can be renamed and placed in a FILE64 Enabled Folder as
+described in the SPLITBIG Section below and later accessed over the Network
+directly.
+
+
+
+FILE MAPPING:
+
+FILE64 splits files larger that 4GiB-4KiB into a Base File and Extents.
+The 4GiB limit was reduced by 4KiB to minimize the performance hit that would
+occur if the File's data is not accessed on Page boundaries.
+
+Unfortunately this leaves a small range of file sizes that can be supported
+without FILE64 but need to be split to be supported by FILE64. To minimze
+problems when Files are imported into a File64 Enabled Folder, a File in this
+size range that should have been split, but wasn't, is treated as a
+Non-FILE64 Enabled File. No Extents are created for these Files. This allows
+them to be read normally. When one of these Files is opened for writing, the
+Extent will be created and the Base File truncated converting it into a
+FILE64 Enabled File.
+
+The Base File has the same name as the Name given when the File is Created.
+This is the only name that will appear when searching with Windows Explorer
+or other 32-Bit Code.
+
+When the 4GiB-4KiB maximum size is exceeded, the Base File will not be
+written further. The excess will be written into the first Extent File.
+The First Extent File will be created with a FileName the same as the Base
+FileName with "``1" appended to it.
+
+This process will be repeated as each Extent File reaches the 4GiB-4Kib
+limit, creating additional Extent Files as needed. Later Extents will be
+appended with "``2", "``3", up to a maximum of "``999".
+
+The Extent Files are skipped over during Directory scans using the FindFirst
+and FindNext APIs. They can be accessed Directly by specifying their full
+name. The RAW Base File can be accessed by appending "``0" to the Base Name.
+
+DOS does not use this API so it shows the RAW File and the Extents.
+
+
+
+ACCESSING THE UNDERLYING FILES:
+
+Windows Explorer and 32-Bit Programs will only see the BASE Filename.
+The DOS Directory command will show the Extension Files.
+
+You can access the Base File in RAW Mode by appending "``0" to it's FileName.
+The Extents can be accessed by their individual Names.
+
+If you need to manipulate a large number of Files with FILE64 disabled in a
+FILE64 Enabled Folder, you can use the SUBST Command to assign a Drive Letter
+that points inside the FILE64 Enabled Directory Tree. Do not do this for
+normal usage. This will not work if there are embedded Folders named "##64".
+
+Temorarily Renaming the underlying Folder in DOS or Deactivating FILE64 (see
+above) can also be used to manipulate Files in RAW Mode.
+
+
+
+LIMITATIONS:
+
+Do not use the "`" character twice together in a FileName, or a Path to, a
+Large File Emulated Directory, other than as described above.
+
+Files with Extensions can be accessed by the Short File Name of the Base
+File as if you had specified the Long File Name.
+
+Using the Short Name of an Extension File will give you access only to that
+extension.
+
+Using "##64" as two or more levels in a Path will not cause problems
+directly, but is not recommended as problems can occur if you move a
+Subtree to a non-FILE64 Folder and don't take into account the Second or
+later "##64" Levels.
+
+All 16-Bit Programs including DOS, DIR, COPY, REN, DEL etc. will see the Base
+and extension Files with a maximum size of 4Gib-4KiB each.
+
+Large files on a NTFS Filesystem must be split and named as described above
+before being transferred to Window 98. SPLITBIG.EXE can be used to split a
+Large File into Smaller Files. Large Files cannot be sent to an XP
+system. The Extension Files must be sent and recombined at the other end.
+MERGE64.EXE can be used recombine the Extension Files back into a Large File.
+
+A separate XP Version of FILE64 (FILE64XP) is available that can create
+FILE64 Enabled folders on NTFS or FAT32 FileSystems that can transparently
+handle Large Files in FILE64 Format and can transfer Files between 98 and XP
+without special tools.
+
+Programs not written to handle Large Files will not work properly. Programs
+that can handle Large Files on NTFS FileSystems should work if Windows 98
+Compatable.
+
+XCOPY cannot handle 4GiB or larger Files.
+
+The SUBST Command must not map a Drive Letter into a FILE64 Enabled Folder.
+Doing so will cause the accesses to the Drive Letter to be handled as
+Non-FILE64 Enabled. Having additional Path levels named "##64" will allow
+FILE64 access but is not recommended.
+
+The CopyFile and MoveFile APIs will not transfer expandable Files between
+4GiB-4Kib and 4GiB in size from FILE64 Enabled Folders to Non-File64 Enabled
+Folders. Directories cannot be Moved from FILE64 Enabled Folders to
+Non-File64 Enabled Folders. Use a Program, such as XFILE, that Copies the
+File without the CopyFile API and optionally deletes the original to Copy or
+Move these Files.
+
+Programs that create their own Extensions for storing data over 4GiB, such as
+Nero, may create Files in this size Range. These Files can safely be stored
+in Non-FILE64 Enabled Folders or in FILE64 Enabled Folders but should not be
+moved out of File64 Enabled Folders.
+
+If a File between 4GiB-4KiB and 4GiB in size is transferred to a File64
+Enabled Folder, such as by DOS renaming a Folder or the use of the CopyFile
+or MoveFile APIs, it will be handled in RAW Mode. This allows the File to be
+read or moved. The File will be converted to File64 Format when opened for
+write.
+
+It is generally safest to create and maintain Files larger than 4GiB-4KiB in
+FILE64 enabled Folders from the start even if they fall into the small range
+of sizes that can fit in Non-FILE64 Folders. Smaller Files can be handled in
+either witout problems.
+
+
+
+SPLITBIG
+
+SPLIT64 is a tool that can be used to split large files in a FILE64 Folder or
+on an XP or other NTFS compatable system into a set of smaller Files that can
+be transferred to Windows 9X for later use with FILE64.
+
+The Command Syntax is as follows:
+
+SPLITBIG [-PieceSize] Large_File Split_File_Base
+
+Large_File is the Name of the Large File to be Split.
+Split_File_Base is the Base Name of the set of Files to be created.
+Created Filenames will have ".###" appended to the Base Name where ###
+starts from 000.
+
+The -PieceSize Option sets the maximum size of each Output File. The default
+is 1GiB. 1GiB Files can be safely handled by DOS Applications.
+
+The Large File must be in a FILE64 Folder or on a NTFS or UDF Partition.
+The Output Files can be written through a Network to any System.
+
+If you set the PieceSize to 0xFFFFF000, the resulting Output Files can later
+be renamed into a FILE64 Base File and Extensions.
+
+Example:
+
+In Source Folder:
+SPLITBIG -0xFFFFF000 LargeFileIn TEMPNAME
+Transfer TEMPNAME.000, TEMPNAME.001, TEMPNAME.002, ... to Destination
+In destination FILE64 Enabled Folder: 
+REN TEMPNAME.000 LargeFileOut``0
+REN TEMPNAME.001 LargeFileOut``1
+REN TEMPNAME.002 LargeFileOut``2
+....
+
+LargeFileOut will be a duplicate of LargeFileIn
+
+NOTE: The Transfer cannot be done with the DOS COPY Command as it can only
+      handle 2GiB Files. Windows Explorer or MERGEBIG can be used (see below)
+      to do this Transfer.
+
+
+
+MERGEBIG
+
+MERGE64 is a tool that can be used to recombine Files created by SPLITBIG or
+any other Program that splits large files.
+
+The Command Syntax is as follows:
+
+MERGEBIG Dest Source .... 
+
+Dest is the Name of the Large File to be created. This File must be in a
+FILE64 enabled Folder or on an NTFS Partition on a Windows XP or later
+System.
+
+One or more Source Files can be listed and will be combined. List all of the
+Files created by SPLITBIG to rebuild the original Large File.
+
+The Source Files can be read from any Folder or through a Network from any
+System.
+
+MERGEBIG can be used as a File Copy Command that can support any size File
+as follows:
+
+MERGEBIG Dest Source
+
+NOTE: MERGEBIG does not Copy the Attributes or DateStamp of a file copied
+      this way.
+
+MERGEBIG can also appends files to an existing File using the -Append Option.
+
+Example:
+
+MERGEBIG -A File AppendFile ....
+
+
+
+WINDOWS XP (FILE64XP)
+
+A set of DLLs is available to support Large Files on FAT32 Partitions or
+NTFS Partitions accessed from Windows 98 directly or through Networks.
+
+Alternatively a Wrapper DLL and customized Tools are available for Windows
+XP to Copy and/or Move large Files to/from/between FAT32 FILE64 Enabled
+Folders and local NTFS Partitions. FAT32 FILE64 Enabled Folders may be local
+or remote shares on any OS including Windows 9x.
+
+Contact Author for more details.
+
+
+
+RELATED PRODUCTS
+
+XFILE      Advanced File Manipulation Utility.
+FILE64XP   64-Bit Wrapper DLL for windows XP to support larger than 4GiB File
+           Manipulation on FAT32 Partitions and Network Shares
+FILE64W    FILE64 with Support for related Unicode FileSystem Functions.
+
+
+
+CONTACT INFORMATION
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+Website:  http://rloew1.no-ip.com

@@ -1,0 +1,373 @@
+               WINDOWS 95/98/SE/ME RAM LIMITATION PATCH
+
+                             Version 7.2
+
+                              06/11/2017
+
+                       Copyright (C) 2007-2017
+                          By Rudolph R. Loew
+                             
+                             
+
+The Windows 95/98/SE/ME RAM Limitation Patch Program patches Windows 95, 98,
+98SE or ME to support Computers with more than 512MB of RAM. Unmodified
+Windows 95, 98, 98SE or ME can malfunction or crash when more than 512MB of
+RAM is present.
+
+This Patch extracts the Windows Memory Manager (VMM.VXD) and the Disk Cache
+Manager (VCACHE.VXD) contained within the VMM32.VXD File in the Windows
+SYSTEM Directory, if necessary. The Patch then Updates all three of them.
+
+NOTE: Computers having more than 3GB of RAM frequently limit RAM
+      available to 32-Bit Software, to as little as 3GB. Any additional
+      Memory is reserved for 64-Bit Software.
+
+
+
+REQUIREMENTS
+
+Windows 95, 98, 98SE or ME.
+2.5MB of Space on the Hard Drive containing the Windows Directory.
+
+
+
+CONTENTS
+
+PATCHMEM.EXE    Windows 95/98/SE/ME RAM Limitation Patch Program Version 7.2
+SPLIT8MB.EXE    Low Memory Splitter
+README.TXT      Overview
+MANUAL.TXT      Users Manual
+LICENSE.TXT     License terms and conditions
+HISTORY.TXT     Revision History
+
+NOTE: The name of the Patch program in the Full Versions is PATCHMEM.EXE
+      while the name in the Demo Versions is PATCHM.EXE.
+
+
+
+PATCH INSTALLATION
+
+1. Download and UnZip the Program to a known location.
+2. Open a MS-DOS Box or Boot into DOS.
+3. Go to the Directory where the program is located.
+4. Run PATCHMEM to install the patch.
+5. The Patch will take effect the next time Windows is Booted.
+
+Windows 95 users may want to use the following command in step 4:
+
+   PATCHMEM /M
+
+NOTE: If Computer crashes during Boot after Installing Patch, see LOW MEMORY
+      REQUIREMENTS Section Below.
+
+
+
+UNINSTALL PATCH (See WARNING Section Below)
+
+1. Download and UnZip the Program to a known location (if necessary).
+2. Open a MS-DOS Box or Boot into DOS.
+3. Go to the Directory where the program is located.
+4. Run PATCHMEM.
+5. Type Yes to the Uninstall request to uninstall the Patch.
+
+
+
+FIRST 16MB OF RAM MEMORY REQUIREMENTS
+
+Some Devices, especially many Gigabit Ethernet Controllers, require space in
+the first 16MB of Physical RAM. Low Physical RAM is also used by Windows 95,
+98 or 98SE for Memory Tables. If there is not enough Free Low Physical Memory,
+the most common symptoms are Windows crashing during Bootup. Rebooting, going
+to a Blank Screen, or reporting a VFAT Error.
+
+Having a very large Registry can cause this problem as well, and increasing
+RAM reduces Low Physical RAM further, increasing the likelihood of this
+problem appearing.
+
+If Windows 95, 98 or 98SE crashes do the following to increase Low Physical
+Memory.
+
+1. Run PATCHMEM to Uninstall the Patch.
+2. Run the following to ReInstall the Patch:
+
+   PATCHMEM /M
+ 
+3. Reboot.
+
+If Windows still crashes, perform the following steps:
+
+4. Copy SPLIT8MB.EXE to your Windows Folder.
+5. Add the following line to your C:\AUTOEXEC.BAT file:
+
+   SPLIT8MB
+
+6. Reboot
+
+Windows 95 users who already used the /M option (see PATCH INSTALLATION above)
+can skip to step 4.
+
+
+
+OTHER PROGRAMS, PATCHES, DRIVERS AND UPDATES
+
+Reinstalling, Repairing or Upgrading Windows, or Adding/Removing Windows
+Components may overwrite the Patched files. If an Updated VMM.VXD and/or
+VCACHE.VXD file is added to the Windows SYSTEM\VMM32 Directory, the Patched
+VMM.VXD and/or VCACHE.VXD Module will be overwritten.
+
+Reinstalling the Patch will be needed to RePatch these files.
+
+Unfortunately there is no way to determine what effect other programs will
+have until they are installed.
+
+If Windows cannot be rebooted after an Installation, reduce the amount of
+RAM to 512MB or less or select the "Command prompt only" option in the
+Windows Startup menu.
+
+Go to the Directory where the PATCHMEM Program is located. Run the PATCHMEM
+Program to Reinstall the Patch. If the PATCHMEM Program asks to Uninstall the
+Patch, say Yes to Uninstall, then Rerun the PATCHMEM Program to Reinstall the
+Patch. If the PATCHMEM Program prints a message indicating that a File has
+been Updated by another Program press 'Y' and 'ENTER' to Continue, repeat as
+needed. If it says "Incomplete Installation Detected", press 'C' and 'ENTER'
+to continue.
+
+Windows 95 users who Install the USB Supplement (USBSUPP and USBUPD2) will
+need to Repatch before each Reboot.
+
+U98SESP3 will replace the RAM Limitation Patch Files and set Memory limiting
+Options in the WINDOWS\SYSTEM.INI File. To Install U98SESP3, perform the
+following steps:
+
+1. Boot Windows 98SE.
+2. Uninstall the RAM Limitation Patch.
+3. Install U98SESP3. Do not reboot.
+4. Reinstall the RAM Limitation Patch.
+5. Reboot.
+6. Repeat Steps 2 thru 5 until all of U98SESP3 has been Installed.
+7. Edit WINDOWS\SYSTEM.INI
+8. Remove the line containing MaxPhysPage.
+9. Remove the line containing MaxFileCache.
+10. Reboot
+
+
+2.75GB OR MORE OF RAM
+
+If you have more than 2.75GB of available RAM in your Computer, Programs that
+use XMS Memory may exhaust the default supply of Handles offered by HIMEM.SYS.
+Add the following line to your CONFIG.SYS file before any program that might
+use XMS Memory to prevent this problem:
+
+DEVICE=<path>\HIMEM.SYS /NUMHANDLES=64
+
+<path> is the path to your HIMEM.SYS file, usually C:\WINDOWS
+If you already have a line installing HIMEM.SYS, add the NUMHANDLES option.
+if you are already using the NUMHANDLES setting, make sure it is at least 64.
+
+This is a DOS issue rather than a Windows issue, but a malfunctioning DOS
+Program can cause Windows to malfunction or not boot.
+
+
+
+PROGRAM COMPATIBILITY
+
+Some Programs, especially Programs that manage RAM Memory, may not operate or
+not operate properly with large amounts of RAM. If specific Programs are
+vital to operation of your system, it is recommended that they be tested with
+the Demo Version before purchase. If a Program stops working when RAM is
+added, please contact Author. Known problems are listed below.
+
+
+The following issue has been identified:
+
+EMM386.EXE will lockup all memory if more than approximately 2800MB of RAM is
+present. If you are using EMM386.EXE with more than 2800MB of RAM, you must
+add the /NUMHANDLES option described in the "2.75GB OR MORE OF RAM" Section
+above.
+
+The following Drivers need to be updated to the latest Version:
+
+3Com 905C (Update to 5.4)
+Related Drivers may need to be updated
+
+
+The following Program will fail with large amounts of RAM:
+
+FASTDEFRAG 2.3  (fails at approximately 1280MB)
+
+
+
+WARNING
+
+THE POTENTIAL EXISTS FOR DATA LOSS TO OCCUR DUE TO ERRORS IN THE PATCH OR
+IF THE PATCHED PROGRAMS ARE BYPASSED OR OVERWRITTEN. DO NOT USE IN CRITICAL
+SYSTEMS OR WHERE HUMAN SAFETY IS INVOLVED.
+
+Please E-Mail any Bug Reports to RLoew@hotmail.com.
+
+
+
+PROGRAM OPERATION
+
+The VMM.VXD and VCACHE.VXD Files are extracted from the VMM32.VXD file if
+they do not already exist.
+
+The three Files are renamed to provide Backup Files before the Patched Files
+are written. The Backup Files have the same name as the Original Files but
+the extension is changed to .BAK provided the File's Name has an extension.
+If not, a .BAK extension is added.
+
+If an earlier Version of the Patch is found, or a Demo Version, it is
+Uninstalled.
+
+NOTE: Patch Versions 4.0, or earlier, cannot be Uninstalled by this Patch.
+      You must Uninstall it first using the original Patch Program.
+
+The Patched Files are deleted and the Backup Files are renamed back if the
+Patch is Uninstalled. If the Backup Files are not present, the Patch cannot
+be Uninstalled.
+
+
+
+OPTIONS
+
+The Program automatically examines the Computer to locate the necessary Files.
+
+The Program can be redirected to Patch specific Files by specifying
+File Names as follows:
+
+PATCHMEM [Options] [VMM32File VMMFile VCACHEFile]
+
+VMM32File is the name of the VMM32.VXD file to extract from and to be updated.
+VMMFile is the name of the VMM.VXD file to be updated.
+VCACHEFile is the name of the VCACHE.VXD file to be updated.
+
+Entering "-" for a Filename will prevent the file from being accessed or
+updated.
+Entering "*" for a Filename will revert to the Default System File.
+
+If you specify any Filenames, you must specify all three. Use "*" as
+placeholders for Filenames you are not specifying, and "-" for files you do
+not wish to access or modify.
+
+You must enable the VMM32File update if the VMMFile and/or VCACHEFile need to
+be extracted.
+
+Only use DOS 8.3 Format Filenames.
+
+If the default Filenames for all three files to be Patched are used, use the
+following syntax:
+
+PATCHMEM [Options]
+
+Options:  /A    Move AGP and Unfixed Tables >=128MB to Shared Arena
+          /C:#  Set Absolute Max File Cache (MB)
+          /I    Install Only
+          /M    Move VXD Data above 16MB
+          /P    Install PROTHOOK
+
+The Move AGP Option (/A) will force AGP amd Unfixed Memory Allocation
+Requests for the SYSTEM Arena to the SHARED Arena. This will reduce the
+demand for the limited SYSTEM Arena that can fill up with large AGP
+Graphics Cards.
+
+The Absolute Maximum File Cache Size is the largest File Cache Size that can
+be allocated under any circumstances. The Maximum File Cache Size can still
+be lowered, in Normal Mode only, by adding the MaxFileCache option to the
+SYSTEM.INI File.
+
+The Default MAXCACHE is 512MB. Settings above 750MB are likely to cause
+problems, especially with 16-Bit Programs. Settings below 128MB may conflict
+with Minimum File Cache Requirements, especially in Computers with a lot of
+RAM. If setting MAXCACHE to 512MB, the MAXCACHE option is not needed.
+To set the Absolute Max File Cache to 256 MB use /C:256.
+
+The Install Only Option (/I) will only allow the Patch to be Installed. If the
+Patch is already present, the Program will exit immediately.
+
+The Move VXD Option (/M) will add code to the VMM32.VXD file to place the VXD
+files within it into RAM Memory above 16MB. This frees up memory below 16MB
+which may be needed for other purposes. See "FIRST 16MB OF RAM MEMORY
+REQUIREMENTS" above.
+
+The PROTHOOK Option (/P) adds code for the PROTHOOK method used by HIMEMEX.
+This elimiantes the need to Install the PROTHOOK VXD when using HIMEMEX.
+HIMEMEX is used by the NON-XMS RAMDISKs.
+
+
+
+NEW WINDOWS INSTALLATIONS
+
+If you are doing a clean install of Windows into a Computer having more than
+512MB of RAM, you will need to Install the Patch before Windows runs.
+
+If you can reduce the amount of RAM to 512MB or less, you can install
+Windows normally, run the PATCHMEM Patch Program, then restore the additional
+RAM.
+
+If you need to Install Windows in a system with more than 512MB of RAM
+present, you can do so as follows:
+
+ 1. Place the Patch Program on a DOS Floppy Disk or on a Formatted Partition.
+ 2. Perform the Windows installation until the FIRST reboot.
+    Do not leave the Computer unattended in case Windows reboots without
+    prompting.
+ 3. Reboot and holds the CTRL key to get the Windows Startup Menu.
+    NOTE: If Windows starts without the Startup Menu, it may crash. If so,
+          press RESET and wait for the Windows Startup Menu. You may need
+          to turn Power back on if it shuts off.
+ 4. Select the "Command prompt only" option and press ENTER.
+ 5. Run the WININIT Command.
+ 6. Go to the Floppy Disk or Partition where the PATCHMEM Program is located.
+ 7. Run the PATCHMEM Program.
+ 8. Remove the Floppy Disk if present.
+ 9. Press the Reset Button or CTRL-ALT-DEL.
+10. Continue the Windows Installation.
+
+Windows 95 and 95A users must replace step 3 with the following:
+
+3. Reboot and wait until Windows crashes.
+   Press RESET and wait for the Windows Startup Menu. You may need to turn
+   Power back on if it shuts off.
+
+   Continue to step 4.
+
+NOTE: The Demo Version of this Patch cannot be used to Install Windows as it
+      will freeze 10 Minutes after Bootup.
+
+If you have a CD Burner or you install Windows from files placed on the hard
+drive, you can purchase pre-patched Installation Cabinet Files for your
+version of Windows. By replacing the original Cabinet Files in the
+Installation CD or Folder you can install Windows without further patching.
+This will also protect you from having the Patches removed if you Reinstall,
+Repair or Add/Remove Components to Windows using this CD or Folder. This will
+not protect you if an update replaces the Patched Files or corrupts them.
+
+
+
+MULTIPLE BOOT WITH OTHER OPERATING SYSTEMS
+
+The Patch is compatable with multiple boot systems. Each separate Windows
+95/98/98SE/ME System must be Licensed and Patched individually.
+
+
+
+RELATED PRODUCTS
+
+WINXX.CAB  Windows Cabinet File with Patch already applied.
+RAMDSK32   Non-XMS RAMDISK supports large amounts of RAM.     
+RAMDSK64   64-Bit RAMDISK uses RAM above 3GB not available to Windows 9x.
+
+
+
+CONTACT INFORMATION
+
+Rudolph R. Loew
+506 Bieling Rd.
+Elmont, NY 11003
+
+1-516-352-9078
+
+RLoew@hotmail.com
+
+Website:  http://rloew1.no-ip.com
