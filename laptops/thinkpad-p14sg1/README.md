@@ -1,6 +1,6 @@
-# Thinkpad P14s Gen 1 Gen 1 (Intel)
+# Thinkpad P14s Gen 1 (Intel)
 
-The Thinkpad P14sg Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM.
+The Thinkpad P14s Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM.
 
 This machine is of the same generation as the [X13 Gen 1](../thinkpad-x13-g1/) I previously worked on and many of the BIOS configurations and drivers have been reutilised from that project.
 
