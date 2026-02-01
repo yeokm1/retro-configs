@@ -12,20 +12,23 @@ Demo video of Doom, Planet X3, ChatGPT and CPUID. Descent runs too fast to be pl
 
 Background of this project can be read from my [blog post](https://yeokhengmeng.com/2024/10/modern-pc-vintage-twist/).
 
+The machine's graphics card was changed from a 4060Ti to 5060Ti. This Gigabyte 5060Ti also supports the legacy video mode.
+
 ## Specifications
 
 These are the specifications of this modern machine.
 
 * AMD Ryzen 5 7600 3.8Ghz AM5 socket
-* Asus Dual GeForce RTX 4060 Ti EVO OC 16GB
+* Asus Dual GeForce RTX 4060 Ti EVO OC 16GB (Previous)
+* Gigabyte GeForce RTX 5060 Ti EAGLE OC ICE 16G (Current)
 * ASUS Pro B650M-CT-CSM motherboard
 * 128GB: 4x32GB DDR5-5600 CL36 Kingston Fury (DDR5-3600 actual)
 * Coolermaster Hyper 212 Spectrum V3 CPU cooler
 * 1TB NVME Crucial T500
-* 2.5GbE RTL8125 PCIe x1
 * Intel Wi-Fi 6E AX210 160Mhz
+* Oculink Adapter
+* Leadex VIII Platinium Pro ATX3.1 1000W (BK)
 * From previous build
-    * Seasonic S12II 520W PSU (non-modular)
     * Coolermaster N400 midtower ATX case
     * Creative Sound BlasterX AE-5
     * 512GB NVME Samsung 970 Evo Plus
@@ -50,10 +53,6 @@ Xircom PE3 connected to a native parallel port.
 <img src="photos/ryzendos-legacy-ports.jpg" width="500">
 
 Motherboard provides native serial and parallel port. A native parallel port is almost unheard of for a desktop motherboard that is this modern
-
-<img src="photos/ryzendos-pcie-extender.jpg" width="500">
-
-A PCIe extender is used to utilise a PCIe x1 slot blocked by the GPU so the sound card can be used.
 
 <img src="photos/ryzendos-rear-floppy.jpg" width="500">
 
