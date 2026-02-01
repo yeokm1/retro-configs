@@ -1,6 +1,6 @@
-# Thinkpad P14s Gen 1 Gen 1 (Intel)
+# Thinkpad P14s Gen 1 (Intel)
 
-The Thinkpad P14sg Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM.
+The Thinkpad P14s Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM.
 
 This machine is of the same generation as the [X13 Gen 1](../thinkpad-x13-g1/) I previously worked on and many of the BIOS configurations and drivers have been reutilised from that project.
 
@@ -127,7 +127,7 @@ Given this modern system, there are no modern video and sound drivers. I used th
 * [SoftGPU](https://github.com/SoftGPU/SoftGPU): Modern GPU driver actually meant for virtual machines. Will not have hardware acceleration on actual hardware.
 * [WDMHDA](https://github.com/andrew-hoffman/WDMHDA): Modern Win 98 Sound Driver for HDA.
 
-## Miscellaneous
+## Benchmarks
 
 ### Disk Performance
 
@@ -140,6 +140,16 @@ I gave nvme9x a short but it did not work on this system.
 <img src="photos/p14sg1-csm-disk-bench.png" width="474">
 
 Disk performance benchmarks using ATTO Disk. Not too bad actually if we are using large transfer sizes.
+
+### 3D Performance
+
+Results from running the 3DMark2000 benchmark on integrated graphics with no graphics acceleration.
+
+<img src="photos/p14sg1-3dmark2000-result-integrated.png" width="600">
+
+420 3D marks with single-digit FPS rates.
+
+## Miscellaneous
 
 ### Safe Shutdown
 
