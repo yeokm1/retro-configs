@@ -58,7 +58,7 @@ BIOS settings such as to enable UEFI-CSM and others are exactly the same as the 
 
 ## Win 98 setup
 
-The system is setup to triple-boot Windows 98 SE, Windows 11 and Linux. Win
+The system is setup to triple-boot Windows 98 SE, Windows 11 and Linux.
 
 <img src="photos/p14sg1-usbfloppy-boot.jpg" width="500">
 
@@ -103,7 +103,7 @@ And Windows 98 booted!
 
 <img src="photos/p14sg1-osloaders.jpg" width="600">
 
-I have setup the system with several bootloader setups to allow for different boot OS.
+I have setup the system with chained bootloader setups to allow for different boot OS.
 
 1. Grub to boot Linux. Set `GRUB_TERMINAL=console` in Grub configuration to permit Windows bootloader to start in text mode.
 2. Text-mode Win 11 bootloader configured by [EasyBCD](https://neosmart.net/EasyBCD/) to allow booting of Win 98 SE and Win 11. Text-mode is configured for faster start and avoid another reboot when selecting Win 98 SE.
@@ -114,7 +114,7 @@ I have setup the system with several bootloader setups to allow for different bo
 
 ### Rudolph Loew Patches
 
-I installed this modern patches/tools to boost disk stability.
+I installed these modern patches/tools to boost disk stability.
 
 * PATCHATA: Allows Windows 9x to use hard drives larger than 137GB
 * PATACPAR: Patch IO.SYS to avoid ghost partitions
@@ -135,7 +135,7 @@ Given this modern system, there are no modern video and sound drivers. I used th
 
 As there is no native NVME driver loaded, Win 98 uses traditional BIOS access to read the disks which does incur some performance penalty.
 
-I gave nvme9x a short but it did not work on this system.
+I gave nvme9x a try but it did not work on this system.
 
 <img src="photos/p14sg1-csm-disk-bench.png" width="474">
 
