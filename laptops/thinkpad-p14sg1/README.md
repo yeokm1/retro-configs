@@ -107,7 +107,7 @@ If Scandisk clears, the GUI setup portion begins.
 
 During the setup process, we may encounter this error due to problems with UEFI-CSM implementations on modern systems as explained [here](https://github.com/mintsuki/cregfix). 
 
-We can either use either of these 2 solutions:
+We can use either of these 2 solutions:
 
 1. Put `DEVICE=C:\CREGFIX.SYS` in `CONFIG.SYS`.
 2. Put `CREGFIX.VXD` into `C:\WINDOWS\SYSTEM`. Edit `%windir%\SYSTEM.INI` and  `%windir%\SYSTEM.CB` and add `DEVICE=CREGFIX.VXD` into `[386Enh]` section.
