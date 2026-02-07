@@ -55,6 +55,9 @@ I'm using a StarTech PCI Express to PCI Adapter Card with a VIA VT6212L USB 2.0 
 
 The idea of using a USB 2.0 PCI Controller came from Omores's Youtube video [xHCI vs. EHCI: The Secret to Getting USB 2.0 back on Windows 9x and 2K+](https://www.youtube.com/watch?v=V0EOecOkuB8). Although he used it on a desktop PC, I had a hunch this trick could also work for a laptop over Thunderbolt.
 
+So I employed this oddball chain of old and new parts:
+Thunderbolt -> eGPU dock -> PCIe-PCI adapter -> VIA USB 2.0 PCI card -> USB network + SoundBlaster adapters.
+
 <img src="photos/p14sg1-ugreen-cr110-asx88772.jpg" width="600">
 
 One of the functions of the USB card is to use a USB 2.0 100Mbps Ethernet adapter. The adapter is Ugreen CR110 based on ASIX AX88772 chip which has Win 98 drivers.
