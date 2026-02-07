@@ -2,7 +2,9 @@
 
 The Thinkpad P14s Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM.
 
-This machine is of the same generation as the [DOS on X13 Gen 1](../thinkpad-x13-g1/) I previously worked on and many of the BIOS configurations and DOS drivers have been reutilised from that project. Links to that project:
+This machine is of the same generation as the [DOS on X13 Gen 1](../thinkpad-x13-g1/) I previously worked on and many of the BIOS configurations and DOS drivers have been reutilised from that project. This project is a follow-up to that.
+
+Links to that previous project:
 
 * [Thinkpad X13 Gen 1 folder in this repo](../thinkpad-x13-g1/)
 * [Blog post of that previous project](https://yeokhengmeng.com/2024/08/dos-on-thinkpad-x13-gen1/)
