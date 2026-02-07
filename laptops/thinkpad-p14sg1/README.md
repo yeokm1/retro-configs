@@ -4,7 +4,7 @@ The Thinkpad P14s Gen 1 (Intel) is a modern laptop released in 2020. I believe i
 
 This machine is of the same generation as the [X13 Gen 1](../thinkpad-x13-g1/) I previously worked on and many of the BIOS configurations and drivers have been reutilised from that project.
 
-<img src="photos/p14sg1-front.jpg" width="500">
+<img src="photos/p14sg1-front-tb-dock.jpg" width="700">
 
 The machine is configured to boot from Windows 98 SE from the internal NVME drive.
 
@@ -12,7 +12,7 @@ The machine is configured to boot from Windows 98 SE from the internal NVME driv
 
 Some third-party video and sound drivers have been installed.
 
-[![P14sg1 demo video](https://img.youtube.com/vi/XSiYbmkA-gw/default.jpg)](https://youtu.be/XSiYbmkA-gw)
+[![P14sg1 demo video](https://i.ytimg.com/vi/XSiYbmkA-gw/maxresdefault.jpg)](https://youtu.be/XSiYbmkA-gw)
 
 Demo video with 3DMark2000 from boot to shutdown.
 
@@ -42,15 +42,23 @@ These are the specifications specific to the Thinkpad I have:
 
 ### Thunderbolt eGPU dock
 
-I used a PCI-e eGPU Thunderbolt dock to connect a PCI USB 2.0 EHCI card. The existing USB ports on the laptop are based on xHCI which are not supported by Win 98.
+I used a PCI-e eGPU TH3P4G3 Thunderbolt dock to connect a PCI USB 2.0 EHCI card. The existing USB ports on the laptop are based on xHCI which are not supported by Win 98.
 
-<img src="photos/p14sg1-tb-usb.jpg" width="500">
+<img src="photos/p14sg1-tb-usb.jpg" width="600">
 
 I'm using a StarTech PCI Express to PCI Adapter Card with a VIA VT6212L USB 2.0 controller.
 
-<img src="photos/p14sg1-ugreen-cr110-asx88772.jpg" width="500">
+<img src="photos/p14sg1-ugreen-cr110-asx88772.jpg" width="600">
 
 One of the functions of the USB card is to use a USB 2.0 100Mbps Ethernet adapter. The adapter is Ugreen CR110 based on ASIX AX88772 chip which has Win 98 drivers.
+
+<img src="photos/p14sg1-sb-play-2.jpg" width="600">
+
+Sound Blaster Play! 2 using more stable generic USB audio drivers is used as a possible alternative to the onboard Realtek HD Audio which is using third-party [WDMHDA](https://github.com/andrew-hoffman/WDMHDA).
+
+<img src="photos/p14sg1-dev-mgr.png" width="500">
+
+Device Manager identifies the relevant USB devices.
 
 ## BIOS setup
 
@@ -101,7 +109,7 @@ We can use `PATCHMEM` by Rudolph Loew to allow Win 98 to address more than 512MB
 
 And Windows 98 booted!
 
-<img src="photos/p14sg1-osloaders.jpg" width="600">
+<img src="photos/p14sg1-osloaders.jpg" width="700">
 
 I have setup the system with chained bootloader setups to allow for different boot OS.
 
@@ -161,13 +169,13 @@ Windows 98 is also not able to restart the system.
 
 ### Power State
 
-<img src="photos/p14sg1-power-state.png" width="600">
+<img src="photos/p14sg1-power-state.png" width="700">
 
 I configured the BIOS to Linux Power state thus enabling the traditional S3 Power state.
 
 ### Charge Threshold
 
-<img src="photos/p14sg1-charge-threshold.png" width="600">
+<img src="photos/p14sg1-charge-threshold.png" width="700">
 
 This modern Windows tool [Charge Threshold](https://forums.lenovo.com/t5/Lenovo-Vantage-Knowledge-Base/Q-amp-A-setting-a-ThinkPad-battery-charge-threshold-by-script/ta-p/4345631) can be used to limit the battery charge to maximise long-term battery life.
 

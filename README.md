@@ -132,7 +132,7 @@ This is a new 386-based subnotebook released in 2024. It runs on DOS 6.22 and Wi
 
 The Thinkpad P14s Gen 1 (Intel) is a modern laptop released in 2020.
 
-<img src="laptops/thinkpad-p14sg1/photos/p14sg1-front.jpg" width="500">
+<img src="laptops/thinkpad-p14sg1/photos/p14sg1-front-tb-dock.jpg" width="700">
 
 The machine is configured to boot from Windows 98 SE from the internal NVME drive.
 
