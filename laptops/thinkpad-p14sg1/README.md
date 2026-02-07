@@ -2,19 +2,22 @@
 
 The Thinkpad P14s Gen 1 (Intel) is a modern laptop released in 2020. I believe it is of the last Thinkpad generation to support UEFI-CSM.
 
-This machine is of the same generation as the [X13 Gen 1](../thinkpad-x13-g1/) I previously worked on and many of the BIOS configurations and drivers have been reutilised from that project.
+This machine is of the same generation as the [DOS on X13 Gen 1](../thinkpad-x13-g1/) I previously worked on and many of the BIOS configurations and DOS drivers have been reutilised from that project. Links to that project:
+
+* [Thinkpad X13 Gen 1 folder in this repo](../thinkpad-x13-g1/)
+* [Blog post of that previous project](https://yeokhengmeng.com/2024/08/dos-on-thinkpad-x13-gen1/)
 
 <img src="photos/p14sg1-front-tb-dock.jpg" width="700">
 
-The machine is configured to boot from Windows 98 SE from the internal NVME drive.
+The machine is configured to triple-boot Windows 98 SE, Windows 11 and Linux from the internal NVME drive.
 
-<img src="photos/p14sg1-front-details.jpg" width="500">
+<img src="photos/p14sg1-front-details.jpg" width="700">
 
 Some third-party video and sound drivers have been installed.
 
 [![P14sg1 demo video](https://i.ytimg.com/vi/XSiYbmkA-gw/maxresdefault.jpg)](https://youtu.be/XSiYbmkA-gw)
 
-Demo video with 3DMark2000 from boot to shutdown.
+Demo video with 3DMark2000 from boot to shutdown. https://youtu.be/XSiYbmkA-gw
 
 ## Specifications
 
@@ -46,7 +49,9 @@ I used a PCI-e eGPU TH3P4G3 Thunderbolt dock to connect a PCI USB 2.0 EHCI card.
 
 <img src="photos/p14sg1-tb-usb.jpg" width="600">
 
-I'm using a StarTech PCI Express to PCI Adapter Card with a VIA VT6212L USB 2.0 controller.
+I'm using a StarTech PCI Express to PCI Adapter Card with a VIA VT6212L USB 2.0 controller. 
+
+The idea of using a USB 2.0 PCI Controller came from Omores's Youtube video [xHCI vs. EHCI: The Secret to Getting USB 2.0 back on Windows 9x and 2K+](https://www.youtube.com/watch?v=V0EOecOkuB8). Although he used it on a desktop PC, I had a hunch this trick could also work for a laptop over Thunderbolt.
 
 <img src="photos/p14sg1-ugreen-cr110-asx88772.jpg" width="600">
 
@@ -62,9 +67,16 @@ Device Manager identifies the relevant USB devices.
 
 ## BIOS setup
 
-BIOS settings such as to enable UEFI-CSM and others are exactly the same as the X13 Gen 1.
+BIOS settings such as to enable UEFI-CSM and others are exactly the same as the [X13 Gen 1](../thinkpad-x13-g1/) hence I will not repeat the screenshots.
 
-## Win 98 setup
+Settings changed are:
+
+* Disable Secure Boot
+* Enable UEFI-CSM
+* Disable Kernel DMA protection
+* Enable Thunderbolt BIOS assist mode and support in Pre Boot Environment
+
+## Win 98 setup and challenges
 
 The system is setup to triple-boot Windows 98 SE, Windows 11 and Linux.
 
@@ -139,7 +151,7 @@ Given this modern system, there are no modern video and sound drivers. I used th
 
 ### Disk Performance
 
-<img src="photos/p14sg1-dos-access.jpg" width="500">
+<img src="photos/p14sg1-dos-access.jpg" width="600">
 
 As there is no native NVME driver loaded, Win 98 uses traditional BIOS access to read the disks which does incur some performance penalty.
 
