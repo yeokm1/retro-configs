@@ -110,7 +110,7 @@ During the setup process, we may encounter this error due to problems with UEFI-
 We can use either of these 2 solutions:
 
 1. Put `DEVICE=C:\CREGFIX.SYS` in `CONFIG.SYS`.
-2. Put `CREGFIX.VXD` into `C:\WINDOWS\SYSTEM`. Edit `%windir%\SYSTEM.INI` and  `%windir%\SYSTEM.CB` and add `DEVICE=CREGFIX.VXD` into `[386Enh]` section.
+2. Put `CREGFIX.VXD` into `%windir%\SYSTEM`. Edit `%windir%\SYSTEM.INI` and  `%windir%\SYSTEM.CB` and add `DEVICE=CREGFIX.VXD` into `[386Enh]` section.
 
 I opt for option 2 as that will still work even if Windows 98 starts in Safe Mode.
 
@@ -139,11 +139,12 @@ I have setup the system with chained bootloader setups to allow for different bo
 
 ### Rudolph Loew Patches
 
-I installed these modern patches/tools to boost disk stability.
+I installed these modern patches/tools.
 
 * PATCHATA: Allows Windows 9x to use hard drives larger than 137GB
 * PATACPAR: Patch IO.SYS to avoid ghost partitions
-* NOFLOPPY: Remove phantom floppy drives 
+* NOFLOPPY: Remove phantom floppy drives
+* SYSDMCPL: Allows Win 98SE to report the friendly name of newer processors correctly
 
 ### Win 98 Device drivers
 
@@ -199,6 +200,6 @@ This modern Windows tool [Charge Threshold](https://forums.lenovo.com/t5/Lenovo-
 ## Sources
 
 1. [P14s Gen 1 Hardware Maintenance Manual](https://download.lenovo.com/pccbbs/mobiles_pdf/t14_gen1_p14s_gen1_hmm_en.pdf)
-2. [SoftGPU](https://github.com/SoftGPU/SoftGPU)
+2. [SoftGPU](https://github.com/JHRobotics/softgpu)
 3. [WDMHDA](https://github.com/andrew-hoffman/WDMHDA)
 4. [AX88772](https://driverscollection.com/?H=AX88772&By=ASIX&SS=Windows%2098%20SE)
