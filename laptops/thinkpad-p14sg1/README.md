@@ -144,7 +144,7 @@ I installed these modern patches/tools.
 * PATCHATA: Allows Windows 9x to use hard drives larger than 137GB
 * PATACPAR: Patch IO.SYS to avoid ghost partitions
 * NOFLOPPY: Remove phantom floppy drives
-* SYSDMCPL: Allows Win 98SE to report the friendly name of newer processors correctly
+* SYSDMCPL: Allows Win 98SE to report the friendly name of newer processors correctly in System Properties
 
 ### Win 98 Device drivers
 
