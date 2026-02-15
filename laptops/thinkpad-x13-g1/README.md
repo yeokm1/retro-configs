@@ -4,6 +4,8 @@ The Thinkpad X13 Gen 1 (Intel) is a modern laptop released in 2020. I believe it
 
 Background of this project can be read from my [blog post](https://yeokhengmeng.com/2024/08/dos-on-thinkpad-x13-gen1/).
 
+The continuation to this project is the [Thinkpad P14s Gen 1](../thinkpad-p14sg1/) which is of the same generation running Windows 98 SE.
+
 <img src="photos/x13g1-front-egpu-dock-full.jpg" width="500">
 
 The machine is configured to boot to DOS 6.22 from a USB flash drive.
