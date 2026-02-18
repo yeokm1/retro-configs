@@ -91,7 +91,7 @@ The goal here is to get Win 98 setup to start from the native disk drive.
 
 I used a USB floppy emulator to launch fdisk to create the partition and set the MBR `fdisk /mbr`. Then make it bootable by copying Win 98 system files over `sys c:`.
 
-After this connect the disk to a modern machine, to inject the Win 98 setup files. Put in a `config.sys` to load `DEVICE=C:\HIMEM.SYS /M:1 /V` to avoid issues where Scandisk and Win 98 Setup will not start.
+After this connect the disk to a modern machine, to inject the Win 98 setup files. Put in a `config.sys` to load `DEVICE=C:\HIMEM.SYS /M:1 /V` to avoid issues where Scandisk and Win 98 Setup will not start. A command like this can be run to create the file in DOS without a text editor: `echo DEVICE=C:\HIMEM.SYS /M:1 /V > config.sys`
 
 This is a good time to align the fdisk-created partition with a tool like MiniTool Partition Wizard to optimise modern SSD operations.
 
