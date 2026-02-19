@@ -34,6 +34,7 @@
 32. [Cregfix](https://github.com/LordOfMice/Tools/blob/master/cregfix.zip)
 33. [nusb33 Win 98 Universal USB drivers](https://www.philscomputerlab.com/windows-98-usb-storage-driver.html)
 34. [Rudolph Loew patches](https://www.philscomputerlab.com/rudolph-r-loew-patches.html)
+35. [WDMHDA](https://github.com/andrew-hoffman/WDMHDA)
 
 # Common software sources
 

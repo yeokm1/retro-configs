@@ -134,7 +134,15 @@ The Thinkpad P14s Gen 1 (Intel) is a modern laptop released in 2020.
 
 <img src="laptops/thinkpad-p14sg1/photos/p14sg1-front-tb-dock.jpg" width="700">
 
-The machine is configured to boot from Windows 98 SE from the internal NVME drive.
+The machine is configured to triple-boot Windows 98 SE, Windows 11 and Linux from the internal NVME drive.
+
+## 10. [Thinkpad E460](laptops/thinkpad-e460) (2015)
+
+The Thinkpad E460 is a budget-friendly machine released in 2015.
+
+<img src="laptops/thinkpad-e460/photos/e460-front.jpg" width="700">
+
+The machine is configured to triple-boot Windows 98 SE, Windows 11 and Linux from the internal SATA SSD.
 
 # Virtual Machines
 

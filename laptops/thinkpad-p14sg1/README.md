@@ -201,5 +201,4 @@ This modern Windows tool [Charge Threshold](https://forums.lenovo.com/t5/Lenovo-
 
 1. [P14s Gen 1 Hardware Maintenance Manual](https://download.lenovo.com/pccbbs/mobiles_pdf/t14_gen1_p14s_gen1_hmm_en.pdf)
 2. [SoftGPU](https://github.com/JHRobotics/softgpu)
-3. [WDMHDA](https://github.com/andrew-hoffman/WDMHDA)
-4. [AX88772](https://driverscollection.com/?H=AX88772&By=ASIX&SS=Windows%2098%20SE)
+3. [AX88772](https://driverscollection.com/?H=AX88772&By=ASIX&SS=Windows%2098%20SE)
