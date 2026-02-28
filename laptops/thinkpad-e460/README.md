@@ -4,7 +4,7 @@ The Thinkpad E460 is a budget-friendly machine released in 2015.
 
 <img src="photos/e460-front.jpg" width="700">
 
-This machine's setup is similar to the [Thinkpad P14s Gen 1](../thinkpad-p146g1/) I previously worked on with a similar triple-boot setup of Windows 98 SE, Windows 11 and Linux.
+This machine's setup is similar to the [Thinkpad P14s Gen 1](../thinkpad-p14sg1/) I previously worked on with a similar triple-boot setup of Windows 98 SE, Windows 11 and Linux.
 
 ## Specifications
 
