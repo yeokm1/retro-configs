@@ -24,6 +24,7 @@ These are the specifications of this modern machine.
 * ASUS Pro B650M-CT-CSM motherboard
 * 128GB: 4x32GB DDR5-5600 CL36 Kingston Fury (DDR5-3600 actual)
 * Coolermaster Hyper 212 Spectrum V3 CPU cooler
+* Powertrain D50 RAM Cooler
 * 1TB NVME Crucial T500
 * Intel Wi-Fi 6E AX210 160Mhz
 * Oculink Adapter
@@ -52,11 +53,19 @@ Xircom PE3 connected to a native parallel port.
 
 <img src="photos/ryzendos-legacy-ports.jpg" width="500">
 
-Motherboard provides native serial and parallel port. A native parallel port is almost unheard of for a desktop motherboard that is this modern
+Motherboard provides native serial and parallel port. A native parallel port is almost unheard of for a desktop motherboard that is this modern.
 
 <img src="photos/ryzendos-rear-floppy.jpg" width="500">
 
 Physical 3.5" floppy drive connected by a USB adapter.
+
+<img src="photos/ryzendos-ram-cooler.jpg" width="500">
+
+RAM cooler to reduce DRAM temperature.
+
+<img src="photos/ryzendos-cpu-cooler.jpg" width="500">
+
+CPU cooler mounted as puller configuration due to limited space on the other side due to RAM cooler.
 
 ## BIOS setup
 
