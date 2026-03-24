@@ -27,7 +27,7 @@ These are the specifications of this modern machine.
 * Powertrain D50 RAM Cooler
 * 1TB NVME Crucial T500
 * Intel Wi-Fi 6E AX210 160Mhz
-* Oculink Adapter
+* 10GbE Realtek 8127
 * Leadex VIII Platinium Pro ATX3.1 1000W (BK)
 * From previous build
     * Coolermaster N400 midtower ATX case
