@@ -21,6 +21,20 @@ I have set it up to run DOS 6.22.
 
 I fabricated the [PC Sprint](https://github.com/reeshub/pc-sprint) to use on this motherboard as a quick way to overclock the system. A 22Mhz crystal was used.
 
+## BIOS ROM
+
+<img src="photos/xtbench-glabios.jpg" width="600">
+
+The BIOS was replaced with a 32KB [GLaBIOS](https://github.com/glabios/glabios) ROM.
+
+<img src="photos/xtbench-rom.jpg" width="600">
+
+The original BIOS was 8KB chip so I used a 32KB AT27C256R chip and duplicated the ROM image 4 times.
+
+```bash
+copy /b GLABIOS_0.4.1_8T.rom + GLABIOS_0.4.1_8T.rom + GLABIOS_0.4.1_8T.rom + GLABIOS_0.4.1_8T.rom GLABIOS_0.4.1_8T_32k.rom
+```
+
 ## Expansion Cards:
 
 <img src="photos/gg-hdmi-board.jpg" width="500">
@@ -53,6 +67,7 @@ Wifi, EMS and HDD emulation. Provided PMEMM EMS driver is loaded to initialise t
 
 * Left: PC Sprint in default clock speed
 * Right: PC Sprint overclocking CPU
+
 
 # Reference
 1. [Manual](https://theretroweb.com/motherboards/s/amax-engineering-amax-2000xt)
