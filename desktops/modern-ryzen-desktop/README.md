@@ -22,7 +22,7 @@ These are the specifications of this modern machine.
 * Asus Dual GeForce RTX 4060 Ti EVO OC 16GB (Previous)
 * Gigabyte GeForce RTX 5060 Ti EAGLE OC ICE 16G (Current)
 * ASUS Pro B650M-CT-CSM motherboard
-* 128GB: 4x32GB DDR5-5600 CL36 Kingston Fury (DDR5-3600 actual)
+* 64GB: 2x32GB DDR5-5600 CL36 Kingston Fury (DDR5-4800 actual)
 * Coolermaster Hyper 212 Spectrum V3 CPU cooler
 * Powertrain D50 RAM Cooler
 * 1TB NVME Crucial T500
