@@ -1,0 +1,101 @@
+
+  v1.9, 04.06.2026
+  - support DSP cmd 0xFD (DSP cmd status).
+  - handling DSP direct cmd (0x10) reworked.
+  - "busy" status of DSP cmd/data port reworked.
+  - VIA VT823X: reworked.
+  - debug version: support for logfile and cmdline option /LF: added.
+  - SB Live/Audigy: interrupt frequency no longer based on timer.
+  - fixed regression in v1.8: sound may have been distorted if 
+    DMA buffer < SB buffer; example: Open Cubic Player.
+  - ignore SB16 DSP ADC cmds 0xBn/0xCn ( bit 3=1 ).
+
+  v1.8, 13.10.2025
+  - fixed: HDA in VmWare.
+  - fixed: SB DSP reset no longer resets SB mixer.
+  - interrupt handling for SB IRQ changed; switch HOSTRT in sbisr.asm now 0 -
+    was 1 in v1.6-v1.7; this avoids crashes if SB IRQ is also used by PCI
+    devices (esp. USB and IDE/SATA controllers).
+  - added low-level tools pciirq.exe, sblive.exe and ichac97.exe.
+  - fixed: single-cycle mode may have set a too large DMA buffer size.
+  - fixed: debug displays in 16-bit variant.
+  - fixed: case "DMA buffer < SB buffer" in single-cycle mode now handled
+    correctly.
+  - values 2,4,8 for cmdline option /CF added.
+  - fixed: SB Live/Audigy timer value (FastTracker 2).
+  - option /DIVE removed (replaced by /CF8).
+  - SB-MIDI UART modes supported.
+  - CD-IN gain changes now routed to sndcard mixer.
+  - fixed: SB sound buffer in EMS page frame.
+  - qpiemu.dll: v1.2 - new function ax=5000h for read access v86 page table 0.
+  - fixed: /OPL0 didn't remove ports 0x228/0x229 from the trap list.
+
+  v1.7, 11.8.2025
+  - fixed: clear CF in case int 31h hook proc handles the function (ax=0x20x).
+  - added soundfont support from VSBHDASF; new cmdline options /SF, /MV, /PS.
+  - fixed: array bounds check in vopl3.cpp added (& 0xff).
+  - fixed: handling of DSP cmd E2 (DMA identification).
+  - DSP cmd 14h with size < 32 will trigger an IRQ at once; this should make
+    more detection routines to work.
+  - qpiemu.dll: v1.1 - bit 1 of register CH now holds IF.
+  - XMSRes.exe: option -H added.
+  - SB16: 8-bit signed PCM mode (C6h 10h) supported.
+  - HDA: reset controller if no codecs are attached.
+  - cmdline option /CF added.
+  - fixed: ES1371 audio driver.
+  - /F cmdline option now accepts 11025 as argument.
+  - added support for SiS 7012.
+  - cmdline option /O1 for SBLive enables speaker jack.
+  - fixed: SB Live/SB Audigy FX8010 initialization.
+
+  v1.6, 10.6.2025
+  - fixed: some port trap variables weren't initialized if real-mode port
+    trapping was disabled.
+  - fixed: debug displays may have caused a GPF.
+  - VSBHDA16: option /DIVE added; enable Borland "Runtime error 200" fix.
+  - fixed: VPIC EOI check now tests bits 5/6 of OCW2; handles specific EOIs.
+  - fixed VMPU: set UART mode cmd 0x3F added.
+  - fixed regression v1.4-v1.5: if DAC had no amplifier, volume was very low
+    and couldn't be changed with /VOL.
+
+  v1.5, 8.6.2024
+  - MPU port emulation if BLASTER variable contains P=xxx.
+  - cmdline option /P added.
+  - cmdline option /SD added.
+  - fix: volume for SB Live/Audigy wasn't set correctly.
+  - trap PIC port to reject attempts to mask the real sound hw interrupt
+    (Rational DOS extender).
+  - switch to client context for SB interrupt emulation.
+  - HDA: improved error msg if card init fails.
+  - IRQ 2 accepted.
+  - fix: SFX noise in tyrian2k, also may be in other games that use
+    non-autoinit DSP cmds.
+
+  v1.4, 20.4.2024
+  - added 16-bit protected-mode variant vsbhda16.exe.
+  - reworked HDA initialization code.
+  - Creative's diagnose.exe accepts vsbhda's SB emulation.
+  - fix: virtual DMA address may have been too high (crash in tyrian2k).
+  - fix: writes to virtual DMA channel ports C0h-DFh caused writes to
+    ports 10-1Fh.
+  - handle "Runtime Error 200" issue in vsbhda16.
+  - fix: DSP cmd 0x91 now handled correctly.
+  - fix: virtual DMA register reads of 08/D0 (status) corrected.
+  - removed stack checks for C++ sources.
+  - fix: mixer volume setting for HDA devices.
+  - cmdline option /BS added.
+  - direct DSP cmd 0x10 supported.
+
+  v1.3, 5.3.2024
+  - source made compatible with Open Watcom 2.0.
+  - tool chain changed to Open Watcom 2.0.
+
+  v1.2, 26.2.2024
+  - reset "interrupt disable" bit in PCI config space.
+  - PCI access with BIOS functions.
+
+  v1.1,  9.2.2024
+  - fix: code for port trap 0x20 in real-mode modified AH register.
+
+  v1.0, 12.4.2023
+  - initial

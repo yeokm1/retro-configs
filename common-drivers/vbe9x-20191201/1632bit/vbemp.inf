@@ -1,0 +1,208 @@
+; INF file for VBEMP display driver
+; Copyright 1988-2019, JW Soft
+
+[version]
+DriverVer = 12/01/2019, 19.12.0001
+Class=DISPLAY
+signature="$CHICAGO$"
+Provider=%Mfg%
+
+[DestinationDirs]
+DefaultDestDir  = 11	; LDID_SYS
+Driver.Copy = 11
+
+[SourceDisksNames]
+1="Windows 9x VBEMP Driver Disk",,0
+
+[SourceDisksFiles]
+vbemp.drv=1
+vbe.vxd=1
+
+[Manufacturer]
+%Mfg%=Mfg
+
+[Mfg]
+%JWSoft.DeviceDesc% (3dfx Interactive) = PCIVID, PCI\VEN_121A&CC_0300
+%JWSoft.DeviceDesc% (3DLabs) = PCIVID, PCI\VEN_3D3D&CC_0300
+%JWSoft.DeviceDesc% (3DLabs) = PCIVID, PCI\VEN_104C&CC_0300
+%JWSoft.DeviceDesc% (Acer Labs) = PCIVID, PCI\VEN_10B9&CC_0300
+%JWSoft.DeviceDesc% (Alliance) = PCIVID, PCI\VEN_1142&CC_0300
+%JWSoft.DeviceDesc% (AMD) = PCIVID, PCI\VEN_100B&CC_0300
+%JWSoft.DeviceDesc% (ARK Logic) = PCIVID, PCI\VEN_EDD8&CC_0300
+%JWSoft.DeviceDesc% (ATI/AMD) = PCIVID, PCI\VEN_1002&CC_0300
+%JWSoft.DeviceDesc% (Avance Logic) = PCIVID, PCI\VEN_1005&CC_0300
+%JWSoft.DeviceDesc% (Avance Logic) = PCIVID, PCI\VEN_4005&CC_0300
+%JWSoft.DeviceDesc% (BrookTree) = PCIVID, PCI\VEN_109E&CC_0300
+%JWSoft.DeviceDesc% (Chips & Tech) = PCIVID, PCI\VEN_102C&CC_0300
+%JWSoft.DeviceDesc% (Cirrus Logic) = PCIVID, PCI\VEN_1013&CC_0300
+%JWSoft.DeviceDesc% (Chromatic Research) = PCIVID, PCI\VEN_110B&CC_0300
+%JWSoft.DeviceDesc% (Compaq) = PCIVID, PCI\VEN_0E11&CC_0300
+%JWSoft.DeviceDesc% (Cyrix MediaGX) = PCIVID, PCI\VEN_1078&CC_0300
+%JWSoft.DeviceDesc% (IIT) = PCIVID, PCI\VEN_1061&CC_0300
+%JWSoft.DeviceDesc% (InteGraphics) = PCIVID, PCI\VEN_10EA&CC_0300
+%JWSoft.DeviceDesc% (Intel) = PCIVID, PCI\VEN_8086&CC_0300
+%JWSoft.DeviceDesc% (iXMICRO) = PCIVID, PCI\VEN_10E0&CC_0300
+%JWSoft.DeviceDesc% (Macronix) = PCIVID, PCI\VEN_10D9&CC_0300
+%JWSoft.DeviceDesc% (Matrox) = PCIVID, PCI\VEN_102B&CC_0300
+%JWSoft.DeviceDesc% (NeoMagic) = PCIVID, PCI\VEN_10C8&CC_0300
+%JWSoft.DeviceDesc% (Number Nine) = PCIVID, PCI\VEN_105D&CC_0300
+%JWSoft.DeviceDesc% (nVidia) = PCIVID, PCI\VEN_10DE&CC_0300
+%JWSoft.DeviceDesc% (nvidia) = PCIVID, PCI\VEN_12D2&CC_0300
+%JWSoft.DeviceDesc% (nvidia) = PCIVID, PCI\VEN_104A&CC_0300
+%JWSoft.DeviceDesc% (OAK) = PCIVID, PCI\VEN_104E&CC_0300
+%JWSoft.DeviceDesc% (Paradise/Phillips) = PCIVID, PCI\VEN_101C&CC_0300
+%JWSoft.DeviceDesc% (Rendition) = PCIVID, PCI\VEN_1163&CC_0300
+%JWSoft.DeviceDesc% (S3 Graphics) = PCIVID, PCI\VEN_107D&CC_0300
+%JWSoft.DeviceDesc% (S3 Graphics) = PCIVID, PCI\VEN_5333&CC_0300
+%JWSoft.DeviceDesc% (Sierra) = PCIVID, PCI\VEN_10A8&CC_0300
+%JWSoft.DeviceDesc% (Sigma Designs) = PCIVID, PCI\VEN_1236&CC_0300
+%JWSoft.DeviceDesc% (Silicon Motion) = PCIVID, PCI\VEN_126F&CC_0300
+%JWSoft.DeviceDesc% (SiS Corp) = PCIVID, PCI\VEN_1039&CC_0300
+%JWSoft.DeviceDesc% (Trident) = PCIVID, PCI\VEN_1023&CC_0300
+%JWSoft.DeviceDesc% (Tritech) = PCIVID, PCI\VEN_1292&CC_0300
+%JWSoft.DeviceDesc% (Tseng Labs) = PCIVID, PCI\VEN_100C&CC_0300
+%JWSoft.DeviceDesc% (VIA Corp) = PCIVID, PCI\VEN_1106&CC_0300
+%JWSoft.DeviceDesc% (VMware) = PCIVID, PCI\VEN_15AD&CC_0300
+%JWSoft.DeviceDesc% (Weitek) = PCIVID, PCI\VEN_100E&CC_0300
+%JWSoft.DeviceDesc% (WinBond) = PCIVID, PCI\VEN_1050&CC_0300
+%JWSoft.DeviceDesc%%JWSoft.DeviceDesc1% = PCIVID, PCI\CC_0300
+%JWSoft.DeviceDesc%%JWSoft.DeviceDesc2% = PCIVID, PCI\CC_0301
+%JWSoft.DeviceDesc%%JWSoft.DeviceDesc3% = PCIVID, PCI\CC_0380
+%JWSoft.DeviceDesc%%JWSoft.DeviceDesc4% = VGA, *PNP0900
+%JWSoft.DeviceDesc%%JWSoft.DeviceDesc5% = VGA, *PNP0917
+%JWSoft.DeviceDesc%%JWSoft.DeviceDesc6% = VGA, NOPNP
+%JWSoft.DeviceDesc%%JWSoft.DeviceDesc7% = PCIVID, NOPNP
+
+[PCIVID]
+CopyFiles=Driver.Copy
+DelReg=Prev.DelReg
+AddReg=Driver.AddReg
+
+[VGA]
+CopyFiles=Driver.Copy
+DelReg=Prev.DelReg
+AddReg=Driver.AddReg
+LogConfig=VGA.LogConfig
+
+[VGA.LogConfig]
+ConfigPriority=HARDWIRED
+IOConfig=3B0-3BB
+IOConfig=3C0-3DF
+MemConfig=A0000-AFFFF
+MemConfig=B8000-BFFFF
+MemConfig=C0000-C7FFF,D0000-D7FFF,E0000-E5FFF,E0000-E7FFF
+
+[Driver.Copy]
+vbemp.drv
+vbe.vxd
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+
+[Driver.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"16,640,480"
+HKR,DEFAULT,drv,,vbemp.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,vbe.vxd
+HKR,DEFAULT,RefreshRate,,-1
+HKR,DEFAULT,DDC,,1
+HKR,DEFAULT,ExtModeSwitch,,0 ;disables full screen extended modes in a window?
+HKR,"MODES\1\640,480",drv,,framebuf.drv
+HKR,"MODES\1\640,480",vdd,,*vdd
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\4\800,600",drv,,supervga.drv
+HKR,"MODES\4\800,600",vdd,,*vdd
+HKR,"MODES\16\320,200"
+HKR,"MODES\16\320,240"
+HKR,"MODES\16\320,400"
+HKR,"MODES\16\400,300"
+HKR,"MODES\16\512,384"
+HKR,"MODES\16\640,350"
+HKR,"MODES\16\640,400"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\720,400"
+HKR,"MODES\16\720,480"
+HKR,"MODES\16\720,576"
+HKR,"MODES\16\800,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\16\1152,864"
+HKR,"MODES\16\1280,800"
+HKR,"MODES\16\1280,960"
+HKR,"MODES\16\1280,1024"
+HKR,"MODES\16\1400,1050"
+HKR,"MODES\16\1600,1200"
+HKR,"MODES\16\1792,1344"
+HKR,"MODES\16\1856,1392"
+HKR,"MODES\16\1920,1440"
+HKR,"MODES\16\832,624"
+HKR,"MODES\16\1366,768"
+HKR,"MODES\16\1440,900"
+HKR,"MODES\16\1600,900"
+HKR,"MODES\16\1920,1080"
+HKR,"MODES\16\1920,1200"
+HKR,"MODES\16\2048,1536"
+HKR,"MODES\16\2560,1440"
+HKR,"MODES\16\2560,1600"
+HKR,"MODES\16\1280,600"
+HKR,"MODES\16\1280,720"
+HKR,"MODES\16\1280,768"
+HKR,"MODES\16\1360,768"
+HKR,"MODES\16\1680,1050"
+HKR,"MODES\32\320,200"
+HKR,"MODES\32\320,240"
+HKR,"MODES\32\320,400"
+HKR,"MODES\32\400,300"
+HKR,"MODES\32\512,384"
+HKR,"MODES\32\640,350"
+HKR,"MODES\32\640,400"
+HKR,"MODES\32\640,480"
+HKR,"MODES\32\720,400"
+HKR,"MODES\32\720,480"
+HKR,"MODES\32\720,576"
+HKR,"MODES\32\800,480"
+HKR,"MODES\32\800,600"
+HKR,"MODES\32\1024,600"
+HKR,"MODES\32\1024,768"
+HKR,"MODES\32\1152,864"
+HKR,"MODES\32\1280,800"
+HKR,"MODES\32\1280,960"
+HKR,"MODES\32\1280,1024"
+HKR,"MODES\32\1400,1050"
+HKR,"MODES\32\1600,1200"
+HKR,"MODES\32\1792,1344"
+HKR,"MODES\32\1856,1392"
+HKR,"MODES\32\1920,1440"
+HKR,"MODES\32\832,624"
+HKR,"MODES\32\1366,768"
+HKR,"MODES\32\1440,900"
+HKR,"MODES\32\1600,900"
+HKR,"MODES\32\1920,1080"
+HKR,"MODES\32\1920,1200"
+HKR,"MODES\32\2048,1536"
+HKR,"MODES\32\2560,1440"
+HKR,"MODES\32\2560,1600"
+HKR,"MODES\32\1280,600"
+HKR,"MODES\32\1280,720"
+HKR,"MODES\32\1280,768"
+HKR,"MODES\32\1360,768"
+HKR,"MODES\32\1680,1050"
+
+[Strings]
+Mfg="JW Soft"
+JWSoft.DeviceDesc = "VBE Miniport"
+JWSoft.DeviceDesc1 = " - Standard PCI Graphics Adapter (VGA)"
+JWSoft.DeviceDesc2 = " - Standard PCI Graphics Adapter (XGA)"
+JWSoft.DeviceDesc3 = " - Standard PCI Graphics Adapter"
+JWSoft.DeviceDesc4 = " - Standard Graphics Adapter (VGA)"
+JWSoft.DeviceDesc5 = " - VGA (reserved by Microsoft)"
+JWSoft.DeviceDesc6 = " - VGA Compatible"
+JWSoft.DeviceDesc7 = " - VGA Compatible (no resources)"

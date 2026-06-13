@@ -102,7 +102,7 @@ Here it is shown running CGA Compatibility tester.
 
 ## 5. [Thinkpad X61](laptops/thinkpad-x61) (2007)
 
-The Thinkpad X61 is a laptop released in 2007 by IBM. The machine is configured to multi-boot to DOS 6.22, Windows 10 32-bit and Xubuntu.
+The Thinkpad X61 is a laptop released in 2007 by IBM. The machine is configured to multi-boot to Win 98 SE, Win XP Pro and MX Linux. 
 
 <img src="laptops/thinkpad-x61/photos/x61-front.jpg" width="500">
 

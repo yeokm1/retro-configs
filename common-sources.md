@@ -35,6 +35,9 @@
 33. [nusb33 Win 98 Universal USB drivers](https://www.philscomputerlab.com/windows-98-usb-storage-driver.html)
 34. [Rudolph Loew patches](https://www.philscomputerlab.com/rudolph-r-loew-patches.html)
 35. [WDMHDA](https://github.com/andrew-hoffman/WDMHDA)
+36. [Iomega Zip Win 9x and NT](https://www.dosdays.co.uk/topics/Manufacturers/iomega_downloads.php)
+37. [Universal VBE Video Display Driver VBE9X](https://bearwindows.zcm.com.au/vbe9x.htm)
+38. [Virtual Sound Blaster for DOS](https://github.com/Baron-von-Riedesel/VSBHDA)
 
 # Common software sources
 

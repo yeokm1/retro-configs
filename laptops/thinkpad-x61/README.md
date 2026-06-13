@@ -4,11 +4,8 @@ The Thinkpad X61 is a laptop released in 2007 by IBM.
 
 <img src="photos/x61-front.jpg" width="500">
 
-The machine is configured to multi-boot to DOS 6.22, Windows 10 32-bit and Xubuntu. The photo includes the laptop mounted on a [X6 Ultrabase](https://www.thinkwiki.org/wiki/ThinkPad_X6_UltraBase).
+The machine is configured to multi-boot to Win 98 SE, Win XP Pro and MX Linux. The photo includes the laptop mounted on a [X6 Ultrabase](https://www.thinkwiki.org/wiki/ThinkPad_X6_UltraBase).
 
-<img src="photos/x61-win10.jpg" width="500">
-
-Windows 10 can boot with DOS with some help from a third-party tool [EasyBCD](https://neosmart.net/EasyBCD/).
 
 ## Specifications
 
@@ -23,7 +20,7 @@ These are the specifications specific to the Thinkpad I have:
 * SD card slot
 * 250GB Samsung 850 Evo
 * Intel Gigabit PRO/1000
-* Intel Dual Band 802.11ac 7260 (BIOS whitelist removed)
+* Killer Wireless-N 1103 (based on Atheros AR9380)
 
 On the X6 Ultrabase Docking station:
 
@@ -34,7 +31,7 @@ On the X6 Ultrabase Docking station:
 
 ## BIOS
 
-To use third-party Wifi cards like the modern Intel 7260 outside of the default wifi whitelist, the BIOS must be modified. 
+To use third-party Wifi cards outside of the default wifi whitelist, the BIOS must be modified. 
 
 A third-party modified BIOS from [Middleton](https://www.thinkwiki.org/wiki/Middleton%27s_BIOS) enables SATA 2, disables whitelist, FN-Ctrl swap and includes SLIC 2.1 for Win 7 activation.
 
@@ -42,23 +39,31 @@ To use the 32-bit BIOS upgrade tool, KB3138612-x86 upgrade has to be installed.
 
 ## Boot Configuration setup
 
-To boot between DOS and Windows 10, [EasyBCD](https://neosmart.net/EasyBCD/) was used to configure Windows boot loader.
+To boot between these OSes, there is a chain of bootloaders
 
-<img src="photos/x61-easybcd1.png" width="400"><img src="photos/x61-easybcd2.png" width="400">
+<img src="photos/x61-grub.jpg" width="500">
 
-EasyBCD configuration
+Grub is loaded allowing a choice between MX Linux and Win XP (with Win 98).
 
-<img src="photos/x61-win-bootloader.jpg" width="400">
+<img src="photos/x61-winxp.jpg" width="500">
 
-Metro bootloader is disabled in favour of the traditional but faster interface.
+Selecting the Win XP option goes to the XP bootloader which allows to select between Win XP and Win 98 SE.
 
-<img src="photos/x61-grub4dos.jpg" width="400">
+<img src="photos/x61-win98-boot-menu.jpg" width="500">
 
-As the Windows bootloader by default cannot start DOS, EasyBCD loads Grub4DOS which in turn starts DOS.
+I have configured the Windows 98 boot menu to select between various DOS options.
 
-## DOS setup
+## Driver configuration
 
-* JEMMEX combined XMS and EMS driver that is required for SBEMU
+### Win 98 drivers
+
+Win 98 SE is not officially supported by this machine hence many drivers are not available like graphics, sound and networking.
+
+To get higher resolutions, Universal VBE Video Display Driver 2019.12.01 is used but has no hardware acceleration.
+
+### Win 98 DOS mode setup
+
+* JEMMEX that is required for VDMHDA
 * Intel ODI drivers
 * ODI to Packet shim
 * MTCP environment variables
@@ -66,13 +71,9 @@ As the Windows bootloader by default cannot start DOS, EasyBCD loads Grub4DOS wh
 
 This networking setup is similar to my [Thinkpad T42](../thinkpad-t42).
 
-<img src="photos/x61-sbemu.jpg" width="500">
+<img src="photos/x61-vsbhda.jpg" width="500">
 
-Sound Blaster and OPL3 support is provided by the [SBEMU](https://github.com/crazii/SBEMU) driver. 
-
-A strange quirk that I found of this current driver with respect to using [Dr Sbaitso TTS](https://en.wikipedia.org/wiki/Dr._Sbaitso) is that the TTS will hang if this is the first app that is launched. Some other app needs to use the virtual Sound Blaster hardware first then we quit that and launch the TTS then the TTS will work.
-
-This is based on build [25 Dec 2023](https://github.com/crazii/SBEMU/releases/tag/UserBuild_2023.12.25_19-41).
+Sound Blaster and OPL3 support is provided by the [VSBHDA](https://github.com/Baron-von-Riedesel/VSBHDA) driver. 
 
 ## Sources
 
@@ -80,3 +81,4 @@ This is based on build [25 Dec 2023](https://github.com/crazii/SBEMU/releases/ta
 2. [Middleton modified BIOS](https://www.thinkwiki.org/wiki/Middleton%27s_BIOS)
 3. [SLIC intructions](https://dellwindowsreinstallationguide.com/windows-7-oem-slp/)
 4. [KB3138612](https://www.microsoft.com/en-us/download/details.aspx?id=51208)
+5. [Atheros AR9380 Win XP](https://drivers.softpedia.com/get/NETWORK-CARD/Atheros/Atheros-WLAN-Driver-1000260-for-XP.shtml)

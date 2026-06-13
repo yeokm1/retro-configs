@@ -1,0 +1,355 @@
+
+
+   1. About
+
+    VSBHDA is a SoundBlaster emulation program for DOS. It's a fork of SBEMU,
+   compatible with the standard HDPMI DPMI hosts included in the HX runtime
+   package. 
+
+
+   2. Requirements
+
+    Besides VSBHDA the following external binaries are needed:
+
+   - HDPMI32i : included in the HX DOS extender runtime package HXRT.
+                Download from https://github.com/Baron-von-Riedesel/HX.
+                Version of HDPMI32i must be v3.21 or better.
+
+   - HDPMI16i : also included in the HX DOS extender runtime package HXRT.
+                This is the 16-bit variant of the DPMI host.
+
+   - Jemm     : To be found at https://github.com/Baron-von-Riedesel/Jemm.
+                This package will also contain JLOAD.EXE and QPIEMU.DLL.
+                Version must be at least v5.84. Jemm - or rather QPIEMU.DLL
+                - is necessary for VSBHDA's support for "real-mode" games.
+                Instead of Jemm, Qemm may be used; however, JHDPMI.DLL can
+                be loaded and used by Jemm only.
+
+    As cpu at least a Pentium is required. However, since the emulation needs
+   quite a bit of processing power, such a cpu very likely isn't sufficient.
+   Tests revealed that a Pentium II with 266 MHz is able to handle simple games;
+   a Pentium III with 500 MHz gave the impression that it could handle both
+   voice and music output smoothly. Note that the MPU synthesizer needs a lot
+   of FPU power - reducing the voice maximum ( see option /MV below ) may be
+   needed. Adjusting the frequency ( /F cmdline option ) to the minimum may
+   also reduce cpu overstrain.
+
+    Supported sound hardware:
+
+   - Intel HDA
+   - Intel ICH, Nvidia nForce, SiS 7012
+   - VIA VT82C686, VT8233/35/37, but not VT8233A
+   - Creative Labs SB Live and SB Audigy (EMU10K1, EMU10K2)
+   - SB PCI cards based on ES1371/ES1373
+   - SB PCI cards based on CA0106 (SB Live24, SB Audigy LS) [untested]
+
+
+   3. Usage
+
+   3.1 Launching VSBHDA
+
+    VSBHDA consists of two programs: vsbhda.exe and vsbhda16.exe. Due to the
+   nature of DPMI, 16-bit and 32-bit DPMI clients must at least have separate
+   interrupt tables. This implies that - at least for DPMI v0.9 - there's no
+   good way for a 32-bit client to provide services for a 16-bit client - and
+   vice versa. Hence vsbhda.exe can only support 32-bit protected-mode games,
+   while vsbhda16 is limited to 16-bit protected-mode ones. Both variants
+   support real-mode games, though.
+
+   The steps to load the VSBHDA emulation layer are
+   
+   - load JemmEx/Jemm386 in CONFIG.SYS
+   - set environment variable BLASTER
+   - run "JLoad QPIEMU.DLL"
+   - optionally run "JLoad JHDPMI.DLL" (see below)
+
+   The rest depends on the game that is to run:
+
+    32-bit                 16-bit
+   --------------------------------------
+    HDPMI32i -x            HDPMI16i -x
+    VSBHDA                 VSBHDA16
+
+    Files START.BAT and START16.BAT are examples how this startup sequence
+   might look like. Also supplied are STARTL.BAT and START16L.BAT - these
+   variants run VSBHDA(16) without JHDPMI.DLL.
+
+    File UNINST.EXE may be used to unload VSBHDA. This must be done if one
+   wants to switch from 32-bit to 16-bit and vice versa; the programs
+   themselves have problems to detect the presence of the other variant.
+
+    As already mentioned, QPIEMU.DLL is needed for real-mode port trapping;
+   also, if it's not installed, UNINST.EXE won't work.
+
+    Vsbhda16.exe loads file sndcard.drv during initialization. Due to
+   limitations of the 16-bit environment ( a module's code/data segments must
+   not exceed 64 kB ) the binary had to be split into two parts.
+
+    With the BLASTER variable one can select what card VSBHDA is to emulate:
+   SB, SB Pro or SB 16; for example: "SET BLASTER=A220 I7 D1 H5 T6" will select
+   a SB16.
+
+
+   3.2 VSBHDA Commandline Options
+
+    VSBHDA will understand a few commandline options. Some, like /A, /I, /D, /H,
+   /P or /T, are similar to the settings of the BLASTER environment variable
+   ( this variable is NOT altered by VSBHDA ). The others are:
+
+     /OPL    : Set OPL3 emulation
+     /PM     : Set protected-mode support
+     /RM     : Set real-mode support
+     /F      : Set frequency
+     /VOL    : Set master volume
+     /BS     : Set PCM buffer size
+     /SD     : Set slowdown factor
+     /O      : Set output connector (HDA & SB Live/Audigy only)
+     /DEV    : Set start index for device scan (HDA only)
+     /PS     : Set period size
+     /SF:fn  : Set sound font filename to load
+     /MV     : Set voice limit for MPU synthesizer
+     /CF     : Set compatibility flags
+
+    Options must be followed by the number/string, without spaces. Options /A
+   and /P expect the number to be in hexadecimal, else decimal numbers are
+   required.
+
+   - /F: note that if the frequency isn't supported by the codec, it can't be
+     used - that's also true for the default value ( 22050 Hz ). In such cases
+     VSBHDA will use a frequency that is supported AND is at least the value
+     set by /F ( or the default ).
+   - /VOL: needs a one-digit value ( /VOL0 - /VOL9 ). This option sets the
+     volume of the real sound hardware ( hda, ac97 ).
+   - /BS: the PCM buffer is used for temporary storage of PCM samples, needed
+     for format conversions. The argument is the number of 4kB pages used as
+     buffer; the default value of 16 (means 64 kB) should be ok for virtually
+     all cases, setting it too small will result in page faults.
+   - /SD: purpose is to slowdown games. Needs a numeric argument, for example
+     /SD100. If this argument is too high, the machine won't respond anymore.
+     This option uses the RDTSC instruction - Although usually no problem, this
+     instruction is priviledged if bit TSD (bit 2) is set in register CR4; then
+     running this instruction in ring3 will cause a GPF.
+   - /PS: "period size" is space (in bytes) for samples rendered during one
+     interrupt request. A period size of 512, for example, means that about
+     128 samples will be rendered ( since output is always 16-bit, stereo ).
+     So option /PS combined with /F determine how many interrupts per second
+     will be generated by the sound hardware.
+   - /SF: sound font must be in .sf2 format. Note: to activate the MPU
+     synthesizer you'll usually have to also set the MPU port - either via the
+     BLASTER variable or the /P cmdline option.
+   - /MV: setting a voice limit of 0 will trigger dynamic allocation - this
+     is the most flexible setting, but may not work for all applications.
+   - /O: for SB Live/Audify cards, /O1 enables the "speaker" or "rear" jack;
+     value /O2 has no meaning for these cards.
+   - /CF: defines up to 32 bits to fine tune VSBHDA's behavior.
+     Bit 0: 1 = DSP cmds 0xF2/0xF3 will trigger an interrupt instantly;
+            0 = interrupt will be triggered delayed (default).
+     Bit 1: 1 = enable interrupts when EOI to be sent to master/slave PIC
+                is detected.
+     Bit 2: 1 = mask PIT interrupt during sound hardware interrupt.
+     Bit 3: 1 = vsbhda16 only: fix Borland's runtime error 200 for 16-bit
+                protected-mode programs.
+
+
+   4. Details/Hints
+
+   4.1 JHDPMI.DLL
+
+    This JLM is recommended to be loaded before the HDPMI binary. It doesn't
+   supply any features for VSBHDA directly, but enhances DPMI compliance of
+   HDPMI. It ensures that the DPMI host will be the first to receive interrupt
+   requests that occur in v86-mode, without the need to modify IVT vectors.
+    The utility JHDPMIS.EXE makes JHDPMI display its status. One may see what
+   IVT vectors are hooked and how often the hook address has been called.
+
+
+   4.2 SETPVI/RESPVI
+
+    A few protected-mode games may "freeze" with the default settings of VSBHDA;
+   or, if the game uses the Rational DOS extender (DOS4/GW), a register dump may
+   be displayed, with the error message "Transfer buffer overflow". Then there's
+   a chance that running SETPVI may fix that. Note that SETPVI won't work with
+   Qemm.
+
+    SETPVI will set the PVI flag in cpu register CR4, RESPVI will reset it. When
+   this bit is set, any protected-mode program running in ring 3 is unable to
+   change the interrupt flag (IF), since CLI/STI will modify the virtual
+   interrupt flag (VIF) only.
+
+
+   4.3 Extended Memory
+
+   4.3.1 Extended Memory Size
+
+    Some DOS games refuse to run if too much extended memory is available.
+   There are some simple software workarounds for such issues:
+
+    - HDPMI's -x cmdline option: this restricts the free DPMI memory to 256MB.
+      Optionally, this can be further reduced by appending a digit to -x: -x2
+      reduces free memory to 64MB, -x4 to 16MB. However, this is a soft limit,
+      since it's just the amount of memory that's reported as free - the
+      program may still allocate more than that, if available.
+
+    - XMSRes: tool to reduce free XMS memory. This TSR can be uninstalled, so
+      the reduction may be reverted without reboot.
+
+    - JemmEx's MAXEXT option: tells JemmEx's XMS host to supply a max. amount
+      of extended memory.
+
+   4.3.2 Extended Memory Address
+
+    There exist (real-mode) games that allocate an extended memory block to
+   be used as sound buffer. Since the SoundBlaster hardware uses ISA DMA, such
+   blocks must reside in the first 16 MB of physical memory. On newer machines
+   with GBs of memory it may be tricky to ensure that the game will get what
+   it needs.
+
+    The XMSRes tool has two options ( /L and /H ) that may help in this
+   regard. In the simplest case running "XMSRes -L 15" after VSBHDA has been
+   launched will leave a free block with the lowest address possible. However,
+   if VSBHDA is to load large sound fonts, there may be no free blocks left
+   below the 16MB barrier after vsbhda.exe has been launched. Then one has
+   to play with XMSRes's /H option to force VSBHDA ( and perhaps even HDPMI )
+   being loaded at high physical addresses, thus freeing up lower address
+   ranges.
+
+
+   4.4 Jemm's NOVCPI Option
+
+    If VSBHDA is to work for DOS protected-mode programs, they have to use the
+   HDPMI32i/HDPMI16i DPMI host. Usually this is no problem, because there's an
+   API to detect the presence of such a host. However, a program may ignore an
+   installed DPMI host and use the so-called VCPI API instead to run its very
+   own low-level code; this will actually deactivate VSBHDA for the program. To
+   cover such cases, Jemm386/JemmEx offers the NOVCPI option.
+    The NOVCPI option must be set *after* VSBHDA has been loaded and *before*
+   the program is launched; just run "jemm386 novcpi" ( or "jemmex novcpi" )
+   from the command line, without further options. After the program has run,
+   it's a good idea to restore the old state with "jemm386 vcpi" ( or "jemmex
+   vcpi" ).
+
+
+   4.5 SoundBlaster IRQ Setting
+
+    The BLASTER environment variable will set the interrupt used by the emulated
+   SoundBlaster card. Most DOS programs assume that this interrupt isn't shared
+   with other devices - tool hwinfo\pciirq.exe will display all PCI devices that
+   use an interrupt, so one can verify that this is the case.
+    Since VSBHDA v1.8 most games will run with sound even if the SB interrupt is
+   shared; the SB interrupt emulation "protects" the SB interrupt routine from
+   receiving real interrupt requests. However, this protection isn't 100% safe.
+
+
+   4.6 Windows 3.1
+
+    Windows 3.1 runs as a 16-bit DPMI client and is compatible with HDPMI in
+   so-called Standard mode. A few things have to be considered, though:
+
+    - The Windows Standard Mode task switcher duo WSWAP.EXE & DSWAP.EXE isn't
+      compatible with JHDPMI.DLL - START16L.BAT must be used to run VSBHDA.
+
+    - The Windows PL0 component DOSX.EXE will ignore any active DPMI host,
+      including HDPMI16i.exe. It must be replaced by the DOSX.EXE binary
+      supplied in directory Win31.
+
+    - If sound fonts are to be used, a lot of extended memory may be needed.
+      If there's less than 128 MB free memory *after* VSBHDA has been loaded,
+      it may be necessary to set environment variable HDPMI=64. For details
+      see DOSX.TXT in directory Win31.
+
+    - if the MS drivers are to be used (msadlib.drv & sndblst2.drv), section
+      [sndblst.drv] in system.ini must have setting VerifyInt=0 if cpu is
+      "fast".
+
+
+   5. Error/Warning Messages
+
+   - "Error: sound card IRQ conflict": the sound hardware uses the very same
+     IRQ number than the emulated SB ( 2, 5 or 7 ). This is currently rejected
+     ( it may confuse the emulator ).
+
+   - "Error: no IRQ assigned to sound card": This may happen on some systems
+     if the BIOS setting "Plug & Play OS" has been set to "Yes".
+
+   - "SB found - probably VSBHDA already installed": a SoundBlaster was
+     detected. If it's due to an installed VSBHDA, use UNINST.EXE to remove the
+     running VSBHDA from memory.
+
+   - "Jemm/Qemm not installed, or version below 7.03: x.x - disable real-mode
+     support": the so-called QPI wasn't found. It's either supplied by Qemm or
+     Jemm ( with QPIEMU.DLL loaded ).
+
+   - "HDPMI not installed - disable protected-mode support": running VSBHDA
+     under another DPMI host is possible, but not recommended.
+
+   - "Failed installing IO port trap for real-mode": the v86-monitor
+     (Qemm/Jemm) returned something unexpected when the port trapping API was
+     called.
+
+   - "Failed installing IO port trap for protected-mode": the DPMI
+     hosts HDPMI32i/HDPMI16i are the only ones implementing the protected-mode
+     port trapping API used by VSBHDA.
+
+   - "HDA: card n skipped - no codecs attached": HDA only; VSBHDA didn't find
+     any codecs attached to the HDA controller. A controller reset may be
+     needed.
+
+   - "HDA: card n skipped - mixer init error": HDA only; VSBHDA was unable to
+     query the codec for an appropriate path for sound output.
+
+   - "Pin <n> (<type>) used for output": HDA only; this is a warning that the
+     expected output device type ( lineout|speaker|headphone ) wasn't found
+     and hence another one had to be used.
+
+
+   6. Compatibility Issues
+
+    Here are some programs/games listed that require special actions:
+
+    - Aladdin: requires EMS, max. XMS memory is 31MB (XMSRes 31).
+    - Betrayal at Krondor: assumes SB IRQ 7; needs EMS memory.
+    - Blood: setting SB IRQ to 2 or 5 may be required. Generally, on some
+      machines the DOS/4GW DOS extender has problems with IRQ 7.
+    - Comanche Maximum Overkill (patched): needs Jemm's NOVCPI option.
+    - Creative's SB16 diagnose.exe: needs cmdline option /CF1.
+    - Daggerfall: uses the CauseWay DOS extender - requires either Jemm's
+      NOVCPI option or environment variable CAUSEWAY=DPMI.
+    - DynaBlaster: requires VSBHDA option /CF1.
+    - FastTracker 2: requires Jemm's NOVCPI option AND option /CF4.
+    - Jazz Jackrabbit: unpatched version requires /CF8.
+    - Jungle Book: needs SETPVI.EXE to be run before launched.
+    - Legend of Kyrandia 2: allocates a sound buffer in extended memory -
+      see notes in 4.3.2).
+    - Lemmings 2, a pretty sensitive game:
+      + uses direct disk access ( Int 25h ); the game has to be located on a
+        FAT12/FAT16 disk.
+      + for SFX to work, vsbhda option /CF1 has to be set.
+      + SB IRQ 5/7 may cause problems, IRQ 2 seems the best to work.
+    - MDK: requires option /CF4.
+    - Monkey Island 2: requires option /CF1.
+    - Redneck Rampage: if JemmEx is loaded with NOEMS, it needs to set MIN=15M.
+    - Screamer: set max. XMS memory to 31MB (XMSRes 31).
+    - Stargunner: requires Jemm's NOVCPI option; the game doesn't restore the
+      SB interrupt vector - it may be necessary to reload vsbhda after the
+      program has been run.
+    - Sword and Fairy 1 (Chinese Paladin): allocates a sound buffer in
+      extended memory - see notes in 4.3.2).
+    - System Shock: set max. XMS memory to 31MB (XMSRes 31) before running
+      HDPMI32i.
+    - Terminal Velocity: set max. XMS memory to 31MB (XMSRes 31).
+    - The Flight of the Amazon Queen: requires SETPVI.
+    - Tyrian 2000: this is a 16-bit game, needs VSBHDA16.EXE; the unpatched
+      variant may cause crashes since it doesn't expect to run with IOPL 0.
+      The patch may be found at https://github.com/drivelling-spinel/VSBCMI. 
+    - X128 (Sinclair Spectrum Emulator): requires Jemm's NOVCPI option.
+
+    The following (incomplete) list shows games that won't run with VSBHDA
+    because they are incompatible with either Jemm/Qemm or HDPMI:
+
+    - Comanche Maximum Overkill (original, unpatched)
+    - Privateer
+    - Rayman
+    - Strike Commander
+    - SuperFrog
+    - Zone 66
+
