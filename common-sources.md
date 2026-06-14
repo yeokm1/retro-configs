@@ -38,6 +38,7 @@
 36. [Iomega Zip Win 9x and NT](https://www.dosdays.co.uk/topics/Manufacturers/iomega_downloads.php)
 37. [Universal VBE Video Display Driver VBE9X](https://bearwindows.zcm.com.au/vbe9x.htm)
 38. [Virtual Sound Blaster for DOS](https://github.com/Baron-von-Riedesel/VSBHDA)
+39. [Thinkpad Driver snapshot 14 August 2014](http://tp.omgema.lt/)
 
 # Common software sources
 
