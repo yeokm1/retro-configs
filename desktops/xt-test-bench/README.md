@@ -29,10 +29,10 @@ The BIOS was replaced with a 32KB [GLaBIOS](https://github.com/glabios/glabios) 
 
 <img src="photos/xtbench-rom.jpg" width="600">
 
-The original BIOS was 8KB chip so I used a 32KB AT27C256R chip and duplicated the ROM image 4 times.
+The original BIOS was 8KB chip so I used a 64KB Winbond W27C512 chip and duplicated the ROM image 8 times.
 
 ```bash
-copy /b GLABIOS_0.4.1_8T.rom + GLABIOS_0.4.1_8T.rom + GLABIOS_0.4.1_8T.rom + GLABIOS_0.4.1_8T.rom GLABIOS_0.4.1_8T_32k.rom
+copy /b GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom GLABIOS_0.4.2_8T_64k.rom
 ```
 
 ## Expansion Cards:
