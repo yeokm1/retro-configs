@@ -45,6 +45,10 @@ copy /b GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLA
 
 [Picomem Audio Edition](https://www.serdashop.com/PicoMEM) acting as HDD emulator, Wireless NE2000 emulator and Expanded Memory.
 
+<img src="photos/xttest-cards.jpg" width="500">
+
+3Com EtherLink III 3C509B ethernet card for LAN connection if needed.
+
 ## Configuration
 
 <img src="photos/xttest-post.jpg" width="500">
