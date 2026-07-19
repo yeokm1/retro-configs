@@ -37,6 +37,10 @@ copy /b GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLA
 
 ## Expansion Cards:
 
+<img src="photos/xttest-cards.jpg" width="500">
+
+Cards placed nearer higher up to reduce signal lengths to CPU.
+
 <img src="photos/gg-hdmi-board.jpg" width="500">
 
 [Graphics Gremlin HDMI](https://github.com/yeokm1/graphics-gremlin-hdmi) CGA graphics card.
@@ -45,7 +49,7 @@ copy /b GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLABIOS_0.4.2_8T.rom + GLA
 
 [Picomem Audio Edition](https://www.serdashop.com/PicoMEM) acting as HDD emulator, Wireless NE2000 emulator and Expanded Memory.
 
-<img src="photos/xttest-cards.jpg" width="500">
+<img src="photos/xttest-3c509.jpg" width="500">
 
 3Com EtherLink III 3C509B ethernet card for LAN connection if needed.
 
