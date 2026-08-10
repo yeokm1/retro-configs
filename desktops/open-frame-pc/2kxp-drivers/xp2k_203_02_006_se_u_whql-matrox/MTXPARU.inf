@@ -1,0 +1,280 @@
+[Version]
+CatalogFile = MTXPARU.cat
+Signature = $Windows NT$
+Provider = Matrox Graphics Inc.
+ClassGuid = {4d36e968-e325-11ce-bfc1-08002be10318}
+Class = Display
+DriverVer=08/08/2006, 1.12.0.110
+
+[SourceDisksNames]
+1 = %Disk1%,Unified.cab
+
+[SourceDisksFiles]
+MTXPARHM.sys = 1
+MTXPARHD.dll = 1
+MTXOGL.dll = 1
+ParheliaDrvUninstaller.exe = 1
+MtxCIP.dll = 1
+mgafg.exe = 1
+
+[DestinationDirs]
+DefaultDestDir = 11
+Miniport.MTXPARH = 12
+File.Uninstaller = 11, PowerDesk8
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Manufacturer]
+%Matrox% = Mfg.Matrox
+
+[Mfg.Matrox]
+;---------------
+;MTXPARH
+;---------------
+%Str00%=IN00,PCI\VEN_102B&DEV_0527&SUBSYS_0850102B
+%Str01%=IN00,PCI\VEN_102B&DEV_0527&SUBSYS_0840102B
+%Str01%=IN00,PCI\VEN_102B&DEV_0528&SUBSYS_1020102B
+%Str02%=IN00,PCI\VEN_102B&DEV_2537&SUBSYS_1820102B
+%Str03%=IN00,PCI\VEN_102B&DEV_2537&SUBSYS_1830102B
+%Str04%=IN00,PCI\VEN_102B&DEV_2537&SUBSYS_2871102B
+%Str06%=IN00,PCI\VEN_102B&DEV_2538&SUBSYS_08C7102B
+%Str07%=IN00,PCI\VEN_102B&DEV_2538&SUBSYS_1801102B
+%Str07%=IN00,PCI\VEN_102B&DEV_2538&SUBSYS_2001102B
+%Str08%=IN00,PCI\VEN_102B&DEV_2538&SUBSYS_0907102B
+%Str09%=IN00,PCI\VEN_102B&DEV_2538&SUBSYS_1087102B
+%Str00%=IN01,PCI\VEN_102B&DEV_0528&SUBSYS_1030102B
+
+;==============================
+;MTXPARH Section(s) 
+;==============================
+[IN00]
+AddReg = AddReg.Setup.MTXPARH
+CopyFiles = Miniport.MTXPARH, Driver.MTXPARH, Driver.Icd.MTXPARH, File.Uninstaller
+
+[IN00.CoInstallers]
+AddReg = AddReg.CoInstaller
+CopyFiles = CoInstaller.MTXPARH
+
+[IN00.Services]
+AddService = MTXPARH,0x00000002,Service.MTXPARH
+
+[IN00.SoftwareSettings]
+AddReg = AddReg.Icd.MTXPARH, AddReg.Settings, AddReg.PackageVer, AddReg.Modes, AddReg.VidParms, AddReg.MTXPARH, AddReg.DefModes
+DelReg = DelReg.DriverSettings
+
+[IN01]
+AddReg = AddReg.Setup.MTXPARH
+CopyFiles = Miniport.MTXPARH, Driver.MTXPARH, Driver.Icd.MTXPARH, File.Uninstaller, MGAFG.EXE
+
+[IN01.CoInstallers]
+AddReg = AddReg.CoInstaller
+CopyFiles = CoInstaller.MTXPARH
+
+[IN01.Services]
+AddService = MTXPARH,0x00000002,Service.MTXPARH
+AddService = MGAFGEXE,,Service.MGAFG
+
+[IN01.SoftwareSettings]
+AddReg = AddReg.Icd.MTXPARH, AddReg.Settings, AddReg.PackageVer, AddReg.Modes, AddReg.VidParms, AddReg.MTXPARH, AddReg.DefModes, AddReg.MGAFG
+DelReg = DelReg.DriverSettings
+
+[MGAFG.EXE]
+mgafg.exe,,,0x00000004
+
+[AddReg.MGAFG]
+HKR,,PDEnable,0x00000001,01,00,00,00
+
+[Service.MGAFG]
+DisplayName = MGAFGEXE
+Description = Matrox FanGuard Service
+ServiceType = 0x00000110
+StartType = 2
+ErrorControl = 0
+ServiceBinary = %11%\mgafg.exe
+
+;---------------
+; MTXPARH shared
+;---------------
+[DelReg.DriverSettings]
+HKR,,User.AGP
+HKR,,CapabilityOverride
+HKR,,User.VPEEnable
+
+[AddReg.Setup.MTXPARH]
+HKR,Settings,InstalledDisplayDrivers,0x00010000,MTXPARHD
+HKR,Settings,VgaCompatible,0x00010001,0
+
+[Service.MTXPARH]
+ServiceType = 0x00000001
+StartType = 3
+ErrorControl = 0
+ServiceBinary = %12%\MTXPARHM.sys
+LoadOrderGroup = Video
+
+[Miniport.MTXPARH]
+MTXPARHM.sys,,,0x00000004
+
+[Driver.MTXPARH]
+MTXPARHD.dll,,,0x00000004
+
+[AddReg.Icd.MTXPARH]
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\MTXOGL,Version,0x00010001,0x00000002
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\MTXOGL,DriverVersion,0x00010001,0x00000001
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\MTXOGL,Flags,0x00010001,0x00000001
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\MTXOGL,Dll,,%11%\MTXOGL.DLL
+
+[Driver.Icd.MTXPARH]
+MTXOGL.dll,,,0x00000004
+
+[AddReg.Settings]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,DisplayName,,%MtxUninstallDisplayName%
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,HelpLink,,%MtxUninstallHelpLink%
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,URLInfoAbout,,%MtxUninstalUrlInfoAbout%
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,UninstallString,,%11%\PowerDesk8\ParheliaDrvUninstaller.exe
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,DisplayIcon,,%11%\PowerDesk8\ParheliaDrvUninstaller.exe
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,NoModify,0x00010001,01
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,Publisher,,"Matrox Graphics Inc."
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,WindowsInstaller,0x00010001,00
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,NoRepair,0x00010001,01
+
+[File.Uninstaller]
+ParheliaDrvUninstaller.exe,,,0x00000004
+
+[AddReg.CoInstaller]
+HKR,,CoInstallers32,0x00010000,"MtxCIP.dll,_CoInstaller@16"
+
+[CoInstaller.MTXPARH]
+MtxCIP.dll,,,0x00000004
+
+[CoInstaller.Info]
+OriginalInfSourcePath = %1%
+VHead = DualParu.inf
+
+[AddReg.PackageVer]
+HKR,,PackageVer,,"1.12.0.110"
+HKR,,PackageID,0x00000001,00,00,00,00
+
+[AddReg.Modes]
+HKR,,Mga.PixelWidths,0x00000001,08,10,20
+HKR,,Mga.SingleResolutions,0x00000001,\
+80,02,90,01,80,02,E0,01,20,03,58,02,50,03,E0,01,\ ; 640x 400,  640x 480,  800x 600,  848x 480
+58,03,E0,01,60,03,E0,01,C0,03,60,09,00,04,00,03,\ ; 856x 480,  864x 480,  960x2400, 1024x 768
+80,04,60,03,00,05,D0,02,00,05,00,03,00,05,C0,03,\ ;1152x 864, 1280x 720, 1280x 768, 1280x 960
+00,05,00,04,50,05,00,03,56,05,00,03,58,05,00,03,\ ;1280x1024, 1360x 768, 1366x 768, 1368x 768
+78,05,1A,04,A0,05,1A,04,40,06,00,04,40,06,B0,04,\ ;1400x1050, 1440x1050, 1600x1024, 1600x1200
+40,06,00,05,90,06,1A,04,80,07,38,04,80,07,B0,04,\ ;1600x1280, 1680x1050, 1920x1080, 1920x1200
+80,07,A0,05,80,07,60,09,00,08,00,06,00,0F,60,09   ;1920x1440, 1920x2400, 2048x1536, 3840x2400
+
+[AddReg.VidParms]
+HKR,,Graphic.640.400,0x00000001,\
+55,00,26,00,ee,7a,00,00,20,00,40,00,60,00,01,00,03,00,29,00,00,00,00,00,\
+4b,00,20,00,57,62,00,00,10,00,60,00,30,00,01,00,03,00,10,00,00,00,00,00,\
+64,00,2a,00,c5,89,00,00,20,00,40,00,60,00,01,00,03,00,14,00,08,00,00,00,\
+78,00,33,00,7c,aa,00,00,28,00,40,00,68,00,01,00,03,00,19,00,08,00,00,00
+HKR,,Graphic.640.480,0x00000001,\
+3c,00,20,00,57,62,00,00,10,00,60,00,30,00,0a,00,02,00,21,00,00,00,00,00,\
+48,00,25,00,0c,7b,00,00,18,00,28,00,80,00,09,00,03,00,1c,00,00,00,00,00,\
+4b,00,26,00,0c,7b,00,00,10,00,40,00,78,00,01,00,03,00,10,00,00,00,00,00,\
+55,00,2b,00,a0,8c,00,00,38,00,38,00,50,00,01,00,03,00,19,00,00,00,00,00,\
+64,00,33,00,93,a8,00,00,28,00,40,00,68,00,01,00,03,00,19,00,08,00,00,00,\
+78,00,3e,00,ba,cc,00,00,28,00,40,00,68,00,01,00,03,00,1f,00,08,00,00,00
+HKR,,Graphic.800.600,0x00000001,\
+38,00,23,00,a0,8c,00,00,18,00,48,00,80,00,01,00,02,00,16,00,0c,00,00,00,\
+3c,00,26,00,40,9c,00,00,28,00,80,00,58,00,01,00,04,00,17,00,0c,00,00,00,\
+48,00,30,00,50,c3,00,00,38,00,78,00,40,00,25,00,06,00,17,00,0c,00,00,00,\
+4b,00,2f,00,5c,c1,00,00,10,00,50,00,a0,00,01,00,03,00,15,00,0c,00,00,00,\
+55,00,36,00,ba,db,00,00,20,00,40,00,98,00,01,00,03,00,1b,00,0c,00,00,00,\
+64,00,40,00,61,0a,01,00,38,00,50,00,88,00,01,00,03,00,20,00,08,00,00,00,\
+78,00,4d,00,ef,47,01,00,40,00,50,00,90,00,01,00,03,00,27,00,08,00,00,00
+HKR,,Graphic.1024.768,0x00000001,\
+3c,00,30,00,e8,fd,00,00,18,00,88,00,a0,00,03,00,06,00,1d,00,00,00,00,00,\
+46,00,38,00,f8,24,01,00,18,00,88,00,90,00,03,00,06,00,1d,00,00,00,00,00,\
+4b,00,3c,00,9e,33,01,00,10,00,60,00,b0,00,01,00,03,00,1c,00,0c,00,00,00,\
+55,00,45,00,24,71,01,00,30,00,60,00,d0,00,01,00,03,00,24,00,0c,00,00,00,\
+64,00,51,00,6f,ba,01,00,50,00,68,00,b8,00,01,00,03,00,2a,00,08,00,00,00,\
+78,00,63,00,f1,1e,02,00,50,00,70,00,c0,00,01,00,03,00,33,00,08,00,00,00,\
+2b,00,23,00,64,af,00,00,08,00,b0,00,38,00,00,00,04,00,14,00,0d,00,00,00
+HKR,,Graphic.1152.864,0x00000001,\
+3c,00,36,00,80,38,01,00,20,00,60,00,c0,00,01,00,03,00,20,00,00,00,00,00,\
+46,00,40,00,24,71,01,00,20,00,60,00,c8,00,01,00,03,00,2c,00,00,00,00,00,\
+4b,00,44,00,e0,a5,01,00,40,00,80,00,00,01,01,00,03,00,20,00,0c,00,00,00,\
+55,00,4d,00,9c,da,01,00,40,00,80,00,e0,00,01,00,03,00,2b,00,00,00,00,00,\
+64,00,5b,00,62,30,02,00,58,00,78,00,d0,00,01,00,03,00,2f,00,08,00,00,00,\
+78,00,6f,00,80,af,02,00,60,00,78,00,d8,00,01,00,03,00,3a,00,08,00,00,00
+HKR,,Graphic.1280.1024,0x00000001,\
+3c,00,40,00,e0,a5,01,00,30,00,70,00,f8,00,01,00,03,00,26,00,0c,00,00,00,\
+4b,00,50,00,58,0f,02,00,10,00,90,00,f8,00,01,00,03,00,26,00,0c,00,00,00,\
+55,00,5b,00,3c,67,02,00,40,00,a0,00,e0,00,01,00,03,00,2c,00,0c,00,00,00,\
+64,00,6c,00,a9,e9,02,00,68,00,88,00,f0,00,01,00,03,00,39,00,08,00,00,00,\
+78,00,81,00,7A,85,03,00,48,00,98,00,18,01,03,00,02,00,31,00,08,00,00,00
+HKR,,Graphic.1600.1024,0x00000001,\
+3c,00,40,00,c3,14,02,00,68,00,a8,00,10,01,01,00,03,00,20,00,08,00,00,00,\
+4b,00,50,00,a3,a9,02,00,78,00,a8,00,20,01,01,00,03,00,29,00,08,00,00,00,\
+55,00,5b,00,f7,08,03,00,78,00,a8,00,20,01,01,00,03,00,2f,00,08,00,00,00,\
+64,00,6c,00,b0,a0,03,00,80,00,a8,00,28,01,01,00,03,00,39,00,08,00,00,00,\
+78,00,84,00,de,6e,04,00,80,00,b0,00,30,01,01,00,03,00,45,00,08,00,00,00
+HKR,,Graphic.1600.1200,0x00000001,\
+3c,00,4b,00,d0,78,02,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+41,00,51,00,8c,ad,02,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+46,00,58,00,48,e2,02,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+4b,00,5e,00,04,17,03,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+55,00,6a,00,7c,80,03,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+64,00,7f,00,ef,47,04,00,80,00,b0,00,30,01,01,00,03,00,43,00,08,00,00,00,\
+3c,00,4b,00,4c,f8,01,00,20,00,20,00,40,00,01,00,03,00,29,00,0c,20,00,00
+HKR,,Graphic.1920.1080,0x00000001,\
+3c,00,44,00,60,70,02,00,20,00,90,00,10,01,03,00,03,00,27,00,00,00,00,00,\
+48,00,54,00,d7,4b,03,00,30,00,d8,00,78,01,03,00,03,00,56,00,00,00,00,00,\
+55,00,60,00,6e,dc,03,00,90,00,d0,00,60,01,01,00,03,00,32,00,08,00,00,00,\
+64,00,72,00,eb,9b,04,00,98,00,d0,00,68,01,01,00,03,00,3c,00,08,00,00,00
+HKR,,Graphic.1920.1200,0x00000001,\
+3c,00,4b,00,08,f5,02,00,40,00,00,01,58,01,03,00,03,00,2c,00,00,00,00,00,\
+41,00,51,00,1e,34,03,00,40,00,00,01,58,01,03,00,03,00,2c,00,00,00,00,00,\
+4c,00,5F,00,e8,be,03,00,40,00,00,01,58,01,03,00,03,00,2c,00,00,00,00,00,\
+55,00,6b,00,1f,50,04,00,98,00,d0,00,68,01,01,00,03,00,38,00,08,00,00,00,\
+64,00,7f,00,4c,26,05,00,a0,00,d0,00,70,01,01,00,03,00,43,00,08,00,00,00
+HKR,,Graphic.1920.1440,0x00000001,\
+3c,00,5a,00,10,92,03,00,80,00,d0,00,58,01,01,00,03,00,38,00,08,00,00,00,\
+4b,00,71,00,28,88,04,00,90,00,e0,00,60,01,01,00,03,00,38,00,08,00,00,00,\
+55,00,81,00,8c,35,05,00,a0,00,d0,00,70,01,01,00,03,00,44,00,08,00,00,00
+HKR,,Graphic.2048.1536,0x00000001,\
+3c,00,5f,00,c8,12,04,00,98,00,e0,00,78,01,01,00,03,00,31,00,00,00,00,00,\
+4b,00,78,00,a1,31,05,00,a8,00,e0,00,88,01,01,00,03,00,3f,00,08,00,00,00,\
+55,00,89,00,69,eb,05,00,a8,00,e0,00,88,01,01,00,03,00,48,00,08,00,00,00
+HKR,,Graphic.1280.960,0x00000001,\
+3c,00,3c,00,e0,a5,01,00,60,00,70,00,38,01,01,00,03,00,24,00,00,00,00,00,\
+55,00,56,00,10,44,02,00,40,00,a0,00,e0,00,01,00,03,00,2f,00,00,00,00,00
+
+[AddReg.MTXPARH]
+HKR,,InstalledDisplayDrivers,0x00010000,MTXPARHD
+HKR,,VgaCompatible,0x00010001,0
+HKR,,System.FastWrite,0x00010001,00,00,00,00
+HKR,,System.MmMaxApertureSize,0x00010001,0
+HKR,,System.ForceSBA,0x00010001,1
+
+[AddReg.DefModes]
+HKR,,DefaultSettings.BitsPerPel,0x00010001,32
+HKR,,DefaultSettings.XResolution,0x00010001,800
+HKR,,DefaultSettings.YResolution,0x00010001,600
+
+;---------------
+; Global Shared
+;---------------
+[Strings]
+Disk1 = "Matrox Graphics Installation Disk 1"
+Matrox = "Matrox Graphics Inc."
+Str00 = "Matrox Parhelia 256MB"
+Str01 = "Matrox Parhelia 128MB"
+Str02 = "Matrox Millennium P750"
+Str03 = "Matrox Millennium P650"
+Str04 = "Matrox EpicA TC2"
+Str06 = "Matrox Millennium P650 PCIe 128"
+Str07 = "Matrox Millennium P650 PCIe x1"
+Str08 = "Matrox Millennium P650 PCIe 64"
+Str09 = "Matrox Millennium P650 LP PCIe 64"
+
+FanGuardServiceDesc = Matrox FanGuard Service
+GenuineMatroxMGIPackage = 0x00000001
+MtxUninstalUrlInfoAbout = "http://www.matrox.com/mga"
+MtxUninstallDisplayName = "Matrox Driver"
+MtxUninstallHelpLink = "http://www.matrox.com/mga/support/tech_support/contact_tech.cfm"

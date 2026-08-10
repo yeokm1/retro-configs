@@ -1,0 +1,86 @@
+;
+; Installation inf for the Matrox True Multi-display for the G400/G450 series.
+;
+; Copyright (c) 1999-2006. Matrox Graphics Inc. All Rights Reserved.
+;
+
+[Version]
+CatalogFile = dualgs.cat
+Signature=$Windows NT$
+Provider=Matrox Graphics Inc.
+ClassGuid={4d36e968-e325-11ce-bfc1-08002be10318}
+Class=Display
+DriverVer=02/27/2006, 5.96.004.0
+
+[VHead]
+SUPPORTED=0525,2527
+UNSUPPORTED=0525-23C0102B,0525-23C1102B,0525-0643102B,0525-0543102B,0525-26C0102B,0525-26C1102B,0525-26C2102B,0525-26C4102B,0525-26C5102B
+NoIndependentPrompt = 2527-28C0102B
+
+[SourceDisksNames]
+1 = %Disk1%,GSeries.cab
+
+[SourceDisksFiles]
+g400dhm.sys = 1
+g400dhd.dll = 1
+
+[DestinationDirs]
+DefaultDestDir = 11
+Miniport.G400VH  = 12
+
+[Manufacturer]
+Matrox=Mfg.Matrox
+
+[Mfg.Matrox]
+Matrox G400/G450/G550 DualHead=G400VH
+
+[G400VH]
+AddReg=AddReg.Setup.G400VH
+CopyFiles=Driver.G400VH, Miniport.G400VH
+
+[G400VH.SoftwareSettings]
+AddReg = AddReg.VHead
+DelReg = DelReg.VHead
+
+[AddReg.Setup.G400VH]
+HKR,Settings,InstalledDisplayDrivers,0x00010000,G400DHD
+HKR,Settings,VgaCompatible,0x00010001,0
+
+[AddReg.VHead]
+HKR,,User.EnableDualView,0x00000001,01,00,00,00
+
+[DelReg.VHead]
+HKR,,User.EnableDualView
+HKR,,User3D.3DEnable
+HKR,,User3D.D3DEnable
+
+[Miniport.G400VH]
+g400dhm.sys,,,0x00000004
+
+[Driver.G400VH]
+g400dhd.dll,,,0x00000004
+
+[G400VH.Services]
+AddService = G400DH, 0x00000002, G400VH_Service_Inst, G400VH_EventLog_Inst
+
+[G400VH_Service_Inst]
+ServiceType    = 0x00000001
+StartType      = 3
+ErrorControl   = 0
+ServiceBinary  = %12%\g400dhm.sys
+LoadOrderGroup = Video
+
+[G400VH_EventLog_Inst]
+AddReg = G400VH_EventLog_AddReg
+
+[G400VH_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%SystemRoot%\System32\IoLogMsg.dll;%SystemRoot%\System32\drivers\G400dhm.sys"
+HKR,,TypesSupported,0x00010001,7
+
+[Strings]
+REG_SZ        = 0x00000000
+REG_MULTI_SZ  = 0x00010000
+REG_EXPAND_SZ = 0x00020000
+REG_BINARY    = 0x00000001
+REG_DWORD     = 0x00010001
+SERVICEROOT   = System\CurrentControlSet\Services

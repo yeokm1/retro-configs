@@ -93,4 +93,5 @@ Do not install Vinyl AC97 WDM driver. That will override Creative VxD driver use
 # Sources
 
 1. [VIADOS drivers](https://sites.google.com/site/cocktailcabinet/downloads)
-2. [Matrox drivers](https://www.philscomputerlab.com/drivers-for-matrox.html)
+2. [Matrox drivers Win 9x](https://www.philscomputerlab.com/drivers-for-matrox.html)
+3. [Matrix drivers Win 2K/XP](https://matrox.com/en/apps/drivers/graphics/download?id=179)

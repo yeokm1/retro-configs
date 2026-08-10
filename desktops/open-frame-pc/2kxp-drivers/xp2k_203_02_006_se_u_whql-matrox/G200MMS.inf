@@ -1,0 +1,312 @@
+[Version]
+CatalogFile = G200MMS.cat
+Signature = $Windows NT$
+Provider = Matrox Graphics Inc.
+ClassGuid = {4d36e968-e325-11ce-bfc1-08002be10318}
+Class = Display
+DriverVer=02/28/2006, 5.96.004.0
+
+[SourceDisksNames]
+1 = %Disk1%,GSeries.cab
+
+[SourceDisksFiles]
+g200icd.dll = 1
+g200mini.sys = 1
+g200disp.dll = 1
+mgabg.exe = 1
+MtxCIP.dll = 1
+pduninst.exe = 1
+
+[DestinationDirs]
+DefaultDestDir = 11
+Miniport.G200 = 12
+File.Uninstaller = 11, PDesk
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Manufacturer]
+%Matrox% = Mfg.Matrox
+
+[Mfg.Matrox]
+;---------------
+;G200MMS
+;---------------
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBE3102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBF2102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBF5102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBF3102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBD9102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBD2102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBC3102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBD3102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBD8102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBF9102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBE2102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBC2102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBF4102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DBF8102B
+%Str00%=IN00,PCI\VEN_102B&DEV_0521&SUBSYS_DB73102B
+%Str01%=IN01,PCI\VEN_102B&DEV_0521&SUBSYS_DBE7102B
+
+;==============================
+;G200MMS Section(s) 
+;==============================
+[IN00]
+AddReg = AddReg.Setup.G200
+CopyFiles = Driver.Icd.G200, Miniport.G200, Driver.G200, MGABG.EXE, File.Uninstaller
+
+[IN00.CoInstallers]
+AddReg = AddReg.CoInstaller
+CopyFiles = CoInstaller.GSeries
+
+[IN00.Services]
+AddService = G200,0x00000002,Service.G200
+AddService = MGABGEXE,,Service.MGABG
+
+[IN00.SoftwareSettings]
+AddReg = AddReg.Icd.G200, AddReg.Modes, AddReg.VidParms, AddReg.MGABG, AddReg.Uninstaller, AddReg.DefModes, AddReg.PackageVer, AddReg.G200
+DelReg = DelReg.DriverSettings, DelReg.Icd.G200
+
+[AddReg.G200]
+HKR,,InstalledDisplayDrivers,0x00010000,G200DISP
+HKR,,VgaCompatible,0x00010001,0
+HKR,,MonitorSettingsOnDigital,0x00000001,01,00,00,00
+
+[IN01]
+AddReg = AddReg.Setup.G200
+CopyFiles = Driver.Icd.G200, Miniport.G200, Driver.G200, MGABG.EXE, File.Uninstaller
+
+[IN01.CoInstallers]
+AddReg = AddReg.CoInstaller
+CopyFiles = CoInstaller.GSeries
+
+[IN01.Services]
+AddService = G200,0x00000002,Service.G200
+AddService = MGABGEXE,,Service.MGABG
+
+[IN01.SoftwareSettings]
+AddReg = AddReg.Icd.G200, AddReg.Modes, AddReg.VidParms, AddReg.MGABG, AddReg.Uninstaller, AddReg.DefModes, AddReg.PackageVer, AddReg.MED2mp
+DelReg = DelReg.DriverSettings, DelReg.Icd.G200
+
+[AddReg.MED2mp]
+HKR,,InstalledDisplayDrivers,0x00010000,G200DISP
+HKR,,VgaCompatible,0x00010001,0
+HKR,,Engine.EnableMemAccess,0x00010001,1
+HKR,,User.PaletteMode,0x00010001,0x80000001
+HKR,,MonitorSettingsOnDigital,0x00000001,01,00,00,00
+
+;---------------
+; G200MMS shared
+;---------------
+[DelReg.DriverSettings]
+HKR,,User.AGP
+HKR,,CapabilityOverride
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,MGABG
+HKR,,User.VPEEnable
+HKR,,User.EnableDualView
+
+[AddReg.Icd.G200]
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\G200ICD,Version,0x00010001,00000002
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\G200ICD,DriverVersion,0x00010001,00000001
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\G200ICD,Flags,0x00010001,00000001
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\G200ICD,Dll,,%11%\G200icd.dll
+
+[Driver.Icd.G200]
+g200icd.dll,,,0x00000004
+
+[AddReg.Modes]
+HKR,,Mga.PixelWidths,0x00000001,08,10,18,20
+HKR,,Mga.SingleResolutions,0x00000001,\
+40,01,C8,00,40,01,F0,00,00,02,80,01,80,02,90,01,\ ; 320x 200,  320x 240,  512x 384,  640x 400
+80,02,E0,01,20,03,58,02,50,03,E0,01,58,03,E0,01,\ ; 640x 480,  800x 600,  848x 480,  856x 480
+60,03,E0,01,C0,03,60,09,00,04,00,02,00,04,00,03,\ ; 864x 480,  960x2400, 1024x 512, 1024x 768
+00,04,00,04,00,04,00,05,00,04,00,06,30,04,58,02,\ ;1024x1024, 1024x1280, 1024x1536, 1072x 600
+80,04,60,03,B0,04,40,06,00,05,D0,02,00,05,00,03,\ ;1152x 864, 1200x1600, 1280x 720, 1280x 768
+00,05,20,03,00,05,C0,03,00,05,00,04,00,05,40,06,\ ;1280x 800, 1280x 960, 1280x1024, 1280x1600
+50,05,00,03,58,05,00,03,60,05,00,03,A0,05,84,03,\ ;1360x 768, 1368x 768, 1376x 768, 1440x 900
+40,06,00,04,40,06,B0,04,40,06,00,05,90,06,1A,04,\ ;1600x1024, 1600x1200, 1600x1280, 1680x1050
+00,07,40,05,08,07,A0,05,40,07,70,05,80,07,0A,04,\ ;1792x1344, 1800x1440, 1856x1392, 1920x1034
+80,07,38,04,80,07,B0,04,80,07,A0,05,00,08,00,06   ;1920x1080, 1920x1200, 1920x1440, 2048x1536
+
+[AddReg.VidParms]
+HKR,,Graphic.320.200,0x00000001,\
+55,00,24,00,C5,3E,00,00,20,00,20,00,40,00,03,00,03,00,10,00,00,00,00,00,\
+4a,00,1f,00,0a,32,00,00,08,00,20,00,30,00,03,00,03,00,10,00,00,00,00,00
+HKR,,Graphic.320.240,0x00000001,\
+55,00,2b,00,4d,44,00,00,08,00,20,00,30,00,03,00,03,00,10,00,00,00,00,00,\
+3f,00,20,00,0a,32,00,00,08,00,20,00,30,00,03,00,03,00,10,00,00,00,00,00
+HKR,,Graphic.512.384,0x00000001,\
+55,00,22,00,da,55,00,00,10,00,40,00,30,00,01,00,03,00,10,00,00,00,00,00
+HKR,,Graphic.640.400,0x00000001,\
+55,00,26,00,ee,7a,00,00,20,00,40,00,60,00,01,00,03,00,29,00,00,00,00,00,\
+4b,00,20,00,57,62,00,00,10,00,60,00,30,00,01,00,03,00,10,00,00,00,00,00
+HKR,,Graphic.640.480,0x00000001,\
+3c,00,20,00,57,62,00,00,10,00,60,00,30,00,0a,00,02,00,21,00,00,00,00,00,\
+48,00,25,00,0c,7b,00,00,18,00,28,00,80,00,09,00,03,00,1c,00,00,00,00,00,\
+4b,00,26,00,0c,7b,00,00,10,00,40,00,78,00,01,00,03,00,10,00,00,00,00,00,\
+55,00,2b,00,a0,8c,00,00,38,00,38,00,50,00,01,00,03,00,19,00,00,00,00,00
+HKR,,Graphic.800.600,0x00000001,\
+38,00,23,00,a0,8c,00,00,18,00,48,00,80,00,01,00,02,00,16,00,0c,00,00,00,\
+3c,00,26,00,40,9c,00,00,28,00,80,00,58,00,01,00,04,00,17,00,0c,00,00,00,\
+48,00,30,00,50,c3,00,00,38,00,78,00,40,00,25,00,06,00,17,00,0c,00,00,00,\
+4b,00,2f,00,5c,c1,00,00,10,00,50,00,a0,00,01,00,03,00,15,00,0c,00,00,00,\
+55,00,36,00,ba,db,00,00,20,00,40,00,98,00,01,00,03,00,1b,00,0c,00,00,00
+HKR,,Graphic.848.480,0x00000001,\
+3c,00,1f,00,d6,83,00,00,10,00,70,00,70,00,06,00,08,00,17,00,00,00,00,00
+HKR,,Graphic.856.480,0x00000001,\
+3c,00,1e,00,0c,7b,00,00,20,00,40,00,60,00,04,00,08,00,08,00,00,00,00,00
+HKR,,Graphic.864.480,0x00000001,\
+3c,00,1e,00,f6,7c,00,00,18,00,50,00,68,00,01,00,03,00,0d,00,08,00,00,00
+HKR,,Graphic.1024.512,0x00000001,\
+3c,00,20,00,61,a1,00,00,20,00,68,00,88,00,01,00,03,00,0f,00,08,00,00,00
+HKR,,Graphic.1024.768,0x00000001,\
+3c,00,30,00,e8,fd,00,00,18,00,88,00,a0,00,03,00,06,00,1d,00,00,00,00,00,\
+46,00,38,00,f8,24,01,00,18,00,88,00,90,00,03,00,06,00,1d,00,00,00,00,00,\
+4b,00,3c,00,9e,33,01,00,10,00,60,00,b0,00,01,00,03,00,1c,00,0c,00,00,00,\
+55,00,45,00,24,71,01,00,30,00,60,00,d0,00,01,00,03,00,24,00,0c,00,00,00,\
+2b,00,23,00,64,af,00,00,08,00,b0,00,38,00,00,00,04,00,14,00,0d,00,00,00
+HKR,,Graphic.1024.1280,0x00000001,\
+46,00,5d,00,be,0d,02,00,48,00,a0,00,b0,00,01,00,07,00,27,00,0c,00,00,00
+HKR,,Graphic.1072.600,0x00000001,\
+3c,00,25,00,b6,c8,00,00,30,00,68,00,98,00,01,00,03,00,12,00,08,00,00,00
+HKR,,Graphic.1152.864,0x00000001,\
+3c,00,36,00,80,38,01,00,20,00,60,00,c0,00,01,00,03,00,20,00,00,00,00,00,\
+46,00,40,00,24,71,01,00,20,00,60,00,c8,00,01,00,03,00,2c,00,00,00,00,00,\
+4b,00,44,00,e0,a5,01,00,40,00,80,00,00,01,01,00,03,00,20,00,0c,00,00,00,\
+55,00,4d,00,9c,da,01,00,40,00,80,00,e0,00,01,00,03,00,2b,00,00,00,00,00
+HKR,,Graphic.1200.1600,0x00000001,\
+4C,00,7C,00,F0,43,03,00,48,00,B8,00,00,01,01,00,02,00,2D,00,0C,00,00,00
+HKR,,Graphic.1280.720,0x00000001,\
+3c,00,2d,00,d4,2a,01,00,30,00,b0,00,c0,00,04,00,08,00,12,00,00,00,00,00
+HKR,,Graphic.1280.768,0x00000001,\
+38,00,2d,00,76,29,01,00,30,00,70,00,f8,00,01,00,03,00,1e,00,00,00,00,00
+HKR,,Graphic.1280.800,0x00000001,\
+3C,00,32,00,2C,46,01,00,48,00,80,00,C8,00,01,00,03,00,18,00,08,00,00,00,\
+4B,00,3F,00,04,A3,01,00,50,00,88,00,D8,00,01,00,03,00,1F,00,08,00,00,00,\
+55,00,47,00,25,E2,01,00,58,00,88,00,E0,00,01,00,03,00,24,00,08,00,00,00
+HKR,,Graphic.1280.960,0x00000001,\
+3c,00,3c,00,e0,a5,01,00,60,00,70,00,38,01,01,00,03,00,24,00,00,00,00,00,\
+55,00,56,00,10,44,02,00,40,00,a0,00,e0,00,01,00,03,00,2f,00,00,00,00,00
+HKR,,Graphic.1280.1024,0x00000001,\
+3c,00,40,00,e0,a5,01,00,30,00,70,00,f8,00,01,00,03,00,26,00,0c,00,00,00,\
+4b,00,50,00,58,0f,02,00,10,00,90,00,f8,00,01,00,03,00,26,00,0c,00,00,00,\
+55,00,5b,00,3c,67,02,00,40,00,a0,00,e0,00,01,00,03,00,2c,00,0c,00,00,00
+HKR,,Graphic.1280.1600,0x00000001,\
+49,00,77,00,9e,59,03,00,48,00,c8,00,10,01,01,00,02,00,24,00,0c,00,00,00
+HKR,,Graphic.1360.768,0x00000001,\
+3c,00,30,00,67,20,01,00,3a,00,1a,00,40,00,0a,00,06,00,20,00,00,00,00,00
+HKR,,Graphic.1368.768,0x00000001,\
+3c,00,30,00,76,4f,01,00,48,00,90,00,d8,00,01,00,03,00,17,00,08,00,00,00
+HKR,,Graphic.1376.768,0x00000001,\
+3c,00,30,00,f4,50,01,00,48,00,90,00,d8,00,01,00,03,00,17,00,08,00,00,00
+HKR,,Graphic.1600.1024,0x00000001,\
+3c,00,40,00,58,0f,02,00,20,00,a0,00,30,01,03,00,03,00,28,00,00,00,00,00,\
+4c,00,53,00,cf,99,02,00,20,00,a0,00,30,01,03,00,03,00,28,00,00,00,00,00
+HKR,,Graphic.1600.1200,0x00000001,\
+3c,00,4b,00,d0,78,02,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+41,00,51,00,8c,ad,02,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+46,00,58,00,48,e2,02,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+4b,00,5e,00,04,17,03,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00,\
+55,00,6a,00,7c,80,03,00,40,00,c0,00,30,01,01,00,03,00,2e,00,0c,00,00,00
+HKR,,Graphic.1600.1280,0x00000001,\
+3c,00,4f,00,ad,a3,02,00,78,00,a8,00,20,01,01,00,03,00,29,00,08,00,00,00
+HKR,,Graphic.1792.1344,0x00000001,\
+3c,00,54,00,ce,1f,03,00,80,00,c8,00,48,01,01,00,03,00,2e,00,08,00,00,00,\
+4b,00,6a,00,88,fb,03,00,60,00,d8,00,60,01,01,00,03,00,45,00,08,00,00,00
+HKR,,Graphic.1800.1440,0x00000001,\
+3c,00,59,00,56,3d,03,00,60,00,c0,00,30,01,01,00,03,00,2e,00,00,00,00,00,\
+46,00,69,00,90,d0,03,00,60,00,c0,00,30,01,01,00,03,00,2e,00,00,00,00,00
+HKR,,Graphic.1856.1392,0x00000001,\
+3c,00,56,00,8a,54,03,00,60,00,e0,00,60,01,01,00,03,00,2b,00,08,00,00,00,\
+4b,00,71,00,00,65,04,00,80,00,e0,00,60,01,01,00,03,00,68,00,08,00,00,00
+HKR,,Graphic.1920.1034,0x00000001,\
+1e,00,22,00,0a,22,01,00,2c,00,58,00,94,00,05,00,05,00,23,00,01,00,00,00
+HKR,,Graphic.1920.1080,0x00000001,\
+3c,00,44,00,60,70,02,00,20,00,90,00,10,01,03,00,03,00,27,00,00,00,00,00,\
+48,00,54,00,d7,4b,03,00,30,00,d8,00,78,01,03,00,03,00,56,00,00,00,00,00
+HKR,,Graphic.1920.1200,0x00000001,\
+3c,00,4b,00,08,f5,02,00,40,00,00,01,58,01,03,00,03,00,2c,00,00,00,00,00,\
+41,00,51,00,1e,34,03,00,40,00,00,01,58,01,03,00,03,00,2c,00,00,00,00,00,\
+4c,00,5F,00,e8,be,03,00,40,00,00,01,58,01,03,00,03,00,2c,00,00,00,00,00
+HKR,,Graphic.1920.1440,0x00000001,\
+3c,00,5a,00,10,92,03,00,80,00,d0,00,58,01,01,00,03,00,38,00,08,00,00,00,\
+4b,00,71,00,28,88,04,00,90,00,e0,00,60,01,01,00,03,00,38,00,08,00,00,00
+HKR,,Graphic.2048.1536,0x00000001,\
+3c,00,5f,00,c8,12,04,00,98,00,e0,00,78,01,01,00,03,00,31,00,00,00,00,00
+
+[AddReg.Setup.G200]
+HKR,Settings,InstalledDisplayDrivers,0x00010000,G200DISP
+HKR,Settings,VgaCompatible,0x00010001,0
+
+[Service.G200]
+ServiceType = 0x00000001
+StartType = 3
+ErrorControl = 0
+ServiceBinary = %12%\g200mini.sys
+LoadOrderGroup = Video
+
+[Miniport.G200]
+g200mini.sys,,,0x00000004
+
+[Driver.G200]
+g200disp.dll,,,0x00000004
+
+[DelReg.Icd.G200]
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers,G200ICD
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\G200ICD,Version
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\G200ICD,DriverVersion
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\G200ICD,Flags
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\G200ICD,Dll
+
+[MGABG.EXE]
+mgabg.exe,,,0x00000004
+
+[AddReg.MGABG]
+HKR,,PDEnable,0x00000001,01,00,00,00
+
+[Service.MGABG]
+DisplayName = MGABGEXE
+ServiceType = 0x00000010
+StartType = 2
+ErrorControl = 0
+ServiceBinary = %11%\mgabg.exe
+
+[AddReg.CoInstaller]
+HKR,,CoInstallers32,0x00010000,"MtxCIP.dll,_CoInstaller@16"
+
+[CoInstaller.GSeries]
+MtxCIP.dll,,,0x00000004
+
+[CoInstaller.Info]
+OriginalInfSourcePath = %1%
+VHeadInf = DualGS.inf
+
+[AddReg.Uninstaller]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Graphics Uninstaller,UninstallString,,%11%\PDesk\PDUninst.exe
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Graphics Uninstaller,DisplayName,,"Matrox Graphics Software (remove only)"
+
+[File.Uninstaller]
+pduninst.exe,,
+
+[AddReg.DefModes]
+HKR,,DefaultSettings.BitsPerPel,0x00010001,16
+HKR,,DefaultSettings.XResolution,0x00010001,800
+HKR,,DefaultSettings.YResolution,0x00010001,600
+
+[AddReg.PackageVer]
+HKR,,PackageVer,,"5.96.004"
+
+;---------------
+; Global Shared
+;---------------
+[Strings]
+Disk1 = "Matrox Graphics Installation Disk 1"
+Matrox = "Matrox Graphics Inc."
+Str00 = "Matrox G200 Multi-Monitor"
+Str01 = "Matrox MED3mp-DVI"
+FanGuardServiceDesc = Matrox FanGuard Service
+GenuineMatroxMGIPackage = 0x00000001
+MtxUninstalUrlInfoAbout = "http://www.matrox.com/mga"
+MtxUninstallDisplayName = "Matrox Driver"
+MtxUninstallHelpLink = "http://www.matrox.com/mga/support/tech_support/contact_tech.cfm"

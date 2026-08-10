@@ -1,0 +1,231 @@
+[Version]
+CatalogFile = MtxPar.cat
+Signature = $Windows NT$
+Provider = Matrox Graphics Inc.
+ClassGuid = {4d36e968-e325-11ce-bfc1-08002be10318}
+Class = Display
+DriverVer=11/13/2006, 2.3.2.6
+
+[SourceDisksNames]
+1 = %Disk1%,MtxPar.cab
+
+[SourceDisksFiles]
+MTXPARM.sys = 1
+MTXPARD.dll = 1
+MtxEscape.dll = 1
+ParheliaDrvUninstaller.exe = 1
+MtxCIP.dll = 1
+MTXOGL.dll = 1
+MtxDrvService.exe = 1
+mtxparmx.sys = 1
+
+[DestinationDirs]
+DefaultDestDir = 11
+Miniport.MTXPAR = 12
+File.Uninstaller = 11, PowerDesk8
+MtxparmxSrv.sys = 12
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Manufacturer]
+%Matrox% = Mfg.Matrox
+
+[Mfg.Matrox]
+;---------------
+;MTXPAR
+;---------------
+%Str00%=IN00,PCI\VEN_102B&DEV_0528&SUBSYS_2021102B
+%Str02%=IN00,PCI\VEN_102B&DEV_2537&SUBSYS_2811102B
+%Str02%=IN00,PCI\VEN_102B&DEV_2537&SUBSYS_2821102B
+%Str03%=IN00,PCI\VEN_102B&DEV_2537&SUBSYS_2C41102B
+%Str06%=IN00,PCI\VEN_102B&DEV_2538&SUBSYS_1047102B
+%Str07%=IN01,PCI\VEN_102B&DEV_2537&SUBSYS_1C10102B
+%Str08%=IN01,PCI\VEN_102B&DEV_2537&SUBSYS_2C11102B
+%Str09%=IN01,PCI\VEN_102B&DEV_2537&SUBSYS_2C21102B
+%Str08%=IN01,PCI\VEN_102B&DEV_2537&SUBSYS_2C31102B
+%Str10%=IN01,PCI\VEN_102B&DEV_2538&SUBSYS_3007102B
+%Str10%=IN01,PCI\VEN_102B&DEV_2538&SUBSYS_30C7102B
+
+;==============================
+;MTXPAR Section(s) 
+;==============================
+[IN00]
+AddReg = AddReg.Setup.MTXPAR
+CopyFiles = Miniport.MTXPAR, Driver.MTXPAR, File.Uninstaller, Driver.Icd.MTXPAR, MtxDrvSrv.exe, MtxparmxSrv.sys
+
+[IN00.CoInstallers]
+AddReg = AddReg.CoInstaller
+CopyFiles = CoInstaller.MTXPAR
+
+[IN00.Services]
+AddService = MTXPAR,0x00000002,Service.MTXPAR
+AddService = MtxDrvService,,Service.MtxDrvSrv
+AddService = Mtxparmx,,Service.Mtxparmx
+
+[IN00.SoftwareSettings]
+AddReg = AddReg.Settings, AddReg.PackageVer, AddReg.MTXPARH, AddReg.Icd.MTXPAR, AddReg.DefModes, AddReg.MtxDrvSrv
+DelReg = DelReg.DriverSettings, DelReg.Icd.MTXPAR
+
+[AddReg.Icd.MTXPAR]
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\MTXOGL,Version,0x00010001,0x00000002
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\MTXOGL,DriverVersion,0x00010001,0x00000001
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\MTXOGL,Flags,0x00010001,0x00000001
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\MTXOGL,Dll,,%11%\MTXOGL.DLL
+
+[Driver.Icd.MTXPAR]
+MTXOGL.dll,,,0x00000004
+
+[DelReg.Icd.MTXPAR]
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers,MTXOGL
+HKLM,Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers,MTXPARHICD
+
+[IN01]
+AddReg = AddReg.Setup.MTXPAR
+CopyFiles = Miniport.MTXPAR, Driver.MTXPAR, File.Uninstaller, MtxDrvSrv.exe, MtxparmxSrv.sys
+
+[IN01.CoInstallers]
+AddReg = AddReg.CoInstaller
+CopyFiles = CoInstaller.MTXPAR
+
+[IN01.Services]
+AddService = MTXPAR,0x00000002,Service.MTXPAR
+AddService = MtxDrvService,,Service.MtxDrvSrv
+AddService = Mtxparmx,,Service.Mtxparmx
+
+[IN01.SoftwareSettings]
+AddReg = AddReg.Settings, AddReg.PackageVer, AddReg.MTXPARH, AddReg.DefModes, AddReg.MtxDrvSrv
+DelReg = DelReg.DriverSettings
+
+;---------------
+; MTXPAR shared
+;---------------
+[DelReg.DriverSettings]
+HKR,,User.AGP
+HKR,,CapabilityOverride
+HKR,,User.VPEEnable
+
+[AddReg.Setup.MTXPAR]
+HKR,Settings,InstalledDisplayDrivers,0x00010000,MTXPARD
+HKR,Settings,VgaCompatible,0x00010001,0
+HKLM,SOFTWARE\Matrox\MtxEscape\v1.0,ModuleName,,MtxEscape
+HKLM,SOFTWARE\Matrox\MtxEscape\v1.0,Path,,%11%
+
+[Service.MTXPAR]
+ServiceType = 0x00000001
+StartType = 3
+ErrorControl = 0
+ServiceBinary = %12%\MTXPARM.sys
+LoadOrderGroup = Video
+
+[Miniport.MTXPAR]
+MTXPARM.sys,,,0x00000004
+
+[Driver.MTXPAR]
+MTXPARD.dll,,,0x00000004
+MtxEscape.dll,,,0x00000004
+
+[AddReg.Settings]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,DisplayName,,%MtxUninstallDisplayName%
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,HelpLink,,%MtxUninstallHelpLink%
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,URLInfoAbout,,%MtxUninstalUrlInfoAbout%
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,UninstallString,,%11%\PowerDesk8\ParheliaDrvUninstaller.exe
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,DisplayIcon,,%11%\PowerDesk8\ParheliaDrvUninstaller.exe
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,NoModify,0x00010001,01
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,Publisher,,"Matrox Graphics Inc."
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,WindowsInstaller,0x00010001,00
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Matrox Parhelia Driver Uninstaller,NoRepair,0x00010001,01
+
+[File.Uninstaller]
+ParheliaDrvUninstaller.exe,,,0x00000004
+
+[AddReg.CoInstaller]
+HKR,,CoInstallers32,0x00010000,"MtxCIP.dll,_CoInstaller@16"
+
+[CoInstaller.MTXPAR]
+MtxCIP.dll,,,0x00000004
+
+[CoInstaller.Info]
+OriginalInfSourcePath = %1%
+VHead = DualPar.inf
+
+[AddReg.PackageVer]
+HKR,,PackageVer,,"2.3.2.6"
+HKR,,PackageID,0x00000001,00,00,00,00
+
+[AddReg.MTXPARH]
+HKR,,InstalledDisplayDrivers,0x00010000,MTXPARD
+HKR,,VgaCompatible,0x00010001,0
+HKR,,System.FastWrite,0x00010001,00,00,00,00
+HKR,,System.MmMaxApertureSize,0x00010001,0
+HKR,,System.ForceSBA,0x00010001,1
+
+[AddReg.DefModes]
+HKR,,DefaultSettings.BitsPerPel,0x00010001,32
+HKR,,DefaultSettings.XResolution,0x00010001,800
+HKR,,DefaultSettings.YResolution,0x00010001,600
+
+[MtxDrvSrv.exe]
+MtxDrvService.exe,,
+
+[AddReg.MtxDrvSrv]
+HKR,,PDEnable,0x00000001,01,00,00,00
+
+[Service.MtxDrvSrv]
+DisplayName = MtxDrvService
+Description = Matrox Display Driver Service
+ServiceType = 0x00000010
+StartType = 2
+ErrorControl = 0
+ServiceBinary = %11%\MtxDrvService.exe
+
+[MtxparmxSrv.sys]
+mtxparmx.sys,,
+
+[Service.Mtxparmx]
+DisplayName = Mtxparmx
+Description = Matrox Miniport Extension Kernel Driver
+ServiceType = 0x00000001
+StartType = 2
+ErrorControl = 0
+ServiceBinary = %12%\Mtxparmx.sys
+
+;---------------
+; Global Shared
+;---------------
+[Strings]
+Disk1 = "Matrox Graphics Installation Disk 1"
+Matrox = "Matrox Graphics Inc."
+Str00 = "Matrox QID Pro"
+Str02 = "Matrox Millennium P650 Low-profile PCI"
+Str03 = "Matrox EpicA TC4"
+Str06 = "Matrox Millennium P650 LP PCIe 128"
+Str07 = "Matrox QID"
+Str08 = "Matrox QID LP PCI"
+Str09 = "Matrox QID LP PCI LW"
+Str10 = "Matrox QID LP PCIe"
+
+GenuineMatroxMGIPackage = 0x00000001
+MtxUninstalUrlInfoAbout = "http://www.matrox.com/mga"
+MtxUninstallDisplayName = "Matrox Driver"
+MtxUninstallHelpLink = "http://www.matrox.com/mga/support/tech_support/contact_tech.cfm"	
+
+[Strings.0C] ;French
+MtxUninstallDisplayName = "Pilote Matrox"
+MtxUninstallHelpLink= "http://www.matrox.com/mga/francais/support/tech_support/tech_request_form.cfm"
+MtxUninstalUrlInfoAbout ="http://www.matrox.com/mga/francais/home.cfm"
+
+[Strings.10] ;Italian
+MtxUninstallDisplayName = "Matrox driver"
+MtxUninstallHelpLink = "http://www.matrox.com/mga/support/tech_support/contact_tech.cfm"
+MtxUninstalUrlInfoAbout =     "http://www.matrox.com/mga/italiano/home.cfm"
+
+[Strings.07] ;German
+MtxUninstallDisplayName = "Matrox Treiber"
+MtxUninstallHelpLink = "http://www.matrox.com/mga/support/tech_support/contact_tech.cfm"
+MtxUninstalUrlInfoAbout =     "http://www.matrox.com/mga/deutsch/home.cfm"
+
+[Strings.0A] ;Spanish
+MtxUninstallDisplayName = "Matrox controlador"
+MtxUninstallHelpLink = "http://www.matrox.com/mga/support/tech_support/contact_tech.cfm"
+MtxUninstalUrlInfoAbout = "http://www.matrox.com/mga"
