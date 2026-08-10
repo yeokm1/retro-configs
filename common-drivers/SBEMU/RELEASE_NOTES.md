@@ -4,73 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0-beta.5] - 2024-08-18
+## [1.0.0-beta.6] - 2026-06-16
 ### :sparkles: New Features
-- [`81f43e0`](https://github.com/crazii/SBEMU/commit/81f43e0f3822d5aa6db2fbb595702c85d713c8f2) - Add ESS Maestro 3i (ES1983) support (tested) *(commit by [@AranVink](https://github.com/AranVink))*
-- [`fc97e5e`](https://github.com/crazii/SBEMU/commit/fc97e5e7c7d3b28c45a4054e97641094326b561e) - Add support for Maestro 2, Maestro 2E, and Canyon 3d 2 (untested) *(commit by [@AranVink](https://github.com/AranVink))*
+- [`3869f9e`](https://github.com/crazii/SBEMU/commit/3869f9e780a7365e9a326bd2f06e561f3e2991ae) - change /FIXTC from siwtch to threshold in Hz. (merge 7f6ea67). *(commit by [@crazii](https://github.com/crazii))*
+- [`c2aeb80`](https://github.com/crazii/SBEMU/commit/c2aeb80f035bd031126d7c098a0f812f0f22d955) - swap stereo (left/right channel), build swtich, no runtime option. (merge 26c6a4f & f5c0616) *(commit by [@crazii](https://github.com/crazii))*
+- [`85fc657`](https://github.com/crazii/SBEMU/commit/85fc657d89545b10e07307c33bbce562daf7599a) - improve mixing and SF/OPL volume balancing. (merge c9172d0). *(commit by [@crazii](https://github.com/crazii))*
+- [`95c1da4`](https://github.com/crazii/SBEMU/commit/95c1da40f96e8481181875e763a27fb631a0a1a7) - [EXPERIMENTAL] enable IF on feeding sound buffer to provide better IRQ0 timing. (merge aba928c) *(commit by [@crazii](https://github.com/crazii))*
 
 ### :bug: Bug Fixes
-- [`b22db15`](https://github.com/crazii/SBEMU/commit/b22db150388c592cd7078a8bfc6a1fd8283d34de) - Try to configure `requarks/changelog-action` to include all commits in changelog, even those that don't have a "type" defined according the Conventional Commits format (feat, feature, fix, bugfix, perf, refactor, test, tests, chore`) *(commit by [@volkertb](https://github.com/volkertb))*
-- [`fb8d190`](https://github.com/crazii/SBEMU/commit/fb8d1906947edf70921552ff99f0abdd41e6ab8e) - Tweak AC97 default volume settings, to mute inputs like microphone and line in by default *(commit by [@AranVink](https://github.com/AranVink))*
-
-### :construction_worker: Build System
-- [`6e065a1`](https://github.com/crazii/SBEMU/commit/6e065a108b77919f8e01e560897744ce32cd6898) - bundle release notes with release artifacts *(commit by [@volkertb](https://github.com/volkertb))*
-- [`e38773c`](https://github.com/crazii/SBEMU/commit/e38773cfa91b00d3b825e794ba89b97c58d11a9f) - Make required Git tag pattern for triggering builds and releases less strict: allow any tag that starts with `v` followed by a number, even if it's not SemVer compliant, such as `1.0beta5` *(commit by [@volkertb](https://github.com/volkertb))*
-- [`d0a73c1`](https://github.com/crazii/SBEMU/commit/d0a73c1a67a6cda7277b97d8e9f9540ead243083) - Fix `tag_name is not well-formed` error in Release tag name, by replacing a space with an underscore *(commit by [@volkertb](https://github.com/volkertb))*
+- [`5d72285`](https://github.com/crazii/SBEMU/commit/5d722852401626c77b6e0fd4652899d727ac0f0d) - OPL volume x1.5 (merge 39b8a1d) *(commit by [@crazii](https://github.com/crazii))*
+- [`521aa1e`](https://github.com/crazii/SBEMU/commit/521aa1e58afec6d9f1c83aab1cf66d56a7cc8c11) - set T for BLASTER env. (merge 77155a4) *(commit by [@crazii](https://github.com/crazii))*
+- [`daa0c83`](https://github.com/crazii/SBEMU/commit/daa0c836034d047f12bbbc1322f6aba3fb812726) - change /VOL volume range from [0,9] to [0, 100] for better granuarity control. if you previously set /VOL8 in your AUTOEXEC.BAT, then a simple change to /VOL80 would be fine. for more details, check the "/VOL" in README.txt (merge 3471ab7) *(commit by [@crazii](https://github.com/crazii))*
+- [`c940a0e`](https://github.com/crazii/SBEMU/commit/c940a0e1cb8c3c0ac0ef4e370b7b631e90c197f4) - fix Virtual DMA flipflop bug when accessed by BIOS (HP T5720) in duke3d and rott. (merge 5d7b649). *(commit by [@crazii](https://github.com/crazii))*
 
 ### :memo: Documentation Changes
-- [`ca571ba`](https://github.com/crazii/SBEMU/commit/ca571bae5b60b3a5d4138ce5a0854cd01e71d76b) - Combine changelog and user instructions into release notes and show those on each release *(commit by [@volkertb](https://github.com/volkertb))*
-- [`da22aa7`](https://github.com/crazii/SBEMU/commit/da22aa704681d2b6fc6cd905f7f9a34ea8b4b5c3) - Fix spelling errors README.txt *(commit by [@AranVink](https://github.com/AranVink))*
-- [`f42a548`](https://github.com/crazii/SBEMU/commit/f42a548d7193548d33bcba7bd05d54ac83ce0e16) - Fix spelling in README.md *(commit by [@AranVink](https://github.com/AranVink))*
+- [`a2178ce`](https://github.com/crazii/SBEMU/commit/a2178ce60055b68679696583b553ca07752ebd25) - update readme on /T and /K. (merge cd373ca) *(commit by [@crazii](https://github.com/crazii))*
 
-### :flying_saucer: Other Changes
-- [`746380f`](https://github.com/crazii/SBEMU/commit/746380f9154dca2cc6da09fc2c8bbd70ee2298ce) - Update `actions/checkout` to v4 *(commit by [@volkertb](https://github.com/volkertb))*
-- [`47b5c9d`](https://github.com/crazii/SBEMU/commit/47b5c9d10aad101fb04002b4ac372a5810d5fe71) - Add current branch to allowlist to test `build-and-release` workflow *(commit by [@volkertb](https://github.com/volkertb))*
-- [`d60b110`](https://github.com/crazii/SBEMU/commit/d60b110728f6cd1d32f87c8e7e46010ea32fb864) - Add step that generates changelog as part of release *(commit by [@volkertb](https://github.com/volkertb))*
-- [`bfbe717`](https://github.com/crazii/SBEMU/commit/bfbe7172ccd4ebae87f6289daf26cf82bf91a064) - Show auto-generated release notes instead, move user instructions (shown on each release until now) to separate Markdown file (we may use it later somehow) *(commit by [@volkertb](https://github.com/volkertb))*
-- [`9981d96`](https://github.com/crazii/SBEMU/commit/9981d967f38c566be31c69442d74d61b951ba2b9) - Use CHANGELOG generated by `heinrichreimer/action-github-changelog-generator` instead of relying on GitHub's release notes generation functionality, which apparently doesn't render the release notes in a Markdown file *(commit by [@volkertb](https://github.com/volkertb))*
-- [`5835b30`](https://github.com/crazii/SBEMU/commit/5835b30750d9b74df94321bca6786e79d72ec175) - Try using different GitHub Action for generating Changelog from Git commits *(commit by [@volkertb](https://github.com/volkertb))*
-- [`59d0f61`](https://github.com/crazii/SBEMU/commit/59d0f61d419323b1336f01da6fc01ec4d19a31f4) - Try to fix configuration of changelog configuration action, so that it also works when build is triggered by a non-tag commit, for instance while testing the workflow in a branch, as is the case while writing this commit *(commit by [@volkertb](https://github.com/volkertb))*
-- [`f3fddb8`](https://github.com/crazii/SBEMU/commit/f3fddb8eb624e1d1c01e3e39e65887154fdacc55) - Fix git commands that assumed the project to be checked out in the current directory, while the code was actually checked out under the subdirectory `./src` *(commit by [@volkertb](https://github.com/volkertb))*
-- [`d71dbae`](https://github.com/crazii/SBEMU/commit/d71dbaeb15e8b37aeb593dc8be21b15edd284714) - Check out tags, so Git log can be used to generate the changelog, with thanks to https://github.com/actions/checkout/issues/206#issuecomment-614129126 *(commit by [@volkertb](https://github.com/volkertb))*
-- [`5e137d6`](https://github.com/crazii/SBEMU/commit/5e137d610eeba027adcd54745509d65ed54c0133) - Configure `actions/checkout` to fetch full Git history, since it's needed to generate changelog from commits between latest and previous tags *(commit by [@volkertb](https://github.com/volkertb))*
-- [`833b0c9`](https://github.com/crazii/SBEMU/commit/833b0c9919c4f22bad9866bac0520e32a9d256ee) - Undo previous configuration change for `requarks/changelog-action`, since the actual cause was found: `actions/checkout` checks out the repo with a depth of 1 (only the most recent commit) by default, so history including previous tags isn't available by default (we fixed that configuration in the previous commit) *(commit by [@volkertb](https://github.com/volkertb))*
-- [`b954563`](https://github.com/crazii/SBEMU/commit/b954563996312b167194df03fcc658db1a2df877) - Configure `requarks/changelog-action` not to demand the "Conventional Commits" format (see https://medium.com/@sagormahtab/mastering-commit-messages-the-ultimate-guide-to-conventional-commits-96f038da6bdf) *(commit by [@volkertb](https://github.com/volkertb))*
-- [`e58a347`](https://github.com/crazii/SBEMU/commit/e58a3477826a718cf1809dffc0e6f08df5a9ca21) - Build and release only when a tag with a proper pattern (`v` followed by a SemVer-compliant version number, for instance `v1.0.0`) is pushed to the Git repo *(commit by [@volkertb](https://github.com/volkertb))*
-- [`39ec56b`](https://github.com/crazii/SBEMU/commit/39ec56b376a99303f49e0f97a6cb2dd60acbcae7) - Merge branch 'main' into generate-changelog-with-each-release *(commit by [@crazii](https://github.com/crazii))*
-- [`e7ceae4`](https://github.com/crazii/SBEMU/commit/e7ceae476f09838d2a8179bca98d034bfa751c49) - Merge pull request [#82](https://github.com/crazii/SBEMU/pull/82) from volkertb/generate-changelog-with-each-release
-
-Generate changelog with each release *(commit by [@crazii](https://github.com/crazii))*
-- [`0bad11e`](https://github.com/crazii/SBEMU/commit/0bad11e7917551afe0f62752461955dcb02d13c4) - Fix spelling errors README.txt *(commit by [@AranVink](https://github.com/AranVink))*
-- [`b7c8b87`](https://github.com/crazii/SBEMU/commit/b7c8b87ad50fe705a8192c77069cc526f49c4628) - Fix spelling in README.md *(commit by [@AranVink](https://github.com/AranVink))*
-- [`773250e`](https://github.com/crazii/SBEMU/commit/773250e7b7116c932aed5c88693744137ed1e0cb) - Merge branch 'patch-1' of https://github.com/AranVink/SBEMU into patch-1 *(commit by [@AranVink](https://github.com/AranVink))*
-- [`2355249`](https://github.com/crazii/SBEMU/commit/2355249694154f903f740121d465f7ebefb73018) - Merge branch 'patch-2' of https://github.com/AranVink/SBEMU into patch-2 *(commit by [@AranVink](https://github.com/AranVink))*
-- [`a31ad51`](https://github.com/crazii/SBEMU/commit/a31ad51924793af3397a72d0d7385bb6152a16ea) - Merge pull request [#118](https://github.com/crazii/SBEMU/pull/118) from AranVink/patch-1
-
-docs: Fix spelling errors README.txt *(commit by [@volkertb](https://github.com/volkertb))*
-- [`23b3227`](https://github.com/crazii/SBEMU/commit/23b322745cc29ea483d629dcea7d631483fb861f) - Merge pull request [#119](https://github.com/crazii/SBEMU/pull/119) from AranVink/patch-2
-
-docs: Fix spelling in README.md *(commit by [@volkertb](https://github.com/volkertb))*
-- [`d719b9c`](https://github.com/crazii/SBEMU/commit/d719b9cb3848dcb142442260e747d47df27e02e3) - Add maestro3 pci id and correct ac97 volume initialization *(commit by [@AranVink](https://github.com/AranVink))*
-- [`1f51c9e`](https://github.com/crazii/SBEMU/commit/1f51c9ed72a7704eed13395fd8bfec052b7ae9ad) - Make pci id's match linux driver support *(commit by [@AranVink](https://github.com/AranVink))*
-- [`b61d8ba`](https://github.com/crazii/SBEMU/commit/b61d8baa435ba7cb5b103bf793257de89cf7618c) - Merge pull request [#123](https://github.com/crazii/SBEMU/pull/123) from AranVink/feature/add_ess_maestro
-
-Feature/add ess maestro *(commit by [@volkertb](https://github.com/volkertb))*
-- [`2bd6cf7`](https://github.com/crazii/SBEMU/commit/2bd6cf79a8a0e0538b0c9d685256ab15669c800d) - Merge pull request [#131](https://github.com/crazii/SBEMU/pull/131) from volkertb/make-release-tag-pattern-less-strict
-
-ci: Make required Git tag pattern for triggering builds and releases less strict *(commit by [@volkertb](https://github.com/volkertb))*
-- [`7afac06`](https://github.com/crazii/SBEMU/commit/7afac06c62553f833c7cd04ca9440acccd19cf5a) - Trigger a build and release on any pushed tag for now, and use the triggering tag name in the corresponding release tag/title *(commit by [@volkertb](https://github.com/volkertb))*
-- [`a588f3c`](https://github.com/crazii/SBEMU/commit/a588f3c3a973fdf7453192484064bf76585bfbb4) - Merge pull request [#132](https://github.com/crazii/SBEMU/pull/132) from volkertb/trigger-build-and-release-on-any-tag
-
-Trigger a build and release on any pushed tag for now *(commit by [@volkertb](https://github.com/volkertb))*
-- [`e97d43e`](https://github.com/crazii/SBEMU/commit/e97d43ea615196459ed0abedd0943646711b46f9) - Merge pull request [#133](https://github.com/crazii/SBEMU/pull/133) from volkertb/trigger-build-and-release-on-any-tag
-
-ci: Fix `tag_name is not well-formed` error in Release tag name, by r… *(commit by [@volkertb](https://github.com/volkertb))*
-- [`36899b5`](https://github.com/crazii/SBEMU/commit/36899b597735257b843c024c376e8783078c0e96) - Merge pull request [#134](https://github.com/crazii/SBEMU/pull/134) from volkertb/empty-feature-commits-to-improve-changelog
-
-Empty feature commits to improve changelog *(commit by [@volkertb](https://github.com/volkertb))*
-
-[1.0.0-beta.5]: https://github.com/crazii/SBEMU/compare/1.0beta4...1.0.0-beta.5
+[1.0.0-beta.6]: https://github.com/crazii/SBEMU/compare/1.0.0-beta.6rc2...1.0.0-beta.6
 
 # User instructions
 

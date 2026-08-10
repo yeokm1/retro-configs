@@ -1,0 +1,98 @@
+# 1. Default fallback for all text files:
+# Forces GitHub ZIP downloads to use CRLF, and forces Windows checkouts to CRLF.
+* text=auto eol=crlf
+
+# 2. Source and documentation files:
+# Explicitly ensure these normalize to LF in the repo and match the OS on checkout.
+# This ensures AI tools see pure LF inside the Git database/containers.
+
+# Sources
+*.c     text diff=cpp
+*.cc    text diff=cpp
+*.cxx   text diff=cpp
+*.cpp   text diff=cpp
+*.cpi   text diff=cpp
+*.c++   text diff=cpp
+*.hpp   text diff=cpp
+*.h     text diff=cpp
+*.h++   text diff=cpp
+*.hh    text diff=cpp
+
+# Documentation
+*.txt           text
+*.md            text
+License         text
+*.html          text diff=html
+*.htm           text diff=html
+*.html          text diff=html
+
+# Scripts
+*.bat text eol=crlf
+
+# Config
+*.inf text eol=crlf
+*.ini text eol=crlf
+
+# Build - All VC++ project files must always be CRLF
+# as well as build artifacts
+
+makefile text eol=crlf
+sources text eol=crlf
+*.def text eol=crlf
+*.log text eol=crlf
+*.err text eol=crlf
+
+# Debug symbols
+*.map text eol=crlf
+*.mac text eol=crlf
+*.pdb binary
+*.res binary
+*.sym binary
+
+# Executables
+*.exe   binary
+*.sys   binary
+*.dll   binary
+
+# Compiled Object files
+*.o     binary
+*.obj   binary
+
+# VC++ project files
+*.aps binary
+*.def text eol=crlf
+*.dsp text eol=crlf
+*.dsw text eol=crlf
+*.ncb binary
+*.opt binary
+*.rc  binary
+
+# Graphics
+*.ai              binary
+*.bmp             binary
+*.eps             binary
+*.gif             binary
+*.gifv            binary
+*.ico             binary
+*.jng             binary
+*.jp2             binary
+*.jpg             binary
+*.jpeg            binary
+*.jpx             binary
+*.jxr             binary
+*.pdf             binary
+*.png             binary
+*.psb             binary
+*.psd             binary
+# SVG treated as an asset (binary) by default.
+*.svg             text
+# If you want to treat it as binary,
+# use the following line instead.
+# *.svg           binary
+*.svgz            binary
+*.tif             binary
+*.tiff            binary
+*.wbmp            binary
+*.webp            binary
+
+

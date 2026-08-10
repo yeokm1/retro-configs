@@ -1,0 +1,3124 @@
+/*****************************************************************************
+ * common.cpp - Common code used by all the HDA miniports.
+ *****************************************************************************
+ * Copyright (c) 2025 Drew Hoffman
+ * Released under MIT License
+ * Code from BleskOS and Microsoft's driver samples used under MIT license. 
+ *
+ * Implementation of the common code object.  This class deals with interrupts
+ * for the device, and is a collection of common code used by all the
+ * miniports.
+ */
+
+#include "stdunk.h"
+#include "common.h"
+#include "codec.h"
+
+
+#define STR_MODULENAME "HDACommon: "
+
+#define BDLE_FLAG_IOC  0x01
+
+typedef struct _BDLE {
+    ULONG64 Address;
+    ULONG   Length;
+    ULONG   Flags;
+} BDLE;
+
+#define HDA_COMMON_BUFFER_ALIGNMENT 128
+
+typedef struct _HDA_DMA_COMMON_BUFFER {
+	volatile PULONG AlignedVirtualAddress;
+	PHYSICAL_ADDRESS AlignedLogicalAddress;
+	PVOID RawVirtualAddress;
+	PHYSICAL_ADDRESS RawLogicalAddress;
+	ULONG RawLength;
+	USHORT BufferPointer;
+	USHORT NumberOfEntries;
+} HDA_DMA_COMMON_BUFFER, *PHDA_DMA_COMMON_BUFFER;
+
+static
+VOID
+ResetCommonBufferDescriptor(
+	OUT PHDA_DMA_COMMON_BUFFER Buffer
+);
+
+static
+NTSTATUS
+AllocateAlignedCommonBuffer(
+	IN      PDMA_ADAPTER            DmaAdapter,
+	IN      ULONG                   BufferLength,
+	IN      ULONG                   Alignment,
+	OUT     PHDA_DMA_COMMON_BUFFER  Buffer
+)
+{
+	ULONG_PTR alignedOffset;
+	PHYSICAL_ADDRESS rawLogicalAddress;
+	PVOID rawVirtualAddress;
+	ULONG rawLength;
+
+	if (!DmaAdapter || !Buffer || Alignment == 0 || (Alignment & (Alignment - 1)) != 0) {
+		return STATUS_INVALID_PARAMETER;
+	}
+
+	ResetCommonBufferDescriptor(Buffer);
+	rawLength = BufferLength + (Alignment - 1);
+	rawVirtualAddress = DmaAdapter->DmaOperations->AllocateCommonBuffer(
+		DmaAdapter,
+		rawLength,
+		&rawLogicalAddress,
+		FALSE);
+
+	if (!rawVirtualAddress || rawLogicalAddress.QuadPart == 0) {
+		return STATUS_INSUFFICIENT_RESOURCES;
+	}
+
+	alignedOffset = (ULONG_PTR)((Alignment - (rawLogicalAddress.QuadPart & (Alignment - 1))) & (Alignment - 1));
+	Buffer->AlignedVirtualAddress = (PULONG)((PUCHAR)rawVirtualAddress + alignedOffset);
+	Buffer->AlignedLogicalAddress.QuadPart = rawLogicalAddress.QuadPart + alignedOffset;
+	Buffer->RawVirtualAddress = rawVirtualAddress;
+	Buffer->RawLogicalAddress = rawLogicalAddress;
+	Buffer->RawLength = rawLength;
+	
+	//confirm alignment matches requirement
+	if ( (((ULONG_PTR)Buffer->AlignedVirtualAddress) & (Alignment - 1) ) != 0 
+		|| ((Buffer->AlignedLogicalAddress.QuadPart & (Alignment - 1)) != 0) ) {
+
+		DmaAdapter->DmaOperations->FreeCommonBuffer(
+			DmaAdapter,
+			Buffer->RawLength,
+			Buffer->RawLogicalAddress,
+			Buffer->RawVirtualAddress,
+			FALSE);
+
+		ResetCommonBufferDescriptor(Buffer);
+		return STATUS_DATATYPE_MISALIGNMENT;
+	}
+
+	//make sure to zero the usable portion of the buffer
+	RtlZeroMemory(Buffer->AlignedVirtualAddress, BufferLength);
+	return STATUS_SUCCESS;
+}
+
+static
+VOID
+ResetCommonBufferDescriptor(
+	OUT PHDA_DMA_COMMON_BUFFER Buffer
+)
+{
+	RtlZeroMemory(Buffer, sizeof(HDA_DMA_COMMON_BUFFER));
+}
+
+static
+VOID
+FreeAlignedCommonBuffer(
+	IN PDMA_ADAPTER DmaAdapter,
+	IN OUT PHDA_DMA_COMMON_BUFFER Buffer
+)
+{
+	if (!DmaAdapter || !Buffer || Buffer->RawVirtualAddress == NULL) {
+		return;
+	}
+
+	DmaAdapter->DmaOperations->FreeCommonBuffer(
+		DmaAdapter,
+		Buffer->RawLength,
+		Buffer->RawLogicalAddress,
+		Buffer->RawVirtualAddress,
+		FALSE);
+
+	ResetCommonBufferDescriptor(Buffer);
+}
+
+#define CHUNK_SIZE 1792 //100ms of 44khz 16bit stereo rounded up to nearest 128b
+
+/*****************************************************************************
+ * CAdapterCommon
+ 
+ *****************************************************************************
+ * Adapter common object.
+ */
+class CAdapterCommon
+:   public IAdapterCommon,
+    public IAdapterPowerManagement,
+    public CUnknown
+    
+{
+private:
+	PMDL mdl;
+	KSPIN_LOCK RirbLock;
+	FAST_MUTEX VerbMutex;
+	PDMA_ADAPTER DMA_Adapter;
+	PDEVICE_DESCRIPTION pDeviceDescription;
+	
+	//PCI IDs
+	USHORT pci_ven;
+	USHORT pci_dev;
+	PUCHAR pConfigMem;
+	USHORT codec_ven;
+	USHORT codec_dev;
+
+	// MMIO registers
+	volatile PUCHAR m_pHDARegisters;     
+	PUCHAR Base;
+    USHORT InputStreamBase;
+    USHORT OutputStreamBase;
+
+	// CORB/RIRB buffers
+	// need to be in different 4k pages
+	HDA_DMA_COMMON_BUFFER RirbBuffer;
+
+    HDA_DMA_COMMON_BUFFER CorbBuffer;
+
+	HDA_DMA_COMMON_BUFFER BdlBuffer;
+
+	HDA_DMA_COMMON_BUFFER DmaPosBuffer;
+	ULONG bad_dpos_count;
+
+    // Output buffer information
+    PULONG OutputBufferList;
+	PVOID BufVirtualAddress;
+	PHYSICAL_ADDRESS BufLogicalAddress;
+
+	UCHAR interrupt;
+	ULONG memLength;
+	UCHAR codecNumber;
+	UCHAR nSDO;
+	UCHAR FirstOutputStream;
+	USHORT statests;
+
+	BOOLEAN is64OK;
+	BOOLEAN g_bHasClFlush;
+
+	ULONG communication_type;
+
+	ULONG debug_kludge;
+
+	// Codec array - packed array of initialized codecs (not sparse)
+	HDA_Codec* pCodecs[16];
+	UCHAR codecCount;  // Number of actually initialized codecs
+
+    BOOLEAN m_bDMAInitialized;   // DMA initialized flag
+    BOOLEAN m_bCORBInitialized;  // CORB initialized flag
+    BOOLEAN m_bRIRBInitialized;  // RIRB initialized flag
+    PDEVICE_OBJECT m_pDeviceObject;     // Device object used for registry access.
+    DEVICE_POWER_STATE m_PowerState;    // Current power state of the device.
+
+    PINTERRUPTSYNC          m_pInterruptSync;
+    PUCHAR                  m_pWaveBase;
+    PUCHAR                  m_pUartBase;
+    PPORTWAVECYCLIC         m_pPortWave;
+    PPORTDMUS               m_pPortUart;
+    PSERVICEGROUP           m_pServiceGroupWave;
+    ULONGLONG               m_startTime;
+    BOOL                    m_bCaptureActive;
+    BYTE                    MixerSettings[DSP_MIX_MAXREGS];
+
+	//Jack Polling state
+	KTIMER JackPollTimer;
+	KDPC JackPollDpc;
+	WORK_QUEUE_ITEM JackPollWorkItem;
+
+	LONG JackPollingEnabled;
+	LONG JackPollingStopping;
+	LONG JackPollWorkQueued;
+	KEVENT JackPollWorkerIdleEvent;
+	BOOLEAN JackPollTimerStarted;
+
+    HDA_INTERRUPT_TYPE AcknowledgeIRQ
+    (   void
+    );
+    BOOLEAN AdapterISR
+    (   void
+    );
+	STDMETHODIMP_(NTSTATUS) ReadWriteConfigSpace(
+    IN PDEVICE_OBJECT  DeviceObject,
+    IN ULONG  ReadOrWrite,  // 0 for read, 1 for write
+    IN PVOID  Buffer,
+    IN ULONG  Offset,
+    IN ULONG  Length
+    );
+	STDMETHODIMP_(NTSTATUS) WriteConfigSpaceByte(UCHAR offset, UCHAR andByte, UCHAR orByte);
+	STDMETHODIMP_(NTSTATUS) WriteConfigSpaceWord(UCHAR offset, USHORT andWord, USHORT orWord);
+	STDMETHODIMP_(BOOLEAN) ReadRegistryBoolean(
+    IN  PCWSTR   ValueName,
+    IN  BOOLEAN  DefaultValue
+	);
+	STDMETHODIMP_(NTSTATUS) TryInitializeCodecSlot(
+		IN UCHAR codec_number,
+		IN PCSTR interfaceName
+	);
+	STDMETHODIMP_(NTSTATUS) StartJackPolling (void);
+	STDMETHODIMP_(VOID) StopJackPolling (void);
+
+	static STDMETHODIMP_(VOID) JackPollDpcRoutine(
+		KDPC*,
+		PVOID DeferredContext,
+		PVOID,
+		PVOID
+	);
+	static STDMETHODIMP_(VOID) JackPollWorker(PVOID Context);
+
+
+public:
+    DECLARE_STD_UNKNOWN();
+    DEFINE_STD_CONSTRUCTOR(CAdapterCommon);
+    ~CAdapterCommon();
+
+    /*****************************************************************************
+     * IAdapterCommon methods
+     */
+    STDMETHODIMP_(NTSTATUS) Init
+    (
+        IN      PRESOURCELIST   ResourceList,
+        IN      PDEVICE_OBJECT  DeviceObject,
+		IN      PDEVICE_OBJECT  PDO
+    );
+    STDMETHODIMP_(PINTERRUPTSYNC) GetInterruptSync
+    (   void
+    );
+	STDMETHODIMP_(PDEVICE_DESCRIPTION) GetDeviceDescription
+    (   void
+    );
+    STDMETHODIMP_(PUNKNOWN *) WavePortDriverDest
+    (   void
+    );
+    STDMETHODIMP_(PUNKNOWN *) MidiPortDriverDest
+    (   void
+    );
+    STDMETHODIMP_(void) SetWaveServiceGroup
+    (
+        IN      PSERVICEGROUP   ServiceGroup
+    );
+    STDMETHODIMP_(NTSTATUS) ResetController
+    (   void
+    );
+	STDMETHODIMP_(NTSTATUS) hda_stop_stream
+    (   void
+    );
+    STDMETHODIMP_(void) MixerRegWrite
+    (
+        IN      BYTE    Index,
+        IN      BYTE    Value
+    );
+    STDMETHODIMP_(BYTE) MixerRegRead
+    (
+        IN      BYTE    Index
+    );
+    STDMETHODIMP_(void) MixerReset
+    (   void
+    );
+    STDMETHODIMP RestoreMixerSettingsFromRegistry
+    (   void
+    );
+    STDMETHODIMP SaveMixerSettingsToRegistry
+    (   void
+    );
+
+	STDMETHODIMP_(NTSTATUS) ProgramSampleRate
+    (
+        IN  DWORD dwSampleRate
+    );
+
+
+	STDMETHODIMP_(NTSTATUS) InitHDAController (void);
+
+	STDMETHODIMP_(ULONG)	hda_send_verb(ULONG codec, ULONG node, ULONG verb, ULONG command);
+	static ULONG SendVerb(CAdapterCommon* pAdapter, ULONG codec, ULONG node, ULONG verb, ULONG command);
+	STDMETHODIMP_(PULONG)	get_bdl_mem(void);
+	STDMETHODIMP_(ULONG)	hda_get_actual_stream_position(void);
+	STDMETHODIMP_(UCHAR)	hda_get_node_type(ULONG codec, ULONG node);
+	STDMETHODIMP_(ULONG)	hda_get_node_connection_entries(ULONG codec, ULONG node, ULONG connection_entries_number);
+	STDMETHODIMP_(BOOLEAN)	hda_is_headphone_connected (void);
+	STDMETHODIMP_(void)		hda_set_volume(ULONG volume, UCHAR ch, BOOLEAN mute);
+	STDMETHODIMP_(void)		hda_start_sound (void);
+	STDMETHODIMP_(void)		hda_stop_sound (void);
+
+	STDMETHODIMP_(void)		hda_check_headphone_connection_change(void);
+	STDMETHODIMP_(UCHAR)	hda_is_supported_sample_rate(ULONG sample_rate);
+	STDMETHODIMP_(void)		hda_enable_pin_output(ULONG codec, ULONG pin_node);
+	STDMETHODIMP_(void)		hda_disable_pin_output(ULONG codec, ULONG pin_node);
+	STDMETHODIMP_(NTSTATUS)	hda_setup_stream_descriptor(PDMACHANNEL DmaChannel);
+	STDMETHODIMP_(USHORT)	hda_return_sound_data_format(ULONG sample_rate, ULONG channels, ULONG bits_per_sample);
+	
+	STDMETHODIMP_(UCHAR)	readUCHAR(USHORT reg);
+    STDMETHODIMP_(void)		writeUCHAR(USHORT reg, UCHAR value);
+
+	STDMETHODIMP_(void)		setUCHARBit(USHORT reg, UCHAR flag);
+	STDMETHODIMP_(void)		clearUCHARBit(USHORT reg, UCHAR flag);
+
+    STDMETHODIMP_(USHORT)	readUSHORT(USHORT reg);
+    STDMETHODIMP_(void)		writeUSHORT(USHORT reg, USHORT value);
+
+    STDMETHODIMP_(ULONG)	readULONG(USHORT reg);
+    STDMETHODIMP_(void)		writeULONG(USHORT reg, ULONG value);
+
+	STDMETHODIMP_(void)		setULONGBit(USHORT reg, ULONG flag);
+	STDMETHODIMP_(void)		clearULONGBit(USHORT reg, ULONG flag);
+
+	STDMETHODIMP_(void)		CacheLineFlush(PVOID Destination, ULONG ByteCount);
+
+	
+
+    
+    /*************************************************************************
+     * IAdapterPowerManagement implementation
+     *
+     * This macro is from PORTCLS.H.  It lists all the interface's functions.
+     */
+    IMP_IAdapterPowerManagement;
+
+    friend
+    NTSTATUS
+    NewAdapterCommon
+    (
+        OUT     PADAPTERCOMMON *    OutAdapterCommon,
+        IN      PRESOURCELIST       ResourceList
+    );
+    friend
+    NTSTATUS
+    InterruptServiceRoutine
+    (
+        IN      PINTERRUPTSYNC  InterruptSync,
+        IN      PVOID           DynamicContext
+    );
+};
+
+static
+MIXERSETTING DefaultMixerSettings[] =
+{
+    { L"LeftMasterVol",   DSP_MIX_MASTERVOLIDX_L,     0xD8 },
+    { L"RightMasterVol",  DSP_MIX_MASTERVOLIDX_R,     0xD8 },
+    { L"LeftWaveVol",     DSP_MIX_VOICEVOLIDX_L,      0xD8 },
+    { L"RightWaveVol",    DSP_MIX_VOICEVOLIDX_R,      0xD8 },
+    { L"LeftMidiVol",     DSP_MIX_FMVOLIDX_L,         0xD8 },
+    { L"RightMidiVol",    DSP_MIX_FMVOLIDX_R,         0xD8 },
+    { L"LeftCDVol",       DSP_MIX_CDVOLIDX_L,         0xD8 },
+    { L"RightCDVol",      DSP_MIX_CDVOLIDX_R,         0xD8 },
+    { L"LeftLineInVol",   DSP_MIX_LINEVOLIDX_L,       0xD8 },
+    { L"RightLineInVol",  DSP_MIX_LINEVOLIDX_R,       0xD8 },
+    { L"MicVol",          DSP_MIX_MICVOLIDX,          0xD8 },
+    { L"PcSpkrVol",       DSP_MIX_SPKRVOLIDX,         0x00 },
+    { L"OutputMixer",     DSP_MIX_OUTMIXIDX,          0x1E },
+    { L"LeftInputMixer",  DSP_MIX_ADCMIXIDX_L,        0x55 },
+    { L"RightInputMixer", DSP_MIX_ADCMIXIDX_R,        0x2B },
+    { L"LeftInputGain",   DSP_MIX_INGAINIDX_L,        0x00 },
+    { L"RightInputGain",  DSP_MIX_INGAINIDX_R,        0x00 },
+    { L"LeftOutputGain",  DSP_MIX_OUTGAINIDX_L,       0x80 },
+    { L"RightOutputGain", DSP_MIX_OUTGAINIDX_R,       0x80 },
+    { L"MicAGC",          DSP_MIX_AGCIDX,             0x01 },
+    { L"LeftTreble",      DSP_MIX_TREBLEIDX_L,        0x80 },
+    { L"RightTreble",     DSP_MIX_TREBLEIDX_R,        0x80 },
+    { L"LeftBass",        DSP_MIX_BASSIDX_L,          0x80 },
+    { L"RightBass",       DSP_MIX_BASSIDX_R,          0x80 },
+};
+
+//driver settings via registry keys
+static BOOLEAN skipControllerReset;
+static BOOLEAN skipCodecReset;
+static BOOLEAN useAltOut;
+static BOOLEAN useSPDIF;
+static BOOLEAN useDisabledPins;
+static BOOLEAN useDmaPos;
+static BOOLEAN forcePioMode;
+
+static REG_BOOL_SETTING g_BooleanSettings[] =
+{
+    { L"SkipControllerReset", &skipControllerReset, FALSE },
+    { L"SkipCodecReset",      &skipCodecReset,      FALSE },
+    { L"UseAltOut",           &useAltOut,           FALSE },
+    { L"UseSPDIF",            &useSPDIF,            TRUE  },
+    { L"UseDisabledPins",     &useDisabledPins,     FALSE },
+    { L"UseDmaPos",           &useDmaPos,           FALSE },
+	{ L"ForcePioMode",        &forcePioMode,        FALSE },
+};
+
+
+#pragma code_seg("PAGE")
+
+/*****************************************************************************
+ * NewAdapterCommon()
+ *****************************************************************************
+ * Create a new adapter common object.
+ */
+NTSTATUS
+NewAdapterCommon
+(
+    OUT     PUNKNOWN *  Unknown,
+    IN      REFCLSID,
+    IN      PUNKNOWN    UnknownOuter    OPTIONAL,
+    IN      POOL_TYPE   PoolType
+)
+{
+    PAGED_CODE();
+
+    ASSERT(Unknown);
+
+    STD_CREATE_BODY_
+    (
+        CAdapterCommon,
+        Unknown,
+        UnknownOuter,
+        PoolType,
+        PADAPTERCOMMON
+    );
+}   
+ 
+	ULONG BdlSize = 256 * 16; //256 entries, 16 bytes each
+
+/*****************************************************************************
+ * CAdapterCommon::Init()
+ *****************************************************************************
+ * Initialize an adapter common object.
+ */
+NTSTATUS
+CAdapterCommon::
+Init
+(
+    IN      PRESOURCELIST   ResourceList,
+    IN      PDEVICE_OBJECT  DeviceObject,
+	IN      PDEVICE_OBJECT  PDO
+)
+{
+    PAGED_CODE();
+
+    ASSERT(ResourceList);
+    ASSERT(DeviceObject != NULL);
+	ASSERT(PDO != NULL);
+
+	NTSTATUS ntStatus = STATUS_SUCCESS;
+	PHYSICAL_ADDRESS physAddr = {0};
+
+    DOUT (DBG_PRINT, ("[CAdapterCommon::Init]"));
+	ULONG i;
+	JackPollingEnabled = 0;
+	JackPollingStopping = 0;
+	JackPollWorkQueued = 0;
+	JackPollTimerStarted = FALSE;
+
+	//Make sure cache line size set in device object is >= 128 byte for alignment reasons
+    DOUT(DBG_SYSINFO, ("Initial FDO align was %d", 
+				DeviceObject -> AlignmentRequirement));
+
+	if (DeviceObject -> AlignmentRequirement < FILE_128_BYTE_ALIGNMENT) {
+		DeviceObject -> AlignmentRequirement = FILE_128_BYTE_ALIGNMENT;
+		    DOUT(DBG_SYSINFO, ("Adjusted it to %d", 
+				DeviceObject -> AlignmentRequirement));
+	}
+        
+    //
+    // Save the device object
+    //
+    m_pDeviceObject = DeviceObject;
+
+	//init mutex & spin lock protecting the communication to the codec
+	ASSERT(KeGetCurrentIrql() == PASSIVE_LEVEL);
+	ExInitializeFastMutex(&VerbMutex);
+	KeInitializeSpinLock(&RirbLock);
+
+	ResetCommonBufferDescriptor(&RirbBuffer);
+	ResetCommonBufferDescriptor(&CorbBuffer);
+	ResetCommonBufferDescriptor(&BdlBuffer);
+	ResetCommonBufferDescriptor(&DmaPosBuffer);
+	
+	//Read settings from registry
+	
+	for (i = 0; i < ARRAY_COUNT(g_BooleanSettings); ++i){
+		*g_BooleanSettings[i].Variable =
+            ReadRegistryBoolean(g_BooleanSettings[i].ValueName, 
+			g_BooleanSettings[i].DefaultValue);
+    }
+
+	// Check for SSE2 / CLFLUSH support
+	ULONG edx_feat;
+		__asm {
+			pushad
+			mov eax, 1
+			cpuid
+			mov edx_feat, edx
+			popad
+    }	
+	g_bHasClFlush = (edx_feat & (1 << 19)) != 0;
+	
+	if (! g_bHasClFlush){
+		DOUT(DBG_ERROR,("SSE2 instructions not detected, cache flushes will not work!"));
+	}
+
+	// Initialize codec array
+	codecCount = 0;
+	for (i = 0; i < 16; i++) {
+		pCodecs[i] = NULL;
+	}
+
+	//send an IRP asking the bus driver to read all of configspace
+	//asking the PnP Config manager does NOT work since we're still in the middle of StartDevice()
+	
+	ULONG pci_ven = 0;
+	ULONG pci_dev = 0;
+	memLength = 0;
+
+	
+	pConfigMem = (PUCHAR)ExAllocatePoolWithTag(NonPagedPool, 256,'gfcP');
+	if (!pConfigMem) {
+		return STATUS_INSUFFICIENT_RESOURCES;
+	}
+	ntStatus = ReadWriteConfigSpace(
+		m_pDeviceObject,
+		0,			//read
+		pConfigMem,	// Buffer to store the configuration data		
+		0,			// Offset into the configuration space
+		256         // Number of bytes to read
+	);
+
+	if (!NT_SUCCESS (ntStatus)){
+		DbgPrint( "\nPCI Configspace Read Failed! 0x%X\n", ntStatus);
+        return ntStatus;
+	} else {
+		PUSHORT pConfigMemS = (PUSHORT)pConfigMem;
+		//VID and PID are first 2 words of configspace
+		pci_ven = (USHORT)pConfigMemS[0];
+		pci_dev = (USHORT)pConfigMemS[1];
+		DbgPrint( "\nHDA Controller: VID:0x%04X PID:0x%04X : ", pci_ven, pci_dev);
+	}
+
+	USHORT tmp;
+	
+	//apply device-specific config space patches depending on the VID/PID
+	switch (pci_ven){
+		case 0x15AD: //VMWare
+			DbgPrint( "VMWare\n");
+			//force PIO mode because VMWare works better like this
+			forcePioMode = true;
+			break;
+		case 0x1002: //ATI
+		case 0x1022: //AMD
+			if ( (pci_dev == 0x437b) || (pci_dev == 0x4383) //ATI SB
+				|| (pci_dev == 0x780d) //Hudson
+				|| (pci_dev == 0x1457) || (pci_dev == 0x1487) //AMD Ryzen
+				|| (pci_dev == 0x157a) || (pci_dev == 0x15e3) //AMD APU
+			){
+				DbgPrint( "ATI/AMD SB450/600/APU Snoop\n");
+				//Enable Snoop
+				ntStatus = WriteConfigSpaceByte(0x42,
+					~0x03, ATI_SB450_HDAUDIO_ENABLE_SNOOP);
+				//should read back & confirm it was set.
+			} else if ( (pci_dev == 0x0002) || (pci_dev == 0x1308)
+				|| (pci_dev == 0x157a) || (pci_dev == 0x15b3)
+			){				
+				DbgPrint( "ATI/AMD HDMI No Snoop\n");
+				//Disable Snoop
+				ntStatus = WriteConfigSpaceByte(0x42,
+					~ATI_SB450_HDAUDIO_ENABLE_SNOOP, 0);
+			} else {
+				DbgPrint( "ATI/AMD Other\n");
+			}
+			break;
+		case 0x10de: //nvidia
+			if ( (pci_dev == 0x026c) || (pci_dev == 0x0371) //MCP5x
+			  || (pci_dev == 0x03e4) || (pci_dev == 0x03f0) //MCP61
+			  || (pci_dev == 0x044a) || (pci_dev == 0x044b) //MCP65
+			  || (pci_dev == 0x055c) || (pci_dev == 0x055d) //MCP67
+			  || (pci_dev == 0x0774) || (pci_dev == 0x0775) //MCP77
+			  || (pci_dev == 0x0776) || (pci_dev == 0x0777) //MCP77
+		  	  || (pci_dev == 0x07fc) || (pci_dev == 0x07fd) //MCP73
+			  || (pci_dev == 0x0ac0) || (pci_dev == 0x0ac1) //MCP79
+			  || (pci_dev == 0x0ac2) || (pci_dev == 0x0ac3) //MCP79
+			  || (pci_dev == 0x0d94) || (pci_dev == 0x0d95) //MCP89
+			  || (pci_dev == 0x0d96) || (pci_dev == 0x0d97) //MCP
+			){
+				DbgPrint( "Nvidia MCP\n");			 
+				ntStatus = WriteConfigSpaceByte(0x4e,
+					~NVIDIA_HDA_ENABLE_COHBITS, NVIDIA_HDA_ENABLE_COHBITS);
+			} else{
+				DbgPrint("Nvidia HDMI\n");
+			}
+			break;
+		case 0x8086: //Intel
+			switch (pci_dev){
+				case 0x2668://ICH6
+				case 0x27D8://ICH7
+					DbgPrint( "Intel ICH6/7\n");
+					//set device 27 function 0 configspace offset 40h bit 0 to 1
+					//to enable HDA link mode (if it isnt already)
+					ntStatus = WriteConfigSpaceByte(0x40, 0xfe, 0x01);
+					break;
+				//ICH
+				case 0x269a:
+				case 0x284b:
+				case 0x2911:
+				case 0x293e:
+				case 0x293f:
+				case 0x3a3e: //ICH8
+				case 0x3a6e: //ICH9
+					DbgPrint( "Intel ICH\n"); //these don't need nosnoop flag changed (?)
+					break;
+				//PCH
+				case 0x1c20: 
+				case 0x1d20:
+				case 0x1e20:
+				case 0x8c20:
+				case 0x8ca0:
+				case 0x8d20:
+				case 0x8d21:
+				case 0xa1f0:
+				case 0xa270:
+				case 0x9c20:
+				case 0x9c21:
+				case 0x9ca0:
+
+				//SKL
+				case 0xa170: 
+				case 0x9d70:
+				case 0xa171:
+				case 0x9d71:
+				case 0xa2f0:
+				case 0xa348:
+				case 0x9dc8:
+				case 0x02c8:
+				case 0x06c8:
+				case 0xf1c8:
+				case 0xa3f0:
+				case 0xf0c8:
+				case 0x34c8:
+				case 0x3dc8:
+				case 0x4dc8:
+				case 0xa0c8:
+				case 0x43c8:
+				case 0x490d:
+				case 0x7da0:
+				case 0x51c8:
+				case 0x51cc:
+				case 0x4b55:
+				case 0x4b58:
+				case 0x5a98:
+				case 0x1a98:
+				case 0x3198:
+				case 0x7a50: //Raptor Lake
+
+				//HDMI
+				case 0x0a0c: 
+				case 0x0c0c:
+				case 0x0d0c:
+				case 0x160c:
+				
+				//SCH
+				case 0x3b56: 
+				case 0x811b:
+				case 0x080a:
+				case 0x0f04:
+				case 0x2284:
+
+				//just in case
+				default:
+
+					DbgPrint( "Intel PCH/SCH/SKL/HDMI\n");
+					//disable no-snoop transaction feature (clear bit 11) if it is set
+					tmp = *((PUSHORT)(pConfigMem + INTEL_SCH_HDA_DEVC));
+					if((tmp & INTEL_SCH_HDA_DEVC_NOSNOOP) != 0){
+						DbgPrint( "0x%X - disabling nosnoop transactions\n", tmp);
+						ntStatus = WriteConfigSpaceWord(INTEL_SCH_HDA_DEVC,
+							~((USHORT)INTEL_SCH_HDA_DEVC_NOSNOOP), 0);
+					} else {
+						DbgPrint( "0x%X - snoop already ok\n", tmp);
+					}
+					break;
+
+			}
+			break;
+		case 0x10b9://ULI M5461
+			DbgPrint( "ULI\n");
+			//disable and zero out BAR1 on this hardware; 
+			//it advertises 64 bit addressing support but can't deliver
+			//not that we can use it anyway in 9x.
+			//this is according to ALSA.
+			//TODO: test this if i can find this rare chipset
+			ntStatus = WriteConfigSpaceWord(0x40,0xffef,0x0010);
+			ntStatus = WriteConfigSpaceWord(0x14,0x0000,0x0000);
+			ntStatus = WriteConfigSpaceWord(0x16,0x0000,0x0000);
+			break;
+		default:
+			DbgPrint( "unknown or no special patches\n");
+			break;
+	}
+	//Set TCSEL (offset 44h in config space, lowest 3 bits) to 0 on some hardware to avoid crackling/static.
+	//the Watlers and MPXPlay drivers set this byte on all but ATI controllers
+	//I'm not sure if class 0 is the highest or lowest priority. some hardware defaults to traffic class 7
+	if(pci_ven != 0x1002){
+		ntStatus = WriteConfigSpaceByte(0x44, 0xf8, 0x0);
+	}
+
+	if (!NT_SUCCESS (ntStatus)){
+		DbgPrint( "\nPCI Config Space Write Failed! 0x%X\n", ntStatus);
+        //return ntStatus; //is failure fatal? i dont think so
+	}
+
+
+	//there may be multiple instances of this driver loaded at once
+	//on systems with HDMI display audio support for instance
+	//but it should be one driver object per HDA controller.
+	//which may access multiple codecs
+	//for now only sending 1 output audio stream to all
+
+    //
+    //Get the memory base address for the HDA controller registers. 
+    // note we only want the first BAR
+	// on Skylake and newer mobile chipsets,
+	// there is a DSP interface at BAR2 for Intel Smart Sound Technology
+	// TODO: fix adapter.cpp to check for this better
+
+	DOUT(DBG_SYSINFO, ("%d Resources in List", ResourceList->NumberOfEntries() ));
+
+    for (i = 0; i < ResourceList->NumberOfEntries(); i++) {
+        PCM_PARTIAL_RESOURCE_DESCRIPTOR desc = ResourceList->FindTranslatedEntry(CmResourceTypeMemory, i);
+        if (desc) {
+			if (!memLength) {
+				physAddr = desc->u.Memory.Start;
+				memLength = desc->u.Memory.Length; 
+			}
+            DOUT(DBG_SYSINFO, ("Resource %d: Phys Addr = 0x%08lX%08lX, Mem Length = %lX", 
+				i, physAddr.HighPart, physAddr.LowPart, memLength));
+        } else {
+				// get interrupt resource too if there is one
+			 desc = ResourceList->FindTranslatedEntry(CmResourceTypeInterrupt, i);
+			 if (desc) {
+				// interrupt = desc->u.Interrupt.Vector;
+				DOUT(DBG_SYSINFO, ("Resource %d: Affinity %d, Level %d, Vector = 0x%X", 
+				i, desc->u.Interrupt.Affinity, desc->u.Interrupt.Level, desc->u.Interrupt.Vector));
+			 }
+		}
+    }
+
+	if (!memLength) {
+        DOUT (DBG_ERROR, ("No memory for HD Audio controller registers"));
+        return STATUS_INSUFFICIENT_RESOURCES;
+	} 
+
+	//Map the HDA controller PCI registers into kernel memory 
+    m_pHDARegisters = (PUCHAR) MmMapIoSpace(physAddr, memLength, MmNonCached);
+
+    if (!m_pHDARegisters) {
+        DOUT (DBG_ERROR, ("Failed to map HD Audio registers to kernel mem"));
+        return STATUS_NO_MEMORY;
+    } else if (memLength < 16383) {
+		DOUT (DBG_ERROR, ("BAR0 is too small to be HDA"));
+		return STATUS_BUFFER_TOO_SMALL;
+	} else {
+        DOUT(DBG_SYSINFO, ("Virt Addr = 0x%X, Mem Length = 0x%X", m_pHDARegisters, memLength));
+    }
+	Base = (PUCHAR)m_pHDARegisters;
+
+#if (DBG)
+	//try reading something from the mapped memory and see if it makes sense as hda registers
+	//for (i = 0; i < 16; i++) {
+	//	DOUT(DBG_SYSINFO, ("Reg %d 0x%X", i, ((PUCHAR)m_pHDARegisters)[i]  ));
+	//}
+#endif
+	//read capabilities
+	USHORT caps = readUSHORT(0x00);
+
+	//check 64OK flag
+	is64OK = caps & 1;
+
+	//TODO check that we have at least 1 output or bidirectional stream engine
+
+	DOUT( DBG_SYSINFO, ("Version: %d.%d", readUCHAR(0x03), readUCHAR(0x02) ));
+
+	//offsets for stream engines
+	InputStreamBase = (0x80);
+	UCHAR numCaptureStreams = ((caps >> 8) & 0xF);
+	UCHAR numPlaybackStreams = ((caps >> 12) & 0xf);
+	if(!numCaptureStreams && !numPlaybackStreams){
+		DOUT(DBG_ERROR, ("Capabilities reports no streams. Guessing 4"));
+		//TODO check on ULI and ATI systems that report weird caps!
+		FirstOutputStream = 4;
+	} else {
+		FirstOutputStream = numCaptureStreams;
+	}
+
+	OutputStreamBase = HDA_STREAMBASE(FirstOutputStream); //skip input streams ports
+	switch((caps >> 1) & 0x3){
+	case 0:
+		nSDO = 1;
+		break;
+	case 1:
+		nSDO = 2;
+		break;
+	case 2:
+		nSDO = 4;
+		break;
+	}
+
+	DOUT( DBG_SYSINFO, ("caps 0x%X: input streams:%d output streams:%d bd streams:%d SDOs:%d 64ok:%d",
+		caps,
+		((caps >> 8) & 0xF),
+		((caps >> 12) & 0xF),
+		((caps >> 3) & 0x1f),
+		nSDO,
+		is64OK
+		));
+
+	//allocate common buffers
+	//for CORB, RIRB, BDL buffer, DMA position buffer
+
+	//the spec doesn't tell you this, but these can NOT share a 4k page
+	//so we need a separate mapping for each one.
+
+	//create device description object for our DMA
+	pDeviceDescription = (PDEVICE_DESCRIPTION)ExAllocatePool (PagedPool,
+                                      sizeof (DEVICE_DESCRIPTION));
+	if (!pDeviceDescription) {
+		return STATUS_INSUFFICIENT_RESOURCES;
+	}
+
+	//zero that struct
+	RtlZeroMemory(pDeviceDescription, sizeof (DEVICE_DESCRIPTION));
+
+	pDeviceDescription -> Version			= DEVICE_DESCRIPTION_VERSION;
+	pDeviceDescription -> Master			= TRUE;	 //is a bus master
+	pDeviceDescription -> ScatterGather		= FALSE; //false for this purpose
+	pDeviceDescription -> DemandMode		= FALSE;
+	pDeviceDescription -> AutoInitialize	= FALSE;
+	pDeviceDescription -> Dma32BitAddresses = TRUE;
+	pDeviceDescription -> IgnoreCount		= FALSE;
+	pDeviceDescription -> Reserved1			= FALSE;
+	pDeviceDescription -> Dma64BitAddresses = is64OK; //it might. doesnt matter to win98
+	pDeviceDescription -> DmaChannel		= 0;
+	pDeviceDescription -> InterfaceType		= PCIBus; //assumed to be cache-coherent
+	pDeviceDescription -> MaximumLength		= BdlSize + 4096 + 8192;
+
+	//number of "map registers" doesn't matter at all here, but i need somewhere to put it
+	ULONG nMapRegisters = 0;
+
+	DMA_Adapter = IoGetDmaAdapter (
+		PDO, //NOT Optional
+		pDeviceDescription,
+		&nMapRegisters );
+
+	DOUT(DBG_SYSINFO, ("Map Registers = %d", nMapRegisters));
+
+	//now we call the AllocateCommonBuffer function pointer in that struct
+	
+	//Allocate RIRB
+	ntStatus = AllocateAlignedCommonBuffer(
+		DMA_Adapter,
+		2048,
+		HDA_COMMON_BUFFER_ALIGNMENT,
+		&RirbBuffer);
+
+	if (!NT_SUCCESS(ntStatus)) {
+		DOUT(DBG_ERROR, ("Couldn't allocate aligned RIRB Space (status 0x%X)", ntStatus));
+		return ntStatus;
+	}
+
+	DOUT(DBG_SYSINFO, ("RIRB Virt Addr = 0x%X,", RirbBuffer.AlignedVirtualAddress));
+	DOUT(DBG_SYSINFO, ("RIRB Phys Addr = 0x%X,", RirbBuffer.AlignedLogicalAddress));
+
+	if (!RirbBuffer.AlignedVirtualAddress) {
+		DOUT(DBG_ERROR, ("Couldn't map virt RIRB Space"));
+		return STATUS_BUFFER_TOO_SMALL;
+	}
+	if (RirbBuffer.AlignedLogicalAddress.QuadPart == 0) {
+		DOUT(DBG_ERROR, ("Couldn't map phys RIRB Space"));
+		return STATUS_NO_MEMORY;
+	}
+
+	if (is64OK == FALSE) {
+		ASSERT(RirbBuffer.AlignedLogicalAddress.HighPart == 0);
+	}
+
+	//check 128-byte alignment of what we received
+	ASSERT( (RirbBuffer.AlignedLogicalAddress.LowPart & 0x7F) == 0);
+
+	//allocate CORB
+	ntStatus = AllocateAlignedCommonBuffer(
+		DMA_Adapter,
+		1024,
+		HDA_COMMON_BUFFER_ALIGNMENT,
+		&CorbBuffer);
+
+	if (!NT_SUCCESS(ntStatus)) {
+		DOUT(DBG_ERROR, ("Couldn't allocate aligned Corb Space (status 0x%X)", ntStatus));
+		return ntStatus;
+	}
+
+	DOUT(DBG_SYSINFO, ("Corb Virt Addr = 0x%X,", CorbBuffer.AlignedVirtualAddress));
+	DOUT(DBG_SYSINFO, ("Corb Phys Addr = 0x%X,", CorbBuffer.AlignedLogicalAddress));
+
+	if (!CorbBuffer.AlignedVirtualAddress) {
+		DOUT(DBG_ERROR, ("Couldn't map virt Corb Space"));
+		return STATUS_BUFFER_TOO_SMALL;
+	}
+	if (CorbBuffer.AlignedLogicalAddress.QuadPart == 0) {
+		DOUT(DBG_ERROR, ("Couldn't map phys Corb Space"));
+		return STATUS_NO_MEMORY;
+	}
+
+	if (is64OK == FALSE) {
+		ASSERT(CorbBuffer.AlignedLogicalAddress.HighPart == 0);
+	}
+
+	//check 128-byte alignment of what we received
+	ASSERT( (CorbBuffer.AlignedLogicalAddress.LowPart & 0x7F) == 0);
+
+	//allocate BDL
+	ntStatus = AllocateAlignedCommonBuffer(
+		DMA_Adapter,
+		BdlSize,
+		HDA_COMMON_BUFFER_ALIGNMENT,
+		&BdlBuffer);
+
+	if (!NT_SUCCESS(ntStatus)) {
+		DOUT(DBG_ERROR, ("Couldn't allocate aligned BDL Space (status 0x%X)", ntStatus));
+		return ntStatus;
+	}
+
+	if (!BdlBuffer.AlignedVirtualAddress) {
+		DOUT(DBG_ERROR, ("Couldn't map virt BDL Space"));
+		return STATUS_BUFFER_TOO_SMALL;
+	}
+	if (BdlBuffer.AlignedLogicalAddress.QuadPart == 0) {
+		DOUT(DBG_ERROR, ("Couldn't map phys BDL Space"));
+		return STATUS_NO_MEMORY;
+	}
+
+	if (is64OK == FALSE) {
+		ASSERT(BdlBuffer.AlignedLogicalAddress.HighPart == 0);
+	}
+
+	//allocate DMA Position Buffer
+	ntStatus = AllocateAlignedCommonBuffer(
+		DMA_Adapter,
+		1024,
+		HDA_COMMON_BUFFER_ALIGNMENT,
+		&DmaPosBuffer);
+
+	if (!NT_SUCCESS(ntStatus)) {
+		DOUT(DBG_ERROR, ("Couldn't allocate aligned DMA Position Buffer (status 0x%X)", ntStatus));
+		return ntStatus;
+	}
+
+	if (!DmaPosBuffer.AlignedVirtualAddress) {
+		DOUT(DBG_ERROR, ("Couldn't map virt DMA Position Buffer"));
+		return STATUS_BUFFER_TOO_SMALL;
+	}
+	if (DmaPosBuffer.AlignedLogicalAddress.QuadPart == 0) {
+		DOUT(DBG_ERROR, ("Couldn't map phys DMA Position Buffer"));
+		return STATUS_NO_MEMORY;
+	}
+
+	if (is64OK == FALSE) {
+		ASSERT(DmaPosBuffer.AlignedLogicalAddress.HighPart == 0);
+	}
+	
+	if (!NT_SUCCESS (ntStatus)){
+		DbgPrint( "\nBuffer Mapping Failed! 0x%X\n", ntStatus);
+        return ntStatus;
+	}
+
+
+	// Not mapping an audio buffer yet, the Wave miniport creates that.
+
+	//
+    // Reset the controller and init registers
+    //
+	DbgPrint( ("\nInit HDA Controller!\n"));
+
+	ntStatus = InitHDAController ();
+
+    if (!NT_SUCCESS (ntStatus)){
+		DbgPrint( "\nInit Controller Failed! 0x%X\n", ntStatus);
+        return ntStatus;
+	} else {
+		DbgPrint( "\nInit Controller Succeeded! 0x%X\n", ntStatus);
+	}
+
+	//
+    // Initialize the device power state.
+    //
+    m_PowerState = PowerDeviceD0;
+  
+    //
+    // Hook up the interrupt.
+    //
+    ntStatus = PcNewInterruptSync(				// See portcls.h
+					&m_pInterruptSync,          // Save object ptr
+					NULL,                       // OuterUnknown(optional).
+					ResourceList,               // He gets IRQ from ResourceList.
+					0,                          // Resource Index
+					InterruptSyncModeNormal     // Run ISRs once until we get SUCCESS
+               );
+
+	if (!NT_SUCCESS(ntStatus) || m_pInterruptSync == NULL) {
+			DbgPrint("PcNewInterruptSync failed: 0x%X\n", ntStatus);
+			return ntStatus;
+	}
+
+    //  run this ISR first
+
+    ntStatus = m_pInterruptSync->RegisterServiceRoutine(InterruptServiceRoutine,PVOID(this),FALSE);
+
+    if (!NT_SUCCESS(ntStatus)) {
+		DbgPrint("RegisterServiceRoutine failed: 0x%X\n", ntStatus);
+		m_pInterruptSync->Release();
+		m_pInterruptSync = NULL;
+		return ntStatus;
+	}
+       
+	ntStatus = m_pInterruptSync->Connect();
+
+	if (!NT_SUCCESS(ntStatus)) {
+		DbgPrint("InterruptSync->Connect failed: 0x%X\n", ntStatus);
+		m_pInterruptSync->Release();
+		m_pInterruptSync = NULL;
+		return ntStatus;
+	}
+
+	ntStatus = StartJackPolling();
+	if (!NT_SUCCESS(ntStatus)) {
+		DbgPrint("Headphone polling failed: 0x%X\n", ntStatus);
+	}
+	
+
+	DbgPrint("Init Finished Successfully!\n");
+    return ntStatus;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::~CAdapterCommon()
+ *****************************************************************************
+ * Destructor.
+ */
+CAdapterCommon::
+~CAdapterCommon
+(   void
+)
+{
+    PAGED_CODE();
+
+    _DbgPrintF(DEBUGLVL_VERBOSE,("[CAdapterCommon::~CAdapterCommon]"));
+
+	//At least try to stop the stream before destruction
+	hda_stop_stream ();
+	StopJackPolling();
+	//Delete all initialized codec objects (packed in pCodecs[0..codecCount-1])
+	for (UCHAR i = 0; i < codecCount; i++) {
+		if (pCodecs[i] != NULL) {
+			delete pCodecs[i];
+			pCodecs[i] = NULL;
+		}
+	}
+
+	//do NOT free the audio buffer now minwave is managing it
+
+	//free DMA buffers
+	if((RirbBuffer.RawVirtualAddress != NULL) && (DMA_Adapter != NULL)){
+		DOUT (DBG_PRINT, ("freeing rirb buffer"));
+		FreeAlignedCommonBuffer(DMA_Adapter, &RirbBuffer);
+	}
+	if((CorbBuffer.RawVirtualAddress != NULL) && (DMA_Adapter != NULL)){
+		DOUT (DBG_PRINT, ("freeing Corb buffer"));
+		FreeAlignedCommonBuffer(DMA_Adapter, &CorbBuffer);
+	}
+	if((BdlBuffer.RawVirtualAddress != NULL) && (DMA_Adapter != NULL)){
+		DOUT (DBG_PRINT, ("freeing Bdl buffer"));
+		FreeAlignedCommonBuffer(DMA_Adapter, &BdlBuffer);
+	}
+	if((DmaPosBuffer.RawVirtualAddress != NULL) && (DMA_Adapter != NULL)){
+		DOUT (DBG_PRINT, ("freeing Dma buffer"));
+		FreeAlignedCommonBuffer(DMA_Adapter, &DmaPosBuffer);
+	}
+
+	//free DMA adapter object
+	if (DMA_Adapter) {
+		DMA_Adapter->DmaOperations->PutDmaAdapter(DMA_Adapter);
+		DMA_Adapter = NULL;
+	}
+	//free device description
+	if (pDeviceDescription) {
+		ExFreePool(pDeviceDescription);
+		pDeviceDescription = NULL;
+	}
+	//free device description
+	if (pConfigMem) {
+		ExFreePool(pConfigMem);
+		pConfigMem = NULL;
+	}
+	//free PCI BAR space	
+    if (m_pHDARegisters) {
+		MmUnmapIoSpace(m_pHDARegisters, memLength);
+		m_pHDARegisters = NULL; // Ensure the pointer is set to NULL after unmapping
+	}
+
+    if (m_pInterruptSync)
+    {
+        m_pInterruptSync->Disconnect();
+        m_pInterruptSync->Release();
+    }
+    if (m_pPortWave)
+    {
+        m_pPortWave->Release();
+    }
+    if (m_pPortUart)
+    {
+        m_pPortUart->Release();
+    }
+    if (m_pServiceGroupWave)
+    {
+        m_pServiceGroupWave->Release();
+    }
+}
+
+/*****************************************************************************
+ * CAdapterCommon::NonDelegatingQueryInterface()
+ *****************************************************************************
+ * Obtains an interface.
+ */
+STDMETHODIMP
+CAdapterCommon::
+NonDelegatingQueryInterface
+(
+    REFIID  Interface,
+    PVOID * Object
+)
+{
+    PAGED_CODE();
+
+    ASSERT(Object);
+
+    if (IsEqualGUIDAligned(Interface,IID_IUnknown))
+    {
+        *Object = PVOID(PUNKNOWN(PADAPTERCOMMON(this)));
+    }
+    else
+    if (IsEqualGUIDAligned(Interface,IID_IAdapterCommon))
+    {
+        *Object = PVOID(PADAPTERCOMMON(this));
+    }
+    else
+    if (IsEqualGUIDAligned(Interface,IID_IAdapterPowerManagment))
+    {
+        *Object = PVOID(PADAPTERPOWERMANAGMENT(this));
+    }
+    else
+    {
+        *Object = NULL;
+    }
+
+    if (*Object)
+    {
+        PUNKNOWN(*Object)->AddRef();
+        return STATUS_SUCCESS;
+    }
+
+    return STATUS_INVALID_PARAMETER;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::WavePortDriverDest()
+ *****************************************************************************
+ * Get a pointer to the wave port pointer.
+ */
+STDMETHODIMP_(PUNKNOWN *)
+CAdapterCommon::
+WavePortDriverDest
+(   void
+)
+{
+    PAGED_CODE();
+
+    return (PUNKNOWN *) &m_pPortWave;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::GetInterruptSync()
+ *****************************************************************************
+ * Get a pointer to the interrupt synchronization object.
+ */
+STDMETHODIMP_(PINTERRUPTSYNC)
+CAdapterCommon::
+GetInterruptSync
+(   void
+)
+{
+    PAGED_CODE();
+
+    return m_pInterruptSync;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::GetDeviceDescription()
+ *****************************************************************************
+ * Get a pointer to the DeviceDescription object.
+ */
+STDMETHODIMP_(PDEVICE_DESCRIPTION)
+CAdapterCommon::
+GetDeviceDescription
+(   void
+)
+{
+    PAGED_CODE();
+
+    return pDeviceDescription;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::MidiPortDriverDest()
+ *****************************************************************************
+ * Get a pointer to the UART port pointer.
+ */
+STDMETHODIMP_(PUNKNOWN *)
+CAdapterCommon::
+MidiPortDriverDest
+(   void
+)
+{
+    PAGED_CODE();
+
+    return (PUNKNOWN *) &m_pPortUart;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::SetWaveServiceGroup()
+ *****************************************************************************
+ * Provides a pointer to the wave service group.
+ */
+STDMETHODIMP_(void)
+CAdapterCommon::
+SetWaveServiceGroup
+(
+    IN      PSERVICEGROUP   ServiceGroup
+)
+{
+	PAGED_CODE ();
+    if (m_pServiceGroupWave)
+    {
+        m_pServiceGroupWave->Release();
+    }
+
+    m_pServiceGroupWave = ServiceGroup;
+    if( m_pServiceGroupWave )
+    {
+        m_pServiceGroupWave->AddRef();
+    }
+}
+
+
+/*****************************************************************************
+ * CAdapterCommon::InitHDAController
+ *****************************************************************************
+ * Initialize the HDA controller. Only call this from IRQL = Passive
+ */
+
+STDMETHODIMP_(NTSTATUS) CAdapterCommon::InitHDAController (void)
+{
+    PAGED_CODE ();
+	UCHAR codec_number;
+	ULONG statestsCodecCandidates = 0;
+	UCHAR corbSzCap, rirbSzCap;
+	int timeout;
+    
+	NTSTATUS ntStatus = STATUS_UNSUCCESSFUL;
+
+    DOUT (DBG_PRINT, ("[CAdapterCommon::InitHDAController]"));
+
+	//TODO: try to stop all possible running streams before resetting?
+
+	//we're not supposed to write to any registers before reset
+
+	statests = readUSHORT(0x0E);
+	DOUT(DBG_SYSINFO, ("STATESTS = %X", statests ));
+
+	//maybe skip controller reset if flag is set and there's
+	//already a codec in statests
+
+	if ((statests != 0) && skipControllerReset) {
+		DOUT(DBG_SYSINFO, ("Skipping reset"));
+	} else {
+		
+		//Reset the whole controller
+
+		DOUT(DBG_SYSINFO, ("Resetting HDA Controller"));
+		
+		//write 0 to GCTL to put the controller into reset
+		writeUCHAR(0x08,0x0);
+		
+		//wait for reset start acknowledgement
+		for (timeout = 10000; timeout > 0; timeout--) {
+			KeStallExecutionProcessor(1);
+			if ((readUCHAR(0x08) & 0x1) == 0x0) {
+				DOUT(DBG_SYSINFO, ("Controller Reset Started %d us", 10000 - timeout));
+				break;
+			}
+		}
+		if (timeout <= 0) {
+			DOUT(DBG_ERROR, ("Controller Reset Start Timeout, GCTL=%X",readUCHAR(0x08)));
+			return STATUS_UNSUCCESSFUL;
+		}
+
+		//try to disable interrupts immediately
+		writeULONG (0x20, 0x0);
+
+		KeStallExecutionProcessor(1000);
+
+		//acknowledge reset
+		writeUCHAR(0x08,0x1);
+
+		//try to disable interrupts again
+		writeULONG (0x20, 0x0);
+	
+		//wait for reset complete
+		for (timeout = 10000; timeout > 0; timeout--) {
+			KeStallExecutionProcessor(1);
+			if ((readUCHAR(0x08) & 0x1) == 0x1) {
+				DOUT(DBG_SYSINFO, ("Controller Reset Complete %d us", 10000 - timeout));
+				break;
+			}
+		}
+		if (timeout <= 0) {
+				DOUT(DBG_ERROR, ("Controller Reset Start Timeout, GCTL=%X",readUCHAR(0x08)));
+				return STATUS_UNSUCCESSFUL;
+		}
+
+		// now we're supposed to wait at least 521us for codec reset events before continuing
+		DOUT(DBG_SYSINFO, ("waiting for codecs to enumerate on link"));
+		KeStallExecutionProcessor(1000);
+	}
+
+	//disable interrupts again just to be sure
+	writeULONG (0x20, 0x0);
+
+	// clear dma position buffer address
+	writeULONG (0x70, 0);
+	writeULONG (0x74, 0);
+ 
+	//disable stream synchronization at both registers it could be
+	writeULONG (0x34, 0);
+	writeULONG (0x38, 0);
+
+	//stop CORB and RIRB
+	writeUCHAR (0x4C, 0x0);
+	writeUCHAR (0x5C, 0x0);
+
+	//check how many codecs enumerated
+	statests = readUSHORT(0x0E);
+	DOUT(DBG_SYSINFO, ("STATESTS = %X", statests ));
+
+	//this may read zero and will have to search blind
+	//also other codecs can show up later with docking.
+	//would need to enable WAKEEN interrupts (register 0x0C) to handle later additions
+
+	if (forcePioMode){
+		goto hda_use_pio_interface;
+	}
+ 
+	//Setup CORB:
+
+	//1. corb memory physical address
+	writeULONG (0x40, CorbBuffer.AlignedLogicalAddress.LowPart);
+	if (is64OK){
+		writeULONG (0x44, CorbBuffer.AlignedLogicalAddress.HighPart);
+	}
+	else {
+		writeULONG (0x44, 0);
+	}
+
+	//2. number of corb buffer entries
+	//check supported and set it to max possible 
+	corbSzCap = readUCHAR (0x4E) & 0xF0;
+
+	if (corbSzCap & 0x40){
+		//max corb size is 256 entries
+		DOUT (DBG_SYSINFO, ("Corb size 256 entries"));
+		CorbBuffer.NumberOfEntries = 256;
+		writeUCHAR (0x4E, corbSzCap | 0x2);
+	} else if (corbSzCap & 0x20){
+		//max corb size is 16 entries
+		DOUT (DBG_SYSINFO, ("Corb size 16 entries"));
+		CorbBuffer.NumberOfEntries = 16;
+		writeUCHAR (0x4E, corbSzCap | 0x1);
+	} else if (corbSzCap & 0x10){
+		//max corb size is 2 entries
+		DOUT (DBG_SYSINFO, ("Corb size 2 entries"));
+		CorbBuffer.NumberOfEntries = 2;
+		writeUCHAR (0x4E, corbSzCap | 0x0);
+	} else {
+		//CORB not supported, need to use PIO
+		DOUT (DBG_ERROR, ("CORB only supports PIO"));
+		goto hda_use_pio_interface;
+		//return STATUS_UNSUCCESSFUL;
+	}
+
+	//3. Reset corb read pointer
+	writeUSHORT (0x4A, 0x8000); //write a 1 to bit 15
+	
+	//wait for bit to change to 1 to indicate reset start
+
+	//note: VMWare and Nforce chipsets
+	//never return a 1 here
+	//VMWare is forced to PIO by the vendor ID.
+
+	for (timeout = 10000; timeout > 0; timeout--) {
+		KeStallExecutionProcessor(1);
+		//read back the 1 to verify reset
+		if (readUSHORT(0x4A) & 0x8000) break;
+
+	}
+	if (timeout <= 0) {
+		//still turn off the reset line
+		writeUSHORT(0x4A, 0x0000);
+		DOUT(DBG_ERROR, ("CORB Reset 1 timeout"));
+		//don't fall back to PIO.
+		//goto hda_use_pio_interface;
+	}
+
+	//then write a 0 and read back the 0 to verify a clear
+	writeUSHORT(0x4A, 0x0000);
+	for (timeout = 10000; timeout > 0; timeout--) {
+		KeStallExecutionProcessor(1);
+
+		if ((readUSHORT(0x4A) & 0x8000) == 0x0) break;				
+	}
+	if (timeout <= 0) {
+		DOUT(DBG_ERROR, ("CORB Reset 0 timeout, Falling back to PIO"));
+		goto hda_use_pio_interface;
+	}
+	
+	//4. reset CORBWP to zero
+	writeUSHORT (0x48,0);
+	CorbBuffer.BufferPointer = 1; //always points to next free entries
+
+	//Setup RIRB:
+	//1. memory address
+	writeULONG (0x50, RirbBuffer.AlignedLogicalAddress.LowPart);
+	if (is64OK){
+		writeULONG (0x54, RirbBuffer.AlignedLogicalAddress.HighPart);
+	}
+	else {
+		writeULONG (0x54, 0);
+	}
+
+	//2. rirb number of entries (each entries is 8 bytes)
+	rirbSzCap = readUCHAR (0x5E) & 0xF0;
+	if (rirbSzCap  & 0x40){
+		//max rirb size is 256 entries
+		DOUT (DBG_SYSINFO, ("rirb size 256 entries"));
+		RirbBuffer.NumberOfEntries = 256;
+		writeUCHAR (0x5E, rirbSzCap | 0x2);
+	} else if (rirbSzCap & 0x20){
+		//max rirb size is 16 entries
+		DOUT (DBG_SYSINFO, ("rirb size 16 entries"));
+		RirbBuffer.NumberOfEntries = 16;
+		writeUCHAR (0x5E, rirbSzCap | 0x1);
+	} else if (rirbSzCap & 0x10){
+		//max rirb size is 2 entries
+		DOUT (DBG_SYSINFO, ("rirb size 2 entries"));
+		RirbBuffer.NumberOfEntries = 2;
+		writeUCHAR (0x5E, rirbSzCap | 0x0);
+	} else {
+		//rirb not supported, need to use PIO
+		DOUT (DBG_ERROR, ("RIRB only supports PIO"))
+		goto hda_use_pio_interface;
+	}
+
+	//3. reset RIRB write pointer to 0th entries
+	writeUSHORT (0x58, 0x8000);
+	KeStallExecutionProcessor(10);
+	
+	//4. clear RIRB response count
+	writeUSHORT(0x5A, 0);
+
+	//5. disable RIRB interrupts
+	writeUSHORT(0x5C, 0);
+	RirbBuffer.BufferPointer = 1; //always points to next free entries
+
+	//Set DMA Position Buffer physical address
+	writeULONG (0x70, DmaPosBuffer.AlignedLogicalAddress.LowPart);
+	if (is64OK){
+		writeULONG (0x74, DmaPosBuffer.AlignedLogicalAddress.HighPart);
+	}
+	else {
+		writeULONG (0x74, 0);
+	}
+
+	if (useDmaPos){
+		// turn on dma position transfer
+		writeULONG (0x70, DmaPosBuffer.AlignedLogicalAddress.LowPart | 0x1);
+	}
+
+
+	KeStallExecutionProcessor(10);
+	
+	//Start CORB and RIRB.
+	//All DMA buffers should be zeroed when allocated
+	//I think the HDA controller will also zero the memory on 1st start 
+	writeUCHAR (0x4C, 0x2);
+
+	//wait for CORBRUN to read back as 1
+	for (timeout = 10000; timeout > 0; timeout--) {
+		KeStallExecutionProcessor(1);
+		if ((readUCHAR(0x4C) & 0x2) != 0) break;				
+	} if (timeout <= 0) {
+		DOUT(DBG_ERROR, ("CORB Run timeout, Falling back to PIO"));
+		goto hda_use_pio_interface;
+	}
+
+	writeUCHAR (0x5C, 0x2);
+
+	//wait for RIRBRUN to read back as 1
+	for (timeout = 10000; timeout > 0; timeout--) {
+		KeStallExecutionProcessor(1);
+		if ((readUCHAR(0x5C) & 0x2) != 0) break;				
+	} if (timeout <= 0) {
+		DOUT(DBG_ERROR, ("RIRB Run timeout, Falling back to PIO"));
+		goto hda_use_pio_interface;
+	}
+
+	communication_type = HDA_CORB_RIRB;
+
+	//Find codecs on the link.
+	//check codecs enumerated in STATESTS first if available
+
+	//TODO: rewrite without the gotos!
+	if(statests == 0)
+		goto blind_probe;
+	
+	DOUT (DBG_SYSINFO, ("Probing codecs found in STATESTS with CORB/RIRB"));
+	statestsCodecCandidates = 0;
+
+	for(codec_number = 0; codec_number < 16; codec_number++) {
+
+		if (((statests >> codec_number) & 1) == 0)
+			continue;
+		statestsCodecCandidates++;
+		
+		ntStatus = TryInitializeCodecSlot(codec_number, "CORB/RIRB");
+
+	}
+	DOUT (DBG_SYSINFO, ("STATESTS reported %d codecs, initialized %d", statestsCodecCandidates, codecCount));
+
+	if (codecCount > 0){
+		DOUT (DBG_SYSINFO, ("Initialized %d codecs", codecCount));
+		return STATUS_SUCCESS;
+    }
+
+blind_probe:
+
+	DOUT (DBG_SYSINFO, ("Probing codecs by CORB/RIRB blind"));
+
+	//If we haven't found anything yet, resort to blindly trying to reset each codec
+	for (codec_number = 0; codec_number < 16; codec_number++) {
+		
+		//send codec reset command (Realtek needs it before it will respond to IDs?)
+		//there won't be a response
+		hda_send_verb(codec_number, 1, 0x7ff, 0);
+
+		//stall for at least 477 clocks for codec reset turnaround
+		KeStallExecutionProcessor(500);		
+		
+		ntStatus = TryInitializeCodecSlot(codec_number, "CORB/RIRB");
+	}
+	if (codecCount == 0){
+		//if we got to last codec and no codecs were successfully initialized
+		DOUT (DBG_ERROR, ("No codecs found by blind probing thru CORB/RIRB, falling back to PIO"));
+	} else if (codecCount > 0){
+		DOUT (DBG_SYSINFO, ("Initialized %d codecs", codecCount));
+		return STATUS_SUCCESS;
+    }
+	
+hda_use_pio_interface:
+
+	DOUT (DBG_SYSINFO, ("Using Immediate Command Interface."));
+	communication_type = HDA_PIO;
+
+	//stop CORB and RIRB:
+	//Clear CORBRST and RIRBRST if they're on (if that timed out)
+	if(readUSHORT (0x4A)) writeUSHORT (0x4A, 0);
+	if(readUSHORT (0x58)) writeUSHORT (0x58, 0);
+
+	//clear CORBRUN bits
+	writeUCHAR (0x4C, 0x0);
+	//wait for CORBRUN to read back as 0
+	for (timeout = 10000; timeout > 0; timeout--) {
+		KeStallExecutionProcessor(1);
+		if ((readUSHORT(0x4C)  & 0x2) == 0x0) break;				
+	}
+	
+	//clear RIRBRUN
+	writeUCHAR (0x5C, 0x0);
+	//wait for RIRBRUN to read back as 0
+	for (timeout = 10000; timeout > 0; timeout--) {
+		KeStallExecutionProcessor(1);
+		if ((readUSHORT(0x5C) & 0x2) == 0x0) break;				
+	}
+	//Optionally clear pending RIRB interrupt status bits.
+	if(readUCHAR (0x5D) & 1) writeUCHAR (0x5D, 0x1);
+
+	//if Statests != 0 then probe codecs we know about
+	if (statests != 0){
+		DOUT (DBG_SYSINFO, ("Probing codecs found in STATESTS with PIO"));
+		statestsCodecCandidates = 0;
+
+		for(codec_number = 0; codec_number < 16; codec_number++) {
+
+			if (((statests >> codec_number) & 1) == 0)
+				continue;
+			statestsCodecCandidates++;
+
+			ntStatus = TryInitializeCodecSlot(codec_number, "PIO");
+
+		}
+		DOUT (DBG_SYSINFO, ("STATESTS reported %d codecs, initialized %d", statestsCodecCandidates, codecCount));
+
+		if (codecCount > 0){
+			DOUT (DBG_SYSINFO, ("Initialized %d codecs", codecCount));
+			return STATUS_SUCCESS;
+		}
+	}
+
+	//Otherwise probe codecs blindly
+	DOUT (DBG_SYSINFO, ("Probing codecs by PIO blind"));
+	for (codec_number = 0; codec_number < 16; codec_number++) {
+		
+		//send codec reset command, there won't be a response
+		hda_send_verb(codec_number, 1, 0x7ff, 0);
+		
+		//wait 1ms
+		KeStallExecutionProcessor(1000);
+
+		ntStatus = TryInitializeCodecSlot(codec_number, "PIO");
+	}
+	if (codecCount == 0){
+			//if we got to last codec and no responses from any of them
+			DOUT (DBG_ERROR, ("No codecs found by blind probing on PIO. Giving up."));
+			return STATUS_UNSUCCESSFUL;
+		}
+	else if (codecCount > 0){
+		DOUT (DBG_SYSINFO, ("Initialized %d codecs", codecCount));
+		return STATUS_SUCCESS;
+    } else {        
+        DOUT (DBG_ERROR, ("Initialization of HDA Codecs failed."));
+		return STATUS_UNSUCCESSFUL;
+    }
+}
+
+/*****************************************************************************
+ * CAdapterCommon::TryInitializeCodecSlot
+ *****************************************************************************/
+STDMETHODIMP_(NTSTATUS)
+CAdapterCommon::TryInitializeCodecSlot(
+	IN UCHAR codec_number,
+	IN PCSTR interfaceName
+)
+{
+	ULONG codec_id = hda_send_verb(codec_number, 0, 0xF00, 0);
+
+	DOUT (DBG_SYSINFO, ("Codec %d response 0x%X", codec_number, codec_id));
+
+	if((codec_id == 0x0) || (codec_id == 0xFFFFFFFF) || (codec_id == STATUS_UNSUCCESSFUL)) {
+		return STATUS_UNSUCCESSFUL;
+	}
+
+	DOUT (DBG_SYSINFO, ("HDA: Codec %d VID/PID: %08X %s communication interface", codec_number, codec_id, interfaceName));
+
+	//create and initialize codec object and pack into array
+	if (codecCount < ARRAY_COUNT(pCodecs)) {
+		HDA_Codec* pCodec = new(NonPagedPool) HDA_Codec(useSPDIF, useAltOut, codec_number, this);
+		if (pCodec) {
+			pCodecs[codecCount++] = pCodec;
+			NTSTATUS status = pCodec->InitializeCodec();
+			if (!NT_SUCCESS(status)) {
+				// If initialization failed, clear the codec slot then keep trying other codecs
+				codecCount--;
+				pCodecs[codecCount] = NULL;
+				delete pCodec;
+				return STATUS_UNSUCCESSFUL;
+			} else {
+				return status;
+			}
+		} else {
+			return STATUS_INSUFFICIENT_RESOURCES;
+		}
+	}
+	return STATUS_UNSUCCESSFUL;
+}
+
+
+// Reads any Boolean value from the Registry Settings key.
+// If nonexistent, returns DefaultValue
+STDMETHODIMP_(BOOLEAN)
+CAdapterCommon::ReadRegistryBoolean(
+    IN  PCWSTR   ValueName,
+    IN  BOOLEAN  DefaultValue
+	)
+{
+    PAGED_CODE();
+
+    PREGISTRYKEY   DriverKey   = NULL;
+    PREGISTRYKEY   SettingsKey = NULL;
+    UNICODE_STRING KeyName;
+    ULONG          Disposition;
+    NTSTATUS       Status;
+    BOOLEAN        Result = DefaultValue;
+
+	const ULONG AllocSize =
+    sizeof(KEY_VALUE_PARTIAL_INFORMATION) + sizeof(DWORD);
+
+    PKEY_VALUE_PARTIAL_INFORMATION Info =
+        (PKEY_VALUE_PARTIAL_INFORMATION)
+            ExAllocatePool(PagedPool, AllocSize);
+
+	Status = PcNewRegistryKey( &DriverKey,               // IRegistryKey
+                               NULL,                     // OuterUnknown
+                               DriverRegistryKey,        // Registry key type
+                               KEY_READ,				 // Access flags
+                               m_pDeviceObject,          // Device object
+                               NULL,                     // Subdevice
+                               NULL,                     // ObjectAttributes
+                               0,                        // Create options
+                               NULL );                   // Disposition
+
+    if (!NT_SUCCESS(Status))
+        goto Exit;
+
+    RtlInitUnicodeString(&KeyName, L"Settings");
+
+    Status = DriverKey->NewSubKey(
+        &SettingsKey,
+        NULL,
+        KEY_READ,
+        &KeyName,
+        REG_OPTION_NON_VOLATILE,
+        &Disposition
+    );
+    if (!NT_SUCCESS(Status))
+        goto Exit;
+
+    if (!Info)
+        goto Exit;
+
+    RtlInitUnicodeString(&KeyName, ValueName);
+
+    Status = SettingsKey->QueryValueKey(
+        &KeyName,
+        KeyValuePartialInformation,
+        Info,
+        AllocSize,
+        &Disposition
+    );
+
+    if (NT_SUCCESS(Status) &&
+        Info->DataLength >= sizeof(BYTE))
+    {
+        Result = (*(PBYTE)Info->Data) ? TRUE : FALSE;
+    }
+
+    ExFreePool(Info);
+
+Exit:
+    if (SettingsKey) SettingsKey->Release();
+    if (DriverKey)   DriverKey->Release();
+
+    return Result;
+}
+
+
+//***End of pageable code!***
+//everything above this must have PAGED_CODE ();
+#pragma code_seg() 
+
+// Check headphone connection status for all codecs
+STDMETHODIMP_(void) CAdapterCommon::hda_check_headphone_connection_change(void) {
+	//TODO: schedule as a periodic task DPC
+	//and make sure to clean up correctly on driver unload!
+	for (int i = 0; i < codecCount; i++) {
+		if (pCodecs[i] != NULL) {
+			pCodecs[i]->hda_check_headphone_connection_change();
+		}
+	}
+}
+
+
+// Check if (all) codecs support the requested sample rate
+STDMETHODIMP_(UCHAR) CAdapterCommon::hda_is_supported_sample_rate(ULONG sample_rate) {
+	if (codecCount == 0) {
+		return FALSE;
+	}
+	for (int i = 0; i < codecCount; i++) {
+		if (pCodecs[i] == NULL || !pCodecs[i]->hda_is_supported_sample_rate(sample_rate)) {
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
+
+
+/*****************************************************************************
+ * CAdapterCommon::hda_send_verb
+ *****************************************************************************
+	Send a verb to the HD Audio codec, return its response in the return value
+	Returns 0 on communication failure (and prints a debug message). 
+
+*/
+
+STDMETHODIMP_(ULONG) CAdapterCommon::hda_send_verb(ULONG codec, ULONG node, ULONG verb, ULONG command) {
+	//DOUT (DBG_PRINT, ("[CAdapterCommon::hda_send_verb]"));
+
+	//TODO: check sizes of components passed in
+	//note that verbs and parameters are variable length so verbs are left aligned in the fields here
+	//verbs which take a 16 bit payload will be shifted left like verb 2h will be verb 0x200 in this code. 
+
+	//TODO: check for unsolicited responses and maybe schedule a DPC to deal with them
+	//TODO: check for responses with high bit set (those are the errors)
+	//TODO: i will need an implementation of send_verb with a callback
+	//maybe take more than one verb at once w/o blocking
+	
+	KIRQL oldirql;
+	ULONG response = 0;
+	ULONG response_ex = 0;
+	BOOLEAN valid = FALSE;
+	BOOLEAN unsolicited = FALSE;
+	ULONG value = ((codec<<28) | (node<<20) | (verb<<8) | (command));
+
+	//DOUT (DBG_SYSINFO, ("Write codec verb 0x%X position %d", value, CorbBuffer.BufferPointer));
+
+	if( (communication_type != HDA_CORB_RIRB) && (communication_type != HDA_PIO) ){
+		DOUT (DBG_ERROR, ("\nHDA Communication in Error State\n"));
+		return 0;
+	}
+	//take mutex
+	ExAcquireFastMutex(&VerbMutex);
+
+	if (communication_type == HDA_CORB_RIRB) {			
+		//CORB/RIRB interface
+
+		//get current rirb pointer temp
+		USHORT expected_rirb = readUSHORT (0x58);
+		//write verb
+		WRITE_REGISTER_ULONG(CorbBuffer.AlignedVirtualAddress + (CorbBuffer.BufferPointer), value); 
+		//move write pointer
+		writeUSHORT(0x48, CorbBuffer.BufferPointer);
+
+		//wait for RIRB pointer to increment/wrap
+		for (ULONG ticks = 0; ticks < 600; ++ticks) {
+			KeStallExecutionProcessor(10);
+			if (readUSHORT (0x58) != expected_rirb) {
+
+				//acquire spin lock
+				KeAcquireSpinLock(&RirbLock, &oldirql);
+					valid = TRUE;
+					//read response. each response is 8 bytes long but only the lower 4 bytes are from the codec
+					response_ex = READ_REGISTER_ULONG (RirbBuffer.AlignedVirtualAddress + (RirbBuffer.BufferPointer * 2) +1);
+					unsolicited = ((response_ex & 0x10) == 0x10);
+					response = READ_REGISTER_ULONG (RirbBuffer.AlignedVirtualAddress + (RirbBuffer.BufferPointer * 2));
+					//move RIRB pointer **only if we got a response**
+					//TODO: if we have unsolicited responses on there may be more than 1 difference
+					//between last read and last written
+					RirbBuffer.BufferPointer++;
+					if (RirbBuffer.BufferPointer == RirbBuffer.NumberOfEntries) {
+						RirbBuffer.BufferPointer = 0;
+					}
+				KeReleaseSpinLock(&RirbLock, oldirql);
+
+				break;
+				} 
+		}
+
+		//move corb pointer (unconditionally)
+		CorbBuffer.BufferPointer++;
+		if(CorbBuffer.BufferPointer == CorbBuffer.NumberOfEntries) {
+			CorbBuffer.BufferPointer = 0;
+		}
+
+	} else if (communication_type == HDA_PIO){		
+		//Immediate command interface
+
+		//clear Immediate Result Valid bit
+		writeUSHORT(0x68, 0x2);
+		//write verb
+		writeULONG(0x60, value);
+		//start verb transfer
+		writeUSHORT(0x68, 0x1);
+
+		//poll for response
+		for (ULONG ticks = 0; ticks < 600; ++ticks) {
+			KeStallExecutionProcessor(10);
+			//wait for Immediate Result Valid bit = set and Immediate Command Busy bit = clear
+			if ((readUSHORT(0x68) & 0x3) == 0x2) {
+				valid = TRUE;
+				//clear Immediate Result Valid bit
+				writeUSHORT(0x68, 0x2);
+				response = readULONG(0x64);
+				break;
+			}
+		}
+	}
+
+	//release mutex
+	ExReleaseFastMutex(&VerbMutex);
+
+	if (!valid){
+		//there was no response after 6 ms
+		DOUT (DBG_ERROR, ("\nSend_Codec_Verb TIMEOUT: Codec %d verb 0x%X position %d",
+			codec, value, CorbBuffer.BufferPointer));
+	}
+	if (unsolicited){
+			DOUT (DBG_ERROR, ("\nUnexpected Unsolicited Response: response 0x%X EX 0x%X",
+			response, response_ex));
+	}
+	//return response whatever it is. single point of exit
+	return response;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::MixerRegWrite()
+ *****************************************************************************
+ * Writes a mixer register.
+ */
+STDMETHODIMP_(void)
+CAdapterCommon::
+MixerRegWrite
+(
+    IN      BYTE    index,
+    IN      BYTE    Value
+)
+{
+
+	DOUT (DBG_PRINT, ("[CAdapterCommon::MixerRegWrite]"));
+	DOUT (DBG_PRINT, ("trying to write %d to %d", Value, index));
+
+    // only hit the hardware if we're in an acceptable power state
+    if( m_PowerState <= PowerDeviceD1 ) {
+		if (index == 0 || index == 1) { //left or right channel respectively
+			DOUT (DBG_PRINT, ("Set volume of %d to 0x%x", index, Value));
+			//volume values for the master channels are 5-bit (<< by 3)
+			//and mute in the LSB
+			hda_set_volume(Value & 0xF8, index + 1, Value & 1);
+		}
+#if (DBG)
+		if ((index == 20) && (debug_kludge == 1)){
+			//Terrible Kludge to reset the codec
+			//and dump the codec config to the console
+			//when the Master Volume, then Treble sliders are moved in Audio Properties
+			//(in that order)
+			InitHDAController();
+
+		}
+#endif
+    }
+
+	debug_kludge = index;
+
+
+    if(index < DSP_MIX_MAXREGS)
+    {
+        MixerSettings[index] = Value;
+    }
+}
+
+/*****************************************************************************
+ * CAdapterCommon::MixerRegRead()
+ *****************************************************************************
+ * Reads a mixer register.
+ */
+STDMETHODIMP_(BYTE)
+CAdapterCommon::
+MixerRegRead
+(
+    IN      BYTE    Index
+)
+{
+	DOUT (DBG_PRINT, ("[CAdapterCommon::MixerRegRead]"));
+	DOUT (DBG_PRINT, ("read from mixer reg %d: %d", Index, MixerSettings[Index]));
+
+    if(Index < DSP_MIX_MAXREGS)
+    {
+        return MixerSettings[Index];
+    }
+
+    return 0;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::MixerReset()
+ *****************************************************************************
+ * Resets the mixer
+ */
+STDMETHODIMP_(void)
+CAdapterCommon::
+MixerReset
+(   void
+)
+{
+
+	DOUT (DBG_PRINT, ("[CAdapterCommon::MixerReset]"));
+    RestoreMixerSettingsFromRegistry();
+}
+
+/*****************************************************************************
+ * CAdapterCommon::AcknowledgeIRQ()
+ *****************************************************************************
+ * Acknowledge any interrupt request
+ */
+HDA_INTERRUPT_TYPE CAdapterCommon::AcknowledgeIRQ()
+{
+    ULONG intsts = readULONG(0x24);
+
+	if (intsts == 0xFFFFFFFF) {
+		//Device glitch, MMIO Bus Error or controller shut down.
+		DOUT(DBG_PRINT, ("**Glitch IRQ"));
+        return HDAINT_NONE;
+    }
+	if (! (intsts & (1UL << 31))){
+		//IRQ is NOT ours unless GIS=1
+		return HDAINT_NONE;
+	}
+
+	BOOLEAN streamSeen = FALSE;
+    BOOLEAN ctrlSeen   = FALSE;
+
+    /* ---- Stream interrupts ---- */
+    ULONG streamMask = intsts & 0x3FFFFFFF; // bits 0-29
+
+    for (UCHAR stream = 0; stream < 30; ++stream) {
+		    if (streamMask & (1UL << stream)) {
+
+				UCHAR sdsts = readUCHAR(HDA_STREAMBASE(stream) + 3);
+
+				if (sdsts) {
+					// Acknowledge only asserted bits
+					writeUCHAR(HDA_STREAMBASE(stream) + 3, sdsts);
+
+					// If this is not a stream we manage, quiesce it
+					if (stream != FirstOutputStream) {
+						UCHAR ctl = readUCHAR(HDA_STREAMBASE(stream) + 0);
+						ctl &= ~(SDCTL_RUN | SDCTL_IE);
+						writeUCHAR(HDA_STREAMBASE(stream) + 0, ctl);
+					}
+
+				streamSeen = TRUE;
+			}
+        }
+    }
+
+    /* ---- Controller interrupts ---- */
+
+    /* RIRB */
+    UCHAR rirbsts = readUCHAR(0x5D);
+    if (rirbsts & 0x05)   // response interrupt or overrun
+    {
+        writeUCHAR(0x5D, rirbsts);
+        ctrlSeen = TRUE;
+    }
+
+    /* CORB Fatal Error */
+    UCHAR corbsts = readUCHAR(0x4D);
+    if (corbsts & 0x01)   // memory error
+    {
+        writeUCHAR(0x4D, corbsts);
+        ctrlSeen = TRUE;
+    }
+
+    /* STATESTS */
+    USHORT statests = readUSHORT(0x0E);
+    if (statests)
+    {
+        writeUSHORT(0x0E, statests);
+        ctrlSeen = TRUE;
+    }
+
+    if (streamSeen)
+        return HDAINT_STREAM;
+
+    if (ctrlSeen)
+        return HDAINT_CONTROLLER;
+
+    // GIS was set but nothing decoded. claim and move on
+    DOUT(DBG_PRINT, ("Unexpected IRQ: INTSTS=%08lX", intsts));
+    return HDAINT_CONTROLLER;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::ResetController()
+ *****************************************************************************
+ * Resets the controller.
+ */
+STDMETHODIMP_(NTSTATUS)
+CAdapterCommon::
+ResetController(void)
+{
+    NTSTATUS ntStatus = STATUS_UNSUCCESSFUL;
+
+	DOUT (DBG_PRINT, ("[CAdapterCommon::ResetController]"));
+
+	ntStatus = hda_stop_stream();
+
+	ntStatus = InitHDAController();
+
+    return ntStatus;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::RestoreMixerSettingsFromRegistry()
+ *****************************************************************************
+ * Restores the mixer settings based on settings stored in the registry.
+ */
+STDMETHODIMP
+CAdapterCommon::
+RestoreMixerSettingsFromRegistry
+(   void
+)
+{
+    PREGISTRYKEY    DriverKey;
+    PREGISTRYKEY    SettingsKey;
+
+    _DbgPrintF(DEBUGLVL_VERBOSE,("[RestoreMixerSettingsFromRegistry]"));
+    
+    // open the driver registry key
+    NTSTATUS ntStatus = PcNewRegistryKey( &DriverKey,               // IRegistryKey
+                                          NULL,                     // OuterUnknown
+                                          DriverRegistryKey,        // Registry key type
+                                          KEY_ALL_ACCESS,           // Access flags
+                                          m_pDeviceObject,          // Device object
+                                          NULL,                     // Subdevice
+                                          NULL,                     // ObjectAttributes
+                                          0,                        // Create options
+                                          NULL );                   // Disposition
+    if(NT_SUCCESS(ntStatus))
+    {
+        UNICODE_STRING  KeyName;
+        ULONG           Disposition;
+        
+        // make a unicode strong for the subkey name
+        RtlInitUnicodeString( &KeyName, L"Settings" );
+
+
+
+        // open the settings subkey
+        ntStatus = DriverKey->NewSubKey( &SettingsKey,              // Subkey
+                                         NULL,                      // OuterUnknown
+                                         KEY_ALL_ACCESS,            // Access flags
+                                         &KeyName,                  // Subkey name
+                                         REG_OPTION_NON_VOLATILE,   // Create options
+                                         &Disposition );
+        if(NT_SUCCESS(ntStatus))
+        {
+            ULONG   ResultLength;
+
+            if(Disposition == REG_CREATED_NEW_KEY)
+            {
+                // copy default settings
+                for(ULONG i = 0; i < SIZEOF_ARRAY(DefaultMixerSettings); i++)
+                {
+                    MixerRegWrite( DefaultMixerSettings[i].RegisterIndex,
+                                   DefaultMixerSettings[i].RegisterSetting );
+                }
+            } else
+            {
+                // allocate data to hold key info
+                PVOID KeyInfo = ExAllocatePool(PagedPool, sizeof(KEY_VALUE_PARTIAL_INFORMATION) + sizeof(DWORD));
+                if(NULL != KeyInfo)
+                {
+                    // loop through all mixer settings
+                    for(UINT i = 0; i < SIZEOF_ARRAY(DefaultMixerSettings); i++)
+                    {
+                        // init key name
+                        RtlInitUnicodeString( &KeyName, DefaultMixerSettings[i].KeyName );
+        
+                        // query the value key
+                        ntStatus = SettingsKey->QueryValueKey( &KeyName,
+                                                               KeyValuePartialInformation,
+                                                               KeyInfo,
+                                                               sizeof(KEY_VALUE_PARTIAL_INFORMATION) + sizeof(DWORD),
+                                                               &ResultLength );
+                        if(NT_SUCCESS(ntStatus))
+                        {
+                            PKEY_VALUE_PARTIAL_INFORMATION PartialInfo = PKEY_VALUE_PARTIAL_INFORMATION(KeyInfo);
+    
+                            if(PartialInfo->DataLength == sizeof(DWORD))
+                            {
+                                // set mixer register to registry value
+                                MixerRegWrite( DefaultMixerSettings[i].RegisterIndex,
+                                               BYTE(*(PDWORD(PartialInfo->Data))) );
+                            }
+                        } else
+                        {
+                            // if key access failed, set to default
+                            MixerRegWrite( DefaultMixerSettings[i].RegisterIndex,
+                                           DefaultMixerSettings[i].RegisterSetting );
+                        }
+                    }
+    
+                    // free the key info
+                    ExFreePool(KeyInfo);
+                } else
+                {
+                    // copy default settings
+                    for(ULONG i = 0; i < SIZEOF_ARRAY(DefaultMixerSettings); i++)
+                    {
+                        MixerRegWrite( DefaultMixerSettings[i].RegisterIndex,
+                                       DefaultMixerSettings[i].RegisterSetting );
+                    }
+
+                    ntStatus = STATUS_INSUFFICIENT_RESOURCES;
+                }
+            }
+
+            // release the settings key
+            SettingsKey->Release();
+        }
+
+        // release the driver key
+        DriverKey->Release();
+
+    }
+
+    return ntStatus;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::SaveMixerSettingsToRegistry()
+ *****************************************************************************
+ * Saves the mixer settings to the registry.
+ */
+STDMETHODIMP
+CAdapterCommon::
+SaveMixerSettingsToRegistry
+(   void
+)
+{
+    PREGISTRYKEY    DriverKey;
+    PREGISTRYKEY    SettingsKey;
+
+    _DbgPrintF(DEBUGLVL_VERBOSE,("[SaveMixerSettingsToRegistry]"));
+
+	if(MixerSettings == NULL || DefaultMixerSettings == NULL) {
+		return STATUS_UNSUCCESSFUL;
+	}
+    
+    // open the driver registry key
+    NTSTATUS ntStatus = PcNewRegistryKey( &DriverKey,               // IRegistryKey
+                                          NULL,                     // OuterUnknown
+                                          DriverRegistryKey,        // Registry key type
+                                          KEY_ALL_ACCESS,           // Access flags
+                                          m_pDeviceObject,          // Device object
+                                          NULL,                     // Subdevice
+                                          NULL,                     // ObjectAttributes
+                                          0,                        // Create options
+                                          NULL );                   // Disposition
+    if(! NT_SUCCESS(ntStatus) || DriverKey == NULL) {
+		return STATUS_UNSUCCESSFUL;
+    }
+    UNICODE_STRING  KeyName;
+        
+    // make a unicode strong for the subkey name
+    RtlInitUnicodeString( &KeyName, L"Settings" );
+
+    // open the settings subkey
+    ntStatus = DriverKey->NewSubKey( &SettingsKey,              // Subkey
+                                     NULL,                      // OuterUnknown
+                                     KEY_ALL_ACCESS,            // Access flags
+                                     &KeyName,                  // Subkey name
+                                     REG_OPTION_NON_VOLATILE,   // Create options
+                                     NULL );
+    if(! NT_SUCCESS(ntStatus) || SettingsKey == NULL) {
+		return STATUS_UNSUCCESSFUL;
+		DriverKey->Release();
+	}
+    // loop through all mixer settings
+    for(UINT i = 0; i < SIZEOF_ARRAY(DefaultMixerSettings); i++) {
+        // init key name
+        RtlInitUnicodeString( &KeyName, DefaultMixerSettings[i].KeyName );
+
+		//ignore out of bounds mixer settings
+		ULONG reg = DefaultMixerSettings[i].RegisterIndex;
+		if (reg > SIZEOF_ARRAY(MixerSettings)){
+			DOUT (DBG_ERROR, ("Out of bounds mixer setting! %d",reg));
+			continue;
+		}
+
+        // set the key
+        DWORD KeyValue = DWORD(MixerSettings[reg]);
+        ntStatus = SettingsKey->SetValueKey( &KeyName,                 // Key name
+                                             REG_DWORD,                // Key type
+                                             PVOID(&KeyValue),
+                                             sizeof(DWORD) );
+        if(!NT_SUCCESS(ntStatus)) {
+			break;
+        }
+	}
+
+	// release the settings key
+	SettingsKey->Release();
+
+    // release the driver key
+    DriverKey->Release();
+
+    return ntStatus;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::ProgramSampleRate
+ *****************************************************************************
+ * Programs the sample rate for all outputs. 
+ * If the rate cannot be programmed, the routine returns STATUS_UNSUCCESSFUL.
+ */
+STDMETHODIMP_(NTSTATUS) CAdapterCommon::ProgramSampleRate
+(
+    IN  DWORD           dwSampleRate
+	//Currently always stereo 16-bit, the KMixer can upconvert mono/8bit
+)
+{
+    PAGED_CODE ();
+
+	ULONG status = 0;
+
+	//set sample rate on all codecs
+
+    DOUT (DBG_PRINT, ("[CAdapterCommon::ProgramSampleRate]"));
+	for (int i = 0; i < codecCount; i++) {
+		if (pCodecs[i] != NULL) {
+			status = pCodecs[i]->ProgramSampleRate(dwSampleRate);
+			if(!NT_SUCCESS(status))
+				return status;
+		}
+	}
+	// if that's ok, set stream data format
+	writeUSHORT(OutputStreamBase + 0x12, 
+		hda_return_sound_data_format(dwSampleRate, 2, 16));
+
+	// todo: adjust size of BDL chunks based on samplerate.
+	// output gets crunchy if rate is set too low for the irq frequency
+    
+    DOUT (DBG_VSR, ("Samplerate changed to %d.", dwSampleRate));
+
+    return STATUS_SUCCESS;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::PowerChangeState()
+ *****************************************************************************
+ * Change power state for the device.
+ */
+STDMETHODIMP_(void)
+CAdapterCommon::
+PowerChangeState
+(
+    IN      POWER_STATE     NewState
+)
+{
+    UINT i;
+
+    _DbgPrintF( DEBUGLVL_VERBOSE, ("[CAdapterCommon::PowerChangeState]"));
+
+    // is this actually a state change??
+    if( NewState.DeviceState != m_PowerState )
+    {
+        // switch on new state
+        switch( NewState.DeviceState )
+        {
+            case PowerDeviceD0:
+                // Insert your code here for entering the full power state (D0).
+                // This code may be a function of the current power state.  Note that
+                // property accesses such as volume and mute changes may occur when
+                // the device is in a sleep state (D1-D3) and should be cached in
+                // the driver to be restored upon entering D0.  However, it should
+                // also be noted that new miniport and new streams will only be
+                // attempted at D0 (portcls will place the device in D0 prior to the
+                // NewStream call).
+				_DbgPrintF(DEBUGLVL_VERBOSE,("  Entering D0 from D%d",ULONG(m_PowerState)-ULONG(PowerDeviceD0)));
+
+                // Save the new state.  This local value is used to determine when to cache
+                // property accesses and when to permit the driver from accessing the hardware.
+
+				//Re-init the codec if coming from D2 or D3
+				if((ULONG(m_PowerState)-ULONG(PowerDeviceD0)) >= 2){
+					InitHDAController();
+				}
+
+				// restore mixer settings
+				for(i = 0; i < DSP_MIX_MAXREGS - 1; i++)
+                {
+                    if( i != DSP_MIX_MICVOLIDX )
+                    {
+                        MixerRegWrite( BYTE(i), MixerSettings[i] );
+                    }
+                }
+
+            case PowerDeviceD1:
+                // This sleep state is the lowest latency sleep state with respect to the
+                // latency time required to return to D0.  The driver can still access
+                // the hardware in this state if desired.  If the driver is not being used
+                // an inactivity timer in portcls will place the driver in this state after
+                // a timeout period controllable via the registry.
+                
+            case PowerDeviceD2:
+                // This is a medium latency sleep state.  In this state the device driver
+                // cannot assume that it can touch the hardware so any accesses need to be
+                // cached and the hardware restored upon entering D0 (or D1 conceivably).
+                
+            case PowerDeviceD3:
+                // This is a full hibernation state and is the longest latency sleep state.
+                // The driver cannot access the hardware in this state and must cache any
+                // hardware accesses and restore the hardware upon returning to D0 (or D1).
+                
+                // Save the new state.
+                m_PowerState = NewState.DeviceState;
+
+                _DbgPrintF(DEBUGLVL_VERBOSE,("  Entering D%d",ULONG(m_PowerState)-ULONG(PowerDeviceD0)));
+                break;
+    
+            default:
+                _DbgPrintF(DEBUGLVL_VERBOSE,("  Unknown Device Power State"));
+                break;
+        }
+    }
+}
+
+/*****************************************************************************
+ * CAdapterCommon::QueryPowerChangeState()
+ *****************************************************************************
+ * Query to see if the device can
+ * change to this power state
+ */
+STDMETHODIMP_(NTSTATUS)
+CAdapterCommon::
+QueryPowerChangeState
+(
+    IN      POWER_STATE     NewStateQuery
+)
+{
+    _DbgPrintF( DEBUGLVL_TERSE, ("[CAdapterCommon::QueryPowerChangeState]"));
+
+    // Check here to see of a legitimate state is being requested
+    // based on the device state and fail the call if the device/driver
+    // cannot support the change requested.  Otherwise, return STATUS_SUCCESS.
+    // Note: A QueryPowerChangeState() call is not guaranteed to always preceed
+    // a PowerChangeState() call.
+
+    return STATUS_SUCCESS;
+}
+
+/*****************************************************************************
+ * CAdapterCommon::QueryDeviceCapabilities()
+ *****************************************************************************
+ * Called at startup to get the caps for the device.  This structure provides
+ * the system with the mappings between system power state and device power
+ * state.  This typically will not need modification by the driver.
+ * 
+ */
+STDMETHODIMP_(NTSTATUS)
+CAdapterCommon::
+QueryDeviceCapabilities
+(
+    IN      PDEVICE_CAPABILITIES    PowerDeviceCaps
+)
+{
+    _DbgPrintF( DEBUGLVL_TERSE, ("[CAdapterCommon::QueryDeviceCapabilities]"));
+
+    return STATUS_SUCCESS;
+}
+
+/*****************************************************************************
+ * InterruptServiceRoutine()
+ *****************************************************************************
+ * ISR.
+ */
+
+NTSTATUS InterruptServiceRoutine
+(
+    IN      PINTERRUPTSYNC  InterruptSync,
+    IN      PVOID           DynamicContext
+)
+{
+
+    ASSERT(DynamicContext);
+
+    CAdapterCommon *that = (CAdapterCommon *) DynamicContext;
+
+    //_DbgPrintF( DEBUGLVL_TERSE, ("***[CAdapterCommon::InterruptServiceRoutine]"));
+
+	//
+    // ACK the ISR. note we don't have any direct access to CAdapterCommon, gotta use the pointer
+	// todo: how do we handle being called if the AdapterCommon object isn't inited yet?
+	// todo: call from a DPC fallback if the IRQ does not appear to be firing properly
+
+    // get out of here immediately if it's not our IRQ
+	HDA_INTERRUPT_TYPE irqType = that->AcknowledgeIRQ();
+	if(irqType == HDAINT_NONE) {
+		return STATUS_UNSUCCESSFUL;
+	} else if (irqType != HDAINT_STREAM) {
+		return STATUS_SUCCESS; //without queuing the DPC
+	}
+
+    ASSERT(InterruptSync);
+    ASSERT(that->m_pServiceGroupWave);
+
+    //
+    // Make sure there is a wave port driver.
+    //
+    if (that->m_pPortWave)
+    {
+        //
+        // Tell it it needs to do some work.
+        //
+        that->m_pPortWave->Notify(that->m_pServiceGroupWave);
+    }
+    return STATUS_SUCCESS;
+}
+
+//stop stream and clear all stream registers
+STDMETHODIMP_(NTSTATUS) CAdapterCommon::hda_stop_stream (void) {
+	NTSTATUS ntStatus = STATUS_SUCCESS;
+
+	DOUT (DBG_PRINT, ("[CAdapterCommon::hda_stop_stream]"));
+    
+	//for first output stream: turn off IOC IRQs, disable the Run bit
+	writeUCHAR(OutputStreamBase + 0x00, 0x00);
+	ULONG ticks = 0;
+	while(ticks++ < 40) {
+		//wait till the run bit reads 0 to confirm it has stopped
+		//should be within 40 us
+		KeStallExecutionProcessor(1);
+		if((readUCHAR(OutputStreamBase + 0x00) & SDCTL_RUN )== 0x0 ) {
+			break;
+		}
+	}
+	if((readUCHAR(OutputStreamBase + 0x00) & SDCTL_RUN ) == SDCTL_RUN) {
+		DOUT (DBG_ERROR, ("HDA: can not stop stream"));
+		ntStatus = STATUS_TIMEOUT;
+	}
+ 
+	//reset stream registers
+	writeUCHAR(OutputStreamBase + 0x00, 0x01);
+	ticks = 0;
+	while(ticks++ < 10) {
+		KeStallExecutionProcessor(1);
+		if((readUCHAR(OutputStreamBase + 0x00) & 0x1)==0x1) {
+			break;
+		}
+	}
+	if((readUCHAR(OutputStreamBase + 0x00) & 0x1)==0x0) {
+		DOUT (DBG_ERROR, ("HDA: can not start resetting stream"));
+	}
+	KeStallExecutionProcessor(5);
+	writeUCHAR(OutputStreamBase + 0x00, 0x00);
+	ticks = 0;
+	while(ticks++<10) {
+		KeStallExecutionProcessor(1);
+			if((readUCHAR(OutputStreamBase + 0x00) & 0x1)==0x0) {
+			break;
+		}
+	}
+	if((readUCHAR(OutputStreamBase + 0x00) & 0x1)==0x1) {
+		DOUT (DBG_ERROR, ("HDA: can not stop resetting stream"));
+		ntStatus = STATUS_TIMEOUT;
+	}
+	KeStallExecutionProcessor(5);
+
+	//clear error bits
+	writeUCHAR(OutputStreamBase + 0x03, 0x1C);
+    return ntStatus;
+}
+
+STDMETHODIMP_(void) CAdapterCommon::hda_start_sound(void) {
+	DOUT (DBG_SYSINFO, ("HDA: starting output stream pos %d", readULONG(OutputStreamBase + 0x04)));
+	//
+    // Make sure there is a wave port driver.
+    //
+    if (m_pPortWave) {
+        // Tell it it needs to do some work.
+        m_pPortWave->Notify(m_pServiceGroupWave);
+		
+		//Stream tag #1, stream is an output
+		writeUCHAR(OutputStreamBase + 0x02, 0x14);
+
+		//start playing output stream 1 with BDL IOC interrupts
+		writeUCHAR(OutputStreamBase + 0x00, 0x06);
+    } else {
+		DOUT (DBG_ERROR, ("Can't start playback with no wave port!"));
+	}
+
+}
+
+STDMETHODIMP_(void) CAdapterCommon::hda_stop_sound(void) {
+	DOUT (DBG_SYSINFO, ("HDA: stopping output stream pos %d", readULONG(OutputStreamBase + 0x04)));
+	writeUCHAR(OutputStreamBase + 0x00, 0x00);
+	ULONG ticks = 0;
+	while(ticks++ < 40) {
+		//wait till the run bit reads 0 to confirm it has stopped
+		//should be within 40 us
+		KeStallExecutionProcessor(1);
+		if((readUCHAR(OutputStreamBase + 0x00) & 0x2)==0x0) {
+			break;
+		}
+	}
+	if((readUCHAR(OutputStreamBase + 0x00) & 0x2)==0x2) {
+		DOUT (DBG_ERROR, ("HDA: can not stop stream"));
+	}
+	DOUT (DBG_SYSINFO, ("HDA: stopped stream pos %d", readULONG(OutputStreamBase + 0x04)));
+}
+
+
+STDMETHODIMP_(ULONG) CAdapterCommon::hda_get_actual_stream_position(void) {
+	//todo: support multiple streams
+	USHORT stream_id = FirstOutputStream; // stream 4 for most chipsets		
+	if (useDmaPos){
+		ULONG dpos = *(ULONG *)(((UCHAR *)DmaPosBuffer.AlignedVirtualAddress) + (stream_id * 8));
+		ULONG lpos = readULONG(OutputStreamBase + 0x04);
+
+		//check if DMA position buffer is moving or if it's stuck at 0
+		//TODO: dpos ever updating from 0 is not sufficient to confirm it works all the time
+		// but IS sufficient to detect emulators with no support for dpos
+		if (dpos != 0) {
+			bad_dpos_count = 0;
+			return dpos;
+		} else if ((dpos == 0) && (lpos != 0)){
+			//LPIB is moving but DMA isn't
+			if (++bad_dpos_count > 9){
+				DOUT (DBG_ERROR, ("DMA position buffer not working, falling back to LPIB"));
+				useDmaPos = FALSE;
+				return lpos;
+			}
+			return dpos;
+		} else {
+			return 0;
+		}
+	} else {
+		//using LPIB
+		return readULONG(OutputStreamBase + 0x04);
+	}
+}
+
+// Set volume & mute for all audio codecs
+STDMETHODIMP_(void) CAdapterCommon::hda_set_volume(ULONG volume, UCHAR ch, BOOLEAN mute) {
+	for (int i = 0; i < codecCount; i++) {
+		if (pCodecs[i] != NULL) {
+			pCodecs[i]->hda_set_volume(volume, ch, mute);
+		}
+	}
+}
+
+//HDA controller register read and write functions
+
+STDMETHODIMP_(UCHAR) CAdapterCommon::readUCHAR(USHORT reg)
+{
+	return READ_REGISTER_UCHAR((PUCHAR)(m_pHDARegisters + reg));
+}
+
+STDMETHODIMP_(void) CAdapterCommon::writeUCHAR(USHORT cmd, UCHAR value)
+{
+	WRITE_REGISTER_UCHAR((PUCHAR)(m_pHDARegisters + cmd), value);
+}
+
+STDMETHODIMP_(void) CAdapterCommon::setUCHARBit(USHORT reg, UCHAR flag)
+{
+	writeUCHAR(reg, readUCHAR(reg) | flag);
+}
+
+STDMETHODIMP_(void) CAdapterCommon::clearUCHARBit(USHORT reg, UCHAR flag)
+{
+	writeUCHAR(reg, readUCHAR(reg) & ~flag);
+}
+
+STDMETHODIMP_(USHORT) CAdapterCommon::readUSHORT(USHORT reg)
+{
+	return READ_REGISTER_USHORT((PUSHORT)(m_pHDARegisters + reg));
+}
+
+STDMETHODIMP_(void) CAdapterCommon::writeUSHORT(USHORT cmd, USHORT value)
+{
+	WRITE_REGISTER_USHORT((PUSHORT)(m_pHDARegisters + cmd), value);
+}
+
+
+STDMETHODIMP_(ULONG) CAdapterCommon::readULONG(USHORT reg)
+{
+	return READ_REGISTER_ULONG((PULONG)(m_pHDARegisters + reg));
+}
+
+STDMETHODIMP_(void) CAdapterCommon::writeULONG(USHORT cmd, ULONG value)
+{
+	WRITE_REGISTER_ULONG((PULONG)(m_pHDARegisters + cmd), value);
+}
+
+STDMETHODIMP_(void) CAdapterCommon::setULONGBit(USHORT reg, ULONG flag)
+{
+	writeULONG(reg, readULONG(reg) | flag);
+}
+
+STDMETHODIMP_(void) CAdapterCommon::clearULONGBit(USHORT reg, ULONG flag)
+{
+	writeULONG(reg, readULONG(reg) & ~flag);
+}
+
+STDMETHODIMP_(NTSTATUS) CAdapterCommon::hda_setup_stream_descriptor(PDMACHANNEL DmaChannel) {
+	
+	ULONG i = 0;
+	NTSTATUS ntStatus = STATUS_SUCCESS;
+
+	DOUT (DBG_PRINT, ("[CAdapterCommon::hda_setup_stream_descriptor]"));
+
+	if( m_PowerState > PowerDeviceD1 ) {
+		DOUT (DBG_ERROR, ("Device in low power state D%d, not ok to touch it", m_PowerState));
+		return STATUS_POWER_STATE_INVALID;
+	}
+
+	//get the physical and virtual address pointers from the dma channel object
+	BufLogicalAddress = DmaChannel->PhysicalAddress();
+	BufVirtualAddress = DmaChannel->SystemAddress();
+	ULONG audBufSize = DmaChannel->BufferSize();
+
+	DOUT(DBG_SYSINFO, ("Audio Buffer Virt Addr = 0x%X,", BufVirtualAddress));
+	DOUT(DBG_SYSINFO, ("Audio Buffer Phys Addr = 0x%X,", BufLogicalAddress));
+	DOUT(DBG_SYSINFO, ("Audio Buffer Size = %d,", audBufSize));
+	
+	//divide the buffer into <entries> chunks (buffer must be an integer multiple of chunk size)
+	
+	ULONG entries = audBufSize / 2048;
+	if(entries > 128UL) entries = 128;
+	for(i = 0; i < (entries * 4); i += 4){
+		BdlBuffer.AlignedVirtualAddress[i+0] = BufLogicalAddress.LowPart + (i/4)*(audBufSize/entries);
+		BdlBuffer.AlignedVirtualAddress[i+1] = BufLogicalAddress.HighPart;
+		BdlBuffer.AlignedVirtualAddress[i+2] = audBufSize / entries;
+		BdlBuffer.AlignedVirtualAddress[i+3] = BDLE_FLAG_IOC; //interrupt on completion ON
+	}
+	
+	//fill BDL entries out with 10 ms buffer chunks (1792 bytes at 44100)
+	//this does not work on Virtualbox - do buffers really need to be power of 2 secretly?
+	/*
+	BDLE* Bdl = reinterpret_cast<BDLE*>(BdlBuffer.AlignedVirtualAddress);
+	PHYSICAL_ADDRESS BasePhys = BufLogicalAddress;
+    ULONG offset = 0;
+    USHORT entries = 0;
+
+    while ((offset + CHUNK_SIZE) <= audBufSize && entries < 256)
+    {
+        Bdl[entries].Address = BasePhys.QuadPart + offset;
+        Bdl[entries].Length  = CHUNK_SIZE;
+        Bdl[entries].Flags   = BDLE_FLAG_IOC;     // interrupt every ~10 ms
+        offset += CHUNK_SIZE;
+        entries++;
+    }
+
+    //handle any leftover < CHUNK_SIZE tail
+    ULONG remainder = audBufSize - offset;
+    if (remainder >= 128) {
+        remainder &= ~127;  // trim to 128-byte boundary
+        Bdl[entries].Address = BasePhys.QuadPart + offset;
+        Bdl[entries].Length  = remainder;
+        Bdl[entries].Flags   = BDLE_FLAG_IOC;
+        entries++;
+    }
+	*/
+	
+	//let's print enough of the BDL and make sure we've got it right
+	/*
+	for(i = 0; i < ((int)BdlSize); i += 4){
+		DOUT(DBG_SYSINFO, 
+		("BDL %d: Phys Addr 0x%08lX %08lX Length %d Flags %X", 
+				(i/4), BdlBuffer.AlignedVirtualAddress[i+1], BdlBuffer.AlignedVirtualAddress[i], BdlBuffer.AlignedVirtualAddress[i+2], BdlBuffer.AlignedVirtualAddress[i+3]));
+	}
+	*/
+	
+
+	DOUT(DBG_SYSINFO, ("BDL set up"));
+
+	
+	//Flush audio buffer and BDL out of cache to RAM
+	//to be sure controller will read correct data.
+	//KeFlushIoBuffers is defined to nothing in the NT DDK so do this with asm
+
+	//CacheLineFlush(BufVirtualAddress, audBufSize);
+	CacheLineFlush(BdlBuffer.RawVirtualAddress, BdlBuffer.RawLength);
+
+	//set buffer registers
+	writeULONG(OutputStreamBase + 0x18, BdlBuffer.AlignedLogicalAddress.LowPart);
+	writeULONG(OutputStreamBase + 0x1C, BdlBuffer.AlignedLogicalAddress.HighPart);
+	writeULONG(OutputStreamBase + 0x08, audBufSize);
+	writeUSHORT(OutputStreamBase + 0x0C, (USHORT)(entries - 1)); //there are entries-1 entries in buffer
+
+	//clear pending codec interrupts once, we do not care
+	UCHAR rirbsts = readUCHAR(0x5D);
+	DOUT(DBG_SYSINFO, ("rirb sts %X",rirbsts));
+	writeUCHAR(0x5D, 0x5);
+
+	//enable interrupts from output stream 1
+	//TODO account for other streams in use
+	writeULONG(0x20, ((1 << 31) | (1 << FirstOutputStream)) );
+	
+	// Memory Fence: Ensures all flushes are globally visible 
+	// before the ISR/DPC returns
+		__asm {
+		    _emit 0x0F // MFENCE
+		    _emit 0xAE
+		    _emit 0xF0
+		}
+
+	DOUT(DBG_SYSINFO, ("stream descriptor ready"));
+
+	// wait for Play state to actually start the stream though.
+	
+    return ntStatus;
+}
+
+inline STDMETHODIMP_(USHORT) CAdapterCommon::hda_return_sound_data_format(ULONG sample_rate, ULONG channels, ULONG bits_per_sample) {
+ USHORT data_format = 0;
+
+ //channels
+ data_format = (USHORT)((channels-1) & 0xf);
+
+ //bits per sample
+ if(bits_per_sample==16) {
+  data_format |= ((0x1)<<4);
+ }
+ else if(bits_per_sample==20) {
+  data_format |= ((0x2)<<4);
+ }
+ else if(bits_per_sample==24) {
+  data_format |= ((0x3)<<4);
+ }
+ else if(bits_per_sample==32) {
+  data_format |= ((0x4)<<4);
+ }
+
+ //sample rate
+ if (sample_rate == 48000) {
+  data_format |= ((0x0)<<8);
+ }
+ //24000 is supported as a stream rate but NOT a codec format
+ else if(sample_rate==16000) {
+  data_format |= ((0x2)<<8);
+ }
+ else if(sample_rate==8000) {
+  data_format |= ((0x5)<<8);
+ }
+ else if(sample_rate==44100) {
+  data_format |= ((0x40)<<8);
+ }
+ else if(sample_rate==22050) {
+  data_format |= ((0x41)<<8);
+ }
+ else if(sample_rate==11025) {
+  data_format |= ((0x43)<<8);
+ }
+ else if(sample_rate==96000) {
+  data_format |= ((0x8)<<8);
+ }
+ else if(sample_rate==32000) {
+  data_format |= ((0xA)<<8);
+ }
+ else if(sample_rate==88200) {
+  data_format |= ((0x48)<<8);
+ }
+ else if(sample_rate==176400) {
+  data_format |= ((0x58)<<8);
+ }
+ else if(sample_rate==192000) {
+  data_format |= ((0x18)<<8);
+ }
+ return data_format;
+}
+
+/* Function to read/write PCI configuration space using IRP
+from this KB article:
+https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/obtaining-device-configuration-information-at-irql---passive-level
+it's the only working example i found.
+*/
+
+STDMETHODIMP_(NTSTATUS)
+CAdapterCommon::ReadWriteConfigSpace(
+    IN PDEVICE_OBJECT  DeviceObject,
+    IN ULONG  ReadOrWrite,  // 0 for read, 1 for write
+    IN PVOID  Buffer, //must be in NONpaged heap
+    IN ULONG  Offset,
+    IN ULONG  Length
+    )
+{
+    KEVENT event;
+    NTSTATUS status;
+    PIRP irp;
+    IO_STATUS_BLOCK ioStatusBlock;
+    PIO_STACK_LOCATION irpStack;
+    PDEVICE_OBJECT targetObject;
+
+    KeInitializeEvent(&event, NotificationEvent, FALSE);
+    targetObject = IoGetAttachedDeviceReference(DeviceObject);
+    irp = IoBuildSynchronousFsdRequest(IRP_MJ_PNP,
+                                       targetObject,
+                                       NULL,
+                                       0,
+                                       NULL,
+                                       &event,
+                                       &ioStatusBlock);
+    if (irp == NULL) {
+        status = STATUS_INSUFFICIENT_RESOURCES;
+        goto End;
+    }
+    irpStack = IoGetNextIrpStackLocation(irp);
+    if (ReadOrWrite == 0) {
+        irpStack->MinorFunction = IRP_MN_READ_CONFIG;
+    } else {
+        irpStack->MinorFunction = IRP_MN_WRITE_CONFIG;
+    }
+    irpStack->Parameters.ReadWriteConfig.WhichSpace = PCI_WHICHSPACE_CONFIG;
+    irpStack->Parameters.ReadWriteConfig.Buffer = Buffer;
+    irpStack->Parameters.ReadWriteConfig.Offset = Offset;
+    irpStack->Parameters.ReadWriteConfig.Length = Length;
+
+    // Initialize the status to error in case the bus driver does not 
+    // set it correctly.
+    irp->IoStatus.Status = STATUS_NOT_SUPPORTED;
+    status = IoCallDriver(targetObject, irp);
+    if (status == STATUS_PENDING) {
+        KeWaitForSingleObject(&event, Executive, KernelMode, FALSE, NULL);
+        status = ioStatusBlock.Status;
+    }
+End:
+    // Done with reference
+    ObDereferenceObject(targetObject);
+    return status;
+}
+
+//set flag in our mirror of configspace and then write it back
+STDMETHODIMP_(NTSTATUS) CAdapterCommon::WriteConfigSpaceByte(UCHAR offset, UCHAR andByte, UCHAR orByte){
+	ASSERT(m_pDeviceObject);
+	ASSERT(pConfigMem);
+	pConfigMem[offset] = (pConfigMem[offset] & andByte) | orByte;
+	return ReadWriteConfigSpace(
+		m_pDeviceObject,
+		1,			//write
+		pConfigMem + offset,	// Buffer to store the configuration data		
+		offset,			// Offset into the configuration space
+		1         // Number of bytes to write
+		);
+}
+  
+
+//set flag in our mirror of configspace and then write it back
+STDMETHODIMP_(NTSTATUS) CAdapterCommon::WriteConfigSpaceWord(UCHAR offset, USHORT andWord, USHORT orWord){
+	ASSERT(m_pDeviceObject);
+	ASSERT(pConfigMem);
+	//cast to get a PUSHORT at arbitrary offset
+	PUSHORT ptemp = (PUSHORT)(&pConfigMem[offset]);
+	*ptemp = (*ptemp & andWord) | orWord;
+	return ReadWriteConfigSpace(
+		m_pDeviceObject,
+		1,			//write
+		pConfigMem + offset,	// Buffer to store the configuration data		
+		offset,			// Offset into the configuration space
+		2         // Number of bytes to write
+		);
+}
+
+STDMETHODIMP_(void) CAdapterCommon::CacheLineFlush(PVOID Destination, ULONG ByteCount){
+	// Manual Cache Invalidation for AMD 6xx-9xx Coherency..
+	if (g_bHasClFlush) {        
+        // We use a 64-byte stride (standard x86 cache line size)
+		ULONG_PTR start = (ULONG_PTR)Destination & ~((ULONG_PTR)63);
+		ULONG_PTR end = ((ULONG_PTR)Destination + ByteCount + 63) & ~((ULONG_PTR)63);
+	    for (ULONG_PTR p = start; p < end; p += 64) {
+		    __asm {
+			    mov eax, p
+                _emit 0x0F // CLFLUSH [eax]
+	            _emit 0xAE
+		        _emit 0x38
+			}
+		}
+		// Memory Fence: Ensures all flushes are globally visible 
+		// before the ISR/DPC returns
+		__asm {
+		    _emit 0x0F // MFENCE
+		    _emit 0xAE
+		    _emit 0xF0
+		}
+	}
+}
+
+//
+// Headphone jack polling: schedules a DPC that creates a kernel work item
+//
+
+STDMETHODIMP_(void) CAdapterCommon::JackPollDpcRoutine(
+    KDPC*,
+    PVOID DeferredContext,
+    PVOID,
+    PVOID
+)
+{
+    CAdapterCommon* self = (CAdapterCommon*)DeferredContext;
+    if (!self)
+        return;
+
+    if (self->JackPollingStopping || !self->JackPollingEnabled)
+        return;
+
+    if (InterlockedCompareExchange(&self->JackPollWorkQueued, 1, 0) != 0)
+        return;
+
+    KeClearEvent(&self->JackPollWorkerIdleEvent);
+	
+	//IoQueueWorkItem is missing from Win98
+	//so we must use ExQueueWorkItem which isn't safe if the device unloads under it
+	ExQueueWorkItem(&self->JackPollWorkItem, DelayedWorkQueue);
+}
+
+STDMETHODIMP_(void) CAdapterCommon::JackPollWorker(PVOID Context)
+{
+    CAdapterCommon* self = (CAdapterCommon*)Context;
+
+    if (!self->JackPollingStopping) {
+        self->hda_check_headphone_connection_change();
+    }
+
+    InterlockedExchange(&self->JackPollWorkQueued, 0);
+	KeSetEvent(&self->JackPollWorkerIdleEvent, IO_NO_INCREMENT, FALSE);
+	
+}
+
+
+STDMETHODIMP_(NTSTATUS) CAdapterCommon::StartJackPolling()
+{
+    if (InterlockedExchange(&JackPollingEnabled, 1) == 1)
+        return STATUS_UNSUCCESSFUL;
+
+    JackPollingStopping = 0;
+    KeInitializeEvent(&JackPollWorkerIdleEvent, NotificationEvent, TRUE);
+
+    KeInitializeTimer(&JackPollTimer);
+    KeInitializeDpc(&JackPollDpc, JackPollDpcRoutine, this);
+
+	ExInitializeWorkItem(&JackPollWorkItem, JackPollWorker, (PVOID) this);
+
+	hda_check_headphone_connection_change();
+
+    LARGE_INTEGER due;
+    due.QuadPart = -2500000;
+
+    KeSetTimerEx(&JackPollTimer, due, 250, &JackPollDpc);
+
+    DbgPrint("WDMHDA: HP polling START\n");
+	return STATUS_SUCCESS;
+}
+
+STDMETHODIMP_(VOID) CAdapterCommon::StopJackPolling()
+{
+    if (InterlockedExchange(&JackPollingEnabled, 0) == 0)
+        return;
+
+    InterlockedExchange(&JackPollingStopping, 1);
+
+    BOOLEAN wasSet = KeCancelTimer(&JackPollTimer);
+    KeRemoveQueueDpc(&JackPollDpc);
+
+    LARGE_INTEGER timeout;
+    timeout.QuadPart = -10 * 1000 * 1000; // 1 sec
+
+    NTSTATUS st = KeWaitForSingleObject(&JackPollWorkerIdleEvent, Executive, KernelMode, FALSE, &timeout);
+
+    DbgPrint("WDMHDA: HP polling STOP (wasSet=%lu wait=0x%08lX)\n", wasSet ? 1UL : 0UL, st);
+
+	//delete the work queue item??
+}
+
+
+
